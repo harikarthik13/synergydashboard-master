@@ -1,0 +1,929 @@
+<div class="modal fade" id="RRMEntryPointModelTechnicalTeam" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="rrmModaltitle"><span id="rrmmodelpagetitleTechnicalTeam"></span> &nbsp; <span><label id="TechnicalTeamrrmType">&nbsp; </label></span>&nbsp;<span><label id="OwnerrrmHoldStatusTechnicaTeam">&nbsp; </label></span></h2>
+            </div>
+
+            <div class="modal-body" data-simplebar>
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="rrmtabTechnicalTeam">
+                        <li role="presentation" class="active  disabled" id="rrm_requirementTabTechnicalTeam" data-tab="rrm_RequirementDetailsTechnicalTeam">
+                            <a href="#rrm_RequirementDetailsTechnicalTeam" aria-controls="rrm_RequirementDetailsTechnicalTeam" role="tab">Requirement Details</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsTabTechnicalTeam">
+                            <a href="#rrm_SkillDetailsTechnicalTeam" aria-controls="rrm_SkillDetailsTechnicalTeam" role="tab">Skills Mapping</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsplanaTabTechnicalTeam">
+                            <a href="#rrm_SkillsPlanADetailsTechnicalTeam" aria-controls="rrm_SkillsPlanADetailsTechnicalTeam" role="tab">Plan A</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsplanbTabTechnicalTeam">
+                            <a href="#rrm_SkillsPlanBDetailsTechnicalTeam" aria-controls="rrm_SkillsPlanBDetailsTechnicalTeam" role="tab">Plan B</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_commentsTechnicalTeamTabTechnicalTeam">
+                            <a href="#rrm_CommentsDetailsTechnicalTeam" aria-controls="rrm_CommentsDetailsTechnicalTeam" role="tab">Comments</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content col-md-12" id="rrmDetailsTechnicalTeam">
+                        <div role="tabpanel" class="tab-pane active" id="rrm_RequirementDetailsTechnicalTeam">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Requirement Name <span style="color: red">*</span></label>
+                                        <div id="sdtxt_rrmtechnical_requirementname"></div>
+                                        <span class="error_message" id="rrm_requirementnameTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Required For <span style="color: red">*</span></label>
+                                        <div id="sdtxt_rrmtechnical_requiredfor"></div>
+                                        <span class="error_message" id="rrm_requiredforTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divTechTeamRFP">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>RFP ID</label>
+                                        <input type="text" class="form-control" name="rrm_rfpidTechnicalTeam" id="rrm_rfpidTechnicalTeam" placeholder="RFP ID" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>BDE</label>
+                                        <select class="form-control" name="rrm_entrybdeTechnicalTeam" id="rrm_entrybdeTechnicalTeam" placeholder="BDE"></select>
+                                    </div>
+                                </div>
+                            </div>
+</div>
+                            <div id="divTechTeamResigination">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>EMP ID</label>
+                <input type="text" class="form-control" name="rrm_empidTechnicalTeam" id="rrm_empidTechnicalTeam" placeholder="EMP ID" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Replacement For</label>
+                <select class="form-control" name="rrm_replacementTechnicalTeam" id="rrm_replacementTechnicalTeam"></select>
+            </div>
+        </div>
+    </div>
+</div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Number of positions <span style="color: red">*</span></label>
+                                        <div id="sdnmb_rrmtechnical_numberofpositions"></div>
+                                        <span class="error_message" id="rrm_numberofpositionsTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Priority </label>
+                                        <div id="sdcmb_rrmtechnical_priority"></div>
+                                        <span class="error_message" id="rrm_priorityTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Department <span style="color: red">*</span></label>
+                                        <div id="sdcmb_rrmtechnical_department"></div>
+                                        <span class="error_message" id="rrm_departmentTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Designation <span style="color: red">*</span></label>
+                                        <div id="sdcmb_rrmtechnical_designation"></div>
+                                        <span class="error_message" id="rrm_designationTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Experience required (In Yrs)<span style="color: red">*</span></label>
+                                        <div id="sdnmb_rrmtechnical_experiencerequired"></div>
+                                        <span class="error_message" id="rrm_experiencerequiredTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Communication <span style="color: red">*</span></label>
+                                        <div id="sdcmb_rrmtechnical_communication"></div>
+                                        <span class="error_message" id="rrm_communicationTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Location</label>
+                                        <div id="sdtxt_rrmtechnical_location"></div>
+                                        <span class="error_message" id="rrm_locationforTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Requested Date</label>
+                                        <div id="sd_date_rrmtechnical_requestedDate"></div>
+                                        <span class="error_message" id="rrm_requesteddateTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Importance</label>
+                                    </div>
+                                    <div class="form-group col-md-6" id="rrm_importance">
+                                        <div id="sdchk_rrmtechnical_losingRevenue"></div>
+                                    </div>
+                                    <div class="form-group col-md-6" id="rrm_importance">
+                                        <div id="sdchk_rrmtechnical_fromVIP"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label id = "lblLeadNameTechnicalTeam" ></label >
+                                        <div id="sdtxt_rrmtechnical_requirementlead"></div>
+                                        <span class="error_message" id="rrm_requirementleadTechnicalTeamError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillDetailsTechnicalTeam">
+                            <div class="row">                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="sdgd-rrmTechnicalSkills"></div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillsPlanADetailsTechnicalTeam">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Skill details(Plan A)<span style="color: red"> *</span></label>
+                                    <div id="sd_txtEditor_technical_skillDetailsPlanA"></div>
+                                    <span class="error_message" id="rrm_skilldetailsplanaTechnicalTeamError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>To On board <span style="color: red">*</span></label>
+                                    <div id="sd_date_rrm_technical_tobeonboardplana"></div>
+                                    <span class="error_message" id="rrm_tobeonboardplanaTechnicalTeamError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-12" id="divTechnicalTeams" style="visibility:hidden">
+                                <!--<div class="form-group col-md-4" id="divTechnicalTeams">-->
+                                    <label for="TechnicalTeams" id="lblTechnicalTeams">TechnicalTeams </label>
+                                    <!--<select class="form-control" id="rrm_TechnicalTeamsplanaTechnicalTeam" multiple="multiple"></select>-->
+                                    <select class="form-control select_recruiter_TechnicalTeam" id="rrm_TechnicalTeamsplanaTechnicalTeam" multiple="multiple"></select>
+                                    <span class="error_message" id="rrm_TechnicalTeamsplanaTechnicalTeamError"></span>
+                                </div>
+                                <div class="form-group col-md-2" style="visibility:hidden">
+                                    <label id="hidebtn">&nbsp;</label>
+                                    <a class="btn btn-primary form-control btn-sm" id="btnreminderTechnicalTeam" onclick="btnsendreminder()"><span class="glyphicon glyphicon-bell"></span>  Send Reminder</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillsPlanBDetailsTechnicalTeam">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Skill details(Plan B)<span style="color: red"> *</span></label>
+                                    <div id="sd_txtEditor_technical_skillDetailsPlanB"></div>
+                                    <span class="error_message" id="rrm_skilldetailsplanbTechnicalTeamError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>To On board<span style="color: red">*</span></label>
+                                    <div id="sd_date_rrm_technical_tobeonboardplanb"></div>
+                                    <span class="error_message" id="rrm_tobeonboardplanbTechnicalTeamError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-12" id="planbTechnicalTeams" style="visibility:hidden">
+                                    <label for="TechnicalTeams">TechnicalTeams </label>
+                                    <select class="form-control select_recruiter_TechnicalTeam" id="rrm_TechnicalTeamsplanbTechnicalTeam" multiple="multiple"></select>
+                                    <span class="error_message" id="rrm_TechnicalTeamsplanbTechnicalTeamError"></span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_CommentsDetailsTechnicalTeam">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>On Hold by BDE &nbsp</label>
+                                    <div id="switchClientTechnicalTeam"></div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>On Hold by Owner &nbsp</label>
+                                    <div id="switchLeadTechnicalTeam"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <div id="rrm_manage_plan_comments_documents_TechnicalTeam" class="rrm_comments_history">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Comments </label>
+                                    <div id="sd_txtEditor_RRMTechnicalComments"></div>
+                                    <!-- <textarea class="form-control" name="rrm_commentsTechnicalTeam" rows="3" id="rrm_commentsTechnicalTeam"></textarea> -->
+                                    <span class="error_message" id="rrm_commentsTechnicalTeamError"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <span class="ApiResponse"></span>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <a class="btn btn-primary btnPrevious hidden-btn" onclick="toggleTabRRMEntryPreviousTechnicalTeam()">Previous</a>
+                    <a class="btn btn-primary btnNext" onclick="toggleTabRRMEntryTechnicalTeam()">Next</a>
+                    <button type="button" class="btn btn-primary saveFamilyBtn hidden-btn" onclick="saveCommentsTechnicalTeam()">Save & Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .rrm_comments_history {
+        border: solid 1px #D1D1D1;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #E3E3E3;
+        margin-bottom: 10px;
+    }
+
+    .rrm_comments_history .message {
+        height:auto;
+        background-color: inherit;
+        display: inline-block;
+        max-width: 60%;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .rrm_comments_history .text{
+        padding-top: 10px;
+    }
+
+    .rrm_comments_history .name {
+        font-weight: bold;
+    }
+
+    .rrm_comments_history .date {
+        opacity: 0.5;
+    }
+</style>
+
+<style>
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > thead > tr > th {
+        border: none;
+        text-align: left !important;
+    }
+</style>
+<script src='components/rrmentrypointtechnicalteam/js/rrmEntryPointTechnicalDevExtremeControls.js'></script>
+<script type="text/javascript" id="rrmEntryPointModalScript">
+    //var addRRMEntryPointJs;
+    $(document).ready(function () {
+        bindDevExtremeControlsForRRMEntryPointTechnical();
+        initializeModalTechnicalTeam();
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token
+        Department = jsonData.Data[0].DepartmentID
+        BackupLead = jsonData.Data["0"].mentorFirstName + " " + jsonData.Data["0"].mentorLastName
+        LoggedUser = jsonData.Data["0"].FirstName + " " + jsonData.Data["0"].LastName
+        BackupLeadId = jsonData.Data["0"].MentorId
+        EmployeeId = jsonData.Data["0"].EmployeeID
+
+        //tab-toggle
+        $('ul#rrmtabTechnicalTeam li').click(function (e) {
+            $('ul#rrmtabTechnicalTeam li').removeClass("active");
+            $(this).addClass("active");
+            var tab_details = $(this).attr("id");
+            var currentTab = $("#" + tab_details + " > a ").attr("aria-controls");
+            $("#rrmDetailsTechnicalTeam .tab-pane").removeClass("active");
+            $("#" + currentTab).addClass("active");            
+
+            $("#sd_txtEditor_technical_skillDetailsPlanB").dxHtmlEditor('instance').option("value",planBcomments);
+
+            if (currentTab == "rrm_SkillDetailsTechnicalTeam") {
+                editRRMEntryPointJsTechnicalTeam.getSkillsDetails(rrmId);
+                $("#editskillTechnicalTeam").attr('disabled', 'disabled');
+                $("#deleteskillTechnicalTeam").attr('disabled', 'disabled');
+                $(".btnPrevious").show();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+                }
+            }
+            else if (currentTab == "rrm_CommentsDetailsTechnicalTeam") {
+                $(".btnPrevious").show();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").show();
+                    editRRMEntryPointJsTechnicalTeam.getManageCommentHistory(rrmId);
+                    $("a.btnNext").hide();
+                }
+            }
+            else if (currentTab == "rrm_SkillsPlanADetailsTechnicalTeam") {
+                $("#sd_txtEditor_technical_skillDetailsPlanA").dxHtmlEditor('instance').option("value",planAcomments);
+                $(".btnPrevious").show();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+                }
+            }
+            else if (currentTab == "rrm_SkillsPlanBDetailsTechnicalTeam") {
+                $("#sd_txtEditor_technical_skillDetailsPlanB").dxHtmlEditor('instance').option("value",planBcomments);
+                $(".btnPrevious").show();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+                }
+            }
+            else if (currentTab == "rrm_RequirementDetailsTechnicalTeam") {
+                $(".btnPrevious").hide();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+                }
+            }
+        });
+        bindHrHeadsinTechnicalTeam();
+
+        $(function () {
+            $("#switchClientTechnicalTeam").dxSwitch({
+                value: false,
+                switchedOffText: "NO",
+                switchedOnText: "YES",
+                disabled: true
+            });
+        });
+        $(function () {
+            $("#switchLeadTechnicalTeam").dxSwitch({
+                value: false,
+                switchedOffText: "NO",
+                switchedOnText: "YES",
+                disabled: true
+            });
+        });
+    })
+
+    function bindHrHeadsinTechnicalTeam() {
+        //var getRecruiterList = callgetlist('GetHRForRRM', '{"IsActive":"True","Token":"' + Token + '"}');
+        callGetListAsync('GetHRForRRM', '{"IsActive":"True","Token":"' + Token + '"}', function (getRecruiterList) {
+
+            var getRecruiterData = [];
+            if (getRecruiterList.length > 0) {
+                getRecruiterList.forEach(function (i, index) {
+                    getRecruiterData.push({
+                        'id': i['EmployeeId'],
+                        'text': i['EmployeeName']
+                    });
+                });
+            }
+
+            $(".select_recruiter_TechnicalTeam").select2({
+                placeholder: "Select Recruiter",
+                allowClear: true,
+                data: getRecruiterData
+            });
+        });
+    }
+
+    var Token;
+    var Department;
+    var BackupLead;
+    var BackupLeadId;
+    var EmployeeId;
+    var planAcomments;
+    var planBcomments;
+
+    //rrm button type
+    function loadRRMByType(type) {
+        if (type == "add") {
+            initializeAddRRMTechnicalTeam();
+
+        }
+        else if (type == "edit") {
+            initializeEditRRMTechnicalTeam();
+        }
+    }
+
+    //tab toggle next button
+    function toggleTabRRMEntryTechnicalTeam() {
+        
+        if (addRRMTypeTechnicalTeam == "edit") {
+            editRRMEntryPointJsTechnicalTeam.toggleTabRRMEntry();
+        }
+        else if (addRRMTypeTechnicalTeam == "add") {
+            addRRMEntryPointJsTechnicalTeam.toggleTabRRMEntry();
+        }
+    }
+
+    //tab toggle previous button
+    function toggleTabRRMEntryPreviousTechnicalTeam() {
+        
+        if (addRRMTypeTechnicalTeam == "edit") {
+            editRRMEntryPointJsTechnicalTeam.toggleTabRRMEntryPrevious();
+        }
+        else if (addRRMTypeTechnicalTeam == "add") {
+            addRRMEntryPointJsTechnicalTeam.toggleTabRRMEntryPrevious();
+        }
+    }
+
+    //save hr commnets
+    function saveCommentsTechnicalTeam() {
+        
+        if (addRRMTypeTechnicalTeam == "add") {
+            addRRMEntryPointJsTechnicalTeam.saveComments();
+        }
+        else if (addRRMTypeTechnicalTeam == "edit") {
+            editRRMEntryPointJsTechnicalTeam.saveComments();
+        }
+
+    }
+
+    //initialize model
+    function initializeModalTechnicalTeam() {
+        
+        $('.error_message').html('');
+        $('.nav-tabs a[href="#rrm_RequirementDetailsTechnicalTeam"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        clearFormDataTechnicalTeam();
+    }
+    function initializeModalAddTechnicalTeam() {
+        $('.error_message').html('');
+        $('.nav-tabs a[href="#rrm_RequirementDetailsTechnicalTeam"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        //clearFormDataAddTechnicalTeam();
+        clearFormDataTechnicalTeam()
+    }
+
+    //initialize Add RRM
+    function initializeAddRRMTechnicalTeam() {
+        $("#rrm_rfpidTechnicalTeam").attr('readonly', true);
+        $("#rrm_empidTechnicalTeam").attr('readonly', true);
+        $('#rrm_entrybdeTechnicalTeam').attr("disabled", "disabled");
+        $('#rrm_entrybdeTechnicalTeam').attr('readonly', true);
+        $('#rrm_replacementTechnicalTeam').attr('readonly', true);
+        $('#rrm_replacementTechnicalTeam').attr("disabled", "disabled");
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('readOnly',true);
+        $("#sdchk_rrmtechnical_losingRevenue").dxCheckBox('instance').option('readOnly',true);
+        $("#sdchk_rrmtechnical_fromVIP").dxCheckBox('instance').option('readOnly',true);
+        $("#sdtxt_rrmtechnical_requirementlead").dxTextBox('instance').option('readOnly',true);
+        //$('#rrm_TechnicalTeamsplanaTechnicalTeam').attr('readonly', true);
+        //$('#rrm_TechnicalTeamsplanaTechnicalTeam').attr("disabled", "disabled");
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0, 10);
+        $("#sd_date_rrmtechnical_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sd_date_rrm_technical_tobeonboardplana").dxDateBox('instance').option("value",nxtDate);
+        $("#sd_date_rrm_technical_tobeonboardplanb").dxDateBox('instance').option("value",nxtDate);
+
+        $("#divTechTeamRFP").hide();
+        $("#divTechTeamResigination").hide();
+        $("#sd_date_rrmtechnical_requestedDate").dxDateBox('instance').option('readOnly',true);
+
+        $("#sdtxt_rrmtechnical_requirementname").dxTextBox('instance').option('readOnly',false);
+        $("#sdtxt_rrmtechnical_requiredfor").dxTextBox('instance').option('readOnly',false);
+        $("#sd_date_rrm_technical_tobeonboardplana").dxDateBox('instance').option("readOnly",false);
+        $("#sd_date_rrm_technical_tobeonboardplanb").dxDateBox('instance').option("readOnly",false);
+        $("#sd_txtEditor_technical_skillDetailsPlanA").dxHtmlEditor('instance').option("readOnly",false);
+        $("#sd_txtEditor_technical_skillDetailsPlanB").dxHtmlEditor('instance').option("readOnly",false);
+        loadAndBindForAddRRMTechnicalTeam();
+        resetFormDataTechnicalTeam();
+    }
+
+    //reset form Data
+    function resetFormDataTechnicalTeam() {
+        bindDevExtremeControlsForRRMEntryPointTechnical();        
+
+        planAcomments = null;
+        planBcomments = null;
+        rrmId = null;
+        $("#sd_txtEditor_technical_skillDetailsPlanA").dxHtmlEditor('instance').option("value","");
+        $("#sd_txtEditor_technical_skillDetailsPlanB").dxHtmlEditor('instance').option("value","");
+        $("#sd_txtEditor_RRMTechnicalComments").dxHtmlEditor('instance').option("value","");
+        addRRMEntryPointJsTechnicalTeam.getSkillsDetails();
+        $("#rrm_manage_plan_comments_documents_TechnicalTeam").hide();
+        $("#sd_txtEditor_technical_skillDetailsPlanB").dxHtmlEditor('instance').option("readOnly",false);
+        $("#sd_txtEditor_technical_skillDetailsPlanA").dxHtmlEditor('instance').option("readOnly",false);
+        $("#sd_date_rrm_technical_tobeonboardplana").dxDateBox('instance').option("readOnly",false);
+        $("#sd_date_rrm_technical_tobeonboardplanb").dxDateBox('instance').option("readOnly",false);
+    }
+
+
+    //load And Bind For Add RRM
+    function loadAndBindForAddRRMTechnicalTeam() {
+        $("a.btnPrevious").hide();
+        $(".saveFamilyBtn").hide();
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+
+        loadAndBindRequirementDetailsTabForAddRRMTechnicalTeam();
+        loadAndBindSkillMappingTabForAddRRMTechnicalTeam();
+
+        var getTechnicalTeamList = loadTechnicalTeamList();
+
+        loadAndBindPlanATabForAddRRM();
+        loadAndBindPlanBTabForAddRRM();
+        loadAndBindCommentsForAddRRM();
+    }
+
+    //load And Bind Requirement Details Tab For Add RRM
+    function loadAndBindRequirementDetailsTabForAddRRMTechnicalTeam() {
+        //Load BDE
+
+      // var bderesult = callgetlist('GetBDExecutive', '{"IsActive":"True"}');
+        callGetListAsync('GetBDExecutive', '{"IsActive":"True"}', function (bderesult) {
+            var bdeoptions = "<option value =''>Select BDE</option>";
+            for (var i = 0; i < bderesult.length; i++) {
+                bdeoptions += "<option value='" + bderesult[i].Id + "'>" + bderesult[i].Name + "</option>";
+            }
+
+            $("#rrm_entrybdeTechnicalTeam").html(bdeoptions);
+        });
+        //Load Departments
+       // var departmentresult = callgetlist('GetDepartmentsForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetDepartmentsForRRM', '{"IsActive":"True"}', function (departmentresult) {
+            var departmentList = [];
+            for (i = 0; i < departmentresult.length; i++) {
+                var obj = {
+                    "Id":departmentresult[i].DepartmentId,
+                    "Name":departmentresult[i].DepartmentName
+                }
+                departmentList.push(obj);
+            }
+            $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: departmentList,
+                key: "Id"
+            }));
+            $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('value',Department);
+        });
+        //Load Designation
+       // var designationresult = callgetlist('GetDesignationsForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetDesignationsForRRM', '{"IsActive":"True"}', function (designationresult) {
+            var designationList = [];
+            for (i = 0; i < designationresult.length; i++) {
+                var obj = {
+                    "Id":designationresult[i].DesignationId,
+                    "Name":designationresult[i].DesignationName
+                }
+                designationList.push(obj);
+            }
+            $("#sdcmb_rrmtechnical_designation").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: designationList,
+                key: "Id"
+            }));
+        });
+        //Load Priorities
+        //var prioritiesresult = callgetlist('GetPrioritiesForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetPrioritiesForRRM', '{"IsActive":"True"}', function (prioritiesresult) {
+            var prioritiesList = [];
+            for (i = 0; i < prioritiesresult.length; i++) {
+                var obj = {
+                    "Id":prioritiesresult[i].PriorityId,
+                    "Name":prioritiesresult[i].PriorityName
+                }
+                prioritiesList.push(obj);
+            }
+            $("#sdcmb_rrmtechnical_priority").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: prioritiesList,
+                key: "Id"
+            }));
+            $("#sdcmb_rrmtechnical_priority").dxSelectBox('instance').option('value',"224BE1C0-DC9A-4629-B888-2B4D4D6D1707");
+        });
+        //Load ResourceReplacement
+       // var resorceresult = callgetlist('GetResourceReplacement', '{"IsActive":"True"}')
+        callGetListAsync('GetResourceReplacement', '{"IsActive":"True"}', function (resorceresult) {
+            var resorceoption = "<option value=''>Select Resource Replacement</option>";
+            for (i = 0; i < resorceresult.length; i++) {
+                resorceoption += "<option value='" + resorceresult[i].Id + "'>" + resorceresult[i].Name + "</option>"
+            }
+
+            $("#rrm_replacementTechnicalTeam").html(resorceoption);
+        });
+        //bind defalut value for from
+        $("#sdcmb_rrmtechnical_priority").dxSelectBox('instance').option('value',"224BE1C0-DC9A-4629-B888-2B4D4D6D1707");
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('value',Department);
+        $("#sdtxt_rrmtechnical_requirementlead").dxTextBox('instance').option('value',LoggedUser);
+        $("#sdnmb_rrmtechnical_numberofpositions").dxNumberBox('instance').option('value',"1");
+        $("#sdcmb_rrmtechnical_communication").dxSelectBox('instance').option('value',"Good");
+        $("#sdtxt_rrmtechnical_location").dxTextBox('instance').option('value',"Coimbatore");
+    }
+
+    //load And Bind Skill Mapping Tab For Add RRM
+    function loadAndBindSkillMappingTabForAddRRMTechnicalTeam() {
+        var employee_id = '';
+        var filter_val = JSON.stringify({
+            "EmployeeId": employee_id
+        });
+       // var result = callgetlist('GetEmployeeSkills', filter_val);
+        // <!-- var loaddata = computeHTML_SkillInfoEntry(result); -->
+        //  <!-- $('#display_SkillsEntry').html(loaddata); -->
+
+        var filter_val = JSON.stringify({ "IsActive": true });
+        //var result = callgetlist('GetSkillFamilies', filter_val);
+        callGetListAsync('GetSkillFamilies', filter_val, function (result) {
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                options += "<option value='" + result[i].Id + "'>" + result[i].Name + "</option>";
+            }
+        });
+    }
+
+    //load TechnicalTeamList
+    function loadTechnicalTeamList() {
+       // return recuirtersdetails = callgetlist('GetHRForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetHRForRRM', '{"IsActive":"True"}', function (recuirtersdetails) {
+            return recuirtersdetails;
+        });
+    }
+
+    //load And Bind PlanA Tab For Add RRM
+    function loadAndBindPlanATabForAddRRM() {
+        var recuirtersoption = "<option value=''>Select Recuirters</option>";
+        for (i = 0; i < recuirtersdetails.length; i++) {
+            recuirtersoption += "<option value='" + recuirtersdetails[i].EmployeeId + "'>" + recuirtersdetails[i].EmployeeName + "</option>"
+        }
+        $("#rrm_TechnicalTeamsplanbTechnicalTeam").html(recuirtersoption);
+    }
+
+    //load And Bind PlanB Tab For Add RRM
+    function loadAndBindPlanBTabForAddRRM() {
+
+        var recuirtersoption = "<option value=''>Select Recuirters</option>";
+        for (i = 0; i < recuirtersdetails.length; i++) {
+            recuirtersoption += "<option value='" + recuirtersdetails[i].EmployeeId + "'>" + recuirtersdetails[i].EmployeeName + "</option>"
+        }
+        $("#rrm_TechnicalTeamsplanaTechnicalTeam").html(recuirtersoption);
+    }
+
+    //load And Bind Comments For Add RRM
+    function loadAndBindCommentsForAddRRM() {
+        
+    }
+
+    //initialize Edit RRM
+    function initializeEditRRMTechnicalTeam(rrmid) {
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $('#RRMEntryPointModelTechnicalTeam').appendTo("body").modal("show");
+        $('.nav-tabs a[href="#rrm_RequirementDetailsTechnicalTeam_fromrrm"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        
+        
+        //$("#editskillTechnicalTeam").attr('disabled', 'disabled');
+        //$("#deleteskillTechnicalTeam").attr('disabled', 'disabled');
+        //$("#btnreminderTechnicalTeam").attr('disabled', 'disabled');
+
+
+        $("#rrm_rfpidTechnicalTeam").attr('readonly', true);
+        $("#rrm_empidTechnicalTeam").attr('readonly', true);
+        $('#rrm_entrybdeTechnicalTeam').attr("disabled", "disabled");
+        $('#rrm_entrybdeTechnicalTeam').attr('readonly', true);
+        $('#rrm_replacementTechnicalTeam').attr('readonly', true);
+        $('#rrm_replacementTechnicalTeam').attr("disabled", "disabled");
+        $("#sdnmb_rrmtechnical_numberofpositions").dxNumberBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmtechnical_designation").dxSelectBox('instance').option('readOnly',true);
+        //$('#rrm_TechnicalTeamsplanaTechnicalTeam').attr('readonly', true);
+        //$('#rrm_TechnicalTeamsplanaTechnicalTeam').attr("disabled", "disabled");
+        $('#rrm_TechnicalTeamsplanbTechnicalTeam').attr('readonly', true);
+        $('#rrm_TechnicalTeamsplanbTechnicalTeam').attr("disabled", "disabled");
+        $("#sd_date_rrmtechnical_requestedDate").dxDateBox('instance').option('readOnly',true);
+        $("#sdchk_rrmtechnical_losingRevenue").dxCheckBox('instance').option('readOnly',true);
+        $("#sdchk_rrmtechnical_fromVIP").dxCheckBox('instance').option('readOnly',true);
+        //$('#rrm_TechnicaTeamsplanaTechnicaTeam').attr("disabled", "disabled");
+        $('#rrm_TechnicalHeadsplanbTechnicaTeam').attr("disabled", "disabled");
+        $("#rrm_numberofpositionsTechnicaTeam").attr('readonly', true);
+        $("#rrm_designationTechnicaTeam").prop("disabled", true);
+        $("#rrm_requirementleadTechnicaTeam").attr('readonly', true);
+
+        $("#sdtxt_rrmtechnical_requirementname").dxTextBox('instance').option('readOnly',true);
+        $("#sdtxt_rrmtechnical_requiredfor").dxTextBox('instance').option('readOnly',true);
+        $("#sd_date_rrm_technical_tobeonboardplana").dxDateBox('instance').option("readOnly",true);
+        $("#sd_date_rrm_technical_tobeonboardplana").dxDateBox('instance').option("min","");
+        $("#sd_date_rrm_technical_tobeonboardplanb").dxDateBox('instance').option("readOnly",true);
+        $("#sd_date_rrm_technical_tobeonboardplanb").dxDateBox('instance').option("min","");
+        loadAndBindRequirementDetailsTabForAddRRMTechnicalTeam()
+        //loadAndBindEditRRMData(rrmid) ;
+
+        if (ResourceRequirementTypeTechTeam == "G") {
+            $("#divTechTeamRFP").hide();
+            $("#divTechTeamResigination").hide();
+        }
+        else if (ResourceRequirementTypeTechTeam == "P") {
+            $("#divTechTeamRFP").show();
+            $("#divTechTeamResigination").hide();
+        }
+        else if (ResourceRequirementTypeTechTeam == "R") {
+            $("#divTechTeamRFP").hide();
+            $("#divTechTeamResigination").show();
+
+        }
+        loadAndBindSkillMappingTabForAddRRMTechnicalTeam();
+    }
+
+    //clear addFormdata
+    function clearFormDataAddTechnicalTeam() {
+        $("#sdtxt_rrmtechnical_requirementname").dxTextBox('instance').option('value',"");
+        $("#sdtxt_rrmtechnical_requiredfor").dxTextBox('instance').option('value',"");
+        $("#rrm_empidTechnicalTeam").val("");
+        $("#rrm_entrybdeTechnicalTeam").val("");
+        $("#sdnmb_rrmtechnical_numberofpositions").dxNumberBox('instance').option('value',"");
+
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('value',"");
+        $("#sdcmb_rrmtechnical_designation").dxSelectBox('instance').option('value',"");
+        $("#sdnmb_rrmtechnical_experiencerequired").dxNumberBox('instance').option('value',"");
+        $("#sdtxt_rrmtechnical_location").dxTextBox('instance').option('value',"");
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        $("#sd_date_rrmtechnical_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sdtxt_rrmtechnical_requirementlead").dxTextBox('instance').option('value',"");
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0, 10);
+        $("#sd_date_rrm_technical_tobeonboardplana").dxDateBox('instance').option("value",nxtDate);
+        $("#sd_date_rrm_technical_tobeonboardplanb").dxDateBox('instance').option("value",nxtDate);
+
+        //reset form 
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $("#rrm_rfpidTechnicalTeam").removeAttr('readonly');
+        $("#rrm_empidTechnicalTeam").removeAttr('readonly');
+        // $('#rrm_entrybde').attr("visible", "visible"); 
+        $('#rrm_entrybdeTechnicalTeam').removeAttr('readonly');
+        $('#rrm_entrybdeTechnicalTeam').removeAttr('disabled');
+        $('#rrm_replacementTechnicalTeam').removeAttr('readonly');
+        $('#rrm_replacementTechnicalTeam').removeAttr('disabled');
+        //$('#rrm_replacement').attr("disabled", "visible"); 
+        $("#sdnmb_rrmtechnical_numberofpositions").dxNumberBox('instance').option('readOnly',false);
+        // $('#rrm_numberofpositions').attr("visible", "true"); 
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('readOnly',false);
+        //$('#rrm_department').attr("visible", "visible"); 
+        $("#sdcmb_rrmtechnical_designation").dxSelectBox('instance').option('readOnly',false);
+        //$('#rrm_designation').attr("visible", "visible"); 
+        $('#rrm_TechnicalTeamsplanaTechnicalTeam').removeAttr('readonly');
+        $('#rrm_TechnicalTeamsplanaTechnicalTeam').removeAttr('disabled');
+        // $('#rrm_TechnicalTeamsplana').attr("visible", "visible"); 
+        $('#rrm_TechnicalTeamsplanbTechnicalTeam').removeAttr('readonly');
+        $('#rrm_TechnicalTeamsplanbTechnicalTeam').removeAttr('disabled');
+        //$('#rrm_TechnicalTeamsplanb').attr("visible", "visible");
+        $("#sd_date_rrmtechnical_requestedDate").dxDateBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmtechnical_designation").dxSelectBox('instance').option('visible',true);
+
+        skillsClearAndShow();
+    }
+
+    //clear Form Data
+    function clearFormDataTechnicalTeam() {
+        $("#sdtxt_rrmtechnical_requirementname").dxTextBox('instance').option('value',"");
+        $("#sdtxt_rrmtechnical_requiredfor").dxTextBox('instance').option('value',"");
+        $("#rrm_empidTechnicalTeam").val("");
+        $("#rrm_entrybdeTechnicalTeam").val("");
+        $("#sdnmb_rrmtechnical_numberofpositions").dxNumberBox('instance').option('value',"");
+
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('value',"");
+        $("#sdcmb_rrmtechnical_designation").dxSelectBox('instance').option('value',"");
+        $("#sdnmb_rrmtechnical_experiencerequired").dxNumberBox('instance').option('value',"");
+        $("#sdtxt_rrmtechnical_location").dxTextBox('instance').option('value',"");
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        $("#sd_date_rrmtechnical_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sdtxt_rrmtechnical_requirementlead").dxTextBox('instance').option('value',"");
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0, 10);
+        $("#sd_date_rrm_technical_tobeonboardplana").dxDateBox('instance').option("value",nxtDate);
+        $("#sd_date_rrm_technical_tobeonboardplanb").dxDateBox('instance').option("value",nxtDate);
+
+        //reset form
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $("#rrm_rfpidTechnicalTeam").removeAttr('readonly');
+        $("#rrm_empidTechnicalTeam").removeAttr('readonly');
+        // $('#rrm_entrybdeTechnicalTeam').attr("visible", "visible");
+        $('#rrm_entrybdeTechnicalTeam').removeAttr('readonly');
+        $('#rrm_entrybdeTechnicalTeam').removeAttr('disabled');
+        $('#rrm_replacementTechnicalTeam').removeAttr('readonly');
+        $('#rrm_replacementTechnicalTeam').removeAttr('disabled');
+        //$('#rrm_replacementTechnicalTeam').attr("disabled", "visible");
+        $("#sdnmb_rrmtechnical_numberofpositions").dxNumberBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmtechnical_designation").dxSelectBox('instance').option('readOnly',false);
+        $('#rrm_TechnicalTeamsplanaTechnicalTeam').removeAttr('readonly');
+        $('#rrm_TechnicalTeamsplanaTechnicalTeam').removeAttr('disabled');
+        // $('#rrm_TechnicalTeamsplanaTechnicalTeam').attr("visible", "visible");
+        $('#rrm_TechnicalTeamsplanbTechnicalTeam').removeAttr('readonly');
+        $('#rrm_TechnicalTeamsplanbTechnicalTeam').removeAttr('disabled');
+        //$('#rrm_TechnicalTeamsplanb').attr("visible", "visible");
+        $("#sd_date_rrmtechnical_requestedDate").dxDateBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmtechnical_designation").dxSelectBox('instance').option('visible',true);
+        //
+        $("#sdcmb_rrmtechnical_priority").dxSelectBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('readOnly',false);
+        $("#sdnmb_rrmtechnical_experiencerequired").dxNumberBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmtechnical_communication").dxSelectBox('instance').option('readOnly',false);
+        $("#editSkillMappingRRMTechnicalTeam").show();
+        $("#deleteSkillMappingRRMTechnicalTeam").show();
+        $("#sd_txtEditor_RRMTechnicalComments").dxHtmlEditor('instance').option("readOnly",false);
+        $("#sdtxt_rrmtechnical_location").dxTextBox('instance').option('readOnly',false);
+        skillsClearAndShow();
+    }
+
+    //skills Clear And Show
+    function skillsClearAndShow() { // Clear our fields
+
+    }
+
+    function readOnlyFormDataTechnicaTeam() {
+        $("#sdcmb_rrmtechnical_priority").dxSelectBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmtechnical_department").dxSelectBox('instance').option('readOnly',true);
+        $("#sdnmb_rrmtechnical_experiencerequired").dxNumberBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmtechnical_communication").dxSelectBox('instance').option('readOnly',true);
+        $("#editSkillMappingRRMTechnicalTeam").hide();
+        $("#deleteSkillMappingRRMTechnicalTeam").hide();
+        $("#sd_txtEditor_RRMTechnicalComments").dxHtmlEditor('instance').option("readOnly",true);
+        $("#sdtxt_rrmtechnical_location").dxTextBox('instance').option('readOnly',true);
+    }
+
+
+</script>
+
+
+<style>
+
+    .rrm_manage_plan_history_lists {
+        border: solid 1px #D1D1D1;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #E3E3E3;
+        margin-bottom: 10px;
+    }
+
+        .rrm_manage_plan_history_lists .manage_comment {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 20px;
+            word-break: break-all;
+            background-color: #ffff;
+            cursor: pointer;
+        }
+
+        .rrm_manage_plan_history_lists label {
+            font-weight: 100;
+        }
+
+        .rrm_manage_plan_history_lists small {
+            font-size: 8pt;
+            font-weight: 400 !important;
+            display: block;
+        }
+
+            .rrm_manage_plan_history_lists small span:last-child {
+                margin-left: 5px;
+            }
+</style>

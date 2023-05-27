@@ -1,0 +1,181 @@
+<link rel="stylesheet" href="components/resourcepoolstatus/css/resourcepoolstatus.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.tab button span{
+	color: red;
+    display: inline-block;
+    width: 15px;
+    line-height: 15px;
+    height: 15px;
+    /* background: white; */
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    top: -5px;
+}
+.tab button.active span {
+    color: #fff !important;
+}
+input#nre_wish_list {
+    margin-right: 5px;
+    margin-top: 0px;
+    zoom: 2;
+}
+input#inprojetc {
+    margin-right: 5px;
+    margin-top: 0px;
+    zoom: 2;
+}
+input#shadow {
+    margin-right: 5px;
+    margin-top: 0px;
+    zoom: 2;
+}
+    input[type=radio] {
+        transform: scale(2);
+    }
+    input[type=text] {
+        width: 130px;
+        font-size: 16px;
+        background-color: white;
+        background-image: url('searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        /*padding: 12px 20px 12px 40px; Following code is commented because, column alignment was not possible. Preventing devextreme default functionality -webkit-transition: width 0.4s ease-in-out; */
+        transition: width 0.4s ease-in-out;
+    }
+
+input[type=text] {
+  width: 100%;
+}
+
+
+    /*#projectid thead tr {
+    display: table-row !important;
+}
+#tblwoexpired thead tr {
+    display: table-row !important;
+}
+#tblnonbillable thead tr {
+    display: table-row !important;
+}
+#tblshadow thead tr {
+    display: table-row !important;
+}
+#tblbenchsearch thead tr {
+    display: table-row !important;
+}
+#tblconsultant thead tr {
+    display: table-row !important;
+}
+
+#conslt_txtprojectlead{ 
+height:70px !important;
+}*/
+</style>
+
+<div class="card-detail">
+    <span class="card-detail-title"><b>Resource Pool Status</b><sup> <span style="color: red; font-weight: bold;" id="ResourceBillingCount"></span></sup></span>
+    <hr/>
+<div class="tab">
+  <button class="rps-tablinks" id="btninprojectStatus" onclick="opentabclickStatus(event, 'InProjectsStatus')">In Projects <span style="color: red" id="InProjectscountStatus"></span></button>
+  <button class="rps-tablinks" onclick="opentabclickStatus(event, 'WOExpiredStatus')">WO Expired <span style="color: red" id="WOExpiredListcountStatus"></span></button>
+  <button class="rps-tablinks" onclick="opentabclickStatus(event, 'NonBillableStatus')">Non-Billable <span style="color: red" id="GetNonBillableListcountStatus"></span></button>
+  <button class="rps-tablinks" onclick="opentabclickStatus(event, 'ShadowStatus')">Shadow <span style="color: red" id="ShadowListcountStatus"></span></button> 
+  <button class="rps-tablinks" onclick="opentabclickStatus(event, 'BenchStatus')">Bench <span style="color: red" id="BenchListcountStatus"></span></button> 
+  <button class="rps-tablinks" onclick="opentabclickStatus(event, 'ConsultantsStatus')">Consultants <span style="color: red" id="ConsultantsListcountStatus"></span></button> 
+</div>
+<div id="rps-tabConntent">
+<div id="InProjectsStatus" class="rps-tabConntent">
+ <div class="table-responsive">
+        <div id="tblinprojectsListStatus"></div>
+  </div>
+</div>
+
+
+<div id="WOExpiredStatus" class="rps-tabConntent">
+ <div class="table-responsive">
+  <div id="tblWOExpiredListStatus"></div>
+  </div>
+</div>
+
+<div id="NonBillableStatus" class="rps-tabConntent">
+ <div class="table-responsive">
+  
+        <div id="tblNonBillableListStatus"></div>
+    </div>
+</div>
+
+<div id="ShadowStatus" class="rps-tabConntent">
+ <div class="table-responsive">
+   
+        <div id="tblShadowListStatus"></div>
+    </div>
+</div>
+
+<div id="BenchStatus" class="rps-tabConntent"> 
+ <div class="table-responsive">
+        <div id="tblBenchListStatus"></div>
+    </div>
+</div>
+<div id="ConsultantsStatus" class="rps-tabConntent">
+ <div class="table-responsive">
+        <div id="tblConsultantsListStatus"></div>
+    </div>
+</div>
+</div>
+</div>
+<!-- ends here -->
+<script>
+$(document).ready(function(){
+    rendershowinprojectsListGridStatus();
+    renderShowWOExpiredListGridStatus();
+    renderNonBillableListStatus();
+    renderShadowListStatus();
+    renderBenchListStatus();
+    renderConsultantsListStatus();
+    BillingCount();
+});
+var getLeadsList = callgetlist('GetBackupLeads','{"IsActive":"True"}');
+        var getLeadData = [];
+        if (getLeadsList.length > 0) {
+            getLeadsList.forEach(function (i, index) {
+                getLeadData.push({
+                    'id': i['Name'],
+                    'text': i['Name']
+                });
+            });
+        }
+ 
+   $(".select_user_lead").select2({
+            placeholder: "Select a Project lead",
+            allowClear: true,
+            data: getLeadData
+        });
+  $(".select_user_lead_consultant").select2({
+            placeholder: "Select a Project lead",
+            allowClear: true,
+            data: getLeadData
+        });
+</script>
+
+
+
+<script type="text/javascript" src="components/resourcepoolstatus/script.js"></script>
+<script type="text/javascript" src="components/resourcepoolstatus/resourcePoolStatusGrid.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

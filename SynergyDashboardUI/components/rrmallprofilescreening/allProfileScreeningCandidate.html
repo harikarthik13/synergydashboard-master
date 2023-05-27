@@ -1,0 +1,174 @@
+<div class="modal fade" id="CandidateDetailsAllProfileScreeningModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title"><span>Candidate Details - </span>&nbsp;<span id="candidateDetailsNameAllProfileScreening"></span></h2>
+          </div>
+
+          <div class="modal-body" data-simplebar>
+            <div class="row">
+              <div class="col-md-6">
+                <table class='table table-borderless' style='margin-bottom:0px'>
+                  <tbody>
+                    <tr>
+                      <td class="table-label"><b>Name</b></td>
+                      <td><b>: </b><span id="lbl_candidateDetailsNameAllProfileScreening">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Mobile</b></td>
+                      <td><b>: </b><span id="lbl_candiateDetailsMobileAllProfileScreening">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Email Id</b></td>
+                      <td><b>: </b><span id="lbl_candiateDetailsEmailAllProfileScreening">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Links</b></td>
+                      <td><b>: </b><span id="lbl_candiateDetailsLinksAllProfileScreening">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Communication Rating</b></td>
+                      <td><b>: </b><span id="star_candidateDetailsCommunicationRatingAllProfileScreening">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Native</b></td>
+                      <td><b>: </b><span id="lbl_candiateDetailsNativeAllProfileScreening">Not Available</span></td>
+                    </tr>
+                  </tbody>
+                </table> 
+              </div>
+              <div class="col-md-6">
+                <table class='table table-borderless' style='margin-bottom:0px'>
+                  <tbody>
+                    <tr>
+                      <td class="table-label"><b>Work Experience</b></td>
+                    </tr>  
+                    <tr>
+                      <td><span id="lbl_candidateDetailsWorkExperienceAllProfileScreening">Not Available</span></td>
+                    </tr>                          
+                    <tr>
+                      <td class="table-label"><b>Skills :</b></td>
+                    </tr>
+                  </tbody>
+                </table> 
+                <div id="sdgd_candidateDetailsSkillsAllProfileScreening"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  // RRM Details for interview schedule
+
+function getCandidateDetailsForAllProfileScreening(candidateId){
+  $("#CandidateDetailsAllProfileScreeningModal").appendTo("body").modal("show");
+  var filterData1 = JSON.stringify({
+      IsActive: true,
+      CandidateProfilebyId : candidateId
+  });
+
+  var filterData2 = JSON.stringify({
+      IsActive: true,
+      CandidateId : candidateId
+  });
+
+  callGetListSync("GetCandidateProfilebyId", filterData1, function (data) {
+      mapCandidateDetailsForAllProfileScreening(data[0]);
+  });
+  
+  callGetListSync("GetCandidateSkillsbyCandidateId", filterData2, function (data) {
+    getCandidateDetailsSkillsAllProfileScreening(data)
+  });
+}
+
+function mapCandidateDetailsForAllProfileScreening(data){
+  if(data.FirstName != null && data.FirstName != ""){
+      $("#lbl_candidateDetailsNameAllProfileScreening").html(data.FirstName);
+      $("#candidateDetailsNameAllProfileScreening").html(data.FirstName)
+  }
+  else{
+      $("#lbl_candidateDetailsNameAllProfileScreening").html("Not Available");
+  }
+  if(data.Mobile != null && data.Mobile != ""){
+      $("#lbl_candiateDetailsMobileAllProfileScreening").html(data.Mobile)
+  }
+  else{
+      $("#lbl_candiateDetailsMobileAllProfileScreening").html("Not Available")
+  }
+  if(data.EmailId != null && data.EmailId != ""){
+      $("#lbl_candiateDetailsEmailAllProfileScreening").html(data.EmailId)
+  }
+  else{
+      $("#lbl_candiateDetailsEmailAllProfileScreening").html("Not Available")
+  }
+  var socialLinksHtml = "";
+  if(data.Skype != null && data.Skype != ""){
+    socialLinksHtml +="<a href='skype:" + data.Skype + "?chat'><i class='fab fa-skype'></i></a> &nbsp;"
+  }
+  if(data.GitHub != null && data.GitHub != ""){
+    socialLinksHtml +="<a href='" + data.GitHub + "' target='_blank'><i class='fab fa-github' aria-hidden='true'></i></a> &nbsp;"
+  }
+  if(data.LinkedIn != null && data.LinkedIn != ""){
+    socialLinksHtml +="<a href='" + data.LinkedIn + "' target='_blank'><i class='fab fa-linkedin'></i></a> &nbsp;"
+  }
+  if(data.Url != null && data.Url != ""){
+    socialLinksHtml +="<a href='" + data.Url + "' target='_blank'><i class='fa fa-link'></i></a>"
+  }  
+  if(socialLinksHtml == ""){
+    socialLinksHtml = "Not Available"
+  }  
+  $("#lbl_candiateDetailsLinksAllProfileScreening").html(socialLinksHtml)
+  
+  $("#star_candidateDetailsCommunicationRatingAllProfileScreening").text(data.CommunicationRatingHR);
+  if(data.Native != null && data.Native != ""){
+      $("#lbl_candiateDetailsNativeAllProfileScreening").html(data.Native)
+  }
+  else{
+      $("#lbl_candiateDetailsNativeAllProfileScreening").html("Not Available")
+  }
+  if(data.PreviousEmployersInfo != null && data.PreviousEmployersInfo != ""){
+      $("#lbl_candidateDetailsWorkExperienceAllProfileScreening").html(data.PreviousEmployersInfo)
+  }
+  else{
+      $("#lbl_candidateDetailsWorkExperienceAllProfileScreening").html("Not Available")
+  }
+}
+
+function getCandidateDetailsSkillsAllProfileScreening(data){      
+      $("#sdgd_candidateDetailsSkillsAllProfileScreening").dxDataGrid({
+          dataSource: data,
+          showBorders: true,
+          paging: {
+              enabled: false
+          },
+          wordWrapEnabled: true,
+          columns: [
+              {
+                  dataField:"SkillGradeName",
+                  caption:"Grade"
+              },
+              {
+                  dataField:"SkillFamilieName",
+                  caption:"Skill Family"
+              },
+              {
+                  dataField:"skillName",
+                  caption:"Skill Name"
+              },
+              {
+                  dataField:"SkillVersion",
+                  caption:"Skill Version"
+              }
+          ],
+      });
+}
+</script>

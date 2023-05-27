@@ -1,0 +1,60 @@
+<div class="card-detail">
+  <span class="pull-right">
+    <!-- change the refresh button id here -->
+    <div id="prefix_refreshStandardBarChartButton"></div>
+  </span>
+<!-- Change the chart title here -->
+<span class="card-detail-title"><b>RFP - Month wise Count</b></span>
+<hr />
+    <!-- change the chart card id here -->
+    <div id="prefix_standardbarchart"></div>
+</div>
+<style>
+  /* change the chart id here */
+#prefix_standardbarchart {
+  height: 440px;
+}
+</style>
+
+<script>
+    $(document).ready(function () {     
+      // change the chart binding function name here       
+      prefix_standardbarLoadChart()
+    });
+         
+//change the chart binding function here
+function prefix_standardbarLoadChart() { 
+//valueField
+var YaxisField = "Value"
+//argumentField
+var XaxisField = "Date"
+//color 
+var color = "#ffaa66"
+
+// call the web api service for get datasource here
+var filterData = "";
+dataSource= callgetlist('GetRFPCountByMonth', filterData);
+ 
+//change the chart card id here
+var prefix_standardbarchartInstance =  $("#prefix_standardbarchart").dxChart({
+      dataSource: dataSource, 
+      series: {
+          argumentField: XaxisField,
+          valueField: YaxisField,
+          name: "RFP Count",
+          type: "bar",
+          color: color
+      }
+  }).dxChart("instance");
+
+  //change the refresh button id here
+  $("#prefix_refreshStandardBarChartButton").dxButton({
+    icon: "refresh",
+    text: "Refresh",
+    onClick: function() {
+      //change the function name here
+      prefix_standardbarLoadChart();
+    }
+  });
+}
+</script>

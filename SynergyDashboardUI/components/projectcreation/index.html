@@ -1,0 +1,621 @@
+<link href="components/project/css/project.css" rel="stylesheet" />
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/jquery.dataTables.min.js"></script>
+
+
+<div class="card-detail">
+	<span><i><img src="components/project/images/project.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Create Project</b></span>
+    <span class="pull-right">       
+        <button class="btn btn-sm btn-primary" onclick="showProjectModal('null', 'null')" >
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+	</span>
+	<hr>
+
+	<div class="tab">
+        <button class="tablinks active" onclick="opentab(event, 'WOSignedProjects')">WO Signed Projects <span style="color: red"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'WONotSignedProjects')">Created Projects <span style="color: red"></span></button>
+    </div>
+
+	<div id="projectCreation-tabConent">
+        <div id="WOSignedProjects" class="tabcontent" style="display: block;">
+            <div class="table-responsive">
+                <div id="signed-project-card-grid"></div>
+            </div>
+        </div>
+
+
+        <div id="WONotSignedProjects" class="tabcontent">
+            <div class="table-responsive">
+                <div id="created-project-card-grid"></div>
+            </div>
+        </div>
+	</div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+	$("#create_project").load("components/projectcreation/create_project.html");
+
+	function include_project(filename, onload) {
+		var head = document.getElementsByTagName('head')[0];
+		var script = document.createElement('script');
+		script.src = filename;
+		script.type = 'text/javascript';
+		head.appendChild(script);
+	}
+    
+	/*WO to project creation page related scripts*/   
+/*WO to project creation page related scripts*/   
+	/*WO to project creation page related scripts*/   
+
+	include_project('./components/projectcreation/js/project_contacts.js');
+	include_project('./components/projectcreation/js/project_phase.js');
+	include_project('./components/projectcreation/js/project_modules.js');
+	include_project('./components/projectcreation/js/project_members.js');
+	include_project('./components/projectcreation/js/project_document.js');
+	include_project('./components/projectcreation/js/project_subproject.js');
+	include_project('./components/projectcreation/js/project_workorder.js');
+	include_project('./components/projectcreation/js/project_timesheet.js');
+	// include_project('./components/projectcreation/js/project_ganttchart.js');
+	
+	$(document).ready(function () {   
+		fn_GetSignedWorkOrdersForProjectCreation();			
+	});
+
+	function fn_GetSignedWorkOrdersForProjectCreation() {
+		var fil_val = JSON.stringify({ "Token": localStorage.getItem('securityToken'), "IsActive": 1 });
+		// var GetSignedWorkOrdersForProjectCreation = callgetlist('GetSignedWorkOrdersForProjectCreation',fil_val);
+		var GetSignedWorkOrdersForProjectCreation = callgetlist('GetSignedWorkOrdersForProjectCreation',fil_val);
+		renderProjectCreationGrid(GetSignedWorkOrdersForProjectCreation);
+
+		var GetCreatedProjectsForProjectCreation = callgetlist('GetProjects');
+		renderCreatedProjectCreationGrid(GetCreatedProjectsForProjectCreation);
+	}
+
+	function renderCreatedProjectCreation_Grid(){
+		var GetCreatedProjectsForProjectCreation = callgetlist('GetProjects');
+		renderCreatedProjectCreationGrid(GetCreatedProjectsForProjectCreation);
+	}
+
+	//tab click event
+	function opentab(evt, tabName) {
+	var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+	for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	}
+	tablinks = document.getElementsByClassName("tablinks");
+	for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace("active", "");
+	}
+	document.getElementById(tabName).style.display = "block";
+	evt.currentTarget.className += " active";
+	}
+
+
+	function GetFormattedDate(proposalDate) {
+		var d = new Date(proposalDate),
+			month = '' + (d.toLocaleString('en-us', { month: 'short' })),
+			day = '' + d.getDate(),
+			year = d.getFullYear();
+
+		if (month.length < 2) month = '0' + month;
+		if (day.length < 2) day = '0' + day;
+		return [day, month, year].join('-');
+	}
+
+	function addDaysToDate(date, days){
+		mydate = new Date(date);
+		mydate.setTime(mydate.getTime() + 86400000* days);
+		return GetFormattedDate(mydate);
+	}
+
+	function addMonthsToDate(date, months){
+		if (!months) months = 0;
+		mydate = new Date(date);
+		mydate.setTime(mydate.getTime() + (86400000* 30)* months);
+		return GetFormattedDate(mydate);
+	}
+
+
+	
+	function showProjectModaladd() {
+		clearAndShow();
+		var filter_val = JSON.stringify({ "Token": localStorage.getItem('securityToken'),"ISActive": 1 });
+		var fil_value = JSON.stringify({ "Token": localStorage.getItem('securityToken'),"IsActive": 1 });
+		var GetProjectIndustry = callgetlist('GetProjectIndustries', filter_val);
+		var GetProjectDomain = callgetlist('GetProjectDomain', fil_value);
+
+		//show GetProjectIndustry list
+		if (GetProjectIndustry.length > 0) {
+		$('#dlProjectIndustry').html('<option value="0">Select Project Indutry</option>');
+			GetProjectIndustry.forEach(function (GetProjectIndustry, i) {
+				$('#dlProjectIndustry').append('<option value="' + GetProjectIndustry.Id +'">' + GetProjectIndustry.ProjectIndustry + '</option>');
+			});
+		} else {
+			$('#dlProjectIndustry').append('<option value="0">No datas Found</option>');
+		}
+		
+	
+		
+		//show GetProjectDomain list
+		if (GetProjectDomain.length > 0) {
+			$('#dlProjectDomain').html('<option value="0">Select Project Domain</option>');
+			GetProjectDomain.forEach(function (GetProjectDomain, i) {
+			$('#dlProjectDomain').append('<option value="' + GetProjectDomain.Id +'">' + GetProjectDomain.ProjectDomain + '</option>');
+			//console.log('key[i].ProjectIndustry',GetProjectDomain.ProjectDomain);
+			});
+		} else {
+			$('#dlProjectDomain').append('<option value="0">No datas Found</option>');
+		}
+
+		//show GetDevelopmentModel  list
+		var fil_value_for_DevModel = JSON.stringify({ "IsActive": 1 });
+        var GetDevelopmentModel = callgetlist('GetDevModel', fil_value_for_DevModel);
+        if (GetDevelopmentModel.length > 0) {
+            $('#dlClientDevelopmentModel').html('<option value="0">Select Development Model</option>');
+            GetDevelopmentModel.forEach(function (GetDevelopmentModel, i) {
+                $('#dlClientDevelopmentModel').append('<option value="'+ GetDevelopmentModel.Id +'">' + GetDevelopmentModel.DevModel + '</option>');
+            });
+        } else {
+            $('#dlClientDevelopmentModel').append('<option value="0">No datas Found</option>');
+        }
+
+	$("#cpm_form_title").html("Add New Project");
+		
+		$('#dlClientName').prop('disabled',false);
+		$('#dlClientProjectType').prop('disabled',false);	
+		var html = "<select id='dlClientProjectType' class='form-control' name='dlClientProjectType'></select>";
+        $('#dlClientProjectType').replaceWith(html);
+	
+
+	   var GetProjectTypeFilters = JSON.stringify({
+		   	"Token":Token,
+     		 "IsActive": true
+		});
+		var GetProjectType = callgetlist("GetProjectType", GetProjectTypeFilters);
+
+	    $('#dlClientProjectType').find('option').remove();
+		$('#dlClientProjectType').append($("<option value='0'>Select Project Type</option>"));
+		GetProjectType.forEach(function (item) {
+			$('#dlClientProjectType').append($("<option></option>").attr("value", item.Id).text(item.ProjectType));
+		});
+
+		 $('#Project_Modal').modal("show");
+	}
+
+	function projectTypeValidation() {
+		if($("#dlClientProjectType option:selected").text() == "Fixed Bid"){
+			$("#dtpclientUta").show();	
+		} else {
+			$("#dtpclientUta").hide();
+		}
+	}
+
+		$("#open_addDlProjectIndustryModel, #open_addDlProjectDomainModel").modal('show');
+ 		
+ 		$(document).on('click', '.woclosemodel', function(){ 
+            $("#open_addDlProjectIndustryModel, #open_addDlProjectDomainModel").modal('hide');
+        });
+	
+
+
+	function renderProjectCreationGrid(data) {
+		var workOrderDataGrid = $("#signed-project-card-grid")
+		.dxDataGrid({
+			filterRow: {
+				visible: true,
+				applyFilter: "auto",
+			},
+			dataSource: data,
+			export: {
+				enabled: true,
+				allowExportSelectedData: true,
+			},
+			searchPanel: {
+				visible: true,
+				width: 240,
+				placeholder: "Search...",
+			},
+			headerFilter: {
+				visible: true,
+			},
+			grouping: {
+				autoExpandAll: true,
+			},
+			pager: {
+				showPageSizeSelector: true,
+				allowedPageSizes: [5, 10, 20],
+				showInfo: true,
+			},
+			paging: {
+				pageSize: 10,
+			},
+			groupPanel: {
+				visible: true,
+				emptyPanelText: "Drag a column"
+			},
+			sorting: {
+				mode: "multiple",
+			},
+			selection: {
+				mode: "multiple",
+			},
+			summary: {
+				totalItems: [
+					{
+						column: "sno",
+						summaryType: "count",
+					},
+				],
+				groupItems: [
+					{
+						column: "sno",
+						summaryType: "count",
+					},
+				],
+			},
+			editing: {
+				mode: "popup",
+				allowAdding: false,
+				allowUpdating: false,
+				useIcons: true,
+			},
+			columnChooser: {
+				enabled: true,
+			},
+			onToolbarPreparing: function (e) {
+				var dataGrid = e.component;
+				e.toolbarOptions.items.unshift({
+					location: "after",
+					widget: "dxButton",
+					options: {
+						icon: "refresh",
+						onClick: function () {
+							fn_GetSignedWorkOrdersForProjectCreation();
+							dataGrid.refresh();
+						}
+					}
+				});
+			},
+			rowAlternationEnabled: true,
+			filterPanel: { visible: true },
+			allowColumnReordering: true,
+			allowColumnResizing: true,
+			showBorders: true,
+			columns: [
+				{
+					caption: "#",
+					dataField: "sno",
+					cssClass: "rno",
+					allowGrouping: false,
+					allowCollapsing: false,
+					allReordering: false,
+					width: 70,
+					cellTemplate: function (container, options) {
+						container.text(
+							workOrderDataGrid.pageIndex() * workOrderDataGrid.pageSize() + options.rowIndex + 1
+						);
+					},
+				},
+				{
+					caption: "RFP Date",
+					dataField: "RFPDate",
+					dataType: "date",
+					format: "dd-MMM-yyyy"
+				},
+				{
+					caption: "BDE Name",
+					dataField: "BDEName",
+				},
+				{
+					caption: "Client Name",
+					dataField: "ClientName",
+				},
+				{
+					caption: "ProjectType",
+					dataField: "ProjectType",
+				},
+				{
+					caption: "ProjectTitle",
+					dataField: "ProjectName",
+				},
+				{
+					dataField: "",
+					caption: "Action",
+					width: 50,
+					allowFiltering:false, 
+				allowFiltering:false, 
+					allowFiltering:false, 
+					allowGrouping: false, 
+				allowGrouping: false, 
+					allowGrouping: false, 
+					allowReordering: false, 
+				allowReordering: false, 
+					allowReordering: false, 
+					allowSorting: false, 
+				allowSorting: false, 
+					allowSorting: false, 
+					allowCollapsing: false, 
+				allowCollapsing: false, 
+					allowCollapsing: false, 
+					allowExporting: false,
+					cellTemplate: function (container, options) {
+
+						if( typeof options.data.WorkOrderId !== 'undefined')
+						{
+							var workOrderId =  options.data.WorkOrderId;
+						}
+						else
+						{
+							var workOrderId = null;
+						}
+
+						var projectId = options.data.ProjectId;						
+						var domActions = "";
+						domActions +=
+							`<button class='btn btn-xs btn-primary edit-btn' onclick=showProjectModal("${workOrderId}","${projectId}");><i class='fas fa-pencil-alt'></i></button>`;
+						$("<div class='text-center'>")
+							.append($(domActions))
+							.appendTo(container);
+					},
+				},
+			],
+		})
+		.dxDataGrid("instance");
+	}
+
+	function renderCreatedProjectCreationGrid(data) {
+		var workOrderDataGrid = $("#created-project-card-grid")
+		.dxDataGrid({
+			filterRow: {
+				visible: true,
+				applyFilter: "auto",
+			},
+			dataSource: data,
+			export: {
+				enabled: true,
+				allowExportSelectedData: true,
+			},
+			searchPanel: {
+				visible: true,
+				width: 240,
+				placeholder: "Search...",
+			},
+			headerFilter: {
+				visible: true,
+			},
+			grouping: {
+				autoExpandAll: true,
+			},
+			pager: {
+				showPageSizeSelector: true,
+				allowedPageSizes: [5, 10, 20],
+				showInfo: true,
+			},
+			paging: {
+				pageSize: 10,
+			},
+			groupPanel: {
+				visible: true,
+				emptyPanelText: "Drag a column"
+			},
+			sorting: {
+				mode: "multiple",
+			},
+			selection: {
+				mode: "multiple",
+			},
+			summary: {
+				totalItems: [
+					{
+						column: "sno",
+						summaryType: "count",
+					},
+				],
+				groupItems: [
+					{
+						column: "sno",
+						summaryType: "count",
+					},
+				],
+			},
+			editing: {
+				mode: "popup",
+				allowAdding: false,
+				allowUpdating: false,
+				useIcons: true,
+			},
+			columnChooser: {
+				enabled: true,
+			},
+			onToolbarPreparing: function (e) {
+				var dataGrid = e.component;
+				e.toolbarOptions.items.unshift({
+					location: "after",
+					widget: "dxButton",
+					options: {
+						icon: "refresh",
+						onClick: function () {
+							renderCreatedProjectCreation_Grid();
+							dataGrid.refresh();
+						}
+					}
+				});
+			},
+			rowAlternationEnabled: true,
+			filterPanel: { visible: true },
+			allowColumnReordering: true,
+			allowColumnResizing: true,
+			showBorders: true,
+			columns: [
+				{
+					caption: "#",
+					dataField: "sno",
+					cssClass: "rno",
+					allowGrouping: false,
+					allowCollapsing: false,
+					allReordering: false,
+					width: 70,
+					cellTemplate: function (container, options) {
+						container.text(
+							workOrderDataGrid.pageIndex() * workOrderDataGrid.pageSize() + options.rowIndex + 1
+						);
+					},
+				},
+				{
+					caption: "RFP Date",
+					dataField: "RFPDate",
+					dataType: "date",
+					format: "dd-MMM-yyyy"
+				},
+				{
+					caption: "BDE Name",
+					dataField: "BDEName",
+				},
+				{
+					caption: "Client Name",
+					dataField: "ClientName",
+				},
+				{
+					caption: "ProjectType",
+					dataField: "ProjectType",
+				},
+				{
+					caption: "ProjectTitle",
+					dataField: "ProjectName",
+				},
+
+				{
+					caption: "Actual Start Date",
+					dataField: "ActualStartDate",
+					dataType: "date",
+					format: "dd-MMM-yyyy",
+				},
+				{
+					caption: "Actual End Date",
+					dataField: "ActualEndDate",
+					dataType: "date",
+					format: "dd-MMM-yyyy",
+				},
+				{
+					caption: "Is Project Closed?",
+					dataField: "IsProjectClosed",
+				},
+				{
+					caption: "Lead Name / Project Incharge",
+					dataField: "ProjectInCharge",
+				},
+
+				{
+					dataField: "",
+					caption: "Action",
+					width: 50,
+					allowFiltering:false, 
+				allowFiltering:false, 
+					allowFiltering:false, 
+					allowGrouping: false, 
+				allowGrouping: false, 
+					allowGrouping: false, 
+					allowReordering: false, 
+				allowReordering: false, 
+					allowReordering: false, 
+					allowSorting: false, 
+				allowSorting: false, 
+					allowSorting: false, 
+					allowCollapsing: false, 
+				allowCollapsing: false, 
+					allowCollapsing: false, 
+					allowExporting: false,
+					cellTemplate: function (container, options) {
+						//console.log("*******"+JSON.stringify(options.data));
+
+						if( typeof options.data.WorkOrderId !== 'undefined')
+						{
+							var workOrderId =  options.data.WorkOrderId;
+						}
+						else
+						{
+							var workOrderId = null;
+						}
+
+						var projectId = options.data.ProjectId;		
+						var IsProjectClosed = (options.data.IsProjectClosed != null)?1:0;	
+						var icon = "<i class='fas fa-pencil-alt'></i>";
+						var domActions = "";
+						if(IsProjectClosed == 1){
+							icon = "<i class='fas fa-eye'></i>";
+						}else{
+							icon = "<i class='fas fa-pencil-alt'></i>";
+						}
+						domActions +=
+							`<button class='btn btn-xs btn-primary edit-btn' onclick=showProjectModal("${workOrderId}","${projectId}","${IsProjectClosed}");>${icon}</button>`;
+						$("<div class='text-center'>")
+							.append($(domActions))
+							.appendTo(container);
+					},
+				},
+			],
+		})
+		.dxDataGrid("instance");
+	}
+
+	function clearAndShow(){
+		$(".select2-selection__rendered li:not(:last-child)").remove();
+    	$(".addSkill-tag-input").val("");
+		
+		$("#dlClientProjectName").val('');
+		$("#dlClientName").val('');
+		// $("#dlClientName :selected").val(key.ClientId);
+		$("#dlClientProjectType").val('');
+		// $("#dlClientProjectType :selected").val(key.ProjectTypeId);
+		// $("#dlClientDevelopmentModel :selected").text(key.DevelopmentModel);
+		$("#dlClientDevelopmentModel").val('0');
+		// $("#dlClientDevelopmentModel :selected").val(key.DevelopmentModelID);
+		// $("#dlProjectIndustry :selected").text(key.ProjectIndustry);
+		$("#dlProjectIndustry").val('0');
+		// $("#dlProjectDomain :selected").text(key.ProjectDomain);
+		$("#dlProjectDomain").val('0');	
+		
+		$("#dtpclientPlannedStartDate").val('');
+		$("#dtpclientPlannedEndDate").val('');
+		$("#dtpclientActualStartDate").val('');
+		$("#dtpclientActualEndDate").val('');
+		$("#dtpclientUtaStartDate").val('');
+		$("#dtpclientUtaEndDate").val('');
+
+	
+		$("#tag-textAreaProject").text('');
+
+		$(".dlClientProjectName_error").html('');
+		$(".dlClientName_error").html('');
+		$(".dlClientProjectType_error").html('');
+		$(".dlClientDevelopmentModel_error").html('');
+		$(".dlProjectIndustry_error").html('');
+		$(".dlProjectDomain_error").html('');
+
+		$("#dtpclientPlannedStartDate_error").html('');
+		$("#dtpclientPlannedEndDate_error").html('');
+		$("#dtpclientActualStartDate_error").html('');
+		$("#dtpclientActualEndDate_error").html('');
+		$("#dtpclientUtaStartDate_error").html('');
+		$("#dtpclientUtaEndDate_error").html('');
+
+		$("#textProjectDescription_error").html('');
+		$("#tag-textAreaProject_error").html('');
+	}
+	
+</script>
+
+
+<link href="./components/projectcreation/css/project.css" rel="stylesheet" />
+
+
+

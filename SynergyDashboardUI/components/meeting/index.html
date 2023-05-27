@@ -1,0 +1,2288 @@
+<link href="components/meeting/css/meeting.css" rel="stylesheet" />
+<!-- meeting Master Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>My meetings</b></span>
+    <!-- the below button for add new meeting -->
+    <span class="pull-right">
+        <button type="submit" id="btnCreateMeeting" class="btnCreateMeeting btn btn-primary btn-xs pull-right"
+            onclick="OpenCreateModal()">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+
+     <div id="MeetingMaster"></div> 
+
+    <div id="tabPanel"></div>
+
+    <!-- FeedbackModal -->
+    <div class="modal fade bd-example-modal-lg in" id="FeedbackModal" role="dialog" style="width: 70%; margin: auto;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">My Feedback </h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4 text-right">
+                                <label>Ratings</label>
+                            </div>
+                            <div class="col-lg-6 col-md-10 col-sm-12">
+                                <div class="form-group rate text-left">
+                                    <input type="radio" id="star5" name="rate" value="5"
+                                        onclick="GetRatings('star5')" />
+                                    <label for="star5" title="text">5 stars</label>
+                                    <input type="radio" id="star4" name="rate" value="4"
+                                        onclick="GetRatings('star4')" />
+                                    <label for="star4" title="text">4 stars</label>
+                                    <input type="radio" id="star3" name="rate" value="3"
+                                        onclick="GetRatings('star3')" />
+                                    <label for="star3" title="text">3 stars</label>
+                                    <input type="radio" id="star2" name="rate" value="2"
+                                        onclick="GetRatings('star2')" />
+                                    <label for="star2" title="text">2 stars</label>
+                                    <input type="radio" id="star1" name="rate" value="1"
+                                        onclick="GetRatings('star1')" />
+                                    <label for="star1" title="text">1 star</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 text-right">
+                                <label>Feedback</label>
+                            </div>
+                            <div class="col-lg-6 col-md-10 col-sm-12">
+                                <div class="form-group">
+                                    <textarea rows="3" class="form-control" id="mdFeedback"></textarea>
+                                </div>
+                                <small class="text-danger"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        onclick="SaveFeedback()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Meeting Details Modal -->
+    <div class="modal fade bd-example-modal-lg in" id="MeetingDetailsModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Meeting Details </h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Name :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <!-- <input type="text" disabled class="form-control" id="mdName" /> -->
+                                            <label id="mdName"></label>
+                                        </div>
+                                        <small class="text-danger"></small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Date :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label id="mdDate"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Planned Start Time :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label id="mdPlanTime"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Actual Start Time :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label id="mdTime"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Chair Person :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <!-- <input class="form-control" disabled id="mdChairperson" /> -->
+                                            <label id="mdChairperson"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Coordinatior :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <!-- <input class="form-control" disabled id="mdCoordinatior" /> -->
+                                            <label id="mdCoordinatior"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Agenda :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <!-- <input type="text" disabled class="form-control" id="mdAgenda" /> -->
+                                            <label id="mdAgenda"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Description :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label id="mdDescription"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Invite Members :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label id="mdInviteMembers"></label>
+                                        </div>
+                                    </div>
+                                </div> -->                               
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Is Feedback Required :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label id="mdIsFeedbackRequired"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Is Training :</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label id="mdIsTraining"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-1"></div>
+
+                            <div class="col-md-6 card-detail" style="height: 400px; overflow-y:auto;">
+                                <div class="row">
+                                    <div id="EmpDesignation">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mark Attendance Modal -->
+    <div class="modal fade bd-example-modal-lg in" id="GetAttendanceModal" role="dialog"
+        style="width: 850px; margin:auto;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Mark Attendance </h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12 card-detail">
+                                <div class="row" id="MarkAttendeeMasterDiv">
+                                    <div id="MarkAttendeeMaster"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="mdMarkAttendance" type="button" class="btn btn-success"
+                        onclick="saveMarkAttendance()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Meeting -->
+    <div class="modal fade bd-example-modal-lg in" id="CreateMeetingModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Create Meeting</h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-5 text-right">
+                                    <label>Bind From template</label>
+                                </div>
+                                <div class="col-lg-7 col-md-10 col-sm-12">
+                                    <div class="form-group">
+                                        <label><input type="radio" onclick="TemplateStatus(true)" name="template"
+                                                value="1" />&nbsp;Yes</label>
+                                        <label><input type="radio" id="cmBindTemplate" onclick="TemplateStatus(false)"
+                                                name="template" value="0" />&nbsp;No</label>
+                                    </div>
+                                    <small class="text-danger template_error_message"></small>
+                                </div>
+                            </div>
+                            <div class="col-md-6" id="TemplateTypeDiv">
+                                <div class="col-md-4 text-right">
+                                    <label>Select Template</label>
+                                </div>
+                                <div class="col-lg-8 col-md-10 col-sm-12">
+                                    <div class="form-group">
+                                        <div id="cm_TemplateType"></div>
+                                        <!-- <select id="cm_TemplateType" onchange="BindTemplate()"
+                                            class="form-control"></select> -->
+                                    </div>
+                                    <small class="text-danger"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="card-detail-title"><b>Basic Details</b><br /></span>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Name</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="cm_Name" />
+                                            <small class="text-danger name_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Description</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="cm_Description" cols="30"
+                                                rows="2"></textarea>
+                                            <small class="text-danger description_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Meeting Type</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <select id="cm_MeetingType" class="form-control"></select>
+                                            <small class="text-danger meeting_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Agenda</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <textarea type="text" class="form-control" id="cm_Agenda" cols="30"
+                                                rows="2"></textarea>
+                                            <small class="text-danger agenda_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <span class="card-detail-title"><b>Meeting Time</b><br /></span>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Planned Start Time</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="datetime-local" class="form-control datepicker"
+                                                id="cm_PlannedStartTime" />
+                                            <small class="text-danger plannedstarttime_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Planned End Time</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="datetime-local" class="form-control datepicker"
+                                                id="cm_PlannedEndTime" />
+                                            <small class="text-danger plannedendtime_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Actual Start Time</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="datetime-local" class="form-control datepicker"
+                                                id="cm_ActualStartTime" />
+                                            <small class="text-danger actualstarttime_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Actual End Time</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="datetime-local" class="form-control datepicker"
+                                                id="cm_ActualEndTime" />
+                                            <small class="text-danger actualendtime_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                        </div>
+
+                        <br />
+                        <span class="card-detail-title"><b>Meeting Options</b><br /></span>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Invite Members</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label><input type="radio" id="cm_InviteMembers" name="invite"
+                                                    value="1" />&nbsp;Yes</label>
+                                            <label><input type="radio" name="invite" value="0" />&nbsp;No</label>
+                                            <small class="text-danger invitemembers_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>IsTraining</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label><input type="radio" id="cm_IsTraining" name="training"
+                                                    value="1" />&nbsp;Yes</label>
+                                            <label><input type="radio" name="training" value="0" />&nbsp;No</label>
+                                            <small class="text-danger invitemembers_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>IsFeedback Required</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label><input type="radio" id="cm_IsFeedback" name="feedback"
+                                                    value="1" />&nbsp;Yes</label>
+                                            <label><input type="radio" name="feedback" value="0" />&nbsp;No</label>
+                                            <small class="text-danger feedback_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <span class="card-detail-title"><b>Participant Details</b><br /></span>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Chair Person</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <div id="cm_Chairperson"></div>
+                                            <small class="text-danger chairperson_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Attendee Type</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <label><input type="radio" id="cm_Employee" name="meetingtype"
+                                                    value="Employee"
+                                                    onclick="GetEmployeesAndDesignaton()" />&nbsp;Employee</label>
+                                            <label><input type="radio" id="cm_Designation" name="meetingtype"
+                                                    value="Designation"
+                                                    onclick="GetEmployeesAndDesignaton()" />&nbsp;Designation</label>
+                                            <small class="text-danger meetingtype_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Coordinator</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <div id="cm_Coordinator"></div>
+                                            <small class="text-danger coordinator_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="cm_AttendeeGrid"></div>
+                        <small class="text-danger employeeid_error_message"></small>
+
+                        <br />
+                        <span class="card-detail-title"><b>Template</b><br /></span>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                        <label>Name</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="cm_TemplateName" />
+                                            <small class="text-danger templatename_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 text-right">
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <button id="cmSaveTemplate" type="button" class="btn btn-success"
+                                                onclick="SaveTemplate()">Save Template</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="cmCreateMeeting" type="button" class="btn btn-success"
+                        onclick="CreateMeeting()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- task assign -->
+    <div class="modal fade bd-example-modal-lg in" id="taskassignModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Task Assign</h4>
+                  
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div style="padding: 20px;" class="row">
+                        <button  type="submit"   class="btn btn-primary btn-lg float-right"
+                            onclick="OpenCreateTask()">
+                           ADD
+                        </button>
+                    </div> 
+                    <div class="row">
+                    <div style="margin: 10px;width: 98% !important;" id="taskassign_div">
+
+                    </div>
+                </div>
+
+                </div>
+                <div class="modal-footer">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- add task -->
+    <div class="modal fade bd-example-modal-lg in" id="taskAddModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content " style="width:60% !important">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Add Task</h4>
+                  
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                     
+                    <div class="form-group">
+                       
+                        
+                             
+                                <div class="row" style="margin-bottom: 20px; margin-top: 30px;">
+                                    <div class="col-md-2 text-right">
+                                        <label>Task Description</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="cm_Name" />
+                                            <small class="text-danger name_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-md-2 text-right">
+                                        <label>Status</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <select class="form-select form-control">
+                                            <option value="" disabled selected>Select your option</option>
+                                            <option value="1">Inprogress</option>
+                                            <option value="2">Completed</option>
+                                            
+                                          </select>
+                                    </div>
+                                </div>
+                             
+                             <div class="row" style="margin-bottom: 20px;">
+                                <div class="col-md-2 text-right">
+                                    <label>Assignees</label>
+                                </div>
+                                <div class="col-lg-8 col-md-10 col-sm-12">
+                                    <select class="form-control select_user_user" id="userMultiple" multiple="multiple"
+                                    style="width:100%;">
+                                </select>
+                            </div>
+                                <div>
+                                    <h4 id="selectValue"></h4>
+                                </div>
+                            </div>
+                                
+                             
+                     
+                        
+                      
+                      
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-md-2 text-right">
+                                        <label>Date</label>
+                                    </div>
+                                    <div class="col-lg-8 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <input type="datetime-local" class="form-control datepicker"
+                                                id="cm_ActualStartTime" />
+                                            <small class="text-danger actualstarttime_error_message"></small>
+                                        </div>
+                                    </div>
+                                </div>
+  
+                    
+                             
+                     
+                         
+                                <div class="row" style="margin-bottom: 20px;">
+                                    <div class="col-md-6 text-right">
+                                        <div class="form-group">
+                                            <button id="cmSaveTemplate" type="button" class="btn btn-success"
+                                                onclick="">Save </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-10 col-sm-12">
+                                        <div class="form-group">
+                                            <button id="cmSaveTemplate"  type="button"  data-dismiss="modal" class="btn btn-primary"
+                                                onclick="">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                           
+                        </div>
+                    </div>
+ 
+                <div class="modal-footer">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+
+
+</div>
+
+<!-- internal script -->
+<script>
+    var meetingList;
+    var meetingHistory;
+    var meetingId;
+    var rating;
+    var employeeID;
+    var designationID;
+    let checkedArray = [];
+    let unCheckedArray = [];
+    var rowIndex = [];
+    var templateData;
+    var data;
+    var canSubmit;
+    var isSaveTemplateClicked = false;
+    var templateEmpId;
+
+    $(document).ready(function () {
+        document.getElementById("btnCreateMeeting").style.visibility = "visible";
+        var filterData = JSON.stringify({
+            "Status": '',
+            "Message": ''
+        });
+        var userinfo = callgetlist('GetCurrentUserInfo', filterData);
+        userinfo.forEach(element => {
+            if (element.Designation == "Associate Project Manager / Architech" || element.Designation == "Associate PL" || element.Designation == "Project Manager"
+                || element.Designation == "Project Leader" || element.Designation == "Project Coordinator" || element.Designation == "Associate Group Leader"
+                || element.Designation == "Group Leader" || element.Designation == "Senior Group Leader") {
+                document.getElementById("btnCreateMeeting").style.visibility = "visible";
+            }
+        })
+
+        callGetListAsync('GetCurrentUserInfo', function (userInfo) {
+            document.getElementById("btnCreateMeeting").style.visibility = "hidden";
+        });
+
+
+        callGetListAsync('GetMeetingTypes', '{"IsActive":"True"}', function (meetingresult) {
+            var meetingtype = "<option value=''>Select Meeting Type</option>";
+            for (i = 0; i < meetingresult.length; i++) {
+                meetingtype += "<option value='" + meetingresult[i].Id + "'>" + meetingresult[i].Name + "</option>";
+            }
+            $("#cm_MeetingType").html(meetingtype);
+        })
+        
+        callGetListAsync('GetEmployeeList', '{"IsActive":"True"}', function (empResult) {
+            $("#cm_Chairperson").dxSelectBox({
+                dataSource: empResult,
+                valueExpr: "EmployeeId",
+                displayExpr: "Name",
+                placeholder: "Select Chair Person",
+                searchEnabled: true
+            });
+            $("#cm_Coordinator").dxSelectBox({
+                dataSource: empResult,
+                valueExpr: "EmployeeId",
+                displayExpr: "Name",
+                placeholder: "Select Coordinator",
+                searchEnabled: true
+            });
+        });
+
+        var options = { year: 'numeric', month: 'short', day: 'numeric' };
+        var today = new Date();
+        LoadMyMeetings();
+    });
+
+    function LoadMyMeetings() {
+        meetingHistory = "";
+        meetingList = "";
+        var filterData = JSON.stringify({
+            "isActive": true
+        });
+        meetingList = callgetlist('GetMeetings', filterData);
+        meetingList.forEach(element => {
+            element.startTime = element.ActualStartTime;
+            element.endTime = element.ActualEndTime;
+            element.pstartTime = element.PlannedStartTime;
+            element.pendTime = element.PlannedEndTime;
+        });
+
+        meetingList.forEach(function (key, item) {
+            var options = { year: 'numeric', month: 'short', day: 'numeric' };
+            today.toLocaleString("en-IN", options);
+
+            var startdate = new Date(key.ActualStartTime);
+            var day = startdate.toLocaleString("en-US", options);
+            var time = key.ActualStartTime.substr(11, 5);
+            time = timeTo12HrFormat(time)
+            key.ActualStartTime = day + " - " + time;
+
+            var enddate = new Date(key.ActualEndTime);
+            var endday = enddate.toLocaleString("en-US", options);
+            var endtime = key.ActualEndTime.substr(11, 5);
+            endtime = timeTo12HrFormat(endtime)
+            key.ActualEndTime = endday + " - " + endtime;
+
+            var pstartdate = new Date(key.PlannedStartTime);
+            var psday = pstartdate.toLocaleString("en-US", options);
+            var pstime = key.PlannedStartTime.substr(11, 5);
+            pstime = timeTo12HrFormat(pstime)
+            key.PlannedStartTime = psday + " - " + pstime;
+
+            var penddate = new Date(key.PlannedEndTime);
+            var pendday = penddate.toLocaleString("en-US", options);
+            var pendtime = key.PlannedEndTime.substr(11, 5);
+            pendtime = timeTo12HrFormat(pendtime)
+            key.PlannedEndTime = pendday + " - " + pendtime;
+        });
+
+        meetingHistory = callgetlist('GetHistoricalMeetings', filterData);
+        meetingHistory.forEach(element => {
+            element.startTime = element.ActualStartTime;
+            element.endTime = element.ActualEndTime;
+            element.pstartTime = element.PlannedStartTime;
+            element.pendTime = element.PlannedEndTime;
+        });
+
+        meetingHistory.forEach(function (key, item) {
+            var options = { year: 'numeric', month: 'short', day: 'numeric' };
+            today.toLocaleString("en-IN", options);
+
+            var startdate = new Date(key.ActualStartTime);
+            var day = startdate.toLocaleString("en-US", options);
+            var time = key.ActualStartTime.substr(11, 5);
+            time = timeTo12HrFormat(time)
+            key.ActualStartTime = day + " - " + time;
+
+            var enddate = new Date(key.ActualEndTime);
+            var endday = enddate.toLocaleString("en-US", options);
+            var endtime = key.ActualEndTime.substr(11, 5);
+            endtime = timeTo12HrFormat(endtime)
+            key.ActualEndTime = endday + " - " + endtime;
+
+            var pstartdate = new Date(key.PlannedStartTime);
+            var psday = pstartdate.toLocaleString("en-US", options);
+            var pstime = key.PlannedStartTime.substr(11, 5);
+            pstime = timeTo12HrFormat(pstime)
+            key.PlannedStartTime = psday + " - " + pstime;
+
+            var penddate = new Date(key.PlannedEndTime);
+            var pendday = penddate.toLocaleString("en-US", options);
+            var pendtime = key.PlannedEndTime.substr(11, 5);
+            pendtime = timeTo12HrFormat(pendtime)
+            key.PlannedEndTime = pendday + " - " + pendtime;
+        });
+
+        meetingList.forEach(element => {
+            meetingHistory.push(element)
+        });
+
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        var EmployeeId = jsonData.Data["0"].EmployeeID;
+        var current = "Current/Upcoming";
+        var history = "History";
+
+
+
+            
+
+        $("#tabPanel").dxTabPanel({            
+       
+            dataSource: [{
+                title: current,
+                
+
+                
+                template: function () {
+                    
+                    return $("<div id='MeetingMaster'>").dxDataGrid({
+          /////////              
+          filterRow: {
+                visible: true,
+                applyFilter: "auto",
+            },
+            repaintChangesOnly: true,
+            highlightChanges: true,
+            showColumnLines: true,
+            rowAlternationEnabled: true,
+            showRowLines: false,
+            export: {
+                enabled: true,
+                allowExportSelectedData: true,
+            },
+            searchPanel: {
+                visible: true,
+                width: 240,
+                placeholder: "Search...",
+            },
+            headerFilter: {
+                visible: true,
+            },
+            selection: {
+                mode: "multiple"
+            },
+            allowColumnReordering: true,
+            showBorders: true,
+            grouping: {
+                autoExpandAll: true,
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10, 15],
+                showInfo: true,
+            },
+            paging: {
+                pageSize: 7,
+            },
+            sorting: {
+                mode: "multiple",
+            },
+            summary: {
+                totalItems: [
+                    {
+                        column: "sno",
+                        summaryType: "count",
+                    },
+                ],
+                groupItems: [
+                    {
+                        column: "sno",
+                        summaryType: "count",
+                    },
+                ],
+            },
+            columnChooser: {
+                enabled: true,
+                mode: "select"
+            },
+            filterPanel: { visible: true },
+            allowColumnResizing: true,
+            groupPanel: {
+                visible: true,
+                emptyPanelText: "Drag a column header here to group by that column"
+            },
+            onToolbarPreparing: function (e) {
+        var dataGrid = e.component;
+        e.toolbarOptions.items.unshift({
+          location: "after",
+          widget: "dxButton",
+          options: {
+            icon: "refresh",
+            onClick: function () {
+                getclosedProjectAuditReportDetailsList();
+            },
+          },
+        });
+      },
+        
+    ///////        //
+                        
+                        width: "100%",
+                        dataSource: meetingList,
+
+                        columns: [
+                            { caption: "Name", dataField: "Meeting", width: 200 },
+                            { caption: "Starts at", dataField: "ActualStartTime", width: 200 },
+                            {
+                                dataField: "",
+                                caption: "Duration",
+                                width: 100,
+                                cellTemplate: function (container, options) {
+                                    const dt2 = new Date(options.data.endTime);
+                                    const dt1 = new Date(options.data.startTime);
+                                    var d3 = ((dt2 - dt1) / 1000) / 60;
+                                    var domActions = "";
+                                    domActions += "<p>" + d3 + " mins" + "</p>";
+                                    $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                                }
+                            },
+                            {
+                                dataField: "",
+                                caption: "Action",
+                                width: 50,
+                                cellTemplate: function (container, options) {
+                                    meetingId = options.data.MeetingId;
+                                    var list = options.data;
+                                    var domActions = "";
+                                    var chairPersonId = options.data.ChairPersonId;
+                                    var coordinatorId = options.data.CoordinatorId;
+                                    if (chairPersonId == EmployeeId || coordinatorId == EmployeeId) {
+                                        domActions += "<button class='btn btn-xs btn-primary' title='Details' onclick=MeetingDetails('" + meetingId + "')><i class='glyphicon glyphicon-list'></i></button>  <button class='btn btn-xs btn-primary' title='Mark Attendance' onclick=MarkAttendance('" + meetingId + "')><i class='glyphicon glyphicon-check'></i></button> <button title='FeedBack' class='btn btn-xs btn-primary' id='mdbtnFeedback' onclick=Feedback('" + meetingId + "')><i class='glyphicon glyphicon-star'></i></button>  <button title='Edit' class='btn btn-xs btn-primary' id='mdbtnFeedback' onclick=editMeeting('" + meetingId + "')><i class='glyphicon glyphicon-edit'></i></button>       ";
+                                        $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                                    }
+                                    else {
+                                        domActions += "<button class='btn btn-xs btn-primary' title='Details' onclick=MeetingDetails('" + meetingId + "')><i class='glyphicon glyphicon-list'></i></button>  <button class='btn btn-xs btn-primary' title='Mark Attendance' onclick=MarkAttendance('" + meetingId + "')><i class='glyphicon glyphicon-check'></i></button> <button class='btn btn-xs btn-primary' id='mdbtnFeedback' title='FeedBack' onclick=Feedback('" + meetingId + "')><i class='glyphicon glyphicon-star'></i></button> ";
+                                        $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                                    }
+                                }
+                            }
+                        ],
+                        showBorders: true,
+                        rowAlternationEnabled: true
+                    });
+                }
+            }, {
+                title: history,
+                template: function () {
+                    return $("<div id='MeetingHistory'>").dxDataGrid({
+                        width: "100%",
+                        dataSource: meetingHistory,
+
+                        filterRow: {
+                visible: true,
+                applyFilter: "auto",
+            },
+            repaintChangesOnly: true,
+            highlightChanges: true,
+            showColumnLines: true,
+            rowAlternationEnabled: true,
+            showRowLines: false,
+            export: {
+                enabled: true,
+                allowExportSelectedData: true,
+            },
+            searchPanel: {
+                visible: true,
+                width: 240,
+                placeholder: "Search...",
+            },
+            headerFilter: {
+                visible: true,
+            },
+            selection: {
+                mode: "multiple"
+            },
+            allowColumnReordering: true,
+            showBorders: true,
+            grouping: {
+                autoExpandAll: true,
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10, 15],
+                showInfo: true,
+            },
+            paging: {
+                pageSize: 7,
+            },
+            sorting: {
+                mode: "multiple",
+            },
+            summary: {
+                totalItems: [
+                    {
+                        column: "sno",
+                        summaryType: "count",
+                    },
+                ],
+                groupItems: [
+                    {
+                        column: "sno",
+                        summaryType: "count",
+                    },
+                ],
+            },
+            columnChooser: {
+                enabled: true,
+                mode: "select"
+            },
+            filterPanel: { visible: true },
+            allowColumnResizing: true,
+            groupPanel: {
+                visible: true,
+                emptyPanelText: "Drag a column header here to group by that column"
+            },
+            onToolbarPreparing: function (e) {
+        var dataGrid = e.component;
+        e.toolbarOptions.items.unshift({
+          location: "after",
+          widget: "dxButton",
+          options: {
+            icon: "refresh",
+            onClick: function () {
+                getclosedProjectAuditReportDetailsList();
+            },
+          },
+        });
+      },
+
+
+                        columns: [
+                            { caption: "Name", dataField: "Meeting", width: 200 },
+                            { caption: "Starts at", dataField: "ActualStartTime", width: 200 },
+                            {
+                                dataField: "",
+                                caption: "Duration",
+                                width: 100,
+                                cellTemplate: function (container, options) {
+                                    const dt2 = new Date(options.data.endTime);
+                                    const dt1 = new Date(options.data.startTime);
+                                    var d3 = ((dt2 - dt1) / 1000) / 60;
+                                    var domActions = "";
+                                    domActions += "<p>" + d3 + " mins" + "</p>";
+                                    $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                                }
+                            },
+                            {
+                                dataField: "",
+                                caption: "Action",
+                                width: 50,
+                                cellTemplate: function (container, options) {
+                                    var meetingId = options.data.MeetingId;
+                                    var list = options.data;
+                                    var domActions = "";
+                                    var chairPersonId = options.data.ChairPersonId;
+                                    var coordinatorId = options.data.CoordinatorId;
+                                    if (chairPersonId == EmployeeId || coordinatorId == EmployeeId) {
+                                        domActions += "<button class='btn btn-xs btn-primary' title='Details' onclick=MeetingDetails('" + meetingId + "')><i class='glyphicon glyphicon-list'></i></button>  <button class='btn btn-xs btn-primary' title='Mark Attendance' onclick=MarkAttendance('" + meetingId + "')><i class='glyphicon glyphicon-check'></i></button> <button title='FeedBack' class='btn btn-xs btn-primary' id='mdbtnFeedback' onclick=Feedback('" + meetingId + "')><i class='glyphicon glyphicon-star'></i></button>  <button title='Edit' class='btn btn-xs btn-primary' id='mdbtnFeedback' onclick=editMeeting('" + meetingId + "')><i class='glyphicon glyphicon-edit'></i></button>         <button title='Edit' class='btn btn-xs btn-primary' id='mdbtnFeedback' onclick=showTasksmodel()><i class='glyphicon glyphicon-edit'></i></button>";
+                                        $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                                    }
+                                    else {
+                                        domActions += "<button class='btn btn-xs btn-primary' title='Details' onclick=MeetingDetails('" + meetingId + "')><i class='glyphicon glyphicon-list'></i></button>  <button class='btn btn-xs btn-primary' title='Mark Attendance' onclick=MarkAttendance('" + meetingId + "')><i class='glyphicon glyphicon-check'></i></button> <button class='btn btn-xs btn-primary' id='mdbtnFeedback' title='FeedBack' onclick=Feedback('" + meetingId + "')><i class='glyphicon glyphicon-star'></i></button> ";
+                                        $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                                    }
+                                }
+                            }
+                        ],
+                        showBorders: true,
+                        rowAlternationEnabled: true
+                    });
+                }
+            }],
+            itemTitleTemplate: function (itemData, itemIndex, itemElement) {
+                itemElement.append("<span class='dx-tab-text'>" + itemData.title + "</span>");
+            },
+            deferRendering: false
+        });
+
+
+
+///////////
+
+
+ 
+
+   
+
+
+        
+        
+    }
+
+    function timeTo12HrFormat(time) {   // Take a time in 24 hour format and format it in 12 hour format
+        var time_part_array = time.split(":");
+        var ampm = 'AM';
+        if (time_part_array[0] >= 12) {
+            ampm = 'PM';
+        }
+
+        if (time_part_array[0] > 12) {
+            time_part_array[0] = time_part_array[0] - 12;
+        }
+
+        formatted_time = time_part_array[0] + ':' + time_part_array[1] + ' ' + ampm;
+
+        return formatted_time;
+    }
+
+    //Marking attendance for the participants of the meeting
+    function MarkAttendance(id) {
+        meetingId = id;
+        var filterData = JSON.stringify({
+            "MeetingId": id,
+            "isActive": true
+        });
+        
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        var EmployeeId = jsonData.Data["0"].EmployeeID;
+        var canMarkAttendance = false;
+
+        document.getElementById("mdMarkAttendance").disabled = true;
+        meetingHistory.forEach(element => {
+            if (element.MeetingId == meetingId) {
+                if (element.ChairPersonId == EmployeeId || element.CoordinatorId == EmployeeId) {
+                    canMarkAttendance = true;
+                    document.getElementById("mdMarkAttendance").disabled = false;
+                }
+            }
+        });
+
+        attendeeList = callgetlist('GetAttendees', filterData);
+
+        var attendee = $("#MarkAttendeeMaster").dxDataGrid({
+            dataSource: attendeeList,
+            filterRow: {
+                visible: true,
+                applyFilter: "auto"
+            },
+            export: {
+                enabled: false,
+                allowExportSelectedData: false
+            },
+            searchPanel: {
+                visible: false
+            },
+            headerFilter: {
+                visible: true
+            },
+            filterPanel: { visible: true },
+            allowColumnReordering: true,
+            showBorders: true,
+            grouping: {
+                autoExpandAll: true,
+            },
+            paging: {
+                pageSize: 100
+            },
+            groupPanel: {
+                visible: true
+            },
+            sorting: {
+                mode: "multiple"
+            },
+            columns: [
+                { caption: "Name", dataField: "EmployeeName", width: 150 },
+                { caption: "Designation", dataField: "Designation", width: 150 },
+                {
+                    dataField: "",
+                    caption: "IsPresent",
+                    width: 90,
+                    cellTemplate: function (container, options) {
+                        var employeeId = options.data.EmployeesId;
+                        var domActions = "";
+                        if (canMarkAttendance) {
+                            if (options.data.IsPresent) {
+                                domActions += "<input type='checkbox' class='chkAttendance'   checked='true'  id='" + employeeId + "'  onclick=attendanceCheckedEvent(this)>";
+                                $("<div class='text-center chkAttendance'>").append($(domActions)).appendTo(container);
+                            }
+                            else {
+                                domActions += "<input type='checkbox' class='chkAttendance'  id='" + employeeId + "' onclick=attendanceCheckedEvent(this)>";
+                                $("<div class='text-center chkAttendance'>").append($(domActions)).appendTo(container);
+                            }
+                        }
+                        else {
+                            if (options.data.IsPresent) {
+                                domActions += "<input type='checkbox' disabled class='chkAttendance'   checked='true'  id='" + employeeId + "'  onclick=attendanceCheckedEvent(this)>";
+                                $("<div class='text-center chkAttendance'>").append($(domActions)).appendTo(container);
+                            }
+                            else {
+                                domActions += "<input type='checkbox' disabled class='chkAttendance'  id='" + employeeId + "' onclick=attendanceCheckedEvent(this)>";
+                                $("<div class='text-center chkAttendance'>").append($(domActions)).appendTo(container);
+                            }
+                        }
+                    }
+                }
+            ]
+        }).dxDataGrid("instance");
+        $('#GetAttendanceModal').appendTo("body").modal('show');
+    }
+
+    //Getting presented participant id of the meeting
+    function attendanceCheckedEvent(id) {
+        var chkId = id;
+        var ID = null;
+        ID = chkId.id;
+        if ($(chkId).prop("checked") == true) {
+            checkedArray.push(
+                { ID }
+            );
+        }
+        if ($(chkId).prop("checked") == false) {
+            unCheckedArray.push(
+                { ID }
+            );
+        }
+    }
+
+    function removeByAttr(arr, attr, value) {
+        var i = arr.length;
+        while (i--) {
+            if (arr[i]
+                && arr[i].hasOwnProperty(attr)
+                && (arguments.length > 2 && arr[i][attr] === value)) {
+                arr.splice(i, 1);
+            }
+        }
+        return arr;
+    }
+
+    // Showing meeting and participant details
+    function MeetingDetails(id) {
+        var filterData = JSON.stringify({
+            "MeetingId": id,
+            "isActive": true
+        });
+        var GetBackupResource = callgetlist('GetBackupResource', '{"IsActive":true}');
+        var attendeeList = callgetlist('GetAttendees', filterData);
+        $('#EmpDesignation').empty();
+
+        attendeeList.forEach(element => {
+            img = "";
+            GetBackupResource.forEach(elm => {
+                if (elm.Id == element.EmployeesId) {
+                    img = elm.ProfilePicture;
+                }
+            })
+            var color = "Red";
+            var attendanceStatus = "Absent";
+            if (element.IsPresent) {
+                color = "Green";
+                attendanceStatus = "Present";
+            }
+
+            if (img == "") {
+                img = "image/dashboard/rs_img.png";
+            }
+            $('#EmpDesignation').append(
+                $('<div style="padding-left:15px; border-bottom:1px solid gray;padding-bottom:15px; padding-top:0px">').prop({
+                    innerHTML: '<img class="img-circle" src="' + img + '" width="30px" height="30px" style="margin-top:20px;"></img><span style="font-size:16px;font-weight:bold;padding-left:20px;">' + element.EmployeeName + '</span><br/><span style="padding-left:50px;">' + element.Designation +
+                        '</span><span style="float: right;margin-top: -15px; margin-right:10px;color:' + color + '">' + attendanceStatus + '</span>'
+                })
+            );
+        });
+
+        meetingHistory.forEach(element => {
+            if(element.IsTraining==true){
+                element.IsTraining="yes"
+            }else element.IsTraining="No"
+            if(element.IsFeedbackRequired==true){
+                element.IsFeedbackRequired="yes"
+            }else element.IsFeedbackRequired="No"
+            if (element.MeetingId == id) {
+                var d = element.ActualStartTime;
+                $("#mdName").text(element.Meeting);
+                $("#mdDate").text(element.ActualStartTime.substr(0, 12));
+                $("#mdPlanTime").text(element.PlannedStartTime.substr(13, 10).replace("-", "") + " - " + element.PlannedStartTime.substr(13, 10).replace("-", ""));
+                $("#mdTime").text(element.ActualStartTime.substr(13, 10).replace("-", "") + " - " + element.ActualEndTime.substr(13, 10).replace("-", ""));
+                $("#mdChairperson").text(element.ChairPerson);
+                $("#mdCoordinatior").text(element.Coordinator);
+                $("#mdAgenda").text(element.Agenda);
+                $("#mdDescription").text(element.Description);
+                $("#mdIsTraining").text(element.IsTraining);
+                $("#mdIsFeedbackRequired").text(element.IsFeedbackRequired);
+            }
+        });
+        $('#MeetingDetailsModal').appendTo("body").modal('show');
+    }
+
+    // Opening create meeting modal
+    function OpenCreateModal() {
+        ResetInputs();
+        document.getElementById("TemplateTypeDiv").style.visibility = "hidden";
+        document.getElementById("cm_AttendeeGrid").style.display = "none";
+        $("#cm_AttendeeGrid").dxDataGrid({
+            dataSource: []
+        })
+        $('#CreateMeetingModal').appendTo("body").modal('show');
+    }
+
+    // Calling meeting details modal to show participant and meeting details
+    $(".btnAddMeeting").click(function () {
+        $('#MeetingDetailsModal').appendTo("body").modal('show');
+    });
+
+    // Getting and showing meeting feedback 
+    function Feedback(id) {
+        // $("#star4").trigger("click");
+        var filterData = JSON.stringify({
+            "MeetingId": id,
+            "isActive": true
+        });
+        var feedback = callgetlist('GetMeetingFeedback', filterData);
+        $('#FeedbackModal').appendTo("body").modal('show');
+    }
+
+    // Getting ratings when clicking the radio button
+    function GetRatings(id) {
+        rating = document.getElementById(id).value;
+    }
+
+    // Saving given meeting feedback
+    function SaveFeedback() {
+        var feedback = document.getElementById("mdFeedback").value;
+        data = {
+            "Method": "PostMeetingFeedBack",
+            "Data": {
+                "MeetingId": meetingId, "Rating": rating, "Feedback": feedback, "isActive": true
+            }
+        }
+        var postCall = PostDataCall(data);
+        if (postCall['IsSuccess'] == true) {
+            swal("Success..!", postCall['Message'], "success");
+            $("#FeedbackModal").modal("hide");
+        }
+        else {
+            swal("Warning..!", postCall['Message'], "warning");
+        }
+    }
+
+    function saveMarkAttendance() {
+        let name = [];
+        let empid = [];
+
+        var dataGrid = $("#MarkAttendeeMaster").dxDataGrid("instance");
+        var allGridItems = dataGrid.getDataSource().items();
+
+        allGridItems.forEach(element => {
+            if (element.IsPresent) {
+                empid.push(element.EmployeesId);
+            }
+        });
+
+        var emp = null;
+        emp = checkedArray.map(function (item) {
+            empid.push(item['ID'])
+            return item['ID'];
+        });
+        var empUnChecked = null;
+        empUnChecked = unCheckedArray.map(function (item) {
+            return item['ID'];
+        });
+        var unCheckedEmployeeId = empUnChecked.toString();
+
+        unCheckedArray.forEach(element => {
+            empid = empid.filter(function (item) {
+                return item !== element.ID;
+            });
+        })
+
+        emp = null;
+        emp = empid.map(function (item) {
+            return item;
+        });
+        var employeeId = emp.toString();
+
+        data = {
+            "Method": "PostAttendees",
+            "Data": {
+                "MeetingId": meetingId, "EmployeeId": employeeId, "isPresent": true, "isActive": true
+            }
+        }
+        var postCall = PostDataCall(data);
+        if (postCall['IsSuccess'] == true) {
+            swal("Success..!", postCall['Message'], "success");
+            $("#GetAttendanceModal").modal("hide");
+        }
+        else {
+            swal("Warning..!", postCall['Message'], "warning");
+        }
+
+
+        checkedArray = [];
+        unCheckedArray = [];
+    }
+
+    function GetEmployeesAndDesignaton() {
+        var type_emp = "";
+        document.getElementById("cm_AttendeeGrid").style.display = "block";
+        var empattendee;
+        if (document.getElementById('cm_Employee').checked) {
+            type_emp = document.getElementById('cm_Employee').value;
+            empattendee = callgetlist('GetEmployeeList', '{"IsActive":"True"}');
+
+            var attendee = $("#cm_AttendeeGrid").dxDataGrid({
+                dataSource: empattendee,
+                filterRow: {
+                    visible: true,
+                    applyFilter: "auto"
+                },
+                export: {
+                    enabled: false,
+                    allowExportSelectedData: false
+                },
+                searchPanel: {
+                    visible: false
+                },
+                showBorders: true,
+                grouping: {
+                    autoExpandAll: true,
+                },
+                paging: {
+                    pageSize: 100
+                },
+                selection: {
+                    mode: "multiple"
+                },
+                columns: [
+                    {
+                        caption: "Name", dataField: "Name", width: 250, alignment: "left"
+                    },
+                    {
+                        caption: "Department", dataField: "Department", width: 250, alignment: "left"
+                    },
+                    {
+                        caption: "Designation", dataField: "Designation", width: 300, alignment: "right"
+                    }
+                ],
+                onSelectionChanged: function (selectedItems) {
+                    var data = selectedItems.selectedRowsData;
+                    if (data.length > 0)
+                        employeeID = $.map(data, function (value) {
+                            return value.EmployeeId
+                        }).join(",");
+                },
+                onContentReady: function (e) {
+                    e.component.selectRowsByIndexes([]);
+                    e.component.selectRowsByIndexes(rowIndex);
+                }
+            }).dxDataGrid("instance");
+        }
+
+        var type_designation = "";
+        if (document.getElementById('cm_Designation').checked) {
+            type_designation = document.getElementById('cm_Designation').value;
+
+            empattendee = callgetlist('GetDesignations');
+
+            var attendee = $("#cm_AttendeeGrid").dxDataGrid({
+                dataSource: empattendee,
+                filterRow: {
+                    visible: true,
+                    applyFilter: "auto"
+                },
+                export: {
+                    enabled: false,
+                    allowExportSelectedData: false
+                },
+                searchPanel: {
+                    visible: false
+                },
+                showBorders: true,
+                grouping: {
+                    autoExpandAll: true,
+                },
+                paging: {
+                    pageSize: 100
+                },
+                selection: {
+                    mode: "multiple"
+                },
+                columns: [
+                    {
+                        caption: "Name", dataField: "Name", width: 150, alignment: "left"
+                    }
+                ],
+                onSelectionChanged: function (selectedItems) {
+                    var data = selectedItems.selectedRowsData;
+                    if (data.length > 0)
+                        employeeID = $.map(data, function (value) {
+                            return value.EmployeeId
+                        }).join(",");
+                }
+            }).dxDataGrid("instance");
+        }
+    }
+
+    function CreateMeeting() {
+        getCreateMeetingData();
+        var postCall = PostDataCall(data);
+        if (postCall['IsSuccess'] == true) {
+            swal("Success..!", postCall['Message'], "success");
+            $("#CreateMeetingModal").modal("hide");
+
+            LoadMyMeetings();
+        }
+        else {
+            swal("Warning..!", postCall['Message'], "warning");
+        }
+    }
+
+    function editMeeting(id) {
+        // var filterData = JSON.stringify({
+        //     "MeetingId": id,
+        //     "isActive": true
+        // });
+        // var GetBackupResource = callgetlist('GetBackupResource', '{"IsActive":true}');
+        // var attendeeList = callgetlist('GetAttendees', filterData);
+        // console.log(attendeeList,"attendeeList")
+     
+        ResetInputs();
+        $('#CreateMeetingModal').appendTo("body").modal('show');
+        var localget = localStorage.getItem("MeetingTemplate");
+        var jsonData = JSON.parse(localget);
+        console.log( "1233")
+    }
+
+    function showTasksmodel() {
+        $('#taskassignModal').appendTo("body").modal('show');
+
+  var status = 2; 
+       empattendee = callgetlist('GetEmployeeList', '{"IsActive":"True"}');
+      
+
+            var attendee = $("#taskassign_div").dxDataGrid({
+                dataSource: empattendee,
+
+                filterRow: {
+                visible: true,
+                applyFilter: "auto",
+            },
+            repaintChangesOnly: true,
+            highlightChanges: true,
+            showColumnLines: true,
+            rowAlternationEnabled: true,
+            showRowLines: false,
+            export: {
+                enabled: true,
+                allowExportSelectedData: true,
+            },
+            searchPanel: {
+                visible: true,
+                width: 240,
+                placeholder: "Search...",
+            },
+            headerFilter: {
+                visible: true,
+            },
+            selection: {
+                mode: "multiple"
+            },
+            allowColumnReordering: true,
+            showBorders: true,
+            grouping: {
+                autoExpandAll: true,
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10, 15],
+                showInfo: true,
+            },
+            paging: {
+                pageSize: 7,
+            },
+            sorting: {
+                mode: "multiple",
+            },
+            summary: {
+                totalItems: [
+                    {
+                        column: "sno",
+                        summaryType: "count",
+                    },
+                ],
+                groupItems: [
+                    {
+                        column: "sno",
+                        summaryType: "count",
+                    },
+                ],
+            },
+            columnChooser: {
+                enabled: true,
+                mode: "select"
+            },
+            filterPanel: { visible: true },
+            allowColumnResizing: true,
+            groupPanel: {
+                visible: true,
+                emptyPanelText: "Drag a column header here to group by that column"
+            },
+            onToolbarPreparing: function (e) {
+        var dataGrid = e.component;
+        e.toolbarOptions.items.unshift({
+          location: "after",
+          widget: "dxButton",
+          options: {
+            icon: "refresh",
+            onClick: function () {
+                getclosedProjectAuditReportDetailsList();
+            },
+          },
+        });
+      },
+               
+                columns: [
+             
+                 
+              
+                    {
+                        caption: "Task Description", dataField: "Designation", width: 250, alignment: "left"
+                    },
+                    {
+                dataField: "Staus",
+                caption: "Status",
+                width: 200,
+                alignment:"left",
+                cellTemplate: function (container, options) {
+                    var fieldData = status;
+                    if (fieldData == 0) {
+                        var html = "<label class='label label-warning m-l-sm'>Yet to accept</label>";
+                    }
+                    else if(fieldData == 1) {
+                        var html = "<label class='label label-danger m-l-sm'>Inprogress</label>";
+                    }
+                    else if(fieldData == 2){
+                        var html = "<label class='label label-success m-l-sm'>Completed</label>";
+                    }
+                    $(html).appendTo(container);
+                }, fixedPosition: "right"
+
+            },
+                    {
+                        caption: "Assignees", dataField: "Name", width: 250, alignment: "left"
+                    },
+                    {
+                        caption: "Date", dataField: "", width: 200, alignment: "left"
+                    },
+                    {
+                        caption: "Action", dataField: "", width: 200, alignment: "right",
+                        cellTemplate: function (container, options) {
+                                    meetingId = options.data.MeetingId;
+                                    var list = options.data;
+                                    var domActions = "";
+                                    var chairPersonId = options.data.ChairPersonId;
+                                    var coordinatorId = options.data.CoordinatorId;
+                                    // if (chairPersonId == EmployeeId || coordinatorId == EmployeeId) {
+                                        domActions += "   <button title='Edit' class='btn btn-xs btn-primary' id='mdbtnFeedback' onclick=edittask('" + meetingId + "')><i class='glyphicon glyphicon-edit'></i></button>";
+                                        $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                                    // }
+                                    // else {
+                                    //     domActions +="   <button title='Edit' class='btn btn-xs btn-primary' id='mdbtnFeedback' onclick=editMeeting('" + meetingId + "')><i class='glyphicon glyphicon-edit'></i></button>";  
+                                    // }
+                                }
+                            }
+                    
+                ],
+                onSelectionChanged: function (selectedItems) {
+                    var data = selectedItems.selectedRowsData;
+                    if (data.length > 0)
+                        employeeID = $.map(data, function (value) {
+                            return value.EmployeeId
+                        }).join(",");
+                },
+                onContentReady: function (e) {
+                    e.component.selectRowsByIndexes([]);
+                    e.component.selectRowsByIndexes(rowIndex);
+                }
+            }).dxDataGrid("instance");
+          
+   
+      
+    }
+
+    function edittask(id){
+        $('#taskAddModal').appendTo("body").modal('show');
+        console.log(id,"id")
+        meetingId = id;
+        var filterData = JSON.stringify({
+            "MeetingId": id,
+            "isActive": true
+        });
+        var GetBackupResource = callgetlist('GetBackupResource', '{"IsActive":true}');
+        var attendeeList = callgetlist('GetAttendees', filterData);
+
+        console.log(GetBackupResource,"GetBackupResource")
+        console.log(attendeeList,"attendeeList")
+    }
+
+     function OpenCreateTask(){
+        $('#taskAddModal').appendTo("body").modal('show');
+
+        var filterData = JSON.stringify({
+            "IsActive": true
+        });
+            var getEmployeeList = callgetlist('GetEmployeeList', filterData);
+            console.log(getEmployeeList,"getEmployeeList")
+        var getEmployeeData = [];
+        if (getEmployeeList.length > 0) {
+            getEmployeeList.forEach(function (i, index) {
+                getEmployeeData.push({
+                    'id': i['EmployeeId'],
+                    'text': i['Name']
+                });
+            });
+        }
+        console.log(getEmployeeData,"getEmployeeData")
+     
+        $(".select_user_user").select2({
+            placeholder: "Select a User",
+            allowClear: true,
+            data: getEmployeeData
+        });
+
+     }
+
+    
+
+
+    function getCreateMeetingData() {
+        
+        var pstime = document.getElementById('cm_PlannedStartTime').value;
+        var petime = document.getElementById('cm_PlannedEndTime').value;
+        var astime = document.getElementById('cm_ActualStartTime').value;
+        var aetime = document.getElementById('cm_ActualEndTime').value;
+
+        pstime= new Date(pstime);
+        petime= new Date(petime);
+        astime= new Date(astime);
+        aetime= new Date(aetime);
+        
+        pstime = new Date(pstime.getTime() - (pstime.getTimezoneOffset() * 60000)).toISOString();
+        petime= new Date(petime.getTime() - (petime.getTimezoneOffset() * 60000)).toISOString();
+        astime= new Date(astime.getTime() - (astime.getTimezoneOffset() * 60000)).toISOString();
+        aetime= new Date(aetime.getTime() - (aetime.getTimezoneOffset() * 60000)).toISOString();
+
+       
+        var feedback = 0;
+        var members = 0;
+        var training = 0;
+        var chairperson = $("#cm_Chairperson").dxSelectBox('instance').option('value');
+        var coordinator = $("#cm_Coordinator").dxSelectBox('instance').option('value');
+        var name = document.getElementById('cm_Name').value;
+       
+        var meettype = document.getElementById('cm_MeetingType').value;
+        var desc = document.getElementById('cm_Description').value;
+        var agenda = document.getElementById('cm_Agenda').value;
+        if (document.getElementById('cm_InviteMembers').checked) {
+            members = document.getElementById('cm_InviteMembers').value;
+        }
+        if (document.getElementById('cm_IsTraining').checked) {
+            training = document.getElementById('cm_IsTraining').value;
+        }
+        if (document.getElementById('cm_IsFeedback').checked) {
+            feedback = document.getElementById('cm_IsFeedback').value;
+        }
+
+        var attenteetype = "";
+        if (document.getElementById('cm_Employee').checked) {
+            attenteetype = document.getElementById('cm_Employee').value;
+        }
+        if (document.getElementById('cm_Designation').checked) {
+            attenteetype = document.getElementById('cm_Designation').value;
+        }
+
+        if (isSaveTemplateClicked) {
+            data = {
+                "Method": "PostMeetings",
+                "Data": {
+                    "MeetingId": null,
+                    "Name": name,
+                    "PlannedStartTime": pstime,
+                    "PlannedEndTime": petime,
+                    "ActualStartTime": (astime),
+                    "ActualEndTime": (aetime),
+                    "ChairPerson": chairperson,
+                    "Coordinator": coordinator,
+                    "MeetingTypeId": meettype,
+                    "Description": desc,
+                    "Agenda": agenda,
+                    "MoM": "--",
+                    "InviteMembers": members,
+                    "IsTraining": training,
+                    "IsFeedbackRequired": feedback,
+                    "AttendeeType": attenteetype,
+                    "DestinationsId": "",
+                    "EmployeesId": employeeID,
+                    "IsActive": true
+                }
+            }
+        }
+        else {
+            data = {
+                "Method": "PostMeetings",
+                "Data": {
+                    "MeetingId": null,
+                    "Name": name,
+                    "PlannedStartTime": pstime,
+                    "PlannedEndTime": petime,
+                    "ActualStartTime": astime,
+                    "ActualEndTime": aetime,
+                    "ChairPerson": chairperson,
+                    "Coordinator": coordinator,
+                    "MeetingTypeId": meettype,
+                    "Description": desc,
+                    "Agenda": agenda,
+                    "MoM": "--",
+                    "InviteMembers": members,
+                    "IsTraining": training,
+                    "IsFeedbackRequired": feedback,
+                    "AttendeeType": attenteetype,
+                    "DestinationsId": "",
+                    "EmployeesId": employeeID,
+                    "IsActive": true
+                }
+            }
+        }
+
+
+        templateData = data;
+    }
+
+    function TemplateStatus(status) {
+       
+        var localget = localStorage.getItem("MeetingTemplate");
+        var element = JSON.parse(localget);
+        var keys = [];
+        for (var k in element) {
+            keys.push(k);
+        }
+
+
+        if (keys.length > 0) {
+            if (status) {
+            $("#cmSaveTemplate").html("Update Template");
+            }
+            document.getElementById("TemplateTypeDiv").style.visibility = "visible";
+        }
+        var temmplatetype = "<option value=''>Select Template</option>";
+        for (i = 0; i < keys.length; i++) {
+            temmplatetype += "<option value='" + keys[i] + "'>" + keys[i] + "</option>";
+            $("#cm_TemplateType").dxSelectBox({
+                dataSource: keys,
+                placeholder: "Select Template",
+                searchEnabled: true
+            });
+        }
+ 
+        $("#cm_TemplateType").dxSelectBox({
+        onValueChanged: function (e) {
+            BindTemplate();
+        }
+    });
+    }
+
+    function BindTemplate() {
+        templateEmpId = "";
+        var localget = localStorage.getItem("MeetingTemplate");
+        var element = JSON.parse(localget);
+        //var opt = document.getElementById('cm_TemplateType').value;
+        try{
+            var opt = $("#cm_TemplateType").dxSelectBox('instance').option('value');
+        }
+        catch{
+
+        }
+        
+        element = element[opt];
+        element = element.Data;
+        $("#cm_MeetingType").val(element.MeetingTypeId);
+        $("#cm_Name").val(element.Name);
+        // $("#cm_Description").text(element.Description);
+        // $("#cm_Agenda").text(element.Agenda);
+        document.getElementById('cm_Description').value = element.Description;
+        document.getElementById('cm_Agenda').value = element.Agenda;
+
+        $("#cm_PlannedStartTime").val(element.PlannedStartTime.substr(0, 16));
+        $("#cm_PlannedEndTime").val(element.PlannedEndTime.substr(0, 16));
+        $("#cm_ActualStartTime").val(element.ActualStartTime.substr(0, 16));
+        $("#cm_ActualEndTime").val(element.ActualEndTime.substr(0, 16));
+
+        $("#cm_TemplateName").val(element.TemplateName);
+        $("#cm_Chairperson").dxSelectBox("instance").option("value", element.ChairPerson);
+        $("#cm_Coordinator").dxSelectBox("instance").option("value", element.Coordinator);
+        if (element.InviteMembers) {
+            $("#cm_InviteMembers").trigger("click");
+        }
+        if (element.IsTraining) {
+            $("#cm_IsTraining").trigger("click");
+        }
+        if (element.IsFeedbackRequired) {
+            $("#cm_IsFeedback").trigger("click");
+        }
+        if (element.EmployeesId != null && element.EmployeesId != undefined) {
+            document.getElementById('cm_Employee').checked = true;
+            templateEmpId = element.EmployeesId.split(',');
+            var empattendee = callgetlist('GetEmployeeList', '{"IsActive":"True"}');
+            rowIndex = [];
+            templateEmpId.forEach(item => {
+                rowIndex.push(empattendee.findIndex(
+                    (element) => element.EmployeeId == item
+                ));
+            });
+            $("#cm_Employee").trigger("click");
+        }
+    }
+
+    function SaveTemplate() {
+        var templateName = document.getElementById('cm_TemplateName').value;
+        var retrievedObject = localStorage.getItem("MeetingTemplate");
+        var stored = JSON.parse(retrievedObject) || {};
+        var updatedData = stored;
+        var localget = localStorage.getItem("MeetingTemplate");
+        var element = JSON.parse(localget);
+        try{
+            var opt = $("#cm_TemplateType").dxSelectBox('instance').option('value');
+            var o = element[opt];
+            var val = o;  
+            delete element[opt];
+        }
+        catch{
+
+        }
+        validate();
+        var keys = [];
+        for (var k in element) {
+            keys.push(k);
+        }
+        keys.forEach(element => {
+            if (templateName == element) {
+                alert("Template name already exist");
+                canSubmit = false;
+            }
+        })
+
+        var members = document.getElementById('cm_InviteMembers').value;
+        
+        
+        var merged = "";
+        if (canSubmit) {
+            isSaveTemplateClicked = true;
+            if (opt != null && opt != undefined && opt != "") {
+                var chairperson = $("#cm_Chairperson").dxSelectBox('instance').option('value');
+                stored[opt].Data.ChairPerson = $("#cm_Chairperson").dxSelectBox('instance').option('value');
+                stored[opt].Data.Coordinator = $("#cm_Coordinator").dxSelectBox('instance').option('value');
+                stored[opt].Data.Name = document.getElementById('cm_Name').value;
+                stored[opt].Data.PlannedStartTime = new Date(document.getElementById('cm_PlannedStartTime').value);
+                stored[opt].Data.PlannedEndTime = new Date(document.getElementById('cm_PlannedEndTime').value);
+                stored[opt].Data.ActualStartTime = new Date(document.getElementById('cm_ActualStartTime').value);
+                stored[opt].Data.ActualEndTime = new Date(document.getElementById('cm_ActualEndTime').value);
+                stored[opt].Data.MeetingTypeId = document.getElementById('cm_MeetingType').value;
+                stored[opt].Data.Description = document.getElementById('cm_Description').value;
+                stored[opt].Data.Agenda = document.getElementById('cm_Agenda').value;
+                stored[opt].Data.InviteMembers = document.getElementById('cm_InviteMembers').value;
+                stored[opt].Data.IsTraining = document.getElementById('cm_IsTraining').value;
+                stored[opt].Data.IsFeedbackRequired = document.getElementById('cm_IsFeedback').value;
+                if (document.getElementById('cm_Employee').checked) {
+                    stored[opt].Data.AttendeeType = document.getElementById('cm_Employee').value;
+                }
+                if (document.getElementById('cm_Designation').checked) {
+                    stored[opt].Data.AttendeeType = document.getElementById('cm_Designation').value;
+                }
+                stored[opt].Data.EmployeesId = employeeID;
+                    var o = stored[opt];
+                    var val = o;      // get current value
+                    //delete o.key1;         // remove previous key
+                    delete o;
+                    stored[opt].Data["TemplateName"] = templateName;
+                    stored = ({ [templateName]: val });
+
+                    //updatedData = ({ [templateName]: val });
+                //stored[opt] = document.getElementById('cm_TemplateName').value;
+                
+                //merged = Object.assign(stored);
+                delete updatedData[opt];
+                merged = Object.assign(updatedData, stored);
+            }
+            else {
+                getCreateMeetingData();
+                var templateName = document.getElementById('cm_TemplateName').value;
+                templateData.Data["TemplateName"] = templateName;
+                var tempData = ({ [templateName]: templateData });
+
+                merged = Object.assign(stored, tempData);
+            }
+            localStorage.setItem("MeetingTemplate", JSON.stringify(merged));
+           
+            
+            swal("Success..!", "Template Saved Successfully", "success");
+            isSaveTemplateClicked = false;
+            ResetInputs();
+        }
+    }
+
+    function isValidJsonString(jsonString){    
+        if(!(jsonString && typeof jsonString === "string")){
+            return false;
+        }
+
+        try{
+        JSON.parse(jsonString);
+        return true;
+        }catch(error){
+            return false;
+        }
+    }
+
+    function ResetInputs() {
+        var chairpersonInstance = $("#cm_Chairperson").dxSelectBox("instance");
+        var chairpersonInstance = chairpersonInstance.option('value', 0);
+        var coordinatorInstance = $("#cm_Coordinator").dxSelectBox("instance");
+        var coordinatorInstance = coordinatorInstance.option('value', 0);  
+          
+        $("#cm_Name").val("");
+        // $("#cm_Description").text("");
+        // $("#cm_Agenda").text("");
+        document.getElementById('cm_Description').value = "";
+        document.getElementById('cm_Agenda').value = "";
+        rowIndex = [];
+        callGetListAsync('GetEmployeeList', '{"IsActive":"True"}', function (empResult) {
+            $("#cm_Chairperson").dxSelectBox({
+                dataSource: empResult,
+                valueExpr: "EmployeeId",
+                displayExpr: "Name",
+                placeholder: "Select Chair Person",
+                searchEnabled: true
+            });
+            $("#cm_Coordinator").dxSelectBox({
+                dataSource: empResult,
+                valueExpr: "EmployeeId",
+                displayExpr: "Name",
+                placeholder: "Select Coordinator",
+                searchEnabled: true
+            });
+            // console.log(empResult,"empResult")
+        });
+        $("#cmSaveTemplate").html("Save Template");
+        $('input[name="template"]').prop('checked', false);
+        $('input[name="meetingtype"]').prop('checked', false);
+
+        $("#cm_PlannedStartTime").val("");
+        $("#cm_PlannedEndTime").val("");
+        $("#cm_ActualStartTime").val("");
+        $("#cm_ActualEndTime").val("");
+
+        $("#cm_TemplateName").val("");
+        $('input[name="feedback"]').prop('checked', false);
+        $('input[name="invite"]').prop('checked', false);
+        $('input[name="training"]').prop('checked', false);
+
+        callGetListAsync('GetMeetingTypes', '{"IsActive":"True"}', function (meetingresult) {
+            // console.log(meetingresult,"meetingresult")
+            var meetingtype = "<option value=''>Select Meeting Type</option>";
+            for (i = 0; i < meetingresult.length; i++) {
+                meetingtype += "<option value='" + meetingresult[i].Id + "'>" + meetingresult[i].Name + "</option>";
+            }
+            $("#cm_MeetingType").html(meetingtype);
+        })
+
+        employeeID = "";
+        //TemplateStatus(false);
+    }
+
+    function validate() {
+        canSubmit = true;
+        var empattendee = callgetlist('GetEmployeeList', '{"IsActive":"True"}');
+        var meetingtype = 0;
+        $('input[name="meetingtype"]').each(function () {
+            if (this.checked) {
+                meetingtype++;
+            }
+        });
+        if (meetingtype == 0) {
+            $('.meetingtype_error_message').html('Please select attendee members ');
+            canSubmit = false;
+        }
+        else {
+            $('.meetingtype_error_message').html('')
+        }
+
+        var invite = 0;
+        $('input[name="invite"]').each(function () {
+            if (this.checked) {
+                invite++;
+            }
+        });
+        if (invite == 0) {
+            $('.invitemembers_error_message').html('Please select invite members ');
+            canSubmit = false;
+        }
+        else {
+            $('.invitemembers_error_message').html('')
+        }
+
+        var feedback = 0;
+        $('input[name="feedback"]').each(function () {
+            if (this.checked) {
+                feedback++;
+            }
+        });
+        if (feedback == 0) {
+            $('.feedback_error_message').html('Please select feedback members ');
+            canSubmit = false;
+        }
+        else {
+            $('.feedback_error_message').html('')
+        }
+        var training = 0;
+        $('input[name="training"]').each(function () {
+            if (this.checked) {
+                training++;
+            }
+        });
+        if (training == 0) {
+            $('.training_error_message').html('Please select training members ');
+            canSubmit = false;
+        }
+        else {
+            $('.training_error_message').html('')
+        }
+
+        var chairperson = $("#cm_Chairperson").dxSelectBox('instance').option('value');
+        if (chairperson == null || chairperson == undefined || chairperson == "") {
+            $('.chairperson_error_message').html('Chairperson is required');
+            canSubmit = false;
+        }
+        else {
+            $('.chairperson_error_message').html('')
+        }
+        var Coordinator = $("#cm_Coordinator").dxSelectBox('instance').option('value');
+        if (Coordinator == null || Coordinator == undefined || Coordinator == "") {
+            $('.coordinator_error_message').html('Coordinator is required');
+            canSubmit = false;
+        }
+        else {
+            $('.chairperson_error_message').html('')
+        }
+
+        var Name = document.getElementById('cm_Name').value;
+        if (Name == null || Name == undefined || Name == "") {
+            $('.name_error_message').html('Name is required');
+            canSubmit = false;
+        }
+        else {
+            $('.name_error_message').html('')
+        }
+
+        var TemplateName = document.getElementById('cm_TemplateName').value;
+        if (TemplateName == null || TemplateName == undefined || TemplateName == "") {
+            $('.templatename_error_message').html('TemplateName is required');
+            canSubmit = false;
+        }
+        else {
+            $('.templatename_error_message').html('')
+        }
+
+        var PlannedStartTime = document.getElementById('cm_PlannedStartTime').value;
+        if (PlannedStartTime == null || PlannedStartTime == undefined || PlannedStartTime == "") {
+            $('.plannedstarttime_error_message').html('PlannedStartTime is required');
+            canSubmit = false;
+        }
+        else {
+            $('.plannedstarttime_error_message').html('')
+        }
+
+        var PlannedEndTime = document.getElementById('cm_PlannedEndTime').value;
+        if (PlannedEndTime == null || PlannedEndTime == undefined || PlannedEndTime == "") {
+            $('.plannedendtime_error_message').html('PlannedEndTime is required');
+            canSubmit = false;
+        }
+        else {
+            $('.plannedendtime_error_message').html('')
+        }
+
+        var ActualStartTime = document.getElementById('cm_ActualStartTime').value;
+        if (ActualStartTime == null || ActualStartTime == undefined || ActualStartTime == "") {
+            $('.actualstarttime_error_message').html('ActualStartTime is required');
+            canSubmit = false;
+        }
+        else {
+            $('.actualstarttime_error_message').html('')
+        }
+
+        var ActualEndTime = document.getElementById('cm_ActualEndTime').value;
+        if (ActualEndTime == null || ActualEndTime == undefined || ActualEndTime == "") {
+            $('.actualendtime_error_message').html('ActualEndTime is required');
+            canSubmit = false;
+        }
+        else {
+            $('.actualendtime_error_message').html('')
+        }
+
+        var MeetingTypeId = document.getElementById('cm_MeetingType').value;
+        if (MeetingTypeId == null || MeetingTypeId == undefined || MeetingTypeId == "") {
+            $('.meeting_error_message').html('MeetingType is required');
+            canSubmit = false;
+        }
+        else {
+            $('.meeting_error_message').html('')
+        }
+
+        var Description = document.getElementById('cm_Description').value;
+        if (Description == null || Description == undefined || Description == "") {
+            $('.description_error_message').html('Description is required');
+            canSubmit = false;
+        }
+        else {
+            $('.description_error_message').html('')
+        }
+
+        var Agenda = document.getElementById('cm_Agenda').value;
+        if (Agenda == null || Agenda == undefined || Agenda == "") {
+            $('.agenda_error_message').html('Agenda is required');
+            canSubmit = false;
+        }
+        else {
+            $('.agenda_error_message').html('')
+        }
+
+        if (employeeID == null || employeeID == undefined || employeeID == "") {
+            $('.employeeid_error_message').html('Please selet any EmployeeID');
+            canSubmit = false;
+        }
+        else {
+            $('.employeeid_error_message').html('')
+        }
+    }
+</script>

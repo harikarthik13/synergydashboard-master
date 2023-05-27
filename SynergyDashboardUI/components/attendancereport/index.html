@@ -1,0 +1,294 @@
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+<script type="text/javascript" src="js/library/jquery.dataTables.min.js"></script>
+<link href="css/library/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" src="js/library/jquery-ui.js"></script>
+
+<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+      rel='stylesheet'>
+<!-- Template Report Grid Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>Attendance Report</b></span>
+    <!-- the below button for refresh Data -->
+    <!--<span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="GetAttendanceReport_getReportData()">
+            <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+        </button>
+    </span>-->
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Start Date</label>
+                <div class="input-group"><input type="text" class="attendancestart_Datepicker" name="attendancestart_date" id="attendancestart_date"><span class="input-group-addon"><i class="fa fa-calendar-alt"></i></span></div>
+                <span class="error_message attendancestart_err"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>End Date</label>
+                <div class="input-group"><input type="text" class="attendanceend_Datepicker" name="attendanceend_date" id="attendanceend_date"><span class="input-group-addon"><i class="fa fa-calendar-alt"></i></span></div>
+                <span class="error_message attendanceend_err"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-md" style="
+    margin-top: 21px;" onclick="GetAttendanceReport_getReportData()">
+                    <!--<i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>-->
+                    Filter Report
+                </button>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-md" style="
+    margin-top: 21px;" onclick="PostLeaveLegers()">
+                    <!--<i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>-->
+                    Post Leave ledgers
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="GetAttendanceReport_reportGrid"></div>
+</div>
+
+<!-- internal script -->
+<script>
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        var Token = jsonData.Data[0].Token;
+
+    function GetMonthName(monthNumber) {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return months[monthNumber - 1];
+    }
+
+    dateString = new Date();
+    const D = new Date(dateString);                 // {object Date}
+    console.log(D.getMonth() + 1 + "/" + D.getDate() + "/" + D.getFullYear());
+    if (D.getDate > 25) {
+        if ((D.getMonth() + 1) >= 12) {
+            $("#attendancestart_date").val(26 + "-" + GetMonthName(D.getMonth() + 1) + "-" + D.getFullYear());
+            $("#attendanceend_date").val(25 + "-" + GetMonthName(0) + "-" + D.getFullYear());
+        }
+        else {
+            $("#attendancestart_date").val(26 + "-" + GetMonthName(D.getMonth() + 1) + "-" + D.getFullYear());
+            $("#attendanceend_date").val(25 + "-" + GetMonthName(D.getMonth() + 2) + "-" + D.getFullYear());
+        }
+    }
+    else {
+        if ((D.getMonth() + 1) == 1) {
+            $("#attendancestart_date").val(26 +"-"+ GetMonthName(11) + "-" + D.getFullYear());
+            $("#attendanceend_date").val(25 +"-"+ GetMonthName(0) + "-" + D.getFullYear());
+        }
+        else {
+            $("#attendancestart_date").val(26 + "-" + GetMonthName(D.getMonth() + 0) + "-" + D.getFullYear());
+            $("#attendanceend_date").val(25 + "-" + GetMonthName(D.getMonth() + 1) + "-" + D.getFullYear());
+        }
+    }
+        const GetAttendanceReport_ProcedureName = 'GetAttendanceReport'; //Change Prefix and Procedure Name Here
+    
+    function GetAttendanceReport_getReportData() {
+        
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "AttendanceStartDate": $("#attendancestart_date").val(),
+            "AttendanceEndDate": $("#attendanceend_date").val()
+        });
+
+        var dataForReport = callgetlist('GetAttendanceReport', filterData);
+        if (dataForReport != null) {
+            renderdataForReportGrid(dataForReport);
+        }
+       
+    }
+    function renderdataForReportGrid(data) {
+        var OpeningskillratingGrid = $("#GetAttendanceReport_reportGrid")
+            .dxDataGrid({
+                filterRow: {
+                    visible: true,
+                    applyFilter: "auto",
+                },
+                dataSource: data,
+                export: {
+                    enabled: true,
+                    allowExportSelectedData: true,
+                },
+                searchPanel: {
+                    visible: true,
+                    width: 240,
+                    placeholder: "Search...",
+                },
+                headerFilter: {
+                    visible: true,
+                },
+                grouping: {
+                    autoExpandAll: true,
+                },
+                pager: {
+                    showPageSizeSelector: true,
+                    allowedPageSizes: [5, 10, 20],
+                    showInfo: true,
+                },
+                paging: {
+                    pageSize: 10,
+                },
+                groupPanel: {
+                    visible: true,
+                    emptyPanelText: "Drag a column"
+                },
+                sorting: {
+                    mode: "multiple",
+                },
+                selection: {
+                    mode: "multiple",
+                },
+                summary: {
+                    totalItems: [
+                        {
+                            column: "sno",
+                            summaryType: "count",
+                        },
+                    ],
+                    groupItems: [
+                        {
+                            column: "sno",
+                            summaryType: "count",
+                        },
+                    ],
+                },
+                editing: {
+                    mode: "popup",
+                    allowAdding: false,
+                    allowUpdating: false,
+                    useIcons: true,
+                },
+                columnChooser: {
+                    enabled: true,
+                },
+                onToolbarPreparing: function (e) {
+                    var dataGrid = e.component;
+                    e.toolbarOptions.items.unshift({
+                        location: "after",
+                        widget: "dxButton",
+                        options: {
+                            icon: "refresh",
+                            onClick: function () {
+                                GetAttendanceReport_getReportData();
+                                dataGrid.refresh();
+                            }
+                        }
+                    });
+                },
+                rowAlternationEnabled: true,
+                //filterPanel: { visible: true },
+                allowColumnReordering: true,
+                allowColumnResizing: true,
+                showBorders: true,
+                columns: [
+                    {
+                        caption: "#",
+                        dataField: "sno",
+                        cssClass: "rno",
+                        allowGrouping: false,
+                        allowCollapsing: false,
+                        allReordering: false,
+                        width: 70,
+                        cellTemplate: function (container, options) {
+                            container.text(
+                                OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                            );
+                        },
+                    },
+                    {
+                        caption: "Employee Number",
+                        dataField: "EmployeeNumber",
+                    },
+                    {
+                        caption: "Employee Name",
+                        dataField: "DisplayName"
+                    },
+                    {
+                        caption: "Designation",
+                        dataField: "Designation"
+                    },
+                    {
+                        caption: "Department",
+                        dataField: "Department"
+                    },
+                    {
+                        caption: "Lead",
+                        dataField: "Lead"
+                    },
+                    {
+                        caption: "No Of Working days",
+                        dataField: "NoOfWorkingdays"
+                    },
+                    {
+                        caption: "Present Days",
+                        dataField: "PresentDays"
+                    },
+                    {
+                        caption: "AbsentDays",
+                        dataField: "AbsentDays"
+                    },
+                    {
+                        caption: "No Of Days Leave Applied",
+                        dataField: "NoOfDaysLeaveApplied"
+                    },
+                    {
+                        caption: "No of days compensation",
+                        dataField: "Noofdayscompensation"
+                    },
+                    {
+                        caption: "No of days Net Leave",
+                        dataField: "NoofdaysNetLeave"
+                    },
+                    {
+                        caption: "Approved Leave Days",
+                        dataField: "ApprovedLeaveDays"
+                    },
+                    {
+                        caption: "UnApproved LeaveDays",
+                        dataField: "UnApprovedLeaveDays"
+                    }
+
+                ],
+            })
+            .dxDataGrid("instance");
+    }
+
+    function PostLeaveLegers() {
+        dataResource = {
+            "Method": "PostToLeaveLedger",
+            "Data": {
+                "Token": Token,
+                "StartDate": $("#attendancestart_date").val(),
+                "EndDate": $("#attendanceend_date").val()
+            }
+        }
+
+        PostDataCallAsync(dataResource, function (result) {
+            if (result.IsSuccess == true) {
+                swal({
+                    title: "Success!",
+                    text: "Saved Successfully!",
+                    icon: "success",
+                    button: "ok!",
+                })
+            }
+        });
+    }
+
+    GetAttendanceReport_getReportData();
+
+    $("#attendancestart_date").datepicker({
+        autoclose: true,
+        dateFormat: 'dd-M-yy'
+    });
+    $("#attendanceend_date").datepicker({
+        autoclose: true,
+        dateFormat: 'dd-M-yy'
+    });
+</script>

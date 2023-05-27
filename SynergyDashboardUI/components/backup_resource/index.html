@@ -1,0 +1,37 @@
+<link href="components/backup_resource/css/style.css" rel="stylesheet" />
+<div class="resource-card card-detail">
+    <span><i><img src="components/backup_resource/images/backup-icon.jpg" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Backup Resource</b></span>
+    <span class="pull-right">
+        <button class="btn btn-primary" onclick="openMessageModal()">
+           Send Mail <i class="glyphicon glyphicon-send"></i>
+        </button>
+    </span>
+
+
+    <hr />
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="DisplayBackupResource"></div>
+        </div>
+    </div>
+<div id="display-plan"></div>
+<div id="ledgerIndividualPopup"></div>  
+
+<script type="text/javascript" src="components/backupresource/js/backup_resource.js"></script>
+
+<script type="text/javascript">
+    $("#display-plan").load("components/backup_resource/backup_resource_model.html");
+
+
+    function include_backup_resource_js(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+    
+    include_backup_resource_js('./components/backup_resource/js/backup_resource.js');
+    
+</script>

@@ -1,0 +1,138 @@
+<link href="components/Balachandar/css/Balachandar.css" rel="stylesheet" />
+<link href="components/Balachandar/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<script type="text/javascript" src="components/Balachandar/js/bootstrap-datepicker.min.js"></script>
+<div class="card-detail">
+	<span><i><img src="components/attendance_log/images/attendance_log.png" width="40px" height="40px" /></i></span>
+	<span class="card-detail-title"><b>Leaves</b></span>
+	<hr />
+	<div class="row">
+		<div class="col-md-12" style="margin:10px 0px;">
+			<button type="submit" id="btnAddLeave" class="btn btn-primary btn-xs pull-right"><i class="glyphicon glyphicon-plus"></i> Add Leave</button>
+		</div>
+	</div>
+	<div class="row total-leave-info-container">
+	
+		<div class="col-md-3">
+			<div class="total-leave-info">
+				<div class="total-leave-content">
+					<h4>Annual Leaves</h4>
+					<span>12</span>
+					</div>
+			</div>
+		</div>
+		
+		<div class="col-md-3">
+			<div class="total-leave-info">
+				<div class="total-leave-content">
+					<h4>Medical Leaves</h4>
+					<span>3</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-3">
+			<div class="total-leave-info">
+				<div class="total-leave-content">
+					<h4>Other Leaves</h4>
+					<span>3</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-3">
+			<div class="total-leave-info">
+				<div class="total-leave-content">
+					<h4>Remaining Leaves</h4>
+					<span>3</span>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<td>Leave Type</td>
+				<td>From</td>
+				<td>To</td>
+				<td>No of Days</td>
+				<td>Status</td>
+				<td>Actions</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Casual Leave</td>
+				<td>01-Aug-2019</td>
+				<td>03-Aug-2019</td>
+				<td>2</td>
+				<td><span class="btn btn-xs btn-success leave-approve-status">Approved</span></td>
+				<td>
+					<button style="float: right;" type="button" class="EmployeeLeaveDetailButton btn btn-default btn-xs cmn-modal-ex-btn">
+						<i class="fa fa-expand"></i>
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<td>Casual Leave</td>
+				<td>10-Aug-2019</td>
+				<td>11-Aug-2019</td>
+				<td>1</td>
+				<td><span class="btn btn-xs btn-warning leave-approve-status">Pending</span></td>
+				<td>
+					<button style="float: right;" type="button" class="EmployeeLeaveDetailButton btn btn-default btn-xs cmn-modal-ex-btn">
+						<i class="fa fa-expand"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+
+<script>
+	$(document).ready(function(){
+		$(".EmployeeLeaveDetailButton").click(function(){
+			$("#EmployeeLeaveDetail-modal").modal();
+		});
+	
+		$("#btnAddLeave").click(function () {
+			$("#modal-AddLeave").modal('show');
+		});
+		
+		$('.leavedatepicker').datepicker({
+		});
+
+		$('#leaveto').change(function(){
+			if ($('#leavefrom').val() != "" && $('#leaveto').val()!="") {
+				var start = $('#leavefrom').val();
+				var end = $('#leaveto').val();
+				days = noofdayscount(start,end);
+				$("#numberofdays").val(days);
+			}
+		})
+
+		$('#leavefrom').change(function(){
+			if ($('#leavefrom').val() != "" && $('#leaveto').val()!="") {
+				var start = $('#leavefrom').val();
+				var end = $('#leaveto').val();
+				days = noofdayscount(start,end);
+				$("#numberofdays").val(days);
+			}
+		})
+
+		function noofdayscount(start,end){
+			var startdate = new Date(start);
+			var enddate = new Date(end);
+			// end - start returns difference in milliseconds 
+			var diff = new Date(enddate - startdate);
+
+			// get days
+			var days = diff/1000/60/60/24;
+			return days;
+		}
+	
+	});
+</script>

@@ -1,0 +1,38 @@
+<div class="card-detail">
+    <span class="card-detail-title modal-not-include"
+      ><b>RRM All Profile Screening</b></span
+    >
+    <hr />
+    <div>
+      <div id="sdgd-rrmallProfileScreening"></div>
+    </div>
+  </div>
+  
+  <div id="rrmDetailsForAllProfileScreening"></div>
+  <div id="candidateDetailsForAllProfileScreening"></div>
+  <!-- <div id="CandidateDetailsForProfileScreeningdiv"></div>  -->
+  
+  <script src='components/rrmallprofilescreening/js/rrmallprofilescreening.js'></script>
+  <style>
+    .btn-black, .btn-black:hover{
+      background-color: #343A40;
+      color: #ffffff;
+    }
+    .profileScreeningWrappedColumn {
+      white-space: normal !important;
+      word-wrap: break-word !important;
+    }
+  </style>
+  
+  <script>
+      $("#rrmDetailsForAllProfileScreening").load("components/rrmallprofilescreening/rrmdetailsAllprofilescreeningmodal.html");
+      $("#candidateDetailsForAllProfileScreening").load("components/rrmallprofilescreening/allProfileScreeningCandidate.html");
+    // $("#rrmDetailsForProfileScreening").load("components/rrmprofilescreening/rrmdetailsprofilescreeningmodal.html");
+    // $("#CandidateDetailsForProfileScreeningdiv").load("components/rrmprofilescreening/candidatedetailsprofilescreeningmodal.html");
+    
+    $(document).on("click", ".candidateDetailsRRMAllProfileScreening", function (e) {
+        var candidateId = $(e.currentTarget).data("candidateid");           
+        getCandidateDetailsForAllProfileScreening(candidateId);
+    });
+    
+  </script>

@@ -1,0 +1,106 @@
+<link href="components/lossofpay/css/lop.css" rel="stylesheet" />
+
+<!-- LOP Card -->
+<div class="card-detail">
+    <span><i><img src="components/lossofpay/images/leave_log.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Loss of Pay</b></span>
+    <!-- the below button for add new leave entry -->
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="openLop();">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>Add LOP
+        </button>
+    </span>
+
+      <!-- the below button for refresh Data -->
+    <span class="pull-right">
+       
+    </span>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+          <label>From Date</label>
+          <div id="rrm_lop_fromDate"></div>
+        </div>
+        <div class="col-md-3">
+          <label>To Date</label>
+          <div id="rrm_lop_toDate"></div>
+        </div>
+        <div class="col-md-4">
+          <br>
+          <button type="button" class="btn btn-primary btn-sm" id="rrmLopFilter" onclick="">
+            <i class="fa fa-search" aria-hidden="true"></i>&nbsp; Filter LOP
+        </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+            <div id="sddgd-lopGridCard"></div>
+        </div>
+      </div>  
+</div>
+
+<div class="modal fade bd-example-modal-lg in" id="LopModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    ><span aria-hidden="true">×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Loss Of Pay </h4>
+            </div>
+            <div class="modal-body" style="border: black;" role="dialog">
+                <div class="form-group">
+                   
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                                <div id="lopName"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="lopEntryGrid"></div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal"
+                            onclick="">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='./components/lossofpay/js/lop.js'></script>
+
+
+<script>
+    
+    $(document).ready(function () {
+        loadLopGridDetails();
+
+        var date = new Date();
+        var fromDate = new Date(date.getFullYear(), date.getMonth(), 1);
+        var toDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+        $("#rrm_lop_fromDate").dxDateBox({
+            type: "date",
+            displayFormat: "dd MMM yyyy",
+            placeholder: "Select From Date",
+            value: fromDate
+        });
+
+        $("#rrm_lop_toDate").dxDateBox({
+            type: "date",
+            placeholder: "Select To Date",
+            displayFormat: "dd MMM yyyy",
+            value: toDate
+        });
+    });
+   
+</script>

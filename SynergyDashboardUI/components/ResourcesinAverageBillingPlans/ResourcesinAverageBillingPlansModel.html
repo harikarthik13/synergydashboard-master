@@ -1,0 +1,191 @@
+<link href="components/ResourcesinAverageBillingPlans/css/ResourcesinAverage.css" rel="stylesheet" />
+<style>
+#tblbenchtobillable thead tr {
+    display: table-row !important;
+}
+.modal-header {
+        padding: 9px 15px;
+        border-bottom: 1px solid #eee;
+        background-color: #c5122c;
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+	
+	#tblbenchtobillable thead tr {
+    display: table-row !important;
+}
+#cke_resources_in_average_plan_comment .cke_contents{
+min-height:205px;
+}
+</style>
+<!-- <model start> -->
+<div class="modal fade" id="ResourcesinAverageBillingPlanModals" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:70%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="rab_closeManageplanModal();"><span aria-hidden="true">&times;</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel"> Update Average Billing to Full Billing documents</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+			<input type="hidden" id="ResourcesinAverage_btb_empidval" name="ResourcesinAverage_btb_empidval">
+			<input type="hidden" id="ResourcesinAverage_btb_empsdateval" name="ResourcesinAverage_btb_empsdateval">
+			<input type="hidden" id="ResourcesinAverage_btb_id" name="ResourcesinAverage_btb_id">
+			<div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Employee Code<span style="color: red">*</span></span></label>
+					  <br>
+                      <input type="text" class="form-control" name="txtemployeeCode" id="btb_txtresourcesinaverageemployeeCode" readonly />
+                      <span class="error_message" id="txtemployeeCodeerror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Employee Name<span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtemployeeName" id="btb_txtresourcesinaverageemployeeName" readonly />
+                      <span class="error_message" id="txtemployeeNameerror"></span>
+                    </div>
+                  </div>
+                </div>
+                            <div class="row">
+							<input type="hidden" id="ResourcesinAveragePlanBillingId" name="Id">
+                                <div class="col-md-12">
+                                    <label>Comments history</label>
+                                    <div class="resources_in_average_plan_history_lists" id="resources_in_average_plan_comments_documents">
+                                        <!-- Comments Section -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Files</label>
+									<br/>
+									<span><b>Note: </b>Please upload single file and file size must be less than 5 MB.</span>
+                                    <div id="resources_in_average_rpm_dropzone">
+                                        <form class="dropzone" id="resources_in_average_plan_document_upload"
+                                            method="post" enctype="multipart/form-data">
+                                            <div class="dz-message needsclick">
+                                                Drop files here or click to upload.<br />
+                                            </div>
+                                        </form>
+										
+                                        <span class="error_message manageDocumentError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Comments :</label>
+									<br/>
+									<br/>
+                                    <textarea class="form-control ckeditor" rows="5" id="resources_in_average_plan_comment"
+                                        name='resources_in_average_plan_comment'></textarea>
+                                    <div class="form-group pull-right" style="padding-top: 5px;">
+                                <input type="button" class="btn btn-default" value="Cancel" id="resources_in_average_plan_reassign_cancel">
+                                <input type="button" class="btn btn-success" value="Save" id="resources_in_average_plan_reassign_save">
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+<!-- <model ends here> -->
+
+
+<!-- <model start here> -->
+<div class="modal fade" id="showresourcesinaverageemployeeskills" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="width:60%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="closeManageModal();"><span aria-hidden="true">&times;</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel"> View Technology</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+			<div class="table-responsive">
+			<table class="table table-striped" id="tblemployeeskilldetails">
+            <thead>
+                <tr class="tblhead">
+                    <td>#</td>
+                   <td>Skill Familie Name</td>
+					<td>Skill Name</td>
+                    <td> Skill Version Name</td>
+                     <td>Skill Grade Name</td>
+                </tr>
+            </thead>
+            <tbody id="tblresourcesinaverageemployeeskilldata">
+			
+			</tbody>
+        </table>
+    </div>
+      </div>
+            </div>
+            
+        </div>
+    </div>
+<!-- <model ends here> -->
+
+<script type="text/javascript" src="components/ResourcesinAverageBillingPlans/js/ResourcesinAverageBilling.js"></script>
+<script>
+    $(document).ready(function () {
+     
+	Dropzone.autoDiscover = false;
+         var ManagePlanDocumentUpload = new Dropzone("#resources_in_average_plan_document_upload", {
+			 addRemoveLinks: true,
+             uploadMultiple: true,
+             autoProcessQueue: false,
+			 url: rab_saveManagePlanDocuments,
+         });
+	 try {
+            CKEDITOR.instances.resources_in_average_plan_comment.destroy(true);
+		} catch (e) {
+        
+
+            var manageplan_Description_ckeditor = CKEDITOR.replace(
+                "resources_in_average_plan_comment",
+                {});
+
+            manageplan_Description_ckeditor.on("paste", function (evt) {
+                if (evt.data.dataTransfer.getFilesCount() > 0) {
+                    var manageDescriptionFile = evt.data.dataTransfer.getFile(0);
+                    var manageDescriptionReader = new FileReader();
+                    manageDescriptionReader.onload = function (evt) {
+                        var manageDescriptionPictureElement = manageplan_Description_ckeditor.document.createElement(
+                            "img",
+                            {
+                                attributes: {
+                                    src: evt.target.result
+                                }
+                            }
+                        );
+
+                        setTimeout(function () {
+                            manageplan_Description_ckeditor.insertElement(
+                                manageDescriptionPictureElement
+                            );
+                        }, 0);
+                    };
+                    manageDescriptionReader.readAsDataURL(manageDescriptionFile);
+                }
+            });
+        }
+		CKEDITOR.instances.resources_in_average_plan_comment.setData("");
+	Dropzone.forElement("#resources_in_average_plan_document_upload").removeAllFiles(true);
+    });
+	function rab_closeManageplanModal(){
+	
+	$("#btb_txtresourcesinaverageemployeeCode").val("");
+	$("#btb_txtresourcesinaverageemployeeName").val("");
+	CKEDITOR.instances.resources_in_average_plan_comment.setData("");
+	Dropzone.forElement("#resources_in_average_plan_document_upload").removeAllFiles(true);
+      $('#ResourcesinAverageBillingPlanModals').appendTo("body").modal("hide");
+}
+
+</script>

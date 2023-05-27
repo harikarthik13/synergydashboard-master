@@ -1,0 +1,1436 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    /*background-image:url(../image/dashboard/background1.png)*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+
+.newsFeeds .btn-xs,
+.newsFeeds .btn-group-xs>.btn {
+    margin-right: 2px;
+    display: inline-block;
+}
+
+.newsFeeds table tr td {
+    padding: 7px;
+}
+.elcl_tabcontent {
+    display: none; 
+}
+/* Style the tab */
+.elcl_tabs .tab {
+  overflow: hidden;
+}
+/* Style the buttons that are used to open the tab content */
+.elcl_tabs .tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.elcl_tabs .tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.elcl_tabs .tab button.active {
+  background-color: #ccc;
+}
+#modal-rejectleave .modal-footer,
+#modal-rejectswipe .modal-footer {
+    border: none;
+    margin-top: 30px;
+}
+
+#modal-ManualSwipeEmpDetails .modal-footer {
+    border: none;
+    margin-top: 30px;
+}
+
+
+#modal-ManualSwipeEmpDetails input,
+#modal-ManualSwipeEmpDetails label {
+    margin: 5px 0;
+    display: block;
+}
+
+#modal-EmpDetails .modal-footer {
+    border: none;
+    margin-top: 30px;
+}
+
+#modal-EmpDetails .emp_button {
+    margin-top: 30px;
+}
+
+#modal-EmpDetails input,
+#modal-EmpDetails label {
+    margin: 5px 0;
+    display: block;
+}
+
+.c_box {
+    height: 60px;
+    display: block;
+    width: 100% !important;
+}
+
+.c_box input[type="checkbox"] {
+    box-shadow: none;
+    height: 20px;
+    text-align: left;
+    width: auto;
+}
+
+#modal-Listingemp .modal-footer {
+    border: none;
+    margin-top: 30px;
+}
+
+#divLeaveCard #btnleaveDetail {
+    float: right;
+    margin-top: 10px;
+    background: none;
+}
+
+.toggleallign {
+    margin-top: 10px;
+
+}
+
+.time_material_button, .randd_buttons, .package_buttons {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#modal-EmpDetails .toggleallign input {
+    margin: 0 !important;
+}
+
+#modal-EmpDetails .toggleallign label {
+    margin: 0 !important;
+}
+
+body .form-control {
+    display: inline-block;
+}
+
+.redClass {
+    border: red solid 1px !important;
+}
+
+
+
+.rfp_description {
+    text-align: left;
+}
+
+.inproject_resource hr {
+    margin: 15px 0;
+}
+
+.project_resource_detail {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.project_resource_detail h4 {
+    margin-top: 0;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.project_resource_detail ul {
+    padding: 0;
+}
+
+.project_resource_detail ul li {
+    list-style-type: none;
+    display: inline-block;
+    text-align: center;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.project_resource_detail .pr_img img {
+    margin: 0 auto;
+}
+
+.project_resource_detail .pr_content {
+    text-align: center;
+}
+
+.project_resource_detail h5 {
+    margin: 10px 0 0 0;
+}
+
+.project_resource_detail p {
+    margin: 5px 0 0 0;
+}
+
+.project_resource_detail p a {
+    color: #00a2e8;
+}
+
+.project_resource_detail h6 {
+    margin: 5px 0 0 0;
+    font-weight: bold;
+}
+
+
+/* RFP CSS Starts here*/
+
+/*font-family: 'Roboto Condensed', sans-serif;*/
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+.steps-model .step-title {
+    margin: 20px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+}
+
+.steps-model .step-title h3 {
+    display: inline-block;
+    margin: 0;
+    color: #46ad46;
+    font-size: 20px;
+}
+
+.steps-model .step-title h3 span {
+    color: #333;
+}
+
+.steps-model .modal-header {
+    background: #c5122c;
+    color: #fff;
+}
+
+
+
+
+.steps-model .modal-header {
+    padding: 10px 15px;
+}
+
+.steps-model .step-anchor {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    height: 35px;
+}
+.steps-model .step-anchor::before, .steps-model .step-anchor::after{
+    display: none;
+}
+
+.steps-model .nav-tabs>li>a {
+    background: #eee;
+    border: none !important;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    text-align: center;
+    line-height: 31px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #b1b1b1;
+    position: relative;
+    margin: 0!important;
+}
+
+.steps-model .nav-tabs>li {  
+    position: relative;  
+    z-index: 10;
+}
+.steps-model .nav-tabs>li::after{
+    content: '';
+    position: absolute;    
+    height: 3px;
+    background-color: #EEEEEE;
+    top: 15px;
+    left: 0;
+    width: 600px;
+    z-index: -1;
+}
+.steps-model .nav-tabs>li:last-child {
+    margin-right: 0;
+}
+
+.steps-model .nav-tabs>li.active a {
+    background: red !important;
+    color: #fff!important;
+    position: relative!important;
+}
+
+.steps-model .nav-tabs>li.done a {
+    background: #46ad46!important;
+    color: #fff!important;
+    position: relative!important;
+}
+.steps-model .nav-tabs>li.active::after, .steps-model .nav-tabs>li.done::after{
+    background-color: #46ad46!important;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover{
+    background-color: #46ad46!important;
+    color: #fff!important;
+}
+
+/*Multistep Form exceed inner line (PDF)*/
+/*
+.steps-model .step-anchor:before {
+    height: 5px;
+    content: '';
+    background: #eee;
+    position: absolute;
+    width: 90%;
+    top: 28px;
+    border: 1px solid #eaeaea;
+}
+
+
+
+.steps-model .nav-tabs>li:nth-child(1).active a:after {
+    left: 0;
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 14px;
+    height: 4px;
+    width: 45px;
+    background: #46ad46;
+}
+
+.steps-model .nav-tabs>li.active a:after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 14px;
+    height: 4px;
+    width: 65px;
+    background: #46ad46;
+    left: -18px;
+}
+
+.steps-model .nav-tabs>li>a span {
+    position: relative;
+    z-index: 9;
+}
+*/
+
+.steps-model .sw-toolbar-bottom .btn-group {
+    float: right;
+}
+
+.steps-model .sw-toolbar-bottom .btn-group button {
+    transition: all 0.3s linear;
+    -webkit-transition: all 0.3s linear;
+    width: 85px;
+    font-size: 16px;
+    border-radius: 4px !important;
+}
+
+.steps-model .sw-toolbar-bottom .btn-group .sw-btn-prev {
+    position: relative;
+    left: -10px;
+    background: transparent;
+    border: 1px solid #cfcfcf;
+    color: #333;
+}
+
+.steps-model .sw-toolbar-bottom .btn-group .sw-btn-prev.disabled {
+    display: none;
+}
+
+.steps-model .sw-toolbar-bottom .btn-group button.sw-btn-next,
+.btn-secondary,
+.steps-model button:focus {
+    background: #003c64;
+    color: #fff;
+}
+
+.steps-model .sw-toolbar-bottom .btn-group button:hover,
+.btn-secondary:hover {
+    background: #c5122c;
+    color: #fff;
+}
+
+.steps-model .minict_wrapper span:empty:before {
+    content: '';
+}
+
+.steps-model .form-section label {
+    font-weight: 400;
+}
+
+.steps-model .form-section .minict_wrapper.bubble {
+    height: 30px;
+    margin-top: 0px;
+}
+
+.steps-model .form-section {
+    border-bottom: 1px solid #eee;
+    margin: 0 0 20px;
+    padding-bottom: 8px;
+    float: left;
+    width: 100%;
+}
+
+.steps-model .form-section .minict_wrapper.bubble ul {
+    top: 32px;
+}
+
+.steps-model .form-control.small-input {
+    width: 157px;
+}
+
+.steps-model .datepicker table tr td.active:hover,
+.datepicker table tr td.active:hover:hover,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active.disabled:hover:hover,
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active.disabled:hover.active,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active:hover.disabled,
+.datepicker table tr td.active.disabled.disabled,
+.datepicker table tr td.active.disabled:hover.disabled,
+.datepicker table tr td.active[disabled],
+.datepicker table tr td.active:hover[disabled],
+.datepicker table tr td.active.disabled[disabled],
+.datepicker table tr td.active.disabled:hover[disabled] {
+    background: #46ad46;
+}
+
+.steps-model .datepicker i.icon-arrow-left {
+    width: 8px;
+    height: 8px;
+    border-left: 2px solid #333;
+    border-bottom: 2px solid #333;
+    display: inline-block;
+    transform: rotate(43deg);
+}
+
+.steps-model .plus-btn {
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    position: relative;
+    top: 0px;
+}
+
+.steps-model .plus-btn button {
+    width: 100%;
+    height: 100%;
+    background: url(../image/add-btn.png) no-repeat 0 0;
+    border: none;
+    box-shadow: none;
+}
+
+.steps-model .medium .form-control,
+.steps-model .medium .minict_wrapper.bubble {
+    width: 88%;
+    display: inline-block;
+}
+
+.form-control.medium.add {
+    margin-right: 2%;
+}
+
+.steps-model .form-control.small-input.calender {
+    background: url(../image/calender-icon.png) no-repeat 94% center;
+}
+
+.steps-model .form-control {
+    height: 30px;
+    padding: 4px 12px;
+}
+
+.steps-model .empty-label {
+    height: 20px;
+}
+
+.steps-model .empty-label {
+    height: 17px;
+}
+
+.steps-model textarea.form-control {
+    resize: unset;
+    height: 80px;
+}
+
+/*.steps-model button {
+    font-size: 16px;
+}
+
+.steps-model button.btn.btn-outline-primary {
+    background: transparent;
+    border: 1px solid #cfcfcf;
+}
+
+.steps-model button.btn.btn-primary {
+    background: #46ad46;
+    color: #fff;
+    border: 1px solid #3b913b;
+}
+
+.steps-model button.btn.btn-primary:hover {
+    background: #3b913b;
+    color: #fff;
+}*/
+
+button.btn.btn-secondary.btn-md:hover { color: #fff;  }
+
+.steps-model .phase-box h3 {
+    margin: 0;
+    color: #000;
+    font-size: 16px;
+    border-bottom: 1px solid #e6e6f2;
+    padding: 0 15px 9px;
+}
+
+.img-responsive {
+    width: 100%;
+}
+
+.steps-model button.btn.btn-outline-primary:hover {
+    background: #cfcfcf;
+    color: #fff;
+}
+
+.steps-model .phase-box {
+    padding: 10px 0;
+    border: 1px solid #e6e6f2;
+    margin-bottom: 20px;
+}
+
+.steps-model .cont-box {
+    padding: 0 15px;
+}
+
+.steps-model .phase-box h4 {
+    font-size: 16px;
+}
+
+.green-clr {
+    color: #46ad46;
+    font-size: 14px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.steps-model .phase-box .small-title {
+    margin-bottom: 0;
+}
+
+.steps-model .cont-box-cvr {
+    overflow: auto;
+    margin: 0 0 14px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0px;
+}
+
+.steps-model .right-btn-hldr {
+    position: relative;
+    top: -10px;
+}
+
+.modal.steps-model {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow-y: auto !important;
+}
+
+.steps-model .checklist {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.steps-model .nav-tabs>li:last-child.active a:after {
+    left: -28px;
+    width: 40px;
+}
+
+.steps-model button:focus {
+    outline: none;
+}
+
+i.icon-arrow-left {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-left: 2px solid #333;
+    border-bottom: 2px solid #333;
+    display: inline-grid;
+    transform: rotate(43deg);
+}
+
+i.icon-arrow-right {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-left: 2px solid #333;
+    border-bottom: 2px solid #333;
+    display: inline-grid;
+    transform: rotate(-133deg);
+}
+
+.tech-sec label {
+    display: block;
+}
+
+span.slect-label {
+    position: relative;
+    top: 13px;
+    font-weight: 600;
+}
+
+.phase-title .form-group {
+    width: auto;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+
+.steps-model .phase-box .phase-title {
+    border-bottom: 1px solid #e6e6f2;
+    float: left;
+    width: 100%;
+    padding: 0 10px 9px;
+    margin-bottom: 13px;
+}
+
+.phase-title .form-group label {
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+.phase-title .form-group input.form-control {
+    width: auto;
+    float: none;
+    display: inline-block;
+}
+
+.steps-model .phase-box .phase-title h3 {
+    border: none;
+    float: left;
+    margin: 10px 0 0;
+    padding-left: 0;
+}
+
+/*Scroll style starts here*/
+
+/*Scroller Script starts here*/
+.content {
+    overflow: auto !important;
+    position: relative;
+    padding: 20px;
+    background: #333;
+    margin: 10px;
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.content.hidden {
+    display: none;
+}
+
+.content.light {
+    background-color: #ddd;
+    color: #333;
+}
+
+.content.cont-box-cvr {
+    height: 360px;
+}
+
+.steps-model .content {
+    background: transparent;
+}
+
+/*Scroller Script ends here*/
+
+.steps-model .checklist label.container {
+    border: 1px solid #e6e6f2;
+    padding: 10px 10px 10px 50px;
+}
+
+/*Model 2 Style starts here*/
+#myModal2 .modal-content {
+    left: 0;
+}
+
+/*Model 2 Style ends here*/
+
+/*Checkbox Style starts here*/
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-weight: 400;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked~.checkmark {
+    background-color: #67d613;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: block;
+}
+
+/* Show the checkmark when checked */
+.container input:checked~.checkmark:after {
+    display: block;
+    border-color: #fff;
+}
+
+.tag-container {
+    margin-bottom: 5px;
+}
+  
+.tag-container:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+
+.skills-tag {
+    cursor:pointer;
+    background-color: blue;
+    padding: 5px 10px 5px 10px;
+    display: inline-block;
+    margin-top: 3px; /*incase tags go in next line, will space */
+    color:#fff;
+    margin-right: 4px;
+    background:#789;
+    padding-right: 20px; /* adds space inside the tags for the 'x' button */
+
+}
+
+.skills-tag:hover{
+    opacity:0.7;
+}
+
+.skills-tag:after { 
+    position:absolute;
+    content:"×";
+    padding:2px 2px;
+    margin-left:2px;
+    font-size:11px;
+}
+
+.projectType-tag {
+    cursor:pointer;
+    background-color: blue;
+    padding: 5px 10px 5px 10px;
+    display: inline-block;
+    margin-top: 3px; /*incase tags go in next line, will space */
+    color:#fff;
+    margin-right: 4px;
+    background:#789;
+    padding-right: 20px; /* adds space inside the tags for the 'x' button */
+
+}
+
+.projectType-tag:hover{
+    opacity:0.7;
+}
+
+.projectType-tag:after { 
+    position:absolute;
+    content:"×";
+    padding:2px 2px;
+    margin-left:2px;
+    font-size:11px;
+}
+
+#add-skills-tag-input {
+    background:#eee;
+    border:0;
+    margin:6px 6px 6px 0px ; /* t r b l */
+    padding:5px;
+    width:auto;
+}      
+
+#openWorkOrderModelbox .finishButton, #openWorkOrderModelbox .exportButton, #WorkOrderModelbox .finishButton, #WorkOrderModelbox .exportButton{
+    margin-right: 10px;
+}
+
+/* Style the checkmark/indicator */
+.checkmark {
+    position: absolute;
+    top: 15px;
+    left: 13px;
+    height: 15px;
+    width: 15px;
+    border: 1px solid #cfcfcf;
+    background: #fff;
+}
+
+.container .checkmark:after {
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: solid #333;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/*Checkbox Style ends here*/
+
+/*Checkbox Style starts here*/
+
+
+/*Dropdown style starts here*/
+.steps-model .minict_wrapper.bubble:after {
+    height: 100%;
+}
+
+.steps-model .minict_wrapper span {
+    border: none;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 14px;
+    color: #000;
+    height: 100%;
+    line-height: 22px;
+}
+
+.steps-model .step-title .minict_wrapper span:empty:before {
+    content: 'Select RFP';
+    color: #000;
+}
+
+.steps-model .minict_wrapper.bubble {
+    margin: -4px 0 0;
+    border: 1px solid #c1c1c1;
+    height: 30px;
+    width: 100%;
+}
+
+.steps-model .minict_wrapper:after {
+    box-shadow: none;
+    border-left: 0;
+    content: '';
+    background: url(../image/drop-down-arrow.png);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.steps-model .title-drop-down {
+    width: 185px;
+}
+
+.steps-model .minict_wrapper.bubble ul:before,
+.minict_wrapper.bubble ul:after {
+    display: none;
+}
+
+.steps-model .minict_wrapper.bubble ul {
+    top: 2.1rem;
+    border-radius: 0 0 7px 8px;
+    -webkit-border-radius: 0 0 7px 8px;
+    -moz-border-radius: 0 0 7px 8px;
+}
+
+.steps-model .minict_wrapper ul li {
+    font-size: 0.9em;
+    font-family: 'Roboto Condensed';
+    padding: 12px 10px;
+    line-height: 0;
+    height: 0;
+}
+
+.steps-model .minict_wrapper ul li:hover {
+    background: #fcfcfc;
+    color: #111;
+}
+
+/*Dropdown style ends here*/
+
+.modal .modal-dialog {
+    display: flex;
+    width: 100% !important;
+    margin: 0;
+    height: 100%;
+    background: transparent;
+}
+
+.modal .modal-dialog>.modal-content {
+    margin: auto;
+    width: 90%;
+}
+.modal .modal-dialog>.modal-content{
+     max-height: 90vh;    
+}
+.modal .modal-dialog>.modal-content .modal-body, .common-modal-body{
+    max-height:calc(100vh - 200px);    
+    overflow: auto;
+    width: 100%;
+    padding: 15px 15px 15px!important;
+}
+
+.txtContacts input[type=checkbox] {
+    float: none!important;
+    margin-right: 5px!important;
+    margin-left: 15px;
+}
+
+
+@media(min-width: 768px) {
+    .steps-model .modal-dialog {
+        width: 700px;
+    }
+
+    .modal .modal-dialog>.modal-content {
+        width: 75%;
+    }
+}
+
+@media(min-width: 1400px) {
+    .modal .modal-dialog>.modal-content {
+        width: 50%;
+        
+    }
+}
+
+@media(max-width: 991px) {
+    .steps-model .form-section label {
+        font-weight: 400;
+        display: block;
+    }
+
+    .steps-model .medium .form-control,
+    .steps-model .medium .minict_wrapper.bubble {
+        width: 95.7%;
+        display: inline-block;
+    }
+
+    
+    .steps-model .plus-btn {
+        width: 25px;
+        height: 25px;
+        display: inline-block;
+        position: absolute;
+        top: 27px;
+        right: 0;
+    }
+
+    .steps-model .medium .minict_wrapper.bubble {
+        width: 97%;
+    }
+}
+
+@media(max-width: 767px) {
+
+    .steps-model .plus-btn {
+        position: absolute;
+        top: 30px;
+        right: 0;
+    }
+
+    .steps-model .medium .form-control,
+    .steps-model .medium .minict_wrapper.bubble {
+        width: 96.8%;
+        display: inline-block;
+    }
+
+    .modal-title {
+        font-size: 20px;
+        margin: 7px 0 0;
+    }
+}
+
+@media(max-width: 480px) {
+    .steps-model .form-control.small-input {
+        width: 100%;
+    }
+
+    .steps-model .title-drop-down {
+        width: 100%;
+        display: block;
+        margin: 14px 0 10px;
+    }
+
+    .steps-model .medium .form-control,
+    .steps-model .medium .minict_wrapper.bubble {
+        width: 96.4%;
+        display: inline-block;
+    }
+
+}
+
+.error_message {
+    color: red;
+}
+
+.required_field {
+    border-color: #dd1313 !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+
+.steps-model #step-12 .form-section {
+    float: none;
+    width: auto;
+}
+
+#smartwizard .btn-toolbar {
+    text-align: right;
+}
+
+#smartwizard .sw-toolbar-bottom .btn-group {
+    float: none;
+}
+
+/* RFP CSS Ends here*/
+
+/*15-04-19*/
+#form-block.form-section .form-group .form-control {
+    display: block;
+    max-width: 100%;
+}
+
+#prepared-employee {
+    display: flex;
+}
+
+span.slect-label {
+    padding-left: 20px;
+}
+
+.modal-body #content-1 {
+    overflow-y: auto !important;
+}
+
+
+.checkmark:after {
+    display: none;
+}
+
+.container input:checked~.checkmark:after {
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: solid #333;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#ProjectPhasesTable .edit-btn {
+    margin-right: 10px;
+}
+
+
+#DeliverableProjectPhase .edit-btn {
+    margin-right: 10px;
+}
+
+#displayEstimateProjectphase .form-group.pull-right {
+    margin-right: 15px;
+}
+
+#step-9 .form-group select {
+    float: left;
+    /*margin-right: 10px;*/
+}
+
+.steps-model .form-section .input-group {
+    width: 100%;
+}
+
+.steps-model #step-9 .plus-btn {
+    top: 1px;
+    float: left;
+    position: static;
+    margin-top: 4px;
+}
+
+.steps-model .form-section .added-list {
+    height: 150px;
+    overflow-y: auto;
+}
+
+.steps-model #step-9 .plus-btn .add-btn {
+    margin-left: 15px;
+}
+
+#step-1 #form-block #proposalDate {
+    padding: 0 10px;
+}
+
+#added_technology div,
+#added_environment div,
+#added_backend div {
+    width: 100%;
+    margin: 0;
+    background-color: #eee;
+    padding: 5px 25px 5px 10px;
+    border-radius: 5px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+#added_technology div .btn-danger,
+#added_environment div .btn-danger,
+#added_backend div .btn-danger {
+    background: none;
+    border: 0;
+    color: #333;
+    padding: 0;
+    right: 10px;
+    position: absolute;
+    line-height: 16px;
+    font-size: 16px;
+    top: 27%;
+}
+
+.previewButton {
+    margin-right: 10px;
+}
+
+.badge {
+    width: 20px;
+    height: 20px;
+    line-height: 20px !important;
+    padding: 0 !important;
+    font-size: 11px !important;
+}
+
+
+@media(max-width: 1024px) {}
+
+@media(max-width: 991px) {
+    .steps-model .form-section .added-list {
+        height: auto;
+    }
+}
+
+@media(max-width: 767px) {}
+
+@media(max-width: 640px) {}
+
+
+
+.expandTitle .sign:after {
+    content: "-";
+    display: inline-block;
+    margin-left: 8px;
+    background-color: lightgrey;
+    padding: 2px 4px;
+    border-radius: 100%;
+}
+
+.expandTitle.expand .sign:after {
+    content: "+";
+}
+/*08-08-19*/
+#div-QuickAction-Edit-Modal .modal-header{
+    background: #c5122c;
+    color: #fff;
+}
+.selectab ul{
+    margin-bottom:0px;
+    padding-left:0;
+}
+.selectab ul li{
+    display:inline-block;
+    margin-right: 10px;
+    padding: 5px;
+    background: #c5122c;
+    color: #fff;
+    border-radius:4px;
+}
+.selectab {
+    display: flex;
+}
+
+/* Header logo style 445 09-08-2019 */
+a.header-logo img {
+    padding: 10px 15px;
+}
+/* Header logo style 445 09-08-2019 */
+/*Style changed (PDF)*/
+#smartwizard label{
+    width:100%;
+}
+
+.modal-header {
+    background: #c5122c !important;
+    color: #fff !important;
+}
+.table>caption+thead>tr:first-child>td, .table>caption+thead>tr:first-child>th, .table>colgroup+thead>tr:first-child>td, .table>colgroup+thead>tr:first-child>th, .table>thead:first-child>tr:first-child>td, .table>thead:first-child>tr:first-child>th{
+    border-top: 1px solid #ddd!important;
+}
+
+#notes .btn-primary.pull-right{
+    margin-bottom: 20px;
+}
+
+
+.modal-header .close{
+    margin-top: -5px!important;
+    width: 35px!important;
+}
+.modal-header .close:focus{
+    background: none!important;
+    outline: 0!important;
+}
+.modal .modal-content .modal-header h2, .modal .modal-content .modal-header h3, .modal .modal-content .modal-header h4{
+    padding: 0 0px!important;
+    font-size: 16px!important;
+    color: #fff!important;
+    margin: 0!important;
+    line-height: 30px!important;
+}
+#skillset{
+    overflow: hidden;
+}
+.common-modal-body{
+    width: 100%!important;
+}
+.common-modal-body #btnResign{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-right: 0!important;
+}
+.common-modal-body hr{
+    display: none!important;
+}
+input[type=checkbox]{
+    margin-right: 20px;
+    margin-top: 0;
+    width: auto;
+    float: left;
+    height: auto;
+}
+#leave_entry .AddLeaveButton .glyphicon {
+    margin-right: 7px;
+}
+
+#modal-commonModal .common-modal-body .pull-right{
+    display: none;
+}
+#div-QuickAction-Edit-Modal .action-wrap{
+    padding: 15px;
+    padding-bottom: 0;
+}
+#div-QuickAction-Edit-Modal .form-control{
+    margin-bottom: 15px;
+}
+#div-QuickAction-Edit-Modal .actionDescSidebar{
+    text-align: left;
+}
+#div-QuickAction-Edit-Modal .actionDescSidebar h2{
+    font-size: 18px;
+}
+
+
+.list-group{
+    display: inline-block;
+    width: 100%;
+}
+#rolesandrights .form-inline .form-group{
+    margin-right: 15px;
+}
+#rfp_operation_modal .form-hordizontal .input-group{
+    width: 100%!important;
+}
+#rfp_operation_modal .form-hordizontal .input-group input, #rfp_operation_modal .form-hordizontal .input-group select {
+    width: 100%!important;
+    border-radius: 4px!important;
+    height:36px;
+    background-color: #fff!important;
+    box-shadow: none!important;
+    border:1px solid #ccc!important;
+    padding: 0 10px;
+}
+#rfp_operation_modal .form-hordizontal .form-group .form-group{
+    margin-left: 0;
+    margin-right: 0;
+}
+.rfpusermapping  div.dataTables_filter{
+    padding-right: 0!important;
+}
+.rfpusermapping  div.dataTables_filter input{
+        width: calc(100% - 70px)!important;
+    border-radius: 4px!important;
+    height: 30px;
+    background-color: #fff!important;
+    box-shadow: none!important;
+    border: 1px solid #ccc!important;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.elcl_input_grp label {
+    display: inline-block;
+}
+
+.elcl_input_grp .input-group {
+    display: inline-block;
+    width: auto;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.elcl_input_grp .input-group input {
+    max-width: 100px;
+    display: inline-block;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.elcl_input_grp .input-group .input-group-addon {
+    display: inline-block;
+    vertical-align: top;
+    padding: 7px 10px;
+    width: auto;
+}
+
+#OpeningELCL .elcl_tabs .elcl_tablinks {
+    padding: 6px 0;
+    border-bottom: 4px solid transparent;
+    margin: 0 10px;
+    font-weight: 700;
+}
+
+#OpeningELCL .elcl_tabs .elcl_tablinks.active, #OpeningELCL .elcl_tabs .elcl_tablinks:hover {
+    color: #dd2c36;
+    border-color: #dd2c36;
+    background: rgba(0,0,0,0);
+}
+
+#OpeningELCL .elcl_tabs {
+    margin-bottom: 20px;
+}
+
+#div-opening_elcl-Edit-Modal.modal .modal-content {
+    max-width: 650px;
+}
+#div-opening_elcl-Edit-Modal.modal .modal-content .elcl_balance label { margin-right: 10px; }
+#div-opening_elcl-Edit-Modal.modal .modal-content .elcl_balance input {
+    max-width: 60px;
+    border-radius: 4px;
+}
+
+#div-opening_elcl-Edit-Modal.modal .modal-content .modal-footer .btn-secondary{
+    border-width: 0;
+    color: #fff;
+}
+
+.opening_elcl_modal_content .prof-pic{margin-bottom:30px}
+.opening_elcl_employee_details .prof-pic img {
+    border: 2px solid #000;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+}
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover {
+    background: #003C64 !important;
+    border-radius: 0;
+    border-color: #003C64;
+}
+
+.nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    background-color: #dd2c36!important;
+    border-color: #dd2c36;
+}
+.select2-container .select2-selection--single {
+    height: 34px;
+    border-radius: 0;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 34px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 34px;
+}
+.input-group-addon, .dx-texteditor.dx-editor-outlined, .select2-container .select2-selection--multiple {
+    border-radius: 0 !important;
+}
+
+@media only screen and (min-width:991px) and (max-width:1280px){
+    .steps-model .form-section label {
+        font-weight: 400;
+        font-size: 12px;
+    }
+    .steps-model .form-control{  font-size: 12px;}
+    .steps-model .step-title h3{font-size: 18px;}
+}

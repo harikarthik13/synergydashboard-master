@@ -1,0 +1,164 @@
+html,
+body {
+  height: 100%;
+}
+
+.outer-wrapper {
+  display: table;
+  width: 100%;
+  height: 80%;
+}
+
+.jumbotron1 {
+  background: #fff;
+}
+
+.inner-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 15px;
+}
+
+.login-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+}
+
+/*Style for clone form */
+
+.cloneform {
+  padding: 10px;
+}
+
+.clonedInput {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.clonedInput div {
+  margin: 5px;
+}
+
+.remove1 {
+  visibility: visible;
+}
+
+.js-title-step .label.label-success {
+  position: relative;
+  top: -2px;
+}
+
+.tp-margin {
+  margin-top: 25px;
+}
+
+header img {
+  padding-top: 2%;
+  padding-left: 2%;
+}
+
+.checkbox span {
+  position: absolute;
+  top: 3
+}
+
+.input-error {
+  border-color: #f35b3f;
+}
+
+.field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+  margin-right: 5px;
+}
+
+
+.login-page { display: flex; background: #f3f3f3; position: static; width: 100%; height: 100%; z-index: 1; overflow-y: auto; left: 0; top: 0; }
+.login-page #loginform { margin: auto; }
+.login-logo { border-bottom: 2px dashed #ececec !important; padding-bottom: 15px; }
+.login-logo img { max-width: 100%; }
+#loginform .login-inner {max-width: 400px; margin: auto;background-color: #fff;padding: 30px;border-radius: 5px;position: relative;border: 1px solid #f5f5f5; -webkit-box-shadow: 0px 0px 5px 0px rgba(214, 214, 214, 0.41); -moz-box-shadow: 0px 0px 5px 0px rgba(214, 214, 214, 0.41); box-shadow: 0px 0px 5px 0px rgba(214, 214, 214, 0.41); }
+#loginform .login-inner:before {content: '';position: absolute;left: 10px;right: 10px;width: calc(100% - 20px);height:50px;z-index: -1;top: -12px;background: #ffffff;border-radius: 5px;border: 1px solid #f1f1f1;} 
+#loginform input {border: 0;border-bottom: 1px solid #ececec !important;box-shadow: none !important;border-radius: 0 !important;padding: 10px 15px 10px 0 !important;height: auto !important;}
+#loginform .form-group label {font-weight: 400;color: #6d6d6d !important;}
+#loginform button {box-shadow: none !important;border-radius: 0 !important;text-transform: uppercase;padding: 9px 20px !important;}
+#loginform button[type="reset"] { border: 0; background-color: transparent; }
+#loginform h2 { position: relative; }
+#loginform h2:before { content: ''; position: absolute; left: -31px; width: 4px; height: 100%; background-color: #c5122c; }
+#loginform .f-submit { margin-top: 15px; }
+#loginform button[type="submit"] { border: 0; outline: none; width: 100%; background: #c5122c; font-weight: 600; letter-spacing: 0.03em; font-size: 16px; }
+#loginform a { color: #7d7d7d; letter-spacing: 0.1em; }
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active { -webkit-background-clip: text; }
+.modal-header {
+  background: #c5122c !important;
+  color: #fff !important;
+}.modal-header .close {
+  margin-top: -2px;
+  font-size: 35px;
+  color: #ffff;
+  opacity: 1;
+}.modal-header .close {
+  margin-top: -5px!important;
+  width: 35px!important;
+}.modal .modal-content .modal-header h2, .modal .modal-content .modal-header h3, .modal .modal-content .modal-header h4 {
+  padding: 0 10px!important;
+  font-size: 18px!important;
+  color: #fff!important;
+  margin: 0!important;
+  line-height: 30px!important;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif!important;
+}
+
+.modal-content {
+  box-shadow: none;
+  border-radius: 0;
+  border-width: 0;
+}
+
+.modal-body input {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.modal-body span.input-group-addon {
+  border-radius: 0;
+}
+.modal .modal-dialog {
+  display: flex;
+  width: 100% !important;
+  margin: 0;
+  height: 100%;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal .modal-dialog .modal-content {
+  width: 100%;
+  max-width: 600px;
+}
+.modal-header .close:focus {
+  outline: none;
+}
+
+.btn-primary {
+  background-color: #dd2c36;
+  border: 0;
+}
+
+@media(max-width: 991px) {
+#loginform .login-inner { width: 80%; }
+}
+@media(max-width: 767px) {
+#loginform .login-inner { width: 60%; margin: auto; display: block; }
+}
+@media(max-width: 640px) {
+#loginform .login-inner { width: 90%; }
+}

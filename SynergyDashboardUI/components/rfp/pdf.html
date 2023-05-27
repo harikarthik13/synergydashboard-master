@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="components/rfp/css/pdf/pdf-style.css" rel="stylesheet" media="screen">
+    <link href="components/rfp/css/pdf/print.css" rel="stylesheet" media="print">
+</head>
+<body>
+    <button class="download_content">Download PDF</button>
+    <div class="pdf_main_div">
+        <!-- page-1 -->
+        <table class="Estimation_details" border="0">
+            <tbody>
+                <tr>
+                    <span id="PdfDocumentType" class="PdfDocumentType" style="display: none;"></span>
+                    <td border="0">Estimation No: <span id="pdf_estimation_number"></span></td>
+                    <td align="right" border="0" id="docVersion">Document Version 1.0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="page print-row page_1" id="pdf_id1">
+           <div class="fitpage">
+            <div class="pdf-head" >
+                <img src="components/rfp/images/pdf/g2logo.png" alt="">
+            </div>
+            <div class="name-section" style=" width: 100%;
+    content-color:#eee!important;
+    padding: 15px;
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+                <h1 class="pdf_document_name"></h1>
+            </div>
+            <div class="about-info">
+                <div class="about_pdf">
+                    <h4>Contact person: <span id="pdf_contact_person"></span></h4>
+                    <h4>Company: <span id="pdf_client_name"></span></h4>
+                </div>
+                <div class="address">                    
+                    <h4>Address: </h4>
+                    <p id="pdf_proposal_address"></p>
+                </div>
+                <div class="company_address">
+                    <p>Document prepared by <span class="pdf_PreparedBy"></span></p>
+                    <p>G2 TECHNOLOGY SOLUTIONS INDIA PVT LTD ., S.F. No. 174 2, First Floor, Vellakinar Pirivu, (Po),<br>
+                        Thiruvalluvar St, GN Mills, Coimbatore, Tamil Nadu 641029</p>
+                    <p><strong>Website</strong> <a href="http://www.g2techsoft.com/">http:www.g2techsoft.com</a>, Contact: +1 818-357-2282</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- page-1 -->
+        <div class="page-break"></div>
+        <!-- page-2 -->
+        <div class="page print-row page_2" id="pdf_id2">
+            <div class="table_of_contents">
+                <h2>Table of Contents</h2>
+                <p><span class="bold">About us</span></p>
+                <ol>
+                    <a href="#revision_history_scroll"><li id="Revision_history_title"></li>
+                        <p id="Prepared_by"></p>
+                        <p id="Estimated_by"></p>
+                        <p id="Reviewed_by"></p></a>
+                    <a href="#estimation_table_scroll"><li id="Estimation_pricing"></li></a>
+                    <a href="#user_story_scroll"><li id="User_story"></li></a>
+                    <a href="#feature_list_scroll"><li id="Feature_list"></li></a>
+                    <a href="#assumptions_scroll"><li id="Assumptions"></li></a>
+                    <a href="#out_of_scope_scroll"><li id="Out_of_scope"></li></a>
+                    <a href="#technology_environment_scroll"><li id="Technology_environment"></li>
+                        <p id="technology_title"></p>
+                        <p id="environment_title"></p>
+                        <p id="backend_title"></p></a>
+                    <a href="#other_notes_scroll"><li id="Other_notes"></li></a>
+                    <a href="#suggestions_scroll"><li id="Suggestion"></li></a>
+                    <a href="#project_deliverable_scroll"><li id="Project_deliverable"></li></a>
+                </ol>
+                
+            </div>
+        </div>
+        <!-- page-2 -->
+        <div class="page-break"></div>
+        <!-- page-3 -->
+        <div class=" page print-row page_3" >
+            <div class="about_us"> 
+                <h2>About us</h2>
+                <p>We are a group of professionals working together with a focus to bring Our Clients Innovative ideas into action and help them with our Digital Transformation Solutions.</p>
+            </div>
+            <div class="about_us_content" style="background-image:url(components/rfp/images/pdf/about-us1.png);
+    background-repeat:no-repeat;">
+                <p>Guided by decades of experience and innovation, G2TechSoft offers the industry’s most powerful Digital Transformation Solutions and partners with companies worldwide to help them harness the extreme power of digital transformation for product development, Managed IT, Testing services or Digital solutions. Over the past 12 years our high levels of commitment to client needs, high degree of competence and strict adherence to quality norms has made it possible to build up an impressive list of 200+ happy clients globally which include some of the world’s most famous brands who operate across many sectors and has helped us complete 416 successful projects.</p>
+            </div>
+            <div class="about_us_img">
+                <img src="components/rfp/images/pdf/group.jpg" alt="">
+            </div>
+            <div class="aboutus_icons" style="background-image:url(components/rfp/images/pdf/countbg_1.png);
+    background-repeat:no-repeat;
+    background-size:100% auto;">
+                <div class="col-md-4">
+                <img src="components/rfp/images/pdf/signal.png" alt="experience"/>
+                <h2 class="number">12</h2>
+                <p>Years Experience</p>
+                </div>
+                <div class="col-md-4">
+                <img src="components/rfp/images/pdf/thumbsup.png" alt="experience"/>
+                <h2 class="number">416</h2>
+                <p>projects delivered sucessfully</p>
+                </div>
+                <div class="col-md-4">
+                 <img src="components/rfp/images/pdf/smile.png" alt="experience"/>
+                <h2 class="number">208</h2>
+                <p>happy clients</p>   
+                </div>
+                <div class="col-md-4">
+                 <img src="components/rfp/images/pdf/users.png" alt="experience"/>
+                <h2 class="number">214</h2>
+                <p>exprienced professionals</p>   
+                </div>
+            </div>
+        </div>
+        <!-- page-3 -->
+        <div class="page-break"></div>
+        <!-- page-4 -->
+        <div class="print-row page_4">
+            <div class="Revision_history">
+                <h2 id="revision_history_scroll">1. Revision History</h2>
+                <h4>Prepared by</h4>
+                <p class="pdf_PreparedBy"></p>
+                <h4>Estimated by</h4>
+                <p id="pdf_EstimatedBy"></p>
+                <h4>Reviewed by</h4>
+                <p id="pdf_ReviewedBy"></p>
+            </div>
+        </div>
+        <!-- page-4 -->
+         <div class="page-break"></div>
+        <!-- page-5 -->
+        <div class="print-row page_5">
+            <div class="estimation">
+                <h2 id="estimation_table_scroll">2. Estimation & Pricing</h2>
+                <div class="estimation_table" id="pdf_EstimatePricing">
+                </div>
+                <div class="estimation_content">
+                    <p>The estimated cost for analysis, design, development, testing and implementation of the <span class="textprimary">“<span class="pdf_document_name"></span>”</span> </span>works out to <span class="total_value_estimate"></span>(<span class="selected_currency_value"></span>)</p>
+                    <p class="primaryblock"><span class="textsecondary">Payment Schedule:</span> The payment schedule shall be decided at the time of signing the work order and will be based on the deliverables with an initial payment at the time of signup.</p>
+                </div>
+            </div>
+        </div>
+        <!-- page-5 -->
+        <div class="page-break"></div>
+        <!-- page-6 -->
+        <div class="print-row page_6">
+            <div class="user_story" id="user_story_scroll">
+                <h2>3. User Story / Understanding</h2>
+                <!-- <p>We will be developing a mobile application for customer and vendor as explained below.</p> -->
+                <div id="pdf_UserStory"></div>
+            </div>
+        </div>
+        <!-- page-6 -->
+        <div class="page-break"></div>
+        <!-- page-7 -->
+        <div class="print-row page_7">
+            <div class="feature_list" id="feature_list_scroll">
+            <h2>4. Feature list based on the above user story / understanding</h2>
+            <div id="pdf_Estimate"></div>
+         </div>
+        </div>
+        <!-- page-7 -->
+        <div class="page-break"></div>
+        <!-- page-8 -->
+        <div class="print-row page_8">
+            <div class="assumptions_block">
+            <h2 id="assumptions_scroll">5. Assumptions</h2>
+            <div class="assumptions">
+                <p id="pdf_Assumptions"></p>
+            </div>
+            <h2 id="out_of_scope_scroll">6. Out of Scope</h2>
+            <div class="out_of_scope" >
+                <p id="pdf_OutOfScope"></p>
+            </div>
+            <h2 id="technology_environment_scroll">7. Technology and Environment</h2>
+            <div class="Technology">
+                <ul>
+                    <li><b>Technology</b>
+                        <ul>
+                            <li id="pdf_Technology"></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li><b>Environment</b>
+                        <ul>
+                            <li id="pdf_Environment"></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li><b>Backend</b>
+                        <ul>
+                            <li id="pdf_BackEnd"></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+         </div>
+        </div>
+        <!-- page-8 -->
+         <div class="page-break"></div>
+        <!-- page-9 -->
+        <div class="print-row page-9">
+           <div class="other_notes_block">
+            <h2 id="other_notes_scroll">8. Other Notes</h2>
+            <div class="other_notes">
+                <p id="pdf_OtherNotes"></p>
+            </div>
+          </div>
+        </div>
+        <!-- page-9 -->
+         <div class="page-break"></div>
+        <!-- page-10 -->
+        <div class="print-row page-10">
+          <div class="suggestions_block">
+            <h2 id="suggestions_scroll">9. Suggestions</h2>
+            <div class="suggestions">
+                <!-- <p>We propose to go for a Fix-bid basis for this project.</p> -->
+                <p id="pdf_Suggestions"></p>
+            </div>
+            <h2 id="project_deliverable_scroll">10. Project Deliverables</h2>
+            <div class="project_deliverable" id="pdf_Deliverables">
+            </div>
+         </div>
+        </div>
+        <!-- page-10 -->
+    </div>
+    <!-- <script type="text/javascript" src="../main/js/library/jquery-1.11.1.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+    <!-- <script src="../main/js/library/jquery-1.11.1.min.js"></script>
+    <script src="../main/js/library/jquery.smartWizard.js"></script> -->
+    
+    <!-- <script type="text/javascript" src="components/rfp/js/pdf/html2canvas.js"></script>
+    <script type="text/javascript" src="components/rfp/js/pdf/jspdf.debug.js"></script> 
+    <script type="text/javascript" src="components/rfp/js/pdf/jspdf.min.js"></script> -->
+    <!-- <script type="text/javascript" src="js/callapi.js"></script> -->
+    <!-- <script type="text/javascript" src="components/rfp/js/assign.js"></script> -->
+     
+    <script>
+        $(".download_content").click(function(){
+            PostProposalDocumentDelivery();
+            window.print();
+            window.close();
+            return false;
+        });
+    </script>
+</body>
+</html>

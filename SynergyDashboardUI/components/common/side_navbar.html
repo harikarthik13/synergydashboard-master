@@ -1,0 +1,153 @@
+
+<script type="text/javascript" src="components/common/js/side_navbar.js"></script>
+<!-- <link href="components/common/css/side_navbar.css" rel="stylesheet" /> -->
+
+<div class="main-sidebar-menu">
+<ul class="left-Navigation left-Navigation-card userMenu">
+    
+</ul>
+</div>
+<script type="text/javascript">
+      
+    // Function for roles and Rights show
+    function roleModal(){
+            $("#rolesAndRightsModal").appendTo("body").modal("show")
+    }    
+    // Dynamic menu generation //
+     var filter_val = JSON.stringify({
+         "IsActive": true,
+         "Status" : "",
+         "Message" : ""
+     });
+     var result = callgetlist('GetDashBoardEmployeeMenuDetails', filter_val);
+     var li = "<li onclick='funcHideMenuIn()' style='padding: 0;' id='button-hide-menuIn'><a href='#'><span class='icofont-close-line icofont-2x' width='20px' height='20px'></span></a></li>";
+     li +="<li onclick='funcHideMenuOut()' style='padding: 0;' id='button-hide-menuOut'><a href='#'> <span class='icofont-navigation-menu icofont-2x' width='20px' height='20px'></span></a></a></li>" 
+     //console.log(result);
+     var menu_div = "";
+     if(result)
+     {
+        console.log('menu' , result); 
+      li += "<span class='main_nav_item'>"
+        /* Create dynamic divs*/
+        for (var j = 0; j < result.length; j++) {
+           if(result[j].IsQuickAction == false){
+            menu_div += "<div id="+result[j].Folder+"></div>";
+           }
+        }
+
+        $(".MenuDivs").html(menu_div);
+        /* Create dynamic divs*/
+
+        
+        var folder_path = "components/";
+        for (var i = 0; i < result.length; i++) {
+         if (result[i].IsQuickAction == false) {
+           //   Modal popup onlu for Roles and rights list
+          //  if (result[i].Menus === "Roles And Rights") {
+          //    li += "<li onClick='roleModal()'><i> <img src='components/common/images/" + result[i].Folder + ".png' width='20px' height='20px' /></i><div class='Synergy-menu-class'><span id='nav-title'>" + result[i].Menus + "</span></div></li>";
+          //    $("#" + result[i].Folder).load(folder_path + result[i].Folder + '/');
+          //  } else {
+             //console.log(result[i].Icon);
+            var notify_count = "";
+            if(result[i].notificationCount > 0) {
+               notify_count = "<span id='nav-notification' class='nav-notification' style='color:"+result[i].notificationColor+"'>" + result[i].notificationCount + "</span>";
+            }
+            if(result[i].Icon === null){
+             li += "<li class='dynamicMenu' menu_id='"+result[i].Folder+"'><i> <img src='components/common/images/" + result[i].Folder + ".png' width='20px' height='20px' /></i><div class='Synergy-menu-class'><span id='nav-title'>" + result[i].Menus + "</span>"+notify_count+"</div></li>";
+            } else {
+               li += "<li class='dynamicMenu' menu_id='"+result[i].Folder+"'><i> <img src='" + result[i].Icon + "' width='20px' height='20px' /></i><div class='Synergy-menu-class'><span id='nav-title'>" + result[i].Menus + "</span>"+notify_count+"</div></li>";   
+            }
+            if(i < 1){
+              $("#" + result[i].Folder).load(folder_path + result[i].Folder + '/');
+            }
+          //  }
+         }
+         
+        }
+
+        /*li += "<li class='dynamicMenu' menu_id='huddle'><i> <img src='components/common/images/rolesandrights.png' width='20px' height='20px' /></i><div class='Synergy-menu-class'><span id='nav-title'>Huddle</span></div></li>";*/ 
+
+        li += "</span>"
+
+     }
+
+     
+     $(".userMenu").html(li);
+
+     // Dynamic menu generation //
+
+    $("#button-hide-menuOut").hide(); 
+    
+    $('.dynamicMenu').click(function(){       
+        IdAttr = $(this).attr('menu_id');
+        Pace.restart();
+        Pace.trigger('update', this.progress);
+        if($("#" + IdAttr).children().length == 0 ){
+         $("#" + IdAttr).load("Components/" + IdAttr + '/', null, function () {
+            var container = $('.newdivs')
+            var scroll_container = $('.newsFeeds .simplebar-content')
+            if($("#"+IdAttr).position().top == 0 || $("#"+IdAttr).html() == ""){
+               //console.log('on top')
+               return
+            }
+            // $(this).hide().prependTo($('.main_nav_item')).slideToggle();
+
+            scroll_container.animate({
+               scrollTop: 0
+            }, 1000);
+            $("#"+IdAttr).hide().prependTo(container).slideToggle();
+            ckInstanceCreator();
+        });  
+        }
+        else{
+         var container = $('.newdivs')
+            var scroll_container = $('.newsFeeds .simplebar-content')
+            if($("#"+IdAttr).position().top == 0 || $("#"+IdAttr).html() == ""){
+               //console.log('on top')
+               return
+            }
+            // $(this).hide().prependTo($('.main_nav_item')).slideToggle();
+
+            scroll_container.animate({
+               scrollTop: 0
+            }, 1000);
+            $("#"+IdAttr).hide().prependTo(container).slideToggle();
+            ckInstanceCreator();
+         
+        }             
+    });
+
+    function ckInstanceCreator(){
+      var  elmId =$('.ckeditor').attr("id");
+     //alert(elmId);
+      try {
+        CKEDITOR.instances[elmId].destroy();
+    } catch (e) {
+        //console.log('error', e)
+    }
+    let editor1 = CKEDITOR.replace(elmId, {});
+   }
+  
+    $(document).ready(function(){
+            if ($(document).width() < 1199) {
+                  funcHideMenuIn()
+               }
+            $(window).resize(function () {
+               if ($(document).width() < 1199) {
+                  funcHideMenuIn()
+               }
+               else {
+                  funcHideMenuOut()
+               }
+            });
+         })
+
+         if(window.outerWidth < 991) {
+            $(".dynamicMenu").click(function(){
+  $(".sidenav").addClass("in");
+  $(".main-content").addClass("expand");
+  $("#button-hide-menuIn").hide();
+  $("#button-hide-menuOut").show();
+});
+}
+</script>

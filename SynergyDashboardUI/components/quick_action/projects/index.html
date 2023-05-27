@@ -1,0 +1,117 @@
+
+<div class="row">
+    <div class="col-md-12 actionForm" style="text-align: left;">
+        <form id="addAnActionForm" method="post" role="form">
+            
+            <div class="col-md-12" id="projects-edit">
+                <label>Select Project</label>
+                <div>
+                    <select class="projectsList form-control" id="Project-edit" name="Project"
+                        onchange="select_project_OnChange(this)">
+                        <option value="">Select Project</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-12" id="tasks-edit">
+                <label>Task</label>
+                <div>
+                    <select class="form-control taskList" id="Task-edit" name="Task"
+                        onchange="task_OnChange(this)">
+                        <option value="">Select Task</option>
+                    </select>
+                </div>
+            </div>
+        
+            <div id="detailsDiv-edit">
+                <div id="billableDiv" class="">
+                    <div class="col-md-12" id="ActualHoursDiv">
+                        <label>Actual Hours</label>
+                        <div>
+                            <input class="form-control" id="ActualHours" name="ActualHours"
+                                placeholder="No. Of Hours" type="number"
+                                oninput="validity.valid||(value='');" value="0" />
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="BillableHoursDiv">
+                        <label>Billable hours</label>
+                        <div>
+                            <input class="form-control" id="BillableHours" name="BillableHours"
+                                placeholder="No. Of Hours" type="number"
+                                oninput="validity.valid||(value='');" value="0" />
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-left" id="hours-response" style="color:red">
+
+                    </div>
+                </div>
+
+                <div class="col-md-12" id="commentsDiv">
+                    <label>Comments</label>
+                    <div>
+                        <textarea class="form-control actionComment" cols="10" id="Comments"
+                            name="Comments" placeholder="Comments" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-left" id="sucess-response" style="color:green">
+
+                </div>
+
+                <div class="col-md-12 text-left" id="error-response" style="color:red">
+
+                </div>
+
+                <div class="col-md-12 text-center" id="form-btn">
+                    <br />
+                    <input type="reset" class="btn btn-danger clear-form" value="Clear" />
+                    <input type="button" class="btn btn-success" value="Add" id="btn-SubmitAction"
+                        onclick="return AddPostData();" />
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8 actionChartSidebar hidden">
+        <div class="col-md-6">
+            <p><strong>Project Start:</strong> <span id="project_start_date"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Project End:</strong> <span id="project_end_date"></span></p>
+        </div>
+        <div style="width: 100%;">
+            <h3>Project Progress</h3>
+            <canvas id="chart1" width="400" height="110">
+                <p>Data not available</p>
+            </canvas>
+        </div>
+        <div style="width: 100%;">
+            <h3>My Contribution</h3>
+            <canvas id="chart2" width="400" height="110">
+                <p>Data not available</p>
+            </canvas>
+        </div>
+        <h3>Task Status</h3>
+        <canvas id="chart3" width="400">
+            <p>Data not available</p>
+        </canvas>
+    </div>
+</div>
+<script type="text/javascript">
+
+function include(filename, onload) {
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.src = filename;
+    script.type = 'text/javascript';
+    head.appendChild(script);
+}
+
+include('components/quick_action/projects/js/project.js');
+
+</script>
+
+
+
+
+

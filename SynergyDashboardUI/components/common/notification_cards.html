@@ -1,0 +1,372 @@
+<link href="css\bootstrap.rest.css" rel="stylesheet" />
+<script type="text/javascript" src="components/common/js/notification_card.js"></script>
+
+
+<style>
+    li {
+        cursor: pointer;
+    }
+
+    #divSwipeLogs .dx-list .dx-empty-message, .dx-list-item {
+        border: none;
+    }
+
+    #divSwipeLogs .dx-list .dx-empty-message, .dx-list-item-content {
+        padding: 5px;
+    }
+
+    .swipe-heading {
+        color: #333;
+        background-color: #f5f5f5;
+        border-color: #ddd;
+        padding: 10px 15px;
+        text-align: center;
+    }
+
+    .dx-switch.dx-state-hover .dx-switch-container {
+        background-color: #f5f5f5;
+        border-color: #337ab7;
+    }
+
+    .swipe-scroll {
+        transform: translate3d(0px, 0px, 0px);
+        visibility: visible;
+        height: 10px;
+    }
+
+    .ledger_reportGrid{
+		overflow: scroll !important;
+	}
+    #divSwipeLogs .dx-scrollable-wrapper, .dx-scrollable-container {
+        min-height: auto;
+        max-height: 180px;
+    }
+   
+.SwipeCircleGreen {
+    margin-right: 5px;
+    color: #5cb85c;
+    background: #d5f0c9;
+}
+.SwipeCircleRed {
+    margin-right: 5px;
+    color: #dd2c36;
+    background: #f7cfcf;
+}
+#ledger_reportGrid .dx-freespace-row {  
+   height: 0px !important;  
+} 
+</style>
+<div class="notification-scroll">
+
+    <div class="card-detail">
+        <div class="form-group notification-cards billabilityDiv">
+            <h4 style="color:darkslateblue">
+                Billability <span style="font-size: 13px"></span>
+            </h4>
+            <hr />
+            <div class="priority-lists">
+                <div class="panel-group" id="accordion">
+                    <div class="ns-panel panel panel-default">
+                        <div class="ns-panel-heading" data-toggle="collapse" data-parent="#accordion" data-target="#forToday" aria-expanded="true">
+                            <h5 class="panel-title accordion-toggle">
+                                <b>For Today</b>
+                            </h5>
+                        </div>
+                        <div id="forToday" class="panel-collapse collapse in" aria-expanded="true">
+                            <div class="ns-panel-body">
+                                <p>Hours Logged : <span id="LoggedHoursToday" class="label label-primary pull-right"  style="font-size: 12px;">0</span></p>
+                                <p>Billable Hours Logged : <span id="BillableHoursToday" class="label label-primary pull-right"  style="font-size: 12px;">0</span></p>
+                                <div class="swipe-heading">Swipe Logs</div>
+                                
+                                <div>
+                                    <div id="divSwipeLogs"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ns-panel panel panel-default">
+                        <div class="ns-panel-heading collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#forMonth">
+                            <h5 class="panel-title accordion-toggle">
+                                <b>For Month</b>
+                            </h5>
+                        </div>
+                        <div id="forMonth" class="panel-collapse collapse">
+                            <div class="ns-panel-body">
+                                <p>Hours Logged : <span id="LoggedHoursMonth" style="font-size: 12px;" class="label label-primary pull-right">0</span></p>
+                                <p>Billable Hours Logged : <span id="BillableHoursMonth" class="label label-primary pull-right" style="font-size: 12px;">0</span></p>
+                                <p>Approved Hours : <span id="ApprovedHoursMonth" class="label label-primary pull-right"  style="font-size: 12px;">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ns-panel panel panel-default">
+                        <div class="ns-panel-heading collapsed" data-toggle="collapse" data-parent="#accordion" data-target="#forYear">
+                            <h5 class="panel-title accordion-toggle">
+                                <b>For Year</b>
+                            </h5>
+
+                        </div>
+                        <div id="forYear" class="panel-collapse collapse">
+                            <div class="ns-panel-body">
+                                <p>Hours Logged : <span id="LoggedHoursYear" class="label label-primary pull-right"  style="font-size: 12px;">0</span></p>
+                                <p>Billable Hours Logged : <span id="BillableHoursYear" class="label label-primary pull-right"  style="font-size: 12px;">0</span></p>
+                                <p>Approved Hours : <span id="ApprovedHoursYear" class="label label-primary pull-right"  style="font-size: 12px;">0</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ledgerPopup" ></div>  
+
+    <div class="card-detail">
+        <div class="form-group notification-cards billabilityDiv">
+            <h4 style="color:darkslategrey">Leave Balance</h4>
+            <hr />
+            <p>Casual Leave: <span id="lbcasualleave" class="label pull-right"  style="font-size: 12px;">0</span></p>
+            <p>Earned Leave:  <span id="lbearnedleave" class="label pull-right"  style="font-size: 12px;">0</span></p>
+            <p>Compensation:  <span id="lbcompensation" class="label pull-right"  style="font-size: 12px;">0</span></p>
+            <input type="button" class="btn btn-sm btn-primary" style="margin-top: 15px;" id="btnShowLedger" value="Ledger"/>
+            <!--<hr />
+            <div style="color:#1cb153;" class="notify_swipe">
+                SWIPE &nbsp; <div id="manual-swipe" style="float:right;"></div>
+            </div>-->
+        </div>
+    </div>
+    <div class="card-detail">
+        <div class="form-group notification-cards billabilityDiv">
+            <h4 style="color:darkred">Announcements</h4>
+            <hr />
+            <div id="announcementCard">
+                <marquee direction="up" scrollamount="1" onmouseover="this.stop();" onmouseout="this.start();">
+                    <ul id="announcementCardvalue">
+                    </ul>
+                </marquee>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model popup -->
+<div class="modal fade" id="showcarddatadetails" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal" id="CloseButton">
+                    &times;
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title text-left">Announcement Details - <span id="subjectdata"></span></h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div id="announcementcarddata" style="display:none;"> </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                </div>
+            </div>
+        </div>
+        <span class="ApiResponse"></span>
+    </div>
+</div>
+<!-- end -->
+<ul id="employees"></ul>
+	<div id="popup"></div>
+
+    <!-- Ledger popup -->
+	<div class="modal fade" id="showledgerdetails1" role="dialog">
+		<div class="modal-dialog modealExpand">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close modal_close" data-dismiss="modal" id="CloseButton">
+						&times;
+					</button>
+					<h2 class="modal-title text-left">Ledger Details <span id="subjectdata"></span></h2>
+				</div>
+				<div class="modal-body" data-simplebar>
+
+					<div class="card-detail">
+						<span class="card-detail-title"><b>Ledger Details</b></span>
+						<span class="pull-right">
+							<button type="submit" class="btn btn-primary btn-xs pull-right" onclick="ledger_getReportData()">
+								<i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+							</button>
+						</span>
+						<hr />
+						<div id="ledger_reportGrid"></div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<div>
+						<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end -->
+
+	<script type="text/javascript">
+	$("#ledgerPopup").dxPopup({  
+			showTitle: true,  
+            height:640,
+		title: 'Ledger Details',  
+		contentTemplate: function (contentElement) { 
+			contentElement.append("<div id='ledger_reportGrid' style='height:480px !important;'>");  
+			ledger_getReportData();		
+		}  
+	});  
+
+	$("#btnShowLedger").dxButton({  
+		text: 'Ledger',  
+		onClick: function () {  
+			$("#ledgerPopup").dxPopup("instance").show();  
+		}  
+	});  
+
+	function openLedger(){
+		ledger_getReportData();
+	}
+		 
+function ledger_getReportData() {
+	var empId = localStorage.getItem("EmployeeID");
+//	var endDatae =new Date().toLocaleDateString();
+    var date = new Date();
+    var endDatae = moment(date).format('MM/DD/YYYY');
+    
+	var startDate = "10/10/2020";
+		var leaveledgerData = callgetlist('GetLeaveLedgerDetails', '{"EmployeeId":"' + empId + '","EndDate":"'+ endDatae +'"}');
+        debugger;
+		// var options = getDevExtremeGridJson();
+        // options.dataSource = leaveledgerData;
+        var dataledger_reportGrid = $("#ledger_reportGrid")
+        .dxDataGrid({
+            filterRow: {
+                visible: true,
+                applyFilter: "auto",
+            },
+            dataSource: leaveledgerData,
+            export: {
+                enabled: true,
+                allowExportSelectedData: true,
+            },
+            searchPanel: {
+                visible: true,
+                width: 240,
+                placeholder: "Search...",
+            },
+            headerFilter: {
+                visible: true,
+            },
+            grouping: {
+                autoExpandAll: true,
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10, 20],
+                showInfo: true,
+            },
+            paging: {
+                pageSize: 10,
+            },
+            groupPanel: {
+                visible: true,
+            },
+            sorting: {
+                mode: "multiple",
+            },
+            selection: {
+                mode: "multiple",
+            },
+            summary: {
+                totalItems: [
+                    {
+                        column: "sno",
+                        summaryType: "count",
+                    },
+                ],
+                groupItems: [
+                    {
+                        column: "sno",
+                        summaryType: "count",
+                    },
+                ],
+            },
+            editing: {
+                mode: "popup",
+                allowAdding: false,
+                allowUpdating: false,
+                useIcons: true,
+            },
+            columnChooser: {
+                enabled: true,
+            },
+            rowAlternationEnabled: true,
+            filterPanel: { visible: true },
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            showBorders: true,
+            columns: [
+                { caption: "Date", dataField: "DATE", dataType: "date", format: 'dd-MM-yyyy' },
+		{ caption: "Details", dataField: "Description" },
+		{
+            caption: "Compensation (In Hours)",
+            columns: [
+            {
+                caption: "Credit",
+                dataField: "CPCredit"
+            },
+            {
+                caption: "Debit",
+                dataField: "CPDebit"
+            },
+            {
+                caption: "Balance",
+                dataField: "CPBalance"
+            }]
+        },
+		{
+            caption: "CL (In Days)",
+			columns: [
+            {
+                caption: "Credit",
+                dataField: "CLCredit"
+            }, {
+                caption: "Debit",
+                dataField: "CLDebit"
+            }, {
+                caption: "Balance",
+                dataField: "CLBalance"
+            },]
+        },
+		{
+            caption: "EL (In Days)",
+			columns: [
+            {
+                caption: "Credit",
+                dataField: "ELCredit"
+            },
+            {
+                caption: "Debit",
+                dataField: "ELDebit"
+            },{
+                caption: "Balance",
+                dataField: "ELBalance"
+            }]
+        }
+                
+            ],
+        })
+        .dxDataGrid("instance");
+	};
+	</script>

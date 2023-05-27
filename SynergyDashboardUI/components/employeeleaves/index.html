@@ -1,0 +1,194 @@
+<div class="card-detail">
+    <!-- Change the chart title here -->
+    <span class="card-detail-title"><b>Employee Leaves</b> </span>
+    <hr />
+    <!-- change the chart card id here -->
+    <div class="row">
+        <!-- <div class="form-group">
+            <div class="col-md-4">
+                 
+                <div id="chart_A1_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                     
+                    <div id="chart_A1" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                 
+                <div id="chart_A2_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                     
+                    <div id="chart_A2" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                 
+                <div id="chart_A3_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                     
+                    <div id="chart_A3" class=""></div>
+                </div>
+            </div>
+        </div> -->
+        <div class="form-group">
+            <div class="col-md-12">
+                
+                <div id="chart_B1_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    
+                    <div id="chart_B1" class=""></div>
+                </div>
+            </div>
+            <!-- <div class="col-md-4">
+                
+                <div id="chart_B2_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    
+                    <div id="chart_B2" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                
+                <div id="chart_B3_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    
+                    <div id="chart_B3" class=""></div>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- <div class="form-group">
+            <div class="col-md-4">
+                  
+                <div id="chart_C1_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                     
+                    <div id="chart_C1" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                
+                <div id="chart_C2_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    
+                    <div id="chart_C2" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="chart_C3_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <div id="chart_C3" class=""></div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<style>
+    .chartBox {
+        border: solid 1px;
+        border-color: bisque;
+    }
+</style>
+
+<script>
+    
+    $(document).ready(function () {
+        loadCharts();
+    });
+
+    function loadCharts() {
+        loadChartB1();
+    }
+
+    function loadChartB1() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+          
+        //   GetUsefullinksList = callgetlist('GetEmployeeLeaves', '{"IsActive":"True"}');
+        //   bindAnnouncementDataListGrid();
+
+        var chartB1DS = [
+            {
+                region: "Casual leave",
+                val: 10,
+            },
+            {
+                region: "Leaves applied",
+                val: 5,
+            },
+            {
+                region: "Earned Leaves",
+                val: 50,
+            },
+            {
+                region: "Leaves Approved",
+                val: 1,
+            },
+            {
+                region: "Leaves Rejected",
+                val: 4,
+            },
+            // {
+            //     region: "Oceania",
+            //     val: 35104756,
+            // },
+        ];
+        $("#chart_B1").dxPieChart({
+            type: "doughnut",
+            size: {
+                width: 1000,
+                height: 400,
+            },
+            palette: "Soft Pastel",
+            dataSource: chartB1DS,
+            title: "Leave Details",
+            tooltip: {
+                enabled: true,
+                format: "Days",
+                customizeTooltip: function (arg) {
+                    return {
+                        text: arg.valueText + " - " + (arg.percent * 100).toFixed(2) + "%",
+                    };
+                },
+            },
+            legend: {
+                horizontalAlignment: "right",
+                verticalAlignment: "top",
+                margin: 0,
+            },
+            export: {
+                enabled: true,
+            },
+            series: [
+                {
+                    argumentField: "region",
+                    label: {
+                        visible: true,
+                        // format: "days",
+                        connector: {
+                            visible: true,
+                        },
+                    },
+                },
+            ],
+        });
+    }
+    
+</script>

@@ -1,0 +1,34 @@
+<link href="components/rrmhrreports/css/style.css" rel="stylesheet" />
+<script src='components/rrmhrreports/js/rrmHrReportsGrid.js'></script>
+<div class="card-detail">
+  <span><i><img src="components/rrmhrreports/images/interviewicon.png" width="40px" height="40px" /></i></span>
+  <span class="card-detail-title"><b>RRM HR Reports</b></span>
+  <hr />
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <div id="rrm_reports_SelectBox"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <label>From Date</label>
+      <div id="rrm_reports_fromDate"></div>
+    </div>
+    <div class="col-md-3">
+      <label>To Date</label>
+      <div id="rrm_reports_toDate"></div>
+    </div>
+    <div class="col-md-4">
+      <label class="rrmlabel">&nbsp;</label>
+      <button type="button" class="btn btn-primary btn-sm" id="rrmHrReportsFilter" onclick="getRRMHRReportsFilter();">
+        <i class="fa fa-search" aria-hidden="true"></i>&nbsp; Filter Reports
+    </button>
+    </div>
+  </div>
+  <div>
+    <br>
+    <div id="sdgd-rrmHrReportsGrid"></div>
+  </div>
+</div>

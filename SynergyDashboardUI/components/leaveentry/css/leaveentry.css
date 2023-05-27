@@ -1,0 +1,176 @@
+.input-group {
+    width: 100%;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.total-leave-info-container{
+    display: flex;
+}
+.total-leave-info{
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 15px;
+    font-weight: bold;
+}
+.total-leave-content{
+    padding: 10px 0px;
+}
+.total-leave-content h4{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.attendance-info-container{
+	display: flex;
+}
+
+.attendance-info-col{
+	border:1px solid #e2e2e2;
+    margin: 10px;
+}
+
+.leave-approve-status{
+    padding: 2px 8px;
+    border-radius:20px;
+}
+#LeaveApproversList .profileImage {
+    width: 26px;
+    height: 26px;
+    margin-right: 0;
+}
+
+/* body {
+    padding: 20px;
+  } */
+  
+  .btn-file {
+      position: relative;
+      overflow: hidden;
+  }
+  .btn-file input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: white;
+      cursor: inherit;
+      display: block;
+  }
+
+  .fileList li{
+    font-size: 14px;    
+    text-align: left;
+    width: auto;
+}
+  
+.profileImage, .backupProfileImage {
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+img {
+    vertical-align: middle;
+    border: 0;
+}
+
+/* Dropdown Checkbox Combo */
+/* .multiselect {
+    width: 200px;
+} */
+
+.selectBox {
+    position: relative;
+}
+
+.selectBox select {
+    width: 100%;
+    font-weight: bold;
+}
+
+.overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.LEpagination {
+    display:inline-block;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+.leaveentry_commentHistoryList{
+    height: 270px;
+    overflow-y: scroll;
+}
+.commentstring {
+    word-wrap: break-word;
+}
+.dateborder {
+    border-bottom: solid 2px;
+}
+
+#leaveentry-dropzone .dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    font-family: Roboto, "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.4rem;
+    background: #F3F4F5;
+    color: #646C7F;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 10px;
+}
+
+#leaveentry-dropzone .dropzone .dz-message {
+   font-weight: 400;
+   /* padding: 30px;
+   text-align: center; */
+}
+
+#leaveentry-dropzone .dropzone .dz-preview.dz-image-preview {
+   background-color: transparent;
+}
+
+#leaveentry-dropzone .dropzone .dz-preview .dz-error-message {
+   color: white;
+}
+
+#leaveentry-dropzone .dropzone .dz-message .note {
+   font-size: 0.8em;
+   font-weight: 200;
+   display: block;
+   margin-top: 1.4rem;
+}
+
+#leaveentry-dropzone .dz-progress{
+    display: none;
+}
+.attachment{
+    display: flex;
+}
+.attachment a{
+    margin-right: 1%;
+}
+.receiver_file button {
+    background-color: #fff !important;
+}
+.card-detail .AddLeaveButton {
+    padding: 1px 5px;
+}

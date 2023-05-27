@@ -1,0 +1,167 @@
+<style>
+.dx-calendar,.dx-timeview-clock { display: none !important; }
+</style>
+
+<!-- Template Report Grid Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>Holiday Incentive Report</b></span>
+    <!-- the below button for refresh Data -->
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="holidayincentivereportedit_getReportData()">
+            <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Year:</label>
+                <div class="dx-field-value" style="width: 100%">
+                    <div id="holidayincentiveEditYear"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>Month:</label>
+                <div class="dx-field-value" style="width: 100%">
+                    <div id="holidayincentiveEditMonth"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-md" style="margin-top: 21px;" onclick="holidayincentivereportedit_getReportData();">
+                    <i class="glyphicon glyphicon-filter"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="holidayincentivereportedit_reportGrid"></div>
+</div>
+
+<!-- internal script -->
+<script>
+
+//Determine the Current Year.
+var currentYear = (new Date()).getFullYear();
+var previousYear = currentYear-1;
+var last10Years=[];
+var monthName = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+var months = [];
+var d = new Date();
+
+for (i=0; i<= d.getMonth(); i++) {
+            months.push(monthName[i]);
+    }
+$('#holidayincentiveEditMonth').dxSelectBox({
+    items: months,
+    // value: monthName[d.getMonth()-1],
+    // value: monthName[d.getMonth()],
+    value: monthName[d.getMonth()],
+  }).dxSelectBox('instance');
+ //Loop and add the Year values to DropDownList.
+ for (var i = currentYear; i >= 2020 ; i--) {
+            last10Years.push(i);
+        } 
+//Loop and add the Year values to DropDownList.
+     $('#holidayincentiveEditYear').dxSelectBox({
+        searchEnabled: true,
+    items: last10Years,
+    value: currentYear,
+    onValueChanged(data) {
+        loadMonth(data.value);
+    },
+  });
+
+  function loadMonth(year){
+    months = [];
+    for (i=0; i<= (year ==currentYear ? d.getMonth(): 11); i++) {
+            months.push(monthName[i]);
+    }
+    $('#holidayincentiveEditMonth').dxSelectBox('instance').option("dataSource",months);
+  }
+
+
+    // TODO : CHANGE ALL PREFIX
+    // 1. Change Your card name in span line number 3
+    // 2. Update your procedure name in line number 31
+    // 3. Find and replace prefix_ to your card prefix, eg: holiday master Card = hm_
+    // ---- Line Numbers 
+    // -------- 6 - onclick function name prefix, 
+    // -------- 11 - div id prefix, 
+    // -------- 30 - const name prefix, 
+    // -------- 32 - function name prefix, 
+    // -------- 33 - parameter name prefix, 
+    // -------- 47 - storageKey prefix, 
+    // -------- 49 - element id prefix,
+    // -------- 53 - function name prefix in function call.
+
+    const holidayincentivereportedit_ProcedureName = 'GetHolidayIncentiveReport'; //Change Prefix and Procedure Name Here
+    function getMonth(monthStr){
+    return new Date(monthStr+'-1-01').getMonth()+1
+}
+    function holidayincentivereportedit_getReportData() {
+        var selectMonth= getMonth($("#holidayincentiveEditMonth").dxSelectBox('instance').option('value'));
+        var filter_file_val = JSON.stringify({
+        "Token":localStorage.getItem('securityToken'),
+        "Month":selectMonth,
+        "Year":$("#holidayincentiveEditYear").dxSelectBox('instance').option('value')
+     });
+        const dataForReport = callgetlist(holidayincentivereportedit_ProcedureName, filter_file_val); //Provide additional Parameters if any
+       
+        if(dataForReport !== null && dataForReport.length > 0){
+            let columns = [];
+            columns = [
+            {caption:"SNo", dataField:"Sno"},
+            {caption:"Employee Name", dataField:"EmployeeName"},
+            {caption:"Date", dataField:"Date"},
+            {caption:"Hours Logged", dataField:"LoggedHours"},
+            {caption:"Approved Hours", dataField:"ApprovedHours"},
+            {caption:"Billable Hours", dataField:"BillableHours"},
+            {caption:"Backup Lead", dataField:"BackupLead"},
+            {caption:"Project In Charge", dataField:"ProjectIncharge"},
+            /*{caption:"Action", dataField: "",
+               cellTemplate: function (container, options) { 
+                   var id=options.data.Id;
+                   var proName=options.data.ProjectName;
+                   var reportFilename=options.data.ReportFileName;
+                var domActions = "";  
+                domActions += `<button onclick='OpenHolidayincentiveEdit("${id}","${proName}","${reportFilename}")' class='btn btn-xs btn-primary view-ts-btn' ><i class='fas fa-calendar-o' ></i></button>`;
+                    $("<div class='text-center'>").append($(domActions)).appendTo(container);                             
+                //   domActions += "<button class='btn btn-xs btn-primary view-ts-btn'><i title='View' onclick='OpenHolidayincentive('"+options.data.Id+"')'  class='fa fa-calendar-o'></i></button>";
+                //   $("<div class='text-center'>").append($(domActions)).appendTo(container);
+          },
+          allowEditing: false
+      } */          
+        ]
+            let options = getDevExtremeGridJson();
+            options.dataSource = dataForReport;
+            options.columns = columns;
+            options.stateStoring = {
+                enabled: true,
+                type: "localStorage",
+                storageKey: "holidayincentivereport_reportGridState" 
+            };
+            $("#holidayincentivereportedit_reportGrid").dxDataGrid(options).dxDataGrid("instance"); 
+        }
+        else
+        {
+            $("#holidayincentivereportedit_reportGrid").dxDataGrid("instance").option('dataSource', []);
+        }
+    }
+
+    holidayincentivereportedit_getReportData();
+    loadMonth(currentYear);
+</script>
+
+<div id="holidayincentiveReportPopupModelBox"></div>
+<script type="text/javascript" src="components/holidayincentivereportedit/js/holidayincentivereport.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $("#holidayincentiveReportPopupModelBox").load("components/holidayincentivereportedit/HolidayincentiveReport.html");
+  });
+
+</script>

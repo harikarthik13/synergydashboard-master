@@ -1,0 +1,1404 @@
+<div class="modal fade" id="RRMEntryPointModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+
+             <button class="expand modalExpanding" style="padding-left: 6px;"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <button class="btn btn-info" id="btnCloneRRM" style="padding: 4px 8px;float : right; background-color: rgb(93, 93, 93); border: none;" onclick="cloneRRMFromEdit()"><i class='fas fa-clone'></i> Clone</button>
+            
+            <h2 class="modal-title" id="rrmModaltitle"><span id="rrmmodelpagetitle"></span>&nbsp; <span><label id="OwnerrrmType">&nbsp; </label></span>&nbsp;<span>
+                <label id="rrmStatus" class="label label-primary m-l-xs"></label></span>&nbsp;<span><label id="OwnerrrmHoldStatus">&nbsp; </label></span>
+                &nbsp;<span><label id="RRMEntryPointTypeDetails">&nbsp; </label></span></h2>
+       </div>
+  
+        <div class="modal-body" id="RRMPEntryPointModalBody" data-simplebar>
+          <div role="tabpanel">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist" id="rrmtab">
+              <li role="presentation" class="active  disabled" id="rrm_requirementTab" data-tab="rrm_RequirementDetails">
+                <a href="#rrm_RequirementDetails" aria-controls="rrm_RequirementDetails" role="tab">Requirement Details</a>
+              </li>
+              <li role="presentation" class="disabled" id="rrm_skillsTab">
+                <a href="#rrm_SkillDetails" aria-controls="rrm_SkillDetails" role="tab">Skills Mapping</a>
+              </li>
+              <li role="presentation" class="disabled" id="rrm_skillsplanaTab">
+                <a href="#rrm_SkillsPlanADetails" aria-controls="rrm_SkillsPlanADetails" role="tab">Plan A</a>
+              </li>
+              <li role="presentation" class="disabled" id="rrm_skillsplanbTab">
+                <a href="#rrm_SkillsPlanBDetails" aria-controls="rrm_SkillsPlanBDetails" role="tab">Plan B</a>
+              </li>
+              <li role="presentation" class="disabled" id="rrm_commentsTab">
+                <a href="#rrm_CommentsDetails" aria-controls="rrm_CommentsDetails" role="tab">Comments</a>
+              </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content" id="rrmDetails">
+                <div role="tabpanel" class="tab-pane active" id="rrm_RequirementDetails">
+                    <div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Requirement Name <span style="color: red">*</span></label>
+                                <div id="sdtxt_rrm_requirementname"></div>
+                                <span class="error_message" id="rrm_requirementnameError"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Required For <span style="color: red">*</span></label>
+                                <div id="sdtxt_rrm_requiredfor"></div>
+                                <span class="error_message" id="rrm_requiredforError"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hidedivRFP">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>RFP ID</label>
+                                    <input type="text" class="form-control" name="rrm_rfpid" id="rrm_rfpid" placeholder="RFP ID" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>BDE</label>
+                                    <select class="form-control" name="rrm_entrybde" id="rrm_entrybde" placeholder="BDE"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hidedivResigination">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>EMP ID</label>
+                                    <input type="text" class="form-control" name="rrm_empid" id="rrm_empid" placeholder="EMP ID" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Replacement For</label>
+                                    <select class="form-control" name="rrm_replacement" id="rrm_replacement"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Number of positions <!--<span style="color: red">*</span>--></label>
+                                <div id="sdnmb_rrm_numberofpositions"></div>
+                                <span class="error_message" id="rrm_numberofpositionsError"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Priority <span style="color: red">*</span></label>
+                                <div id="sdcmb_rrm_priority"></div>
+                                <span class="error_message" id="rrm_priorityError"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Department <!--<span style="color: red">*</span>--></label>
+                                <div id="sdcmb_rrm_department"></div>
+                                <span class="error_message" id="rrm_departmentError"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Designation <span style="color: red">*</span></label>
+                                <div id="sdcmb_rrm_designation"></div>
+                                <span class="error_message" id="rrm_designationError"></span>
+                            </div>
+                        </div>                        
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Communication <!--<span style="color: red">*</span>--></label>
+                                <div id="sdcmb_rrm_communication"></div>
+                                <span class="error_message" id="rrm_communicationError"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Location</label>
+                                <div id="sdtxt_rrm_location"></div>
+                                <span class="error_message" id="rrm_locationforError"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Experience required (In Yrs)<!--<span style="color: red">*</span>--></label>
+                                <div id="sdnmb_rrm_experiencerequired"></div>
+                                <span class="error_message" id="rrm_experiencerequiredError"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>Interviewers <span style="color: red">*</span></label>
+                                <div id="sdtag_rrm_intervierwers"></div>  
+                                <span class="error_message" id="rrm_interviewersError"></span>                              
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Requested Date</label>
+                                <div id="sd_date_rrm_requestedDate"></div>
+                                <span class="error_message" id="rrm_requesteddateError"></span>
+                            </div>
+                            <div class="form-group">
+                                <div id="sdchk_rrm_leadApproval"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Importance</label>
+                            </div>
+                            <div class="form-group col-md-6" id="rrm_importance">
+                                <div id="sdchk_rrm_losingRevenue"></div>
+                            </div>
+                            <div class="form-group col-md-6" id="rrm_importance">                                
+                                <div id="sdchk_rrm_fromVIP"></div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label id="lblLeadName"></label>
+                                <div id="sdtxt_rrm_requirementlead"></div>
+                                <span class="error_message" id="rrm_requirementleadError"></span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="rrm_SkillDetails">
+                    <div>
+                    <div class="alert alert-info">
+                        <strong>Info!</strong> Use either one of the skills to add, update and delete
+                      </div>
+
+                    <div class="row">    
+                        <div class="col-md-12">
+                            <label>Skills : </label>
+                            <select class="form-control" id="rrm_profileEntry_skills" multiple="multiple"
+                                style="width: 100%;" >
+
+                            </select>
+                        </div>           
+                            <div class="col-md-12">
+                                <div id="sdgd-rrmOwnerSkills"></div>
+                                <br>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane" id="rrm_SkillsPlanADetails">
+                    <div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Skill details(Plan A)<span style="color: red"> *</span></label>
+                            <div id="sd_txtEditor_skillDetailsPlanA"></div>
+                            <span class="error_message" id="rrm_skilldetailsplanaError" style="display: block;"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>To On board <span style="color: red">*</span></label>
+                            <div id="sd_date_rrm_tobeonboardplana"></div>
+                            <span class="error_message" id="rrm_tobeonboardplanaError" style="display: block;"></span>
+                        </div>
+                        
+                        <div class="form-group col-md-4" id="divrecruiters">
+                            <label for="recruiters" id="lblrecruiters">Recruiters </label>
+                            <!--<select class="form-control " id="rrm_recruitersplana" multiple="multiple"></select>-->
+                            <div id="sd_tag_recruiter_owner_rrm"></div>
+                            <span class="error_message" id="rrm_recruitersplanaError"></span>
+                        </div>
+                        <div class="form-group col-md-4" id="hidereminder">
+                            <label id="hidebtn">&nbsp;</label>
+                            <br/>
+                            <div id="sdbtn_reminderA"></div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="rrm_SkillsPlanBDetails">
+                    <div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Skill details(Plan B)<span style="color: red"> *</span></label>
+                            <div id="sd_txtEditor_skillDetailsPlanB"></div>
+                            <span class="error_message" id="rrm_skilldetailsplanbError" style="display: block;"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>To On board<span style="color: red">*</span></label>
+                            <div id="sd_date_rrm_tobeonboardplanb"></div>
+                            <span class="error_message" id="rrm_tobeonboardplanbError" style="display: block;"></span>
+                        </div>
+                        <div class="form-group col-md-4" id="planbrecruiters">
+                            <label for="recruiters">Recruiters </label>
+                            <!-- <select class="form-control select_recruiter_owner" id="rrm_recruitersplanb" multiple="multiple" style="width:100%;"></select> -->
+                            <div id="sd_tag_recruitersplanb_rrm"></div>
+                            <span class="error_message" id="rrm_recruitersplanbError"></span>
+                        </div>
+                        <div class="form-group col-md-2" id="hidereminderplanB">
+                            <label id="hidebtn">&nbsp;</label>
+                            <br/>
+                            <div id="sdbtn_reminderB"></div>
+                        </div>
+
+                    </div>
+                    </div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane" id="rrm_CommentsDetails">
+                    <div>
+                    <div class="row" id="rrm_OnHoldDiv">
+                        <div class="form-group col-md-6">
+                            <label>On Hold by BDE &nbsp</label>
+                            <div id="switchClient"></div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>On Hold by Owner &nbsp</label>
+                            <div id="switchLead"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <div id="rrm_manage_plan_comments_documents" class="rrm_comments_history">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Comments </label>
+                            <div id="sd_popover_RRMmentions"></div>
+                            <div id="sd_txtEditor_RRMComments"></div>
+                            <span class="error_message" id="rrm_commentsError"></span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <span class="ApiResponse"></span>
+        </div>
+        <div class="modal-footer">
+          <div>
+            <a class="btn btn-primary btnPrevious hidden-btn" onclick="toggleTabRRMEntryPrevious()">Previous</a>
+            <a class="btn btn-primary btnNext" onclick="toggleTabRRMEntry()">Next</a>
+            <button type="button" class="btn btn-success saveFamilyBtn hidden-btn" onclick="saveComments()">Save & Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RRMEntryPointTrackerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+             <h2 class="modal-title"><span id="lblrrmTrackerTitile">RRM Candidates Tracker</span><span id="lblrrmTrackerRRMNo"></span>&nbsp;</h2>
+       </div>
+  
+        <div class="modal-body" id="RRMEntryPointTrackerModalBody" data-simplebar>
+            <!-- <div class="row" style="display: flex;">
+                <div class="cardDetailsTracker">
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>CANDIATES</b></h5>
+                            <h2 id="cardCandidateRRM">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>OFFERED</b></h5>
+                            <h2 id="cardOfferedRRM">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>IN-PROGRESS</b></h5>
+                            <h2 id="cardPendingRRM">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>RRM ONBOARD</b></h5>
+                            <h2 id="cardOnBoardRRM">NA</h2> 
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <div class="row" style="display: flex; margin-top:1%;">
+                <div class="cardDetailsTracker">
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>L1-Interviews Scheduled</b></h5>
+                            <h2 id="l1InterviewsScheduledRRMCard" >NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>L1-Interviews Conducted</b></h5>
+                            <h2 id="l1InterviewsConductedRRMCard" >NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>L2-Interviews Scheduled</b></h5>
+                            <h2 id="l2InterviewsScheduledRRMCard">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>L2-Interviews Scheduled</b></h5>
+                            <h2 id="l2InterviewsConductedRRMCard">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>Offer Made</b></h5>
+                            <h2 id="offerMadeRRMCard">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>Offer Accepted</b></h5>
+                            <h2 id="offerAcceptedRRMCard">NA</h2> 
+                        </div>
+                    </div>
+                
+                </div>
+               
+            </div>
+           
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="rrmCandidatesTrackerTree" data-simplebar>
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div>
+            <button type="button" class="btn btn-primary" onclick="closeRRMTracker()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RRMCandidateTrackerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+             <h2 class="modal-title"><span id="lblcandidateTrackerTitile">Candidate Tracker</span><span id="lblcandidateTrackerRRMNo"></span>&nbsp;</h2>
+       </div>
+  
+        <div class="modal-body" id="RRMPCandidatetrackerModalBody" data-simplebar>
+          
+          <div class="row">
+            <div class="col-md-12">
+                <label>Graphical View</label>
+                <div id="candidateTimeLineRRM" data-simplebar>
+
+                </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+                <label>Grid View</label>
+                <div id="sdgd-rrmCandidateTracker">
+            
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div>
+            <button type="button" class="btn btn-primary" onclick="closeRRMCandidateTracker()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rrm_common_comments" role="dialog">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding">
+                <i class="fas fa-expand" data-toggle="modal"></i>
+              </button>
+             <h2 class="modal-title"><span id="lblcandidateTrackerTitile">Comments </span><span id="RRMEntryPointCommentsRRMNo"></span>&nbsp;</h2>
+       </div>
+  
+        <div class="modal-body" id="rrm_common_commentsBody" data-simplebar>
+            
+            <ul class="nav nav-tabs" role="tablist" id="rrmtabs">
+                <li role="presentation" class="active disabled" id="rrm_commentsTab">
+                  <a href="#rrm_CommentsDetail" aria-controls="rrm_CommentsDetail" role="tab">Comments</a>
+                </li>
+              </ul>
+
+            <div role="tabpanel" class="tab-pane" id="rrm_CommentsDetail">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div id="rrm_common_manage_plan_comments_documents" class="rrm_comments_history">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label>Comments </label>
+                        <div id="sd_popover_RRMmentions_common"></div>
+                        <div id="sd_txtEditor_RRMComments_common"></div>
+                        <span class="error_message" id="rrm_commentsError_common"></span>
+                    </div>
+                </div>
+            </div>
+          
+        <div class="modal-footer">
+          <div>
+              <button type="button" class="btn btn-success" onclick="saveCommonComments();">Save Comments</button>
+            <button type="button" class="btn btn-primary" onclick="closeRRMCommon();">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<style>
+    .rrm_comments_history {
+        border: solid 1px #D1D1D1;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #E3E3E3;
+        margin-bottom: 10px;
+    }
+
+    .rrm_comments_history .message {
+        height:auto;
+        background-color: inherit;
+        display: inline-block;
+        max-width: 60%;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .rrm_comments_history .text{
+        padding-top: 10px;
+    }
+
+    .rrm_comments_history .name {
+        font-weight: bold;
+    }
+
+    .rrm_comments_history .date {
+        opacity: 0.5;
+    }
+</style>
+
+<style>
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > thead > tr > th {
+        border: none;
+        text-align: left !important;
+    }
+</style>
+<script src='components/rrmentrypoint/js/rrmEntryPointDevExtremeControls.js'></script>
+<script type="text/javascript" id="rrmEntryPointModalScript">
+//var addRRMEntryPointJs;
+$(document).ready(function(){
+    bindDevExtremeControlsForRRMEntryPoint();
+    bindCommonForRRMComments();
+    initializeModalOwner();
+    var localget = localStorage.getItem("UserCheckRes");
+    var jsonData = JSON.parse(localget);
+    Token = jsonData.Data[0].Token;
+    Department = jsonData.Data[0].DepartmentID;
+    BackupLead = jsonData.Data["0"].mentorFirstName + " " + jsonData.Data["0"].mentorLastName;
+    LoggedUser = jsonData.Data["0"].FirstName + " " + jsonData.Data["0"].LastName;
+    BackupLeadId = jsonData.Data["0"].MentorId;
+    EmployeeId = jsonData.Data["0"].EmployeeID;    
+
+    //tab-toggle
+    $('ul#rrmtab li').click(function(e)
+    {   
+        if(addRRMType == "edit"){   
+            //debugger;  
+            var tab_details = $(this).attr("id");
+            var currentTab = $("#"+tab_details + " > a ").attr("aria-controls");  
+                      
+            if (currentTab == "rrm_SkillDetails") {
+                var detailsResult = CheckValidationForRequirementDetailsRRM();  
+                var planAResult = CheckValidationForPlanARRM();
+                var planBResult = CheckValidationForPlanBRRM();
+                var  requirmentLeads = $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('value');
+                detailsResult =true;
+                planAResult =true;
+                planBResult = true;
+
+                if(detailsResult == true && planAResult == true && planBResult == true){
+                    $('ul#rrmtab li').removeClass("active");
+                    $(this).addClass("active");
+                    $("#rrmDetails .tab-pane").removeClass("active");
+                    $("#" + currentTab).addClass("active");
+                    editRRMEntryPointJsOwner.getSkillsDetails(rrmId);
+                    $(".btnPrevious").show();
+                    $(".saveFamilyBtn").hide();
+                    if(LoggedUser == requirmentLeads){
+                        $("a.btnNext").show();
+                        $("#sdchk_rrm_leadApproval").dxCheckBox("instance").option("readOnly",false);
+                    }
+                    else{
+                        $("a.btnNext").hide();
+                        $("#sdchk_rrm_leadApproval").dxCheckBox("instance").option("readOnly",true);
+                    }
+                }
+            }
+            else if (currentTab == "rrm_CommentsDetails") {
+                var detailsResult = CheckValidationForRequirementDetailsRRM(); 
+                var planAResult = CheckValidationForPlanARRM(); 
+                var planBResult = CheckValidationForPlanBRRM();
+                detailsResult =true;
+                planAResult =true;
+                planBResult = true;
+
+                if(detailsResult == true && planAResult == true && planBResult == true){
+                    $('ul#rrmtab li').removeClass("active");
+                    $(this).addClass("active");
+                    $("#rrmDetails .tab-pane").removeClass("active");
+                    $("#" + currentTab).addClass("active"); 
+                    $(".btnPrevious").show();
+                    $(".saveFamilyBtn").show();
+                    if (addRRMType != "add") {
+                        $("#rrm_manage_plan_comments_documents").show();
+                    }
+                    editRRMEntryPointJsOwner.getManageCommentHistory(rrmId);
+                    $("a.btnNext").hide();
+                }
+                
+            }
+            else if (currentTab == "rrm_SkillsPlanADetails") {
+                //debugger;
+                var detailsResult = CheckValidationForRequirementDetailsRRM(); 
+                var planBResult = CheckValidationForPlanBRRM(); 
+                var   requirmentLeads = $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('value');
+                detailsResult =true;
+                planBResult = true;
+                if(detailsResult == true && planBResult == true){
+                    $('ul#rrmtab li').removeClass("active");
+                    $(this).addClass("active");
+                    $("#rrmDetails .tab-pane").removeClass("active");
+                    $("#" + currentTab).addClass("active"); 
+                   // $("#sd_txtEditor_skillDetailsPlanA").dxHtmlEditor('instance').option('value',planAcomments)
+                    var filter_valbtn = JSON.stringify({
+                    "Token": Token,
+                    "ResourceRequirementId": ResourceRequirementId,
+                    "SkillPlans": "PlanA",
+                    "IsActive": "True"
+                }); 
+
+                callGetListAsync('GetResourceRequrimentSkillPlans', filter_valbtn, function (result) {
+                    if (result != null) {
+                        $("#sd_txtEditor_skillDetailsPlanA").dxHtmlEditor('instance').option('value', result[0].SkillPlanInfo);                    
+                    }
+                });
+                    $(".btnPrevious").show();
+                    $(".saveFamilyBtn").hide();
+                    if(LoggedUser == requirmentLeads){
+                        $("a.btnNext").show();
+                    }
+                    else{
+                        $("a.btnNext").hide();
+                    }
+                }
+                
+            }
+            else if (currentTab == "rrm_SkillsPlanBDetails") {
+               // debugger;
+                var detailsResult = CheckValidationForRequirementDetailsRRM();  
+                var planAResult = CheckValidationForPlanARRM();
+                var   requirmentLeads = $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('value');
+                detailsResult =true;
+                planAResult =true;
+
+                if(detailsResult == true && planAResult == true){
+                    $('ul#rrmtab li').removeClass("active");
+                    $(this).addClass("active");
+                    $("#rrmDetails .tab-pane").removeClass("active");
+                    $("#" + currentTab).addClass("active");
+                   // $("#sd_txtEditor_skillDetailsPlanB").dxHtmlEditor('instance').option('value',planBcomments);
+                     var filter_valbtn = JSON.stringify({
+                        "Token": Token,
+                        "ResourceRequirementId": ResourceRequirementId,
+                        "SkillPlans": "PlanB",
+                        "IsActive": "True"
+                    });
+
+                    callGetListAsync('GetResourceRequrimentSkillPlans', filter_valbtn, function (result) {
+                        if (result != null) {
+                            $("#sd_txtEditor_skillDetailsPlanB").dxHtmlEditor('instance').option('value', result[0].SkillPlanInfo);                    
+                        }
+                    });
+
+                    $(".btnPrevious").show();
+                    $(".saveFamilyBtn").hide();
+                    if(LoggedUser == requirmentLeads){
+                        $("a.btnNext").show();
+                    }
+                    else{
+                        $("a.btnNext").hide();
+                    }
+                }
+                
+            }
+            else if (currentTab == "rrm_RequirementDetails")
+            {
+               // debugger;
+                var planAResult = CheckValidationForPlanARRM();
+                var planBResult = CheckValidationForPlanBRRM();
+                var   requirmentLeads = $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('value');
+                planAResult =true;
+                planBResult = true;
+
+                if(planAResult == true && planBResult == true){
+                    $('ul#rrmtab li').removeClass("active");
+                    $(this).addClass("active");
+                    $("#rrmDetails .tab-pane").removeClass("active");
+                    $("#" + currentTab).addClass("active");
+                    $(".btnPrevious").hide();
+                    $(".saveFamilyBtn").hide();
+                    if(LoggedUser == requirmentLeads){
+                        $("a.btnNext").show();
+                    }
+                    else{
+                        $("a.btnNext").hide();
+                    }
+                }
+                
+            }  
+            else{
+                $('.nav-tabs a[href="#rrm_CommentsDetails"]').tab("show");
+                $("#sd_txtEditor_RRMComments").dxHtmlEditor('instance').option('value', "")
+                $(".btnPrevious").show();
+                $(".saveFamilyBtn").show();
+                $("a.btnNext").hide();
+                editRRMEntryPointJsOwner.getManageCommentHistory(rrmId);
+            }            
+        }
+        resetSimpleBarRRMEntryPoint();
+    });
+    bindRecruiters();
+    getEmployeesData();             
+
+    $(function () {
+        $("#html-editor").dxHtmlEditor({
+            mentions: [{
+                dataSource: getEmployeeDataList,
+                searchExpr: "text",
+                displayExpr: "text",
+                valueExpr: "text"
+            }]
+        });
+    });
+})
+
+function CheckValidationForRequirementDetailsRRM(){
+    //debugger;
+    var currentPriority = $("#sdcmb_rrm_priority").dxSelectBox('instance').option('value');
+    var currentCommunication = $("#sdcmb_rrm_communication").dxSelectBox('instance').option('value');
+    var currentExperience = $("#sdnmb_rrm_experiencerequired").dxNumberBox('instance').option('value');
+    var currentInterviewers = $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('value');
+    var interviewerResult = arraysEqual(RRMDetailsForValidations.Interviewers,currentInterviewers);
+    var  requirmentLeads = $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('value');
+    var result = true;
+    if(RRMDetailsForValidations.Priority != currentPriority || RRMDetailsForValidations.Communication != currentCommunication || RRMDetailsForValidations.ExperienceRequired != currentExperience || interviewerResult != true){
+        result = false;
+    }
+    else{
+        result = true;
+    }
+
+    if(result == false){
+        if(LoggedUser != requirmentLeads){
+            result = true;
+        }
+    }
+    return result
+}
+
+function arraysEqual(_arr1, _arr2) {
+    if (
+      !Array.isArray(_arr1)
+      || !Array.isArray(_arr2)
+      || _arr1.length !== _arr2.length
+      ) {
+        return false;
+      }
+    
+    const arr1 = _arr1.concat().sort();
+    const arr2 = _arr2.concat().sort();
+    
+    for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+            return false;
+         }
+    }
+    
+    return true;
+}
+
+function CheckValidationForPlanARRM(){
+    var currentPlanA = $("#sd_txtEditor_skillDetailsPlanA").dxHtmlEditor('instance').option('value');
+    var result = true;
+    if(RRMDetailsForValidations.planAcomments != currentPlanA && currentPlanA != ""){
+        result = false;
+    }
+    else{
+        result = true;
+    }
+    return result
+}
+
+function CheckValidationForPlanBRRM(){
+    var currentPlanB = $("#sd_txtEditor_skillDetailsPlanB").dxHtmlEditor('instance').option('value');
+    var result = true;
+    if(RRMDetailsForValidations.planBcomments != currentPlanB && currentPlanB != ""){
+        result = false;
+    }
+    else{
+        result = true;
+    }
+    return result
+}
+
+function switchClientValueChanged(data){
+    var  currentStatus = data.value;
+    if (currentStatus == false) {
+        $("#switchLead").dxSwitch('instance').option("disabled", false);    
+    }
+    else if (currentStatus == true) {
+        
+        $("#switchLead").dxSwitch('instance').option("disabled", true);
+        if ($("#sd_txtEditor_RRMComments").dxHtmlEditor('instance').option('value') == "") {
+            swal({
+                title: "Info!",
+                text: "You are trying to mark this RRM as RRM on Hold by Client. Comments are required for making RRM as on Hold. Do you want to proceed.",
+                icon: "warning",
+                buttons: {
+                    cancel: true,
+                    confirm: true,
+                },
+                dangerMode: true,
+            })
+        }
+    }
+}   
+
+function switchLeadValueChanged(data){
+    var currentStatus = data.value;
+    if (currentStatus == false) {
+        $("#switchClient").dxSwitch('instance').option("disabled", true);
+    }
+    else if (currentStatus == true)
+    {
+        $("#switchClient").dxSwitch('instance').option("disabled", true);
+        if ($("#sd_txtEditor_RRMComments").dxHtmlEditor('instance').option('value') == "") {
+            swal({
+                title: "Info!",
+                text: "You are trying to mark this RRM as RRM on Hold by Lead. Comments are required for making RRM as on Hold. Do you want to proceed.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+        }
+    }
+}
+
+//Bind Recruiters
+    function bindRecruiters() {
+        var getRecruiterData = [];
+        //var getRecruiterList = callgetlist('GetHRForRRM', '{"IsActive":"True","Token":"' + Token + '"}');
+        callGetListAsync('GetHRForRRM', '{"IsActive":"True","Token":"' + Token + '"}', function (getRecruiterList) {
+            if (getRecruiterList.length > 0) {
+                getRecruiterList.forEach(function (i, index) {
+                    getRecruiterData.push({
+                        'id': i['EmployeeId'],
+                        'text': i['EmployeeName']
+                    });
+                });
+            }
+        })
+            $(".select_recruiter_owner").select2({
+                placeholder: "Select Recruiter",
+                allowClear: true,
+                data: getRecruiterData
+            });
+    }
+
+    function getEmployeesData() {
+        
+        getEmployeeDataList = [];
+        callGetListAsync('GetEmployeeList', '{"IsActive":"True","Token":"' + Token + '"}', function (getEmployees) {
+            if (getEmployees.length > 0) {
+                getEmployees.forEach(function (i, index) {
+                    getEmployeeDataList.push({
+                        text: i['Name'],
+                        team: i['Department'],
+                        icon: i['']
+                    });
+                });
+            }
+        })
+        
+    }
+var Token;
+var Department;
+var BackupLead;
+var BackupLeadId;
+var EmployeeId;
+var LoggedUser;
+var planAcomments;
+var planBcomments;
+var getEmployeeDataList;
+   // var switchstatus;
+//rrm button type
+function loadRRMByType(type){
+  if(type =="add"){
+    initializeAddRRMOwner();
+     
+  }
+  else if(type=="edit"){
+    initializeEditRRM();
+  }
+}
+
+//tab toggle next button
+function toggleTabRRMEntry(){
+  
+    if (addRRMType == "edit") {
+      editRRMEntryPointJsOwner.toggleTabRRMEntry();
+  }
+  else if(addRRMType=="add"){
+      addRRMEntryPointJs.toggleTabRRMEntry();
+  }
+}
+
+//tab toggle previous button
+function toggleTabRRMEntryPrevious(){
+  if(addRRMType=="edit"){
+      editRRMEntryPointJsOwner.toggleTabRRMEntryPrevious();
+  }
+  else if(addRRMType=="add"){
+    addRRMEntryPointJs.toggleTabRRMEntryPrevious();
+  }
+}
+
+//save hr commnets
+function saveComments(){
+  if(addRRMType=="add")
+  {
+    addRRMEntryPointJs.saveComments();
+  }
+  else if(addRRMType == "edit"){
+      editRRMEntryPointJsOwner.saveComments();
+  }
+ 
+    }
+
+//initialize model
+function initializeModalOwner(){
+  $('.error_message').html('');
+  $('.nav-tabs a[href="#rrm_RequirementDetails"]').tab("show");
+  resetSimpleBarRRMEntryPoint();
+  $("a.btnNext").show();
+  $(".saveFamilyBtn").hide();
+  $(".btnPrevious").hide();
+  clearFormDataOwner();
+}
+
+//initialize Add RRM
+ function initializeAddRRMOwner() {
+    $("#rrmStatus").hide();
+    $("#hidedivRFP").hide();
+    $("#hidedivResigination").hide();
+    $("#lblLeadName").text("Requirement lead");
+    $("#rrm_rfpid").attr('readonly', true);
+    $("#rrm_empid").attr('readonly', true);
+    $('#rrm_entrybde').attr("disabled", "disabled");
+    $('#rrm_entrybde').attr('readonly', true);
+    $('#rrm_replacement').attr('readonly', true);
+    $('#rrm_replacement').attr("disabled", "disabled");
+    $("#sdchk_rrm_losingRevenue").dxCheckBox('instance').option('readOnly',false);
+    $("#sdchk_rrm_fromVIP").dxCheckBox('instance').option('readOnly',false);
+    $("#sd_date_rrm_requestedDate").dxDateBox('instance').option('readOnly',true);
+    $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('readOnly',true);
+    $("#rrm_requirementdate").attr('readonly', true);
+    $("#divrecruiters").hide();
+     $("#rrm_recruitersplanb").attr("disabled", "disabled");
+     $("#planbrecruiters").hide();
+    var date = new Date();
+    var currentDate = date.toISOString().slice(0, 10);
+    var tdydate = new Date();
+    tdydate.setDate(tdydate.getDate() + 1);
+    var nxtDate = tdydate.toISOString().slice(0,10);
+    $("#sd_date_rrm_requestedDate").dxDateBox('instance').option('value',currentDate);
+    $("#sd_date_rrm_tobeonboardplanb").dxDateBox('instance').option('value',nxtDate);
+    $("#sd_date_rrm_tobeonboardplana").dxDateBox('instance').option('value',nxtDate);
+    $("#hidedivRFP").hide();
+    $("#hidedivResigination").hide();
+    $("#sdcmb_rrm_priority").dxSelectBox('instance').option('readOnly',false);
+    $("#sdnmb_rrm_experiencerequired").dxNumberBox('instance').option('readOnly',false);
+    $("#sdcmb_rrm_communication").dxSelectBox('instance').option('readOnly',false);
+    $("#sdtxt_rrm_location").dxTextBox('instance').option('readOnly',false);
+    $("#hidereminder").hide();
+    $("#hidereminderplanB").hide();
+    resetFormData();
+    loadAndBindForAddRRMOwner();
+    $("#switchClient").dxSwitch('instance').option("disabled", true);
+    $("#switchClient").dxSwitch('instance').option("value", false);
+    $("#switchLead").dxSwitch('instance').option("disabled", false);
+    $("#switchLead").dxSwitch('instance').option("value", false);
+    $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('readOnly',false);
+    $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('value',"");
+    $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('dataSource',new DevExpress.data.ArrayStore({ 
+            data: interviewersData,
+            key: "EmployeeId"
+    }));
+
+    var arrayList = [EmployeeId];
+    $("#sdtag_rrm_intervierwers").dxTagBox("instance").option("value",arrayList);
+}
+
+ //reset form Data
+ function resetFormData() {
+        bindDevExtremeControlsForRRMEntryPoint();        
+        planAcomments = null;
+        planBcomments = null;
+        rrmId = null;
+        $("#sd_txtEditor_skillDetailsPlanA").dxHtmlEditor('instance').option('value',"");
+        $("#sd_txtEditor_skillDetailsPlanB").dxHtmlEditor('instance').option('value',"");
+        $("#sd_txtEditor_RRMComments").dxHtmlEditor('instance').option('value',"");
+        addRRMEntryPointJs.getSkillsDetails();
+       
+        $("#rrm_manage_plan_comments_documents").hide();
+        $("#sd_txtEditor_skillDetailsPlanB").dxHtmlEditor('instance').option('readOnly',false)
+        $("#sd_txtEditor_skillDetailsPlanA").dxHtmlEditor('instance').option('readOnly',false)
+        $("#sd_date_rrm_tobeonboardplana").dxDateBox('instance').option('readOnly',false)
+        $("#sd_date_rrm_tobeonboardplanb").dxDateBox('instance').option('readOnly',false)
+    }
+
+//load And Bind For Add RRM
+function loadAndBindForAddRRMOwner(){
+    $("a.btnPrevious").hide();
+    $(".saveFamilyBtn").hide();
+    $('.datepicker').datepicker ({
+      format: 'dd/mm/yyyy'
+    });
+
+    loadAndBindRequirementDetailsTabForAddRRMOwner();
+    loadAndBindSkillMappingTabForAddRRMOwner();
+
+    var getRecruiterList = loadRecruiterList();
+
+    //loadAndBindPlanATabForAddRRM();
+    //loadAndBindPlanBTabForAddRRM();
+    //loadAndBindCommentsForAddRRM();
+}
+
+//load And Bind Requirement Details Tab For Add RRM
+function loadAndBindRequirementDetailsTabForAddRRMOwner() {
+        //Load BDE
+        //var bderesult=callgetlist('GetBDExecutive','{"IsActive":"True"}');
+        callGetListAsync('GetBDExecutive', '{"IsActive":"True"}', function (bderesult) {
+        var  bdeoptions = "<option value =''>Select BDE</option>";
+            for (var i = 0; i < bderesult.length; i++) {
+                bdeoptions += "<option value='" + bderesult[i].Id + "'>" + bderesult[i].Name + "</option>";
+            }
+            $("#rrm_entrybde").html(bdeoptions);
+            
+        })
+    
+ //Load Departments
+  //  var departmentresult = callgetlist('GetDepartmentsForRRM','{"IsActive":"True"}')
+    callGetListAsync('GetDepartmentsForRRM', '{"IsActive":"True"}', function (departmentresult) {
+        var departmentsData = [];
+        for (i = 0; i < departmentresult.length; i++) {
+            var obj = {"Id":departmentresult[i].DepartmentId,"Name":departmentresult[i].DepartmentName}
+            departmentsData.push(obj);
+        }
+        $("#sdcmb_rrm_department").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+            data: departmentsData,
+            key: "Id"
+        }));
+        
+        $("#sdcmb_rrm_department").dxSelectBox('instance').option('value',Department);
+    })
+    
+  //Load Designation
+   // var designationresult=callgetlist('GetDesignationsForRRM','{"IsActive":"True"}')
+   callGetListAsync('GetDesignationsForRRM', '{"IsActive":"True"}', function (designationresult) {
+       var designationsData = [];
+        for (i = 0; i < designationresult.length; i++) {
+            var obj = {"Id":designationresult[i].DesignationId,"Name":designationresult[i].DesignationName}
+            designationsData.push(obj);
+        }
+        $("#sdcmb_rrm_designation").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+            data: designationsData,
+            key: "Id"
+        }));
+   })
+
+ //Load Priorities
+   // var prioritiesresult=callgetlist('GetPrioritiesForRRM','{"IsActive":"True"}')
+    callGetListAsync('GetPrioritiesForRRM', '{"IsActive":"True"}', function (prioritiesresult) {
+        var prioritiesData = [];       
+        for (i = 0; i < prioritiesresult.length; i++) {
+            var obj = {"Id":prioritiesresult[i].PriorityId,"Name":prioritiesresult[i].PriorityName}
+            prioritiesData.push(obj);
+        }        
+        $("#sdcmb_rrm_priority").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+            data: prioritiesData,
+            key: "Id"
+        }));
+        $("#sdcmb_rrm_priority").dxSelectBox('instance').option('value',"");
+    })
+   
+//Load ResourceReplacement
+   //var resorceresult=callgetlist('GetResourceReplacement','{"IsActive":"True"}')
+    callGetListAsync('GetResourceReplacement', '{"IsActive":"True"}', function (resorceresult) {
+      var resorceoption = "<option value=''>Select Resource Replacement</option>";
+        for (i = 0; i < resorceresult.length; i++) {
+            resorceoption += "<option value='" + resorceresult[i].Id + "'>" + resorceresult[i].Name + "</option>"
+        }
+        $("#rrm_replacement").html(resorceoption);
+    })
+
+        
+//bind defalut value for from
+   // $("#sdcmb_rrm_priority").dxSelectBox('instance').option('value',"224BE1C0-DC9A-4629-B888-2B4D4D6D1707");
+    $("#sdcmb_rrm_department").dxSelectBox('instance').option('value',Department);
+    $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('value',LoggedUser);
+  $("#sdnmb_rrm_numberofpositions").dxNumberBox('instance').option('value',"1");
+  $("#sdcmb_rrm_communication").dxSelectBox('instance').option('value',"Good");
+  $("#sdtxt_rrm_location").dxTextBox('instance').option('value',"Coimbatore");
+}
+
+//load And Bind Skill Mapping Tab For Add RRM
+function loadAndBindSkillMappingTabForAddRRMOwner(){
+    var employee_id = '';
+    var filter_val = JSON.stringify({
+      "EmployeeId": employee_id
+    });
+   // var result = callgetlist('GetEmployeeSkills', filter_val);
+   //   callGetListAsync('GetEmployeeSkills', filter_val, function (result) {
+
+          var filter_val = JSON.stringify({ "IsActive": true });
+         // var result = callgetlist('GetSkillFamilies', filter_val);
+          callGetListAsync('GetSkillFamilies', filter_val, function (result) {
+              addRRMEntryPointJs.family = result;
+              var options = "<option value=''>Select Family</option>";
+              for (var i = 0; i < result.length; i++) {
+                  options += "<option value='" + result[i].Id + "'>" + result[i].Name + "</option>";
+              }
+        })
+    //  })
+   
+}
+
+//load RecruiterList
+ function loadRecruiterList() {
+    // return recuirtersdetails = callgetlist('GetHRForRRM', '{"IsActive":"True","Token":' + Token + '}')
+     callGetListAsync('GetHRForRRM', '{"IsActive":"True","Token":' + Token + '}', function (recuirtersdetails) {
+         return recuirtersdetails;
+     });
+}
+
+
+//initialize Edit RRM
+function initializeEditRRM(rrmid){
+    $("#rrmStatus").show();
+    $('.form-control').removeClass('required_field');
+    $('.error_message').html('');
+    $('#RRMEntryPointModel').appendTo("body").modal("show");
+    $('.nav-tabs a[href="#rrm_RequirementDetails_fromrrm"]').tab("show");
+    resetSimpleBarRRMEntryPoint();
+    $("a.btnNext").hide();
+    $(".saveFamilyBtn").hide();
+    $(".btnPrevious").hide();
+    $("#hidedivowner").show();
+    $("#rrm_rfpid").attr('readonly', true);
+    $("#rrm_empid").attr('readonly', true);
+    $("#sdtxt_rrm_requirementname").dxTextBox('instance').option('readOnly',true);
+    $("#sdtxt_rrm_requiredfor").dxTextBox('instance').option('readOnly',true); 
+    $("#rrm_rfpid").val("");
+    $("#rrm_entrybde").val("");
+  	$('#rrm_entrybde').attr("disabled", "disabled"); 
+	$('#rrm_entrybde').attr('readonly', true);
+    $('#rrm_replacement').attr('readonly', true);
+    $('#rrm_replacement').attr("disabled", "disabled"); 
+    $("#sdnmb_rrm_numberofpositions").dxNumberBox('instance').option('readOnly',false);
+    
+    $("#sdcmb_rrm_designation").dxSelectBox('instance').option('readOnly',false);
+    //$('#rrm_recruitersplana').attr('readonly', true);
+    //$('#rrm_recruitersplana').attr("disabled", "disabled"); 
+    $('#rrm_recruitersplanb').attr('readonly', true);
+    $('#rrm_recruitersplanb').attr("disabled", "disabled");
+    $("#sd_date_rrm_requestedDate").dxDateBox('instance').option('readOnly',true);
+    $("#sdchk_rrm_losingRevenue").dxCheckBox('instance').option('readOnly',false);
+	$("#sdchk_rrm_fromVIP").dxCheckBox('instance').option('readOnly',false);
+    $('#rrm_recruitersplanb').attr("disabled", "disabled");
+    $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('readOnly',true);
+    $("#sd_date_rrm_tobeonboardplana").dxDateBox('instance').option('readOnly',true);
+    $("#sd_date_rrm_tobeonboardplana").dxDateBox('instance').option('min',"");
+    $("#sd_date_rrm_tobeonboardplanb").dxDateBox('instance').option('readOnly',true);
+    $("#sd_date_rrm_tobeonboardplanb").dxDateBox('instance').option('min',"");
+    $("#divrecruiters").show();
+    $("#planbrecruiters").show();
+    $("#rrm_recruitersplanb").show();
+    $("#divrecruiters").attr("disabled", "disabled"); 
+    $("#rrm_recruitersplanb").attr("disabled", "disabled"); 
+    $("#rrm_recruitersowner").attr("disabled", "disabled");
+    
+    loadAndBindRequirementDetailsTabForAddRRMOwner()
+    //loadAndBindEditRRMData(rrmid) ;
+
+    $("#hidereminder").show();
+    $("#hidereminderplanB").show();
+    $("#hidereminder").attr("disabled", "disabled"); 
+    $("#hidereminderplanB").attr("disabled", "disabled"); 
+
+    if (ResourceRequirementType == "G") {
+        $("#hidedivRFP").hide();
+        $("#hidedivResigination").hide();
+    }
+    else if (ResourceRequirementType == "P") {
+        $("#hidedivRFP").show();
+        $("#hidedivResigination").hide();
+    }
+    else if (ResourceRequirementType == "R") {
+        $("#hidedivRFP").hide();
+        $("#hidedivResigination").show();
+    }
+    loadAndBindSkillMappingTabForAddRRMOwner();
+    $("#rrm_manage_plan_comments_documents").show();
+    $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('readOnly',false);
+    $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('value',"");
+    $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('dataSource',new DevExpress.data.ArrayStore({ 
+            data: interviewersData,
+            key: "EmployeeId"
+    }));
+    
+    // $("#sd_txtEditor_RRMComments").dxHtmlEditor('instance').option('value',"");
+}
+
+//clear Form Data
+function clearFormDataOwner() {
+    $("#sdtxt_rrm_requirementname").dxTextBox('instance').option('value',"");
+    $("#sdtxt_rrm_requiredfor").dxTextBox('instance').option('value',"");
+    $("#rrm_empid").val("");
+    $("#rrm_entrybde").val("");
+    $("#sdnmb_rrm_numberofpositions").dxNumberBox('instance').option('value',"");
+
+    $("#sdcmb_rrm_department").dxSelectBox('instance').option('value',"");
+    $("#sdcmb_rrm_designation").dxSelectBox('instance').option('value',"");
+    $("#sdnmb_rrm_experiencerequired").dxNumberBox('instance').option('value',"");
+    $("#sdtxt_rrm_location").dxTextBox('instance').option('value',"");
+    var date = new Date();
+    var currentDate = date.toISOString().slice(0, 10);
+    $("#sd_date_rrm_requestedDate").dxDateBox('instance').option('value',currentDate);
+    $("#sdtxt_rrm_requirementlead").dxTextBox('instance').option('value',"");
+    
+    var tdydate = new Date();
+    tdydate.setDate(tdydate.getDate() + 1);
+    var nxtDate = tdydate.toISOString().slice(0,10);
+    $("#sd_date_rrm_tobeonboardplana").dxDateBox('instance').option('value',nxtDate)
+    $("#sd_date_rrm_tobeonboardplanb").dxDateBox('instance').option('value',nxtDate)
+    
+    //reset form 
+    $('.form-control').removeClass('required_field');
+    $('.error_message').html('');
+
+    
+    $("#sdtxt_rrm_requirementname").dxTextBox('instance').option('readOnly',false);
+    $("#sdtxt_rrm_requiredfor").dxTextBox('instance').option('readOnly',false);
+    $("#rrm_rfpid").removeAttr('readonly');
+    $("#rrm_rfpid").val("");
+    $("#rrm_empid").removeAttr('readonly');
+    $('#rrm_entrybde').removeAttr('readonly');
+    $('#rrm_entrybde').removeAttr('disabled');
+    $('#rrm_replacement').removeAttr('readonly');
+    $('#rrm_replacement').removeAttr('disabled');
+    $("#sdnmb_rrm_numberofpositions").dxNumberBox('instance').option('readOnly',false);
+    $("#sdcmb_rrm_designation").dxSelectBox('instance').option('readOnly',false);
+    $('#rrm_recruitersplana').removeAttr('readonly');
+    $('#rrm_recruitersplana').removeAttr('disabled');
+    $('#rrm_recruitersplanb').removeAttr('readonly');
+    $('#rrm_recruitersplanb').removeAttr('disabled');
+    $("#sdcmb_rrm_designation").dxSelectBox('instance').option('visible',true);
+    //
+    $("#sdcmb_rrm_priority").dxSelectBox('instance').option('readOnly',false);
+    $("#sdcmb_rrm_department").dxSelectBox('instance').option('readOnly',false);
+    $("#sdnmb_rrm_experiencerequired").dxNumberBox('instance').option('readOnly',false);
+    $("#sdcmb_rrm_communication").dxSelectBox('instance').option('readOnly',false);
+    $("#editSkillMappingRRM").show();
+    $("#deleteSkillMappingRRM").show();
+    $("#sd_txtEditor_RRMComments").dxHtmlEditor('instance').option('readOnly',false)
+    $("#sdtxt_rrm_location").dxTextBox('instance').option('readOnly',false);      
+  skillsClearAndShow();            
+}
+
+//skills Clear And Show
+function skillsClearAndShow() { // Clear our fields
+  
+}
+
+
+function readOnlyFormData() {
+    $("#sdcmb_rrm_priority").dxSelectBox('instance').option('readOnly',true);
+    $("#sdcmb_rrm_department").dxSelectBox('instance').option('readOnly',true);
+    $("#sdnmb_rrm_experiencerequired").dxNumberBox('instance').option('readOnly',true);
+    $("#sdcmb_rrm_communication").dxSelectBox('instance').option('readOnly',true);
+    $("#editSkillMappingRRM").hide();
+    $("#deleteSkillMappingRRM").hide();
+    //$("#sd_txtEditor_RRMComments").dxHtmlEditor('instance').option('readOnly',true);
+    $("#sd_txtEditor_skillDetailsPlanA").dxHtmlEditor('instance').option('readOnly',true);
+    $("#sd_txtEditor_skillDetailsPlanB").dxHtmlEditor('instance').option('readOnly',true);
+    $("#sdtxt_rrm_location").dxTextBox('instance').option('readOnly',true);
+    $("#sdbtn_reminderA").dxButton('instance').option('visible',false);
+    $("#sdbtn_reminderB").dxButton('instance').option('visible',false);
+    $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('readOnly',true);
+}
+
+$(document).on("mouseover", "#RRMEntryPointModel .dx-mention", function (e) {
+    var Id = $(e.currentTarget).data("id");
+    var MentionType = $(e.currentTarget).data("marker");
+    var Target = $(e.currentTarget);
+    LoadTooltipForMentionRRM(Id,MentionType,Target);
+});
+
+function LoadTooltipForMentionRRM(Id,MentionType,Target){
+    if(MentionType == "@"){  
+        var filterData = JSON.stringify({
+            "IsActive": true,
+            "EmployeeIdForMention":Id
+        });
+        callGetListAsync('GetEmployeeDetailsForMentions', filterData, function(e){
+            var Details = e[0];
+            $("#sd_popover_RRMmentions").dxPopover('instance').option('target',Target);  
+            $("#sd_popover_RRMmentions").dxPopover('instance').option("contentTemplate",function(data) {
+                var html = "<div class='row'><div class='col-md-2'><img id='img-"+Details.EmployeeName+"' src='"+Details.ProfilePicture+"' class='img-circle interviewer-image' width='40px' height='40px'></img></div>"
+                    html += "<div class='col-md-10'><b> "+Details.EmployeeName+"</b><br/><i class='fas fa-envelope'></i> &nbsp;<a href='mailto:" + Details.CorporateEmailID + "' target='_blank'>"+Details.CorporateEmailID+"</a><div>"
+                    html += "</div>";
+                    data.html(html);
+            });         
+        });   
+        
+    }
+    if(MentionType == "#"){        
+        var filterData = JSON.stringify({
+            "IsActive": true,
+            "ResourceRequirementId":Id
+        });
+        callGetListAsync('GetRRMDetailsForMentions', filterData, function(e){
+            var Details = e[0];
+            $("#sd_popover_RRMmentions").dxPopover('instance').option('target',Target);  
+            $("#sd_popover_RRMmentions").dxPopover('instance').option("contentTemplate",function(data) {
+                var html = "<table class='table table-borderless' style='margin-bottom:0px'><tbody>"
+                html += "<tr><td><b>RRM Name</b></td><td><b>: </b>"+Details.RRMName+"</td><td><b>RRM No</b></td><td><b>: </b>"+Details.RRMNo+"</td></tr>";
+                html += "<tr><td><b>Required For</b></td><td><b>: </b>"+Details.RequiredFor+"</td><td><b>Lead Name</b></td><td><b>: </b>"+Details.LeadName+"</td></tr>";
+                html += "<tr><td><b>Department</b></td><td><b>: </b>"+Details.DepartmentName+"</td><td><b>Designation</b></td><td><b>: </b>"+Details.DesignationName+"</td></tr>";
+                html += "<tr><td><b>Skills</b></td><td colspan='3'><b>: </b>"+Details.SkillName+"</td></tr>";
+                html += "</tbody></table>"; 
+                data.html(html);
+            });         
+        });
+    }
+}
+
+function resetSimpleBarRRMEntryPoint(){
+    new SimpleBar(document.getElementById('RRMPEntryPointModalBody'));
+}
+
+    
+</script>
+
+<style>
+    
+  .rrm_manage_plan_history_lists
+  {
+  border: solid 1px #D1D1D1;
+  height: 250px;
+  overflow-y: scroll;
+  padding: 10px;
+  background-color: #E3E3E3;
+  margin-bottom: 10px;
+  }
+  
+  .rrm_manage_plan_history_lists .manage_comment
+  {
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
+  word-break: break-all;
+  background-color: #ffff;
+  cursor:pointer;
+  }
+  
+  .rrm_manage_plan_history_lists label{
+  font-weight: 100;
+  }
+  .rrm_manage_plan_history_lists small{
+  font-size: 8pt;
+  font-weight: 400 !important;
+  display: block;
+  }
+  .rrm_manage_plan_history_lists small span:last-child
+  {
+  margin-left: 5px;
+  }
+</style>
+  

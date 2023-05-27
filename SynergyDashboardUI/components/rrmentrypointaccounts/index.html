@@ -1,0 +1,108 @@
+<script id="Accounts">
+    var folderName = "rrmentrypointaccounts";
+    $(document).ready(function () {
+        var pageId = "Accounts";
+        PageInitializeAccounts(pageId);
+    });
+
+    function PageInitializeAccounts(pageId) {
+        var rrmEntryGrid = RRMEntryPointGridAccounts(pageId);
+        rrmEntryGrid.getRRMEntryTable();
+    }
+
+</script>
+
+<link href="components/rrmentrypointaccounts/css/rrmentrypoint.css" rel="stylesheet" />
+
+<script src='components/rrmentrypointaccounts/js/addRRMEntryPointAccount.js'></script>
+<script src='components/rrmentrypointaccounts/js/editRRMEntryPointAccount.js'></script>
+<script src='components/rrmentrypointaccounts/js/rrmentrypointgridaccounts.js'></script>
+
+<div class="rrm-card-detail-NewInterviewCard card-detail">
+    <span><i><img src="./image/dashboard/rrm.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>RRM Entry Point</b></span>
+    <span class="pull-right">
+        <button id="rrmEntryPointAddBtnAccounts" class="btn btn-sm btn-primary" data-type="add">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+
+    <div class="rrm-card-detail">
+        <div id="rrmGridReportAccounts"></div>
+    </div>
+</div>
+
+<div id="rrm_entrypointmodelAccounts"></div>
+
+<script type="text/javascript">
+    $("#rrm_entrypointmodelAccounts").load("components/rrmentrypointaccounts/rrmEntryPointModalAccount.html");
+
+    $(document).ready(function () {
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token;
+        loggedInUserDepartment = jsonData.Data[0].Department;
+        initializeRRMEntryPointAccounts();
+
+    })
+
+    var loggedInUserDepartment;
+    var Token;
+    var editRRMEntryPointJsAccount;
+    var addRRMEntryPointJsAccount;
+    var addRRMTypeAccount;
+    var rrmId;
+    var ResourceRequirementTypeAccounts;
+    //initialize RRMEntryPoint Accounts
+    function initializeRRMEntryPointAccounts() {
+        editRRMEntryPointJsAccount = EditRRMEntryPointAccount();
+        addRRMEntryPointJsAccount = AddRRMEntryPointAccount();
+    }
+
+    //edit RRM Entry Point Accounts
+    $(document).on("click", ".editRRMEntryPointAccounts", function (e) {
+        openEditRRMEntryPointAccounts(e)
+    })
+
+    //edit funct RRMEntry Point Accounts
+    function openEditRRMEntryPointAccounts(e) {
+        initializeModalAccount();
+        $('#RRMEntryPointModelAccount').appendTo("body").modal("show");
+        addRRMTypeAccount = $(e.currentTarget).data("type");
+        rrmId = $(e.currentTarget).data("rrmid");
+        $("#AccountsrrmType").attr('class', '');
+        ResourceRequirementTypeAccounts = $(e.currentTarget).data("rrmtypeaccounts");
+        if (ResourceRequirementTypeAccounts == "G") {
+            $("#lblLeadNameAccounts").text("Requirement lead");
+            $("#AccountsrrmType").html("RRM").addClass("label label-success m-l-xs");
+        }
+        else if (ResourceRequirementTypeAccounts == "P") {
+            $("#lblLeadNameAccounts").text("RFP Owner");
+            $("#AccountsrrmType").html("RFP").addClass("label label-info m-l-xs");
+        }
+        else if (ResourceRequirementTypeAccounts == "R") {
+            $("#lblLeadNameAccounts").text("Backup Lead");
+            $("#AccountsrrmType").html("Resignation").addClass("label label-warning m-l-xs");
+        }
+        initializeEditRRMAccount(rrmId);
+        editRRMEntryPointJsAccount.RRMEntryFromRRM(rrmId);
+    }
+
+    //rrm EntryPoint Add Btn Accounts
+    $(document).on("click", "#rrmEntryPointAddBtnAccounts", function (e) {
+        rrmAddBtnClickedaddRRMTypeAccount(e)
+    })
+
+    //rrmEntryPoint Add Btn clcik event 
+    function rrmAddBtnClickedaddRRMTypeAccount(e) {
+        addRRMTypeAccount = "add";
+        initializeModalAccount();
+        $('#RRMEntryPointModelAccount').appendTo("body").modal("show");
+        $("#AccountsrrmType").attr('class', '');
+        $("#OwnerrrmHoldStatusAccount").attr('class', '');
+        $("#rrmmodelpagetitleAccount").text("Add RRM");
+        var rrmType = $(e.currentTarget).data("type");
+        initializeAddRRMAccount(rrmType);
+    }
+</script>

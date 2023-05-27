@@ -1,0 +1,52 @@
+<!-- RFP Style -->
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+
+
+<link href="components/rfp/css/proposal.css" rel="stylesheet" />
+
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> -->
+<!--POP-UP RFP MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="ApiDBMappingModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+               onclick=""><span aria-hidden="true">&times;</span></button>
+               <button class="expand modalExpanding">
+                  <i class="fas fa-expand" data-toggle="modal"></i>
+                </button>
+            <h2 class="modal-title" id="myModalLabel">API DB Mapping</h2>
+         </div>
+
+         <div class="modal-body"  data-simplebar>
+               <div class="form-group">
+                     <p id="apierror_text"></p>
+                     <label>API</label>
+                     <input type="text" class="form-control" name="apiname" id="apiname">
+                  </div>
+                  <div class="form-group">
+                     <label>DB</label>
+                     <select class="form-control" name="apidblist" id="apidblist">
+                        <option value="0">Select DB</option> 
+                        <option value="RFP">RFP</option>
+                        <option value="SMS">SMS</option>                      
+                     </select>
+                  </div>
+         </div>
+         <div class="modal-footer">
+               <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-md btn-primary" onclick="saveApidbMapping()">Map</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+            
+<script>
+   function openApiDbUserMappingModel(){
+      $('#ApiDBMappingModel').modal('show');
+   }
+</script>

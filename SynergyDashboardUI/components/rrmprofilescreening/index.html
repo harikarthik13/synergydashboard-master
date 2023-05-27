@@ -1,0 +1,34 @@
+<div class="card-detail">
+  <span class="card-detail-title modal-not-include"
+    ><b>RRM Profile Screening</b></span
+  >
+  <hr />
+  <div>
+    <div id="sdgd-rrmProfileScreening"></div>
+  </div>
+</div>
+
+<div id="rrmDetailsForProfileScreening"></div>
+<div id="CandidateDetailsForProfileScreeningdiv"></div>
+<script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+<script src='components/rrmprofilescreening/js/rrmprofilescreening.js'></script>
+<style>
+  .btn-black, .btn-black:hover{
+    background-color: #343A40;
+    color: #ffffff;
+  }
+  .profileScreeningWrappedColumn {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+  }
+</style>
+
+<script>
+  $("#rrmDetailsForProfileScreening").load("components/rrmprofilescreening/rrmdetailsprofilescreeningmodal.html");
+  $("#CandidateDetailsForProfileScreeningdiv").load("components/rrmprofilescreening/candidatedetailsprofilescreeningmodal.html");
+  $(document).on("click", ".rrmdetailProfileScreening", function (e) {
+      var rrmId = $(e.currentTarget).data("rrmid");           
+      getRRMDetailsForProfileScreening(rrmId);
+  });
+
+</script>

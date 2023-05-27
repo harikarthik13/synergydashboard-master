@@ -1,0 +1,284 @@
+<div class="card-detail">
+    <span class="card-detail-title"><b>Provision And Projection Upload</b></span>
+    <button class="btn btn-primary pull-right btn-xs" id="uppViewHistory" onclick="uppViewHistory();">View History</button>
+    <hr />
+
+    <div class="pp-container">
+       
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label><b>Select File </b></label>
+                    <input type="file" id="ppUploadFile" class="form-control file-upload-info" name="CouponFile"
+                        placeholder="Please Upload File">
+                    </input>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>Select Year</label>
+                <div class="form-group">
+                    <select id="ppddlUploadYears" class="form-control"></select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>Select Month</label>
+                <div class="form-group">
+                    <select id="ppddlUploadMonths" class="form-control">
+                        <option value='January'>January</option>
+                        <option value='February'>February</option>
+                        <option value='March'>March</option>
+                        <option value='April'>April</option>
+                        <option value='May'>May</option>
+                        <option value='June'>June</option>
+                        <option value='July'>July</option>
+                        <option value='August'>August</option>
+                        <option value='September'>September</option>
+                        <option value='October'>October</option>
+                        <option value='November'>November</option>
+                        <option value='December'>December</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-end">
+            <div class="btn-group mr-2 sw-btn-group pull-right" role="group">
+                <button id="ppbtnUpload" onclick="UploadProvisionalAndProjection()"
+                    class="btn btn-secondary">Upload File</button>
+            </div>
+        </div>
+    </div>
+
+     <!--  View History Modal -->
+     <div class="modal fade bd-example-modal-lg in" id="uppViewHistoryModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">View History </h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Select Year</label>
+                                <div class="form-group">
+                                    <select id="uppUploadYears" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Select Month</label>
+                                <div class="form-group">
+                                    <select id="uppUploadMonths" class="form-control">
+                                            <option value='January'>January</option>
+                                            <option value='February'>February</option>
+                                            <option value='March'>March</option>
+                                            <option value='April'>April</option>
+                                            <option value='May'>May</option>
+                                            <option value='June'>June</option>
+                                            <option value='July'>July</option>
+                                            <option value='August'>August</option>
+                                            <option value='September'>September</option>
+                                            <option value='October'>October</option>
+                                            <option value='November'>November</option>
+                                            <option value='December'>December</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label></label>
+                                <div class="form-group">
+                                    <button id="uppBtnShowHistory" type="button" class="btn btn-primary"
+                                        onclick="getProvisionAndProjectHistory()">Show History</button>
+                                </div>                                
+                            </div>
+
+                            <div class="col-md-2">
+                                <label></label>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-danger" id="uppBack" onclick="getProvisionAndProjectHistory()">Go Back</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div id="uppViewHistoryContainer"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                       
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tabProvionAndProjection"></div>
+
+    </div>    
+
+<script>
+    $(document).ready(function () {
+        //listProvisionAndProjectionHistory
+        var date = new Date();        
+         var select = document.getElementById('ppddlUploadMonths');
+            var html = '';
+            var n;
+            for (var i = 0; i < 12; i++) {
+                n = date.getMonth();
+            }
+            select.selectedIndex  = n;
+            //For binding years
+            $('#ppddlUploadYears').each(function () {
+                var year = (new Date()).getFullYear();
+                var current = year;
+                year -= 3;
+                for (var i = 0; i < 6; i++) {
+                    if ((year + i) == current)
+                        $(this).append('<option selected value="' + (year + i) + '">' + (year + i) + '</option>');
+                    else
+                        $(this).append('<option value="' + (year + i) + '">' + (year + i) + '</option>');
+                }
+            });
+
+    });
+    
+    function UploadProvisionalAndProjection() {
+            let month = $("#ppddlUploadMonths").val();
+            let year = $("#ppddlUploadYears").val();
+            var inputFile = document.getElementById('ppUploadFile');
+            if (month === null || month == "") {
+                alert("Please Select the Month");
+                return;
+            }
+            else if (year === null || year == "") {
+                alert("Please Select the Year");
+                return;
+            }
+            else if (!inputFile) {
+                alert("Sorry, cannot find the update control.");
+                return;
+            }
+            else if (!inputFile.files) {
+                alert("This browser doesn't seem to support the `files` property of file inputs.");
+                return;
+            }
+            else if (!inputFile.files[0]) {
+                alert("Please select a file before clicking 'Upload'");
+                return;
+            }
+            else {
+                let file = inputFile.files[0];
+                let formData = new FormData();
+    
+                formData.append("file", file);
+                formData.append("month", month);
+                formData.append("year", year);
+    
+                let token = localStorage.getItem("securityToken");
+                $.ajax({
+                    url: SynergyAPIURL + "UploadProvisionAndProjection",
+                    type: 'POST',
+                    beforeSend: function (request) {
+                        request.setRequestHeader("SecurityToken", token);
+                    },
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            alert(data.Message);
+                            $("#ppddlUploadMonths").val('');
+                            $("#ppddlUploadYears").val('');
+                            inputFile.files = [];
+                        }
+                        else {
+                            alert(data.Message);
+                        }
+                    },
+                    error: function () {
+                        alert("Upload Failed!")
+                    }
+                });
+    
+            }
+    
+        }
+    
+        function uppViewHistory() {   
+            debugger         
+            $('#uppViewHistoryModal').appendTo("body").modal('show');
+            var uppMonth = document.getElementById('uppUploadMonths');
+            var html = '';
+            var n;
+            var date = new Date();   
+            for (var i = 0; i < 12; i++) {
+                n = date.getMonth();
+            }
+            uppMonth.selectedIndex  = n;
+            $('#uppUploadYears').each(function () {
+                var year = (new Date()).getFullYear();
+                var currentyear = year;
+                year -= 3;
+                for (var i = 0; i < 6; i++) {
+                    if ((year + i) == currentyear)
+                        $(this).append('<option selected value="' + (year + i) + '">' + (year + i) + '</option>');
+                    else
+                        $(this).append('<option value="' + (year + i) + '">' + (year + i) + '</option>');
+                }
+            });
+            getProvisionAndProjectHistory();
+        }
+
+        function getProvisionAndProjectHistory() {
+            debugger
+        var month = document.getElementById("uppUploadMonths").value;
+        var year = document.getElementById("uppUploadYears").value;
+        listProjectionHistory = callgetlist('GetProjection',"{'IsActive': true}");
+        listProvionalHistory = callgetlist('GetProvisional',"{'IsActive': true}");
+        bindProvisionAndProjectionHistory();
+    }
+
+    function bindProvisionAndProjectionHistory()
+    {
+        $("#tabProvionAndProjection").dxTabPanel({
+            dataSource: [{
+                title: current,
+                template: function () {
+                    return $("<div id='ProvisionHistory'>").dxDataGrid({
+                        width: "100%",
+                        dataSource: listProjectionHistory,
+                        columns: [
+                            { caption: "Client", dataField: "Client", width: 150 },
+                            { caption: "Project", dataField: "Project", width: 150 },
+                            { caption: "Lead Name", dataField: "LeadName", width: 150 }
+                        ],
+                        showBorders: true,
+                        rowAlternationEnabled: true
+                    });
+                }
+            }, {
+                title: history,
+                template: function () {
+                    return $("<div id='ProjectionHistory'>").dxDataGrid({
+                        width: "100%",
+                        dataSource: listProvionalHistory,
+                        columns: [
+                            { caption: "Client", dataField: "Client", width: 150 },
+                            { caption: "Project", dataField: "Project", width: 150 },
+                            { caption: "Lead Name", dataField: "LeadName", width: 150 }
+                        ],
+                        showBorders: true,
+                        rowAlternationEnabled: true
+                    });
+                }
+            }],
+            itemTitleTemplate: function (itemData, itemIndex, itemElement) {
+                itemElement.append("<span class='dx-tab-text'>" + itemData.title + "</span>");
+            },
+            deferRendering: false
+        });
+    }
+    </script>

@@ -1,0 +1,40 @@
+
+<link href="components/rrmallprofileview/css/rrmAllprofileView.css" rel="stylesheet" />
+
+<script src='components/rrmallprofileview/js/rrmAllProfileViewGrid.js'></script>
+<script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+
+
+<div class="rrm-card-detail-NewInterviewCard card-detail">
+    <span><i><img src="./image/dashboard/rrm.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>RRM All Profile View</b></span>
+    
+    <hr />
+
+    <div id="RRMAllProfileTableListDetails">
+        <div id="rrmAllProfileGrid"></div>
+    </div>
+    <div id="showbanmodal"></div>
+</div>
+
+<div id="rrmAllProfileInterviewHistoryDiv">
+
+</div>
+
+<div id="rrmAllProfileSkillsGridForExport" style="visibility: hidden;height: 0px;">
+
+</div>
+
+<div id="rrmAllProfileWorkHistoryGridForExport" style="visibility: hidden;height: 0px;">
+
+</div>
+
+<script type="text/javascript">
+    var candidateProfilesDataSourceForMentions = [];
+    $(document).ready(function () {
+        rendeRRMAllProfileViewGrid();
+    })
+
+    $("#rrmAllProfileInterviewHistoryDiv").load("components/rrmallprofileview/interviewHistoryAllProfileViewModal.html")
+
+</script>

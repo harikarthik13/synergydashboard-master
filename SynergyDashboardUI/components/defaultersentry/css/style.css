@@ -1,0 +1,54 @@
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+    text-align: left !important;
+    padding:5px;
+    font-size: 11pt;
+}
+
+#defaultersEntryReportsFilter {
+    background-color: #337AB7;
+}
+
+#divDefaultersButton{
+    padding-top: 6px;
+}
+
+.defaultersEntry-card {
+    background-color: white;
+    height: 100%;
+    margin: 0;
+}
+
+#div-DefaultersEntry-Edit-Modal .modal-header{
+    background: #c5122c;
+    color: #fff;
+}
+
+#div-DefaultersEntry-Edit-Modal .action-wrap{
+    padding: 15px;
+    padding-bottom: 0;
+}
+#div-DefaultersEntry-Edit-Modal .form-control{
+    margin-bottom: 15px;
+}
+#div-DefaultersEntry-Edit-Modal .defaulters-actionDescSidebar{
+    text-align: left;
+}
+#div-DefaultersEntry-Edit-Modal .defaulters-actionDescSidebar h2{
+    font-size: 18px;
+}
+
+#div-DefaultersEntry-Edit-Modal .modal-body {
+    overflow-y: auto;
+    height: 500px;
+}
+
+.defaulters-rfp_description{
+    text-align: left;
+}

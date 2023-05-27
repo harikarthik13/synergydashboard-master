@@ -1,0 +1,26 @@
+<script src='components/managerfp/js/manageRfp.js'></script>
+
+<div class="card-detail">
+    <span><i><img src="components/managerfp/images/rfp.png" width="40px" height="40px" /></i></span>
+
+    <span class="card-detail-title"><b>Manage RFP</b></span>
+    <hr />
+    <div id="sddgd-manageRfp"></div>
+</div>
+
+
+<script type="text/javascript">
+
+
+    $("#manage_proposal_rfp").load("components/managerfp/manageProposalModel.html");
+
+
+    function include_rfp(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+
+</script>

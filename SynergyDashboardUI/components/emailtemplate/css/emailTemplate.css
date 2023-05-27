@@ -1,0 +1,47 @@
+#previewEmail_template_body{
+    background-color: #F6F6F6;
+}
+
+#emailTemplate_previewCard{
+    background-color: white;
+}
+
+.email_template_cardTitle{
+    color: #797979;
+}
+
+.email_template_space{
+    margin-left: 20px;
+}
+
+.email_template_help{
+    color:#007ACC;
+}
+
+#custom_emailTemplate table th,#custom_emailTemplate table td{
+    border: none;
+}
+
+#helpEmail_template_modal .simplebar-content {
+    overflow: scroll!important;
+}
+
+#urlFormat_emailTemplate table th,#urlFormat_emailTemplate table td{
+    border: none;
+}
+
+#helpEmail_template_modal .modal-body{
+    height: 360px;
+}
+
+.email_template_help{
+    cursor: pointer;
+}
+
+.emailTemplate_commonCursor{
+    cursor: pointer;
+}
+
+.bootstrap-tagsinput {
+    width: 100% !important;
+  }

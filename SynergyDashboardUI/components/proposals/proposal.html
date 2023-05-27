@@ -1,0 +1,1662 @@
+<!-- RFP Style -->
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<!-- <script type="text/javascript" src="js/library/jquery.smartWizard.js"></script> -->
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+<script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+
+<link href="components/proposals/css/proposal.css" rel="stylesheet" />
+<style>
+   #RfpModal {
+        width: 100%;
+    }
+
+    #RfpModal .modal-content{
+        width: 70%;
+        height:80%;
+    }
+
+    .dx-switch-container{
+       text-transform: uppercase;
+    }
+
+    #switchContainer{
+      width: 51px;
+      height: 35px;
+    }
+
+   .select2-container{
+      width: 100% !important;
+   }
+
+</style>
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> -->
+<!--POP-UP RFP MODAL STARTS HERE -->
+<div class="modal fade proposal-popup steps-model " id="RfpModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+               onclick="getProposalList()"><span aria-hidden="true">&times;</span></button>
+               <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title proposal_modal_title" id="myModalLabel">RFP to Proposal</h2>
+         </div>
+         <div class="modal-body" id="RfpModalBody" data-simplebar>
+            <div id="smartwizard">
+               <ul>
+                  <li><a href="#step-1"><span>1</span></a></li>
+                  <li><a href="#step-2"><span>2</span></a></li>
+                  <li><a href="#step-3"><span>3</span></a></li>
+                  <li><a href="#step-4"><span>4</span></a></li>
+                  <li><a href="#step-5"><span>5</span></a></li>
+                  <li><a href="#step-6"><span>6</span></a></li>
+                  <li><a href="#step-7"><span>7</span></a></li>
+                  <li><a href="#step-8"><span>8</span></a></li>
+                  <li><a href="#step-9"><span>9</span></a></li>
+                  <li><a href="#step-10"><span>10</span></a></li>
+                  <li><a href="#step-11"><span>11</span></a></li>
+                  <li><a href="#step-12"><span>12</span></a></li>
+                  <li><a href="#step-13"><span>13</span></a></li>
+               </ul>
+               <div class="form-hldr" id="modal_content">
+                  <input type="hidden" class="edit_enable" value="0">
+                  <input type="hidden" class="smartwizstep" value="0">
+                  <span id="RFPI_Code" style="display: none;"></span>
+                  <div id="step-1" class="" >
+                     <div class="step-title" data-stepnumber="1">
+                        <h3>Step 1: <span>Client</span></h3>
+                        <div class="pull-right">
+                           <!-- <select class="form-control ProposalRfplist proposalError" id="ProposalRfplist">
+                              <option>Select RFP</option>
+                           </select> -->                            
+                           <span class="error_message"></span>
+                        </div>
+                     </div>
+                     <div class="form-section" id="form-block">
+                        <div class="row">
+                             <div class="col-md-12">
+                                 <h5 id="ProposalRfpTitle" class="text-left"></h5>
+                             </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-3">
+                              <label for="estimation_doc"> <input value="E" type="radio" id="estimation_doc"
+                                    name="DocumentType" disabled>
+                                 Estimation Document</label>
+                           </div>
+                           <div class="col-md-3">
+                              <label for="understanding_doc"> <input type="radio" value="U" id="understanding_doc"
+                                    name="DocumentType" disabled> Understanding Document</label>
+                           </div>
+                           <div class="col-md-3">
+                              <label for="clarification_doc"> <input type="radio" value="C" id="clarification_doc"
+                                    name="DocumentType" disabled> Clarification Document</label>
+                           </div>
+                           <div class="col-md-3">
+                              <label for="proposal_doc"> <input type="radio" value="P" id="proposal_doc"
+                                    name="DocumentType" disabled> Proposal Document</label>
+                           </div>
+                           <span id="DocumentTypeError" class="error_message"></span>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Estimate Number</label>
+                                 <input type="text" class="form-control" name="estimate_number" disabled="disabled"
+                                    id="estimate_number">
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Document Name <span style="color: red">*</span></label>
+                                 <input type="text" class="form-control proposalError" name="document_name"
+                                    id="document_name">
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Client Name <span style="color: red">*</span> </label>
+                                 <input type="text" disabled="disabled"  name="client-name"
+                                    class="form-control proposalError" id="client-name">
+                                 <span class="error_message"></span>
+                                 <input type="hidden" name="clientId" class="form-control" id="clientId">
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Contact Person <span style="color: red">*</span> </label>
+                                 <input type="text" disabled="disabled" name="contact-person"
+                                    class="form-control proposalError contact-person" id="contact-person">
+                                 <!-- <select class="form-control proposalError contact-person" id="contact-person"
+                                    name="contact-person">
+                                    <option value="">Select Contact Person</option>
+                                 </select> -->
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Client Name (Shown in Proposal)</label>
+                                 <input type="text" name="client-name_inproposal"
+                                    class="form-control proposalError" id="client-name_inproposal">
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Address</label>
+                                 <input type="text" class="form-control" disabled="disabled" name="address"
+                                    id="address">
+                              </div>
+                           </div>
+                           
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Date <span style="color: red">*</span></label>
+                                 <input type="text" disabled="disabled"
+                                    class="form-control proposalError small-input  proposalDate" value=""
+                                    id="proposalDate">
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Address (Shown in Proposal)</label>
+                                 <input type="text" name="address_inproposal"
+                                    class="form-control proposalError address_inproposal" id="address_inproposal">
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div id="step-2" class="" >
+                     <div class="step-title" data-stepnumber="2">
+                        <h3>Step 2: <span>Estimate Creators</span></h3>
+                        <p style="display: none">Revision History</p>
+                     </div>
+                     <div class="form-section">
+                        <div class="row prepared-by">
+                           <div class="col-md-2">
+                              <div class="form-group medium">
+                                 <label>Prepared By : </label>
+                                 <!-- <select class="form-control prepared-by creatorError" id="prepared-by">
+                                    <option>Select Employee</option>
+                                    </select> -->
+                                 <span class="error_message"></span>
+                                 <!--  <div class="plus-btn">
+                                    <button class="add-btn add-prepared"></button>
+                                    </div> -->
+                              </div>
+                           </div>
+                           <div class="col-md-8">
+                              <div class="form-group">
+                                 <label id="GetPreparedBy_1"></label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row estimated-by">
+                           <div class="col-md-6 estimatedby">
+                              <div class="form-group medium">
+                                 <label>Estimated By : </label>
+                                 <!--   <select class="form-control estimated-by creatorError" id="estimated-by">
+                                    <option>Select Employee</option>
+                                    </select> -->
+                                 <span class="error_message"></span>
+                                 <!--   <div class="plus-btn">
+                                    <button class="add-btn add-estimate"></button>
+                                    </div> -->
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label id="GetPreparedBy_2"></label>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row reviewed-by">
+                           <div class="col-md-6">
+                              <div class="form-group medium">
+                                 <label>Reviewed By : </label>
+                                 <!-- <select class="form-control reviewed-by creatorError" id="reviewed-by">
+                                    <option>Select Employee</option>
+                                    </select> -->
+                                 <span class="error_message"></span>
+                                 <div class="plus-btn">
+                                    <!-- <button class="add-btn add-reviewed"></button> -->
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label id="GetPreparedBy_3"></label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div id="step-3" class="" >
+                     <div class="step-title" data-stepnumber="3">
+                        <h3>Step 3: <span id="proposal-title-3" class="proposal-title-3">User Story / Understanding</span></h3>
+                        <button title="User Story / Understanding" id="edit-title-3" class="edit-title btn" data-step="3"><i class="fa fa-edit"></i></button>
+                     </div>
+                     <div class="form-section">
+                        <label>Description</label>
+                        <!-- <textarea name="user_story" id="user_story" class="form-control ckeditor"></textarea> -->
+                        <div id="user_story"></div>
+                        <span id="user_story_err" class="error_message"></span>
+                     </div>
+                  </div>
+                  <div id="step-4" class="" >
+                     <div class="step-title" data-stepnumber="4">
+                        <h3>Step 4: <span>Estimate</span></h3>
+                     </div>
+                     <div class="form-section" id="form-block">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Project Phases <span style="color: red">*</span></label>
+                                 <select title="Project Phases" class="form-control project-phases phaseError" id="ProjectPhaseId">
+                                 </select>
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Header Title <span style="color: red">*</span></label>
+                                 <input title="Header Title" placeholder="Header Title" type="text" class="form-control phaseError" name="HeaderTitle" id="HeaderTitle">
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-12">
+                              <div class="form-group">
+                                 <label>Description <span style="color: red">*</span></label>
+                                 <textarea title="Description" placeholder="Description" class="form-control phaseError" id="Description"
+                                    name="Description"></textarea>
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Hours</label>
+                                 <input title="Hours" placeholder="Hours" type="number" class="form-control phaseError" min="0" name="Hours" id="Hours">
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6"></div>
+                           <div class="col-md-6 text-right">
+                              <button class="btn btn-md btn-secondary" onclick="clearAndShow()">Cancel</button>
+                              <button class="btn btn-md btn-primary" id="projectPhase_action"
+                                 onclick="insertProjectPhase()">Add</button>
+                           </div>
+                        </div>
+                        <div class="table-sec">
+                           <h3>Project Phases</h3>
+                           <!-- <img src="images/table.jpg" class="img-responsive" alt="table"/> -->
+                           <div id="displayProjectphase">
+                           
+                          </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div id="step-5" class="" >
+                     <div class="step-title" data-stepnumber="5">
+                        <p style="display: none">Feature list based on the above user story / understanding</p>
+                        <h3>Step 5: <span id="proposal-title-5" class="proposal-title-5">Estimate</span></h3>
+                        <button title="Estimate" class="edit-title btn" class="edit-title-5" data-step="5"><i class="fa fa-edit"></i></button>
+                     </div>
+                     <div id="displayEstimateProjectphase"></div>
+                  </div>
+                  <div id="step-6" class="" >
+                     <div class="step-title" data-stepnumber="6">
+                        <h3>Step 6: <span id="proposal-title-6" class="proposal-title-6">Estimate Pricing</span></h3>
+                        <button title="Estimate Pricing" id="edit-title-6" class="edit-title btn" data-step="6"><i class="fa fa-edit"></i></button>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <span><b>Show Estimation</b></span><div id="switchContainer" style="margin-left: 10px;"></div>
+                              <input type="hidden" name="EstimationTable" id="EstimationTable" value="">
+                           </div>
+                        </div>
+                     </div>
+                     <div class="table-sec estimation_pricing">
+                        <h3>Project Phases</h3>
+                        <!-- <img src="images/table.jpg" class="img-responsive" alt="table"/> -->
+                        <div id="displayEstimatePricing">
+                        </div>
+                     </div>
+                     <div class="form-section">
+                        <h3>Pricing and Payment Schedule Details</h3>
+                        <!-- <textarea class="estimate_pricing" name="estimate_pricing"></textarea> -->
+                        <div id="estimate_pricing"></div>
+                        <span id="estimate_pricing_err" class="error_message"></span>
+                     </div>
+                  </div>
+                  <div id="step-7" class="" >
+                     <div class="step-title" data-stepnumber="7">
+                        <h3>Step 7: <span id="proposal-title-7" class="proposal-title-7">Assumptions</span></h3>
+                        <button title="Assumptions" id="edit-title-7" class="edit-title btn" data-step="7"><i class="fa fa-edit"></i></button>
+                        <div class="pull-right right-btn-hldr">
+                           <button class="btn btn-secondary import" mid="assumptionModal">Import</button>
+                        </div>
+                     </div>
+                     <div class="form-section">
+                        <label>Description</label>
+                        <!-- <textarea class="assumptions" name="assumptions"></textarea> -->
+                        <div id="assumptions"></div>
+                        <span id="assumptions_err" class="error_message"></span>
+                     </div>
+                  </div>
+                  <div id="step-8" class="">
+                     <div class="step-title"  data-stepnumber="8">
+                        <h3>Step 8: <span id="proposal-title-8" class="proposal-title-8">Out Of Scope</span></h3>
+                        <button title="Out Of Scope" id="edit-title-8" class="edit-title btn" data-step="8"><i class="fa fa-edit"></i></button>
+                        <div class="pull-right right-btn-hldr">
+                           <button class="btn btn-secondary import" mid="OutOfScope">Import</button>
+                        </div>
+                     </div>
+                     <div class="form-section">
+                        <label>Description</label>
+                        <!-- <textarea class="out_of_scope" name="out_of_scope"></textarea> -->
+                        <div id="out_of_scope"></div>
+                        <span id="OutOfScope_err" class="error_message"></span>
+                     </div>
+                  </div>
+                  <div id="step-9" class="" >
+                     <div class="step-title" data-stepnumber="9">
+                        <h3>Step 9: <span id="proposal-title-9" class="proposal-title-9" >Technology and Environment</span></h3>
+                        <button title="Technology and Environment" id="edit-title-9" class="edit-title btn" data-step="9"><i class="fa fa-edit"></i></button>
+                     </div>
+                     <div class="form-section tech-sec">
+                        <div class="row">
+                           <div class="col-md-4">
+                              <div class="form-group medium technology_title">
+                                 <label>Technology</label>
+                                 <div class="input-group">
+                                    <div id="Technology"></div>
+                                 </div>
+                                 <small class="text-danger technology_error_message"></small>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group medium environment_title">
+                                 <label>Environment</label>
+                                 <div class="input-group">
+                                    <div id="Environment"></div>
+                                 </div>
+                                 <small class="text-danger environment_error_message"></small>
+                              </div>
+                           </div>
+                           <div class="col-md-4">
+                              <div class="form-group medium backend_title">
+                                 <label>Backend</label>
+                                 <div class="input-group">
+                                    <div id="Backend"></div>
+                                 </div>
+                                 <small class="text-danger backend_error_message"></small>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div id="step-10" class="" >
+                     <div class="step-title" data-stepnumber="10">
+                        <h3>Step 10: <span id="proposal-title-10" class="proposal-title-10">Other Notes</span></h3>
+                        <button title="Other Notes" id="edit-title-10" class="edit-title btn" data-step="10"><i class="fa fa-edit"></i></button>
+                        <div class="pull-right right-btn-hldr">
+                           <button class="btn btn-secondary import" data-toggle="modal" mid="OtherNotes">Import</button>
+                        </div>
+                     </div>
+                     <div class="form-section">
+                        <label>Description</label>
+                        <!-- <textarea class="other_notes" name="other_notes"></textarea> -->
+                        <div id="other_notes"></div>
+                        <span id="OtherNotes_err" class="error_message"></span>
+                     </div>
+                  </div>
+                  <div id="step-11" class="" >
+                     <div class="step-title" data-stepnumber="11">
+                        <h3>Step 11: <span id="proposal-title-11" class="proposal-title-11">Suggestions</span></h3>
+                        <button title="Suggestions" id="edit-title-11" class="edit-title btn" data-step="11" onclick="edit_label()"><i class="fa fa-edit"></i></button>
+                        <div class="pull-right right-btn-hldr">
+                           <button class="btn btn-secondary import" data-toggle="modal"
+                              mid="Suggestions">Import</button>
+                        </div>
+                     </div>
+                     <div class="form-section">
+                        <label>Description</label>
+                        <!-- <textarea class="suggestions" name="suggestions"></textarea> -->
+                        <div id="suggestionsTextArea"></div>
+                        <span id="suggestions_err" class="error_message"></span>
+                     </div>
+                  </div>
+                  <div id="step-12" class="" >
+                     <div class="step-title" data-stepnumber="12">
+                        <h3>Step12: <span>Project Deliverables</span></h3>
+                     </div>
+                     <div class="form-section" id="form-block">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Projects / Features<span class="error_message"> *</span></label>
+                                 <select title="Projects / Features" class="form-control DeliverableProjectPhase DeliverableError"
+                                    id="DeliverableProjectPhase">
+                                 </select>
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <div class="row">
+                                    <div class="col-md-6">
+                                       <label>Approx. Delivery Days<span class="error_message"> *</span></label>
+                                       <input title="Approx. Delivery Days" placeholder="Approx. Delivery Days" type="number" min="0" class="form-control DeliverableError"
+                                          id="DeliverableDays" name="DeliverableDays">
+                                       <span class="error_message"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                       <label>Benchmark<span class="error_message"> *</span></label>
+                                       <select title="Benchmark" id="DelivarbleReasons"
+                                          class="form-control DeliverableError DeliverableDescription">
+                                       </select>
+                                       <span class="error_message"></span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6"></div>
+                           <div class="col-md-6 text-right">
+                              <button class="btn btn-md btn-secondary"
+                                 onclick="DeliverableclearAndShow()">Cancel</button>
+                              <button id="AddDeliverables" class="btn btn-md btn-primary"
+                                 onclick="insertDeliverables()">Add</button>
+                           </div>
+                        </div>
+                        <div class="table-sec">
+                           <h3>Project Deliverables</h3>
+                           <div id="displayDeliverableProjectPhase"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div id="step-13" class="" >
+                     <div class="step-title" data-stepnumber="13">
+                        <h3>Step13: <span>Assign</span></h3>
+                     </div>
+                     <div class="form-section">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Action</label>
+                                 <select class="form-control Assign" id="Assign">
+                                 </select>
+
+                              </div>
+                              <span id="assign_err" class="error_message"></span>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Employee</label>
+                                 <select class="form-control employees_list" id="assign_employee">
+                                 </select>
+
+                              </div>
+                              <span id="assign_emplyoee_err" class="error_message"></span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!--POP-UP RFP MODAL ENDS HERE -->
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="assumptionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="myModalLabel">Assumptions</h2>
+         </div>
+         <div class="modal-body" data-simplebar>
+            <label class="container selectall"><span class="slect-label">Select All</span>
+               <input type="checkbox" id="select_all">
+               <span class="checkmark"></span>
+            </label>
+            <div id="content-1" class="content checklist displayDefaultAssumptions">
+            </div>
+            <div class="text-right">
+               <button class="btn btn-secondary" id="importAssumption">Import</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="OutOfScope" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="myModalLabel">Out of Scope</h2>
+         </div>
+         <div class="modal-body" data-simplebar>
+            <label class="container selectall"> <span class="slect-label">Select All</span>
+               <input type="checkbox" id="OutOfScope_select_all">
+               <span class="checkmark"></span>
+            </label>
+            <div id="content-2" class="content mCustomScrollbar checklist displayDefaultOutOfScope">
+            </div>
+            <div class="text-right">
+               <button class="btn btn-secondary" id="importOutOfScope">Import</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="OtherNotes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="myModalLabel">Other Notes</h2>
+         </div>
+         <div class="modal-body" data-simplebar>
+            <label class="container selectall"> <span class="slect-label">Select All</span>
+               <input type="checkbox" id="OtherNotes_select_all">
+               <span class="checkmark"></span>
+            </label>
+            <div id="content-3" class="content mCustomScrollbar checklist displayDefaultOtherNotes">
+            </div>
+            <div class="text-right">
+               <button class="btn btn-secondary" id="importOtherNotes">Import</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="Suggestions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="myModalLabel">Suggestions</h2>
+         </div>
+         <div class="modal-body" data-simplebar>
+            <label class="container selectall"> <span class="slect-label">Select All</span>
+               <input type="checkbox" id="Suggestions_select_all">
+               <span class="checkmark"></span>
+            </label>
+            <div id="content-4" class="content mCustomScrollbar checklist displayDefaultSuggestions">
+            </div>
+            <div class="text-right">
+               <button class="btn btn-secondary" id="importSuggestions">Import</button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+<!-- IMPORT MODAL STARTS HERE -->
+
+<!-- IMPORT MODAL ENDS HERE -->
+<div class="modal fade" id="assignProposalModal" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true" id="btn_assign_proposal_close">&times;</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="assignProposalModalTitle">Assign Proposal</h2>
+            
+         </div>
+         <div class="modal-body" data-simplebar id="assign_rfp_modal_content">
+            <div class="form-section">
+               <div class="row">
+                  <div class="col-md-12">
+                     <p style="font-size: 16pt !important;"><b>Assign:</b></p>
+                     <hr>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Action</label>
+                        <select class="form-control Assign" id="assignProposalDropDown">
+                        </select>
+
+                     </div>
+                     <span id="assignProposal_err" class="error_message"></span>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="form-group">
+                        <label>Employee</label>
+                        <select class="form-control employeelist" id="assignProposalEmployeeDropDown">
+                        </select>
+
+                     </div>
+                     <span id="assignProposal_err" class="error_message"></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-md btn-primary" id="btnAssignProposal" onclick="assignProposalSave()">Save</button>
+            <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!--POP-UP COMMENTS HISTORY STARTS HERE-->
+
+<div class="modal proposal-popup fade" id="commentsHistoryProposalModal" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true" id="btn_comments_proposal_close">&times;</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="commentsHistoryProposalModalTitle">Comments And Documents</h2>           
+         </div>
+         <div class="modal-body" data-simplebar id="comments_proposal_modal_content">
+            <div class="form-section">
+             <div class="row">
+               <div class="col-md-12">
+                  <input type="hidden" id="proposal_RFPID">
+                  <label>Comments history</label>
+                  <div class="rfp_history_lists" id="proposal_comments_history">
+                     <!-- Comments and Documents History Will be displayed here.. -->
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                   <label>Files</label>
+                   <div id="proposal_dropzone">
+                       <form class="dropzone needsclick dz-clickable" id="proposal_document_upload"
+                           method="post" enctype="multipart/form-data">
+                           <div class="dz-message needsclick">
+                               <small>Drop files here or click to upload.</small><br />
+                           </div>
+                       </form>
+                       <span class="error_message proposalDocumentError"></span>
+                   </div>
+               </div>
+               <div class="col-md-6">
+                   <label>Comments :</label>
+                   <!-- <textarea class="form-control" rows="5" id="proposal_Description_ckeditor"
+                       name='proposal_Description_ckeditor'></textarea> -->
+                     <div id="proposal_Description_ckeditor"></div>
+                     <span id="proposal_Description_ckeditor_err" class="error_message"></span>
+               </div>
+            </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <input type="button" class="btn btn-md btn-secondary"  data-dismiss="modal" value="Cancel" id="proposal_reassign_cancel">
+            <input type="button" class="btn btn-md btn-primary" value="Save" id="proposal_save">
+         </div>
+      </div>
+   </div>
+ </div>
+ <!--POP-UP COMMENTS HISTORY ENDS HERE-->
+
+ <!-- POP-UP FOR DELETE RFP  -->
+ <div class="modal fade" id="deleteProposalModal" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true" id="btn_delete_proposal_close">&times;</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="deleteProposalModalTitle"></h2>
+         </div>
+         <span id="ProposalId" style="display: none;"></span>
+         <span id="RFPICode" style="display: none;"></span>
+         <div class="modal-body" data-simplebar id="delete_rfp_modal_content">
+            <div class="form-section">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="form-group">
+                        <label>Status *</label>
+                        <select class="form-control Delete" id="deleteProposalDropDown">
+                        </select>
+                     </div>
+                     <span id="deletestatus_err" class="error_message"></span>
+                     <div class="form-group">
+                        <label>Comments *</label><br/>
+                        <!-- <textarea class="form-control ckeditor" name="deleteProposal_comment" id="deleteProposal_comment">
+                        </textarea> -->
+                        <div id="deleteProposal_comment_dxEditor"></div>
+                     </div>
+                     <span id="deleteProposal_err" class="error_message"></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-md btn-primary" id="btnDeleteProposal" onclick="close_proposal()">Save</button>
+            <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- POP-UP FOR DELETE RFP ENDS -->
+
+ <!-- POP-UP FOR DELETE RFP  -->
+ <div class="modal fade" id="CloneProposalModal" role="dialog" aria-labelledby="myModalLabel">
+</div>
+<!-- POP-UP FOR clone RFP ENDS -->
+
+<!-- For PDF content -->
+<div id="pdf_content" style="display: none;">
+</div>
+
+<script>
+   var deleteProposal_comment_dxEditor;
+
+   $(document).ready(function () {
+      Dropzone.autoDiscover = false;
+      var ProposalDocumentUpload = new Dropzone("#proposal_document_upload", {
+         addRemoveLinks: true,
+         uploadMultiple: true,
+         autoProcessQueue: false,
+         url: saveProposalDocuments,
+      });
+      // CKEDITOR.replace( "deleteProposal_comment" );
+
+      deleteProposal_comment_dxEditor = $('#deleteProposal_comment_dxEditor').dxHtmlEditor({
+		height: 300,
+		value: '',
+		toolbar: {
+		items: [
+			'undo', 'redo', 'separator',
+			{
+			name: 'size',
+			acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+			},
+			{
+			name: 'font',
+			acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+			},
+			'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+			'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+			'orderedList', 'bulletList', 'separator',
+			{
+			name: 'header',
+			acceptedValues: [false, 1, 2, 3, 4, 5],
+			}, 'separator',
+			'color', 'background', 'separator',
+			'link', 'image', 'separator',
+			'clear', 'codeBlock', 'blockquote', 'separator',
+			'insertTable', 'deleteTable',
+			'insertRowAbove', 'insertRowBelow', 'deleteRow',
+			'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+		],
+		},
+		mediaResizing: {
+		enabled: true,
+		},
+	}).dxHtmlEditor('instance');
+	deleteProposal_comment_dxEditor.option('toolbar.multiline', true);
+
+   });
+   var ProposalId = localStorage.getItem('ProposalId');
+   var ProposalSecurityToken = localStorage.getItem("securityToken");
+   function proposalDropzoneRemoveFiles() {
+      Dropzone.forElement("#proposal_document_upload").removeAllFiles(true);
+   }
+
+function saveProposalDocuments(RfpId) 
+{
+  var proposalDocumentFiles = $('#proposal_document_upload').get(0).dropzone.getAcceptedFiles();
+  if (proposalDocumentFiles.length > 0) {
+    for (i = 0; i < proposalDocumentFiles.length; i++) {
+      var FileExtensions = proposalDocumentFiles[i].name.slice((Math.max(0, proposalDocumentFiles[i].name.lastIndexOf(".")) || Infinity) + 1);
+      var FileTypes = proposalDocumentFiles[i].type;
+      var FileNames = proposalDocumentFiles[i].name.substr(0, proposalDocumentFiles[i].name.lastIndexOf("."));
+      var proposalDocumentsFormData = new FormData();
+      proposalDocumentsFormData.append('file', proposalDocumentFiles[i]);
+      var Contentdetails =
+        [{
+          "DocumentTypeId": RfpId,
+          "DocumentType": "RFP",
+          "DocumentName":FileNames,
+          "Extension": FileExtensions,
+          "ContentType": FileTypes
+        }]
+
+        proposalDocumentsFormData.append('Contentdetails', JSON.stringify(Contentdetails));
+        var SaveProposalDocumentsResult = postFileGeneric(proposalDocumentsFormData);
+    }
+  }
+}
+
+// Dx Editor - User Story
+var userStoryDxEditor = $('#user_story').dxHtmlEditor({
+		height: 500,
+		value: '',
+		toolbar: {
+		items: [
+			'undo', 'redo', 'separator',
+			{
+			name: 'size',
+			acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+			},
+			{
+			name: 'font',
+			acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+			},
+			'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+			'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+			'orderedList', 'bulletList', 'separator',
+			{
+			name: 'header',
+			acceptedValues: [false, 1, 2, 3, 4, 5],
+			}, 'separator',
+			'color', 'background', 'separator',
+			'link', 'image', 'separator',
+			'clear', 'codeBlock', 'blockquote', 'separator',
+			// 'insertTable', 'deleteTable',
+			// 'insertRowAbove', 'insertRowBelow', 'deleteRow',
+			// 'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+		],
+		},
+		mediaResizing: {
+		enabled: true,
+		},
+	}).dxHtmlEditor('instance');
+	userStoryDxEditor.option('toolbar.multiline', true);
+
+// Dx Editor - Estimate Pricing
+var estimate_pricingDxEditor= $('#estimate_pricing').dxHtmlEditor({
+		height: 500,
+		value: '',
+		toolbar: {
+		items: [
+			'undo', 'redo', 'separator',
+			{
+			name: 'size',
+			acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+			},
+			{
+			name: 'font',
+			acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+			},
+			'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+			'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+			'orderedList', 'bulletList', 'separator',
+			{
+			name: 'header',
+			acceptedValues: [false, 1, 2, 3, 4, 5],
+			}, 'separator',
+			'color', 'background', 'separator',
+			'link', 'image', 'separator',
+			'clear', 'codeBlock', 'blockquote', 'separator',
+			// 'insertTable', 'deleteTable',
+			// 'insertRowAbove', 'insertRowBelow', 'deleteRow',
+			// 'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+		],
+		},
+		mediaResizing: {
+		enabled: true,
+		},
+	}).dxHtmlEditor('instance');
+	estimate_pricingDxEditor.option('toolbar.multiline', true);
+
+// Dx Editor - Assumption
+var assumptionsDxEditor= $('#assumptions').dxHtmlEditor({
+   height: 500,
+   value: '',
+   toolbar: {
+   items: [
+      'undo', 'redo', 'separator',
+      {
+      name: 'size',
+      acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+      },
+      {
+      name: 'font',
+      acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+      },
+      'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+      'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+      'orderedList', 'bulletList', 'separator',
+      {
+      name: 'header',
+      acceptedValues: [false, 1, 2, 3, 4, 5],
+      }, 'separator',
+      'color', 'background', 'separator',
+      'link', 'image', 'separator',
+      'clear', 'codeBlock', 'blockquote', 'separator',
+      // 'insertTable', 'deleteTable',
+      // 'insertRowAbove', 'insertRowBelow', 'deleteRow',
+      // 'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+   ],
+   },
+   mediaResizing: {
+   enabled: true,
+   },
+}).dxHtmlEditor('instance');
+assumptionsDxEditor.option('toolbar.multiline', true);
+
+// Dx Editor - Out of Scope
+var out_of_scopeDxEditor= $('#out_of_scope').dxHtmlEditor({
+   height: 500,
+   value: '',
+   toolbar: {
+   items: [
+      'undo', 'redo', 'separator',
+      {
+      name: 'size',
+      acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+      },
+      {
+      name: 'font',
+      acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+      },
+      'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+      'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+      'orderedList', 'bulletList', 'separator',
+      {
+      name: 'header',
+      acceptedValues: [false, 1, 2, 3, 4, 5],
+      }, 'separator',
+      'color', 'background', 'separator',
+      'link', 'image', 'separator',
+      'clear', 'codeBlock', 'blockquote', 'separator',
+      // 'insertTable', 'deleteTable',
+      // 'insertRowAbove', 'insertRowBelow', 'deleteRow',
+      // 'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+   ],
+   },
+   mediaResizing: {
+   enabled: true,
+   },
+}).dxHtmlEditor('instance');
+out_of_scopeDxEditor.option('toolbar.multiline', true);
+
+// Dx Editor - Suggestions
+var suggestionsDxEditor= $('#suggestionsTextArea').dxHtmlEditor({
+   height: 500,
+   value: '',
+   toolbar: {
+   items: [
+      'undo', 'redo', 'separator',
+      {
+      name: 'size',
+      acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+      },
+      {
+      name: 'font',
+      acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+      },
+      'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+      'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+      'orderedList', 'bulletList', 'separator',
+      {
+      name: 'header',
+      acceptedValues: [false, 1, 2, 3, 4, 5],
+      }, 'separator',
+      'color', 'background', 'separator',
+      'link', 'image', 'separator',
+      'clear', 'codeBlock', 'blockquote', 'separator',
+      // 'insertTable', 'deleteTable',
+      // 'insertRowAbove', 'insertRowBelow', 'deleteRow',
+      // 'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+   ],
+   },
+   mediaResizing: {
+   enabled: true,
+   },
+}).dxHtmlEditor('instance');
+suggestionsDxEditor.option('toolbar.multiline', true);
+
+// Dx Editor - Other Notes
+var other_notesDxEditor= $('#other_notes').dxHtmlEditor({
+   height: 500,
+   value: '',
+   toolbar: {
+   items: [
+      'undo', 'redo', 'separator',
+      {
+      name: 'size',
+      acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+      },
+      {
+      name: 'font',
+      acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+      },
+      'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+      'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+      'orderedList', 'bulletList', 'separator',
+      {
+      name: 'header',
+      acceptedValues: [false, 1, 2, 3, 4, 5],
+      }, 'separator',
+      'color', 'background', 'separator',
+      'link', 'image', 'separator',
+      'clear', 'codeBlock', 'blockquote', 'separator',
+      // 'insertTable', 'deleteTable',
+      // 'insertRowAbove', 'insertRowBelow', 'deleteRow',
+      // 'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+   ],
+   },
+   mediaResizing: {
+   enabled: true,
+   },
+}).dxHtmlEditor('instance');
+other_notesDxEditor.option('toolbar.multiline', true);
+
+var proposal_comments_history = $('#proposal_Description_ckeditor').dxHtmlEditor({
+   height: 500,
+   value: '',
+   toolbar: {
+   items: [
+      'undo', 'redo', 'separator',
+      {
+      name: 'size',
+      acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+      },
+      {
+      name: 'font',
+      acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+      },
+      'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+      'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+      'orderedList', 'bulletList', 'separator',
+      {
+      name: 'header',
+      acceptedValues: [false, 1, 2, 3, 4, 5],
+      }, 'separator',
+      'color', 'background', 'separator',
+      'link', 'image', 'separator',
+      'clear', 'codeBlock', 'blockquote', 'separator',
+      // 'insertTable', 'deleteTable',
+      // 'insertRowAbove', 'insertRowBelow', 'deleteRow',
+      // 'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+   ],
+   },
+   mediaResizing: {
+   enabled: true,
+   },
+}).dxHtmlEditor('instance');
+proposal_comments_history.option('toolbar.multiline', true);
+
+// try {
+//     CKEDITOR.instances['proposal_Description_ckeditor'].destroy();
+//   } catch (e) {
+//   }
+
+//   var proposal_Description_ckeditor = CKEDITOR.replace(
+//     "proposal_Description_ckeditor",
+//     {});
+
+//   proposal_Description_ckeditor.on("paste", function (evt) {
+//     if (evt.data.dataTransfer.getFilesCount() > 0) {
+//         var proposalDescriptionFile = evt.data.dataTransfer.getFile(0);
+//         var proposalDescriptionReader = new FileReader();
+//         proposalDescriptionReader.onload = function (evt) {
+//             var proposalDescriptionPictureElement = proposal_Description_ckeditor.document.createElement(
+//                 "img",
+//                 {
+//                     attributes: {
+//                         src: evt.target.result
+//                     }
+//                 }
+//             );
+
+//             setTimeout(function () {
+//                 proposal_Description_ckeditor.insertElement(
+//                   proposalDescriptionPictureElement
+//                 );
+//             }, 0);
+//         };
+//         proposalDescriptionReader.readAsDataURL(proposalDescriptionFile);
+//     }
+//   });
+//   $("#proposal_reassign_cancel").on("click", function () {
+//   CKEDITOR.instances.proposal_Description_ckeditor.setData("");
+//   proposalDropzoneRemoveFiles();
+// });
+function saveProposalComments(RFPId, comments) {
+  var comments = {
+    Token: ProposalSecurityToken,
+    RFPId: RFPId,
+    Comments: comments,
+    IsActive: true
+  };
+
+  data = {
+    Method: "PostCommentsinRFP",
+    Data: comments
+  };
+  var postComments = PostDataCall(data);
+}
+$('#proposal_save').on('click', () => {
+   // debugger
+   saveProposalDocuments($('#proposal_RFPID').val());
+    if (proposal_comments_history.option("value") != "") {
+      saveProposalComments($('#proposal_RFPID').val(), proposal_comments_history.option("value"));
+      openCommentsHistoryForProposals($('#proposal_RFPID').val(), 'demo');
+      proposalDropzoneRemoveFiles();
+      proposal_comments_history.option("value","");
+    }
+})
+// var user_story_txt = CKEDITOR.instances.user_story.getData();
+    $('#user_story').on('change', () => {
+      //   debugger
+        if (user_story_txt == '') {
+            $("#user_story_err").html('Please Write User Story for better Understanding.');
+        } else {
+            $("#user_story_err").html('');
+        }
+
+    })
+
+</script>
+
+<script type="text/javascript" src="components/proposals/js/proposal.js"></script>
+<script type="text/javascript" src="components/proposals/js/userstory.js"></script>
+<script type="text/javascript" src="components/proposals/js/estimate_pricing.js"></script>
+<!-- For PDF content -->
+
+<script type="text/javascript">
+   //PDF onload
+   $("#pdf_content").load("components/proposals/pdf.html");
+
+   try {
+      // CKEDITOR.instances['user_story'].destroy(true);
+      // CKEDITOR.instances['assumptions'].destroy(true);
+      // CKEDITOR.instances['out_of_scope'].destroy(true); 
+      // CKEDITOR.instances['other_notes'].destroy(true);
+      // CKEDITOR.instances['suggestions'].destroy(true);
+      // CKEDITOR.instances['estimate_pricing'].destroy(true);
+   } catch (e) { }
+
+   // var user_story = CKEDITOR.replace('user_story', {});
+   var user_story = userStoryDxEditor.option("value", '');
+   // var estimate_pricing = CKEDITOR.replace('estimate_pricing');
+   var estimate_pricing = estimate_pricingDxEditor.option("value", '');
+   var assumptions = assumptionsDxEditor.option("value", '');
+   var out_of_scope = out_of_scopeDxEditor.option("value", '');
+   var other_notes = other_notesDxEditor.option("value", '');
+   var suggestions = suggestionsDxEditor.option("value", '');
+
+   $('#proposalDate').datepicker({
+      format: "yyyy-mm-dd",
+      endDate: new Date(),
+      autoclose: true
+   });
+   if ($('#proposalDate').val() == "") {
+      var date = new Date()
+      yr = date.getFullYear(),
+      month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth(),
+      day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
+      current_Date = yr + '-' + month + '-' + day;
+      /*alert(current_Date);*/
+      $('#proposalDate').val(current_Date);
+      // $('#proposalDate1').val(current_Date);  
+   }
+
+   /* This is proposal listing scripts  */
+   // $(window).on("load", function () {
+   //    getProposalList();
+   // });
+   $(document).ready(function () {
+      getProposalList();
+   });
+
+   /* This is proposal listing scripts  */
+
+   /* RFP Related queries*/
+   $(document).ready(function () {
+      $('#smartwizard').smartWizard({
+         showStepURLhash: false,
+         keyNavigation: false,
+         anchorSettings: {
+            anchorClickable: true,
+            enableAllAnchors        :   true, 
+            markDoneStep            :   true,
+            enableAnchorOnDoneStep  :   true ,
+         },
+         toolbarSettings: {
+            toolbarExtraButtons:
+               [
+                  $('<button></button>').text('Preview')
+                     .addClass('btn btn-info previewButton hidden-btn')
+                     .attr('id', 'proposal_preview_btn')
+                     .on('click', function () {
+                        generateProposalPdf()
+                     }),
+                  $('<button></button>').text('Assign')
+                     .addClass('btn btn-info assignButton hidden-btn')
+                     .attr('id', 'proposal_assign_btn')
+                     .on('click', function () {
+                        var ProposalId = localStorage.getItem('ProposalId');
+                        assignProposalData(ProposalId)
+                     }),
+                  $('<button></button>').text('Finish')
+                     .addClass('btn btn-success finishButton hidden-btn')
+                     .on('click', function () {
+                        var ProposalId = localStorage.getItem('ProposalId');
+                        // assignProposalData(ProposalId)
+                       AddAssign();
+                     })
+               ]
+         }
+      });
+
+      $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection) {
+
+         if(stepNumber>stepNumberForAssign){
+            stepNumberForAssign = stepNumber;
+         }
+         else{
+            stepNumberForAssign = stepNumberForAssign;
+         }
+         // add class to highlight steps no in rfp to proposal steps
+         /**$(".nav-item.active>a.nav-link>span").mouseover(function() {
+           $('.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover').css('background-color','red');
+         }).mouseout(function() {
+             $('.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover').css('background-color','red');
+         });**/
+
+         $('.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover').css('background-color', '#46ad46');
+         $('.nav-tabs > li.done > a, .nav-tabs > li.done > a:focus, .nav-tabs > li.done > a:hover').css('background-color', '#eee');
+         // end
+            if(stepNumber > 2 && stepNumber < 12){
+               $('.assignButton').removeClass('hidden-btn');
+            }
+            else{
+               $('.assignButton').addClass('hidden-btn');
+            }
+            if (stepNumber == 12) {
+               GetAssignDropdown('Assign');
+               $('.finishButton').removeClass('hidden-btn');
+               $('.sw-btn-next').addClass('hidden-btn');
+               $('.previewButton').removeClass('hidden-btn');
+            } else {
+               $('.finishButton').addClass('hidden-btn');
+               $('.sw-btn-next').removeClass('hidden-btn');
+               $('.previewButton').addClass('hidden-btn');
+            }
+      });
+
+      $("#smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
+         new SimpleBar(document.getElementById('RfpModalBody'));
+         if(stepNumber>stepNumberForAssign){
+            stepNumberForAssign = stepNumber;
+         }
+         else{
+            stepNumberForAssign = stepNumberForAssign;
+         }
+         // get proposal id from local storage
+         var localStorageProposalId = localStorage.getItem('ProposalId');
+         var SetProposalId = "";
+         if (localStorageProposalId != "") {
+            SetProposalId = localStorageProposalId;
+         }
+
+         var stakeholderType = localStorage.getItem('stakeholderType');
+         
+         var Holdertype = "P";
+         if (stakeholderType != null) {
+            Holdertype = stakeholderType;
+         }
+      
+
+         // if user clicks on edit button , here we handling the condition //
+         var editEnable = $('.edit_enable').val();
+         if (editEnable == 1 && stepDirection == "forward") {
+            $('.edit_enable').val(0);
+            smartwizstep = $('.smartwizstep').val();
+            //PDF preview list
+            localStorage.setItem('edit_step_number', Number(smartwizstep))
+            ////console.log("preview list");
+            setPdfdetailsforPreview();
+            RfpStepCallAction(Number(smartwizstep), SetProposalId);
+            return true;
+         }
+         else {
+            var currentStep = stepNumber + 1;
+            if (stepDirection == "forward") {
+               
+               switch (stepNumber) {
+                  case 0:
+                     var clientDetails = AddClientDetails();
+                     // if (!clientDetails) {
+                     //    return false;
+                     // }
+                     SetProposalId = localStorage.getItem('ProposalId');
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     GetEstimateCreators(SetProposalId);
+                     break;
+
+                  case 1:
+                     GetEstimateCreators(SetProposalId);
+                     GetUserStoryandUnderstand(SetProposalId);
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     return true;
+                     break;
+
+                  case 2:
+                     var userStory = AddUserStory();
+                     // if (!userStory) {
+                     //    return false;
+                     // }
+                     GetProjectPhases('project-phases');
+                     displayProjectPhase();
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     break;
+
+                  case 3:
+                     displayEstimateProjectDetails();
+                     displayEstimateHeader(SetProposalId,currentStep);
+                     // var checkEstimate = GetAddedProjectPhases();
+                     // if (checkEstimate.length == 0) {
+                     //    alert("Please add atleast one project record!");
+                     //    return false;
+                     // }
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     break;
+
+                  case 4:
+                     var success_currency = displayEstimatePricing();
+                     AddEstimateHeader(SetProposalId);
+                     /*alert(success_currency);*/
+                     GetCurrencies('currency');
+                     $('.currency').val(success_currency);
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     break;
+
+                  case 5:
+                     $("#pdf_EstimatePricing").html($("#displayEstimatePricing").html());
+                     GetDefaultAssumptions();
+                     GetAssumptionForRFP(SetProposalId);
+                     var est_result = post_EstimatePricing();
+                     //console.log(est_result);
+                     // if (!est_result) {
+                     //    return false;
+                     // }
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     break;
+
+                  case 6:
+                     var ass_valid = AddAssumptions();
+                     // if (!ass_valid) {
+                     //    return false;
+                     // }
+                     GetDefaultOutOfScope();
+                     GetOutofScopesForRFP(SetProposalId)
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+
+                     break;
+
+                  case 7:
+                     var oos_valid = AddOutOfScope();
+                     // if (!oos_valid) {
+                     //    return false;
+                     // }
+                     techdata('technology', 'GetTechnology');
+                     techdata('environment', 'GetEnvironment');
+                     techdata('backend', 'GetBackend');
+                     getTech();
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+
+                     break;
+
+                  case 8:
+                     var TechData = AddTechData();
+                     if (!TechData) {
+                        return false;
+                     }
+                     GetDefaultOtherNotes();
+                     GetOtherNotesForRFP(SetProposalId);
+                     var get_pdf_Technology = $("#added_technology").html();
+                     var get_pdf_Environment = $("#added_environment").html();
+                     var get_pdf_Backend = $("#added_backend").html();
+                     $("#pdf_Technology").html(get_pdf_Technology);
+                     $("#pdf_Environment").html(get_pdf_Environment);
+                     $("#pdf_BackEnd ").html(get_pdf_Backend);
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     break;
+
+                  case 9:
+                     var on_valid = AddOtherNotes();
+                     // if (!on_valid) {
+                     //    return false;
+                     // }
+                     GetDefaultSuggestions();
+                     GetSuggestionsForRFP(SetProposalId);
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     break;
+
+                  case 10:
+                     var sugg_valid = AddSuggestions();
+                     // if (!sugg_valid) {
+                     //    return false;
+                     // }
+                     GetDeliverableProjectPhases('DeliverableProjectPhase');
+                     GetProjectDeliverableByDescription('DeliverableDescription');
+                     displayDeliverableProjectPhase();
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+
+                     break;
+
+                  case 11:
+                     GetEmployeesByAssignType("", "employees_list");
+                     GetAssignDropdown('Assign');
+                     // var checkDeliverables = GetAddedDeliverableProjectPhases();
+                     // // if (checkDeliverables.length == 0) {
+                     // //    alert("Please add atleast one project record!");
+                     // //    return false;
+                     // // }
+                     PostProposalStakeholders(SetProposalId, currentStep, Holdertype);
+                     break;
+
+                  case 12:
+                  var Assign_type = $('#Assign').val();
+                    AddAssign();
+                    PostProposalStakeholders(SetProposalId, currentStep, Assign_type);
+                     break;
+                  default:
+
+                     break;
+               }
+            }
+            else if (stepDirection == "backward") {
+               new SimpleBar(document.getElementById('RfpModalBody'));
+               switch (stepNumber) {
+                  case 1:
+                     GetEstimateRFPDetails(SetProposalId);
+                     break;
+
+                  case 2:
+                     GetEstimateCreators(SetProposalId);
+                     break;
+
+                  case 3:
+                     GetUserStoryandUnderstand(SetProposalId);
+                     break;
+
+                  case 4:
+                     GetProjectPhases('project-phases');
+                     displayProjectPhase();
+                     break;
+
+                  case 5:
+                  currentStep = 5;
+                     displayEstimateHeader(SetProposalId,currentStep);
+                     displayEstimateProjectDetails();
+                     break;
+
+                  case 6:
+                     var success_currency = displayEstimatePricing();
+                     GetCurrencies('currency');
+                     $('.currency').val(success_currency);
+                     break;
+
+                  case 7:
+                     GetDefaultAssumptions();
+                     GetAssumptionForRFP(SetProposalId);
+                     break;
+
+                  case 8:
+                     GetDefaultOutOfScope();
+                     GetOutofScopesForRFP(SetProposalId);
+                     break;
+
+                  case 9:
+                     techdata('technology', 'GetTechnology');
+                     techdata('environment', 'GetEnvironment');
+                     techdata('backend', 'GetBackend');
+                     getTech();
+                     break;
+
+                  case 10:
+                     GetDefaultOtherNotes();
+                     GetOtherNotesForRFP(SetProposalId);
+                     break;
+
+                  case 11:
+                     GetDefaultSuggestions();
+                     GetSuggestionsForRFP(SetProposalId);
+                     break;
+
+                  case 12:
+                     GetDeliverableProjectPhases('DeliverableProjectPhase');
+                     GetProjectDeliverableByDescription('DeliverableDescription');
+                     displayDeliverableProjectPhase();
+
+                     break;
+
+                  default:
+                     break;
+               }
+            }
+         }
+      });
+
+
+      $("#content-1, #content-2, #content-3, #content-4").mCustomScrollbar({
+         theme: "minimal"
+      });
+
+   });
+
+   function RfpModal() {
+      // Remove duplicate  highlights disappear in rfp to proposal
+      $('.nav-link').css('background-color', '#eee');
+      //end
+      localStorage.removeItem("ProposalId");
+      localStorage.removeItem("stakeholderType");
+      $('.form-control').removeClass('required_field');
+      $('.error_message').html('');
+
+      $('#RfpModal').modal("show");
+      GetRFPs('ProposalRfplist');
+      $('.proposalError').val('');
+      $('#address').val('');
+
+      //Reset the RFP model step
+      $("#smartwizard").smartWizard('reset');
+   }
+
+   $('.import').click(function () {
+      var modalId = $(this).attr('mid');
+      $('#' + modalId).modal("show");
+   });
+
+   function ProposalSwal(titleParam,textParam,iconParam){
+      var data = {
+         title: titleParam,
+         text: textParam,
+         icon: iconParam
+      }
+      swal({
+         title: data.title,
+         text: data.text,
+         icon: data.icon,
+         button:"OK"
+         });   
+   }
+
+   //function openRfpPdf() {
+      //window.open('files/proposal.pdf', '_blank');
+      //printPdfList(); 
+   //};
+   /* RFP Related queries*/
+
+
+   // Code for Editing Heading for the steps 3 ,5 to 11
+      $('.edit-title').click(function () {
+         var step_number = $(this).data("step");
+
+            var labelvalue = $("#proposal-title-"+step_number).html();
+            $('#proposal-title-'+step_number).html("<input type='text' id='step-title-"+step_number+"' value='"+labelvalue+"'>");
+            $('#edit-title-'+step_number).hide();
+
+               $('#step-title-'+step_number).focusout(function () {
+                  var title = $('#step-title-'+step_number).val();
+                  $('#proposal-title-'+step_number).html(title);
+                  $('#edit-title-'+step_number).show();
+               });
+      }); 
+
+   
+   $(document).ready(function () {
+      var current_status = true;
+      $('#EstimationTable').val(1);
+      $("#switchContainer").dxSwitch({
+         value: current_status,
+         switchedOnText:'Show',
+         switchedOffText:'Hide',
+         onValueChanged: function(data) {
+            Switchcolor(data.value);
+            console.log(data.value,'data');
+         },
+      });
+   });
+
+   function Switchcolor(status){
+      if (status === true) {
+         $('#EstimationTable').val(1);
+         $('.estimation_pricing').show();
+      } else if(status === false) {
+         $('#EstimationTable').val(0);
+         $('.estimation_pricing').hide();
+      }
+   } 
+</script>

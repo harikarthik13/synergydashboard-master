@@ -1,0 +1,912 @@
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<!-- <link href="css/library/bootstrap.min.css" rel="stylesheet" /> -->
+<link href="components/leaveapproval/css/leaveapproval.css" rel="stylesheet" />
+
+<style>
+  .dx-htmleditor-content{
+    text-align: left;
+  }
+</style>
+<script src='./components/leaveapproval/js/leaveapproval.js'></script>
+
+<div class="card-detail" id="divLeaveDetailCard">
+
+  <span><i><img src="components/leaveapproval/images/leave.png" width="40px" height="40px" /></i></span>
+  <span class="card-detail-title"><b>Leave Approval</b></span>
+
+  <hr />
+
+  <!-- <div class="row total-leave-info-container">
+    <div class="col-md-3 total-leave-info">
+      <div class="total-leave-content">
+        <h4>Total Presents</h4>
+        <span>12/60</span>
+      </div>
+    </div>
+    <div class="col-md-3 total-leave-info">
+      <div class="total-leave-content">
+        <h4>Planned Leaves</h4>
+        <span>8 day</span>
+      </div>
+    </div>
+    <div class="col-md-3 total-leave-info">
+      <div class="total-leave-content">
+        <h4>Un Planned Leaves</h4>
+        <span>0 day</span>
+      </div>
+    </div>
+    <div class="col-md-3 total-leave-info">
+      <div class="total-leave-content">
+        <h4>Pending Requests</h4>
+        <span>12</span>
+      </div>
+    </div>
+  </div> -->
+ 
+  <h6 class="text-secondary">Filter Leave Approval Details:</h6> 
+  <div class="row total-leave-info-container">
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <input type="text" name="employeename" id="employeename" value="" class="form-control employeename"
+          placeholder="Employee Name">
+        <span id="employeename_err" class=" text-danger"></span>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <!-- <div class="input-group"> -->
+      <div class="form-group">
+        <select class="form-control status" id="leavestatus">
+          <option value="-1">--Select Status--</option>
+          <option value="1">Approved</option>
+          <option value="2">Rejected</option>
+          <option value="0">Requested</option>
+        </select>
+        <small id="status_err" class=" text-danger"></small>
+      </div>
+      <!-- </div> -->
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- <div class="input-group">
+        <input type="text" class="form-control from_date_leave_approval" id="from_date_leave_approval"
+          name="from_date_leave_approval" style="width: 160px" readonly="">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </span>
+      </div> -->
+      <div class="form-group">
+      <div id="from_date_leave_approval_dx"></div>
+      <small class="from_date_error_message text-danger"></small>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <!-- <div class="input-group">
+        <input type="text" class="form-control to_date_leave_approval" id="to_date_leave_approval"
+          name="to_date_leave_approval" style="width: 160px" readonly="">
+        <span class="input-group-addon">
+          <i class="glyphicon glyphicon-calendar"></i>
+        </span>
+      </div> -->
+      <div class="form-group">
+      <div id="to_date_leave_approval_dx"></div>
+      <small class="to_date_error_message text-danger"></small>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <button type="button" class="leaveapprovalClear btn btn-primary pull-center">Clear</button>
+      <button type="button" class="leaveapprovalSearch btn btn-primary">Search</button>
+    </div>
+  </div>
+
+
+
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+        <div id="leaveApprovalList">
+            
+        </div>         
+    </div>
+</div>
+  <!-- <table id="tblLeaveApprovalentry" class="table table-striped removetable" style="cursor: default">
+    <thead class="bg-primary">
+      <tr>
+        <th>Employee Name</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Total Days</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="leaveApprovalList">
+
+    </tbody>
+  </table> -->
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <div class="pagination-container">
+          <nav>
+            <ul class="pagination LApagination">
+
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>
+
+<!-- Employee leave Approved detail modal -->
+<div class="modal fade" id="EmpApprovelLeaveDetailModal" role="dialog">
+  <div class="modal-dialog">
+    Modal content
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+        <h4 class="modal-title">Leave Approvel Detail</h4>
+      </div>
+      <div id="leave_detail" class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <!-- <td>Leave Type</td> -->
+              <td>From</td>
+              <td>To</td>
+              <td>No of Days</td>
+              <td>Status</td>
+              <td style="text-align: center;">Attachments</td>
+              <td>Approved by</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- <td>Casual Leave</td> -->
+              <td>10-Aug-2019</td>
+              <td>11-Aug-2019</td>
+              <td>1</td>
+              <td>
+                <div class="form-group">
+                  <select class="form-control status" id="status">
+                    <option>--Select status--</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                    <option value="Declined">Declined</option>
+                    <option value="Requested">Requested</option>
+                  </select>
+                  <span id="status_err" class="error_message"></span>
+                </div>
+              </td>
+              <td>
+                <ul>
+                  <li class="glyphicon glyphicon-paperclip">&nbsp;First Attachment</li>
+                </ul>
+              </td>
+              <td>
+                <strong>Parry</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row labelreason">
+        <div class="col-md-12 text-left">
+          <label>Leave Reason</label>
+        </div>
+      </div>
+
+      <div class="row textarealeavereason">
+        <div class="col-md-8 text-center">
+          <textarea name="leaveapprovalreason" id="leaveapprovalreason"
+            class="form-control col-lg-4 col-md-4 ckeditor"></textarea>
+        </div>
+      </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Leave Approvel Detail Modal -->
+<div class="modal fade bd-example-modal-lg in" id="EmployeeLeaveApprovalDetail" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close leaveapproval_addleavecloser" data-dismiss="modal" aria-label="Close"
+          onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+          <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+        <h4 class="modal-title">Leave Approval Detail</h4>
+      </div>
+      <div class="modal-body" style="border: black;" role="dialog">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td>Date</td>
+              <td>Total Hours</td>
+              <td>Compensation Date</td>
+              <td>Approve Compensation</td>
+              <td>Status</td>
+              <td>Approved (A) / Rejected (R) by</td>
+              <td>Approved Date</td>
+            </tr>
+          </thead>
+          <tbody id="leaveapprovaldetails">
+
+          </tbody>
+        </table>
+        <div class="row leaveReasonHistory">
+          <div class="panel pannel-">
+          </div>
+          <div class="row labelreason">
+            <div class="col-md-6 text-left">
+              <label>Approval Reason</label>
+            </div>
+          </div>
+
+          <div class="row textarealeavereason">
+            <div class="col-md-6 text-center">
+              <h5 class="text-left">Add Reason</h5> <br />
+              <!-- <textarea name="leaveaapprovalreason" id="leaveaapprovalreason"
+                class="form-control col-lg-4 col-md-4"></textarea> -->
+                <div id="leaveaapprovalreason"></div>
+              <span class="text-danger leaveaapprovalreason_error_msg"></span>
+            </div>
+            <div class="col-md-6">
+              <div class="row">
+                <h5 class="text-left">Add Attachments</h5> <br />
+                <div class="col-md-12">
+                  <div id="leaveapproval-dropzone">
+                    <form class="dropzone needsclick dz-clickable" id="leaveapproval_document_upload" method="post"
+                      enctype="multipart/form-data">
+                      <div class="dz-message needsclick">
+                        Drop files here or click to upload.<br />
+                      </div>
+                    </form>
+
+                    <span class="error_message error_upload"></span>
+                  </div>
+                </div>
+                <br />
+              </div>
+              <div class="row">
+                <div class="col-md-4 text-right">
+                </div>
+                <div class="col-md-6">
+                  <div class="table-striped leaveapproval_uplodedFileList">
+                    <span class="leaveapproval_fileList">
+
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="text-left">History</h5> <br />
+            <div class="panel panel-default">
+              <div class="panel-heading commentHistoryList">
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn leaveapproval_addleavecloser btn-default" data-dismiss="modal">Close</button>
+          <button onclick="ApprovedLeave()" id="btnUpdateLeave" type="button" class="btn btn-success">Save</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+      const now = new Date();
+      var from_date_leave_approval_dx_value = '';
+      var to_date_leave_approval_dx_value = '';
+
+      $('#from_date_leave_approval_dx').dxDateBox({
+        type: 'date',
+        value: now,
+        onValueChanged: function (e) {
+          var start = $("#from_date_leave_approval_dx").dxDateBox('instance').option('value');
+          var end = $("#to_date_leave_approval_dx").dxDateBox('instance').option('value');
+
+            days = noofdayscount(e.value, now);
+            if (days < 0) {
+              $("#from_date_leave_approval_dx").dxDateBox('instance').option({ value: ''});
+              $('.from_date_error_message').text('From Date should not Grater than Current Date');
+            } else {
+              $('.from_date_error_message').text("");
+            }
+            if (end != '') {
+              days = noofdayscount(start, end);
+              if (days < 0) {
+                $("#from_date_leave_approval_dx").dxDateBox('instance').option({ value: ''});
+                $('.from_date_error_message').text('From Date should not Grater than To Date');
+              } else {
+                $('.from_date_error_message').text("");
+              }
+            }
+        }
+      });
+
+      $('#to_date_leave_approval_dx').dxDateBox({
+        type: 'date',
+        value: now,
+        onValueChanged: function (e) {
+
+          if ($("#from_date_leave_approval_dx").dxDateBox('instance').option('value') != "" && $("#to_date_leave_approval_dx").dxDateBox('instance').option('value') != "") {
+
+            var start = $("#from_date_leave_approval_dx").dxDateBox('instance').option('value');
+            var end = $("#to_date_leave_approval_dx").dxDateBox('instance').option('value');
+
+
+              days = noofdayscount(e.value, now);
+              if (days < 0) {
+                $("#to_date_leave_approval_dx").dxDateBox('instance').option({ value: ''});
+                $('.to_date_error_message').text('ToDate should not be Grater than Current date');
+              } else {
+                $('.to_date_error_message').text("");
+              }
+              if (end != '' && end != null) {
+                debugger
+                days = noofdayscount(start, end);
+                if (days < 0) {
+                  // $("#to_date_leave_approval_dx").dxDateBox('instance').option({ value: now});
+                  $('.to_date_error_message').text('ToDate should not less than FromDate');
+                } else {
+                  $('.to_date_error_message').text("");
+                }
+              }
+          }
+          else if ($('.to_date_error_message').html() == '') {
+            if ($("#from_date_leave_approval_dx").dxDateBox('instance').option('value') == '') {
+              $('.from_date_error_message').html('FromDate is required')
+            } else {
+              $('.from_date_error_message').html('')
+            }
+
+            if ($("#to_date_leave_approval_dx").dxDateBox('instance').option('value') == '') {
+              $('.to_date_error_message').html('ToDate is required')
+            } else {
+              $('.to_date_error_message').html('')
+            }
+          }
+            
+        }
+      });
+
+    $('[data-toggle="tooltip"]').tooltip();
+    // The below will load the leave_approval file
+    // $("#leave_approval_creation").load("components/leaveapproval/leave_approval.html");
+
+    CKEDITOR.replace('leaveapprovalreason');
+    CKEDITOR.add
+
+
+    // The below will trigger a ApprovalLeaveModal
+    $(".AddApprovalLeaveButton").click(function () {
+      $("#ApprovalLeaveModal").modal();
+    });
+    // The below will trigger the EmployeeLeaveApprovalDetail model
+    $(".EmpApprovalLeaveDetailButton").click(function () {
+      $('#EmployeeLeaveApprovalDetail').appendTo("body").modal('show');
+    });
+    $('.leaveapproval_addleavecloser').on('click', () => {
+      leaveapproval_dropzone_remove_files();
+    })
+    var count = 0;
+    var LeaveApproval_FileDetails = [];
+    function handle_LeaveApproval_File(file) {
+
+      LeaveApproval_FileDetails.push(file);
+      // //console.log(FileDetails)
+      return LeaveApproval_FileDetails;
+    }
+
+
+    Dropzone.autoDiscover = false;
+    var leaveapproval_document_upload = new Dropzone("#leaveapproval_document_upload", {
+      addRemoveLinks: true,
+      uploadMultiple: true,
+      createImageThumbnails: true,
+      autoProcessQueue: false,
+      url: saveLeaveApprovalDocuments,
+
+    });
+    // The below change event validates the fromdate 
+    $('#from_date_leave_approval').on('changeDate', function () {
+
+      if ($('#from_date_leave_approval').val() != "") {
+        var start = $('#from_date_leave_approval').val();
+        var end = $('#to_date_leave_approval').val();
+        var date = new Date(),
+          yr = date.getFullYear(),
+          month = date.getUTCMonth() + 1,
+          day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+
+        if (month < 10) {
+          month = '0' + month;
+        }
+
+        var currentdate = month + "/" + day + "/" + yr;
+        days = noofdayscount(start, currentdate);
+        if (days < 0) {
+          $('#from_date_leave_approval').val("");
+          $('.from_date_error_message').text('From Date should not Grater than Current Date');
+        } else {
+          $('.from_date_error_message').text("");
+        }
+        if (end != '') {
+          days = noofdayscount(start, end);
+          if (days < 0) {
+            $('#from_date_leave_approval').val("");
+            $('.from_date_error_message').text('From Date should not Grater than To Date');
+          } else {
+            $('.from_date_error_message').text("");
+          }
+        }
+      }
+    });
+
+
+    $('#to_date_leave_approval').on('changeDate', function () {
+
+      if ($('#from_date_leave_approval').val() == "" || $('#from_date_leave_approval').val() == undefined || $('#from_date_leave_approval').val() == null) {
+        $('.from_date_error_message').html('FromDate is required')
+        $('#to_date_leave_approval').val("");
+      } else {
+        $('.from_date_error_message').html('')
+      }
+
+      if ($('#from_date_leave_approval').val() != "" && $('#to_date_leave_approval').val() != "") {
+        var start = $('#from_date_leave_approval').val();
+        var end = $('#to_date_leave_approval').val();
+
+        var date = new Date(),
+          yr = date.getFullYear(),
+          month = date.getUTCMonth() + 1,
+          day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+
+        if (month < 10) {
+          month = '0' + month;
+        }
+
+        var currentdate = month + "/" + day + "/" + yr;
+        days_checkcurrent = noofdayscount(end, currentdate);
+        if (days_checkcurrent < 0) {
+          $('#to_date_leave_approval').val("");
+          $('.to_date_error_message').html('ToDate should not be Grater than Current date')
+        } else if (end != '') {
+            days = noofdayscount(start, end);
+            if (days < 0) {
+              $('#to_date_leave_approval').val("");
+              $('.to_date_error_message').html('ToDate should not less than FromDate')
+            } else {
+              $('.to_date_error_message').html('')
+            }
+        } else {
+            $('.to_date_error_message').html('')
+        }
+
+      } else if ($('.to_date_error_message').html() == '') {
+        if (start == '') {
+          $('.from_date_error_message').html('FromDate is required')
+        } else {
+          $('.from_date_error_message').html('')
+        }
+
+        if (end == '') {
+          $('.to_date_error_message').html('ToDate is required')
+        } else {
+          $('.to_date_error_message').html('')
+        }
+      }
+    });
+
+    // $('#to_date_leave_approval').on('changeDate', function () {
+    //   if ($('#from_date_leave_approval').val() == "") {
+
+    //     var html = "<div><h4>'FROM date' should not be empty</h4></div>";
+    //     $('#div-alert-modal').html(html);
+    //     $('#in_common-alert').appendTo('body').modal('show')
+    //   }
+
+    //   if ($('#from_date_leave_approval').val() != "" && $('#to_date_leave_approval').val() != "") {
+    //     var start = $('#from_date_leave_approval').val();
+    //     var end = $('#to_date_leave_approval').val();
+
+    //     var date = new Date(),
+    //       yr = date.getFullYear(),
+    //       month = date.getUTCMonth() + 1,
+    //       day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+
+    //     if (month < 10) {
+    //       month = '0' + month;
+    //     }
+
+    //     var currentdate =month + "/" + day + "/" + yr;
+
+    //     days = noofdayscount(end, currentdate);
+    //     if (days < 0) {
+    //       var html = "<div><h4>'TO date' should not be greater than current date</h4></div>";
+    //       $('#div-alert-modal').html(html);
+    //       $('#in_common-alert').appendTo('body').modal('show')
+    //       $('#to_date_leave_approval').val(currentdate);
+    //     }
+    //     else {
+    //       days = noofdayscount(start, end);
+    //       if (days < 0) {
+    //         var html = "<div><h4>'TO date' should be greater than the 'FROM date'</h4></div>";
+    //         $('#div-alert-modal').html(html);
+    //         $('#in_common-alert').appendTo('body').modal('show')
+    //         $('#to_date_leave_approval').val("");
+    //       }
+    //     }
+    //   }
+    // });
+
+    function DisplayLimitedSearchData() {
+
+      var start = $('#from_date_leave_approval').val();
+      var end = $('#to_date_leave_approval').val();
+      var days = noofdayscount(start, end);
+      var maxday = 92;
+
+      if (days > maxday) {
+        $('#to_date_leave_approval').val("");
+        $('.to_date_error_message').text('ToDate should not be more than 3 months from FromDate')
+        return false;
+      }
+      $('.to_date_error_message').text('');
+      return true;
+    }
+
+    $('.leaveapprovalClear').click(function () {
+      $('.from_date_error_message').text('')
+      $('.to_date_error_message').text('')
+      $('#employeename').val('');
+      $('#leavestatus').val('-1');
+      $('#from_date_leave_approval').val('');
+      $('#to_date_leave_approval').val('');
+      loadLeaveApprovalEntry()
+
+    });
+    const loadLeaveApprovalEntry = () => {
+      // debugger;
+      var result = DisplayLimitedSearchData();
+      if (result == true) {
+        GetEmployeeLeaveApproval(employeeName = null, leaveStatus = null, leaveApprovalFromDate = null, leaveApprovalToDate = null);
+        fnPagination();
+      }
+    }
+    loadLeaveApprovalEntry()
+    $('#employeename').on('keyup', () => {
+     
+      var employeeName = $('#employeename').val() != '' ? $('#employeename').val(): null;
+      var leaveStatus = $('#leavestatus').val() != '-1' ? $('#leavestatus').val(): null;
+      var leaveApprovalFromDate = $('#from_date_leave_approval').val() != '' ? $('#from_date_leave_approval').val(): null;
+      var leaveApprovalToDate = $('#to_date_leave_approval').val() != '' ? $('#to_date_leave_approval').val(): null;
+
+      var result = DisplayLimitedSearchData();
+      if (result == true) {
+        GetEmployeeLeaveApproval(employeeName, leaveStatus, leaveApprovalFromDate, leaveApprovalToDate);
+        fnPagination();
+      }
+    });
+    $('#leavestatus').on('change', () => {
+      var employeeName = $('#employeename').val() != '' ? $('#employeename').val(): null;
+      var leaveStatus = $('#leavestatus').val() != '-1' ? $('#leavestatus').val(): null;
+      var leaveApprovalFromDate = $('#from_date_leave_approval').val() != '' ? $('#from_date_leave_approval').val(): null;
+      var leaveApprovalToDate = $('#to_date_leave_approval').val() != '' ? $('#to_date_leave_approval').val(): null;
+
+      var result = DisplayLimitedSearchData();
+      if (result == true) {
+        GetEmployeeLeaveApproval(employeeName, leaveStatus, leaveApprovalFromDate, leaveApprovalToDate);
+        fnPagination();
+      }
+    });
+    const leaveApprovalListingStyle = () => {
+      // debugger
+      var Rcount = $('#tblLeaveApprovalentry tbody tr').length;
+      for (var i = 0; i < Rcount; i++) {
+        var status = $('#tblLeaveApprovalentry tbody tr').eq(i).find('td').eq(4).text();
+
+        if (status == "1") {
+          $('#tblLeaveApprovalentry tbody tr').eq(i).find('td').eq(4).css('background-color', '#83D475');
+        } else if (status == "2") {
+          $('#tblLeaveApprovalentry tbody tr').eq(i).find('td').eq(4).css('background-color', '#F07470');
+        } else {
+          $('#tblLeaveApprovalentry tbody tr').eq(i).find('td').eq(4).css('background-color', '#FD9346');
+        }
+        $('#tblLeaveApprovalentry tbody tr').eq(i).find('td').eq(4).css('border-radius', '20px');
+        $('#tblLeaveApprovalentry tbody tr').eq(i).find('td').eq(4).css({
+          "padding": "16px 8px"
+        });
+        $('#tblLeaveApprovalentry tbody tr').eq(i).find('td').eq(4).css('width', '15px');
+      }
+    }
+    $('.leaveapprovalSearch').click(function () {
+      // debugger;
+      // TodateValidation();
+      $("#tblLeaveApprovalentry").show();
+      var employeeName = $('#employeename').val() != '' ? $('#employeename').val(): null;
+      var leaveStatus = $('#leavestatus').val() != '-1' ? $('#leavestatus').val(): null;
+      var leaveApprovalFromDate = $("#from_date_leave_approval_dx").dxDateBox('instance').option('value') != '' ? $("#from_date_leave_approval_dx").dxDateBox('instance').option('value'): null;
+      var leaveApprovalToDate = $("#to_date_leave_approval_dx").dxDateBox('instance').option('value') != '' ? $("#to_date_leave_approval_dx").dxDateBox('instance').option('value'): null;
+      // if (leaveApprovalFromDate != '' && leaveApprovalToDate != '') {
+        $('#employeename_err').text('')
+        $('#status_err').text('')
+        $('.from_date_error_message').text('')
+        $('.to_date_error_message').text('')
+        // if (leaveStatus == "-1") {
+        //   leaveStatus = null;
+        // }
+
+        // if (leaveApprovalFromDate != "" && leaveApprovalToDate != "") {
+          var result = DisplayLimitedSearchData();
+          if (result == true) {
+            GetEmployeeLeaveApproval(employeeName, leaveStatus, leaveApprovalFromDate, leaveApprovalToDate);
+            fnPagination();
+          }
+        // }
+
+      // } else {
+
+      //   if (leaveApprovalFromDate == '') {
+      //     $('.from_date_error_message').text('FromDate is required')
+      //   } else {
+      //     $('.from_date_error_message').text('')
+      //   }
+
+      //   if (leaveApprovalToDate == '') {
+      //     $('.to_date_error_message').text('ToDate is required')
+      //   } else {
+      //     $('.to_date_error_message').text('')
+      //   }
+      // }
+    });
+
+    var table = '#tblLeaveApprovalentry';
+    function fnPagination() {
+      $('.LApagination').html('')
+      var trnum = 0
+      var maxRows = 10
+
+      var totalRows = $('#leaveApprovalList tr').length
+      $('#tblLeaveApprovalentry tbody tr').each(function () {
+        trnum++
+        if (trnum > maxRows) {
+          $(this).hide()
+        }
+        if (trnum <= maxRows) {
+          $(this).show()
+        }
+      })
+      var i = 1;
+      if (totalRows > maxRows) {
+        var totpagenum = Math.ceil(totalRows / maxRows)
+        $('.LApagination').append('<li class="Previous" data-page="Previous">\<span>Previous<span class="sr-only">(current)</span></span>\</li>').show()
+
+        for (; i <= totpagenum;) {
+          $('.LApagination').append('<li data-page="' + i + '">\<span>' + i++ + '<span class="sr-only">(current)</span></span>\</li>').show()
+        }
+        $('.LApagination').append('<li data-page="Next">\<span>Next<span class="sr-only">(current)</span></span>\</li>').show()
+      }
+
+      $('.LApagination li:nth-child(2)').addClass('active')
+      $('.LApagination li').on('click', function () {
+
+        var pagenum = $(this).attr('data-page')
+        var curPage = $('.LApagination').find('li.active').attr('data-page')
+        var trIndex = 0;
+        var activepage = 0;
+        $('.LApagination li').removeClass('active')
+        activepage = parseInt(pagenum) + 1;
+
+        if (pagenum == "Previous") {
+          if (parseInt(curPage) != 1 && curPage != "Previous") {
+            pagenum = 0;
+            pagenum = parseInt(curPage) - 1;
+            activepage = curPage;
+          }
+        } else {
+          if (pagenum == "Next") {
+            if (parseInt(curPage) != totpagenum && curPage != "Next") {
+              pagenum = 0;
+              pagenum = parseInt(curPage) + 1;
+              activepage = pagenum + 1;
+            }
+          }
+        }
+
+        if (pagenum == "Previous" && curPage == 1) {
+          activepage = 2
+          pagenum = 1
+        }
+
+        if (pagenum == "Next" && curPage == totpagenum) {
+          activepage = totpagenum + 1
+          pagenum = totpagenum;
+        }
+
+        if (activepage != NaN)
+          $('.LApagination li:nth-child(' + activepage + ')').addClass('active')
+
+        $('#tblLeaveApprovalentry tbody tr').each(function () {
+          trIndex++
+          if (trIndex > (maxRows * pagenum) || trIndex <= ((maxRows * pagenum) - maxRows)) {
+            $(this).hide()
+          } else {
+            $(this).show()
+          }
+        })
+      })
+    }
+    const leaveapproval_commentHistory = (commenthistorydata) => {
+      // debugger;
+      // The below flag represents the active user
+      var flag = 1;
+      // The below will remove the all comment history while page loading
+      $(`.commentHistoryList`).html('');
+      datelistarray = [];
+      filelistarray = [];
+      // The below foreach will append the backend data client side UI
+      commenthistorydata.forEach((commentdata) => {
+        // debugger
+        // The below variable stores the commetn created date as a string
+        var createddate = new Date(commentdata.CreatedDate);
+        // The below variable have only comment created date
+        var createddatestring = leaveapproval_dateConverter(createddate);
+        // The below variable have comment created time 
+        var createdtimestring = leaveapproval_timeConverter(createddate);
+        // The below if condition used to separate the comments date wise
+        //The below if checks the created date is not exist in the datelistarray variable if it is true 
+        // it will print the date and push the date into that array 
+        if (!datelistarray.includes(createddatestring)) {
+          var currentDateString = new Date();
+          // The below variable have the current date
+          var currentDate = leaveapproval_dateConverter(currentDateString);
+          $(`.commentHistoryList`).append(`
+            <div class=" row text-center text-primary">
+              <div class="col-xs-4 dateborder"></div>
+              <div class="col-xs-4">${createddatestring == currentDate ? 'Today' : createddatestring}</div>
+              <div class="col-xs-4 dateborder"></div>
+            </div> <br/>
+          `);
+          datelistarray.push(createddatestring);
+        }
+        var commentstring = '';
+        // The below condigtional statement removes the html tag from the comment data
+        if ((commentdata.Comments === null) || (commentdata.Comments === '')) {
+          commentstring = '';
+        } else {
+          data = commentdata.Comments.toString();
+          commentstring = data.replace(/<[^>]*>/g, '');
+        }
+        //  The if condition checks the backend flag value is equal to current user(Active User) flag value(1)
+        // if it is true the if condition will execute 
+        // else the else part will execute
+        if (flag == commentdata.flag) {
+
+          $(`.commentHistoryList`).append(`
+            <div class="row sender">
+              <div class="col-md-8 comment pull-right">
+                <div class="row">
+                  <div class="col-md-12 text-right pull-right">
+                    <strong><small class="text-muted">${commentdata.Name}</small> 
+                    <small class="text-muted"> ,${createdtimestring}</small></strong>
+                  </div>
+                </div>
+                <div class="panel">
+                  <div class="panel-heading"><p class="commentstring">${commentstring}</p><p class="sender_file attachment" id="${commentdata.ID}"></p></div>
+                </div>
+              </div>
+            </div>
+          `);
+
+        } else {
+          $(`.commentHistoryList`).append(`
+
+            <div class="row receiver">
+              <div class="col-md-8 pull-left comment ">
+                <div class="row">
+                  <div class="col-md-12 text-left pull-left">
+                    <strong><small class="text-muted">${commentdata.Name}</small>
+                    <small class="text-muted">,${createdtimestring}</small></strong>
+                  </div>
+                </div>
+                <div class="panel receiver panel-primary">
+                  <div class="panel-heading"><p class="commentstring">${commentstring}</p><p class="receiver_file attachment" id="${commentdata.ID}"></p></div>
+                </div>
+              </div>
+            </div>
+          `);
+
+        }
+        if (commentdata.LeaveFile != null) {
+          filelistarray = JSON.parse(commentdata.LeaveFile);
+          // //console.log(filelistarray);
+          if (filelistarray.length != 0) {
+            var html = '';
+            filelistarray.forEach(function (item, index) {
+
+              html += `<a href="#" onclick="leaveapproval_download_file_func('${item.LeaveCommentsID}','${item.Filename}','${item.FileType}')" class="download_button ${item.LeaveCommentsID}"><button type="button" data-toggle="tooltip" data-placement = "top" title="${item.Filename}.${item.Extension}" class="btn downloadbtn btn-primary btn-sm"> <i class="fas fa-download"></i> </button></a><br/>`;
+            });
+            $(`#${commentdata.ID}`).html(html);
+          }
+          else {
+            $(`#${commentdata.ID}`).html('');
+          }
+        } else {
+          $(`#${commentdata.ID}`).html('');
+        }
+
+
+
+      })
+    }
+
+    function leaveapproval_download_file_func(fileid, Filename, FileType) {
+      // debugger
+      var LeaveCommentsID = JSON.stringify({
+        LeaveCommentsID: fileid,
+        Filename: Filename,
+        FileType: FileType
+      });
+      var filter_file_val = JSON.stringify({
+        LeaveCommentsID: LeaveCommentsID
+      })
+      var result = callgetlist('GetEmployeeLeaveFile', filter_file_val);
+      $(`.${fileid}`).attr('href', `data: ${result[0].FileType} ;charset=utf-8;base64, ${result[0].FileContent}`);
+      $(`.${fileid}`).attr('download', `${result[0].Filename}`);
+    }
+    // The below function change the datetime string as date string and returns the date string
+    const leaveapproval_dateConverter = (dateParam) => {
+      var day = dateParam.getDate();
+      var month = dateParam.getMonth() + 1;
+      if (day < 10) {
+        day = "0" + (day);
+      }
+      if (month < 10) {
+        month = "0" + (month);
+      }
+      var year = dateParam.getUTCFullYear();
+      var convertedDate = (month + "/" + day + "/" + year);
+      return convertedDate;
+    }
+    // The below function change the datetime string as time string and returns the time string with am/pm
+    const leaveapproval_timeConverter = (dateTimeParam) => {
+      var hours = dateTimeParam.getHours();
+      var minutes = dateTimeParam.getMinutes();
+
+      // Check whether AM or PM 
+      var newformat = hours >= 12 ? 'PM' : 'AM';
+
+      // Find current hour in AM-PM Format 
+      hours = hours % 12;
+
+      // To display "0" as "12" 
+      hours = hours ? hours : 12;
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      var convertedTime = hours + ':' + minutes + ' ' + newformat;
+      return convertedTime;
+    } 
+  </script>

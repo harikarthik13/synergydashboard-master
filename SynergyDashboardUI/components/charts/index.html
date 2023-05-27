@@ -1,0 +1,299 @@
+<link href="css/charts.css">
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<!-- <script src="js/charts.js"></script> -->
+<div class="card-detail" style="height: auto;">
+  <a id="customgobackbutton"><small>
+      < GO back</small></a>
+  <div id="chartdiv"></div>
+
+  <ul id="breadcrumbforpiechart" class="breadcrumb">
+    
+  </ul>
+  <div id="levelthreetablediv"></div>
+</div>
+
+<script>
+  // debugger;
+
+  $('#levelthreetablediv').hide();
+  $('#customgobackbutton').hide();
+  $('#breadcrumbforpiechart').hide();
+  $('#customgobackbutton').on('click', () => {
+    $('#chartdiv').show();
+    $('#breadcrumbforpiechart').hide();
+    $('#levelthreetablediv').hide();
+    $('#customgobackbutton').hide();
+  });
+  var filter_file_val = JSON.stringify({});
+  var stageOneData = callgetlist('GetBenchCountInfoForDashboard', filter_file_val);
+  var stageTwoFullTime = callgetlist('GetFullBenchCountInfoForDashboard', filter_file_val);
+  var stageTwoFullTimeArrayObject = [];
+  if (stageTwoFullTime.length != 0) {
+    stageTwoFullTime.forEach(data => {
+      var stageThreeFullTimeArrayObject = [];
+      var filter_file_val = JSON.stringify({
+        "TechnologyId": data.TechnologyId
+      });
+      var stageThreeFullTime = callgetlist('GetFullBenchCountInfoTechnologyWiseForDashboard', filter_file_val);
+      if (stageThreeFullTime.length != 0) {
+        stageThreeFullTime.forEach(data => {
+          stageThreeFullTimeArrayObject.push(data);
+        });
+      } else {
+        stageThreeFullTimeArrayObject = [];
+      }
+      stageTwoFullTimeArrayObject.push({
+
+        'title': data.Technology,
+        'value': data.BenchCount,
+        'subdata': stageThreeFullTimeArrayObject
+      });
+    });
+  } else {
+    stageTwoFullTimeArrayObject.push({
+      'title': 'demo',
+      'value': 1
+    });
+  }
+  var stageTwoPartTime = callgetlist('GetPartTimeBenchCountInfoForDashboard', filter_file_val);
+  var stageTwoPartTimeArrayObject = [];
+  if (stageTwoPartTime.length != 0) {
+    stageTwoPartTime.forEach(data => {
+
+      var stageThreePartTimeArrayObject = [];
+      var filter_file_val = JSON.stringify({
+        "TechnologyId": data.TechnologyId
+      });
+      var stageThreePartTime = callgetlist('GetPartTimeBenchCountInfoTechnologyWiseForDashboard', filter_file_val);
+      if (stageThreePartTime.length != 0) {
+        stageThreePartTime.forEach(data => {
+          stageThreePartTimeArrayObject.push(data);
+        });
+      } else {
+        stageThreePartTimeArrayObject = [];
+      }
+
+      stageTwoPartTimeArrayObject.push({
+        'title': data.Technology,
+        'value': data.BenchCount,
+        'subdata': stageThreePartTimeArrayObject
+      });
+    });
+  } else {
+    stageTwoPartTimeArrayObject.push({
+      'title': 'demo',
+      'value': 1
+    });
+  }
+  console.log(stageTwoFullTimeArrayObject);
+  console.log(stageTwoPartTimeArrayObject);
+  var chartData = [{
+    "title": 'FUllTimeBenchCount',
+    "value": `${stageOneData.length != 0 ? stageOneData[0].FUllTimeBenchCount : 1}`,
+    "url": "#",
+    "description": "click to drill-down",
+    "data": stageTwoFullTimeArrayObject
+  }, {
+    "title": "PartTimeBenchCount",
+    "value": `${stageOneData.length != 0 ? stageOneData[0].PartTimeBenchCount : 1}`,
+    "url": "#",
+    "description": "click to drill-down",
+    "data": stageTwoPartTimeArrayObject
+  }];
+
+  // create pie chart
+  var chart = AmCharts.makeChart("chartdiv", {
+    "type": "pie",
+    "dataProvider": chartData,
+    "valueField": "value",
+    "titleField": "title",
+    "labelText": "[[title]]: [[value]]",
+    "pullOutOnlyOne": true,
+    "titles": [{
+      "text": "Resource Bench Details"
+    }],
+    "allLabels": []
+  });
+
+  // initialize step array
+  chart.drillLevels = [{
+    "title": "Resource Bench Details",
+    "data": chartData
+  }];
+
+  // add slice click handler
+  chart.addListener("clickSlice", function (event) {
+    // debugger;
+    // get chart object
+    var chart = event.chart;
+
+    // check if drill-down data is avaliable
+
+    if (chart.drillLevels.length >= 2) {
+      if (event.dataItem.dataContext.subdata.length != 0) {
+        var tabledata = event.dataItem.dataContext.subdata;
+      //  console.log(event);
+        $('#breadcrumbforpiechart').html('');
+        var dataGrid = $("#levelthreetablediv").dxDataGrid({
+        dataSource: tabledata,
+        filterRow: {
+            visible: true,
+            applyFilter: "auto"
+        },     
+        export: {
+            enabled: true,
+            allowExportSelectedData: true
+          },
+          onExporting: function(e) {
+            var workbook = new ExcelJS.Workbook();
+            var worksheet = workbook.addWorksheet('Announcements');
+            
+            DevExpress.excelExporter.exportDataGrid({
+              component: e.component,
+              worksheet: worksheet,              
+              autoFilterEnabled: true
+            }).then(function() {
+              // https://github.com/exceljs/exceljs#writing-xlsx
+              workbook.xlsx.writeBuffer().then(function(buffer) {
+                saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Announcements.xlsx');
+              });
+            });
+            e.cancel = true;
+          },
+        searchPanel: {
+            visible: true,
+            width: 240,
+            placeholder: "Search..."
+        },
+        headerFilter: {
+            visible: true
+        },
+        filterPanel: { visible: true },
+        allowColumnReordering: true,
+        showBorders: true,
+        grouping: {
+            autoExpandAll: true,
+        },
+        paging: {
+            pageSize: 10
+        },  
+        groupPanel: {
+            visible: true
+        },
+        sorting: {
+            mode: "multiple"
+        },
+        selection: {
+            mode: "multiple"
+        },
+        columns: [
+        {
+          caption: "#", dataField: "sno", cssClass: "rno", allowGrouping: false, allowCollapsing: false, allReordering: false
+          ,
+          cellTemplate: function (container, options) {
+            container.text(dataGrid.pageIndex() * dataGrid.pageSize() + options.rowIndex + 1);
+          }
+        },
+        { caption: "EmployeeName", dataField: "EmployeeName", cssClass: "ename" },
+        { caption: "BackupLead", dataField: "BackupLead", cssClass: "ecode" },
+        { caption: "BenchDays", dataField: "BenchDays", cssClass: "ename" },
+        {
+          caption: "Bench Start Date", dataField: "BenchStartDate", cssClass: "date"
+          , cellTemplate: function (container, options) {
+            var benchStartDate = convertDate(options.value)
+            $("<div>")
+              .append(benchStartDate)
+              .appendTo(container);
+          }
+        }
+        ,
+        { caption: "HRComments", dataField: "HRComments" },
+       
+        {
+          caption: "Plan", dataField: "Plan", width: 200,
+          cellTemplate: function (container, options) {
+            $("<div>")
+              .append(options.value)
+              .appendTo(container);
+          }
+          // 	   cellTemplate: function(element, info) {
+          // 		element.append("<div>" + info.Plans + "</div>")
+          //    }
+        }
+      ],    
+    }).dxDataGrid("instance");
+   
+        var breadcrumbstagetwo = chart.drillLevels[1].title;
+        var breadcrumbstagethree = event.dataItem.dataContext.title;
+        $('#breadcrumbforpiechart').html(`
+          <li><a id="gotostagetwo">${breadcrumbstagetwo}</a></li>
+          <li class="active">${breadcrumbstagethree}</li>
+        `);   
+        $('#gotostagetwo').on('click', () => {
+          $('#customgobackbutton').click();
+        }); 
+        $('#levelthreetablediv').show();
+        $('#breadcrumbforpiechart').show();
+        $('#chartdiv').hide();
+        $('#customgobackbutton').show();
+        // leavelthreebodydata
+      }
+    }
+    if (event.dataItem.dataContext.data !== undefined) {
+      // save for back button
+      chart.drillLevels.push(event.dataItem.dataContext);
+
+      // replace data
+      chart.dataProvider = event.dataItem.dataContext.data;
+
+      // replace title
+      chart.titles[0].text = event.dataItem.dataContext.title;
+
+      // add back link
+      // let's add a label to go back to yearly data
+      event.chart.addLabel(
+        0, 25,
+        "< Go back",
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        'javascript:drillUp();');
+
+      // take in data and animate
+      chart.validateData();
+      chart.animateAgain();
+    }
+  });
+
+  function drillUp() {
+
+    // get level
+    chart.drillLevels.pop();
+    var level = chart.drillLevels[chart.drillLevels.length - 1];
+
+    // replace data
+    chart.dataProvider = level.data;
+
+    // replace title
+    chart.titles[0].text = level.title;
+
+    // remove labels
+    if (chart.drillLevels.length === 1)
+      chart.clearLabels();
+
+    // take in data and animate
+    chart.validateData();
+    chart.animateAgain();
+  }
+
+  //render bench to billing 
+  // function renderBenchToBillingReportGrid(data) {
+  //   // var rowNumber = 0;
+  //   // debugger
+  //    // return dataGrid;
+  // }
+</script>

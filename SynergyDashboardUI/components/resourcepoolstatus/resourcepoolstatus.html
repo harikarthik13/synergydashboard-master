@@ -1,0 +1,121 @@
+<!-- MOdel -->
+
+<div class="modal fade" id="rpmmodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick=""><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+          <h2 class="modal-title" id="rrmModalLabel">Add Status</h2>
+       </div>
+  
+        <div class="modal-body" data-simplebar>
+		 <div class="tab-content col-md-12">
+		   <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>EmployeeCode <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtemployeeCode" id="txtemployeeCode" readonly />
+                      <span class="error_message" id="txtemployeeCodeerror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>EmployeeName <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtemployeeName" id="txtemployeeName" readonly />
+                      <span class="error_message" id="txtemployeeNameerror"></span>
+                    </div>
+                  </div>
+                </div>
+				<div class="row">
+				 
+                        <div class="form-group col-md-4" id="rfp-alignment">
+                          <label>Move to Bench</label>
+                          <input type="checkbox" name="Move_to_Bench" id="nre_wish_list" />
+                        </div>
+                        <div class="form-group col-md-4" id="rfp-alignment">
+                          <label>In Project</label>
+                          <input type="checkbox" name="inprojetc" id="inprojetc"  />
+                        </div>
+						   <div class="form-group col-md-4" id="rfp-alignment">
+                          <label>Shadow</label>
+                          <input type="checkbox" name="shadow" id="shadow"  />
+                        </div>
+                      
+				  </div>
+			<div class="row">
+                   <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Status </label>
+                      <select class="form-control" name="Status " id="Status ">
+                      </select>
+                    </div>
+                  </div>
+                </div>	
+			<div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Project <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtProject" id="rrm_PrtxtProjectoject" placeholder="Project"/>
+                      <span class="error_message" id="txtProjecterror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Client  <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtclient " id="txtclient " />
+                      <span class="error_message" id="txtclienterror "></span>
+                    </div>
+                  </div>
+                
+            </div>
+			<div class="row">                   
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Till Date</label>
+                      <input type="date" class="form-control" id="dttilldate" />
+                      <span class="error_message" id="dttilldateerror"></span>
+                    </div>
+                  </div>
+				  </div>
+			<div class="row">
+                   <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Project Lead </label>
+                      <select class="form-control" name="lead " id="lead ">
+                      </select>
+                    </div>
+                  </div>
+                </div>
+			<div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Occupied Hours<span style="color: red">*</span></label>
+                      <input type="number" class="form-control" min="1" max="50" name="occupiedHours" id="occupiedHours" placeholder="Occupied Hours"/>
+                      <span class="error_message" id="occupiedHourserror"></span>
+                    </div>
+                  </div>
+				   <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Billable Hours <span style="color: red">*</span></label>
+                      <input type="number" class="form-control" min="1" max="50" name="billableHours" id="billableHours" placeholder="Billable Hours"/>
+                      <span class="error_message" id="billableHourserror"></span>
+                    </div>
+                  </div>
+				  </div>
+				
+		</div>
+		<div class="modal-footer">
+<div style="float:right">
+		<button type="button" class="btn btn-success"  onclick="">Save</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+	</div>	
+        </div>        
+		</div>
+        </div>
+        </div>
+        </div>
+
+<!-- END -->

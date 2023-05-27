@@ -1,0 +1,108 @@
+<script id="MarketingHead">
+    var folderName = "rrmentrypointmarketinghead";
+    $(document).ready(function () {
+        var pageId = "MarketingHead";
+        PageInitializeMarketingHead(pageId)
+    });
+
+    function PageInitializeMarketingHead(pageId) {
+        var rrmEntryGrid = RRMEntryPointGridMarketingHead(pageId);
+        rrmEntryGrid.getRRMEntryTable();
+    }
+</script>
+
+<link href="components/rrmentrypointmarketinghead/css/rrmentrypoint.css" rel="stylesheet" />
+
+<script src='components/rrmentrypointmarketinghead/js/addRRMEntryPointMarketingHead.js'></script>
+<script src='components/rrmentrypointmarketinghead/js/editRRMEntryPointMarketingHead.js'></script>
+<script src='components/rrmentrypointmarketinghead/js/rrmentrypointgridmarketinghead.js'></script>
+
+<div class="rrm-card-detail-NewInterviewCard card-detail">
+    <span><i><img src="./image/dashboard/rrm.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>RRM Entry Point</b></span>
+    <span class="pull-right">
+        <button id="rrmEntryPointAddBtnMarketingHead" class="btn btn-sm btn-primary" data-type="add">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+
+    <div class="rrm-card-detail">
+        <div id="rrmGridReportMarketingHead"></div>
+    </div>
+</div>
+
+<div id="rrm_entrypointmodelMarketingHead"></div>
+
+<script type="text/javascript">
+    $("#rrm_entrypointmodelMarketingHead").load("components/rrmentrypointmarketinghead/rrmEntryPointModalMarketingHead.html");
+
+    $(document).ready(function () {
+        initializeRRMEntryPointMarketingHead();
+        //editRRMEntryPointMarketingHeadJs = EditRRMEntryPointMarketingHead();
+
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        loggedInUserDepartment = jsonData.Data[0].Department
+        Token = jsonData.Data[0].Token
+    })
+
+    var loggedInUserDepartment;
+    var Token;
+    var editRRMEntryPointJsMarketingHead;
+    var addRRMEntryPointJsMarketingHead;
+    var addRRMTypeMarketingHead;
+    var rrmId;
+    var ResourceRequirementTypeMarketingHead;
+    function initializeRRMEntryPointMarketingHead() {
+        editRRMEntryPointJsMarketingHead = EditRRMEntryPointOwnerMarketingHead();
+        addRRMEntryPointJsMarketingHead = AddRRMEntryPointMarketingHead();
+    }
+    //edit clcik evnet
+    $(document).on("click", ".editRRMEntryPointMarketingHead", function (e) {
+        openEditRRMEntryPointMarketingHead(e)
+    })
+
+    //edit click event function
+    function openEditRRMEntryPointMarketingHead(e) {
+        
+        initializeModalMarketingHead();
+        $('#RRMEntryPointModelMarketingHead').appendTo("body").modal("show");
+        addRRMTypeMarketingHead = $(e.currentTarget).data("type");
+        rrmId = $(e.currentTarget).data("rrmid");
+        ResourceRequirementTypeMarketingHead = $(e.currentTarget).data("rrmtype");
+
+        $("#MarketingHeadrrmType").attr('class', '');
+        if (ResourceRequirementTypeMarketingHead == "G") {
+            $("#lblLeadNameMarketingHead").text("Requirement lead");
+            $("#MarketingHeadrrmType").html("RRM").addClass("label label-success m-l-xs");
+        }
+        else if (ResourceRequirementTypeMarketingHead == "P") {
+            $("#lblLeadNameMarketingHead").text("RFP Owner");
+            $("#MarketingHeadrrmType").html("RFP").addClass("label label-info m-l-xs");
+        }
+        else if (ResourceRequirementTypeMarketingHead == "R") {
+            $("#lblLeadNameMarketingHead").text("Backup Lead");
+            $("#MarketingHeadrrmType").html("Resignation").addClass("label label-warning m-l-xs");
+        }
+        initializeEditRRMMarketingHead(rrmId);
+        editRRMEntryPointJsMarketingHead.RRMEntryFromRRM(rrmId);
+    }
+
+    //rrmAddBtnClick fucn
+    $(document).on("click", "#rrmEntryPointAddBtnMarketingHead", function (e) {
+        rrmAddBtnClickedMarketingHead(e)
+    })
+
+    //rrm Add Btn Clicked MarketingHead
+    function rrmAddBtnClickedMarketingHead(e) {
+        addRRMTypeMarketingHead = "add";
+        initializeModalMarketingHead()
+        $('#RRMEntryPointModelMarketingHead').appendTo("body").modal("show");
+        $("#MarketingHeadrrmType").attr('class', '');
+        $("#OwnerrrmTypeMarketingHead").attr('class', '');
+        $("#rrmmodelpagetitleMarketingHead").text("Add RRM");
+        var rrmType = $(e.currentTarget).data("type");
+        initializeAddRRMMarketingHead(rrmType);
+    }
+</script>

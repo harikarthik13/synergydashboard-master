@@ -1,0 +1,47 @@
+<!-- Template Report Grid Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>Investment Details (Accounts) </b></span>
+    <!-- the below button for refresh Data -->
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="refreshInvestmentAccountsGrid()">
+            <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+    
+    <div id="incometax_reportGrid"></div>
+    <div class="modal fade bd-example-modal-lg in" id="AccountDetailsModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Scott - 102 </h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">
+                        <div id="incometaxAccountsPopup_reportGrid"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="components/incometaxaccountsview/incometaxaccountsview.js"></script>
+
+<!-- internal script -->
+<script type="text/javascript">
+
+    const incometax_ProcedureName = ''; //Change Prefix and Procedure Name Here
+
+    $(document).ready(function () {
+        getInvestmentAccountsList();
+    });
+
+    
+</script>

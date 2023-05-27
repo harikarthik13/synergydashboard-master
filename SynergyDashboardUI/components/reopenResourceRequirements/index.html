@@ -1,0 +1,282 @@
+<script id = "Closed">
+    var folderName = "closedResourceRequirements";
+    $(document).ready(function () {
+        var pageId = "Closed";
+        PageCloneInitializeOwner(pageId)
+    });
+
+    function PageCloneInitializeOwner(pageId) {
+        var rrmCloneEntryGrid = RRMCloneEntryPointGridOwner(pageId);
+        rrmCloneEntryGrid.getRRMEntryTable();
+    }
+</script>
+
+<link href="components/closedResourceRequirements/css/closedResourceRequirements.css" rel="stylesheet" />
+<script src='components/closedResourceRequirements/js/rrmCloneentrypointgrid.js'></script>
+<!-- <script src='components/closedResourceRequirements/js/addCloneRRMEntryPoint.js'></script>
+<script src='components/closedResourceRequirements/js/editCloneRRMEntryPoint.js'></script> -->
+<!-- <script src='components/closedResourceRequirements/js/rrmCloneTrackerOwner.js'></script> -->
+<script type="text/javascript" src="js/library/jquery.textcomplete.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-tagsinput.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-tagsinput.min.js"></script>
+
+<div class="rrm-card-detail-NewInterviewCard card-detail">
+    <span><i><img src="./image/dashboard/rrm.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Closed Resource Requirements</b></span>
+    <hr />
+   
+    <div class="rrm-card-detail">
+        <div id="rrmGridReportClosed"></div>
+    </div>
+</div>
+
+<div id="rrm_entrypointmodelClosed"></div>
+
+<div id="skillForRRMCloneExport" style="visibility: hidden;height: 0px;">
+
+</div>
+
+
+<div class="modal fade" id="rrm_OpenClosedRRM" role="dialog">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+             <h2 class="modal-title"><span id="lblcandidateTrackerTitile">Reopen Closed RRM </span><span id="OpenRRMEntryRRMNo"></span>&nbsp;</h2>
+       </div>
+        <div class="modal-body" id="rrm_rrmEntryPointClone_remarksBody" data-simplebar>
+                <div role="tabpanel" class="tab-pane" id="rrm_clone_CommentsDetail">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                           <label>Reason<span style="color: red">*</span></label>
+                        </div>
+                        <div class="col-md-9">
+                            <div id="divRRMReopenStatus"></div>
+                            <span class="error_message" id="rrm_RRMReopenStatusError"></span>
+                        </div>
+                     </div>
+                     <br>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <div id="rrm_clone_plan_comments_documents" class="rrm_comments_history">
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Comments <span style="color: red">*</span></label>
+                            <div id="sd_clone_RRMmentions_common"></div>
+                            <div id="sd_clone_txtEditor_common"></div>
+                            <span class="error_message" id="rrm_clone_commentsError_common"></span>
+                        </div>
+                    </div>
+                </div>
+      </div>
+      <div class="modal-footer">
+        <div>
+          <button type="button" class="btn btn-success" onclick="saveOpenClosedRRM();">Save</button>
+          <button type="button" class="btn btn-primary" onclick="closeOpenRRMCloneEntry();">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<script type="text/javascript">
+    $("#rrm_entrypointmodelClosed").load("components/closedResourceRequirements/rrmCloneEntryPointModal.html");
+    //onload func
+    var RRMCloneDetailsForValidations = {
+        "Priority":"",
+        "Communication":"",
+        "ExperienceRequired":"",
+        "Interviewers":[],
+        "planAcomments":"",
+        "planBcomments":""
+    }
+    var interviewersCloneData = [];
+    var rrmDataClone = [];
+    $(document).ready(function () {
+        //renderrrmentrypointreportGrid();
+        initializeRRMCloneEntryPointOwner();
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        loggedInUserDepartment = jsonData.Data[0].Department;
+        Token = jsonData.Data[0].Token;        
+        getCloneInterviewersList();
+        getRRMCloneList();
+    })
+    function getCloneInterviewersList(){
+        interviewersCloneData = [];
+        var interviewersListfilterData = JSON.stringify({
+            "IsActive": true
+        });
+        var interviewersList = callgetlist('GetEmployeeList', interviewersListfilterData);        
+        if (interviewersList.length > 0) {
+            interviewersList.forEach(function (i, index) {
+                interviewersCloneData.push({
+                    'EmployeeId': i['EmployeeId'],
+                    'EmployeeName': i['Name']
+                });
+            });
+        }
+        
+    }
+    function getRRMCloneList(){
+        rrmDataClone = [];
+        var rrmListfilterData = JSON.stringify({
+            "IsActive": true
+        });
+        var rrmListList = callgetlist('GetClosedRRM', rrmListfilterData);        
+        if (rrmListList.length > 0) {
+            rrmListList.forEach(function (i, index) {
+                rrmDataClone.push({
+                    'RRMId': i['RRMId'],
+                    'RRMName':i['RRMNo']+" - "+i['RequirementName']
+                });
+            });
+        }
+    }
+    var loggedInUserDepartment;
+    var editCloneRRMEntryPointJs;
+    var gridRRMCloneEntryPointJsOwner;
+    var addRRMType;
+    var leadApprovalType;
+    var rrmId;
+    var ResourceRequirementType;
+    var IsRRMForClone;
+    var ClonedRRMId;
+    //initialize RRM Entry Point
+    function initializeRRMCloneEntryPointOwner() {
+        addCloneRRMEntryPointJs = AddCloneRRMEntryPoint();
+        editCloneRRMEntryPointJs = EditCloneRRMEntryPoint();
+        gridRRMCloneEntryPointJsOwner = RRMCloneEntryPointGridOwner();
+    }
+
+     //edit rrm-owner click event
+    $(document).on("click", ".editCloneRRMEntryPointClosed", function (e) {
+        IsRRMForClone = false;
+        ClonedRRMId = "";
+        EditCloneRRM(e);
+       
+    });
+
+    $(document).on("click", ".cloneRRMEntryPointOwnerClosed", function (e) {
+        rrmAddBtnClickedOwner(e);
+        IsRRMForClone = true;
+        cloneRRMOwner(e);           
+    });
+
+    function cloneRRMFromEdit(RRMId){
+        $('#RRMCloneEntryPointModel').modal("hide");
+        setTimeout(function(){ 
+            initializeModalOwner();
+            $("#btnCloneRRM").hide();
+            $('#RRMCloneEntryPointModel').appendTo("body").modal("show");
+            $("#OwnerrrmType").attr('class', '');
+            $("#OwnerrrmHoldStatus").attr('class', '');
+            $("#OwnerrrmType").text('');
+            $("#OwnerrrmHoldStatus").text('');
+            $("#rrmmodelpagetitle").text("Add RRM");
+            addRRMType = "add";
+            initializeAddRRMOwner(addRRMType);
+            $("#rrm_OnHoldDiv").hide();
+            IsRRMForClone = true;
+            ClonedRRMId = RRMId;
+            editCloneRRMEntryPointJs.CloneEntryFromRRM(RRMId);
+        }, 1000);        
+    }
+
+    //edit rrm-owner
+    function EditCloneRRM(e) {
+        bindRecruiters();
+        initializeModalOwner();
+        leadApprovalType = "edit";
+        $('#RRMCloneEntryPointModel').appendTo("body").modal("show");
+        addRRMType = $(e.currentTarget).data("type");
+        rrmId = $(e.currentTarget).data("rrmid");
+        $("#btnCloneRRM").show();
+        $("#btnCloneRRM").attr('onclick',"cloneRRMFromEdit('"+rrmId+"')");
+        ResourceRequirementType = $(e.currentTarget).data("rrmtype");
+        $("#OwnerrrmType").attr('class', '');
+        if (ResourceRequirementType == "G") {
+            $("#lblLeadName").text("Requirement lead");
+            $("#OwnerrrmType").html("RRM").addClass("label label-success m-l-xs");
+        }
+        else if (ResourceRequirementType == "P") {
+            $("#lblLeadName").text("RFP Owner");
+            $("#OwnerrrmType").html("RFP").addClass("label label-info m-l-xs");
+        }
+        else if (ResourceRequirementType == "R") {
+            $("#lblLeadName").text("Backup Lead");
+            $("#OwnerrrmType").html("Resignation").addClass("label label-warning m-l-xs");
+        }
+        initializeEditCloneRRM(rrmId);
+        editCloneRRMEntryPointJs.RRMEntryFromRRM(rrmId);
+        getMappedInterviewerForRRM(rrmId);
+        var rrmOwnerId = $(e.currentTarget).data("rrmownerid");
+        var employeeId = localStorage.getItem("EmployeeID");
+        if(rrmOwnerId == employeeId){
+            $("#rrm_OnHoldDiv").show();
+        }
+        else{
+            $("#rrm_OnHoldDiv").hide();
+        }
+
+    }
+
+    function cloneRRMOwner(e){
+        rrmId = $(e.currentTarget).data("rrmid");
+        ClonedRRMId = rrmId;
+        editCloneRRMEntryPointJs.CloneEntryFromRRM(rrmId);
+    }
+
+    //send reminder btn visible only hr head
+    function btnsendreminder() {
+        editCloneRRMEntryPointJs.btnsendreminder(rrmId);
+    }
+
+    //rrm-owner addrrm btn click
+    $(document).on("click", "#rrmEntryPointAddBtnOwner", function (e) {
+        rrmAddBtnClickedOwner(e)
+    })
+
+    //rrm-owner addrrm btn click
+    function rrmAddBtnClickedOwner(e) {
+        $("#btnCloneRRM").hide();
+        IsRRMForClone = false;
+        ClonedRRMId = "";
+        initializeModalOwner();
+        $('#RRMCloneEntryPointModel').appendTo("body").modal("show");
+        $("#OwnerrrmType").attr('class', '');
+        $("#OwnerrrmHoldStatus").attr('class', '');
+        $("#OwnerrrmType").text('');
+        $("#OwnerrrmHoldStatus").text('');
+        $("#rrmmodelpagetitle").text("Add RRM");
+        addRRMType = $(e.currentTarget).data("type");
+        initializeAddRRMOwner(addRRMType);
+        $("#rrm_OnHoldDiv").hide();
+    }
+
+    function getMappedInterviewerForRRM(RRMId){
+        var filter_val = JSON.stringify({
+            "RRMId": RRMId,
+        });
+        callGetListAsync('GetMappedInterviewersForRRM', filter_val, function (result) {
+            var mappedId = [];
+            if (result.length > 0) {
+                result.forEach(function (i, index) {
+                    mappedId.push(i['EmployeeId']);
+                });              
+                // $("#interviewerMultiple").val(mappedId).change();
+                $("#sdtag_rrm_intervierwers").dxTagBox('instance').option('value',mappedId);
+                RRMCloneDetailsForValidations.Interviewers = mappedId;
+            }
+        })
+    }
+
+
+</script>

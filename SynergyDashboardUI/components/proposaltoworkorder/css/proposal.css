@@ -1,0 +1,63 @@
+#proposal_dropzone .dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    font-family: Roboto, "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.4rem;
+    background: #F3F4F5;
+    color: #646C7F;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 10px;
+ }
+ 
+ #proposal_dropzone .dropzone .dz-message {
+    text-align: center;
+    vertical-align: middle;   
+    font-weight: 400;
+ }
+ 
+ #proposal_dropzone .dropzone .dz-preview.dz-image-preview {
+   background-color: transparent;
+ }
+ 
+ #proposal_dropzone .dropzone .dz-preview .dz-error-message {
+   color: white;
+ }
+ 
+ #proposal_dropzone .dropzone .dz-message .note {
+   font-size: 0.8em;
+   font-weight: 200;
+   display: block;
+   margin-top: 1.4rem;
+ }
+ 
+ #proposal_dropzone .dz-progress{
+    display: none;
+ }
+ #smartwizard_workorder input[type=checkbox] { margin-right: 5px; display: inline-block;}
+ #smartwizard_workorder input[type=radio] { margin-right: 5px; display: inline-block;}
+ #smartwizard_workorder input[type=radio] + label {
+  display: inline;
+}
+.rfp_history_lists .rfp_comment {
+  background: #ececec;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+}
+
+.rfp_history_lists .rfp_comment label {
+  width: 100%;
+  margin: 5px 0 0 0;
+}
+.rfp_history_lists .rfp_comment label:empty {
+  display: none;
+}
+@media (max-width: 991px) {
+  #smartwizard_workorder input[type=radio] + label {
+    display: inline-block;
+  }
+}

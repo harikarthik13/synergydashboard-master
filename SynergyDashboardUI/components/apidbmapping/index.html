@@ -1,0 +1,24 @@
+<div class="card-detail">
+    <span class="card-detail-title"><b>API DB Mapping</b></span>
+    <span class="pull-right">
+        <button class="btn btn-sm btn-primary" onclick="openApiDbUserMappingModel();">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+    <div id="sddgd-apidbmapping"></div>
+</div>
+</div>
+<script type="text/javascript" src="components/apidbmapping/js/apidbmapping.js"></script>
+<script type="text/javascript">
+renderAPIdbMapping();
+$("#apidbMapModelBox").load("components/apidbmapping/apidbmappingModal.html");
+
+    function include_files(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+</script>

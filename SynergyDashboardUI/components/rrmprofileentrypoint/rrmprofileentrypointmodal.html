@@ -1,0 +1,1966 @@
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<style>
+    .profileEntryWrappedColumn {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+    }
+
+    /* #profileTabDetails {
+        overflow-y: auto;
+        overflow-x: hidden;
+    } */
+
+    /* #RRMProfileEntryPointTableModel-content {
+        min-height: 90vh;
+        max-height: initial;
+    } */
+
+    #RRMProfileEntryPointTableModel .modal-body {
+        min-height: calc(100vh - 200px)
+    }
+
+    #RRMProfileEntryPointMappingModel .modal-body {
+        min-height: calc(100vh - 200px)
+    }
+
+    /* #RRMProfileEntryPointTableModel-content .simplebar-offset, #RRMProfileEntryPointTableModel-content .simplebar-mask {
+            position: static;
+        }
+
+        #RRMProfileEntryPointTableModel-content .simplebar-wrapper {
+            margin: 0 !important;
+        }
+
+        #RRMProfileEntryPointTableModel-content .simplebar-offset .simplebar-content {
+            padding: 0 !important;
+        }
+
+        #RRMProfileEntryPointTableModel-content .simplebar-wrapper .simplebar-placeholder {
+            display: none;
+        } */
+
+        #RRMProfileEntryPointMappingModel {
+      width: 100%;
+        }
+
+    #RRMProfileEntryPointMappingModel .modal-content{
+        width: 70%;
+    }
+
+    .star-rating {
+        line-height: 32px;
+        font-size: 1.25em;
+    }
+
+    .star-rating .fa-star {
+        color: yellow;
+    }
+
+    .star-rating .fa-star-o {
+        color: aliceblue;
+    }
+
+    #rrm_candidateDisableExternalLoginDiv{
+        padding-top: 8px;
+    }
+</style>
+<!--POP-UP RRM candidate MODAL STARTS HERE -->
+<div class="modal fade" id="RRMProfileEntryPointTableModel" tabindex="-1" role="dialog" style="width: 110%;">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content" id="RRMProfileEntryPointTableModel-content">
+            <div class="modal-header">
+                <!--getNewRfpList()---To Generate the list in RRM Candidate Card-->
+               
+                    <button type="button" class="close modal_close" style="float:right !important" data-dismiss="modal"
+                        id="RrmCloseButton">
+                        &times;
+                    </button>
+                    <button class="expand modalExpanding" style="float:right;"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <button class="btn btn-primary" style="float:right; margin-right: 10px;" id="btnbanprofile" style="background-color : red"
+                    onclick="banRRMProfile()"><i class='ui-icon-flag'></i>Ban</button>
+                
+                <h2 class="modal-title text-left"><span id="modelText"></span></h2>
+            </div>
+
+            <div class="modal-body" id="RRMProfileEntryPointTableModel-body" data-simplebar>
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="rrmprofiletab">
+                        <li role="presentation" class="active  disabled" id="rrm_candidatecontactTab">
+                            <a href="#rrm_CandidateContactDetails" aria-controls="rrm_CandidateContactDetails"
+                                role="tab">Basic</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_candidateinfoTab">
+                            <a href="#rrm_candidateinformationTab" aria-controls="rrm_candidateinformationTab"
+                                role="tab">Additional information</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_candidateaddressTab">
+                            <a href="#rrm_candidateaddressdetail" aria-controls="rrm_candidateaddressdetail"
+                                role="tab">Address</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_employerdetailsTab">
+                            <a href="#rrm_EmployerDetails" aria-controls="rrm_EmployerDetails" role="tab">Work
+                                History</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_candidateCareerTab">
+                            <a href="#rrm_CandidateCareerDetails" aria-controls="rrm_CandidateCareerDetails"
+                                role="tab">Skills</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_candidatedocumentTab">
+                            <a href="#rrm_CandidateDocuments" aria-controls="rrm_CandidateDocuments"
+                                role="tab">Comments</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content col-md-12" id="profileTabDetails">
+                        <!--contact details-->
+                        <div role="tabpanel" class="tab-pane active" id="rrm_CandidateContactDetails">
+                            <div class="row">
+                                <div class="form-section" id="form-block">
+                                    <span class="hidden" style="color: red" id="bindexistingcandidate"></span>
+                                    <div id="rrmprofile-bannedprofilewarning" class="alert alert-danger hidden">
+                                        <strong>Banned Profile: </strong>
+                                        <span id="rrmprofile-flaggedprofilereason"></span>
+                                    </div>
+                                    <div style="visibility:hidden">
+                                        <div>
+                                            <label>id</label>
+                                            <span id="rrm_candidateid"></span>
+                                            <span class="error_message" id="rrm_candidateiderror"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Candidate Details Section-->
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>Name </label>
+                                            <div id="rrm_candidatename"></div>
+                                            <span class="error_message" id="rrm_candidatenameerror"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Email</label>
+                                            <div id="rrm_candidateemail"></div>
+                                            <span class="error_message" id="rrm_candidateemailerror"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="candidateAlreadyExist hidden">
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <div id="rrm_existingcandidateByEmail"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="newCandidateForm hidden">
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label>RRM Name&nbsp; <span style="color: red" >*</span></label>
+                                                <div id="rrm_rrmNumber"></div>
+                                                <span class="error_message" id="rrm_rrmNumbererror"></span>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                <label>Notice Period (in days, for immediate joinee enter 0)&nbsp; <span style="color: red" >*</span></label>
+                                                <div id="rrm_candidatenoticeperiod"></div>
+                                                <span class="error_message" id="rrm_candidatenoticeperioderror"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <!-- <div class="form-group col-md-4">
+                                            <label>PAN No</label>
+                                            <div id="rrm_candidatepanno"></div>
+                                            <span class="error_message" id="rrm_candidatepannoerror"></span>
+                                        </div> -->
+                                            <div class="form-group col-md-6">
+                                                <label>Native </label>
+                                                <div id="rrm_native"></div>
+                                                <span class="error_message" id="rrm_nativeError"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Willing to Relocate&nbsp; <span style="color: red" >*</span></label>
+                                                <div id="rrm_candidatewilling"></div>
+                                                <span class="error_message" id="rrm_candidatewillingerror"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label>Communication&nbsp; <span style="color: red" >*</span></label>
+                                                <div id="rrm_candidatecommunication"></div>
+                                                <span class="error_message" id="rrm_candidatecommunicationerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Phone No&nbsp; <span style="color: red" >*</span></label>
+                                                <div id="rrm_candidatephoneno"></div>
+                                                <span class="error_message" id="rrm_candidatephonenoerror"></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Passport No</label>
+                                                <div id="rrm_candidatepassportno"></div>
+                                                <span class="error_message" id="rrm_candidatepassportnoerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Aadhar No</label>
+                                                <div id="rrm_candidateaadharno"></div>
+                                                <span class="error_message" id="rrm_candidateaadharnoerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>PAN No</label>
+                                                <div id="rrm_candidatepanno"></div>
+                                                <span class="error_message" id="rrm_candidatepannoerror"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Referral</label>
+                                                <div id="rrm_candidatereferral"></div>
+                                                <span class="error_message" id="rrm_candidatereferralerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Total&nbsp; <span style="color: red" >*</span> </label>
+                                                <div id="rrm_candidateTotalExperience"></div>
+                                                <span class="error_message"
+                                                    id="rrm_candidateTotalExperienceerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-4" id="rrm_candidateDisableExternalLoginDiv">
+                                                <br>
+                                                <label>Disable External Login </label>
+                                                <div id="rrm_candidateDisableExternalLogin"></div>
+                                                <span class="error_message"
+                                                    id="rrm_candidateDisableExternalLoginerror"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Additional information-->
+                        <div role="tabpanel" class="tab-pane" id="rrm_candidateinformationTab">
+                            <div class="row">
+                                <div class="form-section" id="form-block">
+                                    <!-- Candidate Details Section-->
+                                    <div class="col-md-6">
+                                        <div class="dx-fieldset-header">
+                                            Professional Information
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="rrmprofile-divShowFileUploader">
+                                                        <div id="file-uploader"></div>
+                                                    </div>
+                                                    <div id="rrmprofile-divShowResumeDownloader" class="hidden">
+                                                        <div id="rrmprofile-existingResumeDownload"
+                                                            style="margin-top: 18px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="audio-uploader"></div>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="photo-uploader"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Audio File </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="audio-uploader"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Profile Photo </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="photo-uploader"></div>
+                                                    <span class="error_message error_profilephotoupload"></span>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group">
+                                            <label>Skype </label>
+                                            <div id="rrm_candidateskype"></div>
+                                            <span class="error_message" id="rrm_candidateskypeerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>LinkedIn</label>
+                                            <div id="rrm_candidatelinkedin"></div>
+                                            <span class="error_message" id="rrm_candidatelinkedinerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>GitHub </label>
+                                            <div id="rrm_candidategithub"></div>
+                                            <span class="error_message" id="rrm_candidategithuberror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>URL</label>
+                                            <div id="rrm_candidateurl"></div>
+                                            <span class="error_message" id="rrm_candidateurlerror"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="dx-fieldset-header">Personal Information</div>
+                                        <div class="form-group">
+                                            <label>Father's Name </label>
+                                            <div id="rrm_candidatefathername"></div>
+                                            <span class="error_message" id="rrm_candidatefathernameerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Marital Status</label>
+                                            <div id="rrm_candidatemaritalstatus"></div>
+                                            <span class="error_message" id="rrm_candidatemaritalstatuserror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date of Birth</label>
+                                            <div id="rrm_candidatedob"></div>
+                                            <span class="error_message" id="rrm_candidatemaritaldoberror"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Address details-->
+                        <div role="tabpanel" class="tab-pane" id="rrm_candidateaddressdetail">
+                            <div class="row">
+                                <div class="form-section" id="form-block">
+                                    <!-- Candidate Details Section-->
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>Address <span style="color: red">*</span></label>
+                                            <div id="rrm_candidateaddress"></div>
+                                            <span class="error_message" id="rrm_candidateaddresserror"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Country <span style="color: red">*</span></label>
+                                            <div id="rrm_candidatecountry"></div>
+                                            <span class="error_message" id="rrm_candidatecountryerror"></span>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>State <span style="color: red">*</span></label>
+                                            <div id="rrm_candidatepstate"></div>
+                                            <span class="error_message" id="rrm_candidatestateerror"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>City <span style="color: red">*</span></label>
+                                            <div id="rrm_candidatecity"></div>
+                                            <span class="error_message" id="rrm_candidatecityerror"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>Pin Code </label>
+                                            <div id="rrm_candidatepincode"></div>
+                                            <span class="error_message" id="rrm_candidatepincodeerror"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Employer Details Section -->
+                        <div role="tabpanel" class="tab-pane" id="rrm_EmployerDetails">
+                            <div class="row">
+                                <div class="demo-container">
+                                    <span class="gridContainer_status"></span>
+                                    <div id="gridContainer"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Candidate Career Details-->
+                        <div role="tabpanel" class="tab-pane" id="rrm_CandidateCareerDetails">
+                            <!-- Career Details Section-->
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <span class="skillset_status"></span>
+                                        <span class="display_Skillsprofile_status"></span>
+                                        <div id="display_Skillsprofile"></div>
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                            </div>
+
+                        </div>
+                        <!--Candiadte Documents-->
+                        <div role="tabpanel" class="tab-pane" id="rrm_CandidateDocuments">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Notes</label>
+                                    <div id="sd_popover_RRMmentions"></div>
+                                    <div id="txtareaComments"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label></label>
+                                    <div id="candidateNotesHistory" class="rrm_comments_history">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-primary btnPrevious hidden-btn" onclick="toggleTabRRMPrevious()">Previous</a>
+                <a class="btn btn-primary btnNext hidden" onclick="toggleTabRRMProfile()">Next</a>
+                <button type="button" class="btn btn-success saveFamilyBtn hidden-btn"
+                    onclick="saveCandidateCommentsAndClose()">Save & Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--POP-UP RRM Candidate MODAL ENDS HERE -->
+<!--POP-UP RRM candidate Ban MODAL STARTS HERE -->
+<div class="modal fade" id="RPMBanModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content" id="RPMBanModel-content">
+            <div class="modal-header">
+
+                <button type="button" class="close modal_close" data-dismiss="modal" id="RrmCloseButton">
+                    &times;
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title text-left">Ban the Candidate</h2>
+            </div>
+
+            <div class="modal-body" id="RPMBanModel-body" data-simplebar>
+                <div role="tabpanel">
+                    <div class="form-group col-md-12">
+                        <div class="row">
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Flag reason</label>
+                                        <div id="rrm_bancandidate"></div>
+                                        <span class="error_message" id="rrm_bancandidateerror"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="row">
+                            <label>Comments</label>
+                            <div id="bantxtareaComments"></div>
+                            <span class="error_message" id="rrm_bancommentsError"></span>
+                            <span class="ApiResponse"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-success " onclick="flagthiscandidate()">Flag</a>
+                <a class="btn btn-danger" onclick="closebanmodal()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RRMProfileEntryPointMappingModel"  role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content" id="RRMProfileEntryPointMappingModel-content">
+            <div class="modal-header">
+
+                    <button type="button" class="close modal_close" style="float:right !important" data-dismiss="modal"
+                        id="RrmCloseButton">
+                        &times;
+                    </button>
+                    <!-- <button class="expand modalExpanding">
+                        <i class="fas fa-expand" data-toggle="modal"></i>
+                      </button> -->
+               
+                <button class="expand modalExpanding" style="float:right;"><i class="fas fa-expand" data-toggle="modal"></i></button>
+
+                <h2 class="modal-title text-left"><span id="modelText">RRM Profile Mapping</span></h2>
+            </div>
+
+            <div class="modal-body" id="RRMProfileEntryPointMappingModel-body" data-simplebar>
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#rrm_CandidateMappingProfileEntryPoint"
+                                aria-controls="rrm_CandidateMappingProfileEntryPoint" role="tab">RRM Mapping</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content col-md-12">
+
+                        <div role="tabpanel" class="tab-pane active" id="rrm_CandidateMappingProfileEntryPoint">
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <h5><b>Available RRM</b></h5>
+                                    <div id="sdgd-candidatesGridProfileEntryPoint"></div>
+                                </div>
+                                <div class="col-xs-1" style="padding-top: 138px;">
+                                    <div class="row">
+                                        &nbsp;<button class="btn btn-success btn-sm"
+                                            onclick="MapProfileEntryPointRRM()">Map <i
+                                                class="fa fa-angle-right"></i></button>
+                                    </div>
+                                    &nbsp;
+                                    <div class="row">
+                                        <button class="btn btn-info btn-sm" onclick="UnMapProfileEntryPointRRM();"><i
+                                                class="fa fa-angle-left"></i> UnMap</button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <h5><b>Mapped RRM</b></h5>
+                                    <div id="sdgd-mappedCandidatesGridProfileEntryPoint"></div>
+                                </div>
+                            </div>
+                            <div id="mappedCandidatesGridProfileEntryPointtooltip">
+                                <span id="mappedCandidatesGridProfileEntryPointtooltipText"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--POP-UP RRM Candidate MODAL ENDS HERE -->
+<!-- Javascript -->
+<!-- <script src="js/callapi.js"></script> -->
+<!-- <script src="components/registration/assets/js/register/skillset.js"></script> -->
+<script src="./js/library/bootstrap.js"></script>
+<script type="text/javascript">
+    var rrmNumbers;
+    
+    $(document).ready(function () {
+        //Global variable
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token;
+        getRRMList();
+        CandidateProfileForMentions();
+        GetEmployeeList();
+        loadGridProfileMapping();
+        //tab-toggle
+        $('ul#rrmprofiletab li').click(function (e) {
+            if (rrmProfileType == "edit") {
+                var isBannedProfile = !($("#rrmprofile-bannedprofilewarning").hasClass('hidden'))
+
+                $('ul#rrmprofiletab li').removeClass("active");
+                $("#profileTabDetails .tab-pane").removeClass("active");
+
+                $(this).addClass("active");
+                var tab_details = $(this).attr("id");
+                var currentTab = $("#" + tab_details + " > a ").attr("aria-controls");
+                $("#" + currentTab).addClass("active");
+                if (currentTab == "rrm_CandidateContactDetails") {
+                    $('.nav-tabs a[href="#rrm_CandidateContactDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").hide();
+                }
+                else if (currentTab == "rrm_candidateinformationTab") {
+                    $('.nav-tabs a[href="#rrm_candidateinformationTab"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                }
+                else if (currentTab == "rrm_EmployerDetails") {
+                    $('.nav-tabs a[href="#rrm_EmployerDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show;
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.GetPreviousEmployersForCandidate();
+                    }
+                }
+                else if (currentTab == "rrm_candidateaddressdetail") {
+                    $('.nav-tabs a[href="#rrm_candidateaddressdetail"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                }
+                else if (currentTab == "rrm_CandidateCareerDetails") {
+                    $('.nav-tabs a[href="#rrm_CandidateCareerDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.getSkillsDetails();
+                    }
+                }
+                else if (currentTab == "rrm_CandidateDocuments") {
+                    $('.nav-tabs a[href="#rrm_CandidateDocuments"]').tab("show");
+                    $("a.btnNext").hide();
+                    $("a.btnSaveAndContinue").hide();
+                    $(".saveFamilyBtn").show();
+                    $(".btnPrevious").show();
+                }
+
+                if (isBannedProfile) {
+                    $("a.btnNext").hide();
+                    $("a.btnSaveAndContinue").hide();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").hide();
+                }
+                resetSimpleBarProfileEntryPoint();
+            }
+        });
+        loadAndBindSkillMappingTabForAddRRMProfile();
+        getRRMRRMProfileEntryEmployerTable();
+        //details tab
+        loadcandidatedetailsform();
+        getRRMRRMProfileEntrySkillTable();
+        loadcountries();
+        GetMaritalStatusMaster();
+        loadGetCandidateFlagMaster();
+    })
+
+    function loadGridProfileMapping() {
+        $("#sdgd-candidatesGridProfileEntryPoint").dxDataGrid({
+            keyExpr: "RRMNo",
+            showBorders: true,
+            allowColumnResizing: true,
+            rowAlternationEnabled: true,
+            selection: {
+                mode: "multiple"
+            },
+            paging: {
+                pageSize: 7
+            },
+            wordWrapEnabled: true,
+            filterRow: { visible: true },
+            columns: [
+                {
+                    dataField: "OnHoldByClient",
+                    caption: "OnHoldByClient",
+                    visible: false,
+                    allowSorting: false
+                },
+                {
+                    dataField: "OnHoldByOwner",
+                    caption: "OnHoldByOwner",
+                    visible: false,
+                    allowSorting: false
+                },
+                {
+                    dataField: "FirstName",
+                    caption: "Name",
+                    allowSorting: false,
+                    allowFiltering: true,
+                    visible: false
+                },
+                {
+                    dataField: "Id",
+                    caption: "Candidate Id",
+                    visible: false,
+                    allowSorting: false
+                },
+                {
+                    dataField: "RRMId",
+                    caption: "RRM Id",
+                    visible: false,
+                    allowSorting: false
+                },
+                {
+                    dataField: "RRMNo",
+                    caption: "RRM No",
+                    allowSorting: false,
+                    allowFiltering: true
+                },
+                {
+                    dataField: "name",
+                    caption: "Skill Name",
+                    allowSorting: false,
+                    allowFiltering: true,
+                    visible: false
+                },
+                {
+                    dataField: "RequirementName",
+                    caption: "Requirement Name",
+                    allowSorting: false,
+                    allowFiltering: true,
+                    visible: true
+                },
+                {
+                    dataField: "RequiredFor",
+                    caption: "Required For",
+                    allowSorting: false,
+                    allowFiltering: true,
+                    visible: false
+                },
+                {
+                    dataField: "Owner",
+                    caption: "Recruiter",
+                    allowSorting: false,
+                    allowFiltering: true,
+                    visible: true
+                }],
+        });
+
+        var toolTip = $("#mappedCandidatesGridProfileEntryPointtooltip").dxTooltip({
+                    }).dxTooltip("instance");
+
+        $("#sdgd-mappedCandidatesGridProfileEntryPoint").dxDataGrid({
+            keyExpr: "RRMId",
+            showBorders: true,
+            allowColumnResizing: true,
+            rowAlternationEnabled: true,
+            selection: {
+                mode: "multiple"
+            },
+            paging: {
+                pageSize: 8
+            },
+            wordWrapEnabled: true,
+            onCellPrepared: disableCheckBoxMappedDataRRMMapping,
+            filterRow: { visible: true },
+            onRowPrepared: function (e) {  
+            if (e.rowType == 'data') {  
+                var status = e.data.StageOrder;
+                var htmlText;
+                if(status >= 26){
+                    htmlText = e.data.Stage+" cannot be unmapped"
+                }
+                else if(status === 4){
+                    htmlText = e.data.Stage+" cannot be unmapped"
+                }
+                else{
+                    htmlText = e.data.Stage;
+                }
+
+                e.rowElement.mousemove(function () {
+                    $('#mappedCandidatesGridProfileEntryPointtooltipText').text(htmlText);
+                    toolTip.show(e.rowElement);
+                })  
+            }  
+        }  ,
+            columns: [{
+                dataField: "Id",
+                caption: "ID",
+                visible: false,
+                allowSorting: false
+            },
+            {
+                dataField: "CandidateName",
+                caption: "Name",
+                width: 100,
+                allowSorting: false,
+                allowFiltering: true,
+                visible: false
+            },
+            {
+                dataField: "Skill",
+                caption: "Skills",
+                allowSorting: false,
+                allowFiltering: true,
+                visible: false
+            },
+            {
+                dataField: "RRMId",
+                caption: "RRMId",
+                allowFiltering: true,
+                allowSorting: false,
+                visible: false
+            },
+            {
+                dataField: "RRMNo",
+                caption: "RRM No",
+                allowSorting: false,
+                allowFiltering: true
+            },
+            {
+                dataField: "RequirementName",
+                caption: "Requirement Name",
+                allowSorting: false,
+                allowFiltering: true,
+                visible: true
+            },
+            {
+                dataField: "StageOrder",
+                caption: "Stage Order",
+                allowFiltering: true,
+                allowSorting: false,
+                visible: false
+            },
+            {
+                dataField: "Stage",
+                caption: "Stage",
+                allowFiltering: true,
+                allowSorting: false,
+                cellTemplate: function (container, options) {
+                    var html = "";
+                    if (options.data.IsFlagged) {
+                        html += "<span class='label label-default'>BANNED &nbsp;<i class='fa fa-ban' aria-hidden='true' style='color:#D9534F'></i></span>"
+                    }
+                    else {
+                        if (options.data.StageOrder == 2) {
+                            html += "<span class='label label-warning'>" + options.data.Stage + "</span>";
+                        }
+                        if (options.data.StageOrder == 3) {
+                            html += "<span class='label label-danger'>" + options.data.Stage + "</span>";
+                        }
+                        if (options.data.StageOrder >= 4 && options.data.StageOrder <= 26) {
+                            html += "<span class='label label-success'>" + options.data.Stage + "</span>";
+                        }
+                        if (options.data.StageOrder >= 4 && options.data.StageOrder == 27) {
+                            html += "<span class='label label-warning'>" + options.data.Stage + "</span>";
+                        }
+                    }
+                    $("<div class='pull-left'>")
+                        .append(html)
+                        .appendTo(container);
+                },
+            },
+            {
+                dataField: "Status",
+                caption: "Status",
+                allowFiltering: true,
+                allowSorting: false,
+                cellTemplate: function (container, options) {
+                    var html = "";
+                    
+                    html += "<span class='label label-primary'>" + options.data.Status + "</span>";
+
+                    $("<div class='pull-left'>")
+                        .append(html)
+                        .appendTo(container);
+                },
+            }],
+        });
+
+    }
+
+    function loadAndBindSkillMappingTabForAddRRMProfile() {
+        var employee_id = '';
+        var filter_val = JSON.stringify({
+            "EmployeeId": employee_id
+        });
+        var filter_val = JSON.stringify({ "IsActive": true });
+        // var result = callgetlist('GetSkillFamilies', filter_val);
+        callGetListAsync('GetSkillFamilies', filter_val, function (result) {
+            //addRRMEntryPointJs.family = result;
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                // options += "<option value='" + result[i].Id + "'>" + result[i].Name + "</option>";
+                skillfamilydata.push({
+                    "Id": result[i].Id,
+                    "Name": result[i].Name
+                });
+            }
+            //$("#familyprofile").html(options);
+        })
+
+    }
+
+
+    function loadcountries() {
+        var filter_val = JSON.stringify({
+            "Token": Token
+        });
+        callGetListAsync('GetCountries', filter_val, function (result) {
+            for (var i = 0; i < result.length; i++) {
+                getcountry.push({
+                    "Id": result[i].Id,
+                    "Name": result[i].Name
+                });
+            }
+        })
+
+    }
+    function loadstate(CountryId) {
+        var filter_val = JSON.stringify({
+            "CountryId  ": CountryId,
+            "Token": Token
+        });
+        var getState = [];
+        $("#rrm_candidatepstate").dxSelectBox("instance").option("dataSource", getState)
+        callGetListAsync('GetStates', filter_val, function (result) {
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                getstate.push({
+                    "Id": result[i].Id,
+                    "Name": result[i].Name
+                });
+            }
+            $("#rrm_candidatepstate").dxSelectBox("instance").option("dataSource", getstate);
+        })
+
+    }
+    function loadcities(StateID) {
+        var filter_val = JSON.stringify({
+            "StateID  ": StateID,
+            "Token": Token
+        });
+        var getCities = [];
+        $("#rrm_candidatecity").dxSelectBox("instance").option("dataSource", getCities);
+        callGetListAsync('GetCities', filter_val, function (result) {
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                getCities.push({
+                    "Id": result[i].Id,
+                    "Name": result[i].Name
+                });
+            }
+            $("#rrm_candidatecity").dxSelectBox("instance").option("dataSource", getCities);
+        })
+
+    }
+    function GetMaritalStatusMaster() {
+        var filter_val = JSON.stringify({
+            "Token": Token
+        });
+        callGetListAsync('GetMaritalStatusMaster', filter_val, function (result) {
+            for (var i = 0; i < result.length; i++) {
+                maritalstatus.push({
+                    "ID": result[i].Id,
+                    "Name": result[i].Status
+                });
+            }
+        })
+    }
+    function toggleTabRRMPrevious() {
+        if (rrmProfileType == "edit") {
+            editRRMProfileEntryPointJs.toggleTabRRMPrevious();
+        }
+        else if (rrmProfileType == "add") {
+            addRRMProfileEntryPointJs.toggleTabRRMPrevious();
+        }
+    }
+
+    function toggleTabRRMProfile() {
+
+        if (rrmProfileType == "edit") {
+            editRRMProfileEntryPointJs.toggleTabRRMEntry();
+        }
+        else if (rrmProfileType == "add") {
+            addRRMProfileEntryPointJs.toggleTabRRMEntry();
+        }
+
+    }
+
+    function get_versionsprofile(skill_id) {
+        var skill_id = skill_id;
+        var filter_val = JSON.stringify({
+            "SkillId": skill_id
+        });
+
+        var result = callgetlist('GetSkillVersions', filter_val);
+
+        var options = "<option value=''>Select Skill Version</option>";
+        for (var i = 0; i < result.length; i++) {
+            options += "<option value='" + result[i].Id + "'>" + result[i].Name + "</option>";
+        }
+        $("#skillversionprofile").html(options);
+    }
+
+    function get_skillsprofile(family_id) {
+        var family_id = family_id;
+        var filter_val = JSON.stringify({
+            "FamilyId": family_id
+        });
+        var result = callgetlist('GetSkills', filter_val);
+        var options = "<option value=''>Select Skills</option>";
+        for (var i = 0; i < result.length; i++) {
+            //options += "<option value='" + result[i].Id + "'>" + result[i].Name + "</option>";
+
+        }
+    }
+
+    function get_skills(family_id) {
+        var family_id = family_id;
+        var filter_val = JSON.stringify({
+            "FamilyId": family_id
+        });
+        var result = callgetlist('GetSkills', filter_val);
+        for (var i = 0; i < result.length; i++) {
+            skilldata.push({
+                "Id": result[i].Id,
+                "Name": result[i].Name
+            });
+        }
+    }
+
+    function loadGetCandidateFlagMaster() {
+        var filter_val = JSON.stringify({
+            "Token": Token
+        });
+        var result = callgetlist('GetCandidateFlagMaster', filter_val);
+        for (var i = 0; i < result.length; i++) {
+            flagreason.push({
+                "Id": result[i].Id,
+                "Name": result[i].Name
+            });
+        }
+    }
+
+    function get_version(skill_id) {
+        var skill_id = skill_id;
+        var filter_val = JSON.stringify({
+            "SkillId": skill_id
+        });
+        var result = callgetlist('GetSkillVersions', filter_val);
+        for (var i = 0; i < result.length; i++) {
+            version.push({
+                "Id": result[i].Id,
+                "Name": result[i].Name
+            });
+        }
+    }
+
+
+    function saveSkillsets() {
+        if (rrmProfileType == "edit") {
+            editRRMProfileEntryPointJs.uploadSkill
+        }
+        else if (rrmProfileType == "add") {
+            addRRMProfileEntryPointJs.uploadSkill();
+        }
+
+    }
+
+    function saveCandidateCommentsAndClose() {
+        if (rrmProfileType == "add") {
+            addRRMProfileEntryPointJs.saveCandidateCommentAndClose();
+        }
+        else if (rrmProfileType == "edit") {
+            editRRMProfileEntryPointJs.saveCandidateCommentAndClose();
+        }
+    }
+
+    function saveCandidateComments() {
+        if (rrmProfileType == "add") {
+            addRRMProfileEntryPointJs.saveCandidateComment();
+        }
+        else if (rrmProfileType == "edit") {
+            editRRMProfileEntryPointJs.saveCandidateComment();
+        };
+    }
+    var candidateData;
+
+    function getRRMRRMProfileEntryEmployerTable() {
+        var filterData = JSON.stringify({
+            "IsActive": true,
+            "CandidateId": candidateIdForSkillAndWorkExperience,
+            "Token": Token
+        });
+        callGetListSync('GetCandidatePreviousEmployersByCandidateId', filterData, function (e) {
+            $("#gridContainer").dxDataGrid({ dataSource: e })
+            candidateData = e;
+        })
+    }
+
+    $(function () {
+        function logEvent(eventName) {
+            var logList = $("#events ul"),
+                newItem = $("<li>", { text: eventName });
+
+            logList.prepend(newItem);
+        }
+
+        var filter_val = JSON.stringify({
+            "CandidateId ": null,
+            "IsActive": "True",
+            "Token": Token
+        });
+
+        callGetListAsync('GetCandidatePreviousEmployersByCandidateId', filter_val, function (e) {
+            getskilldata = e;
+            $("#gridContainer").dxDataGrid({
+                dataSource: getskilldata,
+                //keyExpr: "ID",
+                showBorders: true,
+                paging: {
+                    enabled: false
+                },
+                editing: {
+                    mode: "row",
+                    allowUpdating: true,
+                    allowDeleting: true,
+                    allowAdding: true
+                },
+                columns: [
+                    {
+                        dataField: "EmployerId",
+                        caption: "",
+                        visible: false
+                    },
+                    {
+                        dataField: "EmployerName",
+                        caption: "Employer Name"
+                    },
+                    {
+                        dataField: "Designation",
+                        caption: "Designation"
+                    },
+                    {
+                        dataField: "Location",
+                        caption: "Location"
+                    },
+
+                    {
+                        dataField: "FromDate",
+                        caption: "From Date",
+                        dataType: "date",
+                        format: "dd-MMM-yyyy",
+                        width: 125,
+                        validationRules: [{
+                            type: "range",
+                            max: new Date(maxdate),
+                            message: "Date can not be greater than today"
+                        }],
+                    },
+                    {
+                        dataField: "ToDate",
+                        caption: "To Date",
+                        dataType: "date",
+                        format: "dd-MMM-yyyy",
+                        width: 125,
+                        validationRules: [{
+                            type: "range",
+                            max: new Date(maxdate),
+                            message: "Date can not be greater than today"
+                        },
+                        {
+                            type: "custom",
+                            message: "Date can not be lesser than From Date",
+                            validationCallback: function (e) {
+                                var fromDate = new Date(e.data.FromDate);
+                                var toDate = new Date(e.value);
+                                if (toDate < fromDate) {
+                                    return false;
+                                }
+                                else {
+                                    return true;
+                                }
+                            }
+                        }
+                        ],
+                    },
+                    {
+                        dataField: "Experience",
+                        caption: "Experience",
+                        allowEditing: false
+                    },
+                    {
+                        dataField: "ReasonForLeaving",
+                        caption: "Reason For Leaving",
+                        validationRules: [{
+                            type: "required",
+                            message: "Reason for leaving is required"
+                        }]
+                    }
+                ],
+                summary: {
+                    totalItems: [{
+                        column: "ToDate",
+                        summaryType: "sum",
+                        customizeText: function (data) {
+                            return "Total Experience:";
+                        }
+                    }, {
+                        column: "Experience",
+                        summaryType: "sum",
+                        customizeText: function (data) {
+                            return data.value;
+                        }
+                    }]
+                },
+                onEditingStart: function (e) {
+                    logEvent("EditingStart");
+                },
+                onRowEdited: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.updateEmployer(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMProfileEntryPointJs.updateEmployer(e);
+                    }
+                    logEvent("EditingStart");
+                },
+                onInitNewRow: function (e) {
+                    logEvent("InitNewRow");
+                },
+                onRowInserting: function (e) {
+                    logEvent("RowInserting");
+                },
+                onRowInserted: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.saveEmployer(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMProfileEntryPointJs.saveEmployer(e);
+                    }
+                },
+                onRowUpdating: function (e) {
+                    logEvent("RowUpdating");
+                },
+                onRowUpdated: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.saveEmployer(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMProfileEntryPointJs.saveEmployer(e);
+                    }
+                },
+                onRowRemoving: function (e) {
+                    logEvent("RowRemoving");
+                },
+                onRowRemoved: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.deleteEmployer(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMProfileEntryPointJs.deleteEmployer(e);
+                    }
+                }
+            });
+        });
+        $("#clear").dxButton({
+            text: "Clear",
+            onClick: function () {
+                $("#events ul").empty();
+            }
+        });
+    });
+
+    //skillset
+    function getRRMRRMProfileEntrySkillTable() {
+
+        function logEvent(eventName) {
+            var logList = $("#events ul"),
+                newItem = $("<li>", { text: eventName });
+
+            logList.prepend(newItem);
+        }
+
+        var SkillDataFilter = JSON.stringify({
+            "Token": Token
+        });
+        var allSkilldata = [];
+        callGetListAsync('GetAllSkills', SkillDataFilter, function (e) {
+            allSkilldata = e;
+        });
+        var allSkillversion = [];
+        callGetListAsync('GetAllSkillVersions', SkillDataFilter, function (e) {
+            allSkillversion = e;
+        });
+
+        var filter_val = JSON.stringify({
+            "CandidateId ": candidateIdForSkillAndWorkExperience,
+            "IsActive": "True",
+            "Token": Token
+        });
+
+        callGetListAsync('GetCandidateSkillsbyCandidateId', filter_val, function (e) {
+            getskilldata = e;
+            $("#display_Skillsprofile").dxDataGrid({
+                dataSource: getskilldata,
+                keyExpr: "CandidateSkillMappingId",
+                showBorders: true,
+                paging: {
+                    enabled: false
+                },
+                editing: {
+                    mode: "row",
+                    allowUpdating: true,
+                    allowDeleting: true,
+                    allowAdding: true
+                },
+                columns: [
+                    {
+                        dataField: "CandidateSkillMappingId",
+                        visible: false,
+                        allowEditing: false,
+                        allowAdding: false
+                    },
+                    {
+                        caption: "Grade", dataField: "SkillGradeId",
+                        lookup: {
+                            dataSource: skillGrade,
+                            displayExpr: "Name",
+                            valueExpr: "ID"
+                        },
+                        validationRules: [{ type: "required" }]
+                    },
+                    {
+                        dataField: "SkillFamilieId",
+                        caption: "Family",
+                        setCellValue: function (rowData, value) {
+                            rowData.SkillFamilieId = value;
+                            rowData.skillId = "";
+                            rowData.SkillVersionId = "";
+                        },
+                        lookup: {
+                            dataSource: skillfamilydata,
+                            displayExpr: "Name",
+                            valueExpr: "Id",
+                        },
+                        validationRules: [{ type: "required" }]
+                    },
+                    {
+                        caption: "Skills", dataField: "skillId",
+                        setCellValue: function (rowData, value) {
+                            rowData.skillId = value;
+                            rowData.SkillVersionId = ""
+                        },
+                        lookup: {
+                            dataSource: function (options) {
+                                return {
+                                    store: allSkilldata,
+                                    filter: options.data ? ["FamilyID", "=", options.data.SkillFamilieId] : null,
+                                };
+                            },
+                            valueExpr: "Id",
+                            displayExpr: "Name",
+                        },
+                        validationRules: [{ type: "required" }]
+                    },
+                    {
+                        caption: "Versions", dataField: "SkillVersionId",
+                        setCellValue: function (rowData, value) {
+                            rowData.SkillVersionId = value;
+                        },
+                        lookup: {
+                            dataSource: function (options) {
+                                return {
+                                    store: allSkillversion,
+                                    filter: options.data ? ["SkillID", "=", options.data.skillId] : null,
+                                };
+                            },
+                            valueExpr: "Id",
+                            displayExpr: "Name",
+                        },
+                        validationRules: [{ type: "required" }]
+                    },
+                    {
+                        caption: "Exp (in years)",
+                        dataField: "SkillExperience",
+                        dataType: "number",
+                        validationRules:
+                            [
+                                {
+                                    type: "range",
+                                    message: "Should be greater than 0.1 years",
+                                    min: 0.1,
+                                },
+                                { type: "required" }
+                            ]
+                    },
+                    {
+                        caption: "Rating",
+                        dataField: "Rating",
+                        dataType: "number",
+                        validationRules:
+                            [
+                                {
+                                    type: "range",
+                                    message: "Rating should be within 1 to 5",
+                                    min: 1,
+                                    max: 5,
+
+                                }
+                            ]
+                    },
+                ],
+
+                onEditingStart: function (e) {
+                    logEvent("EditingStart");
+                },
+                onRowEdited: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.uploadSkill(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMProfileEntryPointJs.uploadSkill(e);
+                    }
+                    logEvent("EditingStart");
+                },
+                onRowInserted: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.uploadSkill(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMProfileEntryPointJs.uploadSkill(e);
+                    }
+                },
+                onRowUpdating: function (e) {
+                    logEvent("RowUpdating");
+                },
+                onRowUpdated: function (e) {
+
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.uploadSkill(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMProfileEntryPointJs.uploadSkill(e);
+                    }
+                },
+                onRowRemoving: function (e) {
+                    logEvent("RowRemoving");
+                },
+                onRowRemoved: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMProfileEntryPointJs.deleteSkill(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMProfileEntryPointJs.deleteSkill(e);
+                    }
+                }
+            });
+        });
+
+        $("#clear").dxButton({
+            text: "Clear",
+            onClick: function () {
+                $("#events ul").empty();
+            }
+        });
+    }
+    function loadcandidatedetailsform() {
+        renderProfilePopup();
+        CandidateProfileId = "";
+        $("#candidateNotesHistory").html('');
+        if (rrmProfileType != "edit") {
+            CandidateId = null;
+        }
+        $("#rrm_candidateid").html("");
+        $("#rrm_candidatenoticeperiod").dxNumberBox("instance").option('value', '');
+        $("#rrm_candidatename").dxTextBox("instance").option('value', '');
+        $("#rrm_candidatereferral").dxTextBox("instance").option('value', '');
+        $("#rrm_candidateemail").dxTextBox("instance").option('value', '');
+        $("#rrm_candidatephoneno").dxNumberBox("instance").option('value', '');
+        $("#rrm_candidatepassportno").dxTextBox("instance").option('value', '');
+        $("#rrm_candidateaadharno").dxNumberBox("instance").option('value', '');
+        $("#rrm_candidatepanno").dxTextBox("instance").option('value', '');
+        $('#rrm_candidateTotalExperience').dxNumberBox("instance").option('value', '');
+        loadRRMNumbers();
+        
+        $("#rrm_candidatewilling").dxSelectBox({
+            displayExpr: "Name",
+            valueExpr: "ID",
+            searchEnabled: true,
+            showClearButton: true,
+            dataSource: willingtoreloaction
+        });
+        $("#rrm_candidatecommunication").dxSelectBox({
+            displayExpr: "Name",
+            valueExpr: "ID",
+            searchEnabled: true,
+            showClearButton: true,
+            dataSource: Communication
+        });
+
+        $("#rrm_rrmNumber").dxSelectBox({
+            displayExpr: "RequirementName",
+            valueExpr: "RRMNo",
+            searchEnabled: true,
+            showClearButton: true,
+            dataSource: rrmNumbers
+        });
+
+        $("#gridContainer").dxDataGrid({ dataSource: new Array() })
+
+        
+        $("#display_Skillsprofile").dxDataGrid({ dataSource: new Array() })
+        //carrer tab
+        $("#rrm_native").dxTextBox("instance").option('value', '');
+        //document upload
+        $("#txtareaComments").dxHtmlEditor("instance").option('value', '');
+        $("#file-uploader").dxFileUploader({
+            selectButtonText: "Upload CV",
+            labelText: "",
+            allowedFileExtensions: [".doc", ".docx", ".pdf", ".odt"],
+            uploadMode: "useForm",
+            maxFileSize: 8000000
+        });
+
+        // $("#audio-uploader").dxFileUploader({
+        //     selectButtonText: "Upload Audio File",
+        //     labelText: "",
+        //     accept: "audio/*",
+        //     uploadMode: "useForm"
+        // });
+        $("#photo-uploader").dxFileUploader({
+            selectButtonText: "Select photo",
+            labelText: "",
+            accept: "image/*",
+            uploadMode: "useForm",
+            maxFileSize: 8000000
+        });
+
+        //additional information tab
+        $("#rrm_candidateskype").dxTextBox("instance").option('value', '');
+        $("#rrm_candidatelinkedin").dxTextBox("instance").option('value', '');
+        $("#rrm_candidategithub").dxTextBox("instance").option('value', '');
+        $("#rrm_candidateurl").dxTextBox("instance").option('value', '');
+        $("#rrm_candidatefathername").dxTextBox("instance").option('value', '');
+        $("#rrm_candidatedob").dxDateBox("instance").option('value', null);
+        $("#rrm_candidatecommunication").dxSelectBox("instance").option('value', '');
+        $("#rrm_candidatewilling").dxSelectBox("instance").option('value', '');
+        $('#rrm_rrmNumber').dxSelectBox("instance").option('value', '');
+        $("#rrm_candidatemaritalstatus").dxSelectBox({
+            displayExpr: "Name",
+            valueExpr: "ID",
+            searchEnabled: true,
+            showClearButton: true,
+            dataSource: maritalstatus
+        });
+        $("#rrm_candidatemaritalstatus").dxSelectBox("instance").option('value', null);
+        //address details
+        $("#rrm_candidateaddress").dxTextBox("instance").option('value', null);
+        $("#rrm_candidatepincode").dxTextBox("instance").option('value', null);
+        $("#rrm_candidatecity").dxSelectBox("instance").option('value', null);
+        $("#rrm_candidatepstate").dxSelectBox("instance").option('value', null);
+        $("#rrm_candidatecountry").dxSelectBox("instance").option('value', null);
+        $("#rrm_bancandidate").dxSelectBox("instance").option('value', null);
+        $("#bantxtareaComments").dxHtmlEditor("instance").option('value', null);
+        $('#file-uploader').dxFileUploader('instance').reset();
+        $('#photo-uploader').dxFileUploader('instance').reset();
+
+
+        //Error messages:
+        $('#rrm_candidatename').removeClass('input-error');
+        $('#rrm_candidatenameerror').html("");
+        $('#rrm_candidateemail').removeClass('input-error');
+        $('#rrm_candidateemailerror').html("");
+        $('#rrm_candidatephoneno').removeClass('input-error');
+        $('#rrm_candidatephonenoerror').html("");
+        $('#rrm_candidateaadharno').removeClass('input-error');
+        $('#rrm_candidateaadharnoerror').html("");
+        $('#rrm_candidatewilling').removeClass('input-error');
+        $('#rrm_candidatewillingerror').html("");
+        $('#rrm_candidatecommunication').removeClass('input-error');
+        $('#rrm_candidatecommunicationerror').html("");
+        $('#rrm_candidatecommunication').removeClass('input-error');
+        $('#rrm_candidatecommunicationerror').html("");
+        $('#rrm_candidateaadharno').removeClass('input-error');
+        $('#rrm_candidatepassportnoerror').html("");
+        $('#rrm_candidatenoticeperioderror').removeClass('input-error');
+        $('#rrm_candidatenoticeperioderror').html("");
+        $('#rrm_candidatenoticeperioderror').removeClass('input-error');
+        $('#rrm_candidatenoticeperioderror').html("");
+        $('#rrm_candidatephoneno').removeClass('input-error');
+        $('#rrm_candidatephonenoerror').html("");
+
+        $("#rrmprofile-bannedprofilewarning").addClass("hidden")
+        $("#rrmprofile-flaggedprofilereason").text(" ");
+        $("#bindexistingcandidate").addClass("hidden");
+
+        $("#rrmprofile-divShowFileUploader").removeClass("hidden");
+        $("#rrmprofile-divShowResumeDownloader").addClass("hidden");
+        $("#rrmprofile-existingResumeDownload").html("");
+
+    }
+
+    function loadRRMNumbers() {
+
+        var filter_val = JSON.stringify({
+            "IsActive": "True",
+            "Token": Token
+        });
+
+
+        callGetListAsync('GetAllRRMNumbers', filter_val, function (e) {
+            rrmNumbers = e;
+        })
+
+
+    }
+
+    function loadDisableExternalLogin(candidateId){
+
+        if(candidateId != "" && candidateId != null){
+
+                var filter_vals = JSON.stringify({
+                "Token": Token,
+                "CandidateId": candidateId,
+                "IsActive": "True"
+            });
+
+
+            callGetListAsync('GetDisabledCandidateLoginByCandidateId', filter_vals, function (e) {
+                
+                var disabledValue = e[0].DisableExternalLogin;
+                    
+                    $("#rrm_candidateDisableExternalLogin").dxSwitch({
+                        value:disabledValue,
+                        switchedOffText:"No",
+                        switchedOnText:"Yes",
+                        onValueChanged: function (e) {
+                           
+                            var disabled = e.value;
+                            var candidateId  = CandidateProfileId;
+                            saveDisableExternalLogin(disabled,candidateId);
+                        }
+                    });
+            })
+        }
+    }
+
+    function saveDisableExternalLogin(disabled,candidateId){
+        
+        if(disabled == true){
+
+            swal({
+                title: "Disable External Candidate",
+                text: "You are disabling external candidate login, Are you sure?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willUpdate) => {
+                    if (willUpdate) {
+                        
+                        if(candidateId != null && candidateId !="" && candidateId != undefined){
+                            
+                           var  data = {
+                                    Token:Token,
+                                    CandidateId: candidateId,
+                                    Disabled: disabled,
+                                    IsActive: true
+                                }
+
+                                PostUpdateDisabled = {
+                                    Method: "PostDisabledCandidateLoginByCandidateId",
+                                    Data: data
+                                };
+                                var result = PostDataCall(PostUpdateDisabled);
+
+                                if(result["IsSuccess"] == true){
+                                    
+                                }
+                        }
+                    }
+                })
+        }
+        else if(disabled == false){
+            
+            if(candidateId != null && candidateId !="" && candidateId != undefined){
+               
+                var  data = {
+                            Token:Token,
+                            CandidateId: candidateId,
+                            Disabled: disabled,
+                            IsActive: true
+                        }
+
+                PostUpdateDisabled = {
+                    Method: "PostDisabledCandidateLoginByCandidateId",
+                    Data: data
+                };
+
+                var result = PostDataCall(PostUpdateDisabled);
+
+                if(result["IsSuccess"] == true){
+                    
+                }
+            }
+        }
+    }
+
+    function closebanmodal() {
+        $("#rrm_bancandidate").dxSelectBox("instance").option('value', null);
+        $("#bantxtareaComments").dxHtmlEditor("instance").option('value', null);
+        $('#RPMBanModel').modal.hide();
+    }
+
+    function resetSimpleBarProfileEntryPoint() {
+        new SimpleBar(document.getElementById('RRMProfileEntryPointTableModel-body'));
+    }
+
+    function RemoveReplaceResume() {
+        $("#rrmprofile-divShowFileUploader").removeClass("hidden");
+        $("#rrmprofile-divShowResumeDownloader").addClass("hidden");
+        $("#rrmprofile-existingResumeDownload").html("");
+    }
+
+    var rrmData = [];
+    var candidateProfileMentions = [];
+    var employeeData = [];
+    function getRRMList() {
+        rrmData = [];
+        var rrmListfilterData = JSON.stringify({
+            "IsActive": true
+        });
+        callGetListAsync('GetRRM', rrmListfilterData, function (e) {
+            var rrmListList = e;
+            if (rrmListList.length > 0) {
+                rrmListList.forEach(function (i, index) {
+                    rrmData.push({
+                        'RRMId': i['RRMId'],
+                        'RRMName': i['RRMNo'] + " - " + i['RequirementName']
+                    });
+                });
+            }
+        })
+    }
+    function CandidateProfileForMentions() {
+        if (candidateProfilesDataSourceForMentions.length > 0) {
+            candidateProfilesDataSourceForMentions.forEach(function (i, index) {
+                candidateProfileMentions.push({
+                    'CandidateId': i['CandidateProfileId'],
+                    'CandidateName': i['CandidateName'] + " - " + i['SKillName'] + "-" + i['EmailId'] + "-" + i['Phone']
+                });
+            });
+        }
+    }
+
+    $(document).on("mouseenter", "#RRMProfileEntryPointTableModel .dx-mention", function (e) {
+        var Id = $(e.currentTarget).data("id");
+        var MentionType = $(e.currentTarget).data("marker");
+        var Target = $(e.currentTarget);
+        LoadTooltipForMentionRRM(Id, MentionType, Target);
+    });
+
+    function LoadTooltipForMentionRRM(Id, MentionType, Target) {
+        if (MentionType == "@") {
+            var filterData = JSON.stringify({
+                "IsActive": true,
+                "EmployeeIdForMention": Id
+            });
+            callGetListAsync('GetEmployeeDetailsForMentions', filterData, function (e) {
+                var Details = e[0];
+                $("#sd_popover_RRMmentions").dxPopover('instance').option('target', Target);
+                $("#sd_popover_RRMmentions").dxPopover('instance').option("contentTemplate", function (data) {
+                    var html = "<div class='row'><div class='col-md-2'><img id='img-" + Details.EmployeeName + "' src='" + Details.ProfilePicture + "' class='img-circle interviewer-image' width='40px' height='40px'></img></div>"
+                    html += "<div class='col-md-10'><b> " + Details.EmployeeName + "</b><br/><i class='fas fa-envelope'></i> &nbsp;<a href='mailto:" + Details.CorporateEmailID + "' target='_blank'>" + Details.CorporateEmailID + "</a><div>"
+                    html += "</div>";
+                    data.html(html);
+                });
+            });
+
+        }
+        if (MentionType == "#") {
+            var filterData = JSON.stringify({
+                "IsActive": true,
+                "ResourceRequirementId": Id,
+                "Token": Token
+            });
+            callGetListAsync('GetRRMDetailsForMentions', filterData, function (e) {
+                var Details = e[0];
+                $("#sd_popover_RRMmentions").dxPopover('instance').option('target', Target);
+                $("#sd_popover_RRMmentions").dxPopover('instance').option("contentTemplate", function (data) {
+                    var html = "<table class='table table-borderless' style='margin-bottom:0px'><tbody>"
+                    html += "<tr><td><b>RRM Name</b></td><td><b> </b>" + Details.RRMName + "</td><td><b>RRM No</b></td><td><b> </b>" + Details.RRMNo + "</td></tr>";
+                    html += "<tr><td><b>Required For</b></td><td><b> </b>" + Details.RequiredFor + "</td><td><b>Lead Name</b></td><td><b> </b>" + Details.LeadName + "</td></tr>";
+                    html += "<tr><td><b>Department</b></td><td><b> </b>" + Details.DepartmentName + "</td><td><b>Designation</b></td><td><b> </b>" + Details.DesignationName + "</td></tr>";
+                    html += "<tr><td><b>Skills</b></td><td colspan='3'><b> </b>" + Details.SkillName + "</td></tr>";
+                    html += "</tbody></table>";
+                    data.html(html);
+                });
+            });
+        }
+
+        if (MentionType == "/") {
+            var filterData = JSON.stringify({
+                "IsActive": true,
+                "CandidateProfilebyId": Id,
+                "Token": Token
+            });
+            callGetListAsync('GetCandidateProfilebyId', filterData, function (e) {
+                var Details = e[0];
+                $("#sd_popover_RRMmentions").dxPopover('instance').option('target', Target);
+                $("#sd_popover_RRMmentions").dxPopover('instance').option("contentTemplate", function (data) {
+                    var html = "<table class='table table-borderless' style='margin-bottom:0px'><tbody>"
+                    html += "<tr><td><b>Candidate Name</b></td><td><b> </b>" + Details.FirstName + "</td><td><b>Email Id</b></td><td><b> </b>" + Details.EmailId + "</td></tr>";
+                    html += "<tr><td><b>Total Experience</b></td><td><b> </b>" + Details.TotalExperience + "</td><td><b>Skype</b></td><td><b> </b>" + Details.Skype + "</td></tr>";
+                    html += "<tr><td><b>Phone</b></td><td><b> </b>" + Details.Mobile + "</td><td><b>Communication</b></td><td><b> </b>" + Details.CommunicationRatingHR + "</td></tr>";
+                    html += "<tr><td><b>Notice Period</b></td><td colspan='3'><b>" + Details.NoticePeriod + " </b></td></tr>";
+                    html += "</tbody></table>";
+                    data.html(html);
+                });
+            });
+        }
+    }
+
+
+    function GetEmployeeList() {
+        employeeData = [];
+        var filter_val = JSON.stringify({
+            "IsActive": true
+        });
+        callGetListAsync('GetEmployeeList', filter_val, function (e) {
+            var employeeList = e;
+            if (employeeList.length > 0) {
+                employeeList.forEach(function (i, index) {
+                    employeeData.push({
+                        'EmployeeId': i['EmployeeId'],
+                        'EmployeeName': i['Name']
+                    });
+                });
+            }
+
+        })
+
+    }
+
+    $(document).on("click", ".RRMProfileEntryPointMappingModel", function (e) {
+        var candidateId = $(this).attr('data-candidateId');
+        $('#RRMProfileEntryPointMappingModel').modal("show");
+        getUnMappedRRMForProfileMapping(candidateId);
+        getMappedRRMForProfileMapping(candidateId);
+    });
+
+    function getUnMappedRRMForProfileMapping(CandidateId) {
+        var UnMappedProfiles = [];
+        var GetUnMappedRRMForMappingFilters = JSON.stringify({
+            "Token": localStorage.getItem('securityToken'),
+            "IsActive": true,
+            "CandidateId": CandidateId
+        });
+        UnMappedProfiles = callgetlist("GetUnMappedRRM", GetUnMappedRRMForMappingFilters);
+        $("#sdgd-candidatesGridProfileEntryPoint").dxDataGrid({ dataSource: UnMappedProfiles });
+    }
+
+    function getMappedRRMForProfileMapping(CandidateId) {
+        var MappedProfiles = [];
+        var GetMappedRRMForMappingFilters = JSON.stringify({
+            "IsActive": true,
+            "CandidateId": CandidateId
+        });
+        MappedProfiles = callgetlist("GetMappedRRM", GetMappedRRMForMappingFilters);
+        $("#sdgd-mappedCandidatesGridProfileEntryPoint").dxDataGrid({ dataSource: MappedProfiles });
+    }
+
+    function MapProfileEntryPointRRM() {
+        var dataGrid = $("#sdgd-candidatesGridProfileEntryPoint").dxDataGrid("instance");
+        var selectedRowsData = dataGrid.getSelectedRowsData();
+        var candidateId;
+        
+        if (selectedRowsData.length > 0) {
+            $.each(selectedRowsData, function (key, value) {
+                
+                candidateId = value.Id;
+                var RRMMappingData = {
+                    RRMId: value.RRMId,
+                    CandidateId: candidateId,
+                    IsUnmapped: 0,
+                    IsActive: 1
+                };
+
+                RRMMappingPostCallData = {
+                    Method: "PostMappingForRRM",
+                    Data: RRMMappingData
+                };
+                var RRMMappingPostResult = PostDataCall(RRMMappingPostCallData);
+            });
+
+            getUnMappedRRMForProfileMapping(candidateId);
+            getMappedRRMForProfileMapping(candidateId);
+        }
+        else {
+            var RRMMappingPostSwal = {
+                title: "OOPS",
+                text: "Select Atleast one Profile to Map",
+                icon: 'warning'
+            }
+            rrmMappingSwal(RRMMappingPostSwal);
+        }
+    }
+
+    function UnMapProfileEntryPointRRM() {
+        var dataGrid = $("#sdgd-mappedCandidatesGridProfileEntryPoint").dxDataGrid("instance");
+        var selectedRowsDatas = dataGrid.getSelectedRowsData();
+        var candidateIds;
+        
+        if (selectedRowsDatas.length > 0) {
+            $.each(selectedRowsDatas, function (key, value) {
+                
+                candidateIds = value.Id;
+                var RRMMappingDatas = {
+                    RRMId: value.RRMId,
+                    CandidateId: candidateIds,
+                    IsUnmapped: 1,
+                    IsActive: 1
+                };
+
+                RRMMappingPostCallDatas = {
+                    Method: "PostMappingForRRM",
+                    Data: RRMMappingDatas
+                };
+                var RRMMappingPostResults = PostDataCall(RRMMappingPostCallDatas);
+            });
+
+            getUnMappedRRMForProfileMapping(candidateIds);
+            getMappedRRMForProfileMapping(candidateIds);
+        }
+        else {
+            var RRMMappingPostSwal = {
+                title: "OOPS",
+                text: "Select Atleast one Profile to UnMap",
+                icon: 'warning'
+            }
+            rrmMappingSwal(RRMMappingPostSwal);
+        }
+    }
+
+    function rrmMappingSwal(data) {
+        swal({
+            title: data.title,
+            text: data.text,
+            icon: data.icon,
+            button: "OK"
+        });
+    }
+
+    function disableCheckBoxMappedDataRRMMapping(e) {
+        if (e.rowType === "data" & e.column.command === 'select' && e.row.data.StageOrder === 4) {
+            e.cellElement.find('.dx-select-checkbox').dxCheckBox("instance").option("disabled", true);
+            e.cellElement.off();
+        }
+        if (e.rowType === "data" & e.column.command === 'select' && e.row.data.StageOrder === 3) {
+            e.cellElement.find('.dx-select-checkbox').dxCheckBox("instance").option("disabled", true);
+            e.cellElement.off();
+        }
+        if (e.rowType === "data" & e.column.command === 'select' && e.row.data.StageOrder > 4) {
+            e.cellElement.find('.dx-select-checkbox').dxCheckBox("instance").option("disabled", true);
+            e.cellElement.off();
+        }
+        if (e.rowType === "data" & e.column.command === 'select' && e.row.data.StageOrder === 26) {
+            e.cellElement.find('.dx-select-checkbox').dxCheckBox("instance").option("disabled", true);
+            e.cellElement.off();
+        }
+        if (e.rowType === "data" & e.column.command === 'select' && e.row.data.StageOrder === 27) {
+            e.cellElement.find('.dx-select-checkbox').dxCheckBox("instance").option("disabled", true);
+            e.cellElement.off();
+        }
+        if (e.rowType === "header" & e.column.command === 'select') {
+            e.cellElement.find('.dx-select-checkbox').dxCheckBox("instance").option("disabled", true);
+        }
+    }
+</script>
+
+<style>
+    .tab-pane {
+        margin-top: 20px !important;
+    }
+</style>

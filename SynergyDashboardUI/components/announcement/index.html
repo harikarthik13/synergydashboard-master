@@ -1,0 +1,40 @@
+<!-- <h4>announcement</h4> -->
+<div class="card-detail">
+  <span class="pull-right">
+    <button class="btn btn-sm btn-primary" onclick="AnnouncementModal();">
+      <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+    </button>
+  </span>
+  <span class="card-detail-title modal-not-include"><b>Announcement</b></span>
+  
+  <hr />
+  <div class="table-responsive">  
+      <div id="announcementList">
+
+      </div>
+  </div>
+</div>
+
+
+</div>
+<div id="announcementPopupModelBox"></div>
+<script type="text/javascript" src="components/announcement/js/script.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    //$('#table_announcement').DataTable();
+  
+    $("#announcementPopupModelBox").load("components/announcement/announcementModal.html");  
+    function include_files(filename, onload) {
+      var head = document.getElementsByTagName('head')[0];
+      var script = document.createElement('script');
+      script.src = filename;
+      script.type = 'text/javascript';
+      head.appendChild(script);
+    }
+    announcementdataList();
+    /*   include_files('./components/apidbmapping/js/apidbmap.js');
+    getUserMapList(); */
+  });
+
+</script>

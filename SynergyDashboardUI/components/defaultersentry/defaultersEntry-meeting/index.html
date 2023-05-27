@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-12 defaulters-actionForm" style="text-align: left;">
+        <form id="addAnActionFormDefaulters" method="post" role="form">
+            
+            <div class="col-md-12" id="defaulters-meeting-edit">
+                <label>Meeting</label>
+                <div>
+                    <select class="form-control defaulters-meetingList" id="defaulters-Meeting" name="defaulters-Meeting"
+                        onchange="defaulters_meeting_OnChange(this)">
+                        <option value="">Select Meeting</option>
+                    </select>
+                </div>
+                <label>Date</label>
+                <div>
+                    <input type="text" class="form-control date-field" id="defaulters-meetingDate"
+                        name="defaulters-meetingDate" readonly>
+                </div>
+                <div id="FromTo-time">
+                    <label>From Time</label>
+                    <div>
+                        <input type="text" class="form-control time start" id="defaulters-fromTime"
+                            name="defaulters-fromTime" value=''>
+                    </div>
+
+                    <label>To Time</label>
+                    <div>
+                        <input type="text" class="form-control time end" id="defaulters-toTime" name="defaulters-toTime">
+                    </div>
+                </div>
+            </div>
+    
+
+            <div id="defaulters-detailsDiv-edit">
+                <div class="col-md-12" id="defaulters-commentsDiv">
+                    <label>Comments</label>
+                    <div>
+                        <textarea class="form-control defaulters-actionComment" cols="10" id="defaulters-Comments"
+                            name="defaulters-Comments" placeholder="Comments" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 text-left" id="sucess-response" style="color:green">
+
+                </div>
+
+                <div class="col-md-12 text-left" id="error-response" style="color:red">
+
+                </div>
+
+                <div class="col-md-12 text-center" id="form-btn">
+                    <br />
+                    <input type="reset" class="btn btn-danger clear-form" value="Clear" />
+                    <input type="button" class="btn btn-success" value="Add" id="btn-SubmitAction"
+                        onclick="return AddPostDataDefaulters();" />
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+

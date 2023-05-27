@@ -1,0 +1,29 @@
+#RRMProfileReviewTableList_length {
+    display: none;
+}
+#RRMProfileReviewTableList {
+    width: 100% !important;
+}
+#RRMProfileReviewTableList_filter {
+    float: left !important;
+}
+#RRMProfileReviewTableList_wrapper input[type=search]
+{
+    border-radius: 5px 0px 0px 5px;
+    border-right: none;
+    border: 1px solid #D3D3D3 !important;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+#RRMProfileReviewTableList_wrapper input[type=search]:focus
+{
+    outline: none;
+}
+
+#ProfileRevActionModal .modal-dialog{
+    overflow-y: initial !important;
+}
+
+#ProfileRevActionModal .modal-body{
+    overflow-y: auto;
+}

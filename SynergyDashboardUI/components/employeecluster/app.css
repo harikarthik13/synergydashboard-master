@@ -1,0 +1,13 @@
+.employeecircle{
+    cursor: pointer;
+}
+.employeeClusterSwal{
+    width:900px;
+    height:auto;
+}
+#div-cluster-map {
+    text-align: center;
+}
+.basicContext table tr td:last-of-type {
+    text-align: left !important;
+}

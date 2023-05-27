@@ -1,0 +1,79 @@
+<div class="card-detail">
+  <span class="pull-right">
+    <!-- change the refresh button id here -->
+    <div id="prefix_refreshSideBySideChartButton"></div>
+  </span>
+
+  <!-- Change the chart title here -->
+<span class="card-detail-title"><b>RFP - Month and Department wise Count</b></span>
+<hr />  
+  <!-- change the chart card id here -->
+  <div id="prefix_sidebysidebarchart"></div>
+</div>
+<style>
+  /* change the chart id here */
+#prefix_sidebysidebarchart {
+  height: 440px;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+// change the chart binding function name here 
+prefix_sidebysidebarLoadChart()
+});
+         
+//change the chart binding function here
+function prefix_sidebysidebarLoadChart() {  
+//argumentField
+var  XaxisField = "Date";
+//series
+var  YaxisField = [ { valueField: "Software", name: "Software" },
+{ valueField: "IMS", name: "IMS" },
+{ valueField: "QA", name: "QA" }];
+
+// call the web api service for get datasource here
+var filterData = '';
+dataSource= callgetlist('GetRFPCountByDepartmentForMonth', filterData);
+
+//change the chart card id here
+var sidebysidebarchartInstance = $("#prefix_sidebysidebarchart").dxChart({
+  dataSource: dataSource,
+  commonSeriesSettings: {
+      argumentField: XaxisField,
+      type: "bar",
+      hoverMode: "allArgumentPoints",
+      selectionMode: "allArgumentPoints",
+      label: {
+          visible: true,
+          format: {
+              type: "fixedPoint",
+              precision: 0
+          }
+      }
+  },
+  series: YaxisField,
+  title: "",
+  legend: {
+      verticalAlignment: "bottom",
+      horizontalAlignment: "center"
+  },
+  "export": {
+      enabled: true
+  },
+  onPointClick: function (e) {
+      e.target.select();
+  }
+}).dxChart("instance");
+
+//change the refresh button id here
+$("#prefix_refreshSideBySideChartButton").dxButton({
+  icon: "refresh",
+  text: "Refresh",
+  onClick: function() {
+    prefix_sidebysidebarLoadChart();
+  }
+});
+}
+</script>
+   

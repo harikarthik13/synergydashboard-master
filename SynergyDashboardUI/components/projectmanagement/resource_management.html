@@ -1,0 +1,1495 @@
+<style>
+    .ProjectTitle{
+        margin: 5px;
+        border-bottom: 1px solid #ddd;
+    }
+    .input-group{
+        width: 100% !important;
+    }
+</style>
+<!-- RFP Style -->
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<script src="js/callapi.js"></script>
+<!-- <script type="text/javascript" src="js/library/jquery.smartWizard.js"></script> -->
+<script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+
+
+<link href="components/project/css/project.css" rel="stylesheet" />
+
+
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> -->
+<!--POP-UP RFP MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="ResourceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">Resource Management</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div id="resource_smartwizard" class="sw-main sw-theme-default">
+                    <ul class="nav nav-tabs step-anchor">
+                        <li><a href="#step-1"><span>1</span></a></li>
+                        <li><a href="#step-2"><span>2</span></a></li>
+                    </ul>
+                    <div class="form-hldr" id="modal_content">
+                        
+                        <div id="step-1" class="project-first-step">
+                            <div class="step-title">
+                                <h3>Step: <span>1</span></h3>
+                            </div>
+                            <div class="form-section" id="rmstep1">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="grid1"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="grid2"></div>
+                                    </div>
+                                </div>                                
+                            </div>
+                        </div>
+                        <div id="step-2" class="project-second-step">
+                            <div class="step-title">
+                                <h3>Step: <span>2</span></h3>
+                            </div>
+                            <div class="form-section" id="rmstep2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="scroll">
+                                            <div id="list"></div>
+                                        </div>
+                                        <div id="scheduler"></div>
+                                    </div>      
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-end">
+                            <div class="btn-group mr-2 sw-btn-group" role="group">
+                                <button class="btn btn-secondary sw-btn-prev disabled" type="button">Previous</button>
+                                <button class="btn btn-secondary sw-btn-next type="button">Next</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEMBER SCREEN MODAL STARTS HERE -->
+        <div class="modal fade" id="open_projectMember" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">×</span></button>
+                                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                        <h3 class="modal-title" id="myModalLabel">Member Details</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-4" id="personal_info">
+                            <img src="./components/project/images/user.png" class="img-circle" alt="User photo">
+                            <h3>User Name</h3>
+                            <h4>Contact Number: 1234567890</h4>
+                            <h4>Mail-Id:user@mail.com</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#Contact_info">Contact Information</a>
+                                </li>
+                                <li><a data-toggle="tab" href="#Primary_skills">Primary Skills</a></li>
+                                <li><a data-toggle="tab" href="#Project_details">Project Details</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="Contact_info" class="tab-pane fade in active">
+                                    <div class="col-md-6">
+                                        <table>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h4>Current Address</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 1:</b></td>
+                                                <td>Address Line 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 2:</b></td>
+                                                <td>Address Line 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>City:</b></td>
+                                                <td>City Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>State:</b></td>
+                                                <td>State Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Country:</b></td>
+                                                <td>Country Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Pincode:</b></td>
+                                                <td>12345</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <table>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h4>Permanent Address</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 1:</b></td>
+                                                <td>Address Line 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 2:</b></td>
+                                                <td>Address Line 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>City:</b></td>
+                                                <td>City Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>State:</b></td>
+                                                <td>State Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Country:</b></td>
+                                                <td>Country Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Pincode:</b></td>
+                                                <td>12345</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="Primary_skills" class="tab-pane fade">
+                                    <h4>Primary Skills:PHP,CI,Drupal</h4>
+                                    <br>
+                                    <h4>Secondary Skills:Photoshop,Illustrator,Indesign</h4>
+                                </div>
+                                <div id="Project_details" class="tab-pane fade">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-heading" data-target="#InactiveProject"
+                                            data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="InactiveProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading" data-target="#ActiveProject" data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="ActiveProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading" data-target="#ClosedProject" data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="ClosedProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-sm add-btn" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MEMBER SCREEN MODAL ENDS HERE -->
+    </div>
+</div>
+
+<!-- PROJECT_Closure MODAL STARTS HERE -->
+
+<div class="modal fade" id="ProjectClosureModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel"><span id="headerClosure"></span> Closure</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group"> 
+                            <label>Rate your resources</label>
+                            <div id="workedResourcesGrid"></div>
+                            <span class="error_message resource_rate_error_msg"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Closure Date</label>
+                            <div class=" date">
+                                <div id="closureDate"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Comments</label>
+                            <div id="closureComments"></div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="projectId" name="projectId" value="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+                <button id="btnClosure" type="button" class="btn btn-primary btn-md">Save</button>
+                <!-- <button onclick="DeleteClosure(document.getElementById('projectId').value)" id="btnUpdateClosure" type="button" class="btn btn-primary btn-md">Save</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROJECT_Closure MODAL ENDS HERE -->
+<!-- PROJECT_Closure Comment MODAL STARTS HERE -->
+
+<div class="modal fade" id="ProjectClosureCommentModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Comment</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Rating (Out of 5)</label>
+                            <div class=" date">
+                                <div id="rating"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Comments</label>
+                            <div id="commentClosure"></div>
+                        </div>
+                        <input type="hidden" id="commentId" name="commentId" value="">
+                        <input type="hidden" id="index" name="index" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+                <!-- <button onclick="SaveClosureComment(document.getElementById('commentId').value, document.getElementById('index').value)" id="btncommentSave" type="button" class="btn btn-primary btn-md">Add</button> -->
+                <button id="btncommentSave" type="button" class="btn btn-primary btn-md">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROJECT_Closure MODAL ENDS HERE -->
+
+<!-- Project Work Order Mapping Starts Here-->
+<div class="modal fade" id="WorkOrderMappingModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Work Order Mapping</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 ProjectTitle">
+                        <h3 class="ProjectName"></h3>
+                        <input type="hidden" class="ProjectType">
+                        <input type="hidden" name="ProjectId" class="ProjectId" id="WorkOrder_ProjectId">
+                        <span style="display: none;" class="WorkOrder_ids" id="WorkOrder_ids"></span>
+                        <span style="display: none;" class="dlClientName" id="dlClientName"></span>
+                    </div>
+                </div>
+                <div class="form-section" id="form-block">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right m-b-10">
+                                <button class="btn btn-secondary btn-sm add-btn workorder_mapping" data-toggle="collapse"
+                                    data-target="#addwork-orders" type="button">Add New</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="addwork-orders" class="panel panel-primary collapse">
+                        <div class="panel-heading">
+                            <h4>New Work Order</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id='WorkorderLists'>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="pull-right btn-right">
+                                    <button class="btn btn-danger btn-sm add-btn" type="button"
+                                        data-toggle="collapse"
+                                        data-target="#add-work-orders">Cancel</button>
+                                    <button class="btn btn-secondary btn-sm add-btn" type="button"
+                                        data-toggle="collapse" data-target="#add-work-orders"
+                                        id="btnMemberSave" onclick="assignWorkordertoProject()">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">                                    
+                            <div id="displayMappedWorkOrder">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+                <button id="workOrderSave" type="button" class="btn btn-primary btn-md">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Project Work Order Mapping Ends Here-->
+
+<!-- Project Phases Code Starts Here-->
+<div class="modal fade" id="Project_phases" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Project Tasks</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 ProjectTitle">
+                        <h3 class="ProjectName"></h3>
+                        <input type="hidden" class="ProjectType">
+                        <input type="hidden" name="ProjectId" class="ProjectId" id="projectphase_ProjectId">
+                        <span style="display: none;" class="dlClientName" id="dlClientName"></span>
+                    </div>
+                </div>
+                <div class="form-section" id="form-block">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" id="addProject_Task" class="btn btn-sm btn-secondary add-btn pull-right m-b-10"  onclick=clearPhase()>Add New</button>
+                        </div>
+                    </div>
+                    <div id="addProject-phases" class="panel panel-primary collapse">
+                        <div class="panel-heading">
+                            <h4>Project Tasks</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phase Name <span style="color: red"> *</span></label>
+                                        <div class="txtPhaseName">
+                                            <input type="hidden" id="ProjectPhaseId">
+                                            <input type="hidden" id="ProjectTaskId">
+                                            <select class="form-control disp_projectPhase" id="txt_PhaseName"></select>
+                                            <span class="txtPhaseName_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Project Tasks <span style="color: red"> *</span></label>
+                                        <div class="txtPhaseHeaderTitle">
+                                            <input type="text" class="form-control" id="txt_PPTasks">   
+                                            <span class="txtPPTasks_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Start Date <span style="color: red"> *</span></label>
+                                        <div class="dtpPhase">
+                                            <div class=" date">
+                                                <div id="dtp_PhaseStartDate"></div>
+                                            </div>
+                                            <span class="dtpPhaseStartDate_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>End Date <span style="color: red"> *</span></label>
+                                        <div class="dtpPhase">
+                                            <div class=" date">
+                                                <div id="dtp_PhaseEndDate"></div>
+                                            </div>
+                                            <span class="dtpPhaseEndDate_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Estimated Hours <span style="color: red"> *</span></label>
+                                        <input type="text" class="form-control" name="txt_Hours" id="txt_Hours"
+                                        onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                        <span class="txtHours_error dlerror_messgae"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Task Details <span style="color: red"> *</span></label>
+                                        <textarea class="form-control" rows="4" id="txt_PPNote"></textarea>
+                                        <span class="txtPPNote_error dlerror_messgae"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="pull-right btn-right">
+                                    <button class="btn btn-danger btn-sm add-btn" type="button" onclick="clearPhase()">Cancel</button>
+                                    <button class="btn btn-secondary btn-sm add-btn" type="button" id="btnNew_ProjectSave" onclick="validateProjectPhases()">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">                   
+                            <div id="display_ProjectPhase">
+                                
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Project Phases Code Ends Here -->
+
+<!-- Project Sub Tasks Code Starts Here-->
+<div class="modal fade" id="Project_sub_task" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Project Sub Task</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 ProjectTitle">
+                        <h3 class="ProjectName"></h3>
+                        <input type="hidden" class="ProjectType">
+                        <input type="hidden" name="ProjectId" class="ProjectId" id="subTask_ProjectId">
+                        <span style="display: none;" class="dlClientName" id="dlClientName"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right m-b-10">
+                            <button class="btn btn-secondary btn-sm add-btn" id="addNewProjectModule" data-toggle="collapse"
+                                data-target="#new-sub-task" onclick="clear_ProjectModules()" type="button">Add New</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="new-sub-task" class="panel panel-primary collapse">
+                    <div class="panel-body">
+                        <div class="form-section" id="form-block">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Project Tasks <span style="color: red"> *</span></label>
+                                        <div class="txtPhaseName">
+                                            <div class="">
+                                                <input type="hidden" id="projectModuleId">
+                                                <input type="hidden" id="ProjectEstimation">
+                                                <input type="text" class="form-control" id="pm_projectPhase">
+                                            </div>
+                                            <span class="pmo_projectPhase_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Estimated Hours <span style="color: red"> *</span></label>
+                                        <div class="txtPhaseHeaderTitle">
+                                            <div class="">
+                                                <input type="text" class="form-control" name="pm_estimatedHours" id="pm_estimatedHours"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            </div>
+                                            <span class="pmo_estimatedHours_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Project Sub Tasks <span style="color: red"> *</span></label>
+                                        <div class="txtModule">
+                                            <input type="text" class="form-control" id="pm_headerTitle">
+                                            <span class="pmo_headerTitle_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Project Description</label>
+                                        <div class="txtModule">
+                                            <textarea id="pm_txtProjectDescription" class="form-control"
+                                                rows="4"></textarea>
+                                                <span class="pmo_txtProjectDescription_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <button class="btn btn-danger btn-sm add-btn" data-toggle="collapse"
+                                            data-target="#new-sub-task" onclick="clear_ProjectModules()" type="button">Cancel</button>
+                                        <button id="btnSaveSubTask" data-toggle="collapse" 
+                                            class="btn btn-secondary btn-sm add-btn" onclick="validate_ProjectModules()"
+                                            type="button">Save</button>
+                                    </div>
+                                </div>
+                            </div>                                      
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mt-2">                   
+                        <div id="display_subTasks">
+                            
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Project Sub Tasks Code Ends Here -->
+
+<!-- Project Add Memmber Code Starts Here-->
+<div class="modal fade" id="Project_addmember" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearEditProjectMembers();"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Add Project Member</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 ProjectTitle">
+                        <h3 class="ProjectName"></h3>
+                        <input type="hidden" class="ProjectType">
+                        <input type="hidden" name="ProjectId" class="ProjectId" id="addmember_ProjectId">
+                        <span style="display: none;" class="dlClientName" id="dlClientName"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right m-b-10">
+                            <button class="btn btn-secondary btn-sm add-btn add-project" data-toggle="collapse"
+                                data-target="#addProject-members" type="button">Add New</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="addProject-members" class="panel panel-primary collapse">
+                    <div class="panel-heading">
+                        <h4>New Member</h4>
+                    </div>
+                    <div class="panel-body">                                      
+                        
+                        <!-- Project Member Fields Starts  -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Project Member <span style="color: red"> *</span></label>
+                                    <div class="txtContacts">
+                                        <select class="form-control" id="pm_projectMember" name="pm_projectMember"
+                                            style="width:100%">
+                                            <option value="0">Select Project Members</option>
+                                        </select>
+                                        <span class="error_message pc_projectMember_error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Project Role <span style="color: red"> *</span></label>
+                                    <div class="txtContacts">
+                                        <select class="form-control" id="pm_projectMemberRole" name="pm_projectMemberRole"
+                                            style="width:100%">
+                                            <option value="0">Select Project Roles</option>
+                                        </select>
+                                        <span class="error_message pc_projectMemberRole_error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Alias Name <span style="color: red"> </span></label>
+                                    <div class="txtContacts">
+                                        <input type="text" name="alias-name" id="alias-name" class="alias-name form-control" placeholder="Alias Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Assigned Date <span style="color: red">*</span></label>
+                                    <div class="dtpPhase">
+                                        <div class="input-group date">
+                                            <div id="memberAssignedDate"></div>
+                                        </div>
+                                        <span class="memberAssignedDate_error dlerror_messgae"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Is Active <span style="color: red"> </span></label>
+                                    <div class="txtContacts">
+                                        <input type="checkbox" class="form-check-input" id="memberIsActive">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Project Member Fields Ends  -->
+
+                        <div class="row">
+                            <div class="pull-right btn-right">
+                                <button class="btn btn-danger btn-sm add-btn" type="button"
+                                    data-toggle="collapse"
+                                    data-target="#addProject-members" onclick="clearEditProjectMembers();">Cancel</button>
+                                <button class="btn btn-secondary btn-sm add-btn" type="button" onclick="btnAdd_ProjectMembers()">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-12">
+                        <div id='Project_member_lists' class="table-responsive">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Project Add Memmber Code Ends Here -->
+
+
+<!-- Project Sub Project Code Starts Here-->
+<div class="modal fade" id="Project_subProject" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Sub Project</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 ProjectTitle">
+                        <input type="hidden" name="ProjectId" class="ProjectId" id="subproject-ProjectId">
+                        <span style="display: none;" class="dlClientName" id="dlClientName"></span>
+                        <h3 class="ProjectName"></h3>
+                        <input type="hidden" class="ProjectType">
+                    </div>
+                </div>
+                <div class="form-section" id="form-block">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-right m-b-10">
+                                <button class="btn btn-secondary btn-sm add-btn sub-products" type="button"
+                                data-toggle="collapse" data-target="#newsub-project">Add New</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="newsub-project" class="panel panel-primary collapse">
+                        <div class="panel-heading">
+                            <h4>New Sub Project</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="txtSubProject">
+                                            <div class="form-group">
+                                                <label>Sub Project</label>
+                                                <input type="hidden" id="SubProjectId">
+                                                <input type="text" class="form-control"
+                                                    id="txt_SubProjectName">
+                                            </div>
+                                            <span class="txtSubProjectName_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Planned Start date</label>
+                                            <div class="dtpSubProjectDate">
+                                                <div class=" date">
+                                                    <div id="dtpProjectPlanned_StartDate" class="subProjectDate"></div>
+                                                </div>
+                                                <span class="dtpProjectPlannedStartDate_error dlerror_messgae"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Planned End date</label>
+                                            <div class=" date">
+                                                <div id="dtpProject_EndDate" class="subProjectDate"></div>
+                                            </div>
+                                            <span class="dtpProjectEndDate_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Domain</label>
+                                            <div class="dlSubProject">
+                                                <div class="input-group">
+                                                    <select class="form-control" id="dlSub_ProjectDomain">
+                                                        <option value="0" selected>Select Project Domain</option>
+                                                    </select>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">
+                                                            <i class="glyphicon glyphicon-plus"></i></button>
+                                                    </span>
+                                                </div>
+                                                <span class="dlSubProjectDomain_error dlerror_messgae"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>End Client Name</label>
+                                            <div class="">
+                                                <input type="text" name="dlSub_ClientName" id="dlSub_ClientName" class="form-control" readonly>
+                                            </div>
+                                            <span class="dlSubClientName_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Project Description</label>
+                                            <textarea class="form-control" rows="4"
+                                                id="txtSub_ProjectDescription"></textarea>
+                                                <span class="txtSubProjectDescription_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right">
+                                            <button class="btn btn-danger btn-sm add-btn"
+                                                data-toggle="collapse" data-target="#newsub-project" onclick="clearSubProject()">Cancel</button>
+                                            <button class="btn btn-secondary btn-sm add-btn" type="button"
+                                                id="btnSub_ProjectSave"
+                                                data-toggle="collapse" onclick="validate_SubProject()">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">                                    
+                            <div id="displaySubProject">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Project Sub Project Code Ends Here -->
+
+
+<!-- Project Project Contacts Code Starts Here-->
+<div class="modal fade" id="Project_Contacts" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Project Contacts</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 ProjectTitle">
+                        <input type="hidden" name="ProjectId" class="ProjectId" id="contacts-ProjectId">
+                        <span style="display: none;" class="dlClientName" id="dlClientName"></span>
+                        <h3 class="ProjectName"></h3>
+                        <input type="hidden" class="ProjectType">
+                    </div>
+                </div>
+                <div class="form-section" id="form-block">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="button" class="btn btn-sm btn-secondary add-btn pull-right m-b-10 add_contact"
+                                onclick=toggle_ProjectContacts()>Add Contact</button>
+                        </div>
+                    </div>
+                    <div id="addproject-contacts" class="panel panel-primary collapse">
+                        <div class="panel-heading">
+                            <h4>New Client</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <div class="txtContacts">
+                                            <div class="input-group"> 
+                                                <input type="checkbox" id="Is_Primary" name="Is_Primary">
+                                                <label for="Is_Primary">&nbsp;Is primary&nbsp;&nbsp;</label>
+                                                <input type="radio" id="Timesheet_To" name="TimesheetTo_CC" value="Timesheet_To">
+                                                <label for="Timesheet_To">&nbsp;Timesheet To&nbsp;&nbsp;</label>
+                                                <input type="radio" id="Timesheet_CC" name="TimesheetTo_CC" value="Timesheet_CC">
+                                                <label for="Timesheet_CC">&nbsp;Timesheet CC</label>
+                                            </div>
+                                            <span style="margin-left: 15px;" class="error_message txtContatcTypeError"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Client Contact Name <span style="color: red"> *</span></label>
+                                        <div class="txtContacts">
+                                            <div class="input-group"> 
+                                                <input type="hidden" id="hdn_ClientContactId">                                
+                                                <input type="hidden" id="hdn_ProjectContactId">                                
+                                                <input type="hidden" id="hdn_ProjectId">                                
+                                                <input type="text" class="form-control" id="txt_ClientName">
+                                               
+                                            </div>
+                                            <span class="error_message txtClientName_error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Email ID <span style="color: red"> *</span></label>
+                                        <div class="txtContacts">
+                                            <div class="input-group">                                 
+                                                <input type="text" class="form-control" id="txt_EmailId">
+                                            </div>
+                                            <span class="error_message txtEmailId_error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone No 1</label>
+                                        <div class="txtContacts">
+                                            <div class="input-group">                                 
+                                                <input type="number" maxlength="10" class="form-control" id="txt_PhoneNo1">
+                                            </div>
+                                            <span class="error_message txtPhoneNo1_error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Phone No 2</label>                                                      
+                                        <div class="input-group">                                 
+                                            <input type="number" maxlength="10" class="form-control" id="txt_PhoneNo2">
+                                        </div>
+                                        <span class="error_message txtPhoneNo2_error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Designation </label>
+                                        <div class="dlContacts">
+                                            <div class="input-group" id="name">
+                                                <select class="form-control" id="dl_Designation">
+                                                </select>
+                                            </div>
+                                            <span class="error_message dlDesignation_error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Notes</label>
+                                        <div class="input-group">                                        
+                                            <textarea name="notes" id="txt_Notes" class="form-control" style="width:100%">                                                           
+                                            </textarea>
+                                        </div>
+                                        <span class="error_message txtNotes_error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        <div class="dlContacts">
+                                            <div class="input-group" id="name">
+                                                <select class="form-control" id="dl_Country">
+                                                </select>
+                                            </div>
+                                            <span class="error_message dlCountry_error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>State</label>
+                                        <div class="dlContacts">
+                                            <div class="input-group" id="name">
+                                                <select class="form-control" id="dl_State">
+                                                </select>
+                                            </div>
+                                            <span class="error_message dlState_error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <div class="dlContacts">
+                                            <div class="input-group" id="name">
+                                                <select class="form-control" id="dl_City">
+                                                </select>
+                                            </div>
+                                            <span class="error_message dlCity_error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Fax No</label>                                                       
+                                        <div class="input-group">                                 
+                                            <input type="text" class="form-control" id="txt_FaxNo">
+                                        </div>
+                                        <span class="error_message txtFaxNo_error"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Skype Id</label>                                                       
+                                        <div class="input-group">                                 
+                                            <input type="text" class="form-control" id="txt_SkypeId">
+                                        </div>
+                                        <span class="error_message txtSkypeId_error"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>From Email <span style="color: red"> *</span></label>
+                                        <div class="dlFromEmail">
+                                            <div class="input-group" id="name">
+                                                <select class="form-control" id="dl_FromEmail">
+                                                </select>
+                                            </div>
+                                            <span class="error_message dlFromEmail_error"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="pull-right btn-right">
+                                    <button class="btn btn-danger btn-sm add-btn" type="button" onclick=clear_ProjectContact()>Cancel</button>
+                                    <button class="btn btn-secondary btn-sm add-btn" type="button" id="btnContactsSave" onclick=btn_AddContacts()>Save</button>
+                                </div>
+                            </div>
+                        </div>                                    
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="display_ProjectContacts">
+                                
+                            </div>         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Project Project Contacts Code Ends Here -->
+
+<script type="text/javascript">
+           
+    var closureCommentseditor='';
+    var commentClosureeditor='';
+    var resourceRatingvalidator; 
+    var closurevalidator;
+    $('.resource_rate_error_msg').html('');
+    $(document).ready(function () {
+        $('#dtp_PhaseStartDate').dxDateBox({});
+        $('#dtp_PhaseEndDate').dxDateBox({});
+        $('#dtpProjectPlanned_StartDate').dxDateBox({});
+        $('#dtpProject_EndDate').dxDateBox({});
+
+        $('#memberAssignedDate').dxDateBox({});
+
+        $("#resource_smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection,stepPosition) {});
+
+        $('#btnContactsSave').click(function () {
+            contactSave = true;
+            validateAddContacts()
+        });
+        $('#btnNew_ProjectSave').click(function () {
+            projectSave = true;
+            validateNewProject()
+        });
+        $('#btnMemberSave').click(function () {
+            memberSave = true;
+            validateProjectMembers()
+        });
+        $('#btnSub_ProjectSave').click(function () {
+            subProjectSave = true;
+            validate_SubProject()
+        });
+
+        $("#list_employees_for_project_tbl").dataTable({
+            "destroy": true,
+            "pageLength": 5,
+            "ordering": false,
+            "info": false,
+            "oLanguage": { "sSearch": '<a class="btn searchBtn" id="searchBtn"><i class="fa fa-search"></i></a>' }
+        });
+
+        // $("#dlSub_ClientName").on({
+        //     "select2:open": function () {
+        //         $('body').on('keyup', '#Project_subProject input.select2-search__field', function () {
+        //             var searchKey = $(this).val();
+        //             if (searchKey == "") {
+        //                 let selectE1 = $("select#dlSub_ClientName");
+        //                 selectE1.empty();
+        //                 selectE1.select2('close');
+        //                 selectE1.select2('open');
+        //             }else {
+        //                 setTimeout(function () {
+        //                     SubProjectClientName(searchKey);
+        //                 }, 700);
+        //             }
+        //         });
+        //     }
+        // }).select2({
+        //     dropdownParent: $("#Project_subProject"),
+        //     placeholder: "Select Client"
+        // });
+
+    });
+
+    function buildClosePopup(){
+        const closerDate = $("#closureDate").dxDateBox({
+            type: 'date',
+            value: new Date(),
+            onValueChanged: function (e) {
+            }
+        }).dxValidator({
+            validationRules: [{
+                type: 'required',
+                message: 'Date is required',
+            }],
+            onInitialized:function(e){  
+                closurevalidator = e.component;  
+            }  
+        }).dxDateBox("instance");
+        
+        closureCommentseditor = $('#closureComments').dxHtmlEditor({
+            height: 280,
+            value: '',
+            toolbar: {
+                items: [
+                    'undo', 'redo', 'separator',
+                    {
+                    name: 'size',
+                    acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+                    },
+                    {
+                    name: 'font',
+                    acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+                    },
+                    'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+                    'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+                    'orderedList', 'bulletList', 'separator',
+                    {
+                    name: 'header',
+                    acceptedValues: [false, 1, 2, 3, 4, 5],
+                    }, 'separator',
+                    'color', 'background', 'separator',
+                    'link', 'image', 'separator',
+                    'clear', 'codeBlock', 'blockquote', 'separator',
+                    'insertTable', 'deleteTable',
+                    'insertRowAbove', 'insertRowBelow', 'deleteRow',
+                    'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+                ],
+            },
+            mediaResizing: {
+                enabled: true,
+            },
+        }).dxValidator({
+            validationRules: [{
+                type: 'required',
+                message: 'Comment is required',
+            }],
+        }).dxHtmlEditor('instance');
+
+        closureCommentseditor.option('toolbar.multiline', true);
+        closureCommentseditor.option('value','');
+        closureCommentseditor.option('validationError',null);
+        closureCommentseditor.option('validationErrors',null);
+        closureCommentseditor.option('validationMessageMode',"auto");
+        closureCommentseditor.option('validationStatus',"pending");
+
+        $('#rating').dxNumberBox({
+            min: 1,
+            max: 5,
+            showSpinButtons: true,
+        }).dxValidator({
+            validationRules: [{
+                type: 'required',
+                message: 'Rating is required',
+            }],
+            onInitialized:function(e){  
+                resourceRatingvalidator = e.component;  
+            }  
+        }).dxNumberBox('instance');
+
+        commentClosureeditor = $('#commentClosure').dxHtmlEditor({
+            height: 280,
+            value: '',
+            toolbar: {
+                items: [
+                    'undo', 'redo', 'separator',
+                    {
+                    name: 'size',
+                    acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+                    },
+                    {
+                    name: 'font',
+                    acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+                    },
+                    'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+                    'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+                    'orderedList', 'bulletList', 'separator',
+                    {
+                    name: 'header',
+                    acceptedValues: [false, 1, 2, 3, 4, 5],
+                    }, 'separator',
+                    'color', 'background', 'separator',
+                    'link', 'image', 'separator',
+                    'clear', 'codeBlock', 'blockquote', 'separator',
+                    'insertTable', 'deleteTable',
+                    'insertRowAbove', 'insertRowBelow', 'deleteRow',
+                    'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+                ],
+            },
+            mediaResizing: {
+            enabled: true,
+            },
+	    }).dxValidator({
+            validationRules: [{
+                type: 'required',
+                message: 'Comment is required',
+            }],
+            onInitialized:function(e){  
+                closurevalidator = e.component;  
+            }  
+        }).dxHtmlEditor('instance');
+
+        commentClosureeditor.option('toolbar.multiline', true);
+        commentClosureeditor.option('value','');
+        commentClosureeditor.option('validationErrors',null);
+        commentClosureeditor.option('validationStatus',"pending");
+
+        $("#btncommentSave").dxButton({
+            text: "Add",
+            type: 'success',
+            onClick: function (e) {
+                var result = e.validationGroup.validate();
+                var valid=resourceRatingvalidator._validationInfo.result.isValid;
+                if (valid) {
+                    var token=localStorage.getItem('securityToken');
+                    var projectId=$("#projectId").val();
+                    var resourceId=$("#commentId").val();
+                    var index=$("#index").val();
+                    var rating=$("#rating").dxNumberBox("instance").option('value');
+                    var cmd=$("#commentClosure").dxHtmlEditor("instance").option('value');
+                    dataResource = {
+                        "Method": "PostResourceProjectRating",
+                        "Data": {
+                            "Token": Token,
+                            "ProjectId": projectId,
+                            "ResourceId": resourceId,
+                            "Rating": rating,
+                            "Comment": cmd,
+                        }
+                    }
+                    PostDataCallAsync(dataResource, function (result) {
+                        if(result.IsSuccess == true) {
+                            swal({
+                                title: "Success!",
+                                text: "Comment saved successfully!",
+                                icon: "success",
+                                button: "ok!",
+                            });
+                            const grid = $("#workedResourcesGrid").dxDataGrid('instance');
+                            grid.deleteRow(index); 
+                            grid.confirmDeleteMessage = null
+                            grid.deselectAll();
+                            $('#ProjectClosureCommentModal').modal('hide');
+                        }       
+                    });
+                }
+            }
+        });
+
+
+        $("#btnClosure").dxButton({
+            text: "Save",
+            type: 'success',
+            onClick: function (e) {
+                $('.resource_rate_error_msg').html('');
+                var dataGrid = $("#workedResourcesGrid").dxDataGrid("instance");
+                var gridItemsLength = dataGrid.getDataSource().items().length;
+                var result = e.validationGroup.validate();
+                if (result && gridItemsLength==0) {
+                    var pId=$("#projectId").val();
+        
+                    swal({
+                        title: "Are you sure?",
+                        text: "Once its saved you cant able to revert back.",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            var token=localStorage.getItem('securityToken');
+                            var projectId=$("#projectId").val();
+                            var closureDate=$("#closureDate").dxDateBox('instance').option('value');
+                            var closureComments=$("#closureComments").dxHtmlEditor('instance').option('value');
+                            closuredataResource = {
+                                "Method": "PostProjectClosure",
+                                "Data": {
+                                    "Token": token,
+                                    "ProjectId": projectId,
+                                    "ClosureDate": closureDate,
+                                    "Comment": closureComments,
+                                }
+                            }
+                            PostDataCallAsync(closuredataResource, function (result) {
+                                if (result.IsSuccess == true) {
+                                    swal({
+                                        title: "Success!",
+                                        text: "Saved Successfully!",
+                                        icon: "success",
+                                        button: "ok!",
+                                    })
+                                    $('#ProjectClosureModal').modal('hide');
+
+                                }
+                            });
+                        }         
+                    })
+                }
+                else{
+                    $('.resource_rate_error_msg').html('Complete resources rate and comment');
+                }
+            }
+        });
+    }
+</script>

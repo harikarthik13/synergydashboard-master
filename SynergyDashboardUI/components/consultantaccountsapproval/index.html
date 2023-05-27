@@ -1,0 +1,162 @@
+<div class="card-detail">
+    <span class="modal-not-include">
+        <span class="card-detail-title"><b>Consultant Accounts Approval</b></span>
+        <hr>
+    </span>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Year</span></label>
+           </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Month</span></label>
+                </div>
+          </div>             
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div id="CAA_yearSelectBox"></div>
+      </div>
+      <div class="col-md-4">
+        <div id="CAA_monthSelectBox"></div>
+      </div>
+    </div><br/>
+    
+    <div class="mt-5" id="CAA_dataGridContainer"></div>
+  </div>
+  <script src='components/consultantaccountsapproval/js/consultantaccountsapproval.js'></script>
+  <script>
+   
+    var yearDataSource = [{Name:'2020'},{Name:'2019'},{Name:'2018'}];
+    $("#CAA_yearSelectBox").dxSelectBox({
+        dataSource: yearDataSource,
+        valueExpr: "Name",
+        displayExpr: "Name",
+        value: "2020",
+        searchEnabled: true
+    });
+  
+      
+    var monthDataSource = [{ID:1,Name:'1'},{ID:2,Name:'2'},{ID:3,Name:'3'},{ID:4,Name:'4'},{ID:5,Name:'5'},{ID:3,Name:'3'},
+        {ID:6,Name:'6'},{ID:7,Name:'7'},{ID:8,Name:'8'},{ID:9,Name:'9'},{ID:10,Name:'10'},{ID:11,Name:'11'}, {ID:12,Name:'12'}];
+  
+      $("#CAA_monthSelectBox").dxSelectBox({
+          dataSource: monthDataSource,
+          valueExpr: "ID",
+          displayExpr: "Name",
+          value:9,
+          searchEnabled: true,
+          onValueChanged: function(e) {
+            loadGridForAccounts(e)
+        }
+      });
+  
+      var filter_file_val = JSON.stringify({
+         "IsActive":true,
+         "Year":"2020", 
+         "Month":"9"
+      });
+     var tableDataSource = callgetlist('GetConsultantTaskDetailsForAccounts', filter_file_val);
+     var isEdit = function(position) {
+        return position;
+    };
+     $("#CAA_dataGridContainer").dxDataGrid({
+          dataSource: tableDataSource,
+          keyExpr: "Id",
+          showBorders: true,
+          allowColumnReordering: true,
+          columnChooser: {
+            enabled: true,
+            allowSearch: true
+          },
+          export: {
+            enabled: true,
+            allowExportSelectedData: true
+          },
+          paging: {
+              enabled: false
+          },
+          editing: {
+              mode: "row",
+              allowUpdating: function(e) {
+                return isEdit(e.row.data.PayableHours==null);
+            }
+          }, 
+          columns: [
+              {
+                  dataField: "ConsultantName",
+                  caption: "ConsultantName",
+                  validationRules: [{ type: "required" }],
+                  allowEditing: false
+              }, 
+              {
+                  dataField: "LeadName",
+                  caption: "LeadName",
+                  validationRules: [{ type: "required" }],
+                  allowEditing: false
+              },
+              {
+                  dataField: "Project",
+                  caption: "Project",
+                  allowEditing: false
+              },
+              {
+                  dataField: "LoggedHours",
+                  caption: "LoggedHours",
+                  validationRules: [{ type: "required" }],
+                  allowEditing: false
+              }, 
+              {
+                  dataField: "BillableHours",
+                  caption: "BillableHours",
+                  validationRules: [{ type: "required" }],
+                  allowEditing: false
+              },
+              {
+                  dataField: "ApprovedHours",
+                  caption: "ApprovedHours",
+                  validationRules: [{ type: "required" }],
+                  allowEditing: false
+              }, 
+              {
+                  dataField: "UAApprovedHours",
+                  caption: "UAApprovedHours",
+                  validationRules: [{ type: "required" }],
+                  allowEditing: false
+              },
+              {
+                  dataField: "AccountConfirmHours",
+                  caption: "AccountConfirmHours",
+                  validationRules: [{ type: "required" }]
+               
+              }
+          ],
+          onEditingStart: function(e) {
+              // logEvent("EditingStart");
+          },
+          onInitNewRow: function(e) {
+              // logEvent("InitNewRow");
+          },
+          onRowInserting: function(e) {
+              // logEvent("RowInserting");
+          },
+          onRowInserted: function(e) {
+              // logEvent("RowInserted");
+          },
+          onRowUpdating: function(e) {
+            updateConsultantAccountApproval(e);
+          },
+          onRowUpdated: function(e) {
+              // logEvent("RowUpdated");
+          },
+          onRowRemoving: function(e) {
+              // logEvent("RowRemoving");
+          },
+          onRowRemoved: function(e) {
+              // logEvent("RowRemoved");
+          }
+      });
+  </script>

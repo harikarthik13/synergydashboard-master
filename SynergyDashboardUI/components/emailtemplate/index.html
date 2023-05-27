@@ -1,0 +1,39 @@
+<link href="components/emailtemplate/css/emailTemplate.css" rel="stylesheet" />
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link  href="css/library/bootstrap-tagsinput.css" rel="stylesheet"/>
+<script type="text/javascript" src="js/library/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.textcomplete.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-tagsinput.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-tagsinput.min.js"></script>
+
+<div class="card-detail">
+    <span><i><img src="components/emailtemplate/images/email.jpg" width="40px" height="40px" /></i></span>
+
+    <span class="card-detail-title"><b>Email Template</b></span>
+    <span class="pull-right">
+        <button class="btn btn-sm btn-primary" onclick="emailTemplate();">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+
+    <div id="sddgd-emailTemplateCard"></div>
+</div>
+
+<script src='components/emailtemplate/js/emailTemplate.js'></script>
+<script type="text/javascript">
+
+    $("#emailTemplateModal").load("components/emailtemplate/emailTemplateModal.html");
+
+
+    function include_files(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+    include_files('./components/emailtemplate/js/emailTemplate.js');
+
+</script>

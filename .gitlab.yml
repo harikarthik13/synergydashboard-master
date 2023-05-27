@@ -1,0 +1,17 @@
+variables:
+  FTPURL: 'ftp://172.16.2.30/synergydashboardapi/'
+  FTPUserName: 'sd_prod'
+  FTPPassword: 'sprod@123'
+
+steps:
+- task: FtpUpload@2
+  displayName: 'FTP Upload: UI'
+  inputs:
+    credentialsOption: inputs
+    serverUrl: '$(FTPURL)'
+    username: '$(FTPUserName)'
+    password: '$(FTPPassword)'
+    rootDirectory: '$(System.DefaultWorkingDirectory)/_SynergyDashboard-CI-clone/drop/Source'
+    remoteDirectory: '/synergydashboard_dev'
+    cleanContents: true
+    preservePaths: true

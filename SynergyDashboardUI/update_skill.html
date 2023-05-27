@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Skills</title>
+
+  <!-- CSS -->
+
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+  <link rel="stylesheet" href="components/registration/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="components/registration/assets/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="components/registration/assets/css/form-elements.css">
+  <link rel="stylesheet" href="components/registration/assets/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="js/library/bootstrap.min.js"></script>
+  <script src="js/library/modal-steps.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="./css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
+  <!-- <link rel="shortcut icon" href="components/registration/assets/img/favicon.png"> -->
+  <link href="components/update_skill/css/update_skill.css" rel="stylesheet" />
+
+
+
+
+
+</head>
+
+<body>
+
+  <div id="header_navbar">
+  </div>
+
+  <div class="container" style="margin-top: 6%;text-align: left;">
+
+    <fieldset class="skillsetField" id="skill_fieldset">
+
+      <h2> Update Skillset</h2>
+
+      <p class="text-red" id="skill-caption"></p>
+
+      <p class="text-green" style="text-align:center;color: green;" id="skill-success"></p>
+
+      <div class="cloneform0 pd-bt">
+        <div id="clonedInput0" class="clonedInput0">
+
+          <div class="row">
+            <div class="form-group col-md-2">
+              <label for="skill_grade">Grade<span style="color: red;">*</span></label>
+              <select tabindex="1" id="skill_grade" name="" class="form-control">
+                <option value="Primary">Select Grade</option>
+                <option value="Primary">Primary</option>
+                <option value="Secondary">Secondary</option>
+              </select>
+              <span id="skill_grade_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group col-md-3 ">
+              <label for="family">Family<span style="color: red;">*</span></label>
+              <select tabindex="2" id="family" name="" onchange="get_skill(this.value)" class="form-control">
+                <option value="">Select family</option>
+
+              </select>
+              <span id="family_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="skill">Skills<span style="color: red;">*</span></label>
+              <select tabindex="3" id="skill" onchange="get_version(this.value)" name="" class="form-control">
+                <option value="">Select Skills</option>
+              </select>
+              <span id="skill_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-3 ">
+              <label for="skillversion">Version<span style="color: red;">*</span></label>
+              <select tabindex="4" id="skillversion" name="" class="form-control">
+                <option value="">Select Skill Version</option>
+              </select>
+              <span id="skillversion_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group col-md-1  ">
+              <label for="actions">Action:</label><br>
+              <input tabindex="5" type="button" id="SkillsetsBtn" class="btn btn-add" value="+"
+                onclick="insert_SkillInfo()" />
+            </div>
+          </div>
+          <div>
+            <div class="form-group col-md-3 resume">
+              <span class="success_message"></span>
+              <label for="resume">Upload Resume (Original)<span style="color: red">*</span></label>
+              <input id="resume" class="skill-resume no-resume" type="file" accept=" .doc, .pdf " placeholder="">
+              <!-- <input id="or_resume" class="reset-resume" hidden type="button" value="x"> -->
+              <span id="resume_error" class="error_message"></span>
+              <br>
+              <input type="button" class="btn upload fa-input" value="&#xf093;" onclick="uploadResumeFiles('OR')"
+                value="Upload" / style="background: green;color: #fff;"><input id="or_resume"
+                class="fa-input reset-resume delete_file" hidden type="button" value="&#xf1f8;">
+              <br>
+              <!-- <input type="button" value="Download Result" id="orResume" onclick="DownloadOR()" /> -->
+              <a href="#" id="orResume" class="hidden" onclick="DownloadOR('OR')">
+                <i class="fas fa-download download-icon"> Original Resume</i>
+              </a>
+            </div>
+
+            <div class="form-group col-md-3 resume">
+              <span class="success_message"></span>
+              <label for="resume">Upload Resume (G2 resume)<span style="color: red">*</span></label>
+              <input id="resumeg2" class="skill-resume no-resume" type="file" accept=" .doc, .pdf " placeholder="">
+              <!-- <input id="gr_resume" class="reset-resume" hidden type="button" value="x"> -->
+              <span id="resumeg2_error" class="error_message"></span>
+              <br>
+              <input type="button" class="fa-input btn upload" value="&#xf093;" onclick="uploadResumeFiles('GR')"
+                value="Upload" / style="background: green;color: #fff;"><input id="gr_resume"
+                class="fa-input reset-resume delete_file" hidden type="button" value="&#xf1f8;">
+              <br>
+              <a href="#" id="grResume" class="hidden" onclick="DownloadOR('GR')">
+                <i class="fas fa-download download-icon"> G2 Resume</i>
+              </a>
+            </div>
+
+            <div class="form-group col-md-4 resume">
+              <label for="resume">Please download the sample resume format here </label>
+              <br>
+              <a href="files/sample.doc">
+                <i class="fas fa-download download-icon"> Download</i>
+              </a>
+            </div>
+            <div class="form-group col-md-1  ">
+              <!--  <input type="button" class="btn upload" value="Upload" onclick="uploadResumeFiles()" value="Upload" / style="background: green;color: #fff;"> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <span class="skillset_status"></span>
+              <div id="display_SkillInfo"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="f1-buttons">
+        <a href="dashboard.html" class="btn btn-danger">Back</a>
+        <!-- <button tabindex="6" type="button" class="btn btn-submit skillSetNext" onclick="FinalSubmit_update()">Update</button> -->
+      </div>
+    </fieldset>
+
+  </div>
+
+
+  <script src="js/callapi.js"></script>
+  <script src="components/registration/assets/js/register/skillset.js"></script>
+
+  <script type="text/javascript">
+
+    clearAndShow_SkillInfo();
+
+  </script>
+
+  <script src="js/profile_picture.js"></script>
+  <script src="components/update_skill/js/update_skill.js"></script>
+
+  <script>
+      $("#header_navbar").load("components/common/header_navbar.html");
+  </script>
+
+
+
+
+  <!-- Registration page js files-->
+
+
+
+
+</body>
+
+</html>

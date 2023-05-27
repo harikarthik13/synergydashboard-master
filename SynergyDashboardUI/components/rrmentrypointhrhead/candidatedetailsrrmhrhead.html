@@ -1,0 +1,174 @@
+<div class="modal fade" id="CandidateDetailsRRMHrHeadModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title"><span>Candidate Details - </span>&nbsp;<span id="candidateDetailsNameRRMHrHead"></span></h2>
+          </div>
+
+          <div class="modal-body" data-simplebar>
+            <div class="row">
+              <div class="col-md-6">
+                <table class='table table-borderless' style='margin-bottom:0px'>
+                  <tbody>
+                    <tr>
+                      <td class="table-label"><b>Name</b></td>
+                      <td><b>: </b><span id="lbl_candidateDetailsNameRRMHrHead">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Mobile</b></td>
+                      <td><b>: </b><span id="lbl_candiateDetailsMobileRRMHrHead">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Email Id</b></td>
+                      <td><b>: </b><span id="lbl_candiateDetailsEmailRRMHrHead">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Links</b></td>
+                      <td><b>: </b><span id="lbl_candiateDetailsLinksRRMHrHead">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Communication Rating</b></td>
+                      <td><b>: </b><span id="star_candidateDetailsCommunicationRatingRRMHrHead">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Native</b></td>
+                      <td><b>: </b><span id="lbl_candiateDetailsNativeRRMHrHead">Not Available</span></td>
+                    </tr>
+                  </tbody>
+                </table> 
+              </div>
+              <div class="col-md-6">
+                <table class='table table-borderless' style='margin-bottom:0px'>
+                  <tbody>
+                    <tr>
+                      <td class="table-label"><b>Work Experience</b></td>
+                    </tr>  
+                    <tr>
+                      <td><span id="lbl_candidateDetailsWorkExperienceRRMHrHead">Not Available</span></td>
+                    </tr>                          
+                    <tr>
+                      <td class="table-label"><b>Skills :</b></td>
+                    </tr>
+                  </tbody>
+                </table> 
+                <div id="sdgd_candidateDetailsSkillsRRMHrHead"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  // RRM Details for interview schedule
+
+function getCandidateDetailsForRRMHrHead(candidateId){
+  $("#CandidateDetailsRRMHrHeadModal").appendTo("body").modal("show");
+  var filterData1 = JSON.stringify({
+      IsActive: true,
+      CandidateProfilebyId : candidateId
+  });
+  var filterData2 = JSON.stringify({
+      IsActive: true,
+      CandidateId : candidateId
+  });
+  callGetListSync("GetCandidateProfilebyId", filterData1, function (data) {
+      mapCandidateDetailsForRRMHrHead(data[0]);
+  });
+  // callGetListSync("GetCandidatePreviousEmployersByCandidateId", filterData2, function (data) {
+  //     console.log(data);
+  // });
+  callGetListSync("GetCandidateSkillsbyCandidateId", filterData2, function (data) {
+    getCandidateDetailsSkillsRRMHrHead(data)
+  });
+}
+
+function mapCandidateDetailsForRRMHrHead(data){
+  if(data.FirstName != null && data.FirstName != ""){
+      $("#lbl_candidateDetailsNameRRMHrHead").html(data.FirstName);
+      $("#candidateDetailsNameRRMHrHead").html(data.FirstName)
+  }
+  else{
+      $("#lbl_candidateDetailsNameRRMHrHead").html("Not Available");
+  }
+  if(data.Mobile != null && data.Mobile != ""){
+      $("#lbl_candiateDetailsMobileRRMHrHead").html(data.Mobile)
+  }
+  else{
+      $("#lbl_candiateDetailsMobileRRMHrHead").html("Not Available")
+  }
+  if(data.EmailId != null && data.EmailId != ""){
+      $("#lbl_candiateDetailsEmailRRMHrHead").html(data.EmailId)
+  }
+  else{
+      $("#lbl_candiateDetailsEmailRRMHrHead").html("Not Available")
+  }
+  var socialLinksHtml = "";
+  if(data.Skype != null && data.Skype != ""){
+    socialLinksHtml +="<a href='skype:" + data.Skype + "?chat'><i class='fab fa-skype'></i></a> &nbsp;"
+  }
+  if(data.GitHub != null && data.GitHub != ""){
+    socialLinksHtml +="<a href='" + data.GitHub + "' target='_blank'><i class='fab fa-github' aria-hidden='true'></i></a> &nbsp;"
+  }
+  if(data.LinkedIn != null && data.LinkedIn != ""){
+    socialLinksHtml +="<a href='" + data.LinkedIn + "' target='_blank'><i class='fab fa-linkedin'></i></a> &nbsp;"
+  }
+  if(data.Url != null && data.Url != ""){
+    socialLinksHtml +="<a href='" + data.Url + "' target='_blank'><i class='fa fa-link'></i></a>"
+  }  
+  if(socialLinksHtml == ""){
+    socialLinksHtml = "Not Available"
+  }  
+  $("#lbl_candiateDetailsLinksRRMHrHead").html(socialLinksHtml)
+  
+  $("#star_candidateDetailsCommunicationRatingRRMHrHead").text(data.CommunicationRatingHR);
+  if(data.Native != null && data.Native != ""){
+      $("#lbl_candiateDetailsNativeRRMHrHead").html(data.Native)
+  }
+  else{
+      $("#lbl_candiateDetailsNativeRRMHrHead").html("Not Available")
+  }
+  if(data.PreviousEmployersInfo != null && data.PreviousEmployersInfo != ""){
+      $("#lbl_candidateDetailsWorkExperienceRRMHrHead").html(data.PreviousEmployersInfo)
+  }
+  else{
+      $("#lbl_candidateDetailsWorkExperienceRRMHrHead").html("Not Available")
+  }
+}
+
+function getCandidateDetailsSkillsRRMHrHead(data){      
+      $("#sdgd_candidateDetailsSkillsRRMHrHead").dxDataGrid({
+          dataSource: data,
+          showBorders: true,
+          paging: {
+              enabled: false
+          },
+          wordWrapEnabled: true,
+          columns: [
+              {
+                  dataField:"SkillGradeName",
+                  caption:"Grade"
+              },
+              {
+                  dataField:"SkillFamilieName",
+                  caption:"Skill Family"
+              },
+              {
+                  dataField:"skillName",
+                  caption:"Skill Name"
+              },
+              {
+                  dataField:"SkillVersion",
+                  caption:"Skill Version"
+              }
+          ],
+      });
+}
+</script>

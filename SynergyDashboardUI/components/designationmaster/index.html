@@ -1,0 +1,445 @@
+
+<div class="card-detail">
+    <span class="card-detail-title"><b>Designation Master</b></span>
+    <!-- the below button for add Designation -->
+    <span class="pull-right">
+      <button class="btn btn-sm btn-primary" id="GD_AddDesignation" onclick="showDesignationModal();">
+          <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+      </button>
+    </span>
+    <hr />
+    <div id="GetDesignations_reportGrid"></div>
+
+    <!--POP-UP ADD DESIGNATION MODAL STARTS HERE -->
+    <div class="modal fade" id="Designation_Modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close modal_close" data-dismiss="modal">
+              &times;
+            </button>
+            <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title text-left">Add Designation</h2>
+          </div>
+
+          <div class="modal-body" data-simplebar>
+            <div class="form-section">
+              
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Name <span style="color: red">*</span></label>
+                        <input type="text" class="form-control" name="dm_designation_name"
+                            id="dm_designation_name">
+                        <span class="error_message designation_name_err"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Is Lead</label>
+                    <br>
+                    <input type="checkbox" class="form-check-input" id="dm_is_lead">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                      <label>Upper Designation <span style="color: red">*</span></label>
+                      <select class="form-control" name="dm_upper_designation" id="dm_upper_designation">
+                      </select>
+                      <span class="error_message dm_upper_designation_err"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Code <span style="color: red">*</span></label>
+                        <input type="text" class="form-control" name="dm_designation_code" id="dm_designation_code">
+                        <span class="error_message dm_designation_code_err"></span>
+                    </div>
+                </div>
+                
+              </div>
+
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" onclick=" clearAndShow();">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="postDesignation()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--POP-UP ADD DESIGNATION MODAL ENDS HERE -->
+</div>
+
+<!-- internal script -->
+<script>
+    // TODO : CHANGE ALL PREFIX
+    // 1. Change Your card name in span line number 3
+    // 2. Update your procedure name in line number 31
+    // 3. Find and replace prefix_ to your card prefix, eg: holiday master Card = hm_
+    // ---- Line Numbers
+    // -------- 6 - onclick function name prefix,
+    // -------- 11 - div id prefix,
+    // -------- 30 - const name prefix,
+    // -------- 32 - function name prefix,
+    // -------- 33 - parameter name prefix,
+    // -------- 47 - storageKey prefix,
+    // -------- 49 - element id prefix,
+    // -------- 53 - function name prefix in function call.
+
+    // const GetDesignations_ProcedureName = 'GetDesignations'; //Change Prefix and Procedure Name Here
+
+    // function GetDesignations_getReportData() {
+    //     const dataForReport = callgetlist(GetDesignations_ProcedureName, JSON.stringify({})); //Provide additional Parameters if any
+    //     if (dataForReport !== null && dataForReport.length > 0) {
+    //         let columns = [];
+    //         $.each(dataForReport[0], function (index, value) {
+    //             columns.push({
+    //                 caption: index, dataField: index
+    //             });
+    //         });
+    //         let options = getDevExtremeGridJson();
+    //         options.dataSource = dataForReport;
+    //         options.columns = columns;
+    //         options.stateStoring = {
+    //             enabled: true,
+    //             type: "localStorage",
+    //             storageKey: "GetDesignations_reportGridState"
+    //         };
+    //         $("#GetDesignations_reportGrid").dxDataGrid(options).dxDataGrid("instance");
+    //     }
+    // }
+
+    // GetDesignations_getReportData();
+
+    function GetDesignations_getReportData(){
+      var GetDesignations_getAllDesignations = callgetlist('GetDesignations');
+      var GetDesignations_getUpperDesignationData = callgetlist('GetUpperDesignations');
+
+      // check if user was authorized to create designation
+      $('#GD_AddDesignation').prop('disabled',true);
+      var GD_chkUsrAuthToCreateDesignation = callgetlist('GetDesignationRights');
+      if( GD_chkUsrAuthToCreateDesignation[0].Status == 1){
+        // $('#GD_AddDesignation').prop('disabled',false);
+      }else {
+        // $('#GD_AddDesignation').prop('disabled',true);
+      }
+
+    var designationsStore = new DevExpress.data.ArrayStore({
+        key: "Id",
+        data: GetDesignations_getAllDesignations
+    });
+    
+    // var deleteButton = $("#gridDeleteSelected").dxButton({
+    //     text: "Delete Selected Records",
+    //     height: 34,
+    //     disabled: true,
+    //     onClick: function () {
+    //         $.each(dataGrid.getSelectedRowKeys(), function() {
+    //             employeesStore.remove(this);
+    //         });
+    //         dataGrid.refresh();
+    //     }
+    // }).dxButton("instance");
+    
+     //show GetDesignations_getUpperDesignationData list
+		if (GetDesignations_getUpperDesignationData.length > 0) {
+      $('#dm_upper_designation').html('<option value="0">Select Project Indutry</option>');
+      GetDesignations_getUpperDesignationData.forEach(function (GetDesignations_getUpperDesignationData, i) {
+        $('#dm_upper_designation').append('<option value="' + GetDesignations_getUpperDesignationData.Id +'">' + GetDesignations_getUpperDesignationData.UpperDesignation + '</option>');
+      });
+    } 
+    else {
+      $('#dm_upper_designation').append('<option value="0">No datas Found</option>');
+		}
+
+    var designationsDataGrid = $("#GetDesignations_reportGrid").dxDataGrid({
+        dataSource: designationsStore,
+        filterRow: {
+          visible: true,
+          applyFilter: "auto",
+        },
+        export: {
+          enabled: true,
+          allowExportSelectedData: true,
+        },
+        searchPanel: {
+          visible: true,
+          width: 240,
+          placeholder: "Search...",
+        },
+        headerFilter: {
+          visible: true,
+        },
+        grouping: {
+          autoExpandAll: true,
+        },
+        pager: {
+          showPageSizeSelector: true,
+          allowedPageSizes: [5, 10, 20],
+          showInfo: true,
+        },
+        paging: {
+          pageSize: 10,
+        },
+        groupPanel: {
+          visible: true,
+          emptyPanelText: "Drag a column",
+        },
+        stateStoring: {
+            enabled: true,
+            type: "localStorage",
+            storageKey: "GetDesignations_reportGridStates"
+        },
+        sorting: {
+          mode: "multiple",
+        },
+        selection: {
+          mode: "multiple",
+        },
+        summary: {
+          totalItems: [
+            {
+              column: "sno",
+              summaryType: "count",
+            },
+          ],
+          groupItems: [
+            {
+              column: "sno",
+              summaryType: "count",
+            },
+          ],
+        },
+        showBorders: true,
+       
+        editing: {
+            mode: "cell",
+            allowUpdating: true
+        },
+        columnChooser: {
+        enabled: true,
+        },
+        rowAlternationEnabled: true,
+        filterPanel: { visible: true },
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        // showBorders: true,
+        onToolbarPreparing: function (e) {
+          var dataGrid = e.component;
+          e.toolbarOptions.items.unshift({
+              location: "after",
+              widget: "dxButton",
+              options: {
+                  icon: "refresh",
+                  onClick: function () {                            
+                    GetDesignations_getReportData();
+                  }
+              }
+          });
+        },
+        onSelectionChanged: function(data) {
+            // deleteButton.option("disabled", !data.selectedRowsData.length);
+            // console.log("ch on selecte data", data);
+        }, 
+        columns: [
+            {
+                caption: "#",
+                dataField: "sno",
+                cssClass: "rno",
+                allowGrouping: false,
+                allowCollapsing: false,
+                allReordering: false,
+                width: 70,
+                cellTemplate: function (container, options) {
+                container.text(
+                    designationsDataGrid.pageIndex() * designationsDataGrid.pageSize() +
+                    options.rowIndex +
+                    1
+                );
+                },
+            },
+            {
+                dataField: "Name",
+                caption: "Name",
+            },
+            {
+                dataField: "UpperDesignationId",
+                caption: "Upper Designation",
+                lookup: {
+                    dataSource: GetDesignations_getUpperDesignationData,
+                    displayExpr: "UpperDesignation",
+                    valueExpr: "Id"
+                }
+            },
+            {
+                dataField: "IsLead",
+                caption: "Is Lead",
+            },
+            {
+                dataField: "code",
+                caption: "Code",
+            },
+            {
+            caption: "Action",
+            dataField: "",
+            width: "100",
+            cellTemplate: function (container, options) {
+            //   var ProposalId = options.data.ProposalId;
+              var domActions = "";
+            //   domActions += `<button class='btn btn-xs btn-primary edit-btn' onclick='WorkOrderModelDialog("${ProposalId}")'><i class='fas fa-edit'></i></button>`
+            //   domActions += `<button class='btn btn-xs btn-primary edit-btn' onclick='openCommentsHistoryForProposals("${RFPId}","${ProjectName}")'><i class='fas fa-comments'></i></button>`
+              domActions += `<button class='btn btn-xs btn-primary edit-btn' onclick='' disabled><i class='fas fa-eye'></i></button>`
+              domActions += `<button class='btn btn-xs btn-primary edit-btn' onclick='DeleteDesignation()' disabled><i class='fas fa-trash-alt'></i></button>`
+              domActions += `<button class='btn btn-xs btn-primary edit-btn' onclick='' disabled><i class='fas fa-user-plus'></i></button>`
+              $("<div class='text-center'>")
+                .append($(domActions))
+                .appendTo(container);
+            },
+          }
+        ],
+        onRowUpdating: function(e) {
+            var DesignationToPost = {
+            "DesignationId": e.key,
+            "Code": (e.newData.code) ? e.newData.code : e.oldData.code,
+            "Name": (e.newData.Name) ? e.newData.Name : e.oldData.Name,
+            "IsLead": (e.newData.IsLead) ? e.newData.IsLead : e.oldData.IsLead,
+            "UpperDesignation": (e.newData.UpperDesignationId) ? e.newData.UpperDesignationId : e.oldData.UpperDesignationId,
+            "IsActive": true,
+            "Status": "",
+            "Message": ""
+            };
+
+            // console.log("Chk passing data ",DesignationToPost );
+            data = {
+            "Method": "PostDesignations",
+            "Data": DesignationToPost
+            }
+            
+            var postCall = PostDataCall(data);
+            console.log(postCall);
+            if (postCall['IsSuccess'] == true) {
+                console.log(postCall['Message']);
+            } else {
+                console.log(postCall['Message']);
+            }
+        },
+        onRowUpdated: function(e) {
+            // alert("updated Successfully");
+        },
+    }).dxDataGrid("instance");
+    }
+    
+    GetDesignations_getReportData();
+    function DeleteDesignation() {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                swal("Poof! Your imaginary file has been deleted!", {
+                icon: "success",
+                });
+            } else {
+                swal("Your imaginary file is safe!");
+            }
+        });
+    }
+
+    function showDesignationModal() {
+      clearAndShow();
+      $('#Designation_Modal').appendTo($('body'));
+      $('#Designation_Modal').modal("show");
+    }
+
+    function postDesignation() {   
+
+      let err = 0;
+
+      if ($("#dm_designation_name").val() == "") {
+          $(".designation_name_err").html('Please enter the Designation Name');
+          err = 1;
+      } else {
+          $(".designation_name_err").html('');
+      }
+
+      if ($("#dm_upper_designation").val() == 0) {
+          $(".dm_upper_designation_err").html('Please choose the Upper Designation');
+          err = 1;
+      } else {
+          $(".dm_upper_designation_err").html('');
+      }
+
+      if ($("#dm_designation_code").val() == "") {
+          $(".dm_designation_code_err").html('Please enter the Designation Code');
+          err = 1;
+      } else {
+          $(".dm_designation_code_err").html('');
+      }
+
+      if (err == 1) {
+        return false;
+      } else {
+        data = {
+            "Method": "PostDesignations",
+            "Data": {
+                "DesignationId" : null,
+                "Code" : $('#dm_designation_code').val(),
+                "Name" : $('#dm_designation_name').val(),
+                "IsLead" : $('#dm_is_lead').is(":checked"),
+                "UpperDesignation" : $('#dm_upper_designation').val(),
+                "IsActive": true,
+                "Status": "",
+                "Message": ""
+            }
+        }
+
+      // console.log('chk post insert wo ',data);
+
+      var postCall = PostDataCall(data);
+      if (postCall['IsSuccess'] == true) {
+          console.log(postCall['Message']);
+         
+          var swalEMRSucc = {
+            title: 'Success!',
+            text: postCall['Message'],
+            icon: "success"
+          }
+          swalAlert(swalEMRSucc); 
+          
+      } else {
+          console.log(postCall['Message']);
+          var swalEMRErr = {
+            title: 'Warning!',
+            text: postCall['Message'],
+            icon: "error"
+          }
+          swalAlert(swalEMRErr);
+      }
+  }
+
+    }
+
+   
+
+    function clearAndShow() {
+      $('#dm_designation_code').val('');
+      $('#dm_designation_name').val('');
+      $('#dm_is_lead').prop('checked', false);
+      $('#dm_upper_designation').val('0');
+
+      $(".designation_name_err").html('');
+      $(".dm_upper_designation_err").html('');
+      $(".dm_designation_code_err").html('');
+    }
+</script>

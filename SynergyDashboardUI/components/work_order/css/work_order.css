@@ -1,0 +1,56 @@
+#workorder_card input[type=search]
+{
+    border-radius: 5px 0px 0px 5px;
+    border-right: none;
+    border: 1px solid #D3D3D3 !important;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+
+#workorder_card p{
+    padding: 0px;
+}
+
+#workorder_card input[type=search]:focus
+{
+    outline: none;
+}
+.ml-10 { margin-left: 20px; }
+
+#tbl_workordercard
+{
+    width: 100% !important;
+}
+
+#tbl_workordercard td,#tbl_workordercard tr
+{
+    border-bottom: none !important;
+    border-right: none !important;
+    padding: 8px;
+}
+
+#tbl_workordercard td:last-child
+{
+    border-right:1px solid #D3D3D3 !important;
+}
+
+#tbl_workordercard
+{
+    border-bottom: 1px solid #D3D3D3;
+}
+
+#tbl_workordercard_length{
+    display: none;
+}
+
+#workorder_card .dataTables_filter {
+    float: left !important;
+ }
+
+ #workorder_card #searchBtn
+ {
+     color:rgb(49, 43, 43);
+     border:1px solid #D3D3D3;
+     border-radius: 0px 5px 5px 0px;
+     float: right;
+ }

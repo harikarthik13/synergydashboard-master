@@ -1,0 +1,499 @@
+@media print {
+    * {
+        box-sizing: border-box;
+    }
+
+    * {
+        -webkit-print-color-adjust: exact !important;
+        /* Chrome, Safari */
+        color-adjust: exact !important;
+        /*Firefox*/
+    }
+
+    body {
+        -webkit-print-color-adjust: exact;
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    .page {
+        background: white;
+        /*height:100%;*/
+    }
+
+    .pdf_main_div {
+        width: 900px;
+        margin: auto;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .fitpage {
+        min-height: 1000px !important;
+    }
+
+    .print-row {
+        width: 100%;
+        /*height:100%;*/
+    }
+
+    .pdf_main_div img {
+        max-width: 100%;
+    }
+
+    .page-break {
+        page-break-after: always;
+        page-break-inside: avoid;
+        clear: both;
+    }
+
+    .pdf-head {
+        background-color: #0E2233 !important;
+        -webkit-print-color-adjust: exact;
+        padding: 15px;
+        width: 100%;
+        display: table;
+        /*height:100%;*/
+    }
+
+    .Estimation_details td {
+        border-width: 0;
+        padding: 10px 0;
+        font-weight: bold;
+    }
+
+    .Estimation_details td#docVersion {
+        border-width: 0;
+        text-align: right;
+    }
+
+    .name-section {
+        width: 100%;
+        background-color: #eee !important;
+        padding: 15px;
+        height: 650px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #pdf_EstimatePricing {
+        border: 0;
+        outline: none;
+    }
+
+    .name-section h1 {
+        max-width: 80%;
+        margin: auto;
+        text-align: center;
+    }
+
+    .table_of_contents {
+        padding: 0px 100px;
+    }
+
+    .table_of_contents h2 {
+        text-align: center;
+        font-size: 36px;
+    }
+
+    ol {
+        padding-left: 15px;
+    }
+
+    ol li {
+        font-size: 18px;
+        line-height: 38px
+    }
+
+    .table_of_contents ol p {
+        margin: 0;
+        line-height: 38px;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .about-info {
+        padding: 50px 0;
+        text-align: center;
+        color: #fff;
+        background-color: #0E2233;
+        width: 100%;
+    }
+
+    .about-info * {
+        color: #fff;
+    }
+
+    .about-info h4 {
+        margin: 0;
+        margin-bottom: 10px;
+
+    }
+
+    .about_pdf,
+    .address {
+        width: 400px;
+        margin: auto;
+        border-bottom: 2px solid #fff;
+        padding: 20px;
+        text-align: left
+    }
+
+    .about_us {
+        background-color: #0E2233;
+        color: #fff;
+        padding: 20px 0px;
+    }
+
+    .about_us h2 {
+        text-align: center;
+        margin-bottom: 0;
+        font-size: 23px;
+    }
+
+    .about_us p {
+        text-align: justify;
+        padding: 0px 20px;
+        font-size: 23px;
+        margin: 0;
+    }
+
+    .about_us_content {
+        background-image: url(images/about-us1.png);
+        background-repeat: no-repeat;
+    }
+
+    .about_us_content p {
+        font-size: 18px;
+        margin: 0;
+        color: #fff;
+        padding: 35px;
+        text-align: justify;
+        line-height: 24px;
+    }
+
+    .aboutus_icons {
+        background-image: url(images/countbg_1.png);
+        background-repeat: no-repeat;
+        background-size: 100% auto;
+        height: 190px;
+        width: 100%;
+        color: #fff;
+    }
+
+    .aboutus_icons .col-md-4 {
+        text-align: center;
+        width: 24.3%;
+        float: left;
+        padding: 49px 0px;
+    }
+
+    .aboutus_icons .number {
+        font-size: 24px;
+        font-weight: 700;
+        font-size: 36px;
+    }
+
+    .aboutus_icons h2,
+    .aboutus_icons p {
+        margin: 0;
+    }
+
+    .aboutus_icons p {
+        font-size: 18px;
+        line-height: 24px;
+        text-transform: capitalize;
+    }
+
+    .Revision_history h2,
+    .estimation h2,
+    .user_story h2,
+    .feature_list h2,
+    .assumptions_block h2,
+    .other_notes_block h2,
+    .suggestions_block h2 {
+        color: #0E2233;
+        font-size: 36px;
+    }
+
+    .Revision_history h4 {
+        margin-bottom: 10px;
+        padding: 0px 50px;
+        color: #f15f27;
+        font-size: 24px;
+    }
+
+    .Revision_history p {
+        font-size: 18px;
+        font-style: italic;
+        margin-top: 0;
+        padding: 0px 50px;
+    }
+
+    .table {
+        width: 100%;
+        max-width: 100%;
+        border-collapse: collapse;
+    }
+
+    .textprimary {
+        font-weight: bold;
+    }
+
+    .highlight {
+        background-color: #DBFF33;
+        color: black;
+    }
+
+    .primaryblock {
+        background-color: #DBFF33;
+        color: black;
+        padding: 20px;
+        text-align: center;
+        line-height: 24px;
+    }
+
+    .textsecondary {
+        text-decoration: underline;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    th {
+        border: 1px solid #000;
+        padding: 10px;
+    }
+
+    td {
+        text-align: left;
+        border: 1px solid #000;
+        padding: 10px 10px;
+    }
+
+    .user_story h4,
+    .feature_list h4 {
+        margin-bottom: 10px;
+        color: #f15f27;
+        font-size: 24px;
+    }
+
+    .user_story_img {
+        padding: 30px 0px;
+    }
+
+    .userstory_secondary_content ul li {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .feature_list ul li,
+    .assumptions_block ul li,
+    .other_notes_block ul li,
+    .suggestions_block li {
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    li#pdf_Technology,
+    #pdf_Environment,
+    #pdf_BackEnd {
+        list-style-type: none;
+    }
+
+    #pdf_EstimatePricing input {
+        border: 0;
+        outline: none;
+    }
+
+    .assumptions,
+    .out_of_scope,
+    .Technology,
+    .other_notes,
+    .suggestions {
+        padding: 0px 20px;
+    }
+
+    .download_content {
+        display: none !important;
+    }
+
+    .print_images {
+        display: block;
+        font-size: 0;
+    }
+
+    .print_images img {
+        width: 100%;
+        height: 120vh;
+    }
+
+    .tableofcontents {
+        padding: 40px 0;
+        min-height: 1220px;
+    }
+
+    .tableofcontents tr td:last-child {
+        text-align: center;
+    }
+
+    .tableofcontents tr td:first-child {
+        text-align: right;
+        max-width: 10px;
+    }
+
+    .tableofcontents td {
+        position: relative;
+        height: 28px;
+        border-width: 0;
+    }
+
+    .tableofcontents h3 {
+        margin-bottom: 20px;
+    }
+
+    .tableofcontents td:nth-child(2):after {
+        content: "";
+        position: absolute;
+        height: 0;
+        width: calc(100% - 20px);
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        border: 1px dotted;
+        z-index: -1;
+    }
+
+    .tableofcontents td:nth-child(2) span {
+        background: #fff;
+        display: inline-block;
+        padding: 0 10px;
+    }
+
+    .printpageContentWrap {
+        padding: 30px 0;
+        min-height: 1010px;
+    }
+
+    .printpageContent {
+        min-height: 1100px;
+    }
+
+    .printpageContent .printpageContentWrap {
+        padding: 30px 0;
+        min-height: 950px;
+    }
+
+    .pdf_proposal_notes {
+        padding: 30px 0;
+    }
+
+    .pdf_proposal_notes h2 {
+        font-family: "Calibri Light";
+        color: rgb(46, 117, 181);
+        font-size: 16pt;
+        margin-bottom: 20px;
+        margin-top: 15px;
+    }
+
+    .pdf_proposal_notes p {
+        font-family: "Calibri Light";
+        font-size: 14pt;
+        line-height: 24pt;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .pdf_proposal_notes p a,
+    .pdf_proposal_notes li a,
+    .pdf_proposal_notes ol li a {
+        font-family: "Calibri Light";
+        font-size: 14pt;
+        color: rgb(46, 117, 181);
+        line-height: 22pt;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .pdf_proposal_notes ul {
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .pdf_proposal_notes ul li {
+        font-family: "Calibri Light";
+        color: #000;
+        font-size: 14pt;
+        line-height: 22pt;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .pdf_proposal_notes h5 {
+        font-family: "Calibri Light";
+        color: rgb(46, 117, 181);
+        font-size: 14pt;
+        line-height: 22pt;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .pdf_proposal_notes ol li {
+        font-family: "Calibri Light";
+        color: #000;
+        font-size: 14pt;
+        line-height: 22pt;
+        margin-bottom: 0px;
+        margin-top: 0px;
+    }
+
+    .pdf_proposal_notes ol {
+        padding-left: 60px;
+        margin: 0px;
+    }
+
+    .printpageContent .printpageContentWrap p {
+        font-size: 18px;
+        line-height: 30px;
+    }
+
+
+    .pdf_proposal_notes h3 {
+        text-align: justify;
+        font-family: "Calibri Light";
+        color: #000;
+        font-size: 14pt;
+        line-height: 24pt;
+        margin-bottom: 5px;
+        margin-top: 0px;
+        padding-left: 90px;
+        font-weight: 400;
+    }
+    .pdf_proposal_notes h4 {
+        text-align: justify;
+        font-family: "Calibri Light";
+        color: #000;
+        font-size: 14pt;
+        line-height: 21pt;
+        margin-bottom: 5px;
+        margin-top: 0px;
+        padding-left: 45px;
+        font-weight: 400;
+    }
+    
+    .printpageImg {
+        display: block;
+    }
+    #pdf_proposal_table table thead {
+        background-color: rgb(187, 187, 187);
+    }
+}

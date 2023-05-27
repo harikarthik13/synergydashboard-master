@@ -1,0 +1,197 @@
+<link href="components/rrmofferdispatch/css/style.css" rel="stylesheet" />
+<script src='components/rrmofferdispatch/js/rrmofferdispatch.js'></script>
+<div class="card-detail">
+  <span><i><img src="components/rrmofferdispatch/images/interviewicon.png" width="40px" height="40px" /></i></span>
+  <span class="card-detail-title modal-not-include"><b>RRM Offer Dispatch</b></span>
+  <span class="pull-right">
+    <button class="btn btn-sm btn-primary" data-type="add" onclick="addOfferDispatch()">
+        <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+    </button>
+  </span>
+  <hr />
+  <div>
+    <div id="sdgd-rrmOfferDispatch"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="RRMOfferModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title"><span>OFFER Dispatch</span>&nbsp; <span><label id="OfferDispatchType"></label></span></h2>
+          </div>
+
+          <div class="modal-body" id="rrmOfferDispatchModalBody" data-simplebar>
+            <div role="tabpanel">
+              <ul class="nav nav-tabs" role="tablist" id="rrmDispatchTabs">
+                <li role="presentation" class="active" id="rrm_OfferDispatchTab" data-tab="rrm_OfferDispatch">
+                  <a aria-controls="rrm_OfferDispatch" role="tab">OFFER Dispatch</a>
+                </li>
+                <li role="presentation" id="rrm_OfferDispatchInterviewHistoryTab" data-tab="rrm_OfferDispatchInterviewHistory">
+                  <a aria-controls="rrm_OfferDispatchInterviewHistory" role="tab">Interview(s) History</a>
+                </li>
+                <li role="presentation" id="rrm_OfferDispatchRRMDetailsTab" data-tab="rrm_OfferDispatchRRMDetails">
+                  <a aria-controls="rrm_OfferDispatchRRMDetails" role="tab">RRM Details</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="rrmOfferDispatchDetails">
+                <div role="tabpanel" class="tab-pane active" id="rrm_OfferDispatch">
+                  <span id="offerId" class="hidden"></span>
+                  <div class="row"> 
+                      <div class="col-md-3">
+                        <label>Candidate &nbsp; <span style="color: red">*</span></label>
+                        <div id="sdd-CandidateForOfferDispatch"></div>
+                        <span class="error_message" id="err-CandidateOfferDispatch"></span>
+                      </div>
+                      <div class="col-md-2">
+                        <br>
+                        <div style="display: flex; margin-top: 12px;">
+                          <label style="margin-right: 10px;">Consultant</label>
+                          <div id="sdchk-IsConsultantOfferDispatch"></div>
+                        </div>                      
+                      </div>  
+                      <div class="col-md-5">
+                        <label style=" margin-top: 20px;"></label>
+                      <div id="sdr-ConsultantTypeOfferDispatch"></div>
+                    </div>                       
+                                        
+                    <div class="col-md-2" id="ConsultantHoursOfferDispatch">
+                      <label>Consultant Hours</label>
+                      <div id="sdr-ConsultantHoursOfferDispatch"></div>
+                    </div> 
+
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Current CTC</label>
+                      <div id="sdtxt-CurrentForOfferDispatch"></div>
+                    </div>
+                   
+                    <div class="col-md-4" id="ExpectedCTCdivOfferDispatch">
+                      <label>Expected CTC&nbsp; <span style="color: red" id="err-ExpectedCTCOfferDispatch">*</span></label>
+                      <div id="sdtxt-ExpectedCTCForOfferDispatch"></div>
+                    </div> 
+
+                    <!-- <div class="col-md-4">
+                      <label>Approximate&nbsp; <span style="color: red" id="err-ApproximateCTCOfferDispatch"></span></label>
+                      <div id="sdtxt-ApproximateCTCForOfferDispatch"></div>
+                    </div> -->
+
+                    <div class="col-md-4">
+                      <label>Expected Joining Date &nbsp; <span style="color: red" id="err-InterviewType">*</span></label>
+                      <div id="sddb-ExpectedJoiningDateOfferDispatch"></div>
+                    </div>              
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label id="lbl-IsOfferApproved">Offer Status</label>
+                      <br>
+                      <span id="OfferApprovedStatus"></span>
+                    </div> 
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <label>Notes&nbsp; <span style="color: red">*</span></label>
+                        <div id="sdtxt-NotesOfferDispatch"></div>
+                        <span class="error_message" id="err-CandidateOfferDispatchNotes"></span>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="rrm_OfferDispatchInterviewHistory">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="panel-group" id="rrm_OfferDispatchInterviewHistoryAccordian">
+                                               
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="rrm_OfferDispatchRRMDetails">
+                  <div class="row">
+                    <div class="col-md-12">
+                    <h3 id="rrmDetailsOfferDispatchDivTitle">Select a candidate to view RRM Details</h3>
+                    </div>
+                  </div>
+                  <div class="row" id="rrmDetailsOfferDispatchDiv">
+                    <div class="col-md-6">                      
+                      <table class='table table-borderless' style='margin-bottom:0px'>
+                        <tbody>
+                          <tr>
+                            <td class="table-label"><b>RRM No</b></td>
+                            <td><b>: </b><span id="lbl_offerDispatchRRMNumberTab">Not Available</span></td>
+                          </tr>
+                          <tr>
+                            <td class="table-label"><b>Requirement Name</b></td>
+                            <td><b>: </b><span id="lbl_offerDispatchRRMNameTab">Not Available</span></td>
+                          </tr>
+                          <tr>
+                            <td class="table-label"><b>Required For</b></td>
+                            <td><b>: </b><span id="lbl_offerDispatchRRMRequiredFor">Not Available</span></td>
+                          </tr>
+                          <tr>
+                            <td class="table-label"><b>Department</b></td>
+                            <td><b>: </b><span id="lbl_offerDispatchRRMDepartment">Not Available</span></td>
+                          </tr>
+                          <tr>
+                            <td class="table-label"><b>Designation</b></td>
+                            <td><b>: </b><span id="lbl_offerDispatchRRMDesignation">Not Available</span></td>
+                          </tr>
+                          <tr>
+                            <td class="table-label"><b>Experience (Yrs)</b></td>
+                            <td><b>: </b><span id="lbl_offerDispatchRRMExperience">Not Available</span></td>
+                          </tr>
+                        </tbody>
+                      </table> 
+                    </div>
+                    <div class="col-md-6">
+                      <table class='table table-borderless' style='margin-bottom:0px'>
+                        <tbody>                            
+                          <tr>
+                            <td class="table-label"><b>Plan (A) Information :</b></td>                              
+                          </tr>
+                          <tr>
+                            <td><span id="lbl_offerDispatchRRMPlanA">Not Available</span></td>
+                          </tr>
+                          <tr>
+                            <td class="table-label"><b>Plan (B) Information :</b></td>
+                          </tr>
+                          <tr>
+                            <td><span id="lbl_offerDispatchRRMPlanB">Not Available</span></td>
+                          </tr>
+                          <tr>
+                            <td class="table-label"><b>Skills :</b></td>
+                          </tr>
+                        </tbody>
+                      </table> 
+                      <div id="sdgd_offerDispatchRRMSkillsGrid"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">           
+            <button type="button" class="btn btn-success" id="btnSaveOfferDispatch" onclick="saveOfferDispatch()">Save</button>
+            <button type = "button" class="btn btn-success" id="btnUpdateOfferDispatch" onclick="updateOfferDispatch()">Update</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close" onclick="resetOfferDispatch()">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+<div id="rrmDetailsForOfferDispatch"></div>
+<script>
+  $("#rrmDetailsForOfferDispatch").load("components/rrmofferdispatch/rrmdetailsofferdispatchmodal.html");
+  $(document).on("click", ".rrmdetailOfferDispatch", function (e) {
+      var rrmId = $(e.currentTarget).data("rrmid");           
+      getRRMDetailsForOfferDispatchModal(rrmId);
+  });
+
+</script>

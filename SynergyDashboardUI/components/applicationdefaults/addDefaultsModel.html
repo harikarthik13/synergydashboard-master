@@ -1,0 +1,112 @@
+<script src="https://cdn.ckeditor.com/4.16.1/standard-all/ckeditor.js"></script>
+<div class="modal fade" id="open_add_defaults_model" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"  data-dismiss="modal" aria-label="Close"><span onclick="resetAdDefaultsModel()" aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding">
+                    <i class="fas fa-expand" data-toggle="modal"></i>
+                </button>
+                <h2 class="modal-title" id="myModalLabel">Add Customization</h2>
+            </div>
+            <div class="modal-body ad_model_body" data-simplebar>
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <form>
+                            <div class="form-group">
+                                <label for="code">Code</label>
+                                <input type="text" class="form-control" id="code" laceholder="Enter Code">
+                                <span class="error_message ad_code_error_msg"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ad_desc">Description</label>
+                                <div id="ad_desc"></div>
+                                <span class="error_message ad_desc_error_msg"></span>
+                            </div>
+                            <label for="application_defaults_type">Type</label>
+                            <div class="row" id="application_defaults_type">
+                                <div class="col-md-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input application_defaults_type" (click)="" type="radio" name="application_defaults_type" id="application_defaults_label" value="label">
+                                        <label class="form-check-label" for="application_defaults_label">Label</label>
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input application_defaults_type" type="radio" name="application_defaults_type" id="application_defaults_file" value="file">
+                                        <label class="form-check-label" for="application_defaults_file">File</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-8"></div>
+                            </div>
+                            <span class="error_message ad_type_error_msg"></span>
+
+                            <div class="form-group" id="ad_text">
+                                <label for="ad_text_value">Value</label>
+                                <textarea name="ad_text_value" id="ad_text_value" class="form-control"></textarea>
+                                <span class="error_message ad_text_value_error_msg"></span>
+                            </div>
+                            <div class="form-group" id="ad_file">
+                                <label for="ad_file_upload">Value</label>
+                                <div id="ad_file_upload"></div>
+                                <!-- <div id="ad_uploaded_file">
+                                    <a ><i class="fas fa-download"></i></a>
+                                </div> -->
+                                <span class="error_message ad_value_error_msg"></span>
+                            </div>
+                            <div class="edit_ad_file_wraper">
+                                <button type="button" data-toggle="tooltip" data-placement = "top" title="file" class="btn edit_ad_file btn-success btn-sm"></button><button type="button" onclick="clearUploadedFile()" class="btn btn-danger"><span class="clear_ad_file">X</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger ad_clear close-btn" onclick="resetAdDefaultsModel()" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary ad_submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function () {   
+    var isTypeSelected = false;
+
+     ad_desc = $("#ad_desc").dxHtmlEditor({
+        height: 225,
+        toolbar: {
+            items: [
+                "undo", "redo", "separator",
+                {
+                    name: "size",
+                    acceptedValues: ["8pt", "10pt", "12pt", "14pt", "18pt", "24pt", "36pt"] },
+                {
+                    name: "font",
+                    acceptedValues: ["Arial", "Courier New", "Georgia", "Impact", "Lucida Console", "Tahoma", "Times New Roman", "Verdana"]
+                },
+                "separator", "bold", "italic", "strike", "underline", "separator",
+                "alignLeft", "alignCenter", "alignRight", "alignJustify", "separator",
+                "orderedList", "bulletList", "separator",
+                {
+                    name: "header",
+                    acceptedValues: [false, 1, 2, 3, 4, 5]
+                }, "separator",
+                "color", "background", "separator",
+                "link", "image", "separator",
+                "clear", "codeBlock", "blockquote", "separator",
+                "insertTable", "deleteTable",
+                "insertRowAbove", "insertRowBelow", "deleteRow",
+                "insertColumnLeft", "insertColumnRight", "deleteColumn"
+            ]
+        },
+        mediaResizing: {
+            enabled: true
+        }
+    }).dxHtmlEditor("instance");
+
+    // ad_desc.option("value", "hello");
+});
+</script>
+<script type="text/javascript" src="components/applicationdefaults/applicationdefaults.js"></script>
+

@@ -1,0 +1,114 @@
+<link href="components/closedProjectAuditReport/css/style.css" rel="stylesheet" />
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/jquery.dataTables.min.js"></script>
+<script src='components/closedProjectAuditReport/js/closedProjectAuditReport.js'></script>
+
+<div class="card-detail closed-project">
+	<span><i><img src="components/project/images/project.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Closed Projects</b></span>
+   
+	<hr>
+    <div class="row">
+    <div class="col-md-4">
+    <div id="scrollProject">
+    <div id="projectSelectBox"></div>
+    </div>
+    </div>
+    <div class="col-md-3">
+    <button class="btn btn-primary projectdetail" onclick="ProjectDetails()">
+       GO
+     </button>
+    </div>
+    </div>
+    <br>
+
+	<div class="tab">
+        <button class="tablinks active" onclick="opentab(event, 'Comments')">Comments <span style="color: red"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'Resources')">Resources <span style="color: red"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'Timesheet')">Timesheet <span style="color: red"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'WO')">WO <span style="color: red"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'Notes')">Notes <span style="color: red"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'DeviationReport')">Deviation Report <span style="color: red"></span></button>
+    </div>
+
+	<div id="closedProjectAuditReport-tabConent">
+        <div id="Comments" class="tabcontent" style="display: block;">
+            <div class="table-responsive">
+                <div id="comments"><h1>Comments</h1></div>
+            </div>
+        </div>
+
+
+        <div id="Resources" class="tabcontent">
+            <div class="table-responsive">
+                <div id="resources"><h1>Resources</h1></div>
+            </div>
+        </div>
+
+
+        <div id="Timesheet" class="tabcontent">
+          <div class="table-responsive">
+              <div id="timesheet"><h1>Timesheet</h1></div>
+          </div>
+      </div>
+
+
+      <div id="WO" class="tabcontent">
+        <div class="table-responsive">
+            <div id="wo"><h1>WO</h1></div>
+        </div>
+    </div>
+
+    <div id="Notes" class="tabcontent">
+      <div class="table-responsive">
+          <div id="notes"><h1>Notes</h1></div>
+      </div>
+  </div>
+
+
+  <div id="DeviationReport" class="tabcontent">
+    <div class="table-responsive">
+        <div id="deviationReport"><h1>Deviation Report</h1></div>
+    </div>
+</div>
+	</div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+	
+	$(document).ready(function () {   
+		
+	});
+
+
+
+	//tab click event
+	function opentab(evt, tabName) {
+        debugger
+	var i, tabcontent, tablinks;
+		tabcontent = document.getElementsByClassName("tabcontent");
+    console.log(tabcontent);
+	for (i = 0; i < tabcontent.length; i++) {
+		tabcontent[i].style.display = "none";
+	}
+	tablinks = document.getElementsByClassName("tablinks");
+  console.log(tablinks);
+	for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace("active", "");
+	}
+	document.getElementById(tabName).style.display = "block";
+	evt.currentTarget.className += " active";
+	}
+
+
+
+</script>
+
+
+

@@ -1,0 +1,42 @@
+
+
+<link href="components/managedefaulters/css/managedefaulters.css" rel="stylesheet" />
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+<script src='components/managedefaulters/js/managedefaulters.js'></script>
+
+<div class="manage-card-detail-ManageCard card-detail">
+   
+    <span class="card-detail-title"><b>Manage Defaulters</b></span>    
+    
+    <hr />
+    
+    <div id="ManageDefaultersTableListDetails">
+        
+    </div>   
+</div>
+
+<div class="modal fade" id="manageDefaultersmodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-left">Manage Defaulters -  <span id="empn"> </span>-<span id="empI"> </span>- <span id="headerdate"></span></h4>   
+            </div>            
+            <div class="modal-body"  data-simplebar>
+                <div class="form-group">                  
+                    <label>Lead Comments</label>
+                    <textarea class="form-control" name="leadcomments" rows="3" id="leadcomments"></textarea>
+                    <span class="error_message" id="leadcommentsError"></span>
+                  </div>
+                <span class="ApiResponse"></span>
+            </div>        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="leadcommentsaveBtn" onclick="SaveLeadComments(id);">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+

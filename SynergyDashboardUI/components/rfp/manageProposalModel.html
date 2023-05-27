@@ -1,0 +1,200 @@
+<!-- RFP Style -->
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/select2.min.js"></script> 
+
+<link href="components/rfp/css/proposal.css" rel="stylesheet" />
+
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> -->
+<!--POP-UP RFP MODAL STARTS HERE -->
+<style>
+   .modal-header {
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #c5122c;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+     border-top-left-radius: 5px;
+     border-top-right-radius: 5px;
+ }
+ 
+</style>
+<div class="modal fade" id="managePropsalModalDialog" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+               ><span aria-hidden="true">&times;</span></button>
+               <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="myModalLabel">Manage RFP</h2>
+         </div>
+         <div class="modal-body" data-simplebar>
+               <div role="tabpanel">
+                     <!-- Nav tabs -->
+                     <ul class="nav nav-tabs" role="tablist">
+                         <li role="presentation" class="active"><a href="#tab_take_ownersihp" aria-controls="tab_take_ownersihp" role="tab" data-toggle="tab">Take Ownership</a>
+                 
+                         </li>
+                         <li role="presentation"><a href="#tab_reassign" aria-controls="tab_reassign" role="tab" data-toggle="tab">Re Assign</a>
+                 
+                         </li>
+                         <li role="presentation"><a href="#tab_comments" aria-controls="tab_comments" role="tab" data-toggle="tab">Comments</a>
+                 
+                     </ul>
+                     <!-- Tab panes -->
+                     <div class="tab-content col-md-12">
+                         <div role="tabpanel" class="tab-pane active" id="tab_take_ownersihp">
+                              <div class="form-group">
+                                    <label for="client">Client :</label> <span>Client Name</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newclient">New Client :</label> <span>New Client Name</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="client">Project Title :</label> <span>Project Title</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="technology">Technology :</label> 
+                                    <select class="form-control" id="technology_choose" multiple="multiple" style="width: 100%;"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="applicationtype">Application Type:</label>
+                                    <select class="form-control" id="applicationtype">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="applicationtype">Application Type:</label>
+                                    <select class="form-control" id="applicationtype">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="applicationtype">RFP Documents assigned to:</label>
+                                    <select class="form-control" id="assignedto">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                </div>
+                                <div class="form-group pull-right">
+                                    <input type="button" class="btn btn-default" value="Cancel">
+                                    <input type="button" class="btn btn-success" value="Save">
+                                </div>
+                         </div>
+                         <div role="tabpanel" class="tab-pane" id="tab_reassign">
+                                 <div class="form-group">
+                                     <label for="client">Client :</label> <span>Client Name</span>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="newclient">New Client :</label> <span>New Client Name</span>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="client">Project Title :</label> <span>Project Title</span>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="reassignto">Re-assign to:</label>
+                                     <select class="form-control" id="reassignto">
+                                         <option>1</option>
+                                         <option>2</option>
+                                         <option>3</option>
+                                         <option>4</option>
+                                     </select>
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="newexpecteddate">New Expected Date:</label>
+                                     <input type="text" class="form-control" id="newexpecteddate">
+                                 </div>
+                                 <div class="form-group">
+                                     <label for="reassign_comment"></label>
+                                     <textarea class="form-control" rows="5" id="reassign_comment"></textarea>
+                                 </div>
+                                 <div class="form-group pull-right">
+                                     <input type="button" class="btn btn-default" value="Cancel">
+                                     <input type="button" class="btn btn-success" value="Save">
+                                 </div>
+                         </div>
+                         <div role="tabpanel" class="tab-pane" id="tab_comments">
+                              <div class="row">
+                                    <div class="col-md-6">
+                                        <textarea class="form-control" rows="5" id="comment" name='comment'></textarea>
+                                         <div class="form-group pull-right">
+                                             <input type="button" class="btn btn-default" value="Cancel">
+                                             <input type="button" class="btn btn-success" value="Post">
+                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <select id="option-droup-demo" class="form-control" multiple="multiple">
+                                                    <optgroup label="Mathematics">
+                                                            <option value="analysis">Analysis</option>
+                                                            <option value="algebra">Linear Algebra</option>
+                                                            <option value="discrete">Discrete Mathematics</option>
+                                                            <option value="numerical">Numerical Analysis</option>
+                                                            <option value="probability">Probability Theory</option>
+                                                        </optgroup>
+                                                        <optgroup label="Computer Science">
+                                                            <option value="programming">Introduction to Programming</option>
+                                                            <option value="automata">Automata Theory</option>
+                                                            <option value="complexity">Complexity Theory</option>
+                                                            <option value="software">Software Engineering</option>
+                                                        </optgroup>                                                   
+                                            </select>                                            
+                                        </div>
+                                    
+                                    
+                                </div>
+                         </div>
+                     </div>
+                 </div>
+         </div>
+         <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+<!--
+    <script src="./plugin/ckeditor/ckeditor.js"></script> -->
+       
+<script>
+
+$('#newexpecteddate').datepicker({
+    format: 'dd/mm/yyyy',
+});
+
+/* function openManageProposalModel(){
+    $('#managePropsalModalDialog').modal('show');
+    //$('#technology_choose').append('<option value="foo" selected="selected">Foo</option>').select2();
+    
+    var filter_val = JSON.stringify({
+        "IsActive": true
+    });
+    var result = callgetlist("GetTechnology", filter_val);
+    $.each(result, function(key, value) {  
+        $('#technology_choose').append($("<option></option>").attr("value",value.SkillId).text(value.Skill)).select2();
+    });
+    
+} */
+
+    try {
+        CKEDITOR.instances['comment'].destroy();
+    } catch (e) { 
+
+    }
+    var editor1 = CKEDITOR.replace('comment', {});
+    
+    
+
+</script>

@@ -1,0 +1,7 @@
+#gridContainer {
+    height: 440px;
+}
+
+.family-detail-caption, .skill-detail-caption {
+    margin-bottom: 15px;
+}

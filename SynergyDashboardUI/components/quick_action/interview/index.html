@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-md-12 actionForm" style="text-align: left;">
+        <form id="addAnActionForm" method="post" role="form">
+            
+            <div class="col-md-12 hidden" id="interview-edit">
+                <label>RRM No</label>
+                <div>
+                    <select class="form-control rmgmtList" id="rrmNumber" name="interviewrrmNumber"
+                        onchange="">
+
+                    </select>
+                </div>
+                <div class="cand-select">
+                    <label>Candidate Name</label>
+                    <div>
+                        <select class="form-control rmgmtList" id="interviewName"
+                            name="interviewName" onchange="">
+
+                        </select>
+                    </div>
+                </div>
+
+                <label>Date</label>
+                <div>
+                    <input type="text" class="form-control date-field" id="interviewDate"
+                        name="interviewDate" readonly>
+                </div>
+
+                <div id="FromTo-Time2">
+                    <label>From Time</label>
+                    <div>
+                        <input type="text" class="form-control time start" id="interviewfromTime"
+                            name="interviewfromTime">
+                    </div>
+
+                    <label>To Time</label>
+                    <div>
+                        <input type="text" class="form-control time end" id="interviewtoTime"
+                            name="interviewtoTime" value='now'>
+                    </div>
+                </div>
+                <label>Interview Status</label>
+                <div>
+                    <select class="form-control rmgmtList" id="interviewStatus"
+                        name="interviewStatus" onchange="">
+
+                    </select>
+                </div>
+                <label for="f012">Feedback File Upload</label>
+                <div>
+                    <input type="file" name="interviewFeedback" id="interviewFeedback"
+                        placeholder="Please select file"><br>
+                </div>
+            </div>
+
+            <div id="detailsDiv-edit">
+                <div class="col-md-12" id="commentsDiv">
+                    <label>Comments</label>
+                    <div>
+                        <textarea class="form-control actionComment" cols="10" id="Comments"
+                            name="Comments" placeholder="Comments" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 text-left" id="sucess-response" style="color:green">
+
+                </div>
+
+                <div class="col-md-12 text-left" id="error-response" style="color:red">
+
+                </div>
+
+                <div class="col-md-12 text-center" id="form-btn">
+                    <br />
+                    <input type="reset" class="btn btn-danger clear-form" value="Clear" />
+                    <input type="button" class="btn btn-success" value="Add" id="btn-SubmitAction"
+                        onclick="return AddPostData();" />
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 interviewSidebar hidden">
+        <div class="modal-header" style="text-align: center;"><b>RRM Details</b></div>
+        <p id="interviewrrmdes"></p>
+        <div class="modal-header" style="text-align: center;"><b>Candidate Details</b></div>
+        <p style='text-align: left;' id="interviewrrmDetails"></p>
+
+        <p class="flie_dwn"><a class="fa fa-download hidden" id="file_down" href="#" download> File
+                download</a></p>
+    </div>
+
+</div>
+

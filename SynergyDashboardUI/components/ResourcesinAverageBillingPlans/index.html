@@ -1,0 +1,20 @@
+<div class="card-detail">
+<span class="card-detail-title"><b>Average Billing to Full Billing</b></span>
+   <!-- <form>
+  <input type="text" placeholder="Search.." id="btbsearch" name="search">
+  </form> -->
+	  <hr />
+    <div id="grid-card">
+        <div id="ResourcesinAverageBillingGrid"></div>
+    </div>
+	<div id="Resources_in_Average_Billing_plan"></div>
+</div>
+
+<script>
+    $(document).ready(function(){
+    renderResourcesinAverageBenchToBillingReportGrid();
+})
+  $("#Resources_in_Average_Billing_plan").load("components/ResourcesinAverageBillingPlans/ResourcesinAverageBillingPlansModel.html");
+</script>
+<script type="text/javascript" src="components/ResourcesinAverageBillingPlans/js/ResourcesinAverageBilling.js"></script>
+<script type="text/javascript" src="components/ResourcesinAverageBillingPlans/js/ResourcesinAverageBillingPlanscardgrid.js"></script>

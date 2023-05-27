@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-md-12 actionForm" style="text-align: left;">
+        <form id="addAnActionForm" method="post" role="form">
+            
+            <div class="col-md-12" id="rfp-edit">
+                <label>RFP</label>
+                <div>
+                    <select class="form-control RFPList" id="RFP" name="RFP"
+                        onchange="rfp_OnChange(this)">
+                        <option value="">Select RFP</option>
+                    </select>
+                </div>
+
+                <label>Date</label>
+                <div>
+                    <input type="text" class="form-control date-field" id="rfpDate" name="rfpDate"
+                        value="" readonly>
+                </div>
+
+                <label>Hours</label>
+                <div>
+                    <input class="form-control" id="rfpHours" name="rfpHours" min=0
+                        oninput="validity.valid||(value='');" placeholder="Hours" type="number"
+                        value="0" />
+                </div>
+            </div>
+
+            <div id="detailsDiv-edit">
+                <div class="col-md-12" id="commentsDiv">
+                    <label>Comments</label>
+                    <div>
+                        <textarea class="form-control actionComment" cols="10" id="Comments"
+                            name="Comments" placeholder="Comments" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-12 text-left" id="sucess-response" style="color:green">
+
+                </div>
+
+                <div class="col-md-12 text-left" id="error-response" style="color:red">
+
+                </div>
+
+                <div class="col-md-12 text-center" id="form-btn">
+                    <br />
+                    <input type="reset" class="btn btn-danger clear-form" value="Clear" />
+                    <input type="button" class="btn btn-success" value="Add" id="btn-SubmitAction"
+                        onclick="return AddPostData();" />
+
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div class="col-md-6 actionDescSidebar hidden">
+        <h2>Description</h2>
+
+        <div class="rfp_description" style="text-align: left; white-space: pre-wrap;">
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+

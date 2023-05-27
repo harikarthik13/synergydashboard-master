@@ -1,0 +1,4029 @@
+<style>
+    #GetBDECountForRFPStatus, #GrdGetRFPDetailsForBDE {
+        display: none;
+    }
+
+    #RFPStatusModal {
+        width: 100%;
+    }
+
+        #RFPStatusModal #GetRFPStatusCountexp, #RFPStatusModal #GetBDECountForRFPStatusexp #GetRFPClientandProspectCountByStatusexp {
+            display: inline-block;
+        }
+
+    #RFPMonthStatusModal #RFPCountByMonthexp, #RFPMonthStatusModal #GetBDECountForRFPMonthStatusexp {
+        display: inline-block;
+    }
+
+    #RFPMonthStatusModal #GetOwnerCountForRFPMonthStatusexp, #RFPMonthStatusModal #GetRFPStatusForMonthexp {
+        display: inline-block;
+    }
+
+    #TechnologyCountForRFPStatusModal #TechnologyCountForRFPStatusxp, #TechnologyCountForRFPStatusModal #GetBDECountForTechnologyexp {
+        display: inline-block;
+    }
+
+    #DetailsForBDEOwnerStatusModal #GetDetailsForAssignedexp, #DetailsForBDEOwnerStatusModal #GetDetailsForBDEexp {
+        display: inline-block;
+    }
+
+    #grdTitleRFPDetails {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        .modal .modal-dialog > .modal-content {
+            width: 80% !important;
+        }
+    }
+
+    .dxs-tooltip , .dxc-tooltip {
+        z-index: 99999;
+    }
+
+</style>
+<style>
+    .rfp_comments_history {
+        border: solid 1px #D1D1D1;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #E3E3E3;
+        margin-bottom: 10px;
+    }
+
+        .rfp_comments_history .message {
+            height: auto;
+            background-color: inherit;
+            display: inline-block;
+            max-width: 60%;
+            border-radius: 5px;
+            margin: 5px;
+            padding: 10px;
+            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .rfp_comments_history .text {
+            padding-top: 10px;
+        }
+
+        .rfp_comments_history .name {
+            font-weight: bold;
+        }
+
+        .rfp_comments_history .date {
+            opacity: 0.5;
+        }
+
+    #rfpdataplancomments .modal-dialog {
+        max-width: 900px !important;
+        margin: 0 auto;
+    }
+
+        #rfpdataplancomments .modal-dialog .rfp_comments_history {
+            height: 400px;
+        }
+
+        #rfpdataplancomments .modal-dialog .modal-body {
+            height: 400px;
+        }
+</style>
+<div class="card-detail">
+    <!-- Change the chart title here -->
+    <span class="card-detail-title"><b>RFP Dashboard</b> </span>
+    <hr />
+    <!-- change the chart card id here -->
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>From Date</label>
+                <div class="dx-field-value" style="width: 100%;">
+                    <div id="rfpdash_from_date"></div>
+                </div>
+                <span class="error_message rfpdash_from_date_err"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>To Date</label>
+                <div class="dx-field-value" style="width: 100%">
+                    <div id="rfpdash_to_date"></div>
+                </div>
+                <span class="error_message rfpdash_to_date_err"></span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-md" onclick="getdataBasedOnSelectedData()" style="
+    margin-top: 25px; ">
+                    GO
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_A1_Box" class="chartBox">
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartA1()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandRFPStatusDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <div id="GetRFPStatusCount"></div>
+                <div id="GetBDECountForRFPStatus"></div>
+                <span id="grdTitleRFPDetails"><b>RFP Details</b></span>
+                <div id="GrdGetRFPDetailsForBDE"></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_A2_Box" class="chartBox">
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartRFPCountByMonth()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandRFPMonthStatusDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <!-- Set Unique Id for the chart -->
+                <div id="RFPCountByMonth" class=""></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_A3_Box" class="chartBox">
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartTechnologyCount()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandTechnologyCountForRFPDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <!-- Set Unique Id for the chart -->
+                <div id="TechnologyCountForRFPStatus" class=""></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_B1_Box" class="chartBox">
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartRFPBDEOwnerStatus()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDetailsForBDEOwnerStatusDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <!-- Set Unique Id for the chart -->
+                <div id="DetailsForBDEOwnerStatus" class=""></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_B3_Box" class="chartBox">
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartBDECount()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandBDECountForRFPDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <!-- Set Unique Id for the chart -->
+                <div id="BDECountWiseRFPStatus" class=""></div>
+            </div>
+        </div>
+        <div class="col-md-4"> 
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_B2_Box" class="chartBox">
+                <span class="pull-right">
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartRFPFunnelCount()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <button style="float: right;display: none;" type="button" class="btn btn-xs cmn-modal-ex-btn expandRFPFunnelDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <!-- Set Unique Id for the chart -->
+                <div id="RFPFunnelStatus" class=""></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="display: none;">
+        <div class="col-md-6">
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_C1_Box" class="chartBox">
+                <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <!-- Set Unique Id for the chart -->
+                <div id="chart_C1" class=""></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_C2_Box" class="chartBox">
+                <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <!-- Set Unique Id for the chart -->
+                <div id="chart_C2" class=""></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="display: none;">
+        <div class="col-md-6">
+            <!-- Set Unique Id for the chart box div -->
+            <div id="chart_C3_Box" class="chartBox">
+                <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+                <!-- Set Unique Id for the chart -->
+                <div id="chart_C3" class=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- common Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="RFPStatusModal" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">RFP Dashboard </h4>
+            </div>
+
+            <div class="modal-body" data-simplebar>
+                <span>
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartA1model()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetRFPStatusCountexp"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="GetBDECountForRFPStatusexp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetOwnerCountForRFPStatusexp"></div>
+                    </div>
+              
+                    <div class="col-md-6">
+                        <div id="GetRFPClientandProspectCountByStatusexp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetRFPProductCountByStatusexp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span id="grdTitleRFPDetailsexp"><b>RFP Details</b></span>
+                        <div id="GrdGetRFPDetailsForBDEexp"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common Modal end -->
+<!-- common Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="RFPMonthStatusModal" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">RFP Dashboard -RFP Count by Months</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <span>
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartRFPCountByMonthmodel()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="RFPCountByMonthexp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetRFPStatusForMonthexp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetBDECountForRFPMonthStatusexp"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="GetOwnerCountForRFPMonthStatusexp"></div>
+                    </div>
+                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span id="grdTitleRFPDetailsexp"><b>RFP Month WiseDetails</b></span>
+                                <div id="GrdGetRFPMonthDetailsForBDEexp"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+<!-- common Modal end -->
+<!-- common Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="TechnologyCountForRFPStatusModal" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">RFP Dashboard -Technology Wise Count For RFP Status</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <span>
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedloadChartTechnologyCountmodel()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="TechnologyCountForRFPStatusxp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetBDECountForTechnologyexp"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="GetOwnerCountForTechnologyexp"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span id="grdTitleRFPTechnologyDetailsexp"><b>RFP Technology Details</b></span>
+                        <div id="GrdGetRFPDetailsForTechnologyexp"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common Modal end -->
+<!-- common Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="DetailsForBDEOwnerStatusModal" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">RFP Dashboard -Details For BDE Owner Status</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <span>
+                    <button type="submit" class="btn btn-primary btn-xs pull-right">
+                        <i class="glyphicon glyphicon-refresh" onclick="getdataBasedOnSelectedDataloadChartRFPBDEOwnerStatusmodel()" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="DetailsForBDEOwnerStatusexp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetDetailsForAssignedexp"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="GetDetailsForBDEexp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span id="grdTitleRFPTechnologyDetailsexp"><b>RFP Details For BDE Owner TunOver Status</b></span>
+                        <div id="GrdgetDetailsForBDEOwnerTechnologyexp">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common Modal end -->
+<!-- common Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="rfpdataplancomments" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">RFP Dashboard -comments_history</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div id="rfpdata_plan_comments_documents" class="rfp_comments_history">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common Modal end -->
+<!-- common Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="BDEWiseCountForRFPStatusModal" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">RFP Dashboard -BDE Wise Count For RFP Status</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <span>
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedloadChartBDECountmodel()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="BDECountForRFPStatusxp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetTechnologyCountForBDEexp"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="GetOwnerCountForBDEexp"></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <span id="grdTitleRFPBDEDetailsexp"><b>RFP BDE Details</b></span>
+                        <div id="GrdGetRFPDetailsForBDEWiseexp"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common Modal end -->
+
+<!-- common Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="RFPStatusConversions" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">RFP Dashboard - RFP Status Conversions</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <span>
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getdataBasedOnSelectedDataloadChartRFPFunnelCountModel()">
+                        <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+                    </button>
+                </span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="FsCountForRFPStatusxp"></div>
+                    </div>
+                   <div class="col-md-6">
+                        <div id="GetBDECountForENSC"></div>
+                    </div>
+
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetBDECountForRNW"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="GetOwnerCountForENC"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div id="GetOwnerCountForENSC"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="GetOwnerCountForRNW"></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <span id="grdTitleRFPBDEDetailsexp"><b>RFP Status Conversions</b></span>
+                        <div id="GrdGetRFPDetailsForFsWiseexp"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common Modal end -->
+
+
+
+<style>
+    .chartBox {
+        border: solid 1px;
+        border-color: bisque;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token;
+
+        $today = new Date();
+        $FROM = new Date($today);
+        $FROM.setDate($today.getDate() - 31);
+        $TO = new Date($today);
+        $TO.setDate($today.getDate() - 1);
+
+        $("#rfpdash_from_date").dxDateBox("instance").option("value", $FROM);
+        $("#rfpdash_to_date").dxDateBox("instance").option("value", $TO);
+        //call charts
+        loadCharts();
+    });
+
+    $("body").on('click', '.expandRFPStatusDiv', function () {
+        $("#RFPStatusModal").appendTo("body").modal("show");
+        loadRFPChart(currentStatus);
+    })
+
+    $("body").on('click', '.expandRFPMonthStatusDiv', function () {
+        $("#RFPMonthStatusModal").appendTo("body").modal("show");
+        loadRFPMonthChart();
+    })
+
+    $("body").on('click', '.expandTechnologyCountForRFPDiv', function () {
+        $("#TechnologyCountForRFPStatusModal").appendTo("body").modal("show");
+        loadTechnologyCountForRFPStatusChart();
+    })
+
+    $("body").on('click', '.expandCommonDetailsForBDEOwnerStatusDiv', function () {
+        $("#DetailsForBDEOwnerStatusModal").appendTo("body").modal("show");
+        loadDetailsForBDEOwnerStatusChart();
+    })
+
+    $("body").on('click', '.expandBDECountForRFPDiv', function () {
+        $("#BDEWiseCountForRFPStatusModal").appendTo("body").modal("show");
+        loadBDECountForRFPStatusChart();
+    });
+
+    $("body").on('click', '.expandRFPFunnelDiv', function () {
+        $("#RFPStatusConversions").appendTo("body").modal("show");
+        loadFsCountForRFPStatusChart();
+    });
+
+    
+    function selectChatHistory(id) {
+        $("#rfpdataplancomments").appendTo("body").modal("show");
+        rfpCommnetsHistory(id);
+    }
+
+    function getdataBasedOnSelectedData() {
+        currentStatus = null;
+        //loadChartA1();
+        //loadChartA2();
+        //loadChartA3();
+        //loadChartB1();
+        //loadChartB2();
+        //loadChartB3();
+        loadRFPChart(currentStatus);
+        //loadRFPMonthChart();
+        //loadTechnologyCountForRFPStatusChart();
+        //loadDetailsForBDEOwnerStatusChart();
+        //loadBDECountForRFPStatusChart();
+
+        getdataBasedOnSelectedDataloadChartA1();
+        //getdataBasedOnSelectedDataloadChartA1model();
+
+        getdataBasedOnSelectedDataloadChartRFPCountByMonth();
+        //getdataBasedOnSelectedDataloadChartRFPCountByMonthmodel();
+
+        getdataBasedOnSelectedDataloadChartTechnologyCount();
+        //getdataBasedOnSelectedloadChartTechnologyCountmodel();
+
+        getdataBasedOnSelectedDataloadChartRFPBDEOwnerStatus();
+        //getdataBasedOnSelectedDataloadChartRFPBDEOwnerStatusmodel();
+
+        getdataBasedOnSelectedDataloadChartBDECount();
+        //getdataBasedOnSelectedloadChartBDECountmodel();
+
+        getdataBasedOnSelectedDataloadChartRFPFunnelCount();
+    }
+
+    function getdataBasedOnSelectedDataloadChartA1() {
+        dasChartStatus = null;
+        currentBDE = null;
+        currentStatus = null;
+        currentOwner = null;
+        loadChartA1();
+    }
+    function getdataBasedOnSelectedDataloadChartA1model() {
+        dasChartStatus = null;
+        currentBDE = null;
+        currentStatus = null;
+        currentOwner = null;
+        loadRFPChart(currentStatus);
+    }
+
+    function getdataBasedOnSelectedDataloadChartRFPCountByMonth() {
+        rfpSelectedDate = null;
+        loadChartA2();
+    }
+    function getdataBasedOnSelectedDataloadChartRFPCountByMonthmodel() {
+        rfpSelectedDate = null;
+        rfpmnthcurrentBDE = null;
+        rfpmnthcurrentOwner = null;
+        rfpmnthStatus = null;
+        loadChartA2();
+        loadRFPMonthChart();
+    }
+
+    function getdataBasedOnSelectedDataloadChartTechnologyCount() {
+        rfpStatus = null;
+        rfpTechnology = null;
+        rfptechBDE = null;
+        rfptechOwner = null;
+        loadChartA3();
+    }
+    function getdataBasedOnSelectedloadChartTechnologyCountmodel() {
+        rfpStatus = null;
+        rfpTechnology = null;
+        rfptechBDE = null;
+        rfptechOwner = null;
+        loadTechnologyCountForRFPStatusChart();
+    }
+
+    function getdataBasedOnSelectedDataloadChartRFPBDEOwnerStatus() {
+        rfpBDCStatus = null;
+        rfpBDCTechnology = null;
+        rfpBDCBDE = null;
+        rfpBDChOwner = null;
+        rfpBDCAssigned = null;
+        rfpBDCMode = null;
+        loadChartB1();
+    }
+    function getdataBasedOnSelectedDataloadChartRFPBDEOwnerStatusmodel() {
+
+        rfpBDCStatus = null;
+        rfpBDCTechnology = null;
+        rfpBDCBDE = null;
+        rfpBDChOwner = null;
+        rfpBDCAssigned = null;
+        rfpBDCMode = null;
+        loadDetailsForBDEOwnerStatusChart();
+    }
+
+    function getdataBasedOnSelectedDataloadChartBDECount() {
+        rfpBDEdTechnology = null;
+        rfpBDEdStatus = null;
+        rfpdataBDE = null;
+        rfpBDEdOwner = null;
+        loadChartB3();
+
+    }
+    function getdataBasedOnSelectedloadChartBDECountmodel() {
+        rfpBDEdTechnology = null;
+        rfpBDEdStatus = null;
+        rfpdataBDE = null;
+        rfpBDEdOwner = null;
+        loadBDECountForRFPStatusChart();
+    }
+
+    function getdataBasedOnSelectedDataloadChartRFPFunnelCount() {
+        rfpFsTechnology = null;
+        rfpFsStatus = null;
+        rfpdataFsBDE = null;
+        rfpFsOwner = null;
+        loadChartB2();
+    }
+
+    function getdataBasedOnSelectedDataloadChartRFPFunnelCountModel() {
+        rfpFsTechnology = null;
+        rfpFsStatus = null;
+        rfpdataFsBDE = null;
+        rfpFsOwner = null;
+        loadFsCountForRFPStatusChart();
+    }
+
+    var rfpSelectedDate = null;
+    var rfpmnthStatus = null;
+    var currentBDE = null;
+    var currentOwner = null;
+    var currentStatus = null;
+
+    var dasChartStatus = null;
+    var rfpmnthcurrentBDE = null;
+    var rfpmnthowner = null;
+    var rfpmnthcurrentOwner = null;
+
+    var rfpTechnology = null;
+    var rfpStatus = null;
+    var rfptechBDE = null;
+    var rfptechOwner = null;
+
+    var rfpBDCStatus = null;
+    var rfpBDCBDE = null;
+    var rfpBDChOwner = null;
+    var rfpBDCAssigned = null;
+    var rfpBDCTechnology = null;
+    var rfpBDCMode = null;
+
+    var rfpBDEdTechnology = null;
+    var rfpBDEdStatus = null;
+    var rfpdataBDE = null;
+    var rfpBDEdOwner = null;
+
+    var rfpFsTechnology = null;
+    var rfpFsStatus = null;
+    var rfpdataFsBDE = null;
+    var rfpFsOwner = null;
+
+    function loadCharts() {
+        loadChartA1();
+        loadChartA2();
+        loadChartA3();
+        loadChartB1();
+        loadChartB2();
+        loadChartB3();
+        loadChartC1();
+        loadChartC2();
+        loadChartC3();
+    }
+
+    function loadChartA1() {
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "Status": currentStatus,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+
+        //GetRFPStatusCount
+        var dataForReport = callgetlist('GetRFPStatusCountByStatus', filterData);
+        if (dataForReport != null) {
+            $("#GetRFPStatusCount").dxPieChart({
+                size: {
+                    width: 500
+                },
+                palette: "bright",
+                dataSource: dataForReport,
+                series: [
+                    {
+                        argumentField: "Status",
+                        valueField: "StatusCount",
+                        label: {
+                            visible: true,
+                            connector: {
+                                visible: true,
+                                width: 1,
+                            },
+                        },
+                    },
+                ],
+                title: "RFP Status",
+                export: {
+                    enabled: true,
+                },
+                onPointClick: function (e) {
+                    // currentStatus = null;
+                    var point = e.target;
+                    currentStatus = point.data.Status;
+                    loadChartA1();
+                    getBDECountRFPStatus(point.data.Status);
+                },
+                onLegendClick: function (e) {
+                    var arg = e.target;
+                    currentStatus = arg;
+                    loadChartA1();
+                    getBDECountRFPStatus(arg);
+                },
+            });
+
+
+        }
+
+        getBDECountRFPStatus(status);
+        function getBDECountRFPStatus(status) {
+
+            var filterDatasecChartRFPStatus = JSON.stringify({
+                "Token": Token,
+                "Status": status,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForsecChart = callgetlist('GetBDECountForRFPStatus', filterDatasecChartRFPStatus);
+            if (dataForsecChart != null) {
+                $("#GetBDECountForRFPStatus").dxPieChart({
+                    size: {
+                        width: 400
+                    },
+                    palette: "bright",
+                    dataSource: dataForsecChart,
+                    series: [
+                        {
+                            argumentField: "BDE",
+                            valueField: "CountBDE",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Count BDE Wise",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                    },
+                });
+            }
+
+        }
+    }
+
+    function loadRFPChart(currentStatus) {
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "Status": currentStatus,
+            "BDE": currentBDE,
+            "Owner": currentOwner,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+
+        //GetRFPStatusCount
+        var dataForReport = callgetlist('GetRFPStatusCountByStatus', filterData);
+        if (dataForReport != null) {
+            $("#GetRFPStatusCountexp").dxPieChart({
+                size: {
+                    width: 600
+                },
+                palette: "bright",
+                dataSource: dataForReport,
+                series: [
+                    {
+                        argumentField: "Status",
+                        valueField: "StatusCount",
+                        label: {
+                            visible: true,
+                            connector: {
+                                visible: true,
+                                width: 1,
+                            },
+                        },
+                    },
+                ],
+                title: "RFP Status",
+                export: {
+                    enabled: true,
+                },
+                onPointClick: function (e) {
+                    // currentStatus = null;
+                    // currentBDE = null;
+                    // currentOwner = null;
+                    var point = e.target;
+                    currentStatus = point.data.Status;
+                    loadRFPChart(currentStatus);
+                    getBDECountRFPStatus(point.data.Status);
+                    GetOwnerCountForRFPStatus(point.data.Status);
+                    getRFPClientandProspectCountStatus(currentStatus);
+                    getRFPProductCountStatus(currentStatus);
+                    rfpDetailsGrid();
+                },
+                onLegendClick: function (e) {
+                    var arg = e.target;
+                    currentStatus = arg;
+                    loadRFPChart(currentStatus);
+                    getBDECountRFPStatus(arg);
+                    GetOwnerCountForRFPStatus(arg);
+                    getRFPClientandProspectCountStatus(currentStatus);
+                    getRFPProductCountStatus(currentStatus);
+                    rfpDetailsGrid();
+                },
+            });
+        }
+        
+        getBDECountRFPStatus(currentStatus);
+
+        function getBDECountRFPStatus(currentStatus) {
+            if (currentStatus == "") { currentStatus = null }
+            var filterDatasecChartBDECount = JSON.stringify({
+                "Token": Token,
+                "Status": currentStatus,
+                "BDE": currentBDE,
+                "Owner": currentOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForsecChart = callgetlist('GetBDECountForRFPStatus', filterDatasecChartBDECount);
+            if (dataForsecChart != null) {
+                $("#GetBDECountForRFPStatusexp").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: dataForsecChart,
+                    series: [
+                        {
+                            argumentField: "BDE",
+                            valueField: "CountBDE",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Count BDE Wise",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        currentBDE = point.data.BDE;
+                        loadRFPChart(currentStatus);
+                        getBDECountRFPStatus(currentStatus);
+                        getRFPClientandProspectCountStatus(currentStatus);
+                        getRFPProductCountStatus(currentStatus);
+                        GetOwnerCountForRFPStatus();
+                        rfpDetailsGrid();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        currentBDE = arg;
+                        loadRFPChart(currentStatus);
+                        getBDECountRFPStatus(currentStatus);
+                        getRFPClientandProspectCountStatus(currentStatus);
+                        getRFPProductCountStatus(currentStatus);
+                        GetOwnerCountForRFPStatus();
+                        rfpDetailsGrid();
+                    },
+                });
+            }
+
+        }
+
+        GetOwnerCountForRFPStatus();
+
+        function GetOwnerCountForRFPStatus() {
+            if (currentStatus == "") { currentStatus = null }
+            var filterDatasecChartOwnerCount = JSON.stringify({
+                "Token": Token,
+                "Status": currentStatus,
+                "BDE": currentBDE,
+                "Owner": currentOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            var OwnerCountForRFPStatus = callgetlist('GetOwnerCountForRFPStatus', filterDatasecChartOwnerCount);
+            if (OwnerCountForRFPStatus != null) {
+                $("#GetOwnerCountForRFPStatusexp").dxPieChart({
+                    palette: "bright",
+                    dataSource: OwnerCountForRFPStatus,
+                    size: {
+                        width: 600
+                    },
+                    series: [
+                        {
+                            argumentField: "Owner",
+                            valueField: "CountOwner",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Owner Wise Count",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        currentOwner = point.data.Owner;
+                        loadRFPChart(currentStatus);
+                        getBDECountRFPStatus(currentStatus);
+                        getRFPClientandProspectCountStatus(currentStatus);
+                        getRFPProductCountStatus(currentStatus);
+                        GetOwnerCountForRFPStatus();
+                        rfpDetailsGrid();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        currentOwner = arg;
+                        loadRFPChart(currentStatus);
+                        getBDECountRFPStatus(currentStatus);
+                        getRFPClientandProspectCountStatus(currentStatus);
+                        getRFPProductCountStatus(currentStatus);
+                        GetOwnerCountForRFPStatus();
+                        rfpDetailsGrid();
+                    },
+                });
+            }
+        }
+
+        getRFPClientandProspectCountStatus(currentStatus);
+
+        function getRFPClientandProspectCountStatus(currentStatus) {
+            if (currentStatus == "") { currentStatus = null }
+            var filterDatasecClientandProspectCount = JSON.stringify({
+                "Token": Token,
+                "Status": currentStatus,
+                "BDE": currentBDE,
+                "Owner": currentOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecClientandProspectChart
+            var dataForsecClientandProspectChart = callgetlist('GetRFPClientandProspectCountByStatus', filterDatasecClientandProspectCount);
+            if (dataForsecClientandProspectChart != null) {
+                $("#GetRFPClientandProspectCountByStatusexp").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: dataForsecClientandProspectChart,
+                    series: [
+                        {
+                            argumentField: "Status",
+                            valueField: "StatusCount",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "Client/Prospect Wise Count",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        currentBDE = point.data.BDE;
+                        loadRFPChart(currentStatus);
+                        getBDECountRFPStatus(currentStatus);
+                        getRFPClientandProspectCountStatus(currentStatus);
+                        getRFPProductCountStatus(currentStatus);
+                        GetOwnerCountForRFPStatus();
+                        rfpDetailsGrid();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        currentBDE = arg;
+                        loadRFPChart(currentStatus);
+                        getBDECountRFPStatus(currentStatus);
+                        getRFPClientandProspectCountStatus(currentStatus);
+                        getRFPProductCountStatus(currentStatus);
+                        GetOwnerCountForRFPStatus();
+                        rfpDetailsGrid();
+                    },
+                });
+            }
+
+        }
+
+        getRFPProductCountStatus(currentStatus);
+
+        
+        function getRFPProductCountStatus(currentStatus) {
+            if (currentStatus == "") { currentStatus = null }
+            var filterDatasecProductCount = JSON.stringify({
+                "Token": Token,
+                "Status": currentStatus,
+                "BDE": currentBDE,
+                "Owner": currentOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecClientandProspectChart
+            var dataForsecProductCountChart = callgetlist('GetRFPProductCountByStatus', filterDatasecProductCount);
+            if (dataForsecProductCountChart != null) {
+                $("#GetRFPProductCountByStatusexp").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: dataForsecProductCountChart,
+                    series: [
+                        {
+                            argumentField: "Status",
+                            valueField: "StatusCount",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "Product/Non-Product IMS Wise Count",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        currentBDE = point.data.BDE;
+                        loadRFPChart(currentStatus);
+                        getBDECountRFPStatus(currentStatus);
+                        getRFPClientandProspectCountStatus(currentStatus);
+                        getRFPProductCountStatus(currentStatus);
+                        GetOwnerCountForRFPStatus();
+                        rfpDetailsGrid();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        currentBDE = arg;
+                        loadRFPChart(currentStatus);
+                        getBDECountRFPStatus(currentStatus);
+                        getRFPClientandProspectCountStatus(currentStatus);
+                        getRFPProductCountStatus(currentStatus);
+                        GetOwnerCountForRFPStatus();
+                        rfpDetailsGrid();
+                    },
+                });
+            }
+
+        }
+
+        rfpDetailsGrid();
+        function rfpDetailsGrid() {
+            //GetRFPDetailsForBDE
+            var rfpfiltergrid = JSON.stringify({
+                "Token": Token,
+                "Status": currentStatus,
+                "BDE": currentBDE,
+                "Owner": currentOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+            var datafiltergrid = callgetlist('GetRFPDetailsForBDE', rfpfiltergrid);
+            if (datafiltergrid != null) {
+                renderRFPDeatilsGrid(datafiltergrid);
+            }
+
+            function renderRFPDeatilsGrid(data) {
+                var OpeningskillratingGrid = $("#GrdGetRFPDetailsForBDEexp")
+                    .dxDataGrid({
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto",
+                        },
+                        dataSource: data,
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: true,
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search...",
+                        },
+                        headerFilter: {
+                            visible: true,
+                        },
+                        grouping: {
+                            autoExpandAll: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        sorting: {
+                            mode: "multiple",
+                        },
+                        selection: {
+                            mode: "multiple",
+                        },
+                        summary: {
+                            totalItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count",
+                                },
+                            ],
+                            groupItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count"
+                                }
+                            ],
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        columnChooser: {
+                            enabled: true,
+                        },
+                        rowAlternationEnabled: true,
+                        //filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        allowColumnResizing: true,
+                        showBorders: true,
+                        columns: [
+                            {
+                                caption: "#",
+                                dataField: "sno",
+                                cssClass: "rno",
+                                allowGrouping: false,
+                                allowCollapsing: false,
+                                allReordering: false,
+                                width: 70,
+                                cellTemplate: function (container, options) {
+                                    container.text(
+                                        OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                    );
+                                },
+                            },
+                            {
+                                caption: "Date",
+                                dataField: "ReceivedDate",
+                                dataType: "date",
+                                format: "dd-MMM-yy"
+                            },
+                            {
+                                caption: "Client",
+                                dataField: "ClientName"
+                            },
+                            {
+                                caption: "RFP Name",
+                                dataField: "ProjectTitle"
+                            },
+                            {
+                                caption: "Type",
+                                dataField: "Type"
+                            },
+                            {
+                                caption: "Category",
+                                dataField: "Category"
+                            },
+                            {
+                                caption: "Website",
+                                dataField: "Website"
+                            },
+                            {
+                                caption: "LinkedIn",
+                                dataField: "LinkedIn"
+                            },
+                            {
+                                caption: "Owner",
+                                dataField: "Owner",
+                            },
+                            {
+                                caption: "BDE",
+                                dataField: "BDE",
+                            },
+                            {
+                                caption: "Assigned",
+                                dataField: "Assigned",
+                            },
+                            {
+                                caption: "Technology for the given date",
+                                dataField: "Technology"
+                            },
+                            {
+                                caption: "", dataField: "Id", allowGrouping: false, allowCollapsing: false, allReordering: false, allowExporting: false,
+                                cellTemplate: function (container, options) {
+                                    $("<div>")
+                                        .append("<button data-rfpid=" + options.data.Id + " class='btn btn-xs btn-primary edit-btn btnSelectChatHistory' Onclick=selectChatHistory('" + options.data.Id + "') title='Char History'><i class='fas fa-comments'></i></button>")
+                                        .appendTo(container);
+                                }
+                            }
+                        ],
+                    })
+                    .dxDataGrid("instance");
+            }
+        }
+    }
+
+    function loadChartA2() {
+        //valueField
+        var YaxisField = "Value";
+        //argumentField
+        var XaxisField = "Date";
+        //color
+        var color = "#ffaa66";
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "SelectedDate": rfpSelectedDate,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+
+        var chartA2DS = callgetlist("GetRFPCountByMonth", filterData);
+        if (chartA2DS != null) {
+            //change the chart card id here
+            var prefix_standardbarchartInstance = $("#RFPCountByMonth")
+                .dxChart({
+                    dataSource: chartA2DS,
+                    legend: { visible: true },
+                    title: "RFP Count by Months",
+                    commonSeriesSettings: {
+                        argumentField: "Date",
+                        valueField: "Value",
+                        type: "stackedBar"
+                    },
+                    scrollBar: {
+                        visible: true,
+                    },
+                    seriesTemplate: {
+                        nameField: "Value",
+                        customizeSeries: function (valueFromNameField) {
+                            return valueFromNameField === 2009 ? { type: "line", label: { visible: true }, color: "#ff3f7a" } : {};
+                        }
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpSelectedDate = point.data.Date;
+                        loadChartA2();
+                        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                    },
+                    tooltip: {
+                        enabled: true,
+                    },
+                    argumentAxis:{
+                        label:{
+                            overlappingBehavior:"rotate",
+                            rotationAngle:"-45"
+                        }
+                    },
+
+                })
+                .dxChart("instance");
+        }
+
+        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+
+        function getBDECountRFPMonthWiseStatus(rfpSelectedDate) {
+
+            if (rfpSelectedDate == "") { rfpSelectedDate = null }
+            var filterDatasecChartBDECountRFPMonthWise = JSON.stringify({
+                "Token": Token,
+                "SelectedDate": rfpSelectedDate
+            });
+
+            //dataForsecChart
+            var dataForsecChart = callgetlist('GetBDECountForMonth', filterDatasecChartBDECountRFPMonthWise);
+            if (dataForsecChart != null) {
+                $("#GetBDECountForRFPMonthStatusexp").dxPieChart({
+                    palette: "bright",
+                    dataSource: dataForsecChart,
+                    series: [
+                        {
+                            argumentField: "BDE",
+                            valueField: "CountBDE",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Count BDE Wise",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpmnthcurrentBDE = point.data.BDE;
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpmnthcurrentBDE = arg;
+                    },
+                });
+            }
+
+        }
+    }
+
+    function loadRFPMonthChart() {
+        if (rfpSelectedDate == "") { rfpSelectedDate = null }
+        //valueField
+        var YaxisField = "Value";
+        //argumentField
+        var XaxisField = "Date";
+        //color
+        var color = "#ffaa66";
+
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "Status": rfpmnthStatus,
+            "BDE": rfpmnthcurrentBDE,
+            "Owner": rfpmnthcurrentOwner,
+            "SelectedDate": rfpSelectedDate,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+        var chartA2DS = callgetlist("GetRFPCountByMonth", filterData);
+
+        if (chartA2DS != null) {
+            //change the chart card id here
+            var prefix_standardbarchartInstance = $("#RFPCountByMonthexp")
+                .dxChart({
+                    dataSource: chartA2DS,
+                    legend: { visible: true },
+                    title: "RFP Count by Months",
+                    commonSeriesSettings: {
+                        argumentField: "Date",
+                        valueField: "Value",
+                        type: "stackedBar"
+                    },
+                    size: {
+                        width: 1000
+                    },
+                    seriesTemplate: {
+                        nameField: "Value",
+                        customizeSeries: function (valueFromNameField) {
+                            return valueFromNameField === 2009 ? { type: "line", label: { visible: true }, color: "#ff3f7a" } : {};
+                        }
+                    },
+                    onPointClick: function (e) {
+                        rfpmnthcurrentBDE = null;
+                        rfpmnthcurrentOwner = null;
+                        rfpSelectedDate = null;
+                        var point = e.target;
+                        rfpSelectedDate = point.data.Date;
+                        loadRFPMonthChart();
+                        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+                        GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE);
+                        GetRFPStatusForMonthexpWiseStatus();
+                        rfpMonthWiseDetailsGrid();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                    },
+                    tooltip: {
+                        enabled: true,
+                    },
+                    argumentAxis:{
+                        label:{
+                            overlappingBehavior:"rotate",
+                            rotationAngle:"-45"
+                        }
+                    },
+
+                })
+                .dxChart("instance");
+        }
+
+        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+        function getBDECountRFPMonthWiseStatus(rfpSelectedDate) {
+
+            if (rfpSelectedDate == "") { rfpSelectedDate = null }
+            var filterDatasecChartMonthWise = JSON.stringify({
+                "Token": Token,
+                "Status": rfpmnthStatus,
+                "BDE": rfpmnthcurrentBDE,
+                "Owner": rfpmnthcurrentOwner,
+                "SelectedDate": rfpSelectedDate,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForsecChart = callgetlist('GetBDECountForMonth', filterDatasecChartMonthWise);
+            if (dataForsecChart != null) {
+                $("#GetBDECountForRFPMonthStatusexp").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: dataForsecChart,
+                    series: [
+                        {
+                            argumentField: "BDE",
+                            valueField: "CountBDE",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Count BDE Wise",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpmnthcurrentBDE = point.data.BDE;
+                        loadRFPMonthChart();
+                        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+                        GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE);
+                        GetRFPStatusForMonthexpWiseStatus();
+                        rfpMonthWiseDetailsGrid();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpmnthcurrentBDE = arg;
+                        loadRFPMonthChart();
+                        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+                        GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE);
+                        GetRFPStatusForMonthexpWiseStatus();
+                        rfpMonthWiseDetailsGrid();
+                    },
+                });
+            }
+
+        }
+
+        GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE);
+        function GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE) {
+            var filterDatasecChartOwnerCS = JSON.stringify({
+                "Token": Token,
+                "Status": rfpmnthStatus,
+                "BDE": rfpmnthcurrentBDE,
+                "Owner": rfpmnthcurrentOwner,
+                "SelectedDate": rfpSelectedDate,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            var OwnerCountForRFPStatus = callgetlist('GetOwnerCountForMonth', filterDatasecChartOwnerCS);
+            if (OwnerCountForRFPStatus != null) {
+                $("#GetOwnerCountForRFPMonthStatusexp").dxPieChart({
+                    palette: "bright",
+                    dataSource: OwnerCountForRFPStatus,
+                    size: {
+                        width: 600
+                    },
+                    series: [
+                        {
+                            argumentField: "Owner",
+                            valueField: "CountOwner",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "Owner Wise Count and RFP Status",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpmnthcurrentOwner = point.data.Owner;
+                        loadRFPMonthChart();
+                        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+                        GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE);
+                        GetRFPStatusForMonthexpWiseStatus();
+                        rfpMonthWiseDetailsGrid();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpmnthcurrentOwner = arg;
+                        loadRFPMonthChart();
+                        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+                        GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE);
+                        GetRFPStatusForMonthexpWiseStatus();
+                        rfpMonthWiseDetailsGrid();
+                    },
+                });
+            }
+        }
+
+        GetRFPStatusForMonthexpWiseStatus();
+        function GetRFPStatusForMonthexpWiseStatus() {
+            var filterDatasecChartRFPME = JSON.stringify({
+                "Token": Token,
+                "Status": rfpmnthStatus,
+                "BDE": rfpmnthcurrentBDE,
+                "Owner": rfpmnthcurrentOwner,
+                "SelectedDate": rfpSelectedDate,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+            var OwnerCountForRFPStatus = callgetlist('GetRFPStatusForMonth', filterDatasecChartRFPME);
+            if (OwnerCountForRFPStatus != null) {
+                $("#GetRFPStatusForMonthexp").dxPieChart({
+                    palette: "bright",
+                    dataSource: OwnerCountForRFPStatus,
+                    size: {
+                        width: 600
+                    },
+                    series: [
+                        {
+                            argumentField: "Status",
+                            valueField: "StatusCount",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Status For Month",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpmnthStatus = point.data.Status;
+                        GetRFPStatusForMonthexpWiseStatus();
+                        loadRFPMonthChart();
+                        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+                        GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE);
+                        rfpMonthWiseDetailsGrid();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpmnthStatus = arg;
+                        GetRFPStatusForMonthexpWiseStatus();
+                        loadRFPMonthChart();
+                        getBDECountRFPMonthWiseStatus(rfpSelectedDate);
+                        GetOwnerCountForRFPMonthWiseStatus(rfpmnthcurrentBDE);
+                        rfpMonthWiseDetailsGrid();
+                    },
+                });
+            }
+        }
+
+        rfpMonthWiseDetailsGrid();
+        function rfpMonthWiseDetailsGrid() {
+            //GetRFPDetailsForBDE
+            var filtergridMnth = JSON.stringify({
+                "Token": Token,
+                "Status": rfpmnthStatus,
+                "SelectedDate": rfpSelectedDate,
+                "BDE": rfpmnthcurrentBDE,
+                "Owner": rfpmnthcurrentOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+            var datafiltergrid = callgetlist('GetRFPDetailsForMonth', filtergridMnth);
+            if (datafiltergrid != null) {
+                renderRFPDeatilsGrid(datafiltergrid);
+            }
+
+            function renderRFPDeatilsGrid(data) {
+                var OpeningskillratingGrid = $("#GrdGetRFPMonthDetailsForBDEexp")
+                    .dxDataGrid({
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto",
+                        },
+                        dataSource: data,
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: true,
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search...",
+                        },
+                        headerFilter: {
+                            visible: true,
+                        },
+                        grouping: {
+                            autoExpandAll: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        sorting: {
+                            mode: "multiple",
+                        },
+                        selection: {
+                            mode: "multiple",
+                        },
+                        summary: {
+                            totalItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count",
+                                },
+                            ],
+                            groupItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count"
+                                }
+                            ],
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        columnChooser: {
+                            enabled: true,
+                        },
+                        rowAlternationEnabled: true,
+                        //filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        allowColumnResizing: true,
+                        showBorders: true,
+                        columns: [
+                            {
+                                caption: "#",
+                                dataField: "sno",
+                                cssClass: "rno",
+                                allowGrouping: false,
+                                allowCollapsing: false,
+                                allReordering: false,
+                                width: 70,
+                                cellTemplate: function (container, options) {
+                                    container.text(
+                                        OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                    );
+                                },
+                            },
+                            {
+                                caption: "Date",
+                                dataField: "ReceivedDate",
+                                dataType: "date",
+                                format: "dd-MMM-yy"
+                            },
+                            {
+                                caption: "Client",
+                                dataField: "ClientName"
+                            },
+                            {
+                                caption: "RFP Name",
+                                dataField: "ProjectTitle"
+                            },
+                            {
+                                caption: "Owner",
+                                dataField: "Owner",
+                            },
+                            {
+                                caption: "BDE",
+                                dataField: "BDE",
+                            },
+                            {
+                                caption: "Assigned",
+                                dataField: "Assigned",
+                            },
+                            {
+                                caption: "Technology for the given date",
+                                dataField: "Technology"
+                            },
+                            {
+                                caption: "", dataField: "Id", allowGrouping: false, allowCollapsing: false, allReordering: false, allowExporting: false,
+                                cellTemplate: function (container, options) {
+                                    $("<div>")
+                                        .append("<button data-rfpid=" + options.data.Id + " class='btn btn-xs btn-primary edit-btn btnSelectChatHistory' Onclick=selectChatHistory('" + options.data.Id + "') title='Char History'><i class='fas fa-comments'></i></button>")
+                                        .appendTo(container);
+                                }
+                            }
+                        ],
+                    })
+                    .dxDataGrid("instance");
+            }
+        }
+    }
+
+    function loadChartA3() {
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "Status": rfpStatus,
+            "Technology": rfpTechnology,
+            "BDE": rfptechBDE,
+            "Owner": rfptechOwner,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+        var chartA3DS = callgetlist("GetTechnologyCountForRFPStatus", filterData);
+        $("#TechnologyCountForRFPStatus").dxChart({
+            dataSource: chartA3DS,
+            legend: { visible: true },
+            commonSeriesSettings: {
+                argumentField: "Technology",
+                valueField: "CountTechnology",
+                type: "stackedBar"
+            },
+            seriesTemplate: {
+                nameField: "RFPStatus",
+                customizeSeries: function (valueFromNameField) {
+                    return valueFromNameField === 2009 ? { type: "line", label: { visible: true }, color: "#ff3f7a" } : {};
+                }
+            },
+            legend: {
+                horizontalAlignment: "right",
+                position: "inside",
+                border: { visible: true },
+                columnCount: 2,
+                customizeItems: function (items) {
+
+                    var sortedItems = [];
+
+                    items.forEach(function (item) {
+                        var startIndex = item.series.stack;
+                        sortedItems.splice(startIndex, 0, item);
+                    });
+                    return sortedItems;
+                },
+            },
+            scrollBar: {
+                visible: true,
+            },
+            onLegendClick: function (e) {
+                var arg = e.target;
+                // rfpTechnology = arg._data[0].data.Technology;
+                if (rfpTechnology != "") {
+                    rfpTechnology = null;
+                }
+                rfpStatus = arg._data[0].data.RFPStatus;
+                loadChartA3();
+            },
+            onPointClick: function (e) {
+                var point = e.target;
+                rfpTechnology = point.data.Technology;
+                rfpStatus = point.data.RFPStatus;
+                loadChartA3();
+                //loadTechnologyCountForRFPStatusChart();
+            },
+            valueAxis: {
+                title: {
+                    text: "Technology, RFPStatus",
+                },
+            },
+            title: "Technology Wise Count and RFP Status",
+            export: {
+                enabled: true,
+            },
+            tooltip: {
+                enabled: true,
+            },
+            argumentAxis:{
+                label:{
+                    overlappingBehavior:"rotate",
+                    rotationAngle:"-45"
+                }
+            },
+        });
+    }
+
+    function loadTechnologyCountForRFPStatusChart() {
+        if (rfpStatus != "") { rfpStatus == null }
+        if (rfpTechnology != "") { rfpTechnology == null }
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "Status": rfpStatus,
+            "Technology": rfpTechnology,
+            "BDE": rfptechBDE,
+            "Owner": rfptechOwner,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+
+        var chartechmodel = callgetlist("GetTechnologyCountForRFPStatus", filterData);
+        if (chartechmodel != null) {
+            $("#TechnologyCountForRFPStatusxp").dxChart({
+                size: {
+                    width: 1000
+                },
+                dataSource: chartechmodel,
+                commonSeriesSettings: {
+                    argumentField: "Technology",
+                    valueField: "CountTechnology",
+                    type: "stackedBar"
+                },
+                seriesTemplate: {
+                    nameField: "RFPStatus",
+                    customizeSeries: function (valueFromNameField) {
+                        return valueFromNameField === 2009 ? { type: "line", label: { visible: true }, color: "#ff3f7a" } : {};
+                    }
+                },
+                legend: {
+                    horizontalAlignment: "right",
+                    position: "inside",
+                    border: { visible: true },
+                    columnCount: 2,
+                    customizeItems: function (items) {
+                        var sortedItems = [];
+
+                        items.forEach(function (item) {
+                            var startIndex = item.series.stack;
+                            sortedItems.splice(startIndex, 0, item);
+                        });
+                        return sortedItems;
+                    },
+                },
+                onLegendClick: function (e) {
+                    var arg = e.target;
+                    if (rfpTechnology != "") {
+                        rfpTechnology = null; // arg._data[0].data.Technology;
+                    }
+                    rfpStatus = arg._data[0].data.RFPStatus;
+                    loadTechnologyCountForRFPStatusChart();
+                    getBDECountForTechnologyStatus();
+                    GetOwnerCountForTechnology();
+                    rfpGetRFPDetailsForTechnology();
+                },
+                onPointClick: function (e) {
+                    var point = e.target;
+                    rfpTechnology = point.data.Technology;
+                    rfpStatus = point.data.RFPStatus;
+                    loadTechnologyCountForRFPStatusChart();
+                    getBDECountForTechnologyStatus();
+                    GetOwnerCountForTechnology();
+                    rfpGetRFPDetailsForTechnology();
+                },
+                valueAxis: {
+                    title: {
+                        text: "Technology, RFPStatus",
+                    },
+                },
+                title: "Technology Wise RFP Status",
+                export: {
+                    enabled: true,
+                },
+                tooltip: {
+                    enabled: true,
+                },
+                argumentAxis:{
+                    label:{
+                        overlappingBehavior:"rotate",
+                        rotationAngle:"-45"
+                    }
+                },
+            });
+        }
+
+        getBDECountForTechnologyStatus();
+        function getBDECountForTechnologyStatus() {
+            var filterDatasecChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpStatus,
+                "Technology": rfpTechnology,
+                "BDE": rfptechBDE,
+                "Owner": rfptechOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForsecChart = callgetlist('GetBDECountForTechnology', filterDatasecChart);
+            if (dataForsecChart != null) {
+                $("#GetBDECountForTechnologyexp").dxPieChart({
+                    size: {
+                        width: 500
+                    },
+                    palette: "bright",
+                    dataSource: dataForsecChart,
+                    series: [
+                        {
+                            argumentField: "BDE",
+                            valueField: "CountBDE",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP BDE Wise Count",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfptechBDE = point.data.BDE;
+                        loadTechnologyCountForRFPStatusChart();
+                        getBDECountForTechnologyStatus();
+                        GetOwnerCountForTechnology();
+                        rfpGetRFPDetailsForTechnology();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfptechBDE = arg;
+                        loadTechnologyCountForRFPStatusChart();
+                        getBDECountForTechnologyStatus();
+                        GetOwnerCountForTechnology();
+                        rfpGetRFPDetailsForTechnology();
+                    },
+                });
+            }
+
+        }
+
+        GetOwnerCountForTechnology();
+        function GetOwnerCountForTechnology() {
+            var filterDatasecChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpStatus,
+                "Technology": rfpTechnology,
+                "BDE": rfptechBDE,
+                "Owner": rfptechOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+
+            });
+
+            var OwnerCountForRFPStatus = callgetlist('GetOwnerCountForTechnology', filterDatasecChart);
+            if (OwnerCountForRFPStatus != null) {
+                $("#GetOwnerCountForTechnologyexp").dxPieChart({
+                    size: {
+                        width: 500
+                    },
+                    palette: "bright",
+                    dataSource: OwnerCountForRFPStatus,
+                    series: [
+                        {
+                            argumentField: "Owner",
+                            valueField: "CountOwner",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Owner Wise Count",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfptechOwner = point.data.Owner;
+                        loadTechnologyCountForRFPStatusChart();
+                        getBDECountForTechnologyStatus();
+                        GetOwnerCountForTechnology();
+                        rfpGetRFPDetailsForTechnology();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfptechOwner = arg;
+                        loadTechnologyCountForRFPStatusChart();
+                        getBDECountForTechnologyStatus();
+                        GetOwnerCountForTechnology();
+                        rfpGetRFPDetailsForTechnology();
+                    },
+                });
+            }
+        }
+
+        rfpGetRFPDetailsForTechnology();
+        function rfpGetRFPDetailsForTechnology() {
+            //GetRFPDetailsForBDE
+            var filtergridTech = JSON.stringify({
+                "Token": Token,
+                "Status": rfpStatus,
+                "Technology": rfpTechnology,
+                "BDE": rfptechBDE,
+                "Owner": rfptechOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+            var datafiltergrid = callgetlist('GetRFPDetailsForTechnology', filtergridTech);
+            if (datafiltergrid != null) {
+                renderRFPDeatilsGrid(datafiltergrid);
+            }
+
+            function renderRFPDeatilsGrid(data) {
+                var OpeningskillratingGrid = $("#GrdGetRFPDetailsForTechnologyexp")
+                    .dxDataGrid({
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto",
+                        },
+                        dataSource: data,
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: true,
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search...",
+                        },
+                        headerFilter: {
+                            visible: true,
+                        },
+                        grouping: {
+                            autoExpandAll: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        sorting: {
+                            mode: "multiple",
+                        },
+                        selection: {
+                            mode: "multiple",
+                        },
+                        summary: {
+                            totalItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count",
+                                },
+                            ],
+                            groupItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count"
+                                }
+                            ],
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        columnChooser: {
+                            enabled: true,
+                        },
+                        rowAlternationEnabled: true,
+                        //filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        allowColumnResizing: true,
+                        showBorders: true,
+                        columns: [
+                            {
+                                caption: "#",
+                                dataField: "sno",
+                                cssClass: "rno",
+                                allowGrouping: false,
+                                allowCollapsing: false,
+                                allReordering: false,
+                                width: 70,
+                                cellTemplate: function (container, options) {
+                                    container.text(
+                                        OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                    );
+                                },
+                            },
+                            {
+                                caption: "Date",
+                                dataField: "ReceivedDate",
+                                dataType: "date",
+                                format: "dd-MMM-yy"
+                            },
+                            {
+                                caption: "Client",
+                                dataField: "ClientName"
+                            },
+                            {
+                                caption: "RFP Name",
+                                dataField: "ProjectTitle"
+                            },
+                            {
+                                caption: "Owner",
+                                dataField: "Owner",
+                            },
+                            {
+                                caption: "BDE",
+                                dataField: "BDE",
+                            },
+                            {
+                                caption: "Assigned",
+                                dataField: "Assigned",
+                            },
+                            {
+                                caption: "Technology for the given date",
+                                dataField: "Technology"
+                            },
+                            {
+                                caption: "", dataField: "Id", allowGrouping: false, allowCollapsing: false, allReordering: false, allowExporting: false,
+                                cellTemplate: function (container, options) {
+                                    $("<div>")
+                                        .append("<button data-rfpid=" + options.data.Id + " class='btn btn-xs btn-primary edit-btn btnSelectChatHistory' Onclick=selectChatHistory('" + options.data.Id + "') title='Char History'><i class='fas fa-comments'></i></button>")
+                                        .appendTo(container);
+                                }
+                            }
+                        ],
+                    })
+                    .dxDataGrid("instance");
+            }
+        }
+    }
+
+    function loadChartB1() {
+        // Get the Datasource by calling the API. APGetDetailsForBDEOwnerStatusI call implemented in loadChartA2() function, please refer.
+
+        var filterDatasecChartBDEOwner = JSON.stringify({
+            "Token": Token,
+            "Status": rfpBDCStatus,
+            "Technology": rfpBDCTechnology,
+            "Mode": rfpBDCMode,
+            "BDE": rfpBDCBDE,
+            "Owner": rfpBDChOwner,
+            "Assigned": rfpBDCAssigned,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+
+        var OwnerCountForTechnology = callgetlist('GetDetailsForBDEOwnerStatus', filterDatasecChartBDEOwner);
+        if (OwnerCountForTechnology != null) {
+            $("#DetailsForBDEOwnerStatus").dxSankey({
+                dataSource: OwnerCountForTechnology,
+                sourceField: "BDE",
+                targetField: "Assigned",
+                weightField: "RFPCount",
+                title: "BDE-Owner Turnover",
+                node: {
+                    width: 8,
+                    padding: 30
+                },
+                link: {
+                    colorMode: "gradient"
+                },
+                scrollBar: {
+                    visible: true,
+                },
+                tooltip: {
+                    enabled: true,
+                    customizeLinkTooltip: function (info) {
+                        return {
+                            html:
+                                "<b>BDE:</b> " +
+                                info.source +
+                                "<br/><b>Owner:</b> " +
+                                info.target +
+                                "<br/>" +
+                                "<b>RFP Count:</b> " +
+                                info.weight
+                        };
+                    }
+                },
+                onLinkClick: function (e) {
+                    var point = e.target;
+                    rfpBDCAssigned = point.connection.target;
+                    rfpBDCBDE = point.connection.source;
+                    rfpBDCMode = "Linked";
+                    loadChartB1();
+                },
+                onNodeClick: function (e) {
+                    var arg = e.target;
+                    rfpBDCAssigned = arg.label;;
+                    rfpBDCBDE = arg.label;
+                    rfpBDCMode = "Node";
+                    loadChartB1();
+                }
+
+            });
+        }
+    }
+
+    function loadDetailsForBDEOwnerStatusChart() {
+        var filterDatasecChartBDEOwner = JSON.stringify({
+            "Token": Token,
+            "Status": rfpBDCStatus,
+            "Mode": rfpBDCMode,
+            "Technology": rfpBDCTechnology,
+            "BDE": rfpBDCBDE,
+            "Owner": rfpBDChOwner,
+            "Assigned": rfpBDCAssigned,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+        var OwnerCountForTechnology = callgetlist('GetDetailsForBDEOwnerStatus', filterDatasecChartBDEOwner);
+        if (OwnerCountForTechnology != null) {
+
+            $("#DetailsForBDEOwnerStatusexp").dxSankey({
+                dataSource: OwnerCountForTechnology,
+                sourceField: "BDE",
+                targetField: "Assigned",
+                weightField: "RFPCount",
+                title: "BDE-Owner Turnover",
+                seriesTemplate: {
+                    nameField: "RFPCount",
+                    customizeSeries: function (valueFromNameField) {
+                        return valueFromNameField === 2009 ? { type: "line", label: { visible: true }, color: "#ff3f7a" } : {};
+                    }
+                },
+                size: {
+                    width: 1000
+                },
+                node: {
+                    width: 8,
+                    padding: 30
+                },
+                link: {
+                    colorMode: "gradient"
+                },
+                tooltip: {
+                    enabled: true,
+                    customizeLinkTooltip: function (data) {
+                        return {
+                            html:
+                                "<b>From:</b> " +
+                                data.source +
+                                "<br/><b>To:</b> " +
+                                data.target +
+                                "<br/>" +
+                                "<b>Weight:</b> " +
+                                data.weight
+                        };
+
+                    },
+                },
+
+                onLinkClick: function (e) {
+                    var point = e.target;
+                    rfpBDCMode = "Linked";
+                    rfpBDCAssigned = point.connection.target;
+                    rfpBDCBDE = point.connection.source;
+                    loadDetailsForBDEOwnerStatusChart();
+                    getDetailsForAssignedStatus();
+                    getDetailsForBDEStatus();
+                },
+                onNodeClick: function (e) {
+                    var arg = e.target;
+                    rfpBDCAssigned = arg.label;;
+                    rfpBDCBDE = arg.label;
+                    rfpBDCMode = "Node";
+                    loadDetailsForBDEOwnerStatusChart();
+                    getDetailsForAssignedStatus();
+                    getDetailsForBDEStatus();
+                }
+            });
+        }
+
+        getDetailsForAssignedStatus();
+        function getDetailsForAssignedStatus() {
+            var filterDatasecChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpBDCStatus,
+                "Mode": rfpBDCMode,
+                "Technology": rfpBDCTechnology,
+                "BDE": rfpBDCBDE,
+                "Owner": rfpBDChOwner,
+                "Assigned": rfpBDCAssigned,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForAssignedChart = callgetlist('GetRFPStatusForTurnover', filterDatasecChart);
+            if (dataForAssignedChart != null) {
+                $("#GetDetailsForAssignedexp").dxPieChart({
+                    size: {
+                        width: 500
+                    },
+                    palette: "bright",
+                    dataSource: dataForAssignedChart,
+                    series: [
+                        {
+                            argumentField: "Status",
+                            valueField: "StatusCount",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Status Details",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpBDCStatus = point.data.Status;
+                        //rfpBDCBDE = point.data.BDE;
+                        //rfpBDCAssigned = point.data.Assigned;
+                        loadDetailsForBDEOwnerStatusChart();
+                        getDetailsForAssignedStatus();
+                        getDetailsForBDEStatus();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpBDCStatus = arg;
+                        loadDetailsForBDEOwnerStatusChart();
+                        getDetailsForAssignedStatus();
+                        getDetailsForBDEStatus();
+                    },
+                });
+            }
+
+        }
+
+        getDetailsForBDEStatus();
+        function getDetailsForBDEStatus() {
+            var filterDataBDEDetailsChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpBDCStatus,
+                "Mode": rfpBDCMode,
+                "Technology": rfpBDCTechnology,
+                "BDE": rfpBDCBDE,
+                "Owner": rfpBDChOwner,
+                "Assigned": rfpBDCAssigned,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForBDEDetailsChart = callgetlist('GetTechnologyCountForTurnOver', filterDataBDEDetailsChart);
+            if (dataForBDEDetailsChart != null) {
+                $("#GetDetailsForBDEexp").dxPieChart({
+                    size: {
+                        width: 500
+                    },
+                    palette: "bright",
+                    dataSource: dataForBDEDetailsChart,
+                    series: [
+                        {
+                            argumentField: "Technology",
+                            valueField: "CountTechnology",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Technology Count Details",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpBDCStatus = point.data.RFPStatus;
+                        rfpBDCTechnology = point.data.Technology;
+                        //rfpBDCBDE = point.data.BDE;
+                        //rfpBDCAssigned = point.data.Assigned;
+                        loadDetailsForBDEOwnerStatusChart();
+                        getDetailsForAssignedStatus();
+                        getDetailsForBDEStatus();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpBDCTechnology = arg;
+                        loadDetailsForBDEOwnerStatusChart();
+                        getDetailsForAssignedStatus();
+                        getDetailsForBDEStatus();
+                    },
+                });
+            }
+
+        }
+
+        getDetailsForBDEOwnerTechnology();
+        function getDetailsForBDEOwnerTechnology() {
+            //GetRFPDetailsForBDE
+            var filtergridTech = JSON.stringify({
+                "Token": Token,
+                "Status": rfpBDCStatus,
+                "Mode": rfpBDCMode,
+                "Technology": rfpBDCTechnology,
+                "BDE": rfpBDCBDE,
+                "Owner": rfpBDChOwner,
+                "Assigned": rfpBDCAssigned,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+            var datafiltergrid = callgetlist('GetRFPDetailsForTurnover', filtergridTech);
+            if (datafiltergrid != null) {
+                renderRFPDeatilsGrid(datafiltergrid);
+            }
+
+            function renderRFPDeatilsGrid(data) {
+                var OpeningskillratingGrid = $("#GrdgetDetailsForBDEOwnerTechnologyexp")
+                    .dxDataGrid({
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto",
+                        },
+                        dataSource: data,
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: true,
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search...",
+                        },
+                        headerFilter: {
+                            visible: true,
+                        },
+                        grouping: {
+                            autoExpandAll: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        sorting: {
+                            mode: "multiple",
+                        },
+                        selection: {
+                            mode: "multiple",
+                        },
+                        summary: {
+                            totalItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count",
+                                },
+                            ],
+                            groupItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count"
+                                }
+                            ],
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        columnChooser: {
+                            enabled: true,
+                        },
+                        rowAlternationEnabled: true,
+                        //filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        allowColumnResizing: true,
+                        showBorders: true,
+                        columns: [
+                            {
+                                caption: "#",
+                                dataField: "sno",
+                                cssClass: "rno",
+                                allowGrouping: false,
+                                allowCollapsing: false,
+                                allReordering: false,
+                                width: 70,
+                                cellTemplate: function (container, options) {
+                                    container.text(
+                                        OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                    );
+                                },
+                            },
+                            {
+                                caption: "Date",
+                                dataField: "ReceivedDate",
+                                dataType: "date",
+                                format: "dd-MMM-yy"
+                            },
+                            {
+                                caption: "Client",
+                                dataField: "ClientName"
+                            },
+                            {
+                                caption: "RFP Name",
+                                dataField: "ProjectTitle"
+                            },
+                            {
+                                caption: "Owner",
+                                dataField: "Owner",
+                            },
+                            {
+                                caption: "BDE",
+                                dataField: "BDE",
+                            },
+                            {
+                                caption: "Assigned",
+                                dataField: "Assigned",
+                            },
+                            {
+                                caption: "Technology for the given date",
+                                dataField: "Technology"
+                            },
+                            {
+                                caption: "", dataField: "Id", allowGrouping: false, allowCollapsing: false, allReordering: false, allowExporting: false,
+                                cellTemplate: function (container, options) {
+                                    $("<div>")
+                                        .append("<button data-rfpid=" + options.data.Id + " class='btn btn-xs btn-primary edit-btn btnSelectChatHistory' Onclick=selectChatHistory('" + options.data.Id + "') title='Char History'><i class='fas fa-comments'></i></button>")
+                                        .appendTo(container);
+                                }
+                            }
+                        ],
+                    })
+                    .dxDataGrid("instance");
+            }
+        }
+    }
+
+    function loadChartB2() {
+
+        var filterDatarfpstatus = JSON.stringify({
+            "Token": Token,
+            "Status": rfpFsStatus,
+            "BDE": rfpdataFsBDE,
+            "Owner": rfpFsOwner,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+
+        var rfpFunnelStatus = callgetlist('GetRFPFunnelStatus', filterDatarfpstatus);
+        if (rfpFunnelStatus != null) {
+            $("#RFPFunnelStatus").dxFunnel({
+                dataSource: rfpFunnelStatus,
+                size: {
+                    width: 400,
+                    height: 300,
+                },
+                title: {
+                    text: "RFP Status Conversions",
+                    margin: { bottom: 30 },
+                },
+                argumentField: "Status",
+                valueField: "StatusCount",
+                palette: "Soft Pastel",
+                export: {
+                    enabled: true,
+                },
+                tooltip: {
+                    enabled: true,
+                    format: "fixedPoint",
+                },
+                item: {
+                    border: {
+                        visible: true,
+                    },
+                },
+                label: {
+                    visible: true,
+                    position: "inside",
+                    backgroundColor: "none",
+                    customizeText: function (e) {
+                        return "<span style='font-size: 28px'>" + e.percentText + "</span><br/>" + e.item.argument;
+                    },
+                },
+                onItemClick: function (e) {
+                    var point = e.target;
+                    rfpSelectedDate = point.data.Date;
+                    loadChartB2();
+                    loadFsCountForRFPStatusChart();
+                    getBDECountForFsStatus();
+                    GetOwnerCountForFs();
+                    rfpGetRFPDetailsForFs();
+                },
+                onLegendClick: function (e) {
+                    var arg = e.target;
+                    loadChartB2();
+                    loadFsCountForRFPStatusChart();
+                    getBDECountForFsStatus();
+                    GetOwnerCountForFs();
+                    rfpGetRFPDetailsForFs();
+                },
+            });
+        }
+    }
+
+
+
+    function loadFsCountForRFPStatusChart() {
+        var filterDataFSwisem = JSON.stringify({
+            "Token": Token,
+            "Status": rfpFsStatus,
+            "BDE": rfpdataFsBDE,
+            "Owner": rfpFsOwner,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+
+        // var chartA3FSWisem = callgetlist("GetRFPFunnelStatus", filterDataFSwisem);
+        var dataForGetBDECountForENC = callgetlist("GetBDECountForENC", filterDataFSwisem);
+        $("#FsCountForRFPStatusxp").dxFunnel({
+            dataSource: dataForGetBDECountForENC,
+            size: {
+                width: 400,
+                height: 300,
+            },
+            title: {
+                text: "RFP Status Conversions",
+                margin: { bottom: 30 },
+            },
+            argumentField: "BDE",
+            valueField: "CountBDE", // StatusCount
+            palette: "Soft Pastel",
+            export: {
+                enabled: true,
+            },
+            tooltip: {
+                enabled: true,
+                format: "fixedPoint",
+            },
+            item: {
+                border: {
+                    visible: true,
+                },
+            },
+            label: {
+                visible: true,
+                position: "inside",
+                backgroundColor: "none",
+                customizeText: function (e) {
+                    return "<span style='font-size: 28px'>" + e.percentText + "</span><br/>" + e.item.argument;
+                },
+            },
+            onItemClick: function (e) {
+                var point = e.target;
+                debugger;
+
+            },
+            onLegendClick: function (e) {
+                var arg = e.target;
+                debugger;
+            },
+
+        });
+
+        getBDECountForENSCForFunelStatus();
+        function getBDECountForENSCForFunelStatus() {
+            var filterDataFsChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpFsStatus,
+                "BDE": rfpdataFsBDE,
+                "Owner": rfpFsOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForGetBDECountForENSC = callgetlist('GetBDECountForENSC', filterDataFsChart);     if (dataForGetBDECountForENSC != null) {
+                $("#GetBDECountForENSC").dxFunnel({
+                    dataSource: dataForGetBDECountForENSC,
+                    size: {
+                        width: 400,
+                        height: 300,
+                    },
+                    title: {
+                        text: "Estimation not sent to client",
+                        margin: { bottom: 30 },
+                    },
+                    argumentField: "BDE",
+                    valueField: "CountBDE",
+                    palette: "Soft Pastel",
+                    export: {
+                        enabled: true,
+                    },
+                    tooltip: {
+                        enabled: true,
+                        format: "fixedPoint",
+                    },
+                    item: {
+                        border: {
+                            visible: true,
+                        },
+                    },
+                    label: {
+                        visible: true,
+                        position: "inside",
+                        backgroundColor: "none",
+                        customizeText: function (e) {
+                            return "<span style='font-size: 28px'>" + e.percentText + "</span><br/>" + e.item.argument;
+                        },
+                    },
+                    onItemClick: function (e) {
+                        var point = e.target;
+                        debugger;
+
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        debugger;
+                    },
+                });
+            }
+        }
+
+        getBDECountForRNWForFunelStatus();
+        function getBDECountForRNWForFunelStatus() {
+            var filterDataFsChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpFsStatus,
+                "BDE": rfpdataFsBDE,
+                "Owner": rfpFsOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForGetBDECountForRNW = callgetlist('GetBDECountForRNW', filterDataFsChart);
+            if (dataForGetBDECountForRNW != null) {
+                $("#GetBDECountForRNW").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: dataForGetBDECountForRNW,
+                    series: [
+                        {
+                            argumentField: "BDE",
+                            valueField: "CountBDE",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP BDE Wise (Not Won)",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpdataFsBDE = point.data.BDE;
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpdataFsBDE = arg;
+                    },
+                });
+            }
+        }
+        
+        getOwnerCountForENCForFunelStatus();
+        function getOwnerCountForENCForFunelStatus() {
+            var filterDataFsChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpFsStatus,
+                "BDE": rfpdataFsBDE,
+                "Owner": rfpFsOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+
+            });
+
+            var GetOwnerCountForENCData = callgetlist('GetOwnerCountForENC', filterDataFsChart);
+            if (GetOwnerCountForENCData != null) {
+                $("#GetOwnerCountForENC").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: GetOwnerCountForENCData,
+                    series: [
+                        {
+                            argumentField: "Owner",
+                            valueField: "CountOwner",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "Estimation not Completed",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpFsOwner = point.data.Owner;
+
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpFsOwner = arg;
+                        
+                    },
+                });
+            }
+        }
+
+        getOwnerCountForENSCFunelStatus();
+        function getOwnerCountForENSCFunelStatus() {
+            var filterDataFsChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpFsStatus,
+                "BDE": rfpdataFsBDE,
+                "Owner": rfpFsOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+
+            });
+
+            var OwnerCountForRFPFsStatus = callgetlist('GetOwnerCountForENSC', filterDataFsChart);
+            if (OwnerCountForRFPFsStatus != null) {
+                $("#GetOwnerCountForENSC").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: OwnerCountForRFPFsStatus,
+                    series: [
+                        {
+                            argumentField: "Owner",
+                            valueField: "CountOwner",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "Estimation not sent to client",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpFsOwner = point.data.Owner;
+
+                        // loadFsCountForRFPStatusChart();
+                        // getBDECountForFsStatus();
+                        // GetOwnerCountForFs();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpFsOwner = arg;
+                        
+                        // loadFsCountForRFPStatusChart();
+                        // getBDECountForFsStatus();
+                        // GetOwnerCountForFs();
+                    },
+                });
+            }
+        }
+
+        getOwnerCountForRNWFunelStatus();
+        function getOwnerCountForRNWFunelStatus() {
+            var filterDataFsChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpFsStatus,
+                "BDE": rfpdataFsBDE,
+                "Owner": rfpFsOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+
+            });
+
+            var OwnerCountForRFPFsStatus = callgetlist('GetOwnerCountForRNW', filterDataFsChart);
+            if (OwnerCountForRFPFsStatus != null) {
+                $("#GetOwnerCountForRNW").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: OwnerCountForRFPFsStatus,
+                    series: [
+                        {
+                            argumentField: "Owner",
+                            valueField: "CountOwner",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Not Won",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpFsOwner = point.data.Owner;
+
+                        // loadFsCountForRFPStatusChart();
+                        // getBDECountForFsStatus();
+                        // GetOwnerCountForFs();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpFsOwner = arg;
+                        
+                        // loadFsCountForRFPStatusChart();
+                        // getBDECountForFsStatus();
+                        // GetOwnerCountForFs();
+                    },
+                });
+            }
+        }
+
+        rfpGetRFPDetailsForFs();
+        function rfpGetRFPDetailsForFs() {
+            //GetRFPDetailsForBDE
+            var filtergridFs = JSON.stringify({
+                "Token": Token,
+                "Status": rfpFsStatus,
+                "BDE": rfpdataFsBDE,
+                "Owner": rfpFsOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+            var datafilterFsgrid = callgetlist('GetRFPDetailsForFunnelStatus', filtergridFs);
+            if (datafilterFsgrid != null) {
+                renderRFPBDEDeatilsGrid(datafilterFsgrid);
+            }
+
+            function renderRFPBDEDeatilsGrid(data) {
+                var OpeningskillratingGrid = $("#GrdGetRFPDetailsForFsWiseexp")
+                    .dxDataGrid({
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto",
+                        },
+                        dataSource: data,
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: true,
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search...",
+                        },
+                        headerFilter: {
+                            visible: true,
+                        },
+                        grouping: {
+                            autoExpandAll: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        sorting: {
+                            mode: "multiple",
+                        },
+                        selection: {
+                            mode: "multiple",
+                        },
+                        summary: {
+                            totalItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count",
+                                },
+                            ],
+                            groupItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count"
+                                }
+                            ],
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        columnChooser: {
+                            enabled: true,
+                        },
+                        rowAlternationEnabled: true,
+                        //filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        allowColumnResizing: true,
+                        showBorders: true,
+                        columns: [
+                            {
+                                caption: "#",
+                                dataField: "sno",
+                                cssClass: "rno",
+                                allowGrouping: false,
+                                allowCollapsing: false,
+                                allReordering: false,
+                                width: 70,
+                                cellTemplate: function (container, options) {
+                                    container.text(
+                                        OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                    );
+                                },
+                            },
+                            {
+                                caption: "Date",
+                                dataField: "ReceivedDate",
+                                dataType: "date",
+                                format: "dd-MMM-yy"
+                            },
+                            {
+                                caption: "Client",
+                                dataField: "ClientName"
+                            },
+                            {
+                                caption: "RFP Name",
+                                dataField: "ProjectTitle"
+                            },
+                            {
+                                caption: "Owner",
+                                dataField: "Owner",
+                            },
+                            {
+                                caption: "BDE",
+                                dataField: "BDE",
+                            },
+                            {
+                                caption: "Assigned",
+                                dataField: "Assigned",
+                            },
+                            {
+                                caption: "Technology for the given date",
+                                dataField: "Technology"
+                            },
+                            {
+                                caption: "", dataField: "Id", allowGrouping: false, allowCollapsing: false, allReordering: false, allowExporting: false,
+                                cellTemplate: function (container, options) {
+                                    $("<div>")
+                                        .append("<button data-rfpid=" + options.data.Id + " class='btn btn-xs btn-primary edit-btn btnSelectChatHistory' Onclick=selectChatHistory('" + options.data.Id + "') title='Char History'><i class='fas fa-comments'></i></button>")
+                                        .appendTo(container);
+                                }
+                            }
+                        ],
+                    })
+                    .dxDataGrid("instance");
+            }
+        }
+    }
+
+
+    function loadChartB3() {
+        var filterDataBDEwise = JSON.stringify({
+            "Token": Token,
+            "Status": rfpBDEdStatus,
+            "Technology": rfpBDEdTechnology,
+            "BDE": rfpdataBDE,
+            "Owner": rfpBDEdOwner,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+        var chartA3BDEWise = callgetlist("GetBDECountWiseRFPStatus", filterDataBDEwise);
+        
+        $("#BDECountWiseRFPStatus").dxChart({
+            dataSource: chartA3BDEWise,
+            scrollBar: {
+                visible: true,
+            },
+            commonSeriesSettings: {
+                argumentField: "BDE",
+                valueField: "CountBDE",
+                type: "stackedBar",
+                horizontalAlignment: "right"
+            },
+            seriesTemplate: {
+                nameField: "RFPStatus",
+                customizeSeries: function (valueFromNameField) {
+                    return valueFromNameField === 2009 ? { type: "line", label: { visible: true }, color: "#ff3f7a" } : {};
+                }
+            },
+            legend: {
+                horizontalAlignment: "right",
+                position: "inside",
+                border: { visible: true },
+                columnCount: 2,
+                customizeItems: function (items) {
+
+                    var sortedItems = [];
+
+                    items.forEach(function (item) {
+                        var startIndex = item.series.stack;
+                        sortedItems.splice(startIndex, 0, item);
+                    });
+                    return sortedItems;
+                },
+            },
+            onLegendClick: function (e) {
+                var arg = e.target;
+                if (rfpdataBDE != "") {
+                    rfpdataBDE = null; //  arg._data[0].data.BDE;
+                }
+                rfpBDEdStatus = arg._data[0].data.RFPStatus;
+                loadChartB3();
+            },
+            onPointClick: function (e) {
+                var point = e.target;
+                rfpdataBDE = point.data.BDE;
+                rfpBDEdStatus = point.data.RFPStatus;
+                loadChartB3();
+                //loadTechnologyCountForRFPStatusChart();
+            },
+            valueAxis: {
+                title: {
+                    text: "BDE, RFPStatus",
+                },
+            },
+            title: "BDE Wise Count and RFP Status",
+            export: {
+                enabled: true,
+            },
+            tooltip: {
+                enabled: true,
+            },
+            argumentAxis:{
+                label:{
+                    overlappingBehavior:"rotate",
+                    rotationAngle:"-45"
+                }
+            },
+        });
+    }
+
+    function loadBDECountForRFPStatusChart() {
+        var filterDataBDEwisem = JSON.stringify({
+            "Token": Token,
+            "Status": rfpBDEdStatus,
+            "Technology": rfpBDEdTechnology,
+            "BDE": rfpdataBDE,
+            "Owner": rfpBDEdOwner,
+            "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+            "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+        });
+        var chartA3BDEWisem = callgetlist("GetBDECountWiseRFPStatus", filterDataBDEwisem);
+        $("#BDECountForRFPStatusxp").dxChart({
+            dataSource: chartA3BDEWisem,
+            commonSeriesSettings: {
+                argumentField: "BDE",
+                valueField: "CountBDE",
+                type: "stackedBar",
+                horizontalAlignment: "right"
+            },
+            size: {
+                width: 1000
+            },
+            seriesTemplate: {
+                nameField: "RFPStatus",
+                customizeSeries: function (valueFromNameField) {
+                    return valueFromNameField === 2009 ? { type: "line", label: { visible: true }, color: "#ff3f7a" } : {};
+                }
+            },
+            legend: {
+                horizontalAlignment: "right",
+                position: "inside",
+                border: { visible: true },
+                columnCount: 2,
+                customizeItems: function (items) {
+
+                    var sortedItems = [];
+
+                    items.forEach(function (item) {
+                        var startIndex = item.series.stack;
+                        sortedItems.splice(startIndex, 0, item);
+                    });
+                    return sortedItems;
+                },
+            },
+            onLegendClick: function (e) {
+                var arg = e.target;
+                if (rfpdataBDE != "") {
+                    rfpdataBDE = null; // arg._data[0].data.BDE;
+                }
+                rfpBDEdStatus = arg._data[0].data.RFPStatus;
+                loadBDECountForRFPStatusChart();
+            },
+            onPointClick: function (e) {
+                var point = e.target;
+                rfpdataBDE = point.data.BDE;
+                rfpBDEdStatus = point.data.RFPStatus;
+                loadBDECountForRFPStatusChart();
+                //loadTechnologyCountForRFPStatusChart();
+            },
+            valueAxis: {
+                title: {
+                    text: "BDE, RFPStatus",
+                },
+            },
+            title: "RFP BDE Wise Count",
+            export: {
+                enabled: true,
+            },
+            tooltip: {
+                enabled: true,
+            },
+            argumentAxis:{
+                label:{
+                    overlappingBehavior:"rotate",
+                    rotationAngle:"-45"
+                }
+            },
+
+
+        });
+
+        getTechnologyCountForBDEStatus();
+        function getTechnologyCountForBDEStatus() {
+            var filterDatasecChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpBDEdStatus,
+                "Technology": rfpBDEdTechnology,
+                "BDE": rfpdataBDE,
+                "Owner": rfpBDEdOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+
+            //dataForsecChart
+            var dataForsecChart = callgetlist('GetTechnologyCountForBDE ', filterDatasecChart);
+            if (dataForsecChart != null) {
+                $("#GetTechnologyCountForBDEexp").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: dataForsecChart,
+                    series: [
+                        {
+                            argumentField: "TechStream",
+                            valueField: "CountTechStream",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP BDE Wise Technology Count",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpBDEdTechnology = point.data.TechStream;
+                        loadBDECountForRFPStatusChart();
+                        getTechnologyCountForBDEStatus();
+                        GetOwnerCountForBDE();
+                        rfpGetRFPDetailsForBDE();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpBDEdTechnology = arg;
+                        loadBDECountForRFPStatusChart();
+                        getTechnologyCountForBDEStatus();
+                        GetOwnerCountForBDE();
+                        rfpGetRFPDetailsForBDE();
+                    },
+                });
+            }
+
+        }
+
+        GetOwnerCountForBDE();
+        function GetOwnerCountForBDE() {
+            var filterDatasecChart = JSON.stringify({
+                "Token": Token,
+                "Status": rfpBDEdStatus,
+                "Technology": rfpBDEdTechnology,
+                "BDE": rfpdataBDE,
+                "Owner": rfpBDEdOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+
+            });
+
+            var OwnerCountForRFPStatus = callgetlist('GetOwnerCountForBDE ', filterDatasecChart);
+            if (OwnerCountForRFPStatus != null) {
+                $("#GetOwnerCountForBDEexp").dxPieChart({
+                    size: {
+                        width: 600
+                    },
+                    palette: "bright",
+                    dataSource: OwnerCountForRFPStatus,
+                    series: [
+                        {
+                            argumentField: "Owner",
+                            valueField: "CountOwner",
+                            label: {
+                                visible: true,
+                                connector: {
+                                    visible: true,
+                                    width: 1,
+                                },
+                            },
+                        },
+                    ],
+                    title: "RFP Owner Wise Count",
+                    export: {
+                        enabled: true,
+                    },
+                    onPointClick: function (e) {
+                        var point = e.target;
+                        rfpBDEdOwner = point.data.Owner;
+                        loadBDECountForRFPStatusChart();
+                        getTechnologyCountForBDEStatus();
+                        GetOwnerCountForBDE();
+                        rfpGetRFPDetailsForBDE();
+                    },
+                    onLegendClick: function (e) {
+                        var arg = e.target;
+                        rfpBDEdOwner = arg;
+                        loadBDECountForRFPStatusChart();
+                        getTechnologyCountForBDEStatus();
+                        GetOwnerCountForBDE();
+                        rfpGetRFPDetailsForBDE();
+                    },
+                });
+            }
+        }
+
+        rfpGetRFPDetailsForBDE();
+        function rfpGetRFPDetailsForBDE() {
+            //GetRFPDetailsForBDE
+            var filtergridBDE = JSON.stringify({
+                "Token": Token,
+                "Status": rfpBDEdStatus,
+                "Technology": rfpBDEdTechnology,
+                "BDE": rfpdataBDE,
+                "Owner": rfpBDEdOwner,
+                "FromDate": $("#rfpdash_from_date").dxDateBox("instance").option("value"),
+                "ToDate": $("#rfpdash_to_date").dxDateBox("instance").option("value")
+            });
+            var datafiltergrid = callgetlist('GetRFPDetailsForBDEwise', filtergridBDE);
+            if (datafiltergrid != null) {
+                renderRFPBDEDeatilsGrid(datafiltergrid);
+            }
+
+            function renderRFPBDEDeatilsGrid(data) {
+                var OpeningskillratingGrid = $("#GrdGetRFPDetailsForBDEWiseexp")
+                    .dxDataGrid({
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto",
+                        },
+                        dataSource: data,
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: true,
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search...",
+                        },
+                        headerFilter: {
+                            visible: true,
+                        },
+                        grouping: {
+                            autoExpandAll: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [10, 20, 30],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column"
+                        },
+                        sorting: {
+                            mode: "multiple",
+                        },
+                        selection: {
+                            mode: "multiple",
+                        },
+                        summary: {
+                            totalItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count",
+                                },
+                            ],
+                            groupItems: [
+                                {
+                                    column: "sno",
+                                    summaryType: "count"
+                                }
+                            ],
+                        },
+                        editing: {
+                            mode: "popup",
+                            allowAdding: false,
+                            allowUpdating: false,
+                            useIcons: true,
+                        },
+                        columnChooser: {
+                            enabled: true,
+                        },
+                        rowAlternationEnabled: true,
+                        //filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        allowColumnResizing: true,
+                        showBorders: true,
+                        columns: [
+                            {
+                                caption: "#",
+                                dataField: "sno",
+                                cssClass: "rno",
+                                allowGrouping: false,
+                                allowCollapsing: false,
+                                allReordering: false,
+                                width: 70,
+                                cellTemplate: function (container, options) {
+                                    container.text(
+                                        OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                    );
+                                },
+                            },
+                            {
+                                caption: "Date",
+                                dataField: "ReceivedDate",
+                                dataType: "date",
+                                format: "dd-MMM-yy"
+                            },
+                            {
+                                caption: "Client",
+                                dataField: "ClientName"
+                            },
+                            {
+                                caption: "RFP Name",
+                                dataField: "ProjectTitle"
+                            },
+                            {
+                                caption: "Owner",
+                                dataField: "Owner",
+                            },
+                            {
+                                caption: "BDE",
+                                dataField: "BDE",
+                            },
+                            {
+                                caption: "Assigned",
+                                dataField: "Assigned",
+                            },
+                            {
+                                caption: "Technology for the given date",
+                                dataField: "Technology"
+                            },
+                            {
+                                caption: "", dataField: "Id", allowGrouping: false, allowCollapsing: false, allReordering: false, allowExporting: false,
+                                cellTemplate: function (container, options) {
+                                    $("<div>")
+                                        .append("<button data-rfpid=" + options.data.Id + " class='btn btn-xs btn-primary edit-btn btnSelectChatHistory' Onclick=selectChatHistory('" + options.data.Id + "') title='Char History'><i class='fas fa-comments'></i></button>")
+                                        .appendTo(container);
+                                }
+                            }
+                        ],
+                    })
+                    .dxDataGrid("instance");
+            }
+        }
+    }
+
+    function loadChartC1() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartC1DS = [
+            {
+                country: "China",
+                y014: 320866959,
+                y1564: 853191410,
+                y65: 87774113,
+            },
+            {
+                country: "India",
+                y014: 340419115,
+                y1564: 626520945,
+                y65: 47063757,
+            },
+            {
+                country: "United States",
+                y014: 58554755,
+                y1564: 182172625,
+                y65: 34835293,
+            },
+            {
+                country: "Indonesia",
+                y014: 68715705,
+                y1564: 146014815,
+                y65: 10053690,
+            },
+            {
+                country: "Brazil",
+                y014: 50278034,
+                y1564: 113391494,
+                y65: 9190842,
+            },
+            {
+                country: "Russia",
+                y014: 26465156,
+                y1564: 101123777,
+                y65: 18412243,
+            },
+        ];
+
+        $("#chart_C1")
+            .dxChart({
+                palette: "Harmony Light",
+                dataSource: chartC1DS,
+                size: {
+                    width: 400,
+                    height: 300,
+                },
+                commonSeriesSettings: {
+                    type: "area",
+                    argumentField: "country",
+                },
+                series: [
+                    { valueField: "y1564", name: "15-64 years" },
+                    { valueField: "y014", name: "0-14 years" },
+                    { valueField: "y65", name: "65 years and older" },
+                ],
+                margin: {
+                    bottom: 20,
+                },
+                title: "Population: Age Structure (2000)",
+                argumentAxis: {
+                    valueMarginsEnabled: false,
+                },
+                export: {
+                    enabled: true,
+                },
+                legend: {
+                    verticalAlignment: "bottom",
+                    horizontalAlignment: "center",
+                },
+            })
+            .dxChart("instance");
+    }
+
+    function loadChartC2() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartC2DS = [
+            {
+                state: "Illinois",
+                year1998: 423.721,
+                year2001: 476.851,
+                year2004: 528.904,
+            },
+            {
+                state: "Indiana",
+                year1998: 178.719,
+                year2001: 195.769,
+                year2004: 227.271,
+            },
+            {
+                state: "Michigan",
+                year1998: 308.845,
+                year2001: 335.793,
+                year2004: 372.576,
+            },
+            {
+                state: "Ohio",
+                year1998: 348.555,
+                year2001: 374.771,
+                year2004: 418.258,
+            },
+            {
+                state: "Wisconsin",
+                year1998: 160.274,
+                year2001: 182.373,
+                year2004: 211.727,
+            },
+        ];
+
+        $("#chart_C2").dxChart({
+            dataSource: chartC2DS,
+            size: {
+                width: 400,
+                height: 300,
+            },
+            commonSeriesSettings: {
+                argumentField: "state",
+                type: "bar",
+                hoverMode: "allArgumentPoints",
+                selectionMode: "allArgumentPoints",
+                label: {
+                    visible: true,
+                    format: {
+                        type: "fixedPoint",
+                        precision: 0,
+                    },
+                },
+            },
+            series: [
+                { valueField: "year2004", name: "2004" },
+                { valueField: "year2001", name: "2001" },
+                { valueField: "year1998", name: "1998" },
+            ],
+            title: "Gross State",
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center",
+            },
+            export: {
+                enabled: true,
+            },
+            onPointClick: function (e) {
+                e.target.select();
+            },
+        });
+    }
+
+    function loadChartC3() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartC3DS = [47.27, 65.32, 84.59, 71.86];
+
+        $("#chart_C3").dxBarGauge({
+            startValue: 0,
+            size: {
+                width: 400,
+                height: 300,
+            },
+            endValue: 100,
+            values: chartC3DS,
+            label: {
+                indent: 30,
+                format: {
+                    type: "fixedPoint",
+                    precision: 1,
+                },
+                customizeText: function (arg) {
+                    return arg.valueText + " %";
+                },
+            },
+            export: {
+                enabled: true,
+            },
+            title: {
+                text: "Series' Ratings",
+                font: {
+                    size: 28,
+                },
+            },
+        });
+    }
+
+
+    //get Manage Comment History
+
+    function rfpCommnetsHistory(rfpId) {
+        //$("#rfpdataplancomments").appendTo("body").modal("show");
+        var filter_val = JSON.stringify({
+            "RFPId ": rfpId,
+            "IsActive": 'True',
+            "Token": Token
+        });
+        //  var getManageplanComments = callgetlist("GetCommentsInResourceRequirement", filter_val);
+        callGetListAsync('GetCommentsinRFP', filter_val, function (getManageplanComments) {
+            var plan_no_comments_count = 0;
+            var plan_no_documentsCount = 0;
+            var plan_comment_history_html = "";
+            getManageplanComments.forEach(function (item) {
+                var plan_created_date = new Date(item.CreatedDate);
+                var plan_date_month_year = plan_created_date.toLocaleDateString();
+                var plan_time = plan_created_date.toLocaleTimeString();
+
+                if (item.Id != localStorage.getItem("EmployeeID")) {
+                    plan_comment_history_html += "<div style='width:100%;display:flow-root'><div class='message dx-theme-background-color'>"
+                    plan_comment_history_html += "<div class='name'>" + item.EmployeeName + "</div>"
+                    plan_comment_history_html += "<div class='date'>" + plan_date_month_year + " " + plan_time + "</div>"
+                    plan_comment_history_html += "<div class='text'>" + item.Content + "</div></div></div>";
+                }
+                else {
+                    plan_comment_history_html += "<div style='width:100%;display:flow-root'><div class='message dx-theme-background-color' style='float:right;background-color:rgb(225, 247, 223) !important'>"
+                    plan_comment_history_html += "<div class='date'>" + plan_date_month_year + " " + plan_time + "</div>"
+                    plan_comment_history_html += "<div class='text'>" + item.Content + "</div></div></div>";
+                }
+
+            });
+            $("#rfpdata_plan_comments_documents").show();
+            $("#rfpdata_plan_comments_documents").html(plan_comment_history_html);
+            var div = document.getElementById('rfpdata_plan_comments_documents');
+            div.scrollTop = div.scrollHeight - div.clientHeight;
+        })
+    }
+    
+    $("#rfpdash_from_date").dxDateBox({
+        displayFormat : "dd-MMM-yyyy",
+        type: "date"
+    });
+    
+    $("#rfpdash_to_date").dxDateBox({
+        displayFormat : "dd-MMM-yyyy",
+        type: "date"
+    });    
+
+</script>

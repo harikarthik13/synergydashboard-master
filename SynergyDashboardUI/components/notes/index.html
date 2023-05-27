@@ -1,0 +1,44 @@
+<link href="components/notes/css/notes.css" rel="stylesheet" />
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script> -->
+
+<script type="text/javascript" src="js/library/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.dataTables.min.js"></script>
+<div class="card-detail">
+    <span><i><img src="components/notes/images/notes.png" width="40px" height="40px" /></i></span>
+	<span class="card-detail-title"><b>Notes</b></span>
+	<span class="pull-right">
+	<button type="button" class="btn btn-xs btn-primary pull-right" id="btnAddNotes" onclick="notesModelOpen();" >
+		Add Notes
+	</button>
+	</span>
+	<hr />
+	<div id="sddgd-notesCard"></div>
+	     <!-- <div class="table-responsive" id="notes_table" >
+        <table class="table table-striped" id="notes_datatable" >
+            <thead>
+                <tr>
+                    <td>#</td>
+					<td>Description</td>
+					<td>Priority</td>
+					<td>Action</td>
+                </tr>
+            </thead>
+            <tbody id="notes_display_table">
+
+
+            </tbody>
+        </table>
+    </div>  -->
+</div>
+
+
+ 
+<script type="text/javascript" src="components/notes/js/notes.js"></script>
+<script>
+	$(document).ready(function () {		
+		$("#notesModal").load("components/notes/NotesModel.html");
+	})
+
+</script>

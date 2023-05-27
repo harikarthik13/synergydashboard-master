@@ -1,0 +1,203 @@
+<div class="card-detail">
+    <span class="modal-not-include">
+    <span class="card-detail-title"><b>Consultant Lead Approval</b></span>
+    <hr>
+</span>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>Consultant</label>
+       </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>Project</label>
+            </div>
+      </div>    
+      <div class="col-md-3">
+        <div class="form-group">
+          <label>Year</span></label>
+         </div>
+      </div>
+      <div class="col-md-3">
+          <div class="form-group">
+              <label>Month</span></label>
+              </div>
+        </div>             
+</div>
+  <div class="row">
+    <div class="col-md-3">
+      <div id="CLA_consultantSelectBox"></div>
+    </div>
+    <div class="col-md-3">
+      <div id="CLA_projectSelectBox"></div>
+    </div>
+    <div class="col-md-3">
+        <div id="CLA_yearSelectBox"></div>
+      </div>
+      <div class="col-md-3">
+        <div id="CLA_monthSelectBox"></div>
+      </div>
+  </div><br/>
+  
+  <div class="mt-5" id="CLA_dataGridContainer"></div>
+</div>
+<script src='components/consultantleadapproval/js/consultantleadapproval.js'></script>
+<script>
+
+    var consultant_data = JSON.stringify({
+        "IsActive":true,
+    });
+    
+    var consultantDataSource = callgetlist('GetConsultantList', consultant_data);
+
+    $("#CLA_consultantSelectBox").dxSelectBox({
+        dataSource: consultantDataSource,
+        valueExpr: "ID",
+        displayExpr: "Name",
+      value: "Saravanan",
+      onValueChanged: function(e) {
+            consultantChangedForLead(e)
+        }
+    });
+
+   var consultant =$("#CLA_consultantSelectBox").dxSelectBox('instance').option('value');
+    var project_filter_data = JSON.stringify({
+        "IsActive":true,
+       "ConsultantName":consultant,
+    });
+   var projectDataSource = callgetlist('GetProjectsForConsultant', project_filter_data);
+
+    $("#CLA_projectSelectBox").dxSelectBox({
+        dataSource: projectDataSource,
+        valueExpr: "Projects",
+        displayExpr: "Projects",
+        searchEnabled: true,
+        value: "test",
+        onValueChanged: function(e) {
+            projectLoadGridForProject(e)
+        }
+    });
+
+    var yearDataSource = [{Name:'2020'},{Name:'2019'},{Name:'2018'}];
+        $("#CLA_yearSelectBox").dxSelectBox({
+          dataSource: yearDataSource,
+          valueExpr: "Name",
+          displayExpr: "Name",
+          value: "2020",
+          searchEnabled: true
+      });
+  
+  var monthDataSource = [{ID:1,Name:'1'},{ID:2,Name:'2'},{ID:3,Name:'3'},{ID:4,Name:'4'},{ID:5,Name:'5'},{ID:3,Name:'3'},
+        {ID:6,Name:'6'},{ID:7,Name:'7'},{ID:8,Name:'8'},{ID:9,Name:'9'},{ID:10,Name:'10'},{ID:11,Name:'11'}, {ID:12,Name:'12'}];
+  
+      $("#CLA_monthSelectBox").dxSelectBox({
+          dataSource: monthDataSource,
+          valueExpr: "ID",
+          displayExpr: "Name",
+          value:9,
+          searchEnabled: true,
+          onValueChanged: function(e) {
+            loadGridForLead(e)
+        }
+      });
+
+   var filter_file_val = JSON.stringify({
+        "IsActive":true,
+       "ConsultantName":consultant,
+       "ProjectName":$("#CLA_projectSelectBox").dxSelectBox('instance').option('value'), 
+    });
+    var tableDataSource = callgetlist('GetConsultantLogByProject', filter_file_val);
+
+    var isEdit = function(position) {
+        return position;
+    };
+   $("#CLA_dataGridContainer").dxDataGrid({
+        dataSource: tableDataSource,
+        keyExpr: "Id",
+        showBorders: true,
+        allowColumnReordering: true,
+          columnChooser: {
+            enabled: true,
+            allowSearch: true
+          },
+          export: {
+            enabled: true,
+            allowExportSelectedData: true
+          },
+        paging: {
+            enabled: false
+        },
+        editing: {
+            mode: "row",
+            allowUpdating: function(e) {
+                return isEdit(e.row.data.UAApprovedHours==null);
+            }
+        }, 
+        allowColumnResizing: true,
+        columns: [
+            {
+                dataField: "Date",
+                caption: "Date",
+                dataType: "date",
+                validationRules: [{ type: "required" }],
+                allowEditing: false
+            }, {
+                dataField: "Task",
+                caption: "Task",
+                validationRules: [{ type: "required" }],
+                allowEditing: false
+            },
+            {
+                  dataField: "Project",
+                  caption: "Project",
+                  allowEditing: false
+            },
+            {
+                dataField: "LoggedHours",
+                caption: "LoggedHours",
+                validationRules: [{ type: "required" }],
+                allowEditing: false
+            }, 
+            {
+                dataField: "ApprovedHours",
+                caption: "ApprovedHours",
+                dataType: 'number',
+            }, 
+            {
+                dataField: "BillableHours",
+                caption: "BillableHours",
+                dataType: 'number',
+            }, 
+            {
+                dataField: "Remarks",
+                caption: "Remarks",
+            }, 
+        ],
+        onEditingStart: function(e) {
+            // logEvent("EditingStart");
+        },
+        onInitNewRow: function(e) {
+            // logEvent("InitNewRow");
+        },
+        onRowInserting: function(e) {
+            // logEvent("RowInserting");
+        },
+        onRowInserted: function(e) {
+            // logEvent("RowInserted");
+        },
+        onRowUpdating: function(e) {
+            updateConsultantLeadTaskEntry(e);
+        },
+        onRowUpdated: function(e) {
+            // logEvent("RowUpdated");
+        },
+        onRowRemoving: function(e) {
+            // logEvent("RowRemoving");
+        },
+        onRowRemoved: function(e) {
+            // logEvent("RowRemoved");
+        }
+    });
+</script>

@@ -1,0 +1,22 @@
+<div class="card-detail">
+<span class="card-detail-title"><b>Bench To Billing</b></span>
+   <!-- <form>
+  <input type="text" placeholder="Search.." id="btbsearch" name="search">
+  </form> -->
+	  <hr />
+    <div id="grid-card">
+        <div id="benchToBillingGrid"></div>
+    </div>
+	<div id="manage_proposal_plan"></div>
+</div>
+
+<script>
+    $(document).ready(function(){
+    renderBenchToBillingReportGrid();
+})
+  $("#manage_proposal_plan").load("components/BenchToBilling/managePlanlModel.html");
+</script>
+<script type="text/javascript" src="components/BenchToBilling/js/benchtobilling.js"></script>
+<script type="text/javascript" src="components/BenchToBilling/js/benchtobillingcardgrid.js"></script>
+
+

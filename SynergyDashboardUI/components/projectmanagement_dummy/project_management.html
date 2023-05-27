@@ -1,0 +1,883 @@
+<!-- RFP Style -->
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="css/library/jquery-ui.css" rel="stylesheet" />
+<link href="css/library/dropzone.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/jquery-ui.js"></script>
+<script type="text/javascript" src="js/library/jquery.smartWizard.js"></script>
+<!-- <script type="text/javascript" src="js/library/jquery.smartWizard.js"></script> -->
+<script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+
+
+
+
+<link href="components/projectmanagement/css/projectmanagement.css" rel="stylesheet" />
+
+
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> --> 
+<!--POP-UP RFP MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="ProjectManagementModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+               onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+               <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="myModalLabel">Project Details</h2>
+         </div>
+         <div class="modal-body">
+            <div id="projectManagement_smartwizard" class="sw-main sw-theme-default">
+               <ul class="nav nav-tabs step-anchor">
+                  <li><a href="#step-1"><span>1</span></a></li>
+                  <li><a href="#step-2"><span>2</span></a></li>
+                  <li><a href="#step-3"><span>3</span></a></li>
+               </ul>
+               <div class="form-hldr" id="modal_content">
+                  <div id="step-1" class="project-first-step">
+                     <div class="step-title">
+                         <h3>Step1: <span>Client</span></h3>
+                         <div class="pull-right">
+                             <button class="btn btn-secondary btn-xs">
+                                 Work Order
+                             </button>
+                         </div>
+                         <label class="checkbox-inline pull-right">
+                             <input type="checkbox" id="ProjectActivityStatus" onclick="return false;"> Isactive
+                         </label>
+                     </div>
+                     <div class="form-section" id="form-block">
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Project Name</label>
+                                     <div class="dlClient">
+                                         <input type="text" class="form-control" value="Project Name" readonly>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Client</label>
+                                     <div class="dlClient">
+                                       <input type="text" class="form-control" value="Client" readonly>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Project Type</label>
+                                     <div class="dlClient">
+                                       <input type="text" class="form-control" value="Project Type" readonly>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Development Model</label>
+                                     <div class="dlClient">
+                                       <input type="text" class="form-control" value="Development Model" readonly="true" >
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Project Industry</label>
+                                     <div class="dlClient">
+                                       <input type="text" class="form-control" value="Project Industry" readonly="true" >
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Project Domain</label>
+                                     <div class="dlClient">
+                                       <input type="text" class="form-control" value="Project Domain" readonly="true" >
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Planned Start Date</label>
+                                     <div class="dtpClient">
+                                         <div class="input-group date">
+                                             <input type="text" class="form-control date-validator"
+                                                 value="01/01/2019" readonly>
+                                             <span class="input-group-addon">
+                                                 <i class="glyphicon glyphicon-calendar"></i>
+                                             </span>
+                                         </div>
+                                         <span class="error_message"></span>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Planned End Date</label>
+                                     <div class="dtpClient">
+                                         <div class="input-group date">
+                                             <input type="text" class="form-control date-validator" value="01/02/2019" readonly>
+                                             <span class="input-group-addon">
+                                                 <i class="glyphicon glyphicon-calendar"></i>
+                                             </span>
+                                         </div>
+                                         <span class="error_message"></span>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Actual Start Date</label>
+                                     <div class="input-group date">
+                                         <input type="text" class="form-control" id="dtpActualStartDate"
+                                             readonly="">
+                                         <span class="input-group-addon">
+                                             <i class="glyphicon glyphicon-calendar"></i>
+                                         </span>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>Actual End Date</label>
+                                     <div class="input-group date">
+                                         <input type="text" class="form-control" id="dtpActualEndDate"
+                                             readonly="">
+                                         <span class="input-group-addon">
+                                             <i class="glyphicon glyphicon-calendar"></i>
+                                         </span>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>UTA Start Date</label>
+                                     <div class="input-group date">
+                                         <input type="text" class="form-control" id="dtpUtaStartDate"
+                                             readonly="">
+                                         <span class="input-group-addon">
+                                             <i class="glyphicon glyphicon-calendar"></i>
+                                         </span>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label>UTA End Date</label>
+                                     <div class="input-group date">
+                                         <input type="text" class="form-control" id="dtpUtaEndDate"
+                                             readonly="">
+                                         <span class="input-group-addon">
+                                             <i class="glyphicon glyphicon-calendar"></i>
+                                         </span>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-12">
+                                 <div class="form-group">
+                                     <label>Project Description</label>
+                                     <textarea class="form-control" rows="4" id="textProjectDescription"></textarea>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-12">
+                                 <div class="form-group">
+                                     <label>Project Technology Notes</label>
+                                     <textarea id="ProjectTextArea" class="form-control" rows="4"></textarea>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                  </div>
+                  <div id="step-2" class="project-second-step">
+                     <div class="step-title">
+                         <h3>Step2: <span>Project Contacts</span></h3>
+                     </div>
+                     <div class="form-section" id="form-block">
+                         <div class="row">
+                             <div class="col-md-12">
+                                 <button type="button" class="btn btn-sm btn-secondary add-btn pull-right m-b-10" data-toggle="collapse" data-target="#add-contacts">Add Contact</button>
+                             </div>
+                         </div>
+                         <div id="add-contacts" class="panel panel-primary collapse">
+                             <div class="panel-heading">
+                                 <h4>New Project</h4>
+                             </div>
+                             <div class="panel-body">
+                                 <div class="row">                                                                   
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Client Contact Name</label>
+                                             <div class="txtContacts">
+                                                 <div class="input-group"> 
+                                                     <input type="hidden" val="" id="hdnClientContactId">                                
+                                                     <input type="text" class="form-control" id="txtClientName">
+                                                 </div>
+                                                 <span class="error_message"></span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Email ID</label>
+                                             <div class="txtContacts">
+                                                 <div class="input-group">                                 
+                                                     <input type="text" class="form-control" id="txtEmailId">
+                                                 </div>
+                                                 <span class="error_message"></span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>                                   
+                                 <div class="row">                                                                   
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Phone No 1</label>
+                                             <div class="txtContacts">
+                                                 <div class="input-group">                                 
+                                                     <input type="text" class="form-control" id="txtPhoneNo1">
+                                                 </div>
+                                                 <span class="error_message"></span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Phone No 2</label>                                                      
+                                             <div class="input-group">                                 
+                                                 <input type="text" class="form-control">
+                                             </div>                                                                                                                  
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="row">                                                                   
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Country</label>
+                                             <div class="dlContacts">
+                                                 <div class="input-group" id="name">
+                                                     <select class="form-control" id="dlCountry">
+                                                                                                          
+                                                     </select>
+                                                 </div>
+                                                 <span class="error_message"></span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>State</label>
+                                             <div class="dlContacts">
+                                                 <div class="input-group" id="name">
+                                                     <select class="form-control" id="dlState">
+                                                                               
+                                                     </select>
+                                                 </div>
+                                                 <span class="error_message"></span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="row">                                                                   
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>City</label>
+                                             <div class="dlContacts">
+                                                 <div class="input-group" id="name">
+                                                     <select class="form-control" id="dlCity">
+                                                                                                      
+                                                     </select>
+                                                 </div>
+                                                 <span class="error_message"></span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Fax No</label>                                                       
+                                             <div class="input-group">                                 
+                                                 <input type="text" class="form-control" id="txtFaxNo">
+                                             </div>                                                  
+                                         </div>
+                                     </div>
+                                 </div>  
+                                 <div class="row">                                                                   
+                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                             <label>Skype Id</label>                                                       
+                                             <div class="input-group">                                 
+                                                 <input type="text" class="form-control" id="txtSkypeId">
+                                             </div>                                                  
+                                         </div>
+                                     </div>                                            
+                                 </div>                                                                                      
+                                 <div class="row">
+                                     <div class="pull-right btn-right">
+                                         <button class="btn btn-danger btn-sm add-btn" type="button">Cancel</button>
+                                         <button class="btn btn-secondary btn-sm add-btn" type="button" id="btnContactsSave">Save</button>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="row">
+                             <div class="col-md-12">
+                                 <div id="displayContacts">
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div id="step-3" class="project-third-step">
+                    <div class="step-title">
+                        <h3>Step3: <span>Project Phases</span></h3>
+                    </div>
+                    <div class="form-section" id="form-block">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-sm btn-secondary add-btn pull-right m-b-10" data-toggle="collapse" data-target="#add-new-project-phases">Add New</button>
+                            </div>
+                        </div>
+                        <div id="add-new-project-phases" class="panel panel-primary collapse">
+                            <div class="panel-heading">
+                                <h4>New Project</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Phase Name</label>
+                                            <div class="txtPhaseName">
+                                                <div class="input-group">
+                                                    <input type="hidden" val="" id="hdnPhaseId">
+                                                    <input type="text" class="form-control" id="txtPhaseName">
+                                                </div>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Header Title</label>
+                                            <div class="txtPhaseHeaderTitle">
+                                                    <div class="input-group">
+                                                        <input type="hidden" val="" id="hdnPhaseId">
+                                                        <input type="text" class="form-control" id="txtHeaderTitle">
+                                                    </div>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>                                         
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Start Date</label>
+                                            <div class="dtpPhase">
+                                                <div class="input-group date">
+                                                    <input type="text" class="form-control phaseDateValidator" id="dtpPhaseStartDate" readonly="">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                     </span>
+                                                </div>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>End Date</label>
+                                            <div class="dtpPhase">
+                                                <div class="input-group date">
+                                                    <input type="text" class="form-control phaseDateValidator" id="dtpPhaseEndDate" readonly="">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Estimated Hours</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="HH/MM/SS" id="txtHours" readonly="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="col-md-6">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="" id="PhaseStatus">IsActive</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Note</label>
+                                            <textarea class="form-control" rows="4" id="txtNote"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="pull-right btn-right">
+                                        <button class="btn btn-danger btn-sm add-btn" type="button">Cancel</button>
+                                        <button class="btn btn-secondary btn-sm add-btn" type="button" id="btnNewProjectSave">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="displayProjectManagementPhase">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               </div>
+               <div class="btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-end">
+                  <div class="btn-group mr-2 sw-btn-group" role="group"><button
+                        class="btn btn-secondary sw-btn-prev disabled" type="button">Previous</button><button
+                        class="btn btn-secondary sw-btn-next" type="button">Next</button></div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<div class="modal fade steps-model" id="ResourceAvailabilityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                ><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+             <h2 class="modal-title" id="myModalLabel">Resource Management</h2>
+          </div>
+          <div class="modal-body">
+            <div class="row"> 
+                <div class="col-md-3">
+                    Project Type : Fixed Bit
+                </div>
+                <div class="col-md-3">
+                    Project Duration : 180 Hrs
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-md-3">
+                    Project Domain : Java
+                </div>
+                <div class="col-md-3">
+                    Project Start Date : 27/10/2018
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-md-3">
+                    Project Name : Test
+                </div>
+                <div class="col-md-3">
+                    Project End Date : 21/09/2020
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6"> 
+                    <h4>Assigned Users</h4>
+                    <input class="form-control" id="inputUsers" type="text" placeholder="Search..">
+                    <hr>
+                    <ul id = "sortableAssignedUsers">
+                        <li>
+                            <div class="col-md-offset-1 col-md-11">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2 AssignedContact">
+                                                <img src="./components/projectmanagement/images/user.png" class="img-circle" alt="User">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>Manikandan</p>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-md-offset-1 col-md-11">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2 AssignedContact">
+                                                <img src="./components/projectmanagement/images/user.png" class="img-circle" alt="User">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>SasiKumar</p>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6"> 
+                    <h4>Available Resources</h4>
+                    <input class="form-control" id="inputAvailableResource" type="text" placeholder="Search..">
+                    <hr>
+                    <ul id = "sortableAvailableResources">
+                        <li>
+                            <div class="col-md-offset-1 col-md-11">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2 AssignedContact">
+                                                <img src="./components/projectmanagement/images/user.png" class="img-circle" alt="User">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>Diviamon</p>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-md-offset-1 col-md-11">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2 AssignedContact">
+                                                <img src="./components/projectmanagement/images/user.png" class="img-circle" alt="User">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>Suresh</p>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-md-offset-1 col-md-11">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2 AssignedContact">
+                                                <img src="./components/projectmanagement/images/user.png" class="img-circle" alt="User">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>Naveen</p>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-md-offset-1 col-md-11">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2 AssignedContact">
+                                                <img src="./components/projectmanagement/images/user.png" class="img-circle" alt="User">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>Vidhiya Prakash</p>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="col-md-offset-1 col-md-11">
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-2 AssignedContact">
+                                                <img src="./components/projectmanagement/images/user.png" class="img-circle" alt="User">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <p>Salman Sulthan</p>
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+          </div>
+       </div>
+    </div>
+</div>
+
+<!-- PROJECT_MANAGEMENT_TASKMANAGEMENT MODAL STARTS HERE -->
+
+<div class="modal fade" id="ProjectTaskModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Task Management</h3>
+            </div>
+            <div class="modal-body">
+                <div id="sortableTask">
+                    <div class="col-md-4">
+                        <div>
+                            <h3>ToDo</h3>
+                        </div>                        
+                        <div id="ProjectTodoNew">
+                            <span><button class="btn btn-success btn-xs" onclick=showAddNewTask()><i class="fa fa-plus"></i></button>New Item</span>
+                            <span class="pull-right"><button class="btn btn-xs" onclick=showSearchInput()><i class="fa fa-search"></i></button></span>
+                        </div>
+                        <div id="searchTaskTodo">
+                            <input type="text" id="searchInputTodo" class="input">
+                        </div>
+                        <div id="addnewTask">
+                            <input id="ProjectTaskName"></input>
+                            <button class="btn btn-primary btn-xs" onclick=addnewTask()> Add Task</button>
+                            <span class="error_message"></span>
+                        </div>
+                        <ul id="TaskIssueBoardTodo" class="handle">                              
+                            
+                        </ul>                      
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <h3>Ongoing</h3>
+                        </div>                        
+                        <ul id="TaskIssueBoardInprogress"  class="handle">
+                            
+                        </ul>                    
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            <h3>Completed</h3>
+                        </div>                        
+                        <ul id="TaskIssueBoardCompleted"  class="handle">
+                            
+                        </ul>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROJECT_MANAGEMENT_TASKMANAGEMENT MODAL ENDS HERE -->
+
+<!-- PROJECT_MANAGEMENT_DOCUMENTMANAGEMENT MODAL STARTS HERE -->
+
+<div class="modal fade" id="ProjectDocumentModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Document Management</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-right m-b-10">
+                            <button class="btn btn-primary btn-sm" onclick=resetDocumentUpload() type="button">Upload</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="upload-project-documents" class="panel panel-primary collapse">
+                    <div class="panel-heading">
+                        <h4>Upload</h4>
+                    </div>
+            
+                    <div class="panel-body">
+                        <div>
+                            <form action="#" class="dropzone needsclick dz-clickable" id="project-document-upload-form">
+                                <div class="dz-message needsclick">
+                                    Drop files here or click to upload.<br>
+                                </div>
+                            </form>
+                            <span class="error_message error_upload"></span>
+                        </div>
+                        <div class="form-section" id="form-block">
+                            <form id="form-document-upload">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group">
+                                            <label>Document Name</label>
+                                            <div class="txtDocument">
+                                                <input type="hidden" id="document-file-id" value="">
+                                                <input type="text" class="form-control" id="txt-project-document-name" value="">
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" id="chk-document-activity-status">Is Active</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Project Description</label>
+                                            <div class="txtDocument">
+                                                <textarea class="form-control" rows="4" id="txt-project-document-description"></textarea>
+                                                <span class="error_message"></span>
+                                            </div>                                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right">
+                                            <button class="btn btn-danger btn-sm add-btn"
+                                                type="button" onclick=resetDocumentUpload()>Cancel</button>
+                                            <button id="btn-saveproject-document" class="btn btn-secondary btn-sm add-btn"
+                                            type="button" onclick=saveProjectDocument()>Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>                                            
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-12 project-documents">
+                        <div id="show-project-documents">
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROJECT_MANAGEMENT_DOCUMENTMANAGEMENT MODAL ENDS HERE -->
+
+<!-- PROJECT_MANAGEMENT_APPROVALS MODAL STARTS HERE -->
+
+<div class="modal fade" id="ProjectApprovalModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Approvals</h3>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROJECT_MANAGEMENT_APPROVALS MODAL ENDS HERE -->
+
+<!-- PROJECT_MANAGEMENT_TIMESHEET MODAL STARTS HERE -->
+
+<div class="modal fade" id="ProjectTimesheetModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Time Sheet Management</h3>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROJECT_MANAGEMENT_TIMESHEEt MODAL ENDS HERE -->
+
+<!-- PROJECT_MANAGEMENT_TIMESHEET MODAL STARTS HERE -->
+
+<div class="modal fade" id="ProjectAnalysisModal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Analysis</h3>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROJECT_MANAGEMENT_TIMESHEEt MODAL ENDS HERE -->
+
+<!-- SCRIPT INCLUDES -->
+
+<script type="text/javascript">
+ $(document).ready(function () {
+    $("#dtpActualStartDate").datepicker({});
+    $("#dtpActualEndDate").datepicker({});
+    $("#dtpUtaStartDate").datepicker({});
+    $("#dtpEndStartDate").datepicker({});
+    $("#ProjectTextArea").textext({ 
+        plugins : 'tags prompt',
+        prompt : 'add one..'     
+    }); 
+ });
+   // //var user_story = CKEDITOR.replace('user_story', {});
+
+   // $('#proposalDate').datepicker({
+   //    format: "yyyy-mm-dd",
+   //    endDate: new Date(),
+   //    autoclose: true
+   // });
+   // if ($('#proposalDate').val() == "") {
+   //    var date = new Date()
+   //    yr = date.getFullYear(),
+   //       month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth(),
+   //       day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
+   //       current_Date = yr + '-' + month + '-' + day;
+   //    /*alert(current_Date);*/
+   //    $('#proposalDate').val(current_Date);
+   //    // $('#proposalDate1').val(current_Date);  
+   // }
+
+   // /* This is proposal listing scripts  */
+   // $(window).on("load", function () {
+   //    getProposalList();
+   // });
+   // /* This is proposal listing scripts  */
+
+  
+
+</script>

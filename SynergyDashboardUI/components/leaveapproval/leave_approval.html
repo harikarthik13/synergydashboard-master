@@ -1,0 +1,227 @@
+<link href="components/leave_approval/css/leave_approval.css" rel="stylesheet" />
+<link href="components/leave_approval/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+
+<!-- <div class="loader"></div> -->
+<!-- Employee add leave modal -->
+<div class="modal fade bd-example-modal-lg in" id="ApprovalLeaveModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Add Approval Leave test</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="hdn-selectedRfpid" />
+                <div class="form-group">
+                   <!--  <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Leave Type</label>
+                        </div>
+                        <div class="col-md-6">
+                                <input type="text" name="leavetype" id="leavetype" class="form-control" readonly="" value="Casual Leave">                           
+                        </div>
+                    </div>
+                    <br> -->
+
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>From</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group date leavedatepicker">
+                                <input type="text" class="form-control" id="leavefrom" name="leavefrom" readonly="">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>To</label>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group date leavedatepicker">
+                                <input type="text" class="form-control" id="leaveto" name="leaveto" readonly="">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Number of days</label>
+                        </div>
+                        <div class="col-md-6">
+                          <input type="text" name="numberofdays" id="numberofdays" class="form-control" readonly="">
+                        </div>
+                    </div>
+                    <br />                   
+                    
+                    <div class="row files" id="files">
+                        <div class="col-md-4 text-right">
+                                <label>Add Files</label>
+                        </div>
+                        <div class="col-md-6">
+                        <span class="btn btn-default btn-file">
+                            Browse  <input type="file" name="files" multiple />
+                        </span>
+                        
+                    </div>
+                    <br />   
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table-striped uplodedFileList">
+                                <tr>
+                                    <td>
+                                            <ul class="fileList"></ul> 
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>                       
+                    </div>                                                                
+                    </div>                                               
+                    </div>                                      
+                    <br />
+                    <div class="row">
+                            <div class="col-md-4 text-right">
+                                <label>Leave Reason</label> 
+                            </div>
+                            <div class="col-lg-8 col-md-10 col-sm-12">                                  
+                                <input type="text" name="Reason" id="Reason" class="form-control col-lg-8 col-md-8">                        
+                            </div>
+                    </div>
+                    
+                    <br />                                               
+                    <br />
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="">Cancel</button>
+                        <button id="btnSaveNotes" type="button" class="btn btn-success" data-dismiss="modal"
+                            onclick="">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+   /*  for(name in CKEDITOR.instances)
+    {
+        CKEDITOR.instances[name].destroy(true);
+    }  */
+
+    CKEDITOR.replace('approvleavereason');
+    CKEDITOR.add
+        
+    $('.leavedatepicker').datepicker({
+        });
+        
+    $.fn.fileUploader = function (filesToUpload) 
+    {
+        this.closest(".files").change(function (evt) {
+
+            for (var i = 0; i < evt.target.files.length; i++) {
+                filesToUpload.push(evt.target.files[i]);
+            };
+            var output = [];
+
+            for (var i = 0, f; f = evt.target.files[i]; i++) {
+                var removeLink = "<a class=\"removeFile\" href=\"#\" data-fileid=\"" + i + "\">Remove</a>";
+
+                output.push("<br/><li class=\"glyphicon glyphicon-paperclip\"><strong>&nbsp;", escape(f.name), "</strong> - ",
+                    f.size, " bytes. &nbsp; &nbsp; ", removeLink, "</li> ");
+            }
+            var parent  = $('.uplodedFileList');
+            parent.find(".fileList").append(output.join(""));
+           
+        });
+    };
+
+    var filesToUpload = [];
+
+    $(document).on("click",".removeFile", function(e){
+        e.preventDefault();
+        var fileName = $(this).parent().children("strong").text();
+        // loop through the files array and check if the name of that file matches FileName
+        // and get the index of the match
+        for(i = 0; i < filesToUpload.length; ++ i){
+            if(filesToUpload[i].name == fileName){
+                ////console.log("match at: " + i);
+                // remove the one element at the index where we get a match
+                filesToUpload.splice(i, 1);
+            }	
+        }
+        ////console.log(filesToUpload);
+        // remove the <li> element of the removed file from the page DOM
+        $(this).parent().remove();
+    });
+
+    $("#files").fileUploader(filesToUpload);
+    
+
+    $("#uploadBtn").click(function (e) {
+        e.preventDefault();
+    });
+
+    $('#leaveto').change(function(){
+            
+        if ($('#leavefrom').val() != "" && $('#leaveto').val()!="") {
+            var start = $('#leavefrom').val();
+            var end = $('#leaveto').val();
+                            
+            days = noofdayscount(start,end);
+            if(days < 0){
+                var html = "<div><h4>'TO date' should be greater than the 'FROM date' </h4></div>";
+                    $('#div-alert-modal').html(html);
+                    $('#in_common-alert').appendTo('body').modal('show')                                    
+                    $('#leaveto').val("");                    
+            }
+            else{
+                $("#numberofdays").val(days);
+            }
+        }
+        else if($('#leavefrom').val() == "" ){
+            var html = "<div><h4>'FROM date' should not be empty </h4></div>";
+                    $('#div-alert-modal').html(html);
+                    $('#in_common-alert').appendTo('body').modal('show')                                    
+                    $('#leaveto').val("");
+        }
+    })
+        
+    $('#leavefrom').change(function(){
+        
+        if ($('#leavefrom').val() != "" && $('#leaveto').val()!="") {
+            var start = $('#leavefrom').val();
+            var end = $('#leaveto').val();
+            days = noofdayscount(start,end);
+            $("#numberofdays").val(days);
+        }
+    })
+                
+    function noofdayscount(start,end)
+    {
+        var startdate = new Date(start);
+        var enddate = new Date(end);
+        // end - start returns difference in milliseconds 
+        var diff = new Date(enddate - startdate);
+
+        // get days
+        var days = diff/1000/60/60/24;
+        return days;
+    }
+});
+
+</script>

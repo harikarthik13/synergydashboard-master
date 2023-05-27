@@ -1,0 +1,338 @@
+<div id="rfpOperations">
+    <div class="modal fade" id="modal-Assignrfp" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close reset-datas" data-dismiss="modal">&times;</button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Assigning to Lead </h4>
+                </div>
+                <div class="modal-body" data-simplebar>
+                    <input type="hidden" id="hdn-selectedRfpid" />
+                    <div class="form-group">
+                        <label>Assign</label>
+                        <div>
+                            <select class="form-control" id="cmb-rfpAssign" name="AssignTo">
+                                <option value="1">Diviamon Antony</option>
+                                <option value="2">Jyothi kumar</option>
+                                <option value="3">Srinivasan Mani</option>
+                            </select>
+                        </div>
+                        <br />
+                        <div class="modal-footer">
+                            <button id="btnrfp-assign" type="button" class="btn btn-success"
+                                data-dismiss="modal" onclick="btn_rfpAssignOnClick()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-Assignrrm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Create RRM</h4>
+                </div>
+                <div class="modal-body" data-simplebar>
+                    <div class="form-group">
+                        <input type="hidden" id="hdn-selectedRrm" />
+                        <div class="col-md-12" id="ClientDiv">
+                            <label>Client</label>
+                            <div>
+                                <input class="form-control clientInput" id="Client" name="Client"
+                                    placeholder="Client" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="BDEDiv">
+                            <label>BDE</label>
+                            <div>
+                                <input class="form-control BDEInput" id="BDE" name="BDE" placeholder="BDE"
+                                    type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="BDE_LeadDiv">
+                            <label>BDE_Lead</label>
+                            <div>
+                                <input class="form-control BDE_LeadInput" id="BDE_Lead" name="BDE_Lead"
+                                    placeholder="BDE_Lead" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="designationDiv">
+                            <label>Designation</label>
+                            <div>
+                                <input class="form-control" id="Designation" name="Designation"
+                                    placeholder="Designation" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="expRequiredDiv">
+                            <label>Experience Required</label>
+                            <div>
+                                <input class="form-control" id="Experience_Required"
+                                    name="Experience Required" placeholder="Exp Required" type="text"
+                                    value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="technicalskillsrequiredDiv">
+                            <label>Technical Skills required</label>
+                            <div>
+                                <input class="form-control" id="Technical_Skills_required"
+                                    name="Technical Skills required" placeholder="Technical Skills required"
+                                    type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="SkillsDiv">
+                            <label>Skills </label>
+                            <div>
+                                <input class="form-control" id="Skills" name="Skills" placeholder="Skills"
+                                    type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="createdbyDiv">
+                            <label>Created by</label>
+                            <div>
+                                <input class="form-control" id="Created_by" name="Created by"
+                                    placeholder="Created by" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="requesteddateDiv">
+                            <label>Requested Date</label>
+                            <div>
+                                <input class="form-control" id="Requested_Date" name="Requested Date"
+                                    placeholder="Requested Date" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="CommunicationDiv">
+                            <label>Communication</label>
+                            <div>
+                                <input class="form-control" id="Communication" name="Communication"
+                                    placeholder="Communication" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="NoOfPositionsDiv">
+                            <label>No.Of Positions</label>
+                            <div>
+                                <input class="form-control" id="No_Of_Positions" name="No.Of Positions"
+                                    placeholder="No. Of Positions" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="InterviewschdDiv">
+                            <label>Interview to be scheduled for</label>
+                            <div>
+                                <input class="form-control" id="Interview_to_be_scheduled_for:"
+                                    name="Interview to be scheduled for:"
+                                    placeholder="Interview to be scheduled for:" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="col-md-12" id="CommentsDiv">
+                            <label>Comments</label>
+                            <div>
+                                <input class="form-control" id="Comments" name="Comments"
+                                    placeholder="Comments" type="text" value="" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btnrrm-assign" type="button" class="btn btn-success"
+                                data-dismiss="modal" onclick="btn_rrmAssignOnClick()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-submitproposal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title"> Submit Proposal</h4>
+                </div>
+                <div class="modal-body" data-simplebar>
+                    <label for="f01">Please Select File</label>
+                    <input type="file" name="fname" placeholder="Please select file"><br>
+                    <div class="form-group">
+                        <span></span>
+                        <div class="modal-footer">
+                            <button id="btnrrm-assign" type="button" class="btn btn-success"
+                                data-dismiss="modal" onclick="btn_submitOnClick()">Submit Proposal</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="div-schedule-interview" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Scheduling Interview</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <form class="form-hordizontal well form-horizontal">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">RRM ID</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group"><input id="txt-rrm-RrmId" name="rrmid"
+                                            placeholder="1" class="form-control" type="number" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Client Name</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group"><input id="txt-rrm-ClientName"
+                                            name="clientname" placeholder="Client Name" class="form-control"
+                                            type="text" disabled></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Schedule to</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group"><input id="txt-rrm-ScheduleTo"
+                                            name="scheduleto" placeholder="Schedule To" class="form-control"
+                                            type="text" disabled></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Assigned to</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <select class="form-control" id="cmb-rrm-AssignedTo" required>
+                                            <option value="Diviamon">Diviamon</option>
+                                            <option value="Jayanth">Jayanth</option>
+                                            <option value="Saravana">Saravana</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Time</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+
+                                        <input type="text" id="txt-rrm-Interview-Datetime"
+                                            placeholder="24-08-2018 17:08:00" value="24-08-2018 17:08:00"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Requirement</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group"><input id="txt-rrm-Requirement"
+                                                name="requirement" value="Asp.Net MVC"
+                                                placeholder="Requirement" class="form-control" type="text"
+                                                disabled></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Candidate Name</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                        <div class="input-group"><input id="txt-rrm-CandidateName"
+                                                name="candidatename" placeholder="Name" class="form-control"
+                                                type="text" required></div>
+                                    </div>
+                                </div>
+
+                                <label class="col-md-4 control-label">Mode</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <select id="cmb-rrm-InterviewMode" class="form-control" required>
+                                            <option value="Telephone">Telephone</option>
+                                            <option value="FaceToFace">FaceToFace</option>
+                                            <option value="Machine">Machine</option>
+                                            <option value="Skype">Skype</option>
+                                            <option value="GTM">GTM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" id="rrm-Mode-Phone">
+                                <label class="col-md-4 control-label">
+                                    Phone number
+                                </label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <input id="rrmInput-mode-phone" name="phone" placeholder="Phone Number"
+                                        class="form-control" type="number">
+                                </div>
+                            </div>
+                            <div class="form-group" id="rrm-Mode-Skype">
+                                <label class="col-md-4 control-label">Skype Id</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <input id="rrmInput-mode-skype" name="skype" placeholder="Skype Id"
+                                        class="form-control" type="email">
+                                </div>
+                            </div>
+                            <div class="form-group" id="rrm-Mode-Gtm">
+                                <label class="col-md-4 control-label">GTM Id</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <input id="rrmInput-mode-gtm" name="gtm" placeholder="GTM Id"
+                                        class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Years of Experience</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group"><input id="txt-rrm-YearsOfExperience"
+                                            name="years-exp" placeholder="Years of Experience"
+                                            class="form-control" type="number" required></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Resume</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group">
+                                        <button type="button" class="btn btn-xs" id="btn-input-Resume">
+                                            <span><i><img src="./image/dashboard/pdficon.png" width="40px"
+                                                        height="40px" /></i></span>
+
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="schedule-modal" id="rrm-ScheduleId" value="">
+                </form>
+
+
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-success rrm-class-InterviewSave"
+                                onclick="ToastMessage()">Save</button>
+
+
+                            <div id="interview-save">Interview is scheduled</div>
+                            <button type="button" class="btn btn-default" id="btn-rrm-modal-close"
+                                data-dismiss="modal">Close</button>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+    </div>
+</div>
+
+</div>

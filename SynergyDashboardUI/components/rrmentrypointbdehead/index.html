@@ -1,0 +1,110 @@
+<script id="BdeHead">
+    var folderName = "rrmentrypointbdehead";
+    $(document).ready(function () {
+        var pageId = "BdeHead";
+        PageInitializeTechnicalTeam(pageId);
+    });
+
+    function PageInitializeTechnicalTeam(pageId) {
+        var rrmEntryGrid = RRMEntryPointGridBDEHead(pageId);
+        rrmEntryGrid.getRRMEntryTable();
+    }
+</script>
+
+<link href="components/rrmentrypointbdehead/css/rrmentrypoint.css" rel="stylesheet" />
+
+<script src='components/rrmentrypointbdehead/js/rrmentrypointgridrbdehead.js'></script>
+<script src='components/rrmentrypointbdehead/js/addRRMEntryPointBDEHead.js'></script>
+<script src='components/rrmentrypointbdehead/js/editRRMEntryPointBDEHead.js'></script>
+
+<div class="rrm-card-detail-NewInterviewCard card-detail">
+    <span><i><img src="./image/dashboard/rrm.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>RRM Entry Point</b></span>
+    <span class="pull-right">
+        <button id="rrmEntryPointAddBtnBdeHead" class="btn btn-sm btn-primary" data-type="add">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+
+    <div class="rrm-card-detail">
+        <div id="rrmGridReportBdeHead"></div>
+    </div>
+</div>
+
+<div id="rrm_entrypointmodelBdeHead"></div>
+
+<script type="text/javascript">
+    $("#rrm_entrypointmodelBdeHead").load("components/rrmentrypointbdehead/rrmEntryPointModalBDEHead.html");
+
+    $(document).ready(function () {
+        initializeRRMEntryPointBdeHead();
+
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        loggedInUserDepartment = jsonData.Data[0].Department
+        Token = jsonData.Data[0].Token
+    })
+
+    var loggedInUserDepartment;
+    var Token;
+    var addRRMEntryPointJsBDEHead;
+    var editRRMEntryPointJsBDEHead;
+    var addRRMTypeBDEHead;
+    var rrmId;
+    var ResourceRequirementTypeBDEHead;
+
+    //initialize RRMEntryPoint Bde Head
+    function initializeRRMEntryPointBdeHead() {
+        editRRMEntryPointJsBDEHead = EditRRMEntryPointBDEHead();
+        addRRMEntryPointJsBDEHead = AddRRMEntryPointBDEHead();
+    }
+
+    //edit RRM Entry Point BdeHead
+    $(document).on("click", ".editRRMEntryPointBdeHead", function (e) {
+        openEditRRMEntryPointBdeHead(e)
+    })
+
+    //open Edit RRM Entry Poiint Bde Head
+    function openEditRRMEntryPointBdeHead(e) {
+        
+        initializeModalBDEHead();
+        $('#RRMEntryPointModelBDEHead').appendTo("body").modal("show");
+        addRRMTypeBDEHead = $(e.currentTarget).data("type");
+        rrmId = $(e.currentTarget).data("rrmid");
+        ResourceRequirementTypeBDEHead = $(e.currentTarget).data("rrmtype");
+        $("#BDEHeadrrmType").attr('class', '');
+        if (ResourceRequirementTypeBDEHead == "G") {
+            $("#lblLeadNameBDEHead").text("Requirement lead");
+            $("#BDEHeadrrmType").html("RRM").addClass("label label-success m-l-xs");
+        }
+        else if (ResourceRequirementTypeBDEHead == "P") {
+            $("#lblLeadNameBDEHead").text("RFP Owner");
+            $("#BDEHeadrrmType").html("RFP").addClass("label label-info m-l-xs");
+        }
+        else if (ResourceRequirementTypeBDEHead == "R") {
+            $("#lblLeadNameBDEHead").text("Backup Lead");
+            $("#BDEHeadrrmType").html("Resignation").addClass("label label-warning m-l-xs");
+        }
+        initializeEditRRMBDEHead(rrmId);
+        editRRMEntryPointJsBDEHead.RRMEntryFromRRM(rrmId);
+    }
+
+    //rrmEntryPoint Add Btn event 
+    $(document).on("click", "#rrmEntryPointAddBtnBdeHead", function (e) {
+        rrmAddBtnClickedBDEHead(e)
+    })
+
+    //add btn click event
+    function rrmAddBtnClickedBDEHead(e) {
+        
+        addRRMTypeBDEHead = "add";
+        initializeModalBDEHead()
+        $('#RRMEntryPointModelBDEHead').appendTo("body").modal("show");
+        $("#BDEHeadrrmType").attr('class', '');
+        $("#OwnerrrmTypeBDEHead").attr('class', '');
+        $("#rrmmodelpagetitleBDEHead").text("Add RRM");
+        var rrmType = $(e.currentTarget).data("type");
+        initializeAddRRMBDEHead(rrmType);
+    }
+</script>

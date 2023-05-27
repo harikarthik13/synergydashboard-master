@@ -1,0 +1,21 @@
+.success_message{
+    color: green;
+}
+
+.error_message{
+    color: red;
+}
+
+.error_message1{
+    color: red;
+}
+
+.master-detail-caption {
+    font-weight: 600;
+    font-size: 12pt;
+    padding-bottom: 5px;
+}
+
+#sddgd-skillsets table tr td:last-of-type {
+    text-align: left!important;
+}

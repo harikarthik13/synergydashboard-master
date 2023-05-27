@@ -1,0 +1,40 @@
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+    text-align: left !important;
+    padding:5px;
+    font-size: 11pt;
+}
+
+#RRMDetailsProfileScreeningModal .table-label{
+    width:25%  !important;
+}
+
+#RRMDetailsProfileScreeningModal {
+    width: 100%;
+}
+
+#RRMDetailsProfileScreeningModal .modal-content{
+    width: 70%;
+}
+
+#candidateDetailsProfileScreeningModal {
+    width: 100%;
+}
+
+#candidateDetailsProfileScreeningModal .modal-content{
+    width: 70%;
+}
+
+#candidateDetailsProfileScreeningModal .modal-body{
+    min-height:calc(100vh - 200px)
+}
+
+#rrmHrReportsFilter {
+    background-color: #337AB7;
+}

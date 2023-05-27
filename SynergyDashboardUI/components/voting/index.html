@@ -1,0 +1,398 @@
+<div class="card-detail">
+    <!-- Add "modal-not-include" to a div for which we dont want to show them in modal  -->
+    <span>
+        <span class="card-detail-title modal-not-include"><b>Voting</b></span>
+        <button type="button" id="btnleaveDetail"
+            class="btn btn-xs cmn-modal-ex-btn modal-not-include expandCommonDiv pull-right">
+            <i class="fa fa-expand"></i>
+        </button>
+        <hr>
+    </span>
+
+    <!-- <div>
+        <button class="btn btn-success" id="add_nominee_btn">Add Nominee</button>
+    </div> -->
+
+    <div class="row">
+        <div class="col-md-12 votingGuideBox">
+            <h4>Rating</h4>
+            <ol>
+                <li>Giving the suggestions</li>
+                <li>Learning new technology, implementing the same in a project. (getting appreciation is good to have).</li>
+                <li>Completing the projcet in/before time and getting appreciation for the project.</li>
+                <li>Meeting beyond client expectation</li>
+            </ol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 " id="voteRating">
+            
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg in" id="nominee_comments_modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">×</span></button>
+                            <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="text-center modal-title">Comments</h4>
+                </div>
+                <div class="modal-body" data-simplebar>
+                    <p class="nominee_comment_display">
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // var fileStore = []
+    // var submitArr = []
+    var nomineeComment= new Array();
+    $(document).ready(function(){
+        var filterData = JSON.stringify({
+            "IsVoting": true,
+            "IsActive": true,
+        });
+        var getNomineeList = callgetlist('GetNomineeDeveloperForVoting', filterData);
+        //console.log(getNomineeList);
+        var categoryList = new Array();
+       
+        var mapNomineeListHtml = mapNomineeListcomputeHTML(getNomineeList);
+        $('#voteRating').html(mapNomineeListHtml);
+
+        $("#submitVote").click(function(){
+
+        var category1Value = $("input[type='radio'][name='category1']:checked").val();
+        var category2Value = $("input[type='radio'][name='category2']:checked").val();
+        var category3Value = $("input[type='radio'][name='category3']:checked").val();
+        var category4Value = $("input[type='radio'][name='category4']:checked").val();
+
+        //console.log(category1Value);
+        //console.log(category2Value);
+        //console.log(category3Value);
+        //console.log(category4Value);
+        var categoryFilter = JSON.stringify({
+            "IsActive": true
+        });
+        var getCategory=callgetlist('GetNomineeCategory',categoryFilter);
+        // //console.log(getCategory);
+    //     for (let count = (getCategory.length)-1 ; count >= 0; count--) {
+    //         if(getCategory[count]['RatingCode']==count)
+    //         {
+    //             categoryList.push ({
+    //     "CategoryId":getCategory[count]['CategoryId'],
+    //     "Description": getCategory[count]['Description'],
+    //     "Name": getCategory[count]['Name'],
+    //     "RatingCode": getCategory[count]['RatingCode']
+    //     }
+    //     );
+    //         }
+        
+    //   }
+        // //console.log(categoryList);
+        
+        // var voteDetails =[
+        //    {
+        //         "NomineeDeveloperId":getNomineeList[category1Value-1]["DeveloperId"],
+        //         "MentorId":localStorage.getItem("EmployeeID"),
+        //         "CategoryId":getCategory[1]['CategoryId'],
+        //         "VoteRating":getCategory[1]['RatingCode'],
+        //         "Comments":getNomineeList[category1Value-1]["Comments"]
+        //     },
+        //     {
+        //         "NomineeDeveloperId":getNomineeList[category2Value-1]["DeveloperId"],
+        //         "MentorId":localStorage.getItem("EmployeeID"),
+        //         "CategoryId":getCategory[2]['CategoryId'],
+        //         "VoteRating":getCategory[2]['RatingCode'],
+        //         "Comments":getNomineeList[category1Value-1]["Comments"]
+        //     },
+        //     {
+        //         "NomineeDeveloperId":getNomineeList[category3Value-1]["DeveloperId"],
+        //         "MentorId":localStorage.getItem("EmployeeID"),
+        //         "CategoryId":getCategory[3]['CategoryId'],
+        //         "VoteRating":getCategory[3]['RatingCode'],
+        //         "Comments":getNomineeList[category1Value-1]["Comments"]
+        //     },
+        //     {
+        //         "NomineeDeveloperId":getNomineeList[category4Value-1]["DeveloperId"],
+        //         "MentorId":localStorage.getItem("EmployeeID"),
+        //         "CategoryId":getCategory[4]['CategoryId'],
+        //         "VoteRating":getCategory[4]['RatingCode'],
+        //         "Comments":getNomineeList[category1Value-1]["Comments"]
+        //     }
+        // ];
+
+        var voteDetails = new Array();
+
+        
+        for(let i=1;i<=getNomineeList.length;i++)
+        {
+            var nomineeNumber=i-1;
+            if(nomineeNumber==(category1Value)-1)
+            {
+                voteDetails.push({
+                "NomineeDeveloperId":getNomineeList[category1Value-1]["NomineeDeveloperId"],
+                "MentorId":localStorage.getItem("EmployeeID"),
+                "CategoryId":getCategory[1]['CategoryId'],
+                "VoteRating":getCategory[1]['RatingCode'],
+                "Comments":getNomineeList[category1Value-1]["Comments"]
+            });
+            }
+            if(nomineeNumber==(category2Value)-1)
+            {
+                voteDetails.push({
+                "NomineeDeveloperId":getNomineeList[category2Value-1]["NomineeDeveloperId"],
+                "MentorId":localStorage.getItem("EmployeeID"),
+                "CategoryId":getCategory[2]['CategoryId'],
+                "VoteRating":getCategory[2]['RatingCode'],
+                "Comments":getNomineeList[category2Value-1]["Comments"]
+            });
+            }
+            if(nomineeNumber==(category3Value)-1)
+            {
+                voteDetails.push({
+                "NomineeDeveloperId":getNomineeList[category3Value-1]["NomineeDeveloperId"],
+                "MentorId":localStorage.getItem("EmployeeID"),
+                "CategoryId":getCategory[3]['CategoryId'],
+                "VoteRating":getCategory[3]['RatingCode'],
+                "Comments":getNomineeList[category3Value-1]["Comments"]
+            });
+            }
+            if(nomineeNumber==(category4Value)-1)
+            {
+                voteDetails.push({
+                "NomineeDeveloperId":getNomineeList[category4Value-1]["NomineeDeveloperId"],
+                "MentorId":localStorage.getItem("EmployeeID"),
+                "CategoryId":getCategory[4]['CategoryId'],
+                "VoteRating":getCategory[4]['RatingCode'],
+                "Comments":getNomineeList[category4Value-1]["Comments"]
+            });
+            }
+            if((nomineeNumber!=(category1Value)-1)&&(nomineeNumber!=(category2Value)-1)&&(nomineeNumber!=(category3Value)-1)&&(nomineeNumber!=(category4Value)-1))
+            {
+                voteDetails.push({
+                "NomineeDeveloperId":getNomineeList[nomineeNumber]["NomineeDeveloperId"],
+                "MentorId":localStorage.getItem("EmployeeID"),
+                "CategoryId":getCategory[0]['CategoryId'],
+                "VoteRating":getCategory[0]['RatingCode'],
+                "Comments":getNomineeList[nomineeNumber]["Comments"]
+            });
+            }
+
+        } 
+
+        // //console.log(voteDetails);
+
+        // //console.log(`${JSON.stringify(voteDetails)}`);   
+        var voting = {
+            "JSONDOMData":`${JSON.stringify(voteDetails)}`,
+            "IsActive":true
+        }
+        //    //console.log(typeof(voteDetails));
+        var data = {
+            "Method": "PostDeveloperofMonth",
+            "Data": voting
+        };
+            //console.log(data);
+        var postCall = PostDataCall(data);
+        // //console.log(postCall);
+            if(postCall['IsSuccess']==true)
+            {
+                swal({
+                title: "Success!",
+                text: postCall['Message'],
+                icon: "success",
+                });
+            }
+            else
+            {
+                swal({
+                title: "Sorry!",
+                text:postCall['Message'],
+                // text: "You already voted for this month",
+                icon: "error",
+                });
+            }
+       
+        });
+    }); 
+       
+    function mapNomineeListcomputeHTML(getNomineeList) {
+    
+    var html = "";
+
+    html +="<table id='voteRatingTable' style='width: 100%;margin-top:15px;'>";
+    html +="<thead>";
+    html +="<tr>";
+    html +="<th>Resource Name</th>";
+    html +="<th>Comments</th>";
+    html +="<th>1</th>";
+    html +="<th>2</th>";
+    html +="<th>3</th>";
+    html +="<th>4</th>";
+    html +="</tr>";
+    html +="</thead>";
+    html +="<tbody id='votingResourceList'>";
+    
+  if (getNomineeList == "") {
+    html += "<tr><td colspan='6'>No Data Found.!</td></tr>";
+  } else {
+    var data;
+    // var m_names = ['January', 'February', 'March', 
+    //            'April', 'May', 'June', 'July', 
+    //            'August', 'September', 'October', 'November', 'December'];
+
+    // d = new Date();
+    // var currentMonth = m_names[d.getMonth()-1]; 
+    getNomineeList.forEach(function (key, item) {
+      var RCount = item + 1;
+      
+      data = {
+        // "EmployeeId": key[ 'Employee id' ],
+        "EmployeeId": key.NomineeDeveloperId,
+        "EmployeeName": key.DeveloperName,
+        "Comments": key.Comments,
+        "Month": key.Month
+      };
+
+      var categoryFilter = JSON.stringify({
+            "IsActive": true
+        });
+        var getCategory=callgetlist('GetNomineeCategory',categoryFilter);
+        //console.log(getCategory);
+    //   if(data.Month==currentMonth){
+      nomineeComment[RCount]=data.Comments;
+      html += "<tr class='myRow' id='row_" + RCount + "'>";
+      //html += "<td>" + key[ 'Employee id' ] + "</td>";
+    
+      html += "<td>" +data.EmployeeName+ "</td>";
+      var comments=data.Comments;
+
+      var fieldCount=1;
+      html += "<td><button onclick=showNomineeCommentsModal('" + RCount + "','"+data.EmployeeId+"')><span class='glyphicon glyphicon-comment'></span></button></td>";
+      for (let count = 1 ; count < getCategory.length; count++) {
+       
+            html += "<td> <input type='radio' name='category"+fieldCount+"' value="+RCount+"> </td>";
+            fieldCount++;
+    //     categoryList = {
+    //     // "EmployeeId": key[ 'Employee id' ],
+    //     "CategoryId":getCategory[count]['CategoryId'],
+    //     "Description": getCategory[count]['Description'],
+    //     "Name": getCategory[count]['Name'],
+    //     "RatingCode": getCategory[count]['RatingCode'],
+    //   };
+
+       
+      }
+ 
+      html += "</tr>"; 
+
+    //   $(`.showComment${RCount}`).click(function(){
+    //     $('#nominee_comments_modal').appendTo('body').modal('show')
+    //     // $('.nominee_comment_display').html(submitArr[index].comments)
+    //      $('.nominee_comment_display').html(comments)
+    //   });
+        // }
+    }); 
+  }
+  html +="</tbody>";
+    html +="</table>";
+    if (getNomineeList != "") {
+        html +="<br><div class='col-sm-offset-10 col-sm-2' ><button class='btn btn-primary' id='submitVote'>Submit</button></div>";
+    }
+    
+  return html;
+}
+
+function showNomineeCommentsModal(RCount,DeveloperId){
+    // alert(DeveloperId);
+    var getFilesData=JSON.stringify({
+            "NomineeDeveloperId":DeveloperId,
+            "IsActive": true
+        });
+    var getFiles=callgetlist('GetNomineeDeveloperFiles',getFilesData);
+    //console.log(getFiles);
+    var commentHtml = "";
+    commentHtml +="<div class='jumbotron'><p class='text-dark'>"+nomineeComment[RCount]+"<p></div>";
+    if(getFiles.length!=0){
+
+    commentHtml +="<table id='nomineeFilesTable' style='width: 100%;margin-top:15px;'>";
+    commentHtml +="<thead>";
+    commentHtml +="<tr>";
+    commentHtml +="<th>File Name</th>";
+    commentHtml +="<th>Download</th>";
+    commentHtml +="</tr>";
+    commentHtml +="</thead>";
+    commentHtml +="<tbody>";
+    commentHtml +="<tbody>";
+        var file =new Array();
+   for(var count=0;count<getFiles.length;count++){
+      var fileId=getFiles[count]["FileId"];
+    //    alert(fileId);
+    file = {
+        'DocumentName' : getFiles[count]['DocumentName'],
+        'Extension' : getFiles[count]['Extension']
+    }
+    //console.log(file);
+    commentHtml +="<tr>";
+    commentHtml +="<td class='text-center'><br>"+getFiles[count]["DocumentName"]+"."+getFiles[count]["Extension"]+"<br><br></td>";
+    commentHtml +='<td><br><button class="btn btn-primary btn-xs" onclick=downloadFile("'+fileId+'")><span class="glyphicon glyphicon-arrow-down"></span></button><br><br></td>';
+    commentHtml +="</tr>";
+    }
+   }
+   // $('.nominee_comment_display').html(submitArr[index].comments)
+   commentHtml +="</tbody>";
+   commentHtml +="</table>";
+    $('#nominee_comments_modal').appendTo('body').modal('show');
+   $('.nominee_comment_display').html(commentHtml);
+}
+
+// function downloadFile(docName,docExt,docContent,docType) {
+
+//     var ext = docExt;
+//     var byteCharacters = atob(docContent);
+//     var byteNumbers = new Array(byteCharacters.length);
+//     for (var i = 0; i < byteCharacters.length; i++) {
+//       byteNumbers[i] = byteCharacters.charCodeAt(i);
+//     }
+//     var byteArray = new Uint8Array(byteNumbers);
+
+//     // now that we have the byte array, construct the blob from it
+//     var contentType = docType;
+//     var blob1 = new Blob([byteArray], { type: contentType });
+
+//     var fileName = docName+"."+ ext;
+//     //console.log(fileName);
+//     const a = document.createElement('a');
+//     document.body.appendChild(a);
+//     const url = window.URL.createObjectURL(blob1);
+//     a.href = url;
+//     a.download = fileName;
+//     a.click();
+//     setTimeout(() => {
+//       window.URL.revokeObjectURL(url);
+//       document.body.removeChild(a);
+//     }, 0)
+//   }
+
+function downloadFile(FileId) {
+    var SynergyURL = SynergyAPIURL;
+    VotingSecurityToken = localStorage.getItem("securityToken");
+    swal({
+      title: "Are you sure?",
+      text: "You want to download the File",
+      icon: "warning",
+      buttons: true,
+    })
+      .then((willDownload) => {
+        if (willDownload) {
+          window.open(SynergyURL + "DownloadFile?query=GetDownloadNomineeDeveloperFiles&filters={'FileId':'" + FileId + "','IsActive':true}&Token=" + VotingSecurityToken, '_blank');
+        }
+      });
+  }
+
+</script>

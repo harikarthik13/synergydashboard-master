@@ -1,0 +1,229 @@
+<link href="components/nre/css/nre.css" rel="stylesheet" />
+
+<!--POP-UP NRE MODAL STARTS HERE -->
+<div class="modal fade" id="NreModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal" onclick="getNreList()">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title text-left">New Requirement Entry</h2>
+            </div>
+            
+            <div class="modal-body" data-simplebar>
+                  <div class="row">
+                     <div class="pull-right">
+                        
+                     </div>
+                  </div>
+                  
+                  <div class="row">
+                     <div class="form-section" id="form-block">
+                        <div class="row">
+                          <div class="col-md-6">
+                               <div class="form-group">
+                                 <label>Client</label>
+                              <select class="form-control SmsClientlist proposalError" id="SmsClientlist">
+                                   <option>Select Client</option>
+                                </select>
+                                <span class="error_message"></span>
+                              </div>
+                          </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Project Title</label>
+                                 <input type="text" class="form-control" name="project_title"
+                                    id="project_title">
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="row">
+                           <div class="col-md-6">
+                              <h4> Client Details </h4>
+                           </div>
+                           <div class="col-md-6">
+                              <h4> Project Details </h4>
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <!-- Client Details Section-->
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Department</label>
+                                 <select class="form-control" name="department" 
+                                    id="department">
+                                    <option value="">Select Department</option>
+                                    <option value="Software">Software</option>
+                                    <option value="MT">MT</option>
+                                    <option value="IMS">IMS</option>
+                                    <option value="QA">QA</option>
+                                    <option value="PB">PB</option>
+                                 </select>
+                              </div>
+
+                              <div class="form-group">
+                                 <label>Client Code</label>
+                                 <input type="text" class="form-control" disabled="disabled" name="client_code" 
+                                    id="client_code">
+                              </div>
+
+                              <div class="form-group">
+                                 <label>Company Name</label>
+                                 <input type="text" class="form-control" disabled="disabled" name="company_name"id="company_name">
+                              </div>
+
+                               <div class="form-group">
+                                 <label>Wish-list</label>
+                                 <input type="text" class="form-control" name="wish_list" 
+                                    id="wish_list" disabled="disabled"> 
+                              </div>
+
+                              <div class="form-group">
+                                 <label>Country</label>
+                                 <input type="text" disabled="disabled" class="form-control" name="country" id="country">
+                              </div>
+
+                               <div class="form-group">
+                                 <label> New Client</label>
+                                 <input type="text" class="form-control" name="new_client" 
+                                    id="new_client" disabled="disabled">
+                              </div>
+                           </div>
+                           <!-- Client Details Section-->
+
+                           <!-- Project Details Section-->
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label>Project Type <span style="color: red">*</span></label>
+                                 <select class="form-control" name="project_type" 
+                                    id="project_type">
+                                    <option value="">Select Type</option>
+                                    <option value="Not Yet Decided">Not Yet Decided</option>
+                                    <option value="Fixed Price">Fixed Price</option>
+                                    <option value="Package">Package</option>
+                                    <option value="Retainer">Retainer</option>
+                                 </select>
+                                 <span class="error_message"></span>
+                              </div>
+
+                              <div class="form-group">
+                                 <label>Tech Stream </label>
+                                 <select class="form-control" name="tech_stream" 
+                                    id="tech_stream">
+                                    <option value="">Select Stream</option>
+                                    <option value="QA &amp; Documentation">QA &amp; Documentation</option>
+                                    <option value="Dot Net">Dot Net</option>
+                                    <option value="Open Stream">Open Stream</option>
+                                    <option value="PB">PB</option>
+                                    <option value="Adobe">Adobe</option>
+                                    <option value="Mobile App">Mobile App</option>
+                                    <option value="IMS">IMS</option>
+                                 </select>
+                                 <span class="error_message"></span>
+                              </div>
+
+                              <div class="form-group">
+                                 <label>Technology </label>
+                                 <textarea class="form-control proposalError" name="technology_description" id="technology_description" ></textarea>
+                                 <span class="error_message"></span>
+                              </div>
+                              
+                              <div class="form-group">
+                                 <label> Application Type</label>
+                                 <select class="form-control" name="application_type" 
+                                    id="application_type">
+                                    <option value="">Select Application</option>
+                                    <option value="5">Business application </option>
+                                    <option value="4">CMS website </option>
+                                    <option value="3">Web site simple </option>                      
+                                    <option value="1">Yet to Choose</option>
+                                    <option value="8">component</option>
+                                    <option value="2">e-com /Web Application </option>
+                                 </select>
+                                 <span class="error_message"></span>
+                              </div>
+
+                              <div id="nre-dropzone">
+                                 <form action="#" class="dropzone needsclick dz-clickable" id="nre-upload">
+                                     <div class="dz-message needsclick">
+                                         Drop files here or click to upload.<br>
+                                     </div>
+                                 </form>
+                                 <span class="error_message error_upload"></span>
+                             </div>
+
+                           </div>
+                           <!-- Project Details Section-->
+                        </div>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <h4> Date Details </h4>
+                           </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label> Received Date</label>
+                                 <input type="text" class="form-control" name="received_date"
+                                    id="received_date">
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="form-group">
+                                 <label> Estimation Needed On</label>
+                                 <input type="text" class="form-control" name="estimation_needed_date"
+                                    id="estimation_needed_date">
+                                 <span class="error_message"></span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <span class="ApiResponse"></span>
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="nre_dropzone_remove_files()" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="skillfamilyId" onclick="SaveNreDetails();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--POP-UP RFP MODAL ENDS HERE -->
+<script type="text/javascript" src="components/nre/js/nre.js"></script>
+
+<script type="text/javascript">
+
+
+   function nre_dropzone_remove_files() {
+      Dropzone.forElement('#nre-upload').removeAllFiles(true);
+   }
+
+   $(document).ready(function () {
+      getNreList();   
+      Dropzone.autoDiscover = false;
+      $("#nre-upload").dropzone({
+        url: "hn_SimpeFileUploader.ashx",
+        addRemoveLinks: true,
+      });
+   });        
+
+   /* This is proposal listing scripts  */
+   // function NreModal() {
+   //    $('.form-control').removeClass('required_field');
+   //    $('.error_message').html('');
+   //    $('#NreModal').modal("show");
+   //    SmsClientlist('SmsClientlist');  
+   // }
+
+   $('.import').click(function () {
+      var modalId = $(this).attr('mid');
+      $('#' + modalId).modal("show");
+   });
+   /* RFP Related queries*/
+</script>

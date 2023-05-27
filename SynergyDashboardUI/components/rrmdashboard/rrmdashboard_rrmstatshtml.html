@@ -1,0 +1,1036 @@
+<div class="col-md-12">
+    <div id="rrmdashboard_onEnergySpentRRMCountChart"></div>  
+</div>
+<br>
+<br>
+<br>
+<div class="col-md-12">
+    <div class="col-md-6">
+        <div id="rrmdashboard_onHoldCountPieChart"></div>  
+    </div>
+    <!-- <div class="col-md-6">
+        <div class="row">
+            <label>RRM</label>
+            <div id="rrm_dashboard_rrmNumber"></div>
+        </div>
+      <div class="row">
+
+      </div>
+    </div> -->
+</div>
+<br>
+<br>
+<div class="col-md-12">
+    <div class="col-md-6">
+        <div id="rrmdashboard_rrmcountBarDetails"></div>  
+    </div>
+    <div class="col-md-6">
+        <div id="rrmdashboard_rrmcountStandardBarDetails"></div>  
+    </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div></div>
+<div></div>
+<div class="col-md-12">
+        <div id="rrmdashboard_rrmcountBarDetailsGridData"></div>  
+</div>
+<br>
+<br>
+<br>
+<br>
+<div></div>
+<div></div>
+<br>
+<div class="col-md-12">
+    <h4>UnAssigned RRM</h4>  
+    <div id="rrmdashboard_unassignedrrm"></div>  
+</div>
+
+<script>
+    var pageId = "rrmdashboard";
+    getunassignedRRM();
+    $(document).ready(function () {
+        
+        var fromDate = $("#rrm_dashboard_fromDate").dxDateBox("instance").option("value");
+        fromDate = fromDate.toISOString().slice(0, 10);
+        var toDate = $("#rrm_dashboard_toDate").dxDateBox("instance").option("value");
+
+        loadChartsRRMDashboard(fromDate,toDate);
+        loadOnHoldRRMChartsDetails(fromDate,toDate);
+        loadOnEnergySpentRRM(fromDate, toDate);
+        loadOnRRMDashboard();
+        loadRRMDetailsForGridData();
+        // loadRRMNumbersDashboard();
+        
+    });
+
+    function getunassignedRRM(){
+        renderrrmentrypointreportGrid();
+          
+    }
+
+    function renderrrmentrypointreportGrid(){
+        var dataGrid = $("#rrmdashboard_unassignedrrm").dxDataGrid({
+            filterRow: {
+                visible: true,
+                applyFilter: "auto"
+            },
+            keyExpr:"RRMId",
+            repaintChangesOnly: true,
+            highlightChanges: true,
+            
+            export: {
+                enabled: true,
+                allowExportSelectedData: true
+              },
+            searchPanel: {
+                visible: true,
+                width: 240,
+                placeholder: "Search..."
+            },
+            headerFilter: {
+                visible: true
+            },
+            filterPanel: { visible: true },
+            allowColumnReordering: true,
+            showBorders: true,
+            columnAutoWidth: true,
+            grouping: {
+                autoExpandAll: true,
+            },
+            pager: {
+                showPageSizeSelector: true,
+                allowedPageSizes: [5, 10, 20],
+                showInfo: true
+            },
+            paging: {
+                pageSize: 10
+            },  
+            groupPanel: {
+                visible: true,
+                emptyPanelText:"Drag a column"
+            },
+            sorting: {
+                mode: "multiple"
+            },
+            summary: {
+                totalItems: [{
+                    column: "RRMNo",
+                    summaryType: "count"
+                }
+                // ...
+                ],
+                groupItems: [{
+                    column: "RRMNo",
+                    summaryType: "count"
+                }]
+            },
+              editing: {
+                  mode: "popup",
+                  allowAdding: false,
+                  allowUpdating: false,
+                  useIcons: true
+                  },
+                 columnChooser: {
+                    enabled: true,
+                    mode:"select"
+                },
+                rowAlternationEnabled:true,
+                columnFixing: {
+                    enabled: true
+            },
+            onToolbarPreparing: function (e) {
+                var dataGrid = e.component;
+                e.toolbarOptions.items.unshift({
+                    location: "after",
+                    widget: "dxButton",
+                    options: {
+                        icon: "refresh",
+                        onClick: function () {
+                            refreshCandidatesInterviewRRMHrHead();
+                            _rrmGrid.getRRMEntryTable();
+                            dataGrid.refresh();
+                        }
+                    }
+                })
+            },
+            allowColumnResizing: true,
+            columns: [
+                {caption:"#", dataField:"RRMNo", allowGrouping: false,allowCollapsing: false,allReordering:false, fixed: true, hidingPriority: 0, width:130,
+                cellTemplate: function (container, options) {
+                    container.text(
+                        dataGrid.pageIndex() * dataGrid.pageSize() + options.rowIndex + 1
+                    );
+                },
+            },
+            { caption: "RRM No", dataField: "RRMNo" },
+                {caption:"Owner", dataField:"Owner"},
+                {caption:"Requirement Name", dataField:"RequirementName"},
+                {caption:"Required For", dataField:"RequiredFor"},
+                {
+                    caption: "Plan-A On-Board Date",
+                    dataField: "PlanA-OnBoardDate",
+                    allowEditing: false,
+                    dataType :"date",
+                    allowFiltering: true,
+                    format : "dd-MMM-yyyy",
+                    // cellTemplate: function(container,options){
+					// 	var rrmDate = convertDateFormatForRRMGrid(options.value)
+					// 	$("<div>&nbsp")
+					// 	.append(rrmDate)
+					// 	.appendTo(container);
+					// 	}
+                },
+                {
+                    caption: "Plan-B On-Board Date",
+                    dataField: "PlanB-OnBoardDate",
+                    allowEditing: false,
+                    dataType :"date",
+                    allowFiltering: true,
+                    format : "dd-MMM-yyyy",
+                    // cellTemplate: function(container,options){
+					// 	var rrmDate = convertDateFormatForRRMGrid(options.value)
+					// 	$("<div>&nbsp")
+					// 	.append(rrmDate)
+					// 	.appendTo(container);
+					// 	}
+                },
+                { 
+                    caption: "Priority", 
+                    dataField: "PriorityName",
+                    cellTemplate: function (container, options) {    
+                        var domActions = "";
+                        if (options.data.PriorityName == "Low") {
+                            domActions += "<label class='label label-info m-l-xs'>Low</label>";
+                        } else if (options.data.PriorityName == "Medium") {
+                            domActions += "<label class='label label-warning m-l-xs'>Medium</label>";
+                        } else if (options.data.PriorityName == "High") {
+                            domActions += "<label class='label label-danger m-l-xs'>High</label>";
+                        }
+                        $("<div>").append($(domActions)).appendTo(container);
+                    }
+                }, 
+                { caption: "Plan-A Recruiters", dataField: "PlanARecruiters" },
+                { caption: "Plan-B Recruiters", dataField: "PlanBRecruiters" },
+                { caption: "Exp. Req. in Yrs", dataField: "ExperiencerequiredInYrs" },
+                { caption: "No.Of Interviews Scheduled", dataField:"NoOfInterviewsScheduled"},
+                { caption: "No.Of Shortlisted", dataField: "NoOfShortlisted" },
+                {caption:"Offered", dataField:"Offered", alignment:"right"},
+                { caption: "Accepted", dataField: "Accepted" }, 
+                { caption: "Designation", dataField: "Designation" },
+                { caption: "Joining Date", dataField: "JoiningDate",
+                    allowEditing: false,
+                    dataType :"date",
+                    format : "dd-MMM-yyyy",
+                    // cellTemplate: function(container,options){
+                    //     var rrmDate = convertDateFormatForRRMGrid(options.value)
+                    //     $("<div>&nbsp")
+                    //     .append(rrmDate)
+                    //     .appendTo(container);
+                    //     }
+            },
+                {
+                    caption: "Created Date",
+                    dataField: "RRMCreatedDate",
+                    allowEditing: false,
+                    dataType :"date",
+                    format : "dd-MMM-yyyy",
+                    // cellTemplate: function(container,options){
+					// 	var rrmDate = convertDateFormatForRRMGrid(options.value)
+					// 	$("<div>&nbsp")
+					// 	.append(rrmDate)
+					// 	.appendTo(container);
+					// 	}
+                },
+                {
+                    dataField: "ResourceRequirementType",
+                    caption: "RRM Type",
+                    allowFiltering: false,
+                    cellTemplate: function (container, options) {
+                        
+                        var domActions = "";
+                        if (options.data.ResourceRequirementType == "G") {
+                            domActions += "<label class='label label-success m-l-xs'>RRM</label>";
+                        } else if (options.data.ResourceRequirementType == "P") {
+                            domActions += "<label class='label label-info m-l-xs'>RFP</label>";
+                        } else if (options.data.ResourceRequirementType == "R") {
+                            domActions += "<label class='label label-warning m-l-xs'>Resignation</label>";
+                        }
+                        $("<div>").append($(domActions)).appendTo(container);
+                    }
+                },
+                { caption:"Client", dataField: "Client"},
+                { caption:"Against", dataField: "Against" },
+                { caption: "Skill", dataField: "SkillName" },
+                { caption: "Importance", dataField: "Importance" },
+                { caption: "Status", dataField: "Status" },
+                {caption:"", dataField:"RRMId", allowGrouping: false,allowCollapsing: false,allReordering:false,allowExporting:false,visible:false,
+                cellTemplate: function (container, options) {
+                   
+                    $("<div>")
+                        .append("<button data-type='edit' data-rrmid =" + options.value + " data-rrmtype =" + options.data.ResourceRequirementType + " class='btn btn-xs btn-primary edit-btn btnSelect editRRMEntryPoint"+pageId+"' title='Edit RRM'><i class='fas fa-pencil-alt'></i></button>")
+                        .append("<button data-type='add' data-rrmid =" + options.value + "  data-rrmtype =" + options.data.ResourceRequirementType + " class='btn btn-xs btn-primary edit-btn btnSelect cloneRRMEntryPoint" + pageId + "' title='Clone RRM'><i class='fas fa-clone'></i></button>")
+                        .append("<button data-type='comment' data-rrmid =" + options.data.RRMId + "  data-rrmtype =" + options.data.ResourceRequirementType + " data-rrmownerid ="+ options.data.OwnerId+" class='btn btn-xs btn-primary edit-btn btnSelect commentsRRMEntryPoint' title='Comments RRM' onclick=GetRRMCommentsHead(\'"+ options.data.RRMId +"\',\'"+ options.data.RRMNo +"\')><i class='fas fa-comments'></i></button>")
+                        .appendTo(container);
+                    },
+                onClick: function (e) {
+                    RRMEntryFromRRM(data.RRMId)
+                },fixedPosition: "right", fixed:true, allowExporting:false, hidingPriority: 0
+            }
+            ],
+            onRowPrepared(e) { 
+                if (e.rowType == 'data') { 
+                    if (e.data.IsRecruiterAssigned != "" && e.data.IsRecruiterAssigned != null && e.data.IsRecruiterAssigned != undefined) {  
+                        e.rowElement.css("background-color", "rgb(225, 247, 223)");
+                        e.rowElement.removeClass("dx-row-alt");  
+                    }
+                }
+            
+            }
+        }).dxDataGrid("instance");
+        var filterData = JSON.stringify({
+            "IsActive": true
+        });
+        callGetListAsync('GetUnAssignedRRMDetailsForDashBoard', filterData, function(e){
+            
+            $("#rrmdashboard_unassignedrrm").dxDataGrid({ dataSource: e })
+            try{
+                $("#rrmdashboard_unassignedrrm").dxDataGrid('instance').refresh();
+            }
+            catch(ex){
+
+            }
+        });  
+    }
+
+    function loadChartsRRMDashboard(fromDate,toDate) {
+            
+            var filterData = JSON.stringify({
+                "Token": Token,
+                "IsActive": true,
+                "FromDate": fromDate,
+                "ToDate": toDate
+            });
+            callGetListAsync('GetActiveAndOnHoldRRMCount', filterData, function (e) {
+
+                $('#rrmdashboard_rrmcountBarDetails').dxPieChart({
+                size: {
+                    width: 500,
+                },
+                type: 'doughnut',
+                palette: 'Green Mist',
+                paletteExtensionMode: 'Blend',
+                dataSource: e,
+                // margin: {
+                //     bottom: 80,
+                // },
+                legend: {
+                    orientation: 'horizontal',
+                    itemTextPosition: 'right',
+                    horizontalAlignment: 'center',
+                    verticalAlignment: 'bottom',
+                    columnCount: 4,
+                },
+                resolveLabelOverlapping: 'shift',
+                series: [
+                    {
+                        argumentField: 'rrm',
+                        valueField: 'count',
+                        label: {
+                            visible: true,
+                            connector: {
+                                visible: true,
+                                width: 1,
+                            },
+                            position: 'columns',
+                            customizeText(arg) {
+                                 return `${arg.valueText} (${arg.argumentText})`;
+                          },
+                        },
+                    },
+                ],
+                title: 'RRM',
+                export: {
+                    enabled: true,
+                },
+                onPointClick(e) {
+                    
+                    const point = e.target;
+                    loadChartDetailsSeparatedValues(point.data);
+                },
+            });
+               
+            });
+
+        }
+
+        function loadChartDetailsSeparatedValues(data){
+            if(data.rrm =="TotalActiveRRM"){
+                loadRRMBasedOnCreatedDate();
+            }
+            else if(data.rrm =="TotalRRMOnHold"){
+                loadRRMBasedOnHold();
+            }
+            else if(data.rrm =="RRMHRClosure"){
+                loadRRMBasedOnClosure();
+            }
+        }
+
+        function loadRRMBasedOnCreatedDate(){
+
+            var fromDate = $("#rrm_dashboard_fromDate").dxDateBox("instance").option("value");
+            fromDate = fromDate.toISOString().slice(0, 10);
+            var toDate = $("#rrm_dashboard_toDate").dxDateBox("instance").option("value");
+
+            var filterData = JSON.stringify({
+                "Token": Token,
+               // "FromDate": fromDate,
+                //"ToDate": toDate,
+                "IsActive": true
+            });
+            callGetListAsync('GetRRMCountBasedOnCreatedDate', filterData, function (e) {
+
+                $('#rrmdashboard_rrmcountStandardBarDetails').dxChart({
+                    dataSource: e,
+                    title: 'Total Active RRM',
+                    tooltip: {
+                        enabled: true,
+                        customizeTooltip() {
+                            
+                            return {
+                            text: Math.abs(this.valueText),
+                            };
+                        },
+                    },
+                    onPointClick(e) {
+                        const point = e.target;
+                        var type = 'TotalActiveRRM';
+                        var d =  point.data;
+                        var data = d.CreatedBetween;
+                        
+                        getRRMDetailsForGridData(data,type);
+                       
+                    },
+                    legend: {
+                    orientation: 'horizontal',
+                    itemTextPosition: 'right',
+                    horizontalAlignment: 'center',
+                    verticalAlignment: 'bottom',
+                    columnCount: 4,
+                    visible:true
+                },
+                    series: {
+                        argumentField: 'CreatedBetween',
+                        valueField: 'RRMCount',
+                        name: 'Total Active RRM',
+                        type: 'bar',
+                        color: '#3CBAB2',
+                    },
+                });
+            });
+        }
+
+        function loadRRMBasedOnHold(){
+            var filterData = JSON.stringify({
+                "Token": Token,
+                "IsActive": true
+            });
+            callGetListAsync('GetRRMCountOnHoldBasedOnCreatedDate', filterData, function (e) {
+
+                $('#rrmdashboard_rrmcountStandardBarDetails').dxChart({
+                    dataSource: e,
+                    palette: 'ocean',
+                    paletteExtensionMode: 'Blend',
+                    title: 'Total RRM On Hold',
+                    commonSeriesSettings: {
+                        argumentField: 'CreatedBetween',
+                        type: 'bar',
+                        hoverMode: 'allArgumentPoints',
+                        selectionMode: 'allArgumentPoints',
+                        label: {
+                            visible: true,
+                            format: {
+                            type: 'fixedPoint',
+                            precision: 0,
+                            },
+                        },
+                    },
+                    tooltip: {
+                        enabled: true,
+                        customizeTooltip() {
+                            
+                            
+                            return {
+                             text:  `${this.valueText} - (${this.seriesName})`
+                            };
+                        },
+                    },
+                    onPointClick(e) {
+                        const point = e.target;
+                        var type = 'TotalRRMOnHold';
+                        var d =  point.data;
+                        var data = d.CreatedBetween;
+                        
+                         getRRMDetailsForGridData(data,type);
+                       
+                    },
+                    legend: {
+                    orientation: 'horizontal',
+                    itemTextPosition: 'right',
+                    horizontalAlignment: 'center',
+                    verticalAlignment: 'bottom',
+                    columnCount: 4,
+                    visible:true
+                },
+                series: [
+                        { valueField: 'OnHoldByClient', name: 'On Hold By Client' },
+                        { valueField: 'OnHoldByOwner', name: 'On Hold By Owner' }
+                    ],
+                });
+            });
+        }
+
+        function loadRRMBasedOnClosure(){
+            var filterData = JSON.stringify({
+                "Token": Token,
+                "IsActive": true
+            });
+            callGetListAsync('GetClosureRRMByHrCount', filterData, function (e) {
+
+                $('#rrmdashboard_rrmcountStandardBarDetails').dxChart({
+                    size: {
+                    width: 500,
+                },
+                palette: 'Green Mist',
+                paletteExtensionMode: 'Blend',
+                dataSource: e,
+                margin: {
+                    bottom: 30,
+                },
+                tooltip: {
+                        enabled: true,
+                        customizeTooltip() {
+                            
+                            return {
+                             text:  `${this.valueText}`
+                            };
+                        },
+                    },
+                legend: {
+                    orientation: 'horizontal',
+                    itemTextPosition: 'right',
+                    horizontalAlignment: 'center',
+                    verticalAlignment: 'bottom',
+                    columnCount: 4,
+                    visible:false
+                },
+                onPointClick(e) {
+                        const point = e.target;
+                        var type = 'RRMHrClosure';
+                        var data = point.data.Status.substring(0, 1);
+                        getRRMDetailsForGridData(data,type);
+                       
+                    },
+                series: [
+                    {
+                        argumentField: 'Status',
+                        valueField: 'RRMCount',
+                        type: 'bar',
+                        color: '#EFCC7C',
+                        label: {
+                            visible: true,
+                            connector: {
+                                visible: true,
+                                width: 1,
+                            },
+                            position: 'columns',
+                        },
+                    },
+                ],
+                title: 'RRM HR Closure',
+                export: {
+                    enabled: false,
+                },
+            });
+            });
+        }
+
+        function loadOnRRMDashboard(){
+            var data =[];
+            $('#rrmdashboard_rrmcountStandardBarDetails').dxChart({
+                    dataSource: data,
+                    title: 'Total Active RRM',
+                    tooltip: {
+                        enabled: false,
+                    },
+                    legend: {
+                    orientation: 'horizontal',
+                    itemTextPosition: 'right',
+                    horizontalAlignment: 'center',
+                    verticalAlignment: 'bottom',
+                    columnCount: 4,
+                },
+                    series: {
+                        argumentField: 'CreatedBetween',
+                        valueField: 'RRMCount',
+                        name: 'Total Active RRM',
+                        type: 'bar',
+                        color: '#3CBAB2',
+                    },
+                });
+        }
+
+        function getRRMDetailsForGridData(data,type){
+           
+            var spName = 'Get'+type+'Details';  
+            var CreatedBetween = data;
+            var filterData = JSON.stringify({
+                "Token": Token,
+                "CreatedBetween": CreatedBetween,
+                "IsActive": true
+            });
+            callGetListAsync(spName, filterData, function (e) {
+                
+                var rrm = $("#rrmdashboard_rrmcountBarDetailsGridData").dxDataGrid({
+                        dataSource:e,
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto",
+                        },
+                        repaintChangesOnly: true,
+                        highlightChanges: true,
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: false,
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search...",
+                        },
+                        headerFilter: {
+                            visible: true,
+                        },
+                        filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        showBorders: true,
+                        columnAutoWidth: true,
+                        grouping: {
+                            autoExpandAll: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [5, 10, 20],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column",
+                        },
+                        sorting: {
+                            mode: "multiple",
+                        },
+                        summary: {
+                            totalItems: [{
+                                column: "RRMNo",
+                                summaryType: "count"
+                            }
+                            ],
+                            groupItems: [{
+                                column: "RRMNo",
+                                summaryType: "count"
+                            }]
+                        },
+                        columnChooser: {
+                            enabled: true,
+                            mode:"select"
+                        },
+                        onExporting: function (e) {
+                            var workbook = new ExcelJS.Workbook();
+                            var worksheet = workbook.addWorksheet("RRM DashBoard");
+                    
+                            DevExpress.excelExporter
+                            .exportDataGrid({
+                                component: e.component,
+                                worksheet: worksheet,
+                                autoFilterEnabled: true,
+                                customizeCell: function (options) {
+                                var gridCell = options.gridCell;
+                                var excelCell = options.excelCell;
+                                if (!gridCell) {
+                                    return;
+                                }
+                                if (gridCell.rowType === "header") {
+                                    excelCell.font = { color: { argb: 'FFFFFF' } };
+                                    excelCell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "757171" }, bgColor: { argb: "757171" } };
+                                    excelCell.alignment = { horizontal: 'left' };
+                                }
+                                }
+                            })
+                            .then(function (dataGridRange) {
+                                setBorders(worksheet, dataGridRange);
+                                return Promise.resolve();
+                            }).then(function () {
+                                workbook.xlsx.writeBuffer().then(function (buffer) {
+                                saveAs(
+                                    new Blob([buffer], { type: "application/octet-stream" }),
+                                    "RRMDashboardRRM.xlsx"
+                                );
+                                });
+                            });
+                            e.cancel = true;
+                        },
+                        rowAlternationEnabled: true,
+                        filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        allowColumnResizing: true,
+                        showBorders: true,
+                        columns: [
+                                 {
+                                    caption: "#",
+                                    dataField: "sno",
+                                    cssClass: "rno",
+                                    allowGrouping: false,
+                                    allowCollapsing: false,
+                                    allReordering: false,
+                                    width: 70,
+                                    cellTemplate: function (container, options) {
+                                        container.text(
+                                            rrm.pageIndex() * rrm.pageSize() + options.rowIndex + 1
+                                        );
+                                    },
+                                },
+                            {
+                                dataField: "RRMNo",
+                                caption: "RRM No",
+                            },
+                            {
+                                dataField: "RequirementName",
+                                caption: "Requirement Name"
+                
+                            },
+                            {
+                                dataField: "RequiredFor",
+                                caption: "Required",
+                                visible:true
+                            },
+                            {
+                                dataField: "Status",
+                                caption: "Status"
+                            },
+                            {
+                                dataField: "Owner",
+                                caption: "Owner"
+                            }
+                        ]
+                        }).dxDataGrid("instance");
+                        
+            });
+        }
+
+        function  loadRRMDetailsForGridData(){
+            var data =[];
+            var rrm = $("#rrmdashboard_rrmcountBarDetailsGridData").dxDataGrid({
+                        dataSource:data,
+                        filterRow: {
+                            visible: true,
+                            applyFilter: "auto",
+                        },
+                        repaintChangesOnly: true,
+                        highlightChanges: true,
+                        export: {
+                            enabled: true,
+                            allowExportSelectedData: false,
+                        },
+                        searchPanel: {
+                            visible: true,
+                            width: 240,
+                            placeholder: "Search...",
+                        },
+                        headerFilter: {
+                            visible: true,
+                        },
+                        filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        showBorders: true,
+                        columnAutoWidth: true,
+                        grouping: {
+                            autoExpandAll: true,
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [5, 10, 20],
+                            showInfo: true,
+                        },
+                        paging: {
+                            pageSize: 10,
+                        },
+                        groupPanel: {
+                            visible: true,
+                            emptyPanelText: "Drag a column",
+                        },
+                        sorting: {
+                            mode: "multiple",
+                        },
+                        summary: {
+                            totalItems: [{
+                                column: "RRMNo",
+                                summaryType: "count"
+                            }
+                            ],
+                            groupItems: [{
+                                column: "RRMNo",
+                                summaryType: "count"
+                            }]
+                        },
+                        columnChooser: {
+                            enabled: true,
+                            mode:"select"
+                        },
+                        onExporting: function (e) {
+                            var workbook = new ExcelJS.Workbook();
+                            var worksheet = workbook.addWorksheet("RRM DashBoard");
+                    
+                            DevExpress.excelExporter
+                            .exportDataGrid({
+                                component: e.component,
+                                worksheet: worksheet,
+                                autoFilterEnabled: true,
+                                customizeCell: function (options) {
+                                var gridCell = options.gridCell;
+                                var excelCell = options.excelCell;
+                                if (!gridCell) {
+                                    return;
+                                }
+                                if (gridCell.rowType === "header") {
+                                    excelCell.font = { color: { argb: 'FFFFFF' } };
+                                    excelCell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "757171" }, bgColor: { argb: "757171" } };
+                                    excelCell.alignment = { horizontal: 'left' };
+                                }
+                                }
+                            })
+                            .then(function (dataGridRange) {
+                                setBorders(worksheet, dataGridRange);
+                                return Promise.resolve();
+                            }).then(function () {
+                                workbook.xlsx.writeBuffer().then(function (buffer) {
+                                saveAs(
+                                    new Blob([buffer], { type: "application/octet-stream" }),
+                                    "RRMDashboardRRM.xlsx"
+                                );
+                                });
+                            });
+                            e.cancel = true;
+                        },
+                        rowAlternationEnabled: true,
+                        filterPanel: { visible: true },
+                        allowColumnReordering: true,
+                        allowColumnResizing: true,
+                        showBorders: true,
+                        columns: [
+                        {
+                                caption: "#",
+                                dataField: "sno",
+                                cssClass: "rno",
+                                allowGrouping: false,
+                                allowCollapsing: false,
+                                allReordering: false,
+                                width: 70,
+                                cellTemplate: function (container, options) {
+                                    container.text(
+                                        rrm.pageIndex() * rrm.pageSize() + options.rowIndex + 1
+                                    );
+                                },
+                        },
+                            {
+                                dataField: "RRMNo",
+                                caption: "RRM No",
+                            },
+                            {
+                                dataField: "RequirementName",
+                                caption: "Requirement Name"
+                
+                            },
+                            {
+                                dataField: "RequiredFor",
+                                caption: "Required",
+                                visible:true
+                            },
+                            {
+                                dataField: "Status",
+                                caption: "Status"
+                            },
+                            {
+                                dataField: "Owner",
+                                caption: "Owner"
+                            }
+                        ]
+                        }).dxDataGrid("instance");
+        }
+
+        function loadOnHoldRRMChartsDetails(fromDate, toDate) {
+
+                var filterData = JSON.stringify({
+                    "Token": Token,
+                    "FromDate": fromDate,
+                    "ToDate": toDate,
+                    "IsActive": true
+                });
+                callGetListAsync('GetRRMOnHoldChartDetails', filterData, function (e) {
+
+                    $('#rrmdashboard_onHoldCountPieChart').dxPieChart({
+                        palette: 'Ocean',
+                        dataSource: e,
+                        title: 'No. of On Hold RRMs',
+                        animation: {
+                            enabled: false,
+                        },
+                        resolveLabelOverlapping: 'shift',
+                        legend: {
+                            orientation: 'horizontal',
+                            itemTextPosition: 'right',
+                            horizontalAlignment: 'center',
+                            verticalAlignment: 'bottom',
+                            columnCount: 4,
+                            visible: true
+                        },
+                        export: {
+                            enabled: false,
+                        },
+                        onPointClick(e) {
+
+                            getRRMInterviewsPassedDataRRMDashBoard();
+                            
+                        },
+                        series: [{
+                            argumentField: 'Status',
+                            valueField: 'RRM',
+                            label: {
+                                visible: true,
+                                font: {
+                                    size: 13,
+                                },
+                                connector: {
+                                    visible: true,
+                                    width: 0.5,
+                                },
+                                position: 'columns',
+                                customizeText(arg) {
+
+                                    return `${arg.argumentText} - (${arg.valueText})`;
+
+                                },
+                            },
+                        }],
+                    });
+                });
+            }
+
+            function loadOnEnergySpentRRM(fromDate, toDate) {
+
+                    var filterData = JSON.stringify({
+                        "Token": Token,
+                        "FromDate": fromDate,
+                        "ToDate": toDate,
+                        "IsActive": true
+                    });
+                    callGetListAsync('GetEnergySpentRRMCountOnInterviewers', filterData, function (e) {
+
+                        $('#rrmdashboard_onEnergySpentRRMCountChart').dxChart({
+                            rotated: true,
+                            dataSource: e,
+                            title: 'Energy Spent On RRM',
+                            resolveLabelOverlapping: 'shift',
+                            legend: {
+                                orientation: 'horizontal',
+                                itemTextPosition: 'right',
+                                horizontalAlignment: 'center',
+                                verticalAlignment: 'bottom',
+                                columnCount: 4,
+                                visible: false
+                            },
+                            margin: {
+                                bottom: 25
+                            },
+                            export: {
+                                enabled: false,
+                            },
+                            tooltip: {
+                                enabled: true,
+                                customizeTooltip() {
+                                  
+                                    return {
+                                    text:  `${this.point['data'].RRMName} - ${this.point['data'].Owner} - (${this.valueText})`
+                                    };
+                                },
+                            },
+                            series: [{
+                                argumentField: 'RRMNo',
+                                valueField: 'RRMCount',
+                                label: {
+                                    visible: true,
+                                    backgroundColor: '#c18e92',
+                                    font: {
+                                        size: 10,
+                                    },
+                                    connector: {
+                                        visible: true,
+                                        width: 0.3,
+                                    },
+                                    position: 'columns',
+                                    customizeText(arg) {
+                                        
+                                        return `${arg.point['data'].RRMName} - (${arg.valueText})`;
+
+                                    },
+                                },
+                                color: '#79cac4',
+                                type: 'bar',
+                                valueAxis: {
+                                    tick: {
+                                        visible: false,
+                                    },
+                                    label: {
+                                        visible: false,
+                                    },
+                                },
+                            }],
+                        });
+                    });
+
+                }
+
+    //  function loadRRMNumbersDashboard() {
+
+    //         var filter_val = JSON.stringify({
+    //             "IsActive": "True",
+    //             "Token": Token
+    //         });
+
+    //         callGetListAsync('GetAllActiveRRMForDashboard', filter_val, function (e) {
+
+    //             $("#rrm_dashboard_rrmNumber").dxSelectBox({
+    //                 displayExpr: "RequirementName",
+    //                 valueExpr: "RRMNo",
+    //                 searchEnabled: true,
+    //                 placeholder:"Select RRM",
+    //                 showClearButton: true,
+    //                 dataSource: e,
+    //                 onValueChanged: function(e) {
+    //                     onChangeLoadInterviewsChart(e);
+    //                  },
+    //             });
+    //         })
+    //  }
+
+    //  function onChangeLoadInterviewsChart(data){
+    //     debugger;
+    //     
+    //  }
+</script>

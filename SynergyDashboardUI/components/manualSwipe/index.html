@@ -1,0 +1,75 @@
+<link href="components/manualSwipe/css/style.css" rel="stylesheet" />
+<script src='components/manualSwipe/js/manualSwipe.js'></script>
+<div class="card-detail">
+  <span class="card-detail-title"><b>Manual Swipe</b></span>
+  <hr />
+  <div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>From Date</label>
+            <div class="input-group">
+                <div id="from_date"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+          <label>To Date</label>
+          <div class="input-group">
+              <div id="to_date"></div>
+          </div>
+         
+      </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-md" style="margin-top: 21px;" onclick="getmanualSwipeDetailsListPreview();">
+                Preview
+            </button>
+        </div>
+    </div>
+      <div class="col-md-3">
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-md" style="margin-top: 21px;" onclick="openManualSwipe(0);">
+              Manual Swipe
+          </button>
+        </div>
+    </div>
+</div>
+  <div id="manualSwipe-Grid"></div>
+  <div id="manualSwipeHistory-Grid"></div>
+</div>
+
+<!-- Manual Swipe Popup -->
+<div class="modal fade bd-example-modal-lg in" id="ManualSwipeModal" role="dialog">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close addleavecloser" data-dismiss="modal" aria-label="Close"
+                  onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h4 class="modal-title">Swipe Punch Details</h4>
+          </div>
+          <div class="modal-body" style="border: black;" role="dialog">
+            <div class="row">
+                <div class="col-md-3" style="margin-top: 10px;">
+                    <label>Select Date</label>
+                </div>
+                <div class="col-md-4">
+            <div id="selectDate"></div>
+    </div>
+</div>
+            <br>
+            <br>
+              <div id="manualSwipePopupGrid"></div>
+          </div>
+      </div>
+  </div>
+
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+   
+  });
+ 

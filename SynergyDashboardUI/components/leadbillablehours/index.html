@@ -1,0 +1,110 @@
+<div class="card-detail">
+    <!-- Change the chart title here -->
+    <span class="card-detail-title"><b>Lead Billable Hours</b> </span>
+    <hr />
+    <!-- change the chart card id here -->
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <div id="chart_C2_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <div id="chart_C2" class=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .chartBox {
+        border: solid 1px;
+        border-color: bisque;
+    }
+</style>
+
+<script>
+    
+    $(document).ready(function () {
+        loadCharts();
+    });
+
+    function loadCharts() {
+        loadChartC2(); 
+    }
+    
+    function loadChartC2() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        //   GetUsefullinksList = callgetlist('GetLeadBillableHours', '{"IsActive":"True"}');
+        //   bindAnnouncementDataListGrid();
+        var chartC2DS = [
+            {
+                state: "DEC",
+                year1998: 100,
+                year2001: 150,
+                year2004: 180,
+            },
+            {
+                state: "JAN",
+                year1998: 178,
+                year2001: 195,
+                year2004: 199,
+            },
+            {
+                state: "FEB",
+                year1998: 120,
+                year2001: 168,
+                year2004: 189,
+            },
+            {
+                state: "MAR",
+                year1998: 159,
+                year2001: 122,
+                year2004: 178,
+            },
+            // {
+            //     state: "Wisconsin",
+            //     year1998: 160.274,
+            //     year2001: 182.373,
+            //     year2004: 211.727,
+            // },
+        ];
+       
+        $("#chart_C2").dxChart({
+            dataSource: chartC2DS,
+            size: {
+                width: 1200,
+                height: 400,
+            },
+            commonSeriesSettings: {
+                argumentField: "state",
+                type: "bar",
+                hoverMode: "allArgumentPoints",
+                selectionMode: "allArgumentPoints",
+                label: {
+                    visible: true,
+                    format: {
+                        type: "fixedPoint",
+                        precision: 0,
+                    },
+                },
+            },
+            series: [
+                { valueField: "year2004", name: ".Net" },
+                { valueField: "year2001", name: "Java" },
+                { valueField: "year1998", name: "Opensourse" },
+            ],
+            title: "Billable Hours",
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center",
+            },
+            export: {
+                enabled: true,
+            },
+            onPointClick: function (e) {
+                e.target.select();
+            },
+        });
+    }
+</script>

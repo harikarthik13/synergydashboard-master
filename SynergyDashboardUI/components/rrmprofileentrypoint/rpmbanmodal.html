@@ -1,0 +1,54 @@
+
+<!--POP-UP RRM candidate Ban MODAL STARTS HERE -->
+<div class="modal fade" id="RPMBanModelDummy" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content" id="RPMBanModel-content">
+            <div class="modal-header">
+                
+                    <button type="button" class="close modal_close" data-dismiss="modal" id="RrmCloseButton">
+                        &times;
+                    </button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h2 class="modal-title text-left">Ban the Candidate</h2>
+            </div>
+
+            <div class="modal-body" id="RPMBanModel-body" data-simplebar>
+                <div role="tabpanel">
+                    <div class="form-group col-md-12">
+                        <div class="row">
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Willing to Relocate &nbsp;&nbsp;&nbsp;</label>
+                                        <div id="rrm_candidatewilling"></div>
+                                        <span class="error_message" id="rrm_candidatewillingerror"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Comments</label>
+                        <div id="bantxtareaComments"></div>
+                        <span class="error_message" id="rrm_bancommentsError"></span>
+                        <span class="ApiResponse"></span>
+                    </div>
+                </div>
+                </div>
+
+            <div class="modal-footer">
+                    <a class="btn btn-primary btnPrevious hidden-btn" onclick="toggleTabRRMPrevious()">Previous</a>
+                    <a class="btn btn-primary btnNext" onclick="toggleTabRRMProfile()">Next</a>
+                    <button type="button" class="btn btn-primary saveFamilyBtn hidden-btn" onclick="saveSynergyNewRRMDocuments()">Save & Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+<!--POP-UP RRM Candidate MODAL ENDS HERE -->
+<script src="./js/library/bootstrap.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        alert("loading");
+    });
+</script>

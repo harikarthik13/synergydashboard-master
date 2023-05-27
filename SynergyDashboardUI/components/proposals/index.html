@@ -1,0 +1,50 @@
+
+
+<div class="card-detail">
+    <span><i><img src="components/proposals/images/rfp.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Proposals</b></span>
+    <!-- <span class="pull-right">
+        <button class="btn btn-sm btn-primary" onclick="RfpModal();">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span> -->
+    <hr />
+    
+    <div id="sddgd-proposalcard" class="common-table">
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $("#proposal").load("components/proposals/proposal.html");
+    $("#rfp_operation_modal").load("components/proposals/rfp_operation_modal.html");
+
+    function include_rfp(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+
+   /*Rfp to proposal page related scripts*/
+    /**Load rfps v**/
+    getProposalList();
+    /**end**/
+    include_rfp('./components/proposals/js/estimate_creators.js');
+    include_rfp('./components/proposals/js/estimate.js');
+    include_rfp('./components/proposals/js/userstory.js');
+    include_rfp('./components/proposals/js/assumptions.js');
+    include_rfp('./components/proposals/js/out_of_scope.js');
+    include_rfp('./components/proposals/js/other_notes.js');
+    include_rfp('./components/proposals/js/suggestions.js');
+    include_rfp('./components/proposals/js/technology.js');
+    include_rfp('./components/proposals/js/deliverables.js');
+    include_rfp('./components/proposals/js/assign.js');
+    include_rfp('./components/proposals/js/estimate_pricing.js');
+    include_rfp('./components/proposals/js/pdf.js');
+      include_rfp('./components/proposals/js/proposal.js');
+         /*Rfp to proposal page related scripts Deliverables*/
+</script>

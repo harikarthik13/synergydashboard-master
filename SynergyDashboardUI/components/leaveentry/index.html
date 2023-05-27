@@ -1,0 +1,1419 @@
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<link href="components/leaveentry/css/leaveentry.css" rel="stylesheet" />
+<!-- Leave Entry Card -->
+<div class="card-detail">
+    <span><i><img src="components/leaveentry/images/leave_log.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Leave Entry</b></span>
+    <!-- the below button for add new leave entry -->
+    <span class="pull-right">
+        <button type="submit" class="AddLeaveButton btn btn-primary btn-xs pull-right">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i> Add Leave
+        </button>
+    </span>
+
+      <!-- the below button for refresh Data -->
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="getLeaveDetails()">
+            <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+        </button>
+    </span>
+
+
+
+    <hr />
+
+        
+    <div id="sddgd-leaveEntryCard"></div>
+</div>
+
+<!-- Leave Detail Modal -->
+<div class="modal fade bd-example-modal-lg in" id="EmployeeLeaveDetail" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Leave Detail</h4>
+            </div>
+            <div class="modal-body" style="border: black;" role="dialog">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Date</td>
+                            <td>Total Hours</td>
+                            <td>Compensation Required</td>
+                            <td>Compensation Date</td>
+                            <td>Status</td>
+                            <td>Approved by</td>
+                            <td>Approved Date</td>
+                            <td>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody id="leavedetails">
+
+                    </tbody>
+                </table>
+               
+                <div class="row d-none leaveadetailsreason labelreason">
+                    <div class="col-md-12 text-left">
+                        <label>Leave Reason</label>
+                    </div>
+                </div>
+                <div class="row d-none leaveadetailsreason textarealeavereason">
+                    <div class="col-md-12 text-center">
+                        <h5 class="text-left">Add Reason</h5> <br />
+                        <textarea name="leaveadetailsreason" id="leaveadetailsreason"
+                            class="form-control col-lg-4 col-md-4"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="text-left">History</h5> <br />
+                        <div class="panel panel-default">
+                            <div class="panel-heading leaveentry_commentHistoryList">
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-md" data-dismiss="modal">Close</button>
+                <button onclick="UpdateLeave()" id="btnUpdateLeave" type="button" class="btn btn-primary btn-md">Save</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Add Leave Modal -->
+<div class="modal fade bd-example-modal-lg in" id="LeaveModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close addleavecloser" data-dismiss="modal" aria-label="Close"
+                    onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Add Leave </h4>
+            </div>
+            <div class="modal-body" style="overflow-x: hidden;" role="dialog">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">From</label>
+                        <div class="col-sm-4">
+                            <div class="input-group">
+                                <div id="leave_entry_from_date"></div>
+                                <!-- <input type="text" class="form-control" id="leave_entry_from_date"
+                                    name="leave_entry_from_date" readonly=""> -->
+                                <!-- <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span> -->
+                            </div>
+                            <small class="text-danger leavefrom_error_message"></small>
+                            
+                        </div>
+                        <div class="col-sm-4">
+                            <span id="LeaveApproversList"> </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">To</label>
+                        <div class="col-sm-4">
+                            <div class="input-group ">
+                                <div id="leave_entry_to_date"></div>
+                                <!-- <input type="text" class="form-control" id="leave_entry_to_date"
+                                    name="leave_entry_to_date" readonly="">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span> -->
+                                <input type="hidden" id="base64">
+                            </div>
+                            <small class="text-danger leaveto_error_message"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Number of days</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="numberofdays" id="numberofdays" class="form-control" readonly="">
+                            <small class="text-danger numberofdays_error_message"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Total Hours</label>
+                        <div class="col-sm-7">
+                            <input type="text" name="totalhours" id="totalhours" class="form-control" readonly="">
+                            <span class="pull-right">
+                                <button type="submit" class="ChageHoursButton btn btn-primary btn-xs pull-right">
+                                    <i class="glyphicon glyphicon-time" data-toggle="modal"></i>Chang Actual Total Hours
+                                </button>
+                            </span>
+                            <small class="text-danger totalhours_error_message"></small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Leave Type</label>
+                        <div class="col-sm-7">
+                            <select class="form-control" id="leavetype"></select>
+                            <small class="text-danger leaveTypeErrorMessage"></small>
+                        </div>
+                    </div>
+                    <div class="form-group" id="files">
+                        <label class="col-sm-3 control-label">Add Files</label>
+                        <div class="col-sm-7">
+                            <div id="leaveentry-dropzone">
+                                <form class="dropzone needsclick dz-clickable" id="leaveentry_document_upload"
+                                    method="post" enctype="multipart/form-data">
+                                    <div class="dz-message needsclick">
+                                        Drop files here or click to upload.<br />
+                                    </div>
+                                </form>
+
+                                <span class="error_message error_upload"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 text-right">
+                            </div>
+                            <div class="col-md-7">
+                                <div class="table-striped uplodedFileList">
+                                    <span class="fileList"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Leave Reason</label>
+                        <div class="col-sm-9">
+                            <div id="leavereason"></div>
+                            <small class="text-danger leavereason_error_message"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn addleavecloser btn-secondary btn-md" data-dismiss="modal"
+                    onclick="">Cancel</button>
+                <button id="btnLeaveSaveNotes" type="button" class="btn btn-primary btn-md">Save</button>
+            </div>
+        </div>
+    </div>
+    <!-- Change the Actual Total Hours-->
+    <div class="modal fade bd-example-modal-md in" id="ChangeTotalHoursModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" id="btnClose" aria-label="Close"
+                        onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+                        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title"> Actual Toatal Hours </h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <div class="form-group">
+                        <div>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td>Hours</td>
+                                    </tr>
+                                </thead>
+                                <tbody id="EnableDateandHours">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-md" id="btnCancelDuration"
+                                onclick="">Cancel</button>
+                            <button id="btnSaveDuration" type="button" class="btn btn-primary btn-md">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src='./components/leaveentry/js/leaveentry.js'></script>
+<!-- internal script -->
+<script>
+     var LeaveDateData=null;
+     function getLeaveDetails() 
+     {
+        $('.leaveadetailsreason').hide();
+        $('[data-toggle="tooltip"]').tooltip();
+       
+
+        var filesarray = $('#leaveentry_document_upload').get(0).dropzone.getAcceptedFiles();
+        if (filesarray != null) {
+            if (filesarray.length != 0) {
+                var output = [];
+                filesarray.forEach((file, i) => {
+                    // 
+                    var removeLink = "<a class=\"removeFile\" href=\"#\" data-fileid=\"" + i + "\">Remove</a>";
+
+                    output.push("<br/><li class=\"glyphicon glyphicon-paperclip\"><strong>&nbsp;", escape(file.name), "</strong> - ",
+                        file.size, " bytes. &nbsp; &nbsp; ", removeLink, "</li> ");
+                })
+
+                var parent = $('.uplodedFileList');
+                parent.find(".fileList").append(output.join(""));
+            }
+        }
+
+        $('.addleavecloser').on('click', () => {
+            leaveentry_dropzone_remove_files();
+        })
+        //The below function loads the leave entry while page loading
+        GetEmployeeLeaveEntry();
+        // The below function loads the pagination for the above table
+        fnLeaveEntryPagination();
+
+       
+
+        // The below event triggers the madd leave model while clicking the AddLeaveButton
+        $(".AddLeaveButton").click(function () {
+            // The below function get the list of approvers to that particular employee
+            fnGetEmployeeLeaveApprovers();
+            getLeaveType();
+            resetdatepicker();
+            $('.leavefrom_error_message').html('');
+            $('.leaveto_error_message').html('');
+            $("#numberofdays").val('');
+            $("#totalhours").val('');
+            // $("#leavereason").val('');
+            // leavereasoneditor.option("value","");
+            $('#LeaveModal').appendTo("body").modal('show');
+        });
+
+          
+        //2
+        var flag = 0;
+        var x = 1;
+        $(".ChageHoursButton").hide();
+        // The below event will trigger the change hours model
+        $('#EnableDateandHours').html('');
+
+
+        $(".ChageHoursButton").click(function () {
+            // 
+            $("#ChangeTotalHoursModal").modal();
+
+            if ($('#EnableDateandHours tr').length < 1) {
+                var x = 1;
+                var html = "";
+                var fromdate = $("#leave_entry_from_date").dxDateBox('instance').option('value');
+                var todate = $("#leave_entry_to_date").dxDateBox('instance').option('value');
+
+                var sd = new Date(fromdate);
+                var ed = new Date(todate);
+                if (sd.getMonth() == ed.getMonth()) {
+                    var getTot = daysInMonth(sd.getMonth() + 1, sd.getFullYear());
+                } else {
+                    sdDaysCount = daysInMonth(sd.getMonth() + 1, sd.getFullYear());
+                    edDaysCount = daysInMonth(ed.getMonth() + 1, ed.getFullYear());
+                    var getTot = parseInt(sdDaysCount) + parseInt(edDaysCount);
+                }
+
+
+                var actualtotaldays = noofdayscount(fromdate, todate);
+
+                var sat = new Array();
+                var oddsat = new Array();
+                var sun = new Array();
+
+
+                var date = sd.getDate();
+
+                var totalsaturday = new Array();
+                var totalsunday = new Array();
+                for (var i = 1; i <= actualtotaldays; i++) {
+                    var newDate = new Date(sd.getFullYear(), sd.getMonth(), sd.getDate())
+
+                    if (newDate.getDay() == 0) {
+                        totalsunday.push(sd.getDate())
+                    }
+                    if (newDate.getDay() == 6) {
+                        totalsaturday.push(sd.getDate())
+                    }
+                }
+
+                for (var i = date; i <= actualtotaldays + date; i++) {
+                    // ;
+                    var sat = [];
+                    var oddsat = [];
+                    var sun = [];
+                    flag = 0;
+                    var actualhours = 8;
+                    actualyear = sd.getFullYear();
+                    actualmonth = sd.getMonth() + 1;
+                    actualday = sd.getDate();
+                    var newDate = new Date(sd.getFullYear(), sd.getMonth(), sd.getDate());
+                    var actualDate = (actualmonth + "/" + actualday + "/" + actualyear);
+
+                    if (newDate.getDay() == 6) {
+                        sat.push(actualday)
+                        flag = 1;
+                    }
+                    if (newDate.getDay() == 0) {
+                        sun.push(actualday)
+                        flag = 1;
+                    }
+
+                    if (sat.length > 0) {
+                        for (var j = 0; j < totalsaturday.length; j++) {
+
+                            if (totalsaturday[j] == sat[0]) {
+                                flag = 0;
+                                actualhours = 6;
+                            }
+                            j = j + 1;
+                        }
+                    }
+
+                    if (flag == 0) {
+                        html += "<tr><td><input type=\"text\" class=\"form-control leavedatepicker\" id=\"ChangeFromDate" + x + "\"  name=\"ChangeFromDate\" value= '" + actualDate + "' readonly=''></td>";
+                        html += "<td><input type=\"text\" class=\"form-control\" id=\"ChangeTimeDuration" + x + "\" name=\"ChangeTimeDuration\" value= '" + actualhours + "'> <br/><small class='text-danger changehours_error_msg'></small></td></tr>";
+                        x++;
+                    }
+                }
+            }
+            else {
+                // 
+                var existingRowCount = $('#EnableDateandHours tr').length;
+                for (var i = 1; i <= existingRowCount; i++) {
+                    var actualDate = $("#ChangeFromDate" + i).val();
+                    var actualhours = $("#ChangeTimeDuration" + i).val();
+
+                    html += "<tr><td><input type=\"text\" class=\"form-control leavedatepicker\" id=\"ChangeFromDate" + i + "\"  name=\"ChangeFromDate\" value= '" + actualDate + "' readonly=''></td>";
+                    html += "<td><input type=\"text\" class=\"form-control\" id=\"ChangeTimeDuration" + i + "\" name=\"ChangeTimeDuration\" value= '" + actualhours + "'><br/><small class='text-danger changehours_error_msg'></td> </small></tr>";
+
+                }
+            }
+
+            $("#EnableDateandHours").html(html);
+        });
+
+
+        $("#numberofdays").val('');
+        $("#totalhours").val('');
+        // leavereasoneditor.option("value","");
+
+        $("#btnCancelDuration").click(function () {
+            $("#ChangeTotalHoursModal").modal('hide');
+            $('#LeaveModal').modal('focus');
+        });
+
+        $("#btnClose").click(function () {
+            $("#ChangeTotalHoursModal").modal('hide');
+            $('#LeaveModal').modal({ focus: this });
+        });
+        //The below event will save the updated duration
+        $("#btnSaveDuration").click(function () {
+            var hourstotal = 0;
+            var Rcount = $('#EnableDateandHours tr').length;
+            for (var i = 1; i <= Rcount; i++) {
+                var hours = $("#ChangeTimeDuration" + i).val();
+                if ((hours > 0) && (typeof parseInt(hours) !== 'string')) {
+                    $("#ChangeTimeDuration" + i).val(hours);
+                    hourstotal = parseInt(hourstotal) + parseInt(hours);
+                    $(`.changehours_error_msg`).eq(i - 1).html('');
+                } else {
+
+                    $(`.changehours_error_msg`).eq(i - 1).html('Please Enter a Valid Hours');
+                }
+            }
+            if ($(`.changehours_error_msg`).html() == '') {
+                $("#totalhours").val(hourstotal);
+                $("#ChangeTotalHoursModal").modal('hide');
+            }
+        });
+        // The below method returns the all leave dates that the employee have applied
+        const leaveDates = () => {
+            var LeaveDateArray = []
+            var filter_val = JSON.stringify({
+            });
+            if(LeaveDateData == null || LeaveDateData == undefined) {
+                 LeaveDateData = callgetlist('GetEmployeeLeaveDates', filter_val)
+            }
+            // if(LeaveDateData == null || LeaveDateData == undefined || LeaveDateData == '' || LeaveDateData.length > 0) {
+                LeaveDateData.forEach(function (key, item) {
+                    var RCount = item + 1;
+
+                    var date = new Date(key.LeaveDate);
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+
+                    if (day < 10) {
+                        day = "0" + (day);
+                    }
+                    if (month < 10) {
+                        month = "0" + (month);
+                    }
+                    var year = date.getUTCFullYear();
+
+                    var leavedate = (year + "-" + month + "-" + day);
+                    LeaveDateArray.push(leavedate);
+                });
+            // }
+            return LeaveDateArray;
+        }
+        // leaveDates();
+        // The below datepicker disable the dates that was already applied as a leave for the employee
+        const now = new Date();
+        var disableLeaveDates = leaveDates();
+        const startDate = $("#leave_entry_from_date").dxDateBox({
+            type: 'date',
+            displayFormat: 'dd-MMM-yyyy',
+        //    value: now,
+           disabledDates: disableLeaveDates,
+        onValueChanged: function (e) {
+            endDate.option("min", e.value);
+            numberofDaysMap();
+        }
+    }).dxDateBox("instance");
+
+    const endDate = $("#leave_entry_to_date").dxDateBox({
+        type: 'date',
+        displayFormat: 'dd-MMM-yyyy',
+        //    value: now,
+           disabledDates: disableLeaveDates,
+        onValueChanged: function (e) {
+            startDate.option("max", e.value);
+            numberofDaysMap();
+        }
+    }).dxValidator({
+    validationRules: [{
+      type: 'required',
+      message: 'To Date is required',
+    }],
+  }).dxDateBox("instance");
+
+
+        // $('#leave_entry_from_date').datepicker({
+        //     autoclose: true,
+        //     todayHighlight: true,
+
+        //     beforeShowDay: function (currentDate) {
+              
+        //         var dayNr = currentDate.getDay();
+        //         var dateNr = moment(currentDate.getDate()).format("YYYY-MM-DD");
+        //         var fromDatesForDisable = leaveDates()
+        //         if (fromDatesForDisable.length > 0) {
+        //             for (var i = 0; i < fromDatesForDisable.length; i++) {
+        //                 if (moment(currentDate).unix() == moment(fromDatesForDisable[i], 'YYYY-MM-DD').unix()) {
+        //                     return false;
+        //                 }
+        //             }
+        //         }
+        //         return true;
+        //     }
+        // });
+
+        // The below datepicker disable the dates that was already applied as a leave for the employee
+        // $('#leave_entry_to_date').datepicker({
+        //     autoclose: true,
+        //     todayHighlight: true,
+        //     setDate: null,
+        //     beforeShowDay: function (currentDate) {
+        //         // ;
+        //         var dayNr = currentDate.getDay();
+        //         var dateNr = moment(currentDate.getDate()).format("YYYY-MM-DD");
+        //         var toDatesForDisable = leaveDates()
+        //         if (toDatesForDisable.length > 0) {
+        //             for (var i = 0; i < toDatesForDisable.length; i++) {
+        //                 if (moment(currentDate).unix() == moment(toDatesForDisable[i], 'YYYY-MM-DD').unix()) {
+        //                     return false;
+        //                 }
+        //             }
+        //         }
+        //         return true;
+        //     }
+        // });
+    
+       
+        // The below event will checks if the from date and to date have data
+        //if have a data then checks  from date is less than to date 
+        //if it is true it will calculate the totalhours and total days
+        //else it will return the error message
+       
+        // The below event will checks if the from date and to date have data
+        //if have a data then checks  from date is less than to date 
+        //if it is true it will calculate the totalhours and total days
+        //else it will return the error message
+        $('#leave_entry_from_date').on('changeDate', function () {
+            $('.numberofdays_error_message').text('')
+            $('.totalhours_error_message').text('')
+            if ($('#leave_entry_from_date').val() != "" ) {
+                $('.leavefrom_error_message').html('');
+            }
+            
+            if ($("#leave_entry_from_date").dxDateBox('instance').option('value') != null && $("#leave_entry_to_date").dxDateBox('instance').option('value') != null) {
+                var start =("#leave_entry_from_date").dxDateBox('instance').option('value') ;
+                var end = $("#leave_entry_to_date").dxDateBox('instance').option('value');
+                days = noofdayscount(start, end) + 1;
+                if (days < 0 || days == 0) {
+                    resetdatepicker();
+                    $('.leavefrom_error_message').html('From date is grater than TO date ')
+                    $("#numberofdays").val("");
+                    $("#totalhours").val("");
+
+
+                } else {
+                    $('.leavefrom_error_message').html('')
+                    $("#numberofdays").val(days);
+                    var totalhours = fnGetRegularWeekEndLeaves(start, end);
+                    $("#totalhours").val(totalhours);
+                    $(".ChageHoursButton").show();
+                    calculateTimeandHoursDuration();
+
+                }
+            } else if($('.leavefrom_error_message').html() == '') {
+                if ($("#leave_entry_from_date").dxDateBox('instance').option('value') == "") {
+                    $('.leavefrom_error_message').html('From Date is Required.');
+                } else {
+                    $('.leavefrom_error_message').html('');
+                }
+                if ($("#leave_entry_to_date").dxDateBox('instance').option('value') == "") {
+                    $('.leaveto_error_message').html('To Date is Required.');
+                } else {
+                    $('.leaveto_error_message').html('');
+                }
+            }
+        })
+        //The below function returns the number of days in a given from date and to date
+        function noofdayscount(start, end) {
+            var startdate = new Date(start);
+            var enddate = new Date(end);
+            // end - start returns difference in milliseconds 
+            var diff = new Date(enddate - startdate);
+
+            // get days
+            var days = diff / 1000 / 60 / 60 / 24;
+            return days;
+        }
+        // The below event will trigger the function that function will stores the leave entry
+        $('#btnLeaveSaveNotes').on("click", function () {
+            PostEmployeeLeaveEntry();
+        });
+        // The below function will send the leave entry data to the server
+        function PostEmployeeLeaveEntry() {
+            // ;
+            var leavefrom =$("#leave_entry_from_date").dxDateBox('instance').option('value');
+            var leaveto = $("#leave_entry_to_date").dxDateBox('instance').option('value');
+            var numberofdays = $('#numberofdays').val();
+            var totalhours = $('#totalhours').val();
+            var leave_Type = $('#leavetype').val();
+            var leavereason = leavereasoneditor.option("value");
+            if ((leavefrom !== '' || leavefrom != null) &&( leaveto !== '' || leaveto != null) && numberofdays !== '' && totalhours !== '' && leave_Type !== '-1' && leavereason !== '') {
+                $('.leavefrom_error_message').text('')
+                $('.leaveto_error_message').text('')
+
+                $('.numberofdays_error_message').text('')
+                $('.totalhours_error_message').text('')
+                $('.leavereason_error_message').text('')
+                // var filedataval = saveLeaveEntryDocuments();
+                var numberofdays = $('#numberofdays').val();
+                var totalhours = $('#totalhours').val();
+                var addFileName = $('#base64').val();
+                var leavereason = leavereasoneditor.option("value");
+                var leavetypedata = $('#leavetype').val();
+                var CurDate = new Date();
+
+                var day = CurDate.getDate();
+                var month = CurDate.getMonth() + 1;
+                if (day < 10) {
+                    day = "0" + (day);
+                }
+                if (month < 10) {
+                    month = "0" + (month);
+                }
+                var year = CurDate.getUTCFullYear();
+                var AppliedDate = (year + "-" + month + "-" + day);
+
+                var LeaveDetails = [];
+                var count = $('#EnableDateandHours tr').length;
+                for (var i = 1; i <= count; i++) {
+                    var Ldate = $("#ChangeFromDate" + i).val();
+                    var Lhours = $("#ChangeTimeDuration" + i).val();
+
+                    LeaveDetails[i - 1] = {
+                        "LeaveDate": Ldate,
+                        "LeaveHours": Lhours,
+                        "AppliedDate": AppliedDate,
+                        "Reason": leavereason,
+                        "LeaveFile": addFileName,
+                        "LeaveTypeID":leavetypedata
+                    };
+                }
+
+                var data = {
+                    "Method": "PostEmployeeLeave",
+                    "Data": {
+                        "LeaveDetails": JSON.stringify(LeaveDetails)
+                    },
+                    "Status": "",
+                    "Message": ""
+                };
+                var postCall = PostDataCall(data);
+                if (postCall['IsSuccess'] == true) {
+                    var leaveentry_file = $('#leaveentry_document_upload').get(0).dropzone.getAcceptedFiles();
+                    if (leaveentry_file.length > 0) {
+                        for (i = 0; i < leaveentry_file.length; i++) {
+                            var FileExtensions = leaveentry_file[i].name.slice((Math.max(0, leaveentry_file[i].name.lastIndexOf(".")) || Infinity) + 1);
+                            var FileTypes = leaveentry_file[i].type;
+                            var FileNames = leaveentry_file[i].name.substr(0, leaveentry_file[i].name.lastIndexOf("."));
+                            var leaveentryfileFormData = new FormData();
+                            leaveentryfileFormData.append('file', leaveentry_file[i]);
+                            var Contentdetails =
+                                [{
+                                    "DocumentTypeId": "LEAVE",
+                                    "DocumentType": "LEAVE",
+                                    "DocumentName": FileNames,
+                                    "Extension": FileExtensions,
+                                    "ContentType": FileTypes
+                                }]
+
+                            leaveentryfileFormData.append('Contentdetails', JSON.stringify(Contentdetails));
+                            var SaveLeaveEntryDocumentsResult = postFileGeneric(leaveentryfileFormData);
+                        }
+                    }
+
+                    $('#EnableDateandHours tr').remove();
+                    $('#leaveentrylist').empty();
+                    //The below function will get the latest leaveentry  data from server 
+                    GetEmployeeLeaveEntry();
+                    leaveentry_dropzone_remove_files();
+                    $('.fileList').html('');
+                    resetdatepicker();
+                    swal("Success..!", postCall['Message'], "success");
+                    $("#LeaveModal").modal("hide")
+
+                    //The below function will get the latest leaveapproval  data from server 
+                    loadLeaveApprovalEntry();
+                } else {
+                    swal("Warning..!", postCall['Message'], "warning");
+                }
+            } else {
+                
+                if (leavefrom == '' || leavefrom == null) {
+                    $('.leavefrom_error_message').text('From date is required')
+                } else {
+                    $('.leavefrom_error_message').text('')
+                }
+
+                if (leaveto == '' || leaveto == null) {
+                    $('.leaveto_error_message').text('To date is required')
+                } else {
+                    $('.leaveto_error_message').text('')
+                }
+
+                if (numberofdays == '') {
+                    $('.numberofdays_error_message').text('Number of days required')
+                } else {
+                    $('.numberofdays_error_message').text('')
+                }
+
+                if (totalhours == '') {
+                    $('.totalhours_error_message').text('Total hours is required')
+                } else {
+                    $('.totalhours_error_message').text('')
+                }
+                if (leave_Type == "-1") {
+                    $('.leaveTypeErrorMessage').text('Leave Type is required')
+                } else {
+                    $('.leaveTypeErrorMessage').text('')
+                }
+
+                if (leavereason == '') {
+                    $('.leavereason_error_message').text('Reason is required')
+                } else {
+                    $('.leavereason_error_message').text('')
+                }
+            }
+        }
+
+
+
+
+
+       
+
+        function daysInMonth(month, year) {
+            return new Date(year, month, 0).getDate();
+        }
+
+
+     }
+    $(document).ready(function () {
+        Dropzone.autoDiscover = false;
+        var leaveentry_document_upload = new Dropzone("#leaveentry_document_upload", {
+            addRemoveLinks: true,
+            uploadMultiple: true,
+            createImageThumbnails: true,
+            autoProcessQueue: false,
+            url: saveLeaveEntryDocuments,
+        });
+        var editor = CKEDITOR.instances.resPlanMsg;
+        if (editor) {
+            editor.destroy(true);
+        }
+        CKEDITOR.replace('leaveadetailsreason');
+        CKEDITOR.config.height = 100;
+        getLeaveDetails();
+           
+        });
+
+</script>
+
+<script>
+    
+    var leavereasoneditor='';
+    function getLeaveType() {
+        var filter_val = JSON.stringify({
+        });
+        var result = callgetlist('GetLeaveType', filter_val);
+        var html = '';
+        html +=`<option value="-1">Choose Leave Type</option>`; 
+        result.forEach((data, index) => {
+            html+=`<option value="${data.LeaveTypeID}">${data.LeaveTypeDescription}</option>`;
+        });
+        $(`#leavetype`).html(html);
+    }
+    // The below function gets the approvers list
+    function fnGetEmployeeLeaveApprovers() {
+        // var editor = CKEDITOR.instances.leavereason;
+        // if (editor) {
+        //     editor.destroy(true);
+        // }
+        // CKEDITOR.replace('leavereason');
+        
+        leavereasoneditor = $('#leavereason').dxHtmlEditor({
+		height: 300,
+		value: '',
+		toolbar: {
+		items: [
+			'undo', 'redo', 'separator',
+			{
+			name: 'size',
+			acceptedValues: ['8pt', '10pt', '12pt', '14pt', '18pt', '24pt', '36pt'],
+			},
+			{
+			name: 'font',
+			acceptedValues: ['Arial', 'Courier New', 'Georgia', 'Impact', 'Lucida Console', 'Tahoma', 'Times New Roman', 'Verdana'],
+			},
+			'separator', 'bold', 'italic', 'strike', 'underline', 'separator',
+			'alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'separator',
+			'orderedList', 'bulletList', 'separator',
+			{
+			name: 'header',
+			acceptedValues: [false, 1, 2, 3, 4, 5],
+			}, 'separator',
+			'color', 'background', 'separator',
+			'link', 'image', 'separator',
+			'clear', 'codeBlock', 'blockquote', 'separator',
+			'insertTable', 'deleteTable',
+			'insertRowAbove', 'insertRowBelow', 'deleteRow',
+			'insertColumnLeft', 'insertColumnRight', 'deleteColumn',
+		],
+		},
+		mediaResizing: {
+		enabled: true,
+		},
+	}).dxHtmlEditor('instance');
+	leavereasoneditor.option('toolbar.multiline', true);
+
+        var filter_val = JSON.stringify({
+            LeaveId: null
+        });
+        var result = callgetlist('GetEmployeeLeaveApprovers', filter_val);
+        var mapLeaveApprovers = MapEmployeeLeaveApprovers(result);
+        $('#LeaveApproversList').html(mapLeaveApprovers);
+    }
+    function resetdatepicker() {
+//         const now = new Date();
+//         $('#leave_entry_from_date').dxDateBox({
+//     type: 'date',
+//     value: now,
+//   });
+        //  $("#leave_entry_from_date").datepicker('setDate', null);
+        // $('#leave_entry_from_date').datepicker({
+        //     autoclose: true,
+        //     todayHighlight: true,
+
+        //     beforeShowDay: function (currentDate) {
+        //         // ;
+        //         var dayNr = currentDate.getDay();
+        //         var dateNr = moment(currentDate.getDate()).format("YYYY-MM-DD");
+        //         var fromDatesForDisable = leaveDates()
+        //         if (fromDatesForDisable.length > 0) {
+        //             for (var i = 0; i < fromDatesForDisable.length; i++) {
+        //                 if (moment(currentDate).unix() == moment(fromDatesForDisable[i], 'YYYY-MM-DD').unix()) {
+        //                     return false;
+        //                 }
+        //             }
+        //         }
+        //         return true;
+        //     }
+        // });
+        // $("#leave_entry_to_date").datepicker('setDate', null);
+        // $('#leave_entry_to_date').datepicker({
+        //     autoclose: true,
+        //     todayHighlight: true,
+        //     beforeShowDay: function (currentDate) {
+        //         // ;
+        //         var dayNr = currentDate.getDay();
+        //         var dateNr = moment(currentDate.getDate()).format("YYYY-MM-DD");
+        //         var toDatesForDisable = leaveDates()
+        //         if (toDatesForDisable.length > 0) {
+        //             for (var i = 0; i < toDatesForDisable.length; i++) {
+        //                 if (moment(currentDate).unix() == moment(toDatesForDisable[i], 'YYYY-MM-DD').unix()) {
+        //                     return false;
+        //                 }
+        //             }
+        //         }
+        //         return true;
+        //     }
+        // });
+
+    }
+</script>
+
+
+<script>
+    // Dropdown Checkbox Combo
+    var expanded = false;
+
+    function showCheckboxes(count) {
+
+        var checkboxes = document.getElementById("checkboxes" + count);
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+    // The below function for pagination
+    function fnLeaveEntryPagination() {
+        // ;
+        $('.LEpagination').html('');
+        var trnum = 0;
+        var maxRows = 6;
+
+        var totalRows = $('#leaveentrylist tr').length;
+        $('#leave tbody tr').each(function () {
+            trnum++;
+            if (trnum > maxRows) {
+                $(this).hide();
+            }
+            if (trnum <= maxRows) {
+                $(this).show();
+            }
+        })
+        var i = 1;
+        if (totalRows > maxRows) {
+            var totpagenum = Math.ceil(totalRows / maxRows)
+            $('.LEpagination').append('<li class="Previous" data-page="Previous">\<span>Previous</span>\</li>').show();
+
+            for (; i <= totpagenum;) {
+                $('.LEpagination').append('<li data-page="' + i + '">\<span>' + i++ + '</span>\</li>').show();
+            }
+            $('.LEpagination').append('<li data-page="Next">\<span>Next</span>\</li>').show();
+        }
+
+        $('.LEpagination li:nth-child(2)').addClass('active');
+        $('.LEpagination li').on('click', function () {
+            // ;
+            var pagenum = $(this).attr('data-page');
+            var curPage = $('.LEpagination').find('li.active').attr('data-page');
+            var trIndex = 0;
+            var activepage = 0;
+            $('.LEpagination li').removeClass('active');
+            activepage = parseInt(pagenum) + 1;
+
+            if (pagenum == "Previous") {
+                if (parseInt(curPage) != 1) {
+                    pagenum = 0;
+                    pagenum = parseInt(curPage) - 1;
+                    activepage = curPage;
+                }
+            } else {
+                if (pagenum == "Next") {
+                    if (parseInt(curPage) != totpagenum) {
+                        pagenum = 0;
+                        pagenum = parseInt(curPage) + 1;
+                        activepage = pagenum + 1;
+                    }
+                }
+            }
+
+            if (pagenum == "Previous" && curPage == 1) {
+                activepage = 2
+                pagenum = 1
+            }
+
+            if (pagenum == "Next" && curPage == totpagenum) {
+                activepage = totpagenum + 1
+                pagenum = totpagenum;
+            }
+
+            if (activepage != NaN)
+                $('.LEpagination li:nth-child(' + activepage + ')').addClass('active')
+
+            $('#leave tbody tr').each(function () {
+                trIndex++
+                if (trIndex > (maxRows * pagenum) || trIndex <= ((maxRows * pagenum) - maxRows)) {
+                    $(this).hide()
+                } else {
+                    $(this).show()
+                }
+            })
+        })
+    }
+
+
+    const commentHistory = (commenthistorydata) => {
+        // ;
+        // The below flag represents the active user
+        var flag = 1;
+        // The below will remove the all comment history while page loading
+        $(`.leaveentry_commentHistoryList`).html('');
+        datelistarray = [];
+        filelistarray = [];
+        // The below foreach will append the backend data client side UI
+        if (commenthistorydata != null) {
+            commenthistorydata.forEach((commentdata) => {
+                // 
+                // The below variable stores the commetn created date as a string
+                var createddate = new Date(commentdata.CreatedDate);
+                // The below variable have only comment created date
+                var createddatestring = dateConverter(createddate);
+                // The below variable have comment created time 
+                var createdtimestring = timeConverter(createddate);
+                // The below if condition used to separate the comments date wise
+                //The below if checks the created date is not exist in the datelistarray variable if it is true 
+                // it will print the date and push the date into that array 
+                if (!datelistarray.includes(createddatestring)) {
+                    var currentDateString = new Date();
+                    // The below variable have the current date
+                    var currentDate = dateConverter(currentDateString);
+                    $(`.leaveentry_commentHistoryList`).append(`
+                <div class=" row text-center text-primary">
+                <div class="col-xs-4 dateborder"></div>
+                <div class="col-xs-4">${createddatestring == currentDate ? 'Today' : createddatestring}</div>
+                <div class="col-xs-4 dateborder"></div>
+                </div> <br/>
+            `);
+                    datelistarray.push(createddatestring);
+                }
+                var commentstring = '';
+                // The below condigtional statement removes the html tag from the comment data
+                if ((commentdata.Comments === null) || (commentdata.Comments === '')) {
+                    commentstring = '';
+                } else {
+                    data = commentdata.Comments.toString();
+                    commentstring = data.replace(/<[^>]*>/g, '');
+                }
+                //  The if condition checks the backend flag value is equal to current user(Active User) flag value(1)
+                // if it is true the if condition will execute 
+                // else the else part will execute
+                if (flag == commentdata.flag) {
+
+                    $(`.leaveentry_commentHistoryList`).append(`
+                <div class="row sender">
+                <div class="col-md-8 comment pull-right">
+                    <div class="row">
+                    <div class="col-md-12 text-right pull-right">
+                        <strong><small class="text-muted">${commentdata.Name}</small> 
+                        <small class="text-muted"> ,${createdtimestring}</small></strong>
+                    </div>
+                    </div>
+                    <div class="panel">
+                    <div class="panel-heading"><p class="commentstring">${commentstring}</p><span id="${commentdata.ID}" class="attachment sender_file"></span></div>
+                    </div>
+                </div>
+                </div>
+            `);
+                } else {
+                    $(`.leaveentry_commentHistoryList`).append(`
+
+                <div class="row receiver">
+                <div class="col-md-8 pull-left comment ">
+                    <div class="row">
+                    <div class="col-md-12 text-left pull-left">
+                        <strong><small class="text-muted">${commentdata.Name}</small>
+                        <small class="text-muted">,${createdtimestring}</small></strong>
+                    </div>
+                    </div>
+                    <div class="panel  panel-primary">
+                    <div class="panel-heading"><p class="commentstring">${commentstring}</p><span id="${commentdata.ID}" class="attachment receiver_file"></span></div>
+                    </div>
+                </div>
+                </div>
+            `);
+                }
+
+                filelistarray = JSON.parse(commentdata.LeaveFile);
+                if (filelistarray != null) {
+                    if (filelistarray.length != 0) {
+                        var html = '';
+                        filelistarray.forEach(function (item, index) {
+                            html += `<a href="#"  onclick="download_file_func('${item.LeaveCommentsID}','${item.Filename}','${item.FileType}')" class="download_button ${item.LeaveCommentsID}"><button type="button" data-toggle="tooltip" data-placement = "top" title="${item.Filename}.${item.Extension}" class="btn downloadbtn btn-primary btn-sm"> <i class="fas fa-download"></i> </button></a><br/>`;
+
+                        });
+                        $(`#${commentdata.ID}`).html(html);
+                    }
+                    else {
+                        $(`#${commentdata.ID}`).html('');
+                    }
+                } else {
+                    $(`#${commentdata.ID}`).html('');
+                }
+
+            })
+
+        }
+    }
+
+
+    // The below function change the datetime string as date string and returns the date string
+    const dateConverter = (dateParam) => {
+        var day = dateParam.getDate();
+        var month = dateParam.getMonth() + 1;
+        if (day < 10) {
+            day = "0" + (day);
+        }
+        if (month < 10) {
+            month = "0" + (month);
+        }
+        var year = dateParam.getUTCFullYear();
+        var convertedDate = (year + "/" + month + "-" + day);
+        return convertedDate;
+    }
+    // The below function change the datetime string as time string and returns the time string with am/pm
+    const timeConverter = (dateTimeParam) => {
+        var hours = dateTimeParam.getHours();
+        var minutes = dateTimeParam.getMinutes();
+
+        // Check whether AM or PM 
+        var newformat = hours >= 12 ? 'PM' : 'AM';
+
+        // Find current hour in AM-PM Format 
+        hours = hours % 12;
+
+        // To display "0" as "12" 
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        var convertedTime = hours + ':' + minutes + ' ' + newformat;
+        return convertedTime;
+    }
+    function download_file_func(fileid, Filename, FileType) {
+      
+        var LeaveCommentsID = JSON.stringify({
+            LeaveCommentsID: fileid,
+            Filename: Filename,
+            FileType: FileType
+        });
+        var filter_file_val = JSON.stringify({
+            LeaveCommentsID: LeaveCommentsID
+        })
+        var result = callgetlist('GetEmployeeLeaveFile', filter_file_val);
+        $(`.${fileid}`).attr('href', `data: ${result[0].FileType} ;charset=utf-8;base64, ${result[0].FileContent}`);
+        $(`.${fileid}`).attr('download', `${result[0].Filename}`);
+    }
+
+    var perdayhours = 8;
+
+
+function  numberofDaysMap(){
+    if ($("#leave_entry_from_date").dxDateBox('instance').option('value') != "" ) {
+                $('.leavefrom_error_message').html('');
+            }
+            
+            if ($("#leave_entry_from_date").dxDateBox('instance').option('value') != null && $("#leave_entry_to_date").dxDateBox('instance').option('value') != null) {
+                var start = $("#leave_entry_from_date").dxDateBox('instance').option('value');
+                var end = $("#leave_entry_to_date").dxDateBox('instance').option('value');
+                days = noofdayscount(start, end) + 1;
+                if (days < 0 || days == 0) {
+                    resetdatepicker();
+                    $('.leavefrom_error_message').html('From date is grater than TO date ')
+                    $("#numberofdays").val("");
+                    $("#totalhours").val("");
+
+
+                } else {
+                    $('.leavefrom_error_message').html('')
+                    $("#numberofdays").val(days);
+                    var totalhours = fnGetRegularWeekEndLeaves(start, end);
+                    $("#totalhours").val(totalhours);
+                    $(".ChageHoursButton").show();
+                    calculateTimeandHoursDuration();
+
+                }
+            } else if($('.leavefrom_error_message').html() == '') {
+                if ($("#leave_entry_from_date").dxDateBox('instance').option('value') == "") {
+                    $('.leavefrom_error_message').html('From Date is Required.');
+                } else {
+                    $('.leavefrom_error_message').html('');
+                }
+                if ($("#leave_entry_to_date").dxDateBox('instance').option('value')== "") {
+                    $('.leaveto_error_message').html('To Date is Required.');
+                } else {
+                    $('.leaveto_error_message').html('');
+                }
+            }
+}
+function noofdayscount(start, end) {
+            var startdate = new Date(start);
+            var enddate = new Date(end);
+            // end - start returns difference in milliseconds 
+            var diff = new Date(enddate - startdate);
+
+            // get days
+            var days = diff / 1000 / 60 / 60 / 24;
+            return days;
+        }
+
+         // The below function gets the regularweekend leaves
+         function fnGetRegularWeekEndLeaves(strDate, endDate) {
+            // ;
+            var saturdayCount = 0;
+            var sd = new Date(strDate);
+            var ed = new Date(endDate);
+
+
+            var actualtotaldays = noofdayscount(strDate, endDate);
+            var sat = new Array();
+            var oddsat = new Array();
+            var sun = new Array();
+            var evensat = new Array();
+
+            var date = sd.getDate();
+
+            var totalsaturday = new Array();
+            var totalsunday = new Array();
+            var sd_getWeekEnd = new Date(strDate);
+            for (var i = 1; i <= actualtotaldays + date; i++) {
+                var newDate = new Date(sd_getWeekEnd.getFullYear(), sd_getWeekEnd.getMonth(), sd_getWeekEnd.getDate())
+                sd_getWeekEnd_getyear = sd_getWeekEnd.getFullYear();
+                sd_getWeekEnd_getmonth = sd_getWeekEnd.getMonth() + 1;
+                sd_getWeekEnd_getday = sd_getWeekEnd.getDate();
+                var sd_getWeekEnd_getfulldate = (sd_getWeekEnd_getmonth + "/" + sd_getWeekEnd_getday + "/" + sd_getWeekEnd_getyear);
+                if (newDate.getDay() == 0) {
+                    totalsunday.push(sd_getWeekEnd_getfulldate)
+                }
+                if (newDate.getDay() == 6) {
+                    totalsaturday.push(sd_getWeekEnd_getfulldate)
+                }
+                sd_getWeekEnd.setDate(sd_getWeekEnd.getDate() + 1);
+            }
+            var sd_getWeekDays = new Date(strDate);
+            for (var i = date; i <= actualtotaldays + date; i++) {
+                sat = [];
+                sd_getWeekDays_actualyear = sd_getWeekDays.getFullYear();
+                sd_getWeekDays_actualmonth = sd_getWeekDays.getMonth() + 1;
+                sd_getWeekDays_actualday = sd_getWeekDays.getDate();
+                var newDate = new Date(sd_getWeekDays.getFullYear(), sd_getWeekDays.getMonth(), sd_getWeekDays.getDate());
+                var sd_getWeekDays_actualDate = (sd_getWeekDays_actualmonth + "/" + sd_getWeekDays_actualday + "/" + sd_getWeekDays_actualyear);
+                if (newDate.getDay() == 6) {
+                    sat.push(sd_getWeekDays_actualDate)
+                }
+                if (newDate.getDay() == 0) {
+                    sun.push(sd_getWeekDays_actualDate)
+                }
+                // ;
+                if (sat.length > 0) {
+                    for (var j = 0; j < totalsaturday.length; j++) {
+                        var monthvalue = parseInt(totalsaturday[j].trim().split('/')[0]);
+                        var datevalue = parseInt(totalsaturday[j].trim().split('/')[1]);
+                        if (j != 0) {
+                            var previousmonthvalue = parseInt(totalsaturday[j - 1].trim().split('/')[0]);
+                            var previousdatevalue = parseInt(totalsaturday[j - 1].trim().split('/')[1]);
+
+                            if ((monthvalue > previousmonthvalue) || (datevalue < previousdatevalue)) {
+                                if (totalsaturday[j] == sat[0]) {
+                                    flag = 0;
+                                    actualhours = 6;
+                                    oddsat.push(sat[0]);
+                                }
+
+                                j = j + 1;
+                            }
+                        } else {
+                            var previousmonthvalue = '';
+                            var previousdatevalue = '';
+                        }
+                        if ((j == 0) || (monthvalue == previousmonthvalue) || (datevalue > previousdatevalue)) {
+                            if (totalsaturday[j] == sat[0]) {
+                                flag = 0;
+                                actualhours = 6;
+                                oddsat.push(sat[0]);
+                            }
+
+                            if (j != 0 && j < totalsaturday.length - 1) {
+                                var nextmonthvalue = parseInt(totalsaturday[j + 1].trim().split('/')[0]);
+                            } else {
+                                var nextmonthvalue = '';
+                            }
+                            if ((j == 0) || (monthvalue == nextmonthvalue)) {
+                                j = j + 1;
+                            }
+                        }
+
+                        // even sat values
+                        if (j != 0) {
+                            var previousmonthvalue = parseInt(totalsaturday[j - 1].trim().split('/')[0]);
+                            var previousdatevalue = parseInt(totalsaturday[j - 1].trim().split('/')[1]);
+
+                            if ((monthvalue > previousmonthvalue) || (datevalue < previousdatevalue)) {
+                                if (totalsaturday[j] == sat[0]) {
+                                    evensat.push(sat[0]);
+                                }
+                                j = j + 2;
+                            }
+                        } else {
+                            var previousmonthvalue = '';
+                            var previousdatevalue = '';
+                        }
+                        if ((j == 0) || (monthvalue == previousmonthvalue) || (datevalue > previousdatevalue)) {
+                            if (totalsaturday[j] == sat[0]) {
+                                evensat.push(sat[0]);
+                            }
+
+                            if (j != 0 && j < totalsaturday.length - 1) {
+                                var nextmonthvalue = parseInt(totalsaturday[j + 1].trim().split('/')[0]);
+                            } else {
+                                var nextmonthvalue = '';
+                            }
+                            if ((j == 0) || (monthvalue == nextmonthvalue)) {
+                                j = j + 2;
+                            }
+                        }
+                    }
+                }
+                sd_getWeekDays.setDate(sd_getWeekDays.getDate() + 1);
+            }
+            var oddsatcount = oddsat.length;
+
+            var totaldays = (actualtotaldays + 1) - (evensat.length + sun.length);
+            $("#numberofdays").val(totaldays);
+            var totalhours = totaldays * perdayhours;
+            for (var i = 0; i < oddsatcount; i++) {
+                totalhours = totalhours - 2;
+            }
+
+            return totalhours
+        }
+
+        function calculateTimeandHoursDuration() {
+            var x = 1;
+            var html = "";
+            var fromdate =$("#leave_entry_from_date").dxDateBox('instance').option('value');
+            var todate = $("#leave_entry_to_date").dxDateBox('instance').option('value');
+            var sd = new Date(fromdate);
+            var ed = new Date(todate);
+
+            var actualtotaldays = noofdayscount(fromdate, todate);
+            var sat = new Array();
+            var oddsat = new Array();
+            var sun = new Array();
+
+            var date = sd.getDate();
+
+            var totalsaturday = new Array();
+            var totalsunday = new Array();
+            var sd_1 = new Date(fromdate);
+            for (var i = 1; i <= actualtotaldays + date; i++) {
+                var newDate = new Date(sd_1.getFullYear(), sd_1.getMonth(), sd_1.getDate());
+                getyear = sd_1.getFullYear();
+                getmonth = sd_1.getMonth() + 1;
+                getday = sd_1.getDate();
+                var getfulldate = (getmonth + "/" + getday + "/" + getyear);
+                if (newDate.getDay() == 0) {
+                    totalsunday.push(getfulldate)
+                }
+                if (newDate.getDay() == 6) {
+                    totalsaturday.push(getfulldate)
+                }
+                sd_1.setDate(sd_1.getDate() + 1);
+            }
+            for (var i = date; i <= actualtotaldays + date; i++) {
+
+                var sat = [];
+                var oddsat = [];
+                var sun = [];
+                flag = 0;
+                var actualhours = 8;
+                actualyear = sd.getFullYear();
+                actualmonth = sd.getMonth() + 1;
+                actualday = sd.getDate();
+                var newDate = new Date(sd.getFullYear(), sd.getMonth(), sd.getDate());
+                var actualDate = (actualmonth + "/" + actualday + "/" + actualyear);
+
+
+                if (newDate.getDay() == 6) {
+                    sat.push(actualDate)
+                    flag = 1;
+                }
+                if (newDate.getDay() == 0) {
+                    sun.push(actualDate)
+                    flag = 1;
+                }
+
+                if (sat.length > 0) {
+                    for (var j = 0; j < totalsaturday.length; j++) {
+                        var monthvalue = parseInt(totalsaturday[j].trim().split('/')[0]);
+                        var datevalue = parseInt(totalsaturday[j].trim().split('/')[1]);
+                        if (j != 0) {
+                            var previousmonthvalue = parseInt(totalsaturday[j - 1].trim().split('/')[0]);
+                            var previousdatevalue = parseInt(totalsaturday[j - 1].trim().split('/')[1]);
+
+                            if ((monthvalue > previousmonthvalue) || (datevalue < previousdatevalue)) {
+                                if (totalsaturday[j] == sat[0]) {
+                                    flag = 0;
+                                    actualhours = 6;
+                                }
+
+                                j = j + 1;
+                            }
+                        } else {
+                            var previousmonthvalue = '';
+                            var previousdatevalue = '';
+                        }
+                        if ((j == 0) || (monthvalue == previousmonthvalue) || (datevalue > previousdatevalue)) {
+                            if (totalsaturday[j] == sat[0]) {
+                                flag = 0;
+                                actualhours = 6;
+                            }
+                            if (j != 0 && j < totalsaturday.length - 1) {
+                                var nextmonthvalue = parseInt(totalsaturday[j + 1].trim().split('/')[0]);
+                            } else {
+                                var nextmonthvalue = '';
+                            }
+                            if ((j == 0) || (monthvalue == nextmonthvalue)) {
+                                j = j + 1;
+                            }
+                        }
+
+                    }
+
+                }
+                if (flag == 0) {
+                    html += "<tr><td><input type=\"text\" class=\"form-control leavedatepicker\" id=\"ChangeFromDate" + x + "\"  name=\"ChangeFromDate\" value= '" + actualDate + "' readonly=''></td>";
+                    html += "<td><input type=\"text\" class=\"form-control\" id=\"ChangeTimeDuration" + x + "\" name=\"ChangeTimeDuration\" value= '" + actualhours + "'> <br/><small class='text-danger changehours_error_msg'></small></td></tr>";
+                    x++;
+                }
+                sd.setDate(sd.getDate() + 1);
+            }
+
+            $("#EnableDateandHours").html(html);
+        }
+</script>

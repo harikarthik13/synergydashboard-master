@@ -1,0 +1,156 @@
+<!-- <link href="css/library/datepicker.min.css" rel="stylesheet" />
+<script type="text/javascript" src="js/library/datepicker.min.js"></script> -->
+<div class="john-trail card-detail">
+    <!-- Add "modal-not-include" to a div for which we dont want to show them in modal  -->
+    <span >
+        <span class="card-detail-title modal-not-include"><b>Voting Results</b></span>
+        <button type="button" id="btnleaveDetail" class="btn btn-xs cmn-modal-ex-btn modal-not-include expandCommonDiv pull-right">
+            <i class="fa fa-expand"></i>
+        </button>
+        <button type="button" id="votingHistory" class="btn btn btn-success modal-not-include pull-right">
+            Voting History
+        </button>
+        <hr>
+    </span>
+    <div class="row">
+        <p id="winnerResult"></p>
+    </div>
+    <div class="row ">
+        <div class="col-md-12">
+            <form action="">
+                <table id="resignTbl" class="table table-striped removetable" style="cursor: default">
+                    <thead>
+                        <th>Nominnee name</th>
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                        <th>4</th>
+                        <th>Total</th>
+                    </thead>
+                    <tbody id="votingResultBody">
+                        
+                    </tbody>
+                </table>
+                <!-- <div>
+                    <p class="text-center">Expand card to view no-due details</p>
+                </div> -->
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade bd-example-modal-lg in" id="voting_history" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Result History</h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="input-group date" style="width: 100%;margin-bottom: 15px;">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="voting-result-date"
+                          name="voting-result-date"
+                          readonly=""
+                        />
+                        <span class="input-group-addon">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                      </div>
+                    <div class="row">
+                        <table id="resultTable" class="table table-striped removetable" style="cursor: default">
+                            <thead>
+                                <th>Nominnee name</th>
+                                <th>1</th>
+                                <th>2</th>
+                                <th>3</th>
+                                <th>4</th>
+                                <th>Total</th>
+                            </thead>
+                            <tbody id="votingHistoryResultBody">
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+<script src="./js/library/moment-with-locales.js"></script>
+<script src="./js/library/lodash.min.js"></script>
+<script>
+    function findWinner(a,field){
+       return _.maxBy(a, function(o) {
+          return o[field];
+        })
+    }
+    function findVotingResult(month = null,year = null,appendDiv=null){
+        let currentMonth = moment().format('MMMM')
+        let currentYear = moment().year()
+        if(month){
+            currentMonth = month
+        }
+        if(year){
+            currentYear = year
+        }
+
+        //console.log('moment month',currentMonth)
+        var filter_val = JSON.stringify({
+            Month: currentMonth,
+            Year: currentYear,
+        });
+    var developerVotingResult = callgetlist(
+      "GetEmployeeDeveloperofmonth",
+      filter_val
+    );
+    //console.log("#####################");
+    //console.log(developerVotingResult);
+    let html = ''
+    if(developerVotingResult.length > 0){
+        let winnerObj = findWinner(developerVotingResult,'Total')
+        $('#winnerResult').html(`<b>Winner : ${winnerObj.EmployeeName}</b>, Total : ${winnerObj.Total}`)
+        developerVotingResult.forEach(element => {
+            html += `
+            <tr>
+                <td>${element.EmployeeName}</td>
+                <td>${element['1']}</td>
+                <td>${element['2']}</td>
+                <td>${element['3']}</td>
+                <td>${element['4']}</td>
+                <td>${element['Total']}</td>
+            </tr>
+            `
+        });
+        $(`#${appendDiv}`).html(html)
+    }else{
+        $(`#${appendDiv}`).html(`<tr><td colspan="6">No Records</td></tr>`)
+    }
+        
+    }
+    $(function(){
+        $('#votingHistory').click(function(){
+            $('#voting_history').appendTo('body').modal('show')
+            findVotingResult(null,null,'votingHistoryResultBody')
+        })
+       findVotingResult(null,null,'votingResultBody')
+
+            $('#voting-result-date').datepicker( {
+            format: "mm-yyyy",
+            startView: "months", 
+            minViewMode: "months"
+            })
+            .change(dateChanged)
+            .on('changeDate', dateChanged);
+        })
+        function dateChanged(ev) {
+            let month = moment($("#voting-result-date").val(), 'MM-YYYY').format('MMMM')
+            let year = moment($("#voting-result-date").val(), 'MM-YYYY').format('YYYY')
+            findVotingResult(month,year,'votingHistoryResultBody')
+        }
+</script>

@@ -1,0 +1,133 @@
+
+<link href="components\accountsmodule\css\account_module.css" rel="stylesheet" />
+<script src='components/accountsmodule/js/accounts_module.js'></script>
+
+
+<style>
+    div.dt-buttons {
+    float: right;
+}
+</style>
+<script>
+
+renderaccountmoduleGrid();
+    //loadDatasourceForbenchtobillingreport()
+
+</script>
+
+<div class="view-card-detail-ViewCard card-detail">   
+    <span class="card-detail-title"><b>Account Module</b></span>   
+    <hr />
+    <div class="form-group col-md-12">
+        <div class="row">
+            
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Start Date <span style="color: red"></span></label>
+               </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>End Date <span style="color: red"></span></label>
+                    </div>
+              </div>             
+        </div>
+    <div class="row">    
+        <div class="col-md-4" style="padding-left: 0px;">
+          <div class="form-group">
+            <input type="date" class="form-control" id="startdate" />
+            <span class="error_message" id="startdateError" style="display: block;"></span>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="date" class="form-control" id="enddate"  />
+                <span class="error_message" id="enddateError" style="display: block;"></span>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+                <button class="btn btn-primary" id="searchBtn" >
+                    Search
+                </button>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+                <button class="btn btn-primary" id="refreshBtn" >
+                    Refresh
+                </button>
+            </div>
+          </div>
+    </div>
+</div>
+   
+<div class="row">
+    <div class="form-group col-md-12">
+    <div id="accountmodule_gridview">       
+       
+    </div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="AccountModuleModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick=""><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding">
+              <i class="fas fa-expand" data-toggle="modal"></i>
+            </button>
+          <h2 class="modal-title" id="rrmModalLabel">Update:</h2>
+       </div>
+  
+        <div class="modal-body" data-simplebar>
+		 <div class="tab-content col-md-12">
+		 <input type="hidden" id="consultantidval" name="Id">
+		   <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Client Name<span style="color: red">*</span></span></label>
+                      <input type="text" class="form-control" name="Client Name" id="txtaccountclientname" placeholder="Employee Name" disabled/>
+                      <span class="error_message" id="conslttxtemployeenameerror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Project Name<span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="Project Name" id="txtaccountprojectName" placeholder="Email Id" value="xyz" disabled />
+                      <span class="error_message" id="conslttxtemployeemailerror"></span>
+                    </div>
+                  </div>
+                </div>
+			
+			<div class="row">                   
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Project Start Date<span style="color: red">*</span></label>
+                      <input type="date" class="form-control" id="dtaccountprojectstartdate" />
+                      <span class="error_message" id="consltdtprojectstartdateerror"></span>
+                    </div>
+                  </div>				   
+				  </div>				
+		</div>
+		<div class="modal-footer">
+<div style="float:right">
+		<button type="button" class="btn btn-success"  onclick="updateconsultantdata()">Save</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+	</div>	
+        </div>        
+		</div>
+        </div>
+        </div>
+        </div>
+
+
+
+    
+
+
+

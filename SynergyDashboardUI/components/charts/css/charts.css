@@ -1,0 +1,12 @@
+#chartdiv {
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+  }
+  .amcharts-chart-div svg a{
+    display: none !important;
+  }
+  .customgobackbutton {
+    text-decoration: none;
+    color: black;
+  }

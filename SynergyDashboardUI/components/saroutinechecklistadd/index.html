@@ -1,0 +1,131 @@
+<script src='components/saroutinechecklistadd/js/saroutineadd.js'></script>
+<link href="components/saroutinechecklistadd/css/saroutine.css" rel="stylesheet" />
+<div class="card-detail">
+    <span class="pull-right">
+        <button class="btn btn-sm btn-primary" onclick="openManageSARoutineListModels('add')">
+          <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+      </span>
+
+    <span class="card-detail-title"><b>SA Routine Master</b></span>
+    <hr />
+    <div id="sddgd-saroutinelist"></div>
+</div>
+
+<div class="modal fade" id="SAAddRoutinemodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-center">Add New Routine</h4>   
+            </div>
+            <div class="modal-body"  data-simplebar>
+                <div class="form-group">
+                    <div class="row" >
+                        <div class="col-md-4">
+                            <label>Task<span class="required">*</span></label>
+                            <input type="text" name="task" id="task" class="form-control" >
+                            <small class="text-danger task_error_message"></small>
+
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <label>Start Date<span class="required">*</span></label>
+                            <div class="input-group ">
+                                <input type="text" class="form-control" id="routine_start_date" name="routine_start_date" readonly="">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+                            </div>
+                            <small class="text-danger routinestart_error_message"></small>
+                            
+                        </div>
+
+                        <div class="col-md-4 ">
+                            <label>End Date</label>
+                            <div class="input-group ">
+                                <input type="text" class="form-control" id="routine_end_date" name="routine_end_date" readonly="">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+                            </div>
+                            <small class="text-danger routineend_error_message"></small>
+                        </div>
+                        
+                    </div>
+                    <br />
+
+                    <div class="row">                        
+                        <div class="col-md-8">
+                            <label>Runs Every :<span class="required">*</span></label> 
+                            <div class="input-group ">
+                                <label><input type="radio" name="freqoption"  value="D"> &nbsp;Daily</label>&nbsp;
+                                <label><input type="radio" name="freqoption" value="W"> &nbsp;Weekly</label>&nbsp;
+                                <label><input type="radio" name="freqoption" value="M">&nbsp;Monthly</label>&nbsp;
+                                <label><input type="radio" name="freqoption" value="Q"> &nbsp;Quarterly</label>&nbsp;
+                                <label><input type="radio" name="freqoption" value="H" > &nbsp;Half-yearly</label>&nbsp;
+                                <label><input type="radio" name="freqoption" value="Y">&nbsp;Yearly</label>
+                            </div>
+                            <small class="text-danger freqoption_error_message"></small>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label>Time of Execution<span class="required">*</span></label>
+                            <div class="input-group ">
+                                <input type="time" class="form-control" id="routine_time" name="routine_time" >
+                            </div>
+                            <small class="text-danger routine_time_error_message"></small>
+                        </div>
+                    </div>
+                    <br />
+
+
+                    <div class="row">
+                        <div class="col-md-12 text-left">
+                           <div ><label>Instruction<span class="required">*</span></label></div>
+                            <div name="masterinstructions" id="masterinstructions"></div>
+                        </div>
+                        <small class="text-danger masterinstructions_error_message"></small>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <input type="hidden" id="saroutineid" value="">
+                    </div>
+                </div>
+            </div>
+            <div id= "modalFooter" class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary RoutinesaveBtn" id="RoutinesaveBtn">Save</button>             
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="SAReportRoutinemodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Report Routine</h4>   
+            </div>            
+            <div class="modal-body"  data-simplebar>
+                <div id="sddgd-saroutine-report"></div>                    
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- History Model -->
+<div id="saHistoryModel" style="display: none;">
+    <div data-options="dxTemplate: { name: 'saHistoryModelContent' }">    
+        <div class="form-group">
+            <div id="saHistoryGrid"></div>
+        </div>    
+     </div>
+</div>

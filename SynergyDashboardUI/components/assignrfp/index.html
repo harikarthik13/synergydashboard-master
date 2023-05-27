@@ -1,0 +1,27 @@
+<link href="components/assignrfp/css/assignProposal.css" rel="stylesheet" />
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.dataTables.min.js"></script>
+
+<div class="card-detail">
+    <span><i><img src="components/assignrfp/images/rfp.png" width="40px" height="40px" /></i></span>
+    
+    <span class="card-detail-title"><b>Assign RFP</b></span>
+    <hr />
+    <div id="sddgd-assignRfp"></div>
+</div>
+
+<script src='components/assignrfp/js/assignProposal.js'></script>
+<script type="text/javascript">
+    
+    $("#assignproposalModal").load("components/assignrfp/assignProposalModel.html");
+
+    function include_rfp(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }  
+</script>

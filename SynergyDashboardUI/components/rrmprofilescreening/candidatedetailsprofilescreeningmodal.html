@@ -1,0 +1,105 @@
+<link href="components/rrmprofilescreening/css/style.css" rel="stylesheet" />
+
+<div class="modal fade" id="candidateDetailsProfileScreeningModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title"><span>Candidate Details</span></h2>
+          </div>
+
+          <div class="modal-body" id="rrmProfileScreeningModalBody" data-simplebar>
+              <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist" id="profileScreeningTab">
+                  <li role="presentation" class="active" id="candidateDetailsForProfileScreeningTab">
+                    <a aria-controls="candidateDetailsForProfileScreening" role="tab">Candidate Info</a>
+                  </li>
+                  <li role="presentation" id="rrm_PreviousInterviewDetailsTabProfileScreening">
+                    <a aria-controls="rrm_PreviousInterviewDetailsProfileScreening" role="tab">Interview(s) History</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="profileScreeningTabDetails">
+                  <div role="tabpanel" class="tab-pane" id="rrm_PreviousInterviewDetailsProfileScreening">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="panel-group" id="rrm_ProfileScreeningInterviewHistoryAccordian">
+                                                 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane active" id="candidateDetailsForProfileScreening">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <table class='table table-borderless' style='margin-bottom:0px'>
+                          <tbody>
+                            <tr>
+                              <td class="table-label"><b>Name</b></td>
+                              <td><b>: </b><span id="lbl_candidateDetailsNameProfileScreening">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Mobile</b></td>
+                              <td><b>: </b><span id="lbl_candiateDetailsMobileProfileScreening">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Email Id</b></td>
+                              <td><b>: </b><span id="lbl_candiateDetailsEmailProfileScreening">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Links</b></td>
+                              <td><b>: </b><span id="lbl_candiateDetailsLinksProfileScreening">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Communication Rating</b></td>
+                              <td><b>: </b><span id="star_candidateDetailsCommunicationRatingProfileScreening">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Native</b></td>
+                              <td><b>: </b><span id="lbl_candiateDetailsNativeProfileScreening">Not Available</span></td>
+                            </tr>
+                          </tbody>
+                        </table> 
+                      </div>
+                      <div class="col-md-6">
+                        <table class='table table-borderless' style='margin-bottom:0px'>
+                          <tbody>
+                            <tr>
+                              <td class="table-label"><b>Work Experience</b></td>
+                            </tr>  
+                            <tr>
+                              <td><span id="lbl_candidateDetailsWorkExperienceProfileScreening">Not Available</span></td>
+                            </tr>                          
+                            <tr>
+                              <td class="table-label"><b>Skills :</b></td>
+                            </tr>
+                          </tbody>
+                        </table> 
+                        <div id="sdgd_candidateDetailsSkillsProfileScreening"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>          
+              </div>
+          </div>
+          <div class="modal-footer">           
+            <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  $('ul#profileScreeningTab li').click(function(e)
+{            
+    var tab_details = $(this).attr("id");
+    var currentTab = $("#"+tab_details + " > a ").attr("aria-controls");            
+    $('ul#profileScreeningTab li').removeClass("active");
+    $(this).addClass("active");
+    $("#profileScreeningTabDetails .tab-pane").removeClass("active");
+    $("#" + currentTab).addClass("active");
+    new SimpleBar(document.getElementById('rrmProfileScreeningModalBody'));
+});
+</script>

@@ -1,0 +1,36 @@
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+
+  div.dataTables_filter {
+    padding-right: 50px;
+    /* position: relative; */
+  }
+
+
+ .dataTables_wrapper .dataTables_filter {
+ float: left;
+ text-align: left;
+ margin-bottom: 10px;
+ 
+ }
+
+ /* #assignBackupLeadList {
+  z-index: 9;
+  } */
+
+ .toggleButtons
+ {
+   float: right;
+    margin-left: 100px;
+ }
+
+ #nonAssignedEmployeesBtn
+ {
+  display: none; 
+  margin-left: 65px;
+  /* position: absolute;
+   left: 60%; */
+ }

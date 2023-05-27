@@ -1,0 +1,924 @@
+<div class="modal fade" id="RRMEntryPointModelMarketingHead" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="rrmModaltitle"><span id="rrmmodelpagetitleMarketingHead"></span>&nbsp; <span><label id="MarketingHeadrrmType">&nbsp; </label></span>&nbsp;<span><label id="OwnerrrmHoldStatusMarketingHead">&nbsp; </label></span></h2>
+            </div>
+
+            <div class="modal-body" data-simplebar>
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="rrmtabMarketingHead">
+                        <li role="presentation" class="active  disabled" id="rrm_requirementTabMarketingHead" data-tab="rrm_RequirementDetailsMarketingHead">
+                            <a href="#rrm_RequirementDetailsMarketingHead" aria-controls="rrm_RequirementDetailsMarketingHead" role="tab">Requirement Details</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsTabMarketingHead">
+                            <a href="#rrm_SkillDetailsMarketingHead" aria-controls="rrm_SkillDetailsMarketingHead" role="tab">Skills Mapping</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsplanaTabMarketingHead">
+                            <a href="#rrm_SkillsPlanADetailsMarketingHead" aria-controls="rrm_SkillsPlanADetailsMarketingHead" role="tab">Plan A</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsplanbTabMarketingHead">
+                            <a href="#rrm_SkillsPlanBDetailsMarketingHead" aria-controls="rrm_SkillsPlanBDetailsMarketingHead" role="tab">Plan B</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_commentsMarketingHeadTabMarketingHead">
+                            <a href="#rrm_CommentsDetailsMarketingHead" aria-controls="rrm_CommentsDetailsMarketingHead" role="tab">Comments</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content col-md-12" id="rrmDetailsMarketingHead">
+                        <div role="tabpanel" class="tab-pane active" id="rrm_RequirementDetailsMarketingHead">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Requirement Name <span style="color: red">*</span></label>
+                                        <div id="sdtxt_rrmmarketinghead_requirementname"></div>
+                                        <span class="error_message" id="rrm_requirementnameMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Required For <span style="color: red">*</span></label>
+                                        <div id="sdtxt_rrmmarketinghead_requiredfor"></div>
+                                        <span class="error_message" id="rrm_requiredforMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divMarketingRFP">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>RFP ID</label>
+                                            <input type="text" class="form-control" name="rrm_rfpidMarketingHead" id="rrm_rfpidMarketingHead" placeholder="RFP ID" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>BDE</label>
+                                            <select class="form-control" name="rrm_entrybdeMarketingHead" id="rrm_entrybdeMarketingHead" placeholder="BDE"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="divMarketingresignation">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>EMP ID</label>
+                                        <input type="text" class="form-control" name="rrm_empidMarketingHead" id="rrm_empidMarketingHead" placeholder="EMP ID" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Replacement For</label>
+                                        <select class="form-control" name="rrm_replacementMarketingHead" id="rrm_replacementMarketingHead"></select>
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Number of positions <span style="color: red">*</span></label>
+                                        <div id="sdnmb_rrmmarketinghead_numberofpositions"></div>
+                                        <span class="error_message" id="rrm_numberofpositionsMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Priority </label>
+                                        <div id="sdcmb_rrmmarketinghead_priority"></div>
+                                        <span class="error_message" id="rrm_priorityMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Department <span style="color: red">*</span></label>
+                                        <div id="sdcmb_rrmmarketinghead_department"></div>
+                                        <span class="error_message" id="rrm_departmentMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Designation <span style="color: red">*</span></label>
+                                        <div id="sdcmb_rrmmarketinghead_designation"></div>
+                                        <span class="error_message" id="rrm_designationMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Experience required (In Yrs)<span style="color: red">*</span></label>
+                                        <div id="sdnmb_rrmmarketinghead_experiencerequired"></div>
+                                        <span class="error_message" id="rrm_experiencerequiredMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Communication <span style="color: red">*</span></label>
+                                        <div id="sdcmb_rrmmarketinghead_communication"></div>                                        
+                                        <span class="error_message" id="rrm_communicationMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Location</label>
+                                        <div id="sdtxt_rrmmarketinghead_location"></div>
+                                        <span class="error_message" id="rrm_locationforMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Requested Date</label>
+                                        <div id="sd_date_rrmmarketinghead_requestedDate"></div>
+                                        <span class="error_message" id="rrm_requesteddateMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Importance</label>
+                                    </div>
+                                    <div class="form-group col-md-6" id="rrm_importance">
+                                        <div id="sdchk_rrmmarketinghead_losingRevenue"></div>
+                                    </div>
+                                    <div class="form-group col-md-6" id="rrm_importance">
+                                        <div id="sdchk_rrmmarketinghead_fromVIP"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">                                        
+                                        <label id = "lblLeadNameMarketingHead" ></label >
+                                        <div id="sdtxt_rrmmarketinghead_requirementlead"></div>
+                                        <span class="error_message" id="rrm_requirementleadMarketingHeadError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillDetailsMarketingHead">
+                            <div class="row">                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="sdgd-rrmMarketingHeadSkills"></div>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillsPlanADetailsMarketingHead">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Skill details(Plan A)<span style="color: red"> *</span></label>
+                                    <div id="sd_txtEditor_markettingHead_skillDetailsPlanA"></div>
+                                    <span class="error_message" id="rrm_skilldetailsplanaMarketingHeadError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>To On board <span style="color: red">*</span></label>
+                                    <div id="sd_date_rrm_markettingHead_tobeonboardplana"></div>
+                                    <span class="error_message" id="rrm_tobeonboardplanaMarketingHeadError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-12" id="divMarketingHeads" style="visibility:hidden">
+                                <!--<div class="form-group col-md-4" id="divMarketingHeads">-->
+                                    <label for="MarketingHeads" id="lblMarketingHeads">MarketingHeads </label>
+                                    <!--<select class="form-control" id="rrm_MarketingHeadsplanaMarketingHead" multiple="multiple"></select>-->
+                                    <select class="form-control select_recruiter_arketingHead" id="rrm_MarketingHeadsplanaMarketingHead" multiple="multiple" ></select>
+                                    <span class="error_message" id="rrm_MarketingHeadsplanaMarketingHeadError"></span>
+                                </div>
+                                <div class="form-group col-md-2" style="visibility:hidden">
+                                    <label id="hidebtn">&nbsp;</label>
+                                    <a class="btn btn-primary form-control btn-sm" id="btnreminderMarketingHead" onclick="btnsendreminder()"><span class="glyphicon glyphicon-bell"></span>  Send Reminder</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillsPlanBDetailsMarketingHead">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Skill details(Plan B)<span style="color: red"> *</span></label>
+                                    <div id="sd_txtEditor_markettingHead_skillDetailsPlanB"></div>
+                                    <span class="error_message" id="rrm_skilldetailsplanbMarketingHeadError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>To On board<span style="color: red">*</span></label>
+                                    <div id="sd_date_rrm_markettingHead_tobeonboardplanb"></div>
+                                    <span class="error_message" id="rrm_tobeonboardplanbMarketingHeadError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-12" id="planbMarketingHeads" style="visibility:hidden">
+                                    <label for="MarketingHeads">MarketingHeads </label>
+                                    <select class="form-control select_recruiter_arketingHead" id="rrm_MarketingHeadsplanbMarketingHead" multiple="multiple"></select>
+                                    <span class="error_message" id="rrm_MarketingHeadsplanbMarketingHeadError"></span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_CommentsDetailsMarketingHead">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>On Hold by BDE &nbsp</label>
+                                    <div id="switchClientMarketing"></div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>On Hold by Owner &nbsp</label>
+                                    <div id="switchLeadMarketing"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <div id="rrm_manage_plan_comments_documents_MarketingHead" class="rrm_comments_history">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Comments </label>
+                                    <div id="sd_txtEditor_RRMMarkettingHeadComments"></div>
+                                    <span class="error_message" id="rrm_commentsMarketingHeadError"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <span class="ApiResponse"></span>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <a class="btn btn-primary btnPrevious hidden-btn" onclick="toggleTabRRMEntryPreviousMarketingHead()">Previous</a>
+                    <a class="btn btn-primary btnNext" onclick="toggleTabRRMEntryMarketingHead()">Next</a>
+                    <button type="button" class="btn btn-primary saveFamilyBtn hidden-btn" onclick="saveCommentsMarketingHead()">Save & Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .rrm_comments_history {
+        border: solid 1px #D1D1D1;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #E3E3E3;
+        margin-bottom: 10px;
+    }
+
+    .rrm_comments_history .message {
+        height:auto;
+        background-color: inherit;
+        display: inline-block;
+        max-width: 60%;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .rrm_comments_history .text{
+        padding-top: 10px;
+    }
+
+    .rrm_comments_history .name {
+        font-weight: bold;
+    }
+
+    .rrm_comments_history .date {
+        opacity: 0.5;
+    }
+</style>
+
+<style>
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > thead > tr > th {
+        border: none;
+        text-align: left !important;
+    }
+</style>
+<script src='components/rrmentrypointmarketinghead/js/rrmEntryPointMarkettingHeadDevExtremeControls.js'></script>
+<script type="text/javascript" id="rrmEntryPointModalScript">
+    //var addRRMEntryPointJs;
+    $(document).ready(function () {
+        bindDevExtremeControlsForRRMEntryPointMarkettingHead()
+        initializeModalMarketingHead();
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token
+        Department = jsonData.Data[0].DepartmentID
+        BackupLead = jsonData.Data["0"].mentorFirstName + " " + jsonData.Data["0"].mentorLastName
+        LoggedUser = jsonData.Data["0"].FirstName + " " + jsonData.Data["0"].LastName
+        BackupLeadId = jsonData.Data["0"].MentorId
+        EmployeeId = jsonData.Data["0"].EmployeeID
+
+        //tab-toggle
+        $('ul#rrmtabMarketingHead li').click(function (e) {
+            $('ul#rrmtabMarketingHead li').removeClass("active");
+            $(this).addClass("active");
+            var tab_details = $(this).attr("id");
+            var currentTab = $("#" + tab_details + " > a ").attr("aria-controls");
+            $("#rrmDetailsMarketingHead .tab-pane").removeClass("active");
+            $("#" + currentTab).addClass("active");            
+
+            
+            if (currentTab == "rrm_SkillDetailsMarketingHead") {
+                editRRMEntryPointJsMarketingHead.getSkillsDetails(rrmId);
+                $("#editskillMarketingHead").attr('disabled', 'disabled');
+                $("#deleteskillMarketingHead").attr('disabled', 'disabled');
+                $(".btnPrevious").show();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+                }
+            }
+            else if (currentTab == "rrm_CommentsDetailsMarketingHead") {
+                $(".btnPrevious").show();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").show();
+                    editRRMEntryPointJsMarketingHead.getManageCommentHistory(rrmId);
+                    $("a.btnNext").hide();
+                }
+            }
+            else if (currentTab == "rrm_SkillsPlanADetailsMarketingHead") {
+                $("#sd_txtEditor_markettingHead_skillDetailsPlanA").dxHtmlEditor('instance').option("value",planAcomments);
+                $(".btnPrevious").show();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+                }
+            }
+            else if (currentTab == "rrm_SkillsPlanBDetailsMarketingHead") {
+                $("#sd_txtEditor_markettingHead_skillDetailsPlanB").dxHtmlEditor('instance').option("value",planBcomments);
+                $(".btnPrevious").show();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+                }
+            }
+            else if (currentTab == "rrm_RequirementDetailsMarketingHead") {
+                $(".btnPrevious").hide();
+                if (!IsRrmSaved) {
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+                }
+            }
+        });
+        bindHrHeadsinMarketingHead();
+
+        $(function () {
+            $("#switchClientMarketing").dxSwitch({
+                value: false,
+                switchedOffText: "NO",
+                switchedOnText: "YES",
+                disabled: true
+            });
+        });
+        $(function () {
+            $("#switchLeadMarketing").dxSwitch({
+                value: false,
+                switchedOffText: "NO",
+                switchedOnText: "YES",
+                disabled: true
+            });
+        });
+
+    });
+    function bindHrHeadsinMarketingHead() {
+        //var getRecruiterList = callgetlist('GetHRForRRM', '{"IsActive":"True","Token":"' + Token + '"}');
+        callGetListAsync('GetHRForRRM', '{"IsActive":"True","Token":"' + Token + '"}', function (getRecruiterList) {
+            var getRecruiterData = [];
+            if (getRecruiterList.length > 0) {
+                getRecruiterList.forEach(function (i, index) {
+                    getRecruiterData.push({
+                        'id': i['EmployeeId'],
+                        'text': i['EmployeeName']
+                    });
+                });
+            }
+
+            $(".select_recruiter_arketingHead").select2({
+                placeholder: "Select Recruiter",
+                allowClear: true,
+                data: getRecruiterData
+            });
+        });
+    }
+
+    var Token;
+    var Department;
+    var BackupLead;
+    var BackupLeadId;
+    var EmployeeId;
+    var planAcomments;
+    var planBcomments;
+    //rrm button type
+    function loadRRMByType(type) {
+        if (type == "add") {
+            initializeAddRRMMarketingHead();
+
+        }
+        else if (type == "edit") {
+            initializeEditRRMMarketingHead();
+        }
+    }
+
+    //tab toggle next button
+    function toggleTabRRMEntryMarketingHead() {
+        
+        if (addRRMTypeMarketingHead == "edit") {
+            editRRMEntryPointJsMarketingHead.toggleTabRRMEntry();
+        }
+        else if (addRRMTypeMarketingHead == "add") {
+            addRRMEntryPointJsMarketingHead.toggleTabRRMEntry();
+        }
+    }
+
+    //tab toggle previous button
+    function toggleTabRRMEntryPreviousMarketingHead() {
+        
+        if (addRRMTypeMarketingHead == "edit") {
+            editRRMEntryPointJsMarketingHead.toggleTabRRMEntryPrevious();
+        }
+        else if (addRRMTypeMarketingHead == "add") {
+            addRRMEntryPointJsMarketingHead.toggleTabRRMEntryPrevious();
+        }
+    }
+
+    //save hr commnets
+    function saveCommentsMarketingHead() {
+        
+        if (addRRMTypeMarketingHead == "add") {
+            addRRMEntryPointJsMarketingHead.saveComments();
+        }
+        else if (addRRMTypeMarketingHead == "edit") {
+            editRRMEntryPointJsMarketingHead.saveComments();
+        }
+
+    }
+
+    //initialize model
+    function initializeModalMarketingHead() {
+        
+        $('.error_message').html('');
+        $('.nav-tabs a[href="#rrm_RequirementDetailsMarketingHead"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        clearFormDataMarketingHead();
+    }
+    function initializeModalAddMarketingHead() {
+        $('.error_message').html('');
+        $('.nav-tabs a[href="#rrm_RequirementDetailsMarketingHead"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        //clearFormDataMarketingHeadAddclearFormDataMarketingHead();
+        clearFormDataMarketingHead()
+    }
+
+    //initialize Add RRM
+    function initializeAddRRMMarketingHead() {
+        $("#rrm_rfpidMarketingHead").attr('readonly', true);
+        $("#rrm_empidMarketingHead").attr('readonly', true);
+        $('#rrm_entrybdeMarketingHead').attr("disabled", "disabled");
+        $('#rrm_entrybdeMarketingHead').attr('readonly', true);
+        $('#rrm_replacementMarketingHead').attr('readonly', true);
+        $('#rrm_replacementMarketingHead').attr("disabled", "disabled");
+        $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('readOnly',true);
+        $("#sdchk_rrmmarketinghead_losingRevenue").dxCheckBox('instance').option('readOnly',true);
+        $("#sdchk_rrmmarketinghead_fromVIP").dxCheckBox('instance').option('readOnly',true);
+        $("#sdtxt_rrmmarketinghead_requirementlead").dxTextBox('instance').option('readOnly',true);
+        //$('#rrm_MarketingHeadsplanaMarketingHead').attr('readonly', true);
+        //$('#rrm_MarketingHeadsplanaMarketingHead').attr("disabled", "disabled");
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0, 10);
+        $("#sd_date_rrmmarketinghead_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sd_date_rrm_markettingHead_tobeonboardplana").dxDateBox('instance').option("value",nxtDate);
+        $("#sd_date_rrm_markettingHead_tobeonboardplanb").dxDateBox('instance').option("value",nxtDate);
+        $("#divMarketingRFP").hide();
+        $("#divMarketingresignation").hide();
+        $("#sd_date_rrmmarketinghead_requestedDate").dxDateBox('instance').option('readOnly',true);
+
+        $("#sdtxt_rrmmarketinghead_requirementname").dxTextBox('instance').option('readOnly',false);
+        $("#sdtxt_rrmmarketinghead_requiredfor").dxTextBox('instance').option('readOnly',false);
+        $("#sd_date_rrm_markettingHead_tobeonboardplana").dxDateBox('instance').option("readOnly",false);
+        $("#sd_date_rrm_markettingHead_tobeonboardplanb").dxDateBox('instance').option("readOnly",false);
+        $("#sd_txtEditor_markettingHead_skillDetailsPlanA").dxHtmlEditor('instance').option("readOnly",false);
+        $("#sd_txtEditor_markettingHead_skillDetailsPlanB").dxHtmlEditor('instance').option("readOnly",false);
+
+        resetFormDataMarketingHead();
+        loadAndBindForAddRRMMarketingHead();
+    }
+
+    function resetFormDataMarketingHead() {
+        bindDevExtremeControlsForRRMEntryPointMarkettingHead();
+
+        
+        planAcomments = null;
+        planBcomments = null;
+        rrmId = null;
+        $("#sd_txtEditor_markettingHead_skillDetailsPlanA").dxHtmlEditor('instance').option("value","");
+        $("#sd_txtEditor_markettingHead_skillDetailsPlanB").dxHtmlEditor('instance').option("value","");
+        $("#sd_txtEditor_RRMMarkettingHeadComments").dxHtmlEditor('instance').option("value","");
+        addRRMEntryPointJsMarketingHead.getSkillsDetails();
+        $("#rrm_manage_plan_comments_documents_MarketingHead").hide();
+        $("#sd_txtEditor_markettingHead_skillDetailsPlanB").dxHtmlEditor('instance').option("readOnly",false);
+        $("#sd_txtEditor_markettingHead_skillDetailsPlanA").dxHtmlEditor('instance').option("readOnly",false);
+        $("#sd_date_rrm_markettingHead_tobeonboardplana").dxDateBox('instance').option("readOnly",false);
+        $("#sd_date_rrm_markettingHead_tobeonboardplanb").dxDateBox('instance').option("readOnly",false);
+    }
+
+    //load And Bind For Add RRM
+    function loadAndBindForAddRRMMarketingHead() {
+        $("a.btnPrevious").hide();
+        $(".saveFamilyBtn").hide();
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+
+        loadAndBindRequirementDetailsTabForAddRRMMarketingHead();
+        loadAndBindSkillMappingTabForAddRRMMarketingHead();
+
+        var getMarketingHeadList = loadMarketingHeadList();
+
+        // loadAndBindPlanATabForAddRRM();
+        // loadAndBindPlanBTabForAddRRM();
+        // loadAndBindCommentsForAddRRM();
+    }
+
+    //load And Bind Requirement Details Tab For Add RRM
+    function loadAndBindRequirementDetailsTabForAddRRMMarketingHead() {
+        //Load BDE
+
+        // var bderesult = callgetlist('GetBDExecutive', '{"IsActive":"True"}');
+        callGetListAsync('GetBDExecutive', '{"IsActive":"True"}', function (bderesult) {
+            var bdeoptions = "<option value =''>Select BDE</option>";
+            for (var i = 0; i < bderesult.length; i++) {
+                bdeoptions += "<option value='" + bderesult[i].Id + "'>" + bderesult[i].Name + "</option>";
+            }
+
+            $("#rrm_entrybdeMarketingHead").html(bdeoptions);
+        });
+        //Load Departments
+     //   var departmentresult = callgetlist('GetDepartmentsForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetDepartmentsForRRM', '{"IsActive":"True"}', function (departmentresult) {
+            var departmentList = [];
+            for (i = 0; i < departmentresult.length; i++) {
+                var obj = {
+                    "Id":departmentresult[i].DepartmentId,
+                    "Name":departmentresult[i].DepartmentName
+                }
+                departmentList.push(obj);
+            }
+            $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: departmentList,
+                key: "Id"
+            }));
+            $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('value',Department);
+        });
+        //Load Designation
+        //var designationresult = callgetlist('GetDesignationsForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetDesignationsForRRM', '{"IsActive":"True"}', function (designationresult) {
+            var designationList = [];
+            for (i = 0; i < designationresult.length; i++) {
+                var obj = {
+                    "Id":designationresult[i].DesignationId,
+                    "Name":designationresult[i].DesignationName
+                }
+                designationList.push(obj);
+            }
+            $("#sdcmb_rrmmarketinghead_designation").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: designationList,
+                key: "Id"
+            }));
+        });
+        //Load Priorities
+        //  var prioritiesresult = callgetlist('GetPrioritiesForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetPrioritiesForRRM', '{"IsActive":"True"}', function (prioritiesresult) {
+            var priorityList = [];
+            for (i = 0; i < prioritiesresult.length; i++) {
+                var obj = {
+                    "Id":prioritiesresult[i].PriorityId,
+                    "Name":prioritiesresult[i].PriorityName
+                }
+                priorityList.push(obj);
+            }
+            $("#sdcmb_rrmmarketinghead_priority").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: priorityList,
+                key: "Id"
+            }));
+            $("#sdcmb_rrmmarketinghead_priority").dxSelectBox('instance').option('value',"224BE1C0-DC9A-4629-B888-2B4D4D6D1707");
+        });
+    
+        //Load ResourceReplacement
+       // var resorceresult = callgetlist('GetResourceReplacement', '{"IsActive":"True"}')
+        callGetListAsync('GetResourceReplacement', '{"IsActive":"True"}', function (resorceresult) {
+        var resorceoption = "<option value=''>Select Resource Replacement</option>";
+        for (i = 0; i < resorceresult.length; i++) {
+            resorceoption += "<option value='" + resorceresult[i].Id + "'>" + resorceresult[i].Name + "</option>"
+            }
+            $("#rrm_replacementMarketingHead").html(resorceoption);
+    });
+
+       
+
+        //bind defalut value for from
+        $("#sdcmb_rrmmarketinghead_priority").dxSelectBox('instance').option('value',"224BE1C0-DC9A-4629-B888-2B4D4D6D1707");
+        $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('value',Department);
+        $("#sdtxt_rrmmarketinghead_requirementlead").dxTextBox('instance').option('value',BackupLead);
+        $("#sdnmb_rrmmarketinghead_numberofpositions").dxNumberBox('instance').option('value',"1");
+        $("#sdcmb_rrmmarketinghead_communication").dxSelectBox('instance').option('value',"Good");
+        $("#sdtxt_rrmmarketinghead_location").dxTextBox('instance').option('value',"Coimbatore");
+    }
+
+    //load And Bind Skill Mapping Tab For Add RRM
+    function loadAndBindSkillMappingTabForAddRRMMarketingHead() {
+        var employee_id = '';
+        var filter_val = JSON.stringify({
+            "EmployeeId": employee_id
+        });
+        //var result = callgetlist('GetEmployeeSkills', filter_val);
+
+        // <!-- var loaddata = computeHTML_SkillInfoEntry(result); -->
+        //  <!-- $('#display_SkillsEntry').html(loaddata); -->
+
+        var filter_val = JSON.stringify({ "IsActive": true });
+
+      //  var result = callgetlist('GetSkillFamilies', filter_val);
+        callGetListAsync('GetSkillFamilies', filter_val, function (result) {
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                options += "<option value='" + result[i].Id + "'>" + result[i].Name + "</option>";
+            }
+        });
+    }
+
+    //load MarketingHeadList
+    function loadMarketingHeadList() {
+      //  return recuirtersdetails = callgetlist('GetHRForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetHRForRRM', '{"IsActive":"True"}', function (recuirtersdetails) {
+            return recuirtersdetails;
+        });
+    }
+
+    //load And Bind PlanA Tab For Add RRM
+    function loadAndBindPlanATabForAddRRM() {
+       
+        var recuirtersoption = "<option value=''>Select Recuirters</option>";
+        for (i = 0; i < recuirtersdetails.length; i++) {
+            recuirtersoption += "<option value='" + recuirtersdetails[i].EmployeeId + "'>" + recuirtersdetails[i].EmployeeName + "</option>"
+        }
+        $("#rrm_MarketingHeadsplanbMarketingHead").html(recuirtersoption);
+    }
+
+    //load And Bind PlanB Tab For Add RRM
+    function loadAndBindPlanBTabForAddRRM() {        
+
+        var recuirtersoption = "<option value=''>Select Recuirters</option>";
+        for (i = 0; i < recuirtersdetails.length; i++) {
+            recuirtersoption += "<option value='" + recuirtersdetails[i].EmployeeId + "'>" + recuirtersdetails[i].EmployeeName + "</option>"
+        }
+        $("#rrm_MarketingHeadsplanaMarketingHead").html(recuirtersoption);
+    }
+
+    //load And Bind Comments For Add RRM
+    function loadAndBindCommentsForAddRRM() {
+        
+    }
+
+    //initialize Edit RRM
+    function initializeEditRRMMarketingHead(rrmid) {
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $('#RRMEntryPointModelMarketingHead').appendTo("body").modal("show");
+        $('.nav-tabs a[href="#rrm_RequirementDetailsMarketingHead_fromrrm"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        //$("#editskillMarketingHead").attr('disabled', 'disabled');
+        //$("#deleteskillMarketingHead").attr('disabled', 'disabled');
+        //$("#btnreminderMarketingHead").attr('disabled', 'disabled');
+
+
+        $("#rrm_rfpidMarketingHead").attr('readonly', true);
+        $("#rrm_empidMarketingHead").attr('readonly', true);
+        $('#rrm_entrybdeMarketingHead').attr("disabled", "disabled");
+        $('#rrm_entrybdeMarketingHead').attr('readonly', true);
+        $('#rrm_replacementMarketingHead').attr('readonly', true);
+        $('#rrm_replacementMarketingHead').attr("disabled", "disabled");
+        $("#sdnmb_rrmmarketinghead_numberofpositions").dxNumberBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmmarketinghead_designation").dxSelectBox('instance').option('readOnly',true);
+        //$('#rrm_MarketingHeadsplanaMarketingHead').attr('readonly', true);
+        //$('#rrm_MarketingHeadsplanaMarketingHead').attr("disabled", "disabled");
+        $('#rrm_MarketingHeadsplanbMarketingHead').attr('readonly', true);
+        $('#rrm_MarketingHeadsplanbMarketingHead').attr("disabled", "disabled");
+        $("#sd_date_rrmmarketinghead_requestedDate").dxDateBox('instance').option('readOnly',true);
+        $("#sdchk_rrmmarketinghead_losingRevenue").dxCheckBox('instance').option('readOnly',true);
+        $("#sdchk_rrmmarketinghead_fromVIP").dxCheckBox('instance').option('readOnly',true);
+        //$('#rrm_TechnicalHeadsplanaTechnicalHead').attr("disabled", "disabled");
+        $('#rrm_TechnicalHeadsplanbMarketingHead').attr("disabled", "disabled");
+        $("#sdtxt_rrmmarketinghead_requirementlead").dxTextBox('instance').option('readOnly',true);
+
+        $("#sdtxt_rrmmarketinghead_requirementname").dxTextBox('instance').option('readOnly',true);
+        $("#sdtxt_rrmmarketinghead_requiredfor").dxTextBox('instance').option('readOnly',true);
+        $("#sd_date_rrm_markettingHead_tobeonboardplana").dxDateBox('instance').option("readOnly",true);
+        $("#sd_date_rrm_markettingHead_tobeonboardplana").dxDateBox('instance').option("min","");
+        $("#sd_date_rrm_markettingHead_tobeonboardplanb").dxDateBox('instance').option("readOnly",true);
+        $("#sd_date_rrm_markettingHead_tobeonboardplanb").dxDateBox('instance').option("min","");
+        loadAndBindRequirementDetailsTabForAddRRMMarketingHead()
+        //loadAndBindEditRRMData(rrmid) ;
+
+        if (ResourceRequirementTypeMarketingHead == "G") {
+            $("#divMarketingRFP").hide();
+            $("#divMarketingresignation").hide();
+        }
+        else if (ResourceRequirementTypeMarketingHead == "P") {
+            $("#divMarketingRFP").show();
+            $("#divMarketingresignation").hide();
+        }
+        else if (ResourceRequirementTypeMarketingHead == "R") {
+            $("#divMarketingRFP").hide();
+            $("#divMarketingresignation").show();
+        }
+        loadAndBindSkillMappingTabForAddRRMMarketingHead();
+    }
+
+    //clear addFormdata
+    function clearFormDataMarketingHeadAddMarketingHead() {
+        $("#sdtxt_rrmmarketinghead_requirementname").dxTextBox('instance').option('value',"");
+        $("#sdtxt_rrmmarketinghead_requiredfor").dxTextBox('instance').option('value',"");
+        $("#rrm_empidMarketingHead").val("");
+        $("#rrm_entrybdeMarketingHead").val("");
+        $("#sdnmb_rrmmarketinghead_numberofpositions").dxNumberBox('instance').option('value',"");
+
+        $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('value',"");
+        $("#sdcmb_rrmmarketinghead_designation").dxSelectBox('instance').option('value',"");
+        $("#sdnmb_rrmmarketinghead_experiencerequired").dxNumberBox('instance').option('value',"");
+        $("#sdtxt_rrmmarketinghead_location").dxTextBox('instance').option('value',"");
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        $("#sd_date_rrmmarketinghead_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sdtxt_rrmmarketinghead_requirementlead").dxTextBox('instance').option('value',"");
+
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0, 10);
+        $("#sd_date_rrm_markettingHead_tobeonboardplana").dxDateBox('instance').option("value",nxtDate);
+        $("#sd_date_rrm_markettingHead_tobeonboardplanb").dxDateBox('instance').option("value",nxtDate);
+
+        //reset form 
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $("#rrm_rfpidMarketingHead").removeAttr('readonly');
+        $("#rrm_empidMarketingHead").removeAttr('readonly');
+        // $('#rrm_entrybde').attr("visible", "visible"); 
+        $('#rrm_entrybdeMarketingHead').removeAttr('readonly');
+        $('#rrm_entrybdeMarketingHead').removeAttr('disabled');
+        $('#rrm_replacementMarketingHead').removeAttr('readonly');
+        $('#rrm_replacementMarketingHead').removeAttr('disabled');
+        //$('#rrm_replacement').attr("disabled", "visible"); 
+        $("#sdnmb_rrmmarketinghead_numberofpositions").dxNumberBox('instance').option('readOnly',false);
+        // $('#rrm_numberofpositions').attr("visible", "true"); 
+        $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('readOnly',false);
+        //$('#rrm_department').attr("visible", "visible"); 
+        //$('#rrm_designation').attr("visible", "visible"); 
+        $('#rrm_MarketingHeadsplanaMarketingHead').removeAttr('readonly');
+        $('#rrm_MarketingHeadsplanaMarketingHead').removeAttr('disabled');
+        // $('#rrm_MarketingHeadsplana').attr("visible", "visible"); 
+        $('#rrm_MarketingHeadsplanbMarketingHead').removeAttr('readonly');
+        $('#rrm_MarketingHeadsplanbMarketingHead').removeAttr('disabled');
+        //$('#rrm_MarketingHeadsplanb').attr("visible", "visible");
+        $("#sd_date_rrmmarketinghead_requestedDate").dxDateBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmmarketinghead_designation").dxSelectBox('instance').option('readOnly',true);
+
+        skillsClearAndShow();
+    }
+
+    //clear Form Data
+    function clearFormDataMarketingHead() {
+        $("#sdtxt_rrmmarketinghead_requirementname").dxTextBox('instance').option('value',"");
+        $("#sdtxt_rrmmarketinghead_requiredfor").dxTextBox('instance').option('value',"");
+        $("#rrm_empidMarketingHead").val("");
+        $("#rrm_entrybdeMarketingHead").val("");
+        $("#sdnmb_rrmmarketinghead_numberofpositions").dxNumberBox('instance').option('value',"");
+
+        $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('value',"");
+        $("#sdcmb_rrmmarketinghead_designation").dxSelectBox('instance').option('value',"");
+        $("#sdnmb_rrmmarketinghead_experiencerequired").dxNumberBox('instance').option('value',"");
+        $("#sdtxt_rrmmarketinghead_location").dxTextBox('instance').option('value',"");
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        $("#sd_date_rrmmarketinghead_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sdtxt_rrmmarketinghead_requirementlead").dxTextBox('instance').option('value',"");
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0, 10);
+        $("#sd_date_rrm_markettingHead_tobeonboardplana").dxDateBox('instance').option("value",nxtDate);
+        $("#sd_date_rrm_markettingHead_tobeonboardplanb").dxDateBox('instance').option("value",nxtDate);
+
+        //reset form
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $("#rrm_rfpidMarketingHead").removeAttr('readonly');
+        $("#rrm_empidMarketingHead").removeAttr('readonly');
+        // $('#rrm_entrybdeMarketingHead').attr("visible", "visible");
+        $('#rrm_entrybdeMarketingHead').removeAttr('readonly');
+        $('#rrm_entrybdeMarketingHead').removeAttr('disabled');
+        $('#rrm_replacementMarketingHead').removeAttr('readonly');
+        $('#rrm_replacementMarketingHead').removeAttr('disabled');
+        //$('#rrm_replacementMarketingHead').attr("disabled", "visible");
+        $("#sdnmb_rrmmarketinghead_numberofpositions").dxNumberBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmmarketinghead_designation").dxSelectBox('instance').option('readOnly',false);
+        $('#rrm_MarketingHeadsplanaMarketingHead').removeAttr('readonly');
+        $('#rrm_MarketingHeadsplanaMarketingHead').removeAttr('disabled');
+        // $('#rrm_MarketingHeadsplanaMarketingHead').attr("visible", "visible");
+        $('#rrm_MarketingHeadsplanbMarketingHead').removeAttr('readonly');
+        $('#rrm_MarketingHeadsplanbMarketingHead').removeAttr('disabled');
+        //$('#rrm_MarketingHeadsplanb').attr("visible", "visible");
+        $("#sd_date_rrmmarketinghead_requestedDate").dxDateBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmmarketinghead_designation").dxSelectBox('instance').option('visible',true);
+        //
+        //
+        $("#sdcmb_rrmmarketinghead_priority").dxSelectBox('instance').option('readOnly',false);
+        $("#sdnmb_rrmmarketinghead_experiencerequired").dxNumberBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmmarketinghead_communication").dxSelectBox('instance').option('readOnly',false);
+        $("#editSkillMappingRRMMarketingHead").show();
+        $("#deleteSkillMappingRRMMarketingHead").show();
+        $("#sd_txtEditor_RRMMarkettingHeadComments").dxHtmlEditor('instance').option("readOnly",false);
+        $("#sdtxt_rrmmarketinghead_location").dxTextBox('instance').option('readOnly',false);
+        skillsClearAndShow();
+    }
+
+    //skills Clear And Show
+    function skillsClearAndShow() { // Clear our fields
+    }
+
+    function readOnlyFormDataMarketingHead() {
+        $("#sdcmb_rrmmarketinghead_priority").dxSelectBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmmarketinghead_department").dxSelectBox('instance').option('readOnly',true);
+        $("#sdnmb_rrmmarketinghead_experiencerequired").dxNumberBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmmarketinghead_communication").dxSelectBox('instance').option('readOnly',true);
+        $("#editSkillMappingRRMMarketingHead").hide();
+        $("#deleteSkillMappingRRM").hide();
+        $("#sd_txtEditor_RRMMarkettingHeadComments").dxHtmlEditor('instance').option("readOnly",true);
+        $("#sdtxt_rrmmarketinghead_location").dxTextBox('instance').option('readOnly',true);
+    }
+
+</script>
+
+
+<style>
+
+    .rrm_manage_plan_history_lists {
+        border: solid 1px #D1D1D1;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #E3E3E3;
+        margin-bottom: 10px;
+    }
+
+        .rrm_manage_plan_history_lists .manage_comment {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 20px;
+            word-break: break-all;
+            background-color: #ffff;
+            cursor: pointer;
+        }
+
+        .rrm_manage_plan_history_lists label {
+            font-weight: 100;
+        }
+
+        .rrm_manage_plan_history_lists small {
+            font-size: 8pt;
+            font-weight: 400 !important;
+            display: block;
+        }
+
+            .rrm_manage_plan_history_lists small span:last-child {
+                margin-left: 5px;
+            }
+</style>

@@ -1,0 +1,109 @@
+
+<div class="card-detail">
+    <span class="card-detail-title"><b>Investment Details (Hr)</b></span>
+    <button class="btn btn-primary pull-right btn-xs" id="ViewHistory" >View History</button>
+    <hr />
+    <div class="ucft-container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="iteYear">Year</label>
+                    <select class="form-control" id="iteYear">
+                        <option value="" required>Select Year</option>
+                        <option value="2021">2021</option>
+                        <option value="2022" selected>2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+                    <span class="error_message" id="iteiteYearerror"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="itePolicy">Month</label>
+                    <select class="form-control" id="itemonth">
+                        <option value="" required>Select</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                    <span class="error_message" id="iteInvestmenterror"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="itePolicy">Type of Bill</label>
+                    <select class="form-control" id="itemonth">
+                        <option value="" required>Select</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Petrol">Petrol</option>
+                        
+                    </select>
+                    <span class="error_message" id="iteInvestmenterror"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="iteAmount">Amount <span style="color: red">*</span></label>
+                   <!-- <input type="text" class="form-control" id="iteAmount"> -->
+                   <div id="iteAmount"></div>
+                   <span class="error_message" id="iteAmounterror"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label for="file">Browse file</label>
+                <div id="file-uploader-accounts"></div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="iteRemarks">Remarks</label>
+                   <input type="text" placeholder="Remarks" class="form-control" id="iteRemarks">
+                </div>
+            </div>
+            <div class="col-md-4" style="padding-top: 25px;">
+                <button id="iteSave"
+                    class="btn btn-success pull-right">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="incometaxEmployeeView_reportGrid"></div>
+</div>
+
+<script type="text/javascript" src="components/incometaxemployeeentry/js/incometaxemployeeentry.js"></script>
+<!-- internal script -->
+<script type="text/javascript">
+
+
+$(document).ready(function () {
+    $("#file-uploader-accounts").dxFileUploader({
+            selectButtonText: "Upload Files",
+            labelText: "",
+            //allowedFileExtensions: [".doc", ".docx", ".pdf", ".odt"],
+            uploadMode: "useForm",
+            //maxFileSize: 8000000
+        });
+
+        getInvestmentsList();
+});
+
+$("#iteAmount").dxTextBox({
+        placeholder: "Amount",
+        showClearButton: true,
+        onValueChanged: checkAmount
+    })
+</script>

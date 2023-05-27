@@ -1,0 +1,349 @@
+<div class="john-trail card-detail">
+    <!-- Add "modal-not-include" to a div for which we dont want to show them in modal  -->
+    <span >
+        <span class="card-detail-title modal-not-include"><b>Resignation</b></span>
+        <button type="button" id="btnleaveDetail" class="btn btn-xs cmn-modal-ex-btn modal-not-include expandCommonDiv pull-right">
+            <i class="fa fa-expand"></i>
+        </button> 
+        <button type="button" id="btnResign" onclick="openResign()" class="btn  btn-success pull-right">
+            Resign your position
+        </button>
+        <hr>
+    </span>
+    <div class="row ">
+        <div class="col-md-12">
+            <form action="">
+                <table id="resignTbl" class="table table-striped removetable" style="cursor: default">
+                    <thead>
+                        <th>Date Of resignation</th>
+                        <th>Expected Resign Date</th>
+                        <th>Days Left</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>17-03-2019</td>
+                            <td>17-05-2019</td>
+                            <td>15</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <div>
+                    <p class="text-center">Expand card to view no-due details</p>
+                </div> -->
+            </form>
+        </div>
+    </div>
+
+    <!-- for the div which has to be shown while expanding and not in the card add this class "expand-status expand-div" -->
+    <div class="row ">
+        <div class="col-md-12">
+					<h4>No Due</h4>
+					<table id="noDueTbl" class="table table-striped removetable" style="cursor: default">
+							<thead>
+									<th>Team</th>
+									<th>Status</th>
+							</thead>
+							<tbody>
+									<tr>
+											<td>Project Manager 1</td>
+											<td><i class="fa fa-check" aria-hidden="true"></i></td>
+									</tr>
+									<tr>
+											<td>Project Manager 2</td>
+											<td><i class="fa fa-times" aria-hidden="true"></i></td>
+									</tr>
+									<tr>
+											<td>Project Manager 3</td>
+											<td><i class="fa fa-check" aria-hidden="true"></i></td>
+									</tr>
+							</tbody>
+					</table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade steps-model" id="resignationAnswerModal" tabindex="-1" role="dialog"
+    aria-labelledby="resModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="resModalLabel">Resignation</h2>
+            </div>
+            <div class="modal-body"  data-simplebar>
+                <div id="res-smartwizard">
+                    <ul>
+                        <li><a href="#res-step-1"><span>1</span></a></li>
+                        <li><a href="#res-step-2"><span>2</span></a></li>
+                        <li><a href="#res-step-3"><span>3</span></a></li>
+                        <li><a href="#res-step-4"><span>4</span></a></li>
+                        <li><a href="#res-step-5"><span>5</span></a></li>
+                        <li><a href="#res-step-6"><span>6</span></a></li>
+                    </ul>
+                    <div class="form-hldr" id="modal_content">
+                        <input type="hidden" class="edit_enable" value="0">
+                        <input type="hidden" class="smartwizstep" value="0">
+                        <div id="res-step-1" class="">
+                            <div id="quesForm0">
+                                <div class="step-title">
+                                    <h3>Step 1: <span>Resignation Application</span></h3>
+                                </div>
+                                <div class="form-section" id="form-block">
+                                    <div class="emp-position">
+                                        <h4>John Doe <span>Web Designer</span></h4>
+                                    </div>
+                                    <p class="p-label">Resignation Application</p>
+                                    <span class="resSummaryErr error_message"></span>
+                                    <textarea name="resignationSummary" id="resignationSummary" cols="30"
+                                        rows="10"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="res-step-2" class="">
+                            <div class="step-title">
+                                <h3>Step 2: <span>Question 1</span></h3>
+                            </div>
+                            <div class="form-section">
+                                <div class="row">
+                                   <div class="col-md-12">
+                                       <p>At approximately what point in time did you begin making your decition to resign?
+                                    </p>
+                                    <span class="error_message step-2-err"></span>
+                                   </div>
+                                    
+                                    
+                                </div>
+                                <div class="quesform" id="quesForm1">
+                                    <ul class="list-group">
+                                        <li class="list-group-item res-item">6 - 9 Months Ago
+                                            <div class="squaredchk pull-left">
+                                                <input type="checkbox" value="6 - 9 Months Ago" name="check"
+                                                    id="timeRes1">
+                                                <label for="timeRes1"></label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item res-item">3 - 5 Months Ago
+                                            <div class="squaredchk pull-left">
+                                                <input type="checkbox" name="timeRes" id="timeRes2">
+                                                <label for="timeRes2"></label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item res-item">1 - 2 Months Ago
+                                            <div class="squaredchk pull-left">
+                                                <input type="checkbox" name="timeRes" id="timeRes3">
+                                                <label for="timeRes3"></label>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item res-item">Other
+                                            <div class="squaredchk pull-left">
+                                                <input type="checkbox" class="timeResOther otherCheck" name="timeRes"
+                                                    id="timeRes4">
+                                                <label for="timeRes4"></label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div>
+                                        <textarea name="othertimeReason" id="othertimeReason" cols="30"
+                                            rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="res-step-3" class="">
+                            <div class="step-title">
+                                <h3>Step 3: <span>Question 2</span></h3>
+                                <!-- <p style="display: none">Revision History</p> -->
+                            </div>
+                            <div class="form-section">
+                                <div class="row">
+                                   <div class="col-md-12">
+                                    <p>Please Indicate reason(s) below, which contributed
+                                        to your decision to resign your current position ?</p>
+                                    <span class="error_message step-3-err"></span>
+                                    </div>
+                                </div>
+                                <div class="row res-time-form">
+                                    <div class="quesform" id="quesForm2">
+                                        <ul class="list-group">
+                                            <li class="list-group-item res-item">Salary
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign1">
+                                                    <label for="resignationResign1"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Relocation
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign2">
+                                                    <label for="resignationResign2"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Job Advancement
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign3">
+                                                    <label for="resignationResign3"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Family Responsibilities
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign4">
+                                                    <label for="resignationResign4"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Personal
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign5">
+                                                    <label for="resignationResign5"></label>
+
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Dissatisfied/Management
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign6">
+                                                    <label for="resignationResign6"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Return to school
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign7">
+                                                    <label for="resignationResign7"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Benifits
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign8">
+                                                    <label for="resignationResign8"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Health Retirement
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" name="resignationResign"
+                                                        id="resignationResign9">
+                                                    <label for="resignationResign9"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">Other
+                                                <div class="squaredchk pull-left">
+                                                    <input type="checkbox" class="resignationReasonOther otherCheck"
+                                                        name="resignationResign" id="resignationResign10">
+                                                    <label for="resignationResign10"></label>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <div>
+                                            <textarea name="otherResReason" id="otherResReason" cols="30"
+                                                rows="10"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="res-step-4" class="">
+                            <div class="step-title">
+                                <h3>Step 4: <span>Question 3</span></h3>
+                            </div>
+                            <div class="form-section">
+                                <div class="row">
+                                   <div class="col-md-12">
+                                    <p>Was there a specific event of issue that prompted your resignation</p>
+                                    <span class="error_message step-4-err"></span>
+                                    </div>
+                                    <div class="quesform" id="quesForm3">
+                                        <ul class="list-group">
+                                            <li class="list-group-item res-item">Yes
+                                                <div class="squaredchk pull-left">
+                                                    <input type="radio" class="yesReason otherCheck" name="promptRes"
+                                                        id="promptRes1">
+                                                    <label for="promptRes1"></label>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item res-item">No
+                                                <div class="squaredchk pull-left">
+                                                    <input type="radio" name="promptRes" id="promptRes2"
+                                                        class="noReason">
+                                                    <label for="promptRes2"></label>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                       
+                                           <div class="col-md-12">
+                                            <p>If Yes, please briefly explain</p>
+                                            <textarea name="resYesPrompt"  class="form-control" id="resYesPrompt" cols="30"
+                                                rows="10"></textarea>
+                                             </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="res-step-5" class="">
+                            <div class="step-title">
+                                <h3>Step 5: <span>Question 4</span></h3>
+                                <!-- <p style="display: none">Revision History</p> -->
+                            </div>
+                            <div class="form-section">
+                                <div class="row">
+                                   <div class="col-md-12">
+                                    <p>Have you discuss this matter with your supervisor/Manager</p>
+                                    <span class="error_message step-5-err"></span>
+                                    </div>
+                                    <div class="quesform" id="quesForm4">
+                                        <ul class="list-group">
+                                                <li class="list-group-item res-item">Yes
+                                                    <div class="squaredchk pull-left">
+                                                        <input type="radio" class="yesReason otherCheck"
+                                                            name="managerRes" id="managerRes1">
+                                                        <label for="managerRes1"></label>
+                                                    </div>
+                                                </li>
+                                                <li class="list-group-item res-item">No
+                                                    <div class="squaredchk pull-left">
+                                                        <input type="radio" name="managerRes" id="managerRes2"
+                                                            class="noReason">
+                                                        <label for="managerRes2"></label>
+                                                    </div>
+                                                </li>
+                                        </ul>
+                                       
+                                           <div class="col-md-12">
+                                               <p>If Yes, please briefly explain</p>
+                                               <textarea name="resYesDiscuss" class="form-control" id="resYesDiscuss" cols="30"
+                                                rows="10"></textarea>
+                                           </div>
+                                            
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="res-step-6" class="">
+                            <div class="step-title">
+                                <h3>Step 6: <span>Completed</span></h3>
+                                <!-- <p style="display: none">Revision History</p> -->
+                            </div>
+                            <div class="form-section">
+                                <div class="row res-sub-success">
+                                   <div class="col-md-12">
+                                    <h2 class="text-center">Thanks! for submission</h2>
+                                    <h4 class="text-center">Please Wait for approval</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="components/resignation/js/resignation.js"></script>

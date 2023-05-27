@@ -1,0 +1,74 @@
+
+<link href="components\viewdefaulters\css\viewdefaulters.css" rel="stylesheet" />
+<script src='components/viewdefaulters/js/viewdefaulters.js'></script>
+
+
+<style>
+    div.dt-buttons {
+    float: right;
+}
+</style>
+
+<div class="view-card-detail-ViewCard card-detail">   
+    <span class="card-detail-title"><b>View Defaulters</b></span>   
+    <hr />
+    <div class="form-group col-md-12">
+        <div class="row">
+            
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Start Date <span style="color: red"></span></label>
+               </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>End Date <span style="color: red"></span></label>
+                    </div>
+              </div>             
+        </div>
+    <div class="row">    
+        <div class="col-md-4" style="padding-left: 0px;">
+          <div class="form-group">
+            <input type="date" class="form-control" id="startdate" />
+            <span class="error_message" id="startdateError" style="display: block;"></span>
+          </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="date" class="form-control" id="enddate"  />
+                <span class="error_message" id="enddateError" style="display: block;"></span>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+                <button class="btn btn-primary" id="searchBtn" onclick="getViewDefaultersDetailsSearchDate()">
+                    Search
+                </button>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+                <button class="btn btn-primary" id="refreshBtn" onclick="getViewDefaultersDetails()">
+                    Refresh
+                </button>
+            </div>
+          </div>
+    </div>
+</div>
+   
+<div class="row">
+    <div class="form-group col-md-12">
+    <div id="ViewDefaultersTableListDetails">       
+       
+    </div>
+</div>
+</div>
+
+</div>
+
+
+
+    
+
+
+

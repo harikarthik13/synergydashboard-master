@@ -1,0 +1,2966 @@
+<div class="john-trail card-detail" style="height:auto">
+    <span class="modal-not-include">
+        <span class="card-detail-title"><b>Roles and Rights</b></span>
+        <!--<button style="float: right;" type="button" id="btnleaveDetail"
+                class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                <i class="fa fa-expand"></i>
+            </button>-->
+            <span class="pull-right">
+                <button class="btn btn-primary btn-sm" id="rolesModel" onclick="open_rolesrights();">Add Roles</button>
+                <button class="btn btn-primary btn-sm" id="addMenu" onclick="open_menu_model();">Add Menu</button>
+            </span>
+        <hr>
+    </span>
+
+    <div class="modal-not-include" id="rolesAndRightsModal">
+        <div class="modal-not-include" role="document" id="rolesAndRights">
+            <div class="container-fluid">
+                <div class="row">
+                   
+                    <div class="col-md-12 no-padd">
+                        <form id='form-id'>
+                            <div class="form-group">
+                                <label for="watch-me" class="radio-inline">
+                                    <input id='watch-me' name='test' type='radio' checked /> User
+                                </label>
+                                <label for="see-me" class="radio-inline">
+                                    <input id='see-me' name='test' type='radio' /> Group
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            <div id='show-me' style="height:auto">
+                
+
+                            <!-- menu -->
+                            
+                           
+                            <div class="row">
+                                <div class="col-sm-6"><select class="form-control select_user_menu" id="userMenuMultiple" multiple="multiple"
+                                    style="width:100%;">
+                                </select></div>
+                                <div class="col-sm-6"> <select class="form-control select_user_user" id="userMultiple" multiple="multiple"
+                                    style="width:100%;">
+                                </select></div>
+                            </div>
+                            <div>
+                                <h4 id="selectValue"></h4>
+                            </div>
+
+                            <table class="table table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            Can Read
+                                            <div class="squaredchk pull-right">
+                                                <input type="checkbox" value="Can Read" class="permission"
+                                                    id="squaredchku" name="check" />
+                                                <label for="squaredchku" id="squaredchkuE"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            Can Write
+                                            <div class="squaredchk pull-right">
+                                                <input type="checkbox" value="Can Write" class="permission"
+                                                    id="squaredchku0" name="check" />
+                                                <label for="squaredchku0"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Can View
+                                            <div class="squaredchk pull-right">
+                                                <input type="checkbox" value="Can View" class="permission"
+                                                    id="squaredchku1" name="check" />
+                                                <label for="squaredchku1"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            Can Delete
+                                            <div class="squaredchk pull-right">
+                                                <input type="checkbox" value="Can Delete" class="permission"
+                                                    id="squaredchku2" name="check" />
+                                                <label for="squaredchku2"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <button class="btn btn-primary" id="saveRole">Save</button>
+                        
+                    <div class="alert alert-success" id="userRoleSuccess"
+                        style="width: 81%;margin-top: 7px;display:none">
+
+                    </div>
+
+
+
+            </div>
+            <div id='show-me-two' style='display:none;height:auto'>
+
+
+
+                <!-- Tab -->
+
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                   
+                    <li class="nav-item" onclick=removeRole();>
+                        <a class="nav-link" id="role-tab" data-toggle="tab" role="tab" href="#group_map"
+                            aria-controls="profile" aria-selected="false">Role Designation Mapping</a>
+                    </li>
+
+                    <li class="nav-item active" onclick=showGroup();>
+                        <a class="nav-link active" id="group-tab" data-toggle="tab" href="#group" role="tab"
+                            aria-controls="home" aria-selected="true">Role Menu Mapping</a>
+                    </li>
+
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active in" id="group" role="tabpanel"
+                        aria-labelledby="group-tab" style="margin-top:10px;">
+
+                        <div class="row" id="divGroup">
+                            <div class="col-md-12">
+                                <!-- menu -->
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label class="control-label" for="role_name">Role:</label>
+                                        <div class="form-group">
+                                            <select class="form-control select_group_menu" id="groupMenuMultiple"
+                                                style="width:100%;">
+                                                <option>Select</option>
+                                            </select>
+                                            <span class="pull-right">
+                                                <!-- <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#skillsetmodel"><i class="glyphicon glyphicon-plus"></i></button> -->
+                                                <!-- <button type="button" class="btn btn-primary btn-sm" id="add_rolesandrights" onclick="open_group();"><i class="glyphicon glyphicon-plus"></i></button> -->
+                                            </span>
+                                            <span id="role_name_err" class="error_message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="control-label" for="role_name">Menu:</label>
+                                        <div class="form-group">
+                                            <select class="form-control select_menu_for_group" id="groupGroupMultiple"
+                                                multiple="multiple" style="width:100%;">
+                                            </select>
+                                            <span class="pull-right">
+                                                <!-- <button type="button" class="btn btn-primary btn-sm" id="add_rolesandrights" onclick="open_rolesrights();"><i class="glyphicon glyphicon-plus"></i></button> -->
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+
+                                <div class="rolecheckdiv">
+                                    <table class="table table-striped rmtable">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Can Read
+                                                    <div class="squaredchk pull-right">
+                                                        <input type="checkbox" value="Can Read" class="permission"
+                                                            id="menu_squaredchku" name="check">
+                                                        <label for="menu_squaredchku" id="menu_squaredchkuE"></label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    Can Write
+                                                    <div class="squaredchk pull-right">
+                                                        <input type="checkbox" value="Can Write" class="permission"
+                                                            id="menu_squaredchku0" name="check">
+                                                        <label for="menu_squaredchku0"></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Can View
+                                                    <div class="squaredchk pull-right">
+                                                        <input type="checkbox" value="Can View" class="permission"
+                                                            id="menu_squaredchku1" name="check">
+                                                        <label for="menu_squaredchku1"></label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    Can Delete
+                                                    <div class="squaredchk pull-right">
+                                                        <input type="checkbox" value="Can Delete" class="permission"
+                                                            id="menu_squaredchku2" name="check">
+                                                        <label for="menu_squaredchku2"></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                
+                                <button class="btn btn-primary" id="saveGroup">Save</button>
+                                <span id="roles_rights_err" class="error_message"></span>
+                            </div>
+                            <div class="designationTable">
+                                <div class="col-md-12">
+                                    <table class="listDesRoles" style="width: 100%; margin-top: 15px;">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Group</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="tab-pane fade in" id="group_map" role="tabpanel"
+                        aria-labelledby="role-tab" style="margin-top:10px;">
+
+                        <div class="row" id="divGroup2">
+                            <div class="col-md-12">
+                                <!-- menu -->
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        
+                                        <div class="form-group">
+                                            <label class="control-label" for="role_name">Roles:</label>
+                                            <select class="form-control select_group_des" id="desgroupMenuMultiple"
+                                                style="width:100%;">
+                                                <option>Select</option>
+                                            </select>
+                                            <span class="pull-right">
+                                            </span>
+                                            <span id="group_map_name_err" class="error_message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="role_name">Designation:</label>
+                                            <select class="form-control select_des_des" id="desDesignationMenuMultiple"
+                                                multiple="multiple" style="width:100%;">
+                                            </select>
+                                            <span class="pull-right"></span>
+                                        </div>
+                                        <span id="des_map_err" class="error_message"></span>
+                                        
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <button class="btn btn-primary mt-23" id="saveDes">Save</button>
+                                    </div>
+                                </div>
+
+                                
+                                
+                            </div>
+                            <div class="desMapTable">
+                                <div class="col-md-12">
+                                    <table class="listDesMap" style="width: 100%; margin-top: 0px;">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Group</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+                <!-- Tab -->
+
+
+
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="menuAddmodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="resModalLabel">Add Menu</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <!-- <h4 class=""><b>Add Menu</b></h4> -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="menuName">Menu Name</label>
+                            <input type="text" class="form-control" name="menuName" id="menuName"
+                                placeholder="Enter Menu Name...">
+                        </div>
+                        <span id="menuErr"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group quickmenu">
+                            <label for="quickAction" class="checkbox-inline">
+                                <input type="checkbox" name="quickAction" id="quickAction" value="1"> Quick Menu</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="menuFolder">Menu Folder</label>
+                            <br>
+                            <select id="menuFolder" class="form-control" name="menuFolder">
+
+                            </select>
+                            <!-- <input type="text" class="form-control" name="menuFolder" id="menuFolder"
+                                placeholder="Enter Menu Folder..."> -->
+                        </div>
+                        <span id="folderErr"></span>
+                    </div>
+                    <div class="col-md-6"></div>
+
+                </div>
+                
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="selectPriority">Priority</label>
+                            <br>
+                            <select id="selectPriority" class="form-control" name="selectPriority">
+                                <option value="0">Select Priority</option>
+                                <option value="1">Action Item - High Priority</option>
+                                <option value="2">Action Item - Medium Priority</option>
+                                <option value="3">Action Item - Low Priority</option>
+                                <option value="4">Informative Item - High Priority</option>
+                                <option value="5">Informative Item - Medium Priority</option>
+                                <option value="6">Informative Item - Low Priority</option>
+                                <option value="7">Reports</option>
+                                <option value="8">MIS Reports</option>
+                                <option value="9">Need basis</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" name="menuFolder" id="menuFolder"
+                                placeholder="Enter Menu Folder..."> -->
+                        </div>
+                        <span id="priorityErr"></span>
+                    </div>
+                    <div class="col-md-6"></div>
+
+                </div>
+                
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="selectAIKey">AI Key</label>
+                            <br>
+                            <input type="text" class="form-control" id="selectAIKey" placeholder="Enter AI Key..">
+                        </div>
+                        <span id="AIKeyErr"></span>
+                    </div>
+                    <div class="col-md-6"></div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="menuIconImg">Menu Icon</label>
+                            <input type="file" name="menuIconImg" class="form-control" id="menuIconImg" accept="image/*" onchange="encode();">
+                        </div>
+                        <span id="iconErr"></span>
+                    </div>
+                    <div class="col-md-6"></div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success" id="menuResponse" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary saveMenuModal" id="addToMenu">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="menuEditModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="fileDefault()" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="resModalLabel">Edit Menu</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <!-- <h4 class=""><b>Add Menu</b></h4> -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="menuName">Menu Name</label>
+                            <input type="text" class="form-control" name="menuName" id="editMenuName"
+                                placeholder="Enter Menu Name...">
+                        </div>
+                        <span id="editMenuErr"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="family_name">Quick Menu</label>
+                            <input type="checkbox" class="form-control" name="quickAction" id="quickAction" value="1">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="menuFolder">Menu Folder</label>
+                            <br>
+                            <select id="editMenuFolder" class="form-control" name="editMenuFolder">
+
+                            </select>
+                            <!-- <input type="text" class="form-control" name="menuFolder" id="editMenuFolder" disabled> -->
+                        </div>
+                        <span id="editFolderErr"></span>
+                    </div>
+                    <div class="col-md-6"></div>
+
+                </div>
+                
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="selectPriority">Priority</label>
+                            <br>
+                            <select id="editPriority" class="form-control" name="selectPriority">
+                                <option value="0">Select Priority</option>
+                                <option value="1">Action Item - High Priority</option>
+                                <option value="2">Action Item - Medium Priority</option>
+                                <option value="3">Action Item - Low Priority</option>
+                                <option value="4">Informative Item - High Priority</option>
+                                <option value="5">Informative Item - Medium Priority</option>
+                                <option value="6">Informative Item - Low Priority</option>
+                                <option value="7">Reports</option>
+                                <option value="8">MIS Reports</option>
+                                <option value="9">Need basis</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" name="menuFolder" id="menuFolder"
+                                placeholder="Enter Menu Folder..."> -->
+                        </div>
+                        <span id="editPriorityErr"></span>
+                    </div>
+                    <div class="col-md-6"></div>
+
+                </div>
+                
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="selectAIKey">AI Key</label>
+                            <br>
+                            <input type="text" class="form-control" id="editAIKey" placeholder="Enter AI Key..">
+                            <input type="text" class="form-control" id="editMenuId" style="display: none;">
+                        </div>
+                        <span id="editAIKeyErr"></span>
+                    </div>
+                    <div class="col-md-6"></div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="menuIconImg">Menu Icon</label>
+                            
+                            <div id="dispImg" style="position: relative; height: 100px; border: 1px solid rgb(202, 202, 202);">
+                                <div style="width: 80%; height: 100px; margin: 0 auto;">
+                                    <!-- <img id="iconImg" src="https://www.w3schools.com/css/img_5terre.jpg" style="height: 100px; object-fit: contain; margin: 0 auto;"> -->
+                                    <img id="iconImg" style="height: 100px; object-fit: contain; margin: 0 auto;">
+                                    <input type="file" style="margin-top: 30px;" class="form-control" name="menuIconImg" id="editMenuIconImg" accept="image/*" onchange="encodeForEdit();">
+                                    <span id="editIconErr"></span>
+                                </div>
+
+                                <button id="iconEditBtn" onclick="editIcon()" style="position: absolute; width: 30px; right: 0; bottom: 0; background-color: #dd2c36; outline: none; border: none;"><i id="btnImage" style="color: white;" class="fas fa-pencil-alt"></i></button>
+
+                            </div>
+                            
+                            <input type="text" class="form-control" id="editMenuIconSrc" style="display: none;">
+                        </div>
+                    </div>
+                    <div class="col-md-6"></div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success" id="menuResponse" style="display: none;">
+                        </div>                       
+                    </div>
+                </div>
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="fileDefault()" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary editMenuModal" id="editToMenu">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="menuRightsUpdate" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title"><span id="rolesName"></span> Menu Rights</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="row">
+                    <input class="form-control roleUserFilter" style="margin-bottom: 10px;" placeholder="Search..." />
+                </div>
+                <input type="hidden" id='empRolesUpdateData'>
+                    <div class="employeeMenuRightsDataView"> </div>
+                   
+            </div>
+            <div class="modal-footer">
+                    <div class="col-md-12">
+                            <div class="alert alert-success" id="entryMenuRightsResponse" style="display: none;position: absolute;margin-top: -8px;">
+                            </div>
+                        </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="updateMenuRightCall()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="roleMapModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="resModalLabel">Menu</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <!-- <div class="row">
+                    <div class="col-md-6 col-md-offset-6">
+                        Map Roles
+                        <select class="form-control select_role_map" id="rolemapselect" multiple="multiple"
+                            style="width:90%;">
+                        </select>
+                        <button type="button" class="btn btn-primary btn-sm addRolesMap"><i
+                                class="glyphicon glyphicon-plus"></i></button>
+                    </div>
+                </div> -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control searchRoleInp" style="margin-bottom: 10px;" placeholder="Search..."/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Menu</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary" id="addToMenu">Save</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="rolesAddmodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div> -->
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="resModalLabel">Add Roles</h2>
+
+            </div>
+
+            <div class="modal-body" data-simplebar>
+                <select id="designationList" name="designationList" class="form-control">
+
+                </select>
+
+                <span id="rolesAndRightsDatas">
+
+                </span>
+
+
+                <span id="rolesErr" class="alert alert-warning" style="display: none"></span>
+                <div class="alert alert-success" id="rolesResponse" style="display: none;margin-top:20px">
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <!-- <button type="button" class="btn btn-primary" id="addToMenu">Save</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Role Popup content-->
+<div class="modal fade" id="roleandrightsetmodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-left" id="modalHeader">Add Role</h4>
+            </div>
+
+            <div class="modal-body" data-simplebar>
+                <div class="alert alert-success rolepostSuccess" role="alert"></div>
+                <div class="alert alert-danger rolepostdanger" role="alert"></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="role_name">Name:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="role_name" id="role_name" value=""
+                            placeholder="Role Name">
+                        <span id="modal_role_name_err" class="error_message"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom:50px"></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="role_description">Description:</label>
+                    <div class="col-sm-10">
+                        <textarea rows="4" cols="50" id="role_description" class="form-control"></textarea>
+                        <br>
+                        <span id="modal_role_description_err" class="error_message"></span>
+                    </div>
+                </div>
+
+                <span class="ApiResponse"></span>
+                <div style="margin-bottom:130px"></div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="skillfamilyId"
+                    onclick="SaveRolesandRights();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Group Popup content-->
+<div class="modal fade" id="groupsetmodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-left" id="modalHeader">Add Group</h4>
+            </div>
+
+            <div class="modal-body" data-simplebar>
+                <div class="alert alert-success grouppostSuccess" role="alert"></div>
+                <div class="alert alert-danger grouppostdanger" role="alert"></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="group_name">Name:</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="group_name" id="group_name" value=""
+                            placeholder="Group Name">
+                        <span id="group_name_err" class="error_message"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom:50px"></div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2" for="group_description">Description:</label>
+                    <div class="col-sm-10">
+                        <textarea rows="4" cols="50" id="group_description"></textarea>
+                        <span id="group_description_err" class="error_message"></span>
+                    </div>
+                </div>
+
+                <span class="ApiResponse"></span>
+                <div style="margin-bottom:130px"></div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="skillfamilyId" onclick="SaveGroup();">Save</button>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="previousEmp" value="">
+    <input type="hidden" id="choosedEmp" value="">
+</div>
+
+
+<!-- Role Popup content-->
+<div class="modal fade" id="roleandDesignationViewmodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-left" id="modalHeader">View Role and Designation Mapping </h4>
+            </div>
+
+            <div class="modal-body" data-simplebar>
+                <div class="alert alert-success rolepostSuccess" style="display: none" role="alert"></div>
+                <div class="alert alert-danger rolepostdanger" style="display: none" role="alert"></div>
+                <div class="form-group">
+                    <b><span id="roleName"></span></b><br>
+                    <span id="roleDesignations"></span>
+
+                    <div class="form-group row">
+                        <label class="control-label col-sm-2" for="role_name">Designation:</label>
+                        <div class="col-sm-12">
+                            <input type="hidden" id="desgroupMenuMultiples" name="desgroupMenuMultiples" value="">
+                            <input type="hidden" id="checkRoleDesignationNewAdd" name="checkRoleDesignationNewAdd"
+                                value="0">
+                            <select class="form-control select_des_dess" id="desDesignationMenuMultiples"
+                                multiple="multiple" style="width:90%;">
+                            </select>
+                            <span class="pull-right"><button class="btn btn-primary" id="saveDesPRole">Save</button>
+                            </span>
+                        </div>
+                    </div>
+                    <span id="des_map_err" class="error_message"></span>
+
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="desMapTable">
+                                    <div class="dx-viewport demo-container">
+                                        <div id="gridContainer"></div>
+                                    </div>
+                                    <!-- <table class="listRoleDesMap">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Designation</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+        
+                                        </tbody>
+                                    </table> -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="margin-bottom:50px"></div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-success" id="ApiResponseRolesDesignation" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:130px"></div>
+
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <!-- <button type="button" class="btn btn-primary" id="skillfamilyId" onclick="SaveRolesandRights();">Save</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="components/rolesandrights/js/addrolesandrights.js"></script>
+<script>
+    var menuRoleData
+    var  roleId
+    var gRoleUsersData = []
+    var gRoleUserFilterData = []
+    var gRoleUsersRoleId
+    var group_filter = JSON.stringify({
+        isActive: true,
+        Status: 1,
+        Message: "",
+    });
+    // var _roleMenuData = callgetlist('GetDashBoardRoles', group_filter);
+    // var roleMenuData = $.map(_roleMenuData, function (obj) {
+    //     obj.text = obj.text || obj.Roles; // replace name with the property used for the text
+    //     obj.id = obj.id || obj.Id; // replace name with the property used for the text
+    //     return obj;
+    // });
+    var filterRoleAndDesginationList = JSON.stringify({
+        "IsActive": true
+    });
+    var mappedRole = callgetlist('GetDashBoardDesignationRoleMappings', filterRoleAndDesginationList);
+    var uniArr = removeDuplicates(mappedRole, "RoleName");
+    var roleMenuData = $.map(uniArr, function (obj) {
+        obj.text = obj.text || obj.RoleName; // replace name with the property used for the text
+        obj.id = obj.id || obj.RoleId; // replace name with the property used for the text
+        return obj;
+    });
+    var _groupMapData = callgetlist('GetDashBoardGroups', group_filter);
+    var groupMapData = $.map(_groupMapData, function (obj) {
+        obj.text = obj.text || obj.Groups; // replace name with the property used for the text
+        obj.id = obj.id || obj.Id; // replace name with the property used for the text
+        return obj;
+    });
+    var _designationData = callgetlist('GetDesignations');
+    var designationData = $.map(_designationData, function (obj) {
+        obj.text = obj.text || obj.Name; // replace name with the property used for the text
+        obj.id = obj.id || obj.Id; // replace name with the property used for the text
+
+        return obj;
+    });
+    var filter_val = JSON.stringify({
+        "IsActive": 1,
+        "Status": true,
+        "Message": ""
+    });
+    var _roleData = callgetlist('GetDashBoardRoles', filter_val);
+    var roleData = $.map(_roleData, function (obj) {
+        obj.text = obj.text || obj.Roles; // replace name with the property used for the text
+        obj.id = obj.id || obj.Id; // replace name with the property used for the text
+        return obj;
+    });
+    
+    var menuFilter = JSON.stringify({
+        "IsActive": true,
+        "Status": '',
+        "Message": '',
+    });
+    var _menuData = callgetlist('GetDashBoardMenus', menuFilter);
+    var menuData = $.map(_menuData, function (obj) {
+        obj.text = obj.text || obj.Menus; // replace name with the property used for the text
+        obj.id = obj.id || obj.Id; // replace name with the property used for the text
+        return obj;
+    });
+
+    var roleSelectData = [{
+        id: 1,
+        text: 'Role 2'
+    }, {
+        id: 2,
+        text: 'Role 3'
+    }, {
+        id: 3,
+        text: 'Role 4'
+    }]
+    var roleDataMap = [{
+        id: 0,
+        text: 'Role 1'
+    }, ]
+    var designationListVal = []
+    var designationMapListVal = []
+    var rolesListVal = []
+
+    function updateRoleMenuMapTable() {
+        var filval = JSON.stringify({
+            "IsActive": true,
+            "Status": "",
+            "Message": "",
+        });
+        roleResult = callgetlist('GetDashBoardEmployeeRoleDetails', filval);
+        let listTemplate = ''
+        roleResult.forEach((element, index) => {
+            //console.log('elem', element)
+            var getDeleteButton = (element.Id == '00000000-0000-0000-0000-000000000000') ? 'style="opacity:0.1" disabled' : '';
+            listTemplate += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td>${element.Roles}</td>
+                    <td>
+                        <button class="btn btn-xs btn-primary view-btn" onclick="openrolesmap('${element.Id}')"><i class="fas fa-eye"></i></button>
+                        <button ${getDeleteButton} class="btn btn-xs btn-danger delete-btn" onclick="deleteDesRole('${element.Id}')"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            `
+        });
+        $('.listDesRoles tbody').html(listTemplate);
+    }
+
+    function updateGroupMapTable() {
+        $('.listDesMap tbody').html('<tr><td colspan="3">Loading...</td></tr>');
+        let listTemplate = ''
+
+        if (!designationMapListVal || designationMapListVal.length == 0 || typeof designationMapListVal[0] ===
+            'undefined') {
+            listTemplate += `
+                <tr>
+                    <td colspan="3">No records found</td>
+                    
+                </tr>
+            `
+        } else {
+            designationMapListVal.forEach((element, index) => {
+                //console.log('elem', element)
+                listTemplate += `
+                <tr id="deleteRole_${element.roleId}">
+                    <td>${index + 1}</td>
+                    <td>${element.roleName}</td>
+                    <td>
+                        <button class="btn btn-xs btn-primary view-btn" onclick="openViewRolesNDesignationModel('${element.roleId}','${element.roleName}')"><i class="fas fa-eye"></i></button>
+                        <button class="btn btn-xs btn-danger delete-btn" onclick="deleteDesGroupMap('${element.roleId}')"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            `
+            });
+        }
+        $('.listDesMap tbody').html(listTemplate);
+    }
+
+    function menuRightsUpdateShow(menuId,roleId,menuName,roleid){
+        //console.log(roleId,menuId)
+        $('#menuRightsUpdate').appendTo('body').modal('show')
+        $('#rolesName').html(menuName);
+        $('#rolesName').append('<input type="hidden" value="'+menuId+'" id="currentMenuId">');
+        var filval = JSON.stringify({
+            "IsActive": true,
+			"RoleId": roleId,
+			"MenuId": menuId
+        });
+        roleResult = callgetlist('GetEmployeesMenuRoleRights', filval);
+        gRoleUsersData = roleResult
+        gRoleUsersRoleId = roleid
+        console.log('show employees')
+        //$('#empRightId').val(roleResult[0]['EmployeeRightID'])
+        if(roleResult.length > 0){ 
+            updateRoleUsers(roleResult,roleid)
+        }
+        
+    }
+
+
+    function updateRoleUsers(data,roleid){ console.log(data)
+        var html='';
+        var displayEmployeeDetails='';
+        var empId=''
+        $('.employeeMenuRightsDataView').html('');
+        for(var i=0;i < data.length;i++){ //console.log(data[i]['CanCreate']);
+            empId = data[i]["EmployeeRightID"]
+            if(roleid == '00000000-0000-0000-0000-000000000000') { 
+                displayEmployeeDetails = '<div id="employeeName">Name :'+data[i]["DisplayName"]+'</div><div id="employeeRollno">Empolyee no :'+ data[i]["EmployeeNumber"]+'</div>';
+         
+            } else { displayEmployeeDetails ='';}
+
+            html+=` 
+               ${displayEmployeeDetails}
+               <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        Can Read
+                                        <div class="pull-right">
+                                            <input type="checkbox" value="Can Read" class="permission canreadRight"
+                                                id="canreadRight_${empId}"  name="check"/>
+                                            <label for="canreadRight"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Can Write
+                                        <div class="pull-right">
+                                            <input type="checkbox" value="Can Write" class="permission canwriteRight"
+                                                id="canwriteRight_${empId}"  name="check" />
+                                            <label for="canwriteRight"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Can View
+                                        <div class="pull-right">
+                                            <input type="checkbox" value="Can View" class="permission canviewRight"
+                                                id="canviewRight_${empId}"  name="check" />
+                                            <label for="canviewRight"></label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        Can Delete
+                                        <div class="pull-right">
+                                            <input type="checkbox" value="Can Delete" class="permission candeleteRight"
+                                                id="candeleteRight_${empId}" name="check" />
+                                            <label for="candeleteRight"></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>`;
+            }
+            html+=``;
+            $('.employeeMenuRightsDataView').html(html);  
+
+            for(var j=0;j < data.length;j++){
+            $('#canreadRight_'+data[j]['EmployeeRightID']).prop('checked',data[j]['CanRead']);
+            $('#canwriteRight_'+data[j]['EmployeeRightID']).prop('checked',data[j]['CanCreate']);
+            $('#canviewRight_'+data[j]['EmployeeRightID']).prop('checked',data[j]['CanUpdate']);
+            $('#candeleteRight_'+data[j]['EmployeeRightID']).prop('checked',data[j]['CanDelete']);
+            }
+    }
+
+    function updateMenuRightCall(){
+            console.log(gRoleUsersData);
+        let sendList;    
+        console.log(gRoleUserFilterData);
+        if(gRoleUserFilterData == ''){
+            sendList = roleResult
+        } else {
+            sendList = gRoleUserFilterData
+        }
+        let getReadValue;
+        let getUpdateValue;
+        let getDeleteValue;
+        let getCreateValue;
+        var combineAllData=[];
+        var getCurrentMenuId = $('#currentMenuId').val();
+        for(var k=0;k < sendList.length;k++){
+            if($('#canreadRight_'+sendList[k]['EmployeeRightID']).prop('checked') === undefined ) {  getReadValue = sendList[k]['CanRead'] } else {  getReadValue = $('#canreadRight_'+sendList[k]['EmployeeRightID']).prop('checked') }
+            if($('#canviewRight_'+sendList[k]['EmployeeRightID']).prop('checked') === undefined ) {  getUpdateValue = sendList[k]['CanUpdate'] } else {  getUpdateValue = $('#canviewRight_'+sendList[k]['EmployeeRightID']).prop('checked') }
+            if($('#candeleteRight_'+sendList[k]['EmployeeRightID']).prop('checked') === undefined ) {  getDeleteValue = sendList[k]['CanDelete'] } else {  getDeleteValue = $('#candeleteRight_'+sendList[k]['EmployeeRightID']).prop('checked') }
+            if($('#canwriteRight_'+sendList[k]['EmployeeRightID']).prop('checked') === undefined ) {  getCreateValue = sendList[k]['CanCreate'] } else {  getCreateValue = $('#canwriteRight_'+sendList[k]['EmployeeRightID']).prop('checked') }
+            combineAllData.push({
+            "EmployeeRightID": sendList[k]['EmployeeRightID'],
+            "CanRead": getReadValue,
+            "CanUpdate": getUpdateValue,
+            "CanDelete": getDeleteValue,
+            "CanCreate": getCreateValue
+            });
+            if($('#canreadRight_'+sendList[k]['EmployeeRightID']).prop('checked') == false && $('#canviewRight_'+sendList[k]['EmployeeRightID']).prop('checked') == false && $('#candeleteRight_'+sendList[k]['EmployeeRightID']).prop('checked')== false && $('#canwriteRight_'+sendList[k]['EmployeeRightID']).prop('checked') ==  false){
+               $('#remove_'+getCurrentMenuId).hide();
+            }
+        }
+        console.log(combineAllData)
+    
+        //console.log(JSON.stringify(combineAllData));
+
+        var sendResult = {
+            Method: "UpdateEmployeesmenuRoleRights",
+            Data: {
+            RightsData:JSON.stringify(combineAllData)   
+            },
+            "Status":"",
+            "Message":""
+        }
+        //console.log(sendResult);
+        var response = PostDataCall(sendResult);
+        //console.log('response', response);
+        if (response['IsSuccess'] == false) {
+            var swalEMRErr = {
+                        title: 'Warning!',
+                        text: response['Message'],
+                        icon: "error"
+                    }
+                    swalAlert(swalEMRErr);
+                    /*$('#entryMenuRightsResponse').removeClass('alert-success');
+                    $('#entryMenuRightsResponse').addClass('alert-danger');
+                    $('#entryMenuRightsResponse').show().html('<strong>Warning! </strong>' + response['Message']);*/
+                } else {
+                    var swalEMRSucc = {
+                        title: 'Success!',
+                        text: response['Message'],
+                        icon: "success"
+                    }
+                    swalAlert(swalEMRSucc);    
+                /*$('#entryMenuRightsResponse').removeClass('alert-danger');
+                $('#entryMenuRightsResponse').addClass('alert-success');
+                $('#entryMenuRightsResponse').show().html('<strong>Success!</strong>' + response['Message']).delay(2000).fadeOut();*/
+                //$('#menuRightsUpdate').modal('hide');
+                }
+        
+        
+    }
+
+    function updateRolesTable(roleid) {
+        var getMenuFilter = JSON.stringify({
+            "IsActive": true,
+            "RoleId": roleid,
+        });
+
+        gRoleId = roleid
+        menuRoleData = callgetlist('GetDashBoardRoleMenuMappings', getMenuFilter);
+        //console.log('menuRoleData',menuRoleData)
+        if(menuRoleData <= 0){
+            $('#roleMapModal').appendTo('body').modal('hide')
+            updateRoleMenuMapTable()
+        }
+        
+        UpdateRoleListView(menuRoleData,roleid)
+    }
+
+    function UpdateRoleListView(data,roleid){
+        let rolesHtml = '';
+        var mroleId = '';
+        var disbaleDeleteButton ='';
+        data.forEach(element => {
+            if(roleid == '00000000-0000-0000-0000-000000000000') { mroleId = element.MenuId; disbaleDeleteButton ='style="opacity:0.1" disabled'; } else { mroleId = element.Id; disbaleDeleteButton =''; }
+            rolesHtml += `
+                <tr id="remove_${element.Id}">
+                    <td>${element.MenuName}</td>
+                    <td>
+                        <button class="btn btn-xs btn-info" onclick="menuRightsUpdateShow('${mroleId}','${element.RoleId}','${element.MenuName}','${roleid}')"><i class="fa fa-expand"></i></button>
+                        <button class="btn btn-xs btn-primary edit-btn" onclick="menuRightsEdit('${element.MenuId}')"><i class="fas fa-pencil-alt"></i></button>
+                        <button ${disbaleDeleteButton} class="btn btn-xs btn-danger delete-btn" onclick="deleteRoleMap('${element.Id}','${element.RoleId}')"><i class="fas fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+                `
+        });
+        $('#roleMapModal tbody').html(rolesHtml)
+    }
+    
+
+    function updateRolesDesignationTable(RoleId) {
+        let listTemplate = '';
+        if (getRoleBasedDesgination.length == 0) {
+            listTemplate += `
+                <tr><td colspan="3">No records</td></tr>   
+                `
+            deleteDesGroupMap(RoleId);
+        } else {
+            // console.log('getRoleBasedDesgination',getRoleBasedDesgination);
+
+            // Declare a new array
+            let newArray = [];
+              
+            // Declare an empty object
+            let uniqueObject = {};
+
+            // Loop for the array elements
+            for (let i in getRoleBasedDesgination) {
+      
+                // Extract the title
+                objTitle = getRoleBasedDesgination[i]['DesignationId'];
+
+                // Use the title as the index
+                uniqueObject[objTitle] = getRoleBasedDesgination[i];
+            }
+
+            // Loop to push unique object into array
+            for (i in uniqueObject) {
+                newArray.push(uniqueObject[i]);
+            }
+              
+            // Display the unique objects
+            // console.log('newArray',newArray);
+
+            $(function(){
+            $("#gridContainer").dxDataGrid({
+                dataSource: newArray,
+                keyExpr: "DesignationId",
+                showBorders: true,
+                columns: [
+                    {
+                        dataField: "Designation",
+                        caption: "Designation",
+                        alignment: "left"
+                    },
+                    {
+                        dataField: "",
+                        caption: "Action",
+                        width: 50,
+                        allowFiltering:false, 
+                        allowGrouping: false, 
+                        allowReordering: false, 
+                        allowSorting: false, 
+                        allowCollapsing: false, 
+                        allowExporting: false,
+                        cellTemplate: function (container, options) {
+                        // var dataKey = options.data["key"];
+                        var DesignationRoleMappingId = options.data["DesignationRoleMappingId"];
+                        var DesignationId = options.data["DesignationId"];
+
+                        var domActions = "";
+                        domActions +=
+                        "<button class='btn btn-xs btn-danger delete-btn' onclick=deleteSingleRolesDesignation('"+DesignationRoleMappingId+"','"+RoleId+"','"+DesignationId+"')><i class='fas fa-trash-alt'></i></button>";
+                            // '<button class="btn btn-xs btn-danger delete-btn" onclick="deleteSingleRolesDesignation("'+DesignationRoleMappingId+'","'+RoleId+'","'+DesignationId+'")"><i class="fas fa-trash-alt"></i></button>';
+                        $("<div class='text-center'>")
+                            .append($(domActions))
+                            .appendTo(container);
+                        },
+                    }
+                ],
+                masterDetail: {
+                    enabled: true,
+                    template: function(container, options) { 
+                        var currentEmployeeData = options.data;
+
+                        $("<div>")
+                            .addClass("master-detail-caption")
+                            // .text(currentEmployeeData.FirstName + " " + currentEmployeeData.LastName + "'s Tasks:")
+                            .appendTo(container);
+
+                        $("<div>")
+                            .dxDataGrid({
+                                columnAutoWidth: true,
+                                showBorders: true,
+                                columns: [
+                                    {
+                                        dataField: "EmployeeNumber",
+                                        caption: "Employee Number"
+                                    },
+                                    {
+                                        dataField: "DisplayName",
+                                        caption: "Employee Name"
+                                    },
+                                ],
+                                dataSource: new DevExpress.data.DataSource({
+                                    store: new DevExpress.data.ArrayStore({
+                                        key: "DesignationId",
+                                        data: getRoleBasedDesgination
+                                    }),
+                                    filter: ["DesignationId", "=", options.key]
+                                })
+                            }).appendTo(container);
+                    }
+                }
+            });
+        });
+
+
+            // getRoleBasedDesgination.forEach(function (i, index) {
+            //     //console.log('hi');
+            //     //console.log(i);
+            //     var desginationValue = i['Designation'];
+            //     var designationRelationId = i['DesignationRoleMappingId'];
+            //     var designationId = i['DesignationId'];
+            //     listTemplate += `
+            //     <tr>
+            //         <td>${index + 1}</td>
+            //         <td>${desginationValue}</td>
+            //         <td>
+                        
+            //             <button class="btn btn-xs btn-danger delete-btn" onclick="deleteSingleRolesDesignation('${designationRelationId}','${RoleId}','${designationId}')"><i class="fas fa-trash-alt"></i></button>
+            //         </td>
+            //     </tr>
+            // `
+            // });
+        }
+        // $('.listRoleDesMap tbody').html(listTemplate);
+    }
+
+    function refreshGroupSelect() {
+        var filterRoleAndDesginationList = JSON.stringify({
+            "IsActive": true
+        });
+        var mappedRole = callgetlist('GetDashBoardDesignationRoleMappings', filterRoleAndDesginationList);
+        let removeMappedValue = removeDuplicates(mappedRole, "RoleName");
+        let rRoleMenuData = $.map(removeMappedValue, function (obj) {
+            obj.text = obj.text || obj.RoleName; // replace name with the property used for the text
+            obj.id = obj.id || obj.RoleId; // replace name with the property used for the text
+            return obj;
+        });
+       
+        $(".select_group_menu").select2("destroy");
+        $(".select_group_menu").html("<option><option>");
+        $(".select_group_menu").select2({
+            placeholder: "Select a Role",
+            allowClear: true,
+            data: rRoleMenuData
+        })
+    }
+
+
+    function refreshRoleSelect() {
+        var filter_val = JSON.stringify({
+        "IsActive": 1,
+        "Status": true,
+        "Message": ""
+    });
+    var _roleData = callgetlist('GetDashBoardRoles', filter_val);
+    var roleData = $.map(_roleData, function (obj) {
+        obj.text = obj.text || obj.Roles; // replace name with the property used for the text
+        obj.id = obj.id || obj.Id; // replace name with the property used for the text
+        return obj;
+    });
+       
+        $(".select_group_des").select2("destroy");
+        $(".select_group_des").html("<option><option>");
+        $(".select_group_des").select2({
+            placeholder: "Select",
+            allowClear: true,
+            data: roleData
+            //groupMapData
+        })
+    }
+
+    function refreshGroupMapSelect() {
+        $(".select_group_des").select2("destroy");
+        $(".select_group_des").html("<option><option>");
+        $(".select_group_des").select2({
+            placeholder: "Select",
+            allowClear: true,
+            data: roleData
+            //groupMapData
+        })
+    }
+
+    function refreshRolesSelect() {
+        $(".select_role_map").select2("destroy");
+        $(".select_role_map").html("<option><option>");
+        $(".select_role_map").select2({
+            placeholder: "Select a Role",
+            allowClear: true,
+            data: roleSelectData
+        })
+    }
+
+    function refreshDesignationSelect() {
+        $(".select_des_dess").select2("destroy");
+        $(".select_des_dess").html("<option><option>");
+        $(".select_des_dess").select2({
+            placeholder: "Select a Designation",
+            allowClear: true,
+            data: designationData
+        })
+    }
+
+    function getMenuDropList(getMenuData){
+        //console.log('getMenuDropList');
+        // //console.log(getMenuData); 
+        $(".select_user_menu,.select_menu_for_group").select2("destroy");
+        $(".select_user_menu,.select_menu_for_group").html("<option><option>"); 
+        $(".select_user_menu,.select_menu_for_group").select2({
+            placeholder: "Select a Menu",
+            allowClear: true,
+            data: getMenuData,
+        });
+        // //console.log('menu added');
+    }
+
+    function deleteDesRole(roleId) {
+        // //console.log(desid)
+        // let filIndex = designationListVal.findIndex(elem => elem.id == desid)
+        // let desSplit = designationListVal.splice(filIndex, 1)
+        // //console.log('desSplit', desSplit)
+        // roleMenuData.push(desSplit[0])
+        // refreshGroupSelect()
+        // updateRoleMenuMapTable()
+        let swal_config = {
+            title:'Are you sure ?',
+            text:'This Action will delete the rights',
+        }
+        swal_confirm(swal_config,(status) => {
+            if(status){
+                var dataResult = {
+                    RoleId: roleId,
+                    MenuId: null,
+                    Status: '',
+                    Message: ''
+                }
+                var sendResult = {
+                    Method: "DeleteDashBoardMenuRoles",
+                    Data: dataResult
+                }
+                var response = PostDataCall(sendResult);
+                //console.log(response)
+                if (response['IsSuccess']) {
+                    updateRoleMenuMapTable()
+                }
+            }else{
+                //console.log('cancel')
+            }
+        })
+    }
+
+    function deleteDesGroupMap(roleId) {
+        let swal_config={
+            title:"Are you sure ?",
+            text:"This Action will delete the Designation",
+        }
+        swal_confirm(swal_config,(status) => {
+            if(status){
+                var dataResult = {
+                    RoleId: roleId,
+                    Status: '',
+                    Message: ''
+                }
+                var sendResult = {
+                    Method: "DeleteDashBoardRoles",
+                    Data: dataResult
+                }
+                var response = PostDataCall(sendResult);
+                if (response['IsSuccess'] == false) {
+                   // alert('Warning!' + response['Message']);
+                } else {
+                    //alert('Role Deleted Successfully!');
+                    $('#deleteRole_' + roleId).hide();
+                    refreshGroupSelect();
+                    updateRoleMenuMapTable();
+                }
+            }
+        })
+        //refreshGroupMapSelect()        
+        //updateGroupMapTable()
+    }
+
+    function deleteRoleMap(menuId,roleId) {
+
+        // //console.log(roleId)
+        // let filIndex = roleDataMap.findIndex(elem => elem.id == roleId)
+        // let desSplit = roleDataMap.splice(filIndex, 1)
+        // //console.log('desSplit', desSplit)
+        // roleSelectData.push(desSplit[0])
+        // refreshRolesSelect()
+        // updateRolesTable()
+        // //console.log(menuId,roleId);
+        // return
+        let swal_config = {
+            title:'Are you sure ?',
+            text:'This Action will delete the menu',
+        }
+        swal_confirm(swal_config,(status) => {
+            if(status){
+                var dataResult = {
+                    RoleId: roleId,
+                    MenuId: menuId,
+                    Status: '',
+                    Message: ''
+                }
+                var sendResult = {
+                    Method: "DeleteDashBoardMenuRoles",
+                    Data: dataResult
+                }
+                var response = PostDataCall(sendResult);
+                //console.log(response)
+                updateRolesTable(roleId)
+            }
+        })
+    }
+
+    function openrolesmap(roleid) {
+        $('#roleMapModal').appendTo('body').modal('show')
+        $(".select_role_map").select2({
+            placeholder: "Select a Role",
+            allowClear: true,
+            data: roleSelectData
+        });
+        
+        updateRolesTable(roleid)
+    }
+
+    var getRoleBasedDesgination;
+
+    function updateDesignationDropDownList(roleId) {
+
+        getRoleBasedDesgination = getMappedRoleAndDesginationList.filter(elem => elem.RoleId == roleId)
+
+        //get designation Id
+        function showRole(value) {
+            return value.DesignationId;
+        }
+
+        function getDesignationId(value) {
+            return value.Id;
+        }
+        var rmveExistVlue = getRoleBasedDesgination.map(showRole);
+        var matserVlue = designationData.map(getDesignationId);
+        let intersection = rmveExistVlue.filter(x => matserVlue.includes(x));
+
+        $.each(intersection, function (index, val) {
+            $("#desDesignationMenuMultiples>option[value='" + val + "']").prop('disabled', true);
+        });
+
+    }
+
+    function openViewRolesNDesignationModel(getRoleId, getRoleName) {
+        //refresh desgination list
+        $('#checkRoleDesignationNewAdd').val(0);
+        refreshDesignationSelect();
+        $('#desgroupMenuMultiples').val(getRoleId);
+        $('#roleandDesignationViewmodel').appendTo("body").modal('show');
+
+        $('#roleName').html(getRoleName + '<br>');
+
+        updateDesignationDropDownList(getRoleId);
+        updateRolesDesignationTable(getRoleId);
+    }
+    var srcData;
+    function encode() {
+        var selectedfile = document.getElementById("menuIconImg").files;
+        if (selectedfile.length > 0) {
+          var imageFile = selectedfile[0];
+          if(imageFile.size > 5000){
+              $('#iconErr').html('Maximum File Size should be 5 KB').css('color', 'red')
+              return
+          }else{
+            $('#iconErr').html("")
+          }
+          var fileReader = new FileReader();
+          fileReader.onload = function(fileLoadedEvent) {
+            srcData = fileLoadedEvent.target.result;
+            
+          }
+          fileReader.readAsDataURL(imageFile);
+        }
+      }
+
+      function encodeForEdit() {
+        var selectedfile = document.getElementById("editMenuIconImg").files;
+        if (selectedfile.length > 0) {
+          var imageFile = selectedfile[0];
+          if(imageFile.size > 5000){
+              $('#editIconErr').html('Maximum File Size should be 5 KB').css('color', 'red')
+              return
+          }else{
+            $('#editIconErr').html("")
+          }
+          var fileReader = new FileReader();
+          fileReader.onload = function(fileLoadedEvent) {
+            srcData = fileLoadedEvent.target.result;
+            
+          }
+          fileReader.readAsDataURL(imageFile);
+        }
+        else {
+            srcData = false;
+        }
+      }
+
+      function deleteSingleRolesDesignation(mappingId, roleId, designationId) {
+        // alert("deleteSingleRolesDesignation");
+        let swal_config = {
+            title:'Are you sure ?',
+            text:'This Action will delete the designation',
+        }
+
+        swal_confirm(swal_config,(status) => {
+            if(status){
+                var dataResult = {
+                    // RoleId: roleId,
+                    // MappingId: mappingId,
+                    // DesignationId: designationId,
+                    DesignationRoleMappingId: mappingId,
+                    Status: '',
+                    Message: ''
+                }
+                var sendResult = {
+                    Method: "DeleteDashBoardDesignationRoleMappings",
+                    Data: dataResult
+                }
+                var response = PostDataCall(sendResult);
+                // console.log('sendResult',sendResult);
+            
+                var getDeletedId = getRoleBasedDesgination.findIndex(elem => elem.DesignationRoleMappingId == mappingId);
+           
+                getRoleBasedDesgination.splice(getDeletedId, 1)
+                var getMainDeletedId = getMappedRoleAndDesginationList.filter(elem => elem.DesignationRoleMappingId ==
+                    mappingId);
+                getMappedRoleAndDesginationList.splice(getMainDeletedId, 1)
+                $("#desDesignationMenuMultiples>option[value='" + designationId + "']").removeProp('disabled');
+                    updateRolesDesignationTable(roleId);
+
+            }
+        })
+    }
+
+
+
+    $(document).ready(function () {
+        $('.searchRoleInp').keyup(function(){
+            //console.log('this',$(this).val())
+            let filtervalue = $(this).val()
+            if(!filtervalue){
+                UpdateRoleListView(menuRoleData,gRoleId)
+                return
+            }
+            //console.log('menuRoleData',menuRoleData)
+            let newData = menuRoleData.filter(x => {
+                let menuName = x.MenuName.toLowerCase()
+                if(menuName.includes(filtervalue.toLowerCase())){
+                    return true
+                }
+            })
+            UpdateRoleListView(newData,gRoleId)
+        })
+        $('.roleUserFilter').keyup(function(){
+            let filtervalue = $(this).val()
+            //console.log('filtervalue',filtervalue)
+            if(!filtervalue){
+                updateRoleUsers(gRoleUsersData,gRoleUsersRoleId)
+                gRoleUserFilterData = []
+                return
+            }
+            //console.log('gRoleUsersData',gRoleUsersData)
+            let newData = gRoleUsersData.filter(x => {
+                let DisplayName = x.DisplayName.toLowerCase()
+                if(DisplayName.includes(filtervalue.toLowerCase())){
+                    return true
+                }
+            })
+            console.log(newData)
+            gRoleUserFilterData = newData
+            updateRoleUsers(newData,gRoleId)
+        })
+
+
+        // multiple menu values
+        var filterData = JSON.stringify({
+            "IsActive": true
+        });
+        var filterDataDash = JSON.stringify({
+            "IsActive": true,
+            "Status": '',
+            "Message": '',
+        });
+
+        var getEmployeeList = callgetlist('GetEmployeeList', filterData);
+        var getEmployeeData = [];
+        if (getEmployeeList.length > 0) {
+            getEmployeeList.forEach(function (i, index) {
+                getEmployeeData.push({
+                    'id': i['EmployeeId'],
+                    'text': i['Name']
+                });
+            });
+        }
+        var getDashList = _menuData;
+        var getDashData = [];
+        if (getDashList.length > 0) {
+            getDashList.forEach(function (i, index) {
+                ////console.log(index);
+                getDashData.push({
+                    'id': i['Id'],
+                    'text': i['Menus']
+                });
+            });
+            //console.log(getDashData);
+        }
+        var quickActionVal = 0;
+        $('#quickAction').change(function () {
+
+            if ($(this).is(':checked')) {
+                quickActionVal = 1;
+
+            } else {
+                quickActionVal = 0;
+            }
+            //console.log(quickActionVal);
+        });
+        var menuResult = [];
+        $('.saveMenuModal').unbind('click').click(function () {
+            //console.log('addToMenuclick')
+            // debugger;
+            var getMenuName = $('#menuName').val().trim();
+            var getMenuFolder = $('#menuFolder').val();
+            var getPriority = $('#selectPriority').val();
+            var getAIKey = $('#selectAIKey').val();
+            var getMenuIcon = $('#menuIconImg').val();
+
+            let iconSize = null
+            if(document.getElementById("menuIconImg").files.length > 0){
+                iconSize = document.getElementById("menuIconImg").files[0].size
+            }
+
+            if (getMenuName == "") {
+                //console.log('getMenuName-error')
+                $('#menuName').focus();
+                $('#menuName').css('border-color', 'red');
+                $('#menuErr').html('Field Required').css('color', 'red');
+                return false;
+            } else if (getMenuFolder == '' || getMenuFolder == 0) {
+                //console.log('getMenuFolder-error')
+                $("#menuName").removeAttr("style");
+                $('#menuErr').html('');
+                $('#menuFolder').focus();
+                $('#menuFolder').css('border-color', 'red');
+                $('#folderErr').html('Field Required').css('color', 'red');
+                return false;
+            } else if (getPriority == '' || getPriority == 0) {
+                //console.log('getMenuFolder-error')
+                $("#menuFolder").removeAttr("style");
+                $('#folderErr').html('');
+                $('#selectPriority').focus();
+                $('#selectPriority').css('border-color', 'red');
+                $('#priorityErr').html('Field Required').css('color', 'red');
+                return false;
+            }else if (getAIKey == '' || getAIKey == 0) {
+                //console.log('getMenuFolder-error')
+                $("#selectPriority").removeAttr("style");
+                $('#priorityErr').html('');
+                $('#selectAIKey').focus();
+                $('#selectAIKey').css('border-color', 'red');
+                $('#AIKeyErr').html('Field Required').css('color', 'red');
+                return false;
+            } else if (getMenuIcon == '') {
+                //console.log('getMenuIcon-error')
+                $("#selectAIKey").removeAttr("style");
+                $('#AIKeyErr').html('');
+                $('#menuIconImg').focus();
+                $('#menuIconImg').css('border-color', 'red');
+                $('#iconErr').html('Field Required').css('color', 'red');
+                return false;
+            }else if(iconSize > 5000){
+              $('#iconErr').html('Maximum File Size should be 5 KB').css('color', 'red')
+              return
+          }else {
+                var r = Math.random().toString(36).substring(7);
+                menuResult = {
+                    Name: getMenuName,
+                    Folder: getMenuFolder,
+                    Description: getMenuName,
+                    PriorityType: getPriority,
+                    IsQuickAction: quickActionVal,
+                    Icon:srcData,
+                    IsActive: "1",
+                    Status: 1,
+                    Message: ''
+                }
+                var sendResult = {
+                    Method: "PostDashBoardMenus",
+                    Data: menuResult
+                }
+                var response = PostDataCall(sendResult);
+                if (response['IsSuccess'] == false) {
+                    /*$('#menuResponse').removeClass('alert-success');
+                    $('#menuResponse').addClass('alert-danger');
+                    $('#menuResponse').show().html('<strong>Warning! </strong>' + response['Message']);*/
+                    var swlMenuErr = {
+                    title: "Warning!",
+                    text: response['Message'],
+                    icon: "error",
+                }
+                swalAlert(swlMenuErr);
+                } else {
+                    $('#userMenuMultiple').val(null).trigger("change");
+                    $('#userMultiple').val(null).trigger("change");
+                    $('.permission').prop('checked', false);
+                    /*$('#menuResponse').removeClass('alert-danger');
+                    $('#menuResponse').addClass('alert-success');
+                    $('#menuResponse').show().html('<strong>Success! </strong>' + response['Message'])
+                        .delay(2000).fadeOut('slow').css('margin-top', '20px');*/
+                    var swalMenuSucc = {
+                        title: 'Success',
+                        text: response['Message'],
+                        icon: "success"
+                    }
+                    swalAlert(swalMenuSucc);
+                    $('#menuAddmodel').modal('toggle');
+                }
+                // $('#menuAddmodel').modal('hide');
+                $('#menuName').val('');
+                $("#menuName").removeAttr("style");
+                $('#menuFolder').val(0);
+                $("#menuFolder").removeAttr("style");
+                $('#menuErr').html('');
+                $('#folderErr').html('');
+                $('#selectPriority').val(0);
+                $("#selectPriority").removeAttr("style");
+                $('#priorityErr').html('');
+                $('#selectAIKey').val('');
+                $("#selectAIKey").removeAttr("style");
+                $('#AIKeyErr').html('');
+                $('#iconErr').html('');
+                $("#menuIconImg").removeAttr("style");
+                $('#menuIconImg').val('');
+                $('#quickAction').attr('checked', false);
+
+                getmenulist();
+                // //console.log(getDashData);
+            }
+        });
+        // multiple menu values end
+
+
+        $('#editToMenu').unbind('click').click(function () {
+            // console.log('addToMenuclick')
+            // debugger;
+            var getMenuName = $('#editMenuName').val().trim();
+            var getMenuFolder = $('#editMenuFolder').val();
+            var getPriority = $('#editPriority').val();
+            var getAIKey = $('#editAIKey').val();
+            var getMenuIcon = $('#editMenuIconImg').val();
+
+            var getMenuId = $('#editMenuId').val();           
+
+
+            let iconSize = null
+            if(document.getElementById("editMenuIconImg").files.length > 0){
+                iconSize = document.getElementById("editMenuIconImg").files[0].size
+            }
+
+            if (getMenuName == "") {
+                //console.log('getMenuName-error')
+                $('#editMenuName').focus();
+                $('#editMenuName').css('border-color', 'red');
+                $('#editMenuErr').html('Field Required').css('color', 'red');
+                return false;
+            } else if (getMenuFolder == '' || getMenuFolder == 0) {
+                //console.log('getMenuFolder-error')
+                $("#editMenuName").removeAttr("style");
+                $('#editMenuErr').html('');
+                $('#editMenuFolder').focus();
+                $('#editMenuFolder').css('border-color', 'red');
+                $('#editFolderErr').html('Field Required').css('color', 'red');
+                return false;
+            } else if (getPriority == '' || getPriority == 0) {
+                //console.log('getMenuFolder-error')
+                $("#editMenuFolder").removeAttr("style");
+                $('#editFolderErr').html('');
+                $('#editPriority').focus();
+                $('#editPriority').css('border-color', 'red');
+                $('#editPriorityErr').html('Field Required').css('color', 'red');
+                return false;
+            }else if (getAIKey == '' || getAIKey == 0) {
+                //console.log('getMenuFolder-error')
+                $("#editPriority").removeAttr("style");
+                $('#editPriorityErr').html('');
+                $('#editAIKey').focus();
+                $('#editAIKey').css('border-color', 'red');
+                $('#editAIKeyErr').html('Field Required').css('color', 'red');
+                return false;
+            } 
+            // else if (getMenuIcon == '') {
+            //     //console.log('getMenuIcon-error')
+            //     $("#editAIKey").removeAttr("style");
+            //     $('#editAIKeyErr').html('');
+            //     $('#editMenuIconImg').focus();
+            //     $('#editMenuIconImg').css('border-color', 'red');
+            //     $('#editIconErr').html('Field Required').css('color', 'red');
+            //     return false;
+            // }
+            else if(iconSize > 5000){
+              $('#editIconErr').html('Maximum File Size should be 5 KB').css('color', 'red')
+              return
+          }
+          else {
+                var r = Math.random().toString(36).substring(7);
+
+                
+                var editMenuIconImg  = $('#editMenuIconImg').val();
+                var editMenuIconSrc  = $('#editMenuIconSrc').val();
+
+                if(editMenuIconSrc == "") {
+                    // $('#editMenuIconImg').css("display", "block");
+                    // $('#dispImg').css("display", "none");
+                    if(editMenuIconImg == "") {
+                        srcData = false;
+                    }
+                } else {
+                    // $('#editMenuIconImg').css("display", "none");
+                    // $('#dispImg').css("display", "block");
+                    if (editMenuIconImg == "") {
+                        srcData = editMenuIconSrc;
+                    }
+                }
+
+                menuResult = {
+                    MenuId: getMenuId,
+                    Name: getMenuName,
+                    Folder: getMenuFolder,
+                    Description: getMenuName,
+                    PriorityType: getPriority,
+                    IsQuickAction: quickActionVal,
+                    Icon: srcData ? srcData : null ,
+                    IsActive: "1",
+                    Status: 1,
+                    Message: ''
+                }
+                // console.log("Post Result", menuResult);
+                var sendResult = {
+                    Method: "PostDashBoardMenus",
+                    Data: menuResult
+                }
+                var response = PostDataCall(sendResult);
+                if (response['IsSuccess'] == false) {
+                    /*$('#menuResponse').removeClass('alert-success');
+                    $('#menuResponse').addClass('alert-danger');
+                    $('#menuResponse').show().html('<strong>Warning! </strong>' + response['Message']);*/
+                    var swlMenuErr = {
+                    title: "Warning!",
+                    text: response['Message'],
+                    icon: "error",
+                }
+                swalAlert(swlMenuErr);
+                } else {
+                    $('#userMenuMultiple').val(null).trigger("change");
+                    $('#userMultiple').val(null).trigger("change");
+                    $('.permission').prop('checked', false);
+                
+                    /*$('#menuResponse').removeClass('alert-danger');
+                    $('#menuResponse').addClass('alert-success');
+                    $('#menuResponse').show().html('<strong>Success! </strong>' + response['Message'])
+                        .delay(2000).fadeOut('slow').css('margin-top', '20px');*/
+                    var swalMenuSucc = {
+                        title: 'Success',
+                        text: response['Message'],
+                        icon: "success"
+                    }
+                    swalAlert(swalMenuSucc);
+                    $('#menuEditModel').modal('toggle');
+                }
+                // $('#menuAddmodel').modal('hide');
+
+                // $('#menuName').val('');
+                // $("#menuName").removeAttr("style");
+                // $('#menuFolder').val(0);
+                // $("#menuFolder").removeAttr("style");
+                // $('#menuErr').html('');
+                // $('#folderErr').html('');
+                // $('#selectPriority').val(0);
+                // $("#selectPriority").removeAttr("style");
+                // $('#priorityErr').html('');
+                // $('#selectAIKey').val('');
+                // $("#selectAIKey").removeAttr("style");
+                // $('#AIKeyErr').html('');
+                // $('#iconErr').html('');
+                // $("#menuIconImg").removeAttr("style");
+                // $('#menuIconImg').val('');
+                // $('#quickAction').attr('checked', false);
+
+                // getmenulist();
+                // // //console.log(getDashData);
+            }
+        });
+        // multiple menu values end 
+
+        // Switching between user and group
+        $("#watch-me").click(function () {
+            $("#show-me:hidden").show('fast');
+            $("#show-me-two").hide();
+        });
+        $("#watch-me").click(function () {
+            if ($('watch-me').prop('checked') === false) {
+                $('#show-me').hide();
+            }
+        });
+        $("#see-me").click(function () {
+            $("#show-me-two:hidden").show('fast');
+            $("#show-me").hide();
+
+        });
+        $("#see-me").click(function () {
+            if ($('see-me-two').prop('checked') === false) {
+                $('#show-me-two').hide();
+            }
+        })
+
+        $('.addRolesMap').click(function () {
+            let rolesValue = $('#rolemapselect').val()
+            let removedArray = []
+            rolesValue.forEach(element => {
+                // let filtArr = roleSelectData.filter(elem => elem.id == element)
+                let roleIndex = roleSelectData.findIndex(elem => elem.id == element)
+                //console.log('roleIndex', roleIndex)
+                let splicedArr = roleSelectData.splice(roleIndex, 1)
+                removedArray.push(splicedArr[0])
+            });
+
+            refreshRolesSelect()
+            $('.roleSelectData').val(null).trigger('change');
+            //console.log('roleDataMap', roleDataMap)
+            roleDataMap = [
+                ...roleDataMap,
+                ...removedArray,
+            ]
+            //console.log('roleDataMap', roleDataMap)
+            updateRolesTable()
+
+        })
+
+        $('.selectMenu').click(function () {
+            $(this).parent().siblings().find('input').prop('checked', $(this).prop('checked'))
+        })
+
+        // Select Plugin for multi select
+        $(".select_user_menu").select2({
+            placeholder: "Select a Menu",
+            allowClear: true,
+            data: getDashData,
+        });
+        $(".select_user_user").select2({
+            placeholder: "Select a User",
+            allowClear: true,
+            data: getEmployeeData
+        });
+
+        $(".select_group_menu").select2({
+            placeholder: "Select a Roled",
+            allowClear: true,
+            data: roleMenuData,
+        });
+        updateRoleMenuMapTable()
+        $(".select_menu_for_group").select2({
+            placeholder: "Select a Menu",
+            allowClear: true,
+            data: menuData
+        });
+        $(".select_group_des").select2({
+            placeholder: "Select a role",
+            allowClear: true,
+            data: roleData
+            //groupMapData,
+        });
+        $(".select_des_des").select2({
+            placeholder: "Select a Designation",
+            allowClear: true,
+            data: designationData,
+        });
+        $(".select_des_dess").select2({
+            placeholder: "Select a Designation",
+            allowClear: true,
+            data: designationData,
+        });
+        // Select Plugin for multi select
+    })
+
+    function format(item) {
+        return item.tag;
+    } // Return Tag for text
+
+    // add permissions to users
+    var testval = [];
+    var getCanRead = 'false';
+    var getCanCreate = 'false';
+    var getCanEdit = 'false';
+    var getCanDelete = 'false';
+
+    var getGroupCanRead = 'false';
+    var getGroupCanCreate = 'false';
+    var getGroupCanEdit = 'false';
+    var getGroupCanDelete = 'false';
+
+    //for users role
+    $('#squaredchku').change(function () {
+
+        if ($(this).is(':checked')) {
+            getCanRead = 'true';
+
+        } else {
+            getCanRead = 'false';
+        }
+    });
+    $('#squaredchku0').change(function () {
+
+        if ($(this).is(':checked')) {
+            getCanCreate = 'true';
+
+        } else {
+            getCanCreate = 'false';
+        }
+    });
+
+    $('#squaredchku1').change(function () {
+
+        if ($(this).is(':checked')) {
+            getCanEdit = 'true';
+
+        } else {
+            getCanEdit = 'false';
+        }
+    });
+
+    $('#squaredchku2').change(function () {
+
+        if ($(this).is(':checked')) {
+            getCanDelete = 'true';
+
+        } else {
+            getCanDelete = 'false';
+        }
+    });
+
+    //for group role
+
+    $('#squaredchkg').change(function () {
+
+        if ($(this).is(':checked')) {
+            getGroupCanRead = 'true';
+
+        } else {
+            getGroupCanRead = 'false';
+        }
+    });
+    $('#squaredchkg0').change(function () {
+
+        if ($(this).is(':checked')) {
+            getGroupCanCreate = 'true';
+
+        } else {
+            getGroupCanCreate = 'false';
+        }
+    });
+
+    $('#squaredchkg1').change(function () {
+
+        if ($(this).is(':checked')) {
+            getGroupCanEdit = 'true';
+
+        } else {
+            getGroupCanEdit = 'false';
+        }
+    });
+
+    $('#squaredchkg2').change(function () {
+
+        if ($(this).is(':checked')) {
+            getGroupCanDelete = 'true';
+
+        } else {
+            getGroupCanDelete = 'false';
+        }
+    });
+
+
+
+    var finalResult = [];
+  //  $(document).on('click','#saveRole',function () {
+        $('#saveRole').click(function (){
+        var getUserMenuMultipleArry = $('#userMenuMultiple').val();
+        var getEmployeeMultipleArry = $('#userMultiple').val();
+        var joinMenuArry = "";
+        var joinEmployeeArry = "";
+        $.each(getUserMenuMultipleArry, function (index, val) {
+            joinMenuArry += val + ",";
+        });
+        $.each(getEmployeeMultipleArry, function (index, val) {
+            joinEmployeeArry += val + ",";
+        });
+        joinMenuArry = joinMenuArry.replace(/,\s*$/, "");
+        joinEmployeeArry = joinEmployeeArry.replace(/,\s*$/, "");
+
+        if ($('#userMenuMultiple').val() == '' || $('#userMenuMultiple').val() == null) {
+            $('#userMenuMultiple').focus();
+            $('.select2-container--default.select2-container--focus .select2-selection--multiple').css(
+                'border-color', 'red');
+            return false;
+        } else if ($('#userMultiple').val() == '' || $('#userMultiple').val() == null) {
+
+            $('#userMultiple').focus();
+            $('.select2-container--default.select2-container--focus .select2-selection--multiple').css(
+                'border-color', 'red');
+
+            return false;
+        } else if (getCanRead == 'false' && getCanEdit == 'false' && getCanDelete == 'false' && getCanCreate ==
+            'false') {
+            $('#squaredchkuE').css('border-color', 'red');
+            return false;
+        } else if($('#squaredchku').is(':checked') != 1 && $('#squaredchku0').is(':checked') != 1 && $('#squaredchku1').is(':checked') != 1 && $('#squaredchku2').is(':checked') != 1) {
+            $('#squaredchkuE').css('border-color', 'red');
+            return false;
+        }else {
+            $('.select2-selection.select2-selection--multiple').removeAttr("style");
+            $("#squaredchkuE").removeAttr("style");
+            //console.log(getCanRead);
+            finalResult = {
+                EmployeeId: joinEmployeeArry,
+                MenuId: joinMenuArry,
+                CanRead: getCanRead,
+                CanUpdate: getCanEdit,
+                CanDelete: getCanDelete,
+                CanCreate: getCanCreate,
+                RoleId: null,
+                SortOrder: 1,
+                IsActive: 1,
+                Status: "",
+                Message: "",
+            };
+            var sendResult = {
+                Method: "PostDashBoardRights",
+                Data: finalResult
+            }
+            var response = PostDataCall(sendResult);
+            if (response['IsSuccess'] == false) {
+    //$('#userRoleSuccess').show().html('<strong>Warning!</strong>' + response['Message']).delay(2000).fadeOut('slow');
+                var swlDataErr = {
+                    title: "Warning!",
+                    text: response['Message'],
+                    icon: "error",
+                }
+                swalAlert(swlDataErr);
+            } else {
+                $('#userMenuMultiple').val(null).trigger("change");
+                $('#userMultiple').val(null).trigger("change");
+                $('.permission').prop('checked', false);
+//$('#userRoleSuccess').show().html('<strong>Success!</strong>' + response['Message']).delay(2000).fadeOut('slow');
+                var swlData = {
+                    title: "Success!",
+                    text: response['Message'],
+                    icon: "success",
+                }
+                swalAlert(swlData);
+                    
+            }
+        }
+        //console.log(JSON.stringify(sendResult));
+    });
+    //end
+
+    var finalGroupResult = [];
+    $('#saveGroup').click(function () {
+        $('#roles_rights_err').html("");
+
+        if ($('#groupMenuMultiple').val() == '' || $('#groupMenuMultiple').val() == null || $(
+                '#groupMenuMultiple').val() == "Select") {
+            $('#groupMenuMultiple').focus();
+            $('.select2-container--default.select2-container--focus .select2-selection--multiple').css(
+                'border-color', 'red');
+            $('#roles_rights_err').html('Please Select Role.');
+            return false;
+        } else if ($('#groupGroupMultiple').val() == '' || $('#groupGroupMultiple').val() == null) {
+
+            $('#groupGroupMultiple').focus();
+            $('.select2-container--default.select2-container--focus .select2-selection--multiple').css(
+                'border-color', 'red');
+            $('#roles_rights_err').html('Please add role.');
+
+            return false;
+        } else {
+            $('.select2-selection.select2-selection--multiple').css('border-color', 'black');
+            let status = false;
+            $('.rmtable').find('input[type=checkbox]').each(function () {
+                // //console.log($(this).prop('checked'))
+                if ($(this).prop('checked')) {
+                    status = true;
+                }
+            })
+            if (!status) {
+                $('#roles_rights_err').html('please select rights')
+                return false;
+            }
+            // finalGroupResult = {
+            //     Users: $('#groupGroupMultiple').val().toString(),
+            //     Menus: $('#groupMenuMultiple').val().toString(),
+            //     CanRead: getGroupCanRead,
+            //     CanUpdate: getGroupCanEdit,
+            //     CanDelete: getGroupCanDelete,
+            //     CanCreate: getGroupCanCreate,
+            //     Status: ""
+            // };
+        }
+        finalGroupResult = {
+            EmployeeId: null,
+            MenuId: $('#groupGroupMultiple').val().toString(),
+            RoleId: $('#groupMenuMultiple').val().toString(),
+            CanRead: $('#menu_squaredchku').prop('checked'),
+            CanUpdate: $('#menu_squaredchku1').prop('checked'),
+            CanDelete: $('#menu_squaredchku2').prop('checked'),
+            CanCreate: $('#menu_squaredchku0').prop('checked'),
+            Status: "",
+            SortOrder: "",
+            IsActive: true,
+            Message: "",
+        }
+        var sendResult = {
+            Method: "PostDashBoardRights",
+            Data: finalGroupResult
+        }
+        var response = PostDataCall(sendResult);
+        //console.log('response', response)
+       // alert(response['Message'])
+        if (response['IsSuccess'] == false) {
+//$('#userRoleSuccess').show().html('<strong>Warning!</strong>' + response['Message']).delay(2000).fadeOut('slow');
+            var swalRoleErr = {
+                title:'Warning!',
+                text:response['Message'],
+                icon :'error'
+            }
+                swalAlert(swalRoleErr);
+        } else {
+            var swalRoleSucc = {
+                title:'Success!',
+                text:response['Message'],
+                icon :'success'
+            }
+                swalAlert(swalRoleSucc);
+            //$('#userMenuMultiple').val(null).trigger("change");
+            //$('#userMultiple').val(null).trigger("change");
+            //$('.permission').prop('checked', false);
+            // $('#userRoleSuccess').show().html('<strong>Success!</strong>' + response['Message']).delay(2000)
+            //     .fadeOut('slow');
+        }
+        let designationVal = $('#groupMenuMultiple').val()
+        let rolesVal = $('#groupGroupMultiple').val()
+
+
+        // let filtArr = designationData.filter(elem => elem.id == designationVal)
+        // let desIndex = roleMenuData.findIndex(elem => elem.id == designationVal)
+        // let splicedArr = roleMenuData.splice(desIndex, 1)
+        refreshGroupSelect()
+        $('.select_menu_for_group').val(null).trigger('change');
+        // designationListVal.push(splicedArr[0])
+        updateRoleMenuMapTable()
+        $('.rolecheckdiv').find('.permission').each(function () {
+            //console.log($(this).prop('checked', false))
+        })
+
+    });
+    var getMappedRoleAndDesginationList;
+
+    function getMappingListOFRoleAndDesignationList() {
+
+        var uniqueArray = [];
+        var filterRoleAndDesginationList = JSON.stringify({
+            "IsActive": true
+        });
+        getMappedRoleAndDesginationList = callgetlist('GetDashBoardDesignationRoleMappings',
+            filterRoleAndDesginationList);
+
+        uniqueArray = removeDuplicates(getMappedRoleAndDesginationList, "RoleName");
+        $.each(uniqueArray, function (index, value) {
+            designationMapListVal.push({
+                'roleName': value.RoleName,
+                'roleId': value.RoleId
+            });
+        });
+
+        //console.log(designationMapListVal);
+        updateGroupMapTable();
+        designationMapListVal = [];
+        //
+    }
+    getMappingListOFRoleAndDesignationList();
+    $('#saveDes').click(function () {
+        $('#group_map_name_err').html("");
+        $('#des_map_err').html('');
+
+        if ($('#desgroupMenuMultiple').val() == '' || $('#desgroupMenuMultiple').val() == null || $(
+                '#desgroupMenuMultiple').val() == "Select") {
+            $('#desgroupMenuMultiple').focus();
+            $('#group_map_name_err').html('Please Select Role.');
+            return false;
+        } else if ($('#desDesignationMenuMultiple').val() == '' || $('#desDesignationMenuMultiple').val() ==
+            null) {
+            $('#desDesignationMenuMultiple').focus();
+            $('#des_map_err').html('Please add Designation.');
+
+            return false;
+        } else {
+            // finalGroupResult = {
+            //     Users: $('#groupGroupMultiple').val().toString(),
+            //     Menus: $('#groupMenuMultiple').val().toString(),
+            //     CanRead: getGroupCanRead,
+            //     CanUpdate: getGroupCanEdit,
+            //     CanDelete: getGroupCanDelete,
+            //     CanCreate: getGroupCanCreate,
+            //     Status: ""
+            // };
+            //console.log('no error')
+        }
+        let groupMapVal = $('#desgroupMenuMultiple').val();
+        let desMapVal = $('#desDesignationMenuMultiple').val();
+
+        var joinDesignationArry = "";
+
+        $.each(desMapVal, function (index, val) {
+            joinDesignationArry += val + ",";
+        });
+        joinDesignationArry = joinDesignationArry.replace(/,\s*$/, "");
+        //add to database
+        var finalResult = {
+            RoleId: groupMapVal,
+            DesignationId: joinDesignationArry,
+            IsActive: "true",
+            Status: "",
+            Message: ""
+        };
+
+        var sendResult = {
+            Method: "PostDashBoardDesignationRoleMappings",
+            Data: finalResult
+        }
+        //console.log(sendResult);
+        var response = PostDataCall(sendResult);
+
+        if (response['IsSuccess'] == false) {
+            //alert(response['Message']);
+            var swalErr = {
+                title:'Warning!',
+                text:response['Message'],
+                icon:'error'
+            }
+            swalAlert(swalErr);
+            // $('#userRoleSuccess').show().html('<strong>Warning!</strong>' + response['Message']).delay(2000)
+            //                 .fadeOut('slow');
+
+        } else {
+           // alert(response['Message']);
+            var swalSucc = {
+                title:'Success!',
+                text:response['Message'],
+                icon:'success'
+            }
+            swalAlert(swalSucc);
+
+            
+            //remove values from roles dropdown    
+            /**let desIndex = roleData.findIndex(elem => elem.id == groupMapVal)
+            let splicedArr = roleData.splice(desIndex,1)**/
+            refreshGroupSelect();
+            refreshGroupMapSelect();
+            refreshRoleSelect();
+            $('.select_des_des').val(null).trigger('change');
+            //designationMapListVal.push(splicedArr[0].Roles);
+            getMappingListOFRoleAndDesignationList();
+        }
+        //end
+
+
+    });
+
+    $('#desDesignationMenuMultiples').on('select2:select', function (e) {
+        var data = e.params.data;
+        var getCheckDesignationValue = $('#checkRoleDesignationNewAdd').val();
+        if (getCheckDesignationValue == 1) {
+
+            $('.select2-selection__choice,.select2-selection__choice__remove').trigger('click');
+            $('#checkRoleDesignationNewAdd').val(0);
+        }
+        //console.log(data);
+    });
+
+    $('#saveDesPRole').click(function () {
+        $('#group_map_name_err').html("");
+        $('#des_map_err').html('');
+
+        if ($('#desgroupMenuMultiples').val() == '' || $('#desgroupMenuMultiples').val() == null || $(
+                '#desgroupMenuMultiples').val() == "Select") {
+            $('#desgroupMenuMultiples').focus();
+            $('#group_map_name_err').html('Please Select Role.');
+            return false;
+        } else if ($('#desDesignationMenuMultiples').val() == '' || $('#desDesignationMenuMultiples').val() ==
+            null) {
+            $('#desDesignationMenuMultiples').focus();
+            //$('#des_map_err').html('Please add Designation.');
+
+            return false;
+        } else {
+            // finalGroupResult = {
+            //     Users: $('#groupGroupMultiple').val().toString(),
+            //     Menus: $('#groupMenuMultiple').val().toString(),
+            //     CanRead: getGroupCanRead,
+            //     CanUpdate: getGroupCanEdit,
+            //     CanDelete: getGroupCanDelete,
+            //     CanCreate: getGroupCanCreate,
+            //     Status: ""
+            // };
+            //console.log('no error')
+        }
+        let groupMapVal = $('#desgroupMenuMultiples').val();
+        let desMapVal = $('#desDesignationMenuMultiples').val();
+
+        var joinDesignationArry = "";
+
+        //console.log(getRoleBasedDesgination);
+        //get designation Id
+        function showRole(value) {
+            return value.DesignationId;
+        }
+
+        var rmveExistVlue = getRoleBasedDesgination.map(showRole);
+        //console.log(rmveExistVlue);
+        //console.log(desMapVal);
+
+        let intersection = desMapVal.filter(x => rmveExistVlue.includes(x));
+        var getDuplicateDesgination = '';
+        var $select = $('#desDesignationMenuMultiples');
+        $.each(intersection, function (index, val) {
+            //$("#desDesignationMenuMultiples option[value='"+val+"']").remove();
+            getDuplicateDesgination += val + ',';
+            var values = $select.select2('val');
+            var i = values.indexOf(val);
+
+            if (i >= 0) {
+
+                $("#desDesignationMenuMultiples>option[value='" + val + "']").prop('disabled', true);
+                //$('#desDesignationMenuMultiples').val(null).trigger('change');
+            }
+
+
+        });
+
+
+        $.each(desMapVal, function (index, val) {
+            joinDesignationArry += val + ",";
+        });
+        joinDesignationArry = joinDesignationArry.replace(/,\s*$/, "");
+        //add to database
+        var finalResult = {
+            RoleId: groupMapVal,
+            DesignationId: joinDesignationArry,
+            IsActive: "true",
+            Status: "",
+            Message: ""
+        };
+
+        var sendResult = {
+            Method: "PostDashBoardDesignationRoleMappings",
+            Data: finalResult
+        }
+        //console.log(sendResult);
+        var response = PostDataCall(sendResult);
+
+        if (response['IsSuccess'] == false) {
+            //alert(response['Message']);
+            /*$('#des_map_err').show().html('<strong>Warning!</strong>' + response['Message']).delay(2000)
+                .fadeOut('slow');*/
+                var swlDasDesigRoleErr = {
+                    title: "Warning!",
+                    text: response['Message'],
+                    icon: "error",
+                }
+                swalAlert(swlDasDesigRoleErr);
+
+        } else {
+           // alert(response['Message']);
+           var swlDasDesigRoleSucc = {
+                    title: "Success!",
+                    text: response['Message'],
+                    icon: "success",
+                }
+                swalAlert(swlDasDesigRoleSucc);
+            //remove values from roles dropdown    
+            /**let desIndex = roleData.findIndex(elem => elem.id == groupMapVal)
+            let splicedArr = roleData.splice(desIndex,1)**/
+
+            $('.select_des_dess').val(null).trigger('change');
+            //designationMapListVal.push(splicedArr[0].Roles);
+            getMappingListOFRoleAndDesignationList();
+            getRoleBasedDesgination = getMappedRoleAndDesginationList.filter(elem => elem.RoleId == groupMapVal)
+            //console.log(getRoleBasedDesgination);
+            updateDesignationDropDownList(groupMapVal);
+            updateRolesDesignationTable(groupMapVal);
+            $('.select2-selection__choice,.select2-selection__choice__remove').trigger('click');
+            $('.select2-selection__choice,.select2-selection__choice__remove').trigger('click');
+            $('#checkRoleDesignationNewAdd').val(1);
+        }
+        //end
+
+
+    });
+
+    //user roles and rights
+
+    var getDesginationList = callgetlist('GetDesignations', JSON.stringify({}));
+    if (getDesginationList.length > 0) {
+        $('#designationList').html('<option value="0">Select Designation</option>');
+        getDesginationList.forEach(function (designationVal, i) {
+
+            $('#designationList').append('<option value="' + designationVal.Id + '_' + designationVal.Name +
+                '">' + designationVal.Name +
+                '</option>');
+        });
+    } else {
+        $('#designationList').append('<option value="0">No datas Found</option>');
+    }
+    var userArray = [];
+    var uniqueArray = [];
+    var userHtml = '';
+    var getUsersList = '';
+    $('#designationList').change(function () {
+        var getDesginationId = $('#designationList').val().split('_')[0];
+        var getDesignationName = $('#designationList').val().split('_')[1];
+        userHtml = '';
+        getUsersList = [];
+        uniqueArray = [];
+        userArray = [];
+        $('#rolesAndRightsDatas').html('');
+        $('#rolesResponse').hide();
+        $('#rolesErr').hide();
+        //console.log(getDesignationName);
+        if (getDesginationId != 0) {
+            var filterDataUserList = JSON.stringify({
+                "DesignationID": getDesginationId,
+                "IsActive": true
+            });
+
+            getUsersList = callgetlist('GetEmployeesRights', filterDataUserList);
+
+            if (getUsersList != '') {
+
+                getUsersList.filter(function (x) {
+
+                    if (x.Designations == getDesignationName) {
+                        userArray.push(x);
+                        uniqueArray = removeDuplicates(userArray, "Name");
+                    } else {
+                        //console.log('No records found');
+                        userHtml = '';
+                    }
+
+                });
+                userHtml += '<div class="list-group">';
+                uniqueArray.forEach(function (val, i) {
+                    var modifiedName = val.Name.split(/[ ,]+/).join('__');
+                    userHtml +=
+                        ' <div class="list-group-item list-group-item-action"><a class="userName" href="javascript:void(0)" data="' +
+                        val.Name + '" id="' + modifiedName + '">' + val.Name + '</a>';
+                    userHtml += '<div class="subMenu" id="' + modifiedName +
+                        '_menuNames" style="margin-left:60px;margin-top:20px"></div></div>';
+
+                });
+                userHtml += '</div>';
+                $('#rolesAndRightsDatas').html(userHtml);
+
+            } else {
+
+                $('#rolesResponse').show().html('<strong>Warning!</strong> No Records found');;
+            }
+        } else {
+            $('#rolesErr').show().html('<strong>Warning!</strong> Please select designation');
+        }
+    });
+
+    var menuArray = [];
+    var uniqueArrayMenu;
+    $(document).on('click', '.userName', function () {
+        //$(".subMenu").slideUp();
+        //$(this).next().slideToggle();
+
+        var getUserID = $(this).attr('id');
+        if ($('#' + getUserID).hasClass('open')) {
+            $('#' + $(this).attr('id')).addClass('clse').removeClass('open');
+            $('#' + getUserID + '_menuNames').slideUp();
+        } else {
+            $('#' + $(this).attr('id')).addClass('open').removeClass('clse');
+            $('#' + getUserID + '_menuNames').slideDown();
+        }
+
+        /** if($('#previousEmp').val() == ''){    
+    $('#choosedEmp').val($(this).attr('id'));
+    $('#previousEmp').val($(this).attr('id'));
+    }else {
+    $('#choosedEmp').val($(this).attr('id'));
+    var getPreviousEmp = $('#previousEmp').val();
+    var getChoosedEmp = $('#choosedEmp').val();
+  
+    $('#'+getPreviousEmp+'_menuNames').show();
+    //$('#'+getChoosedEmp+'_menuNames').slideToggle();
+    $('#previousEmp').val($(this).attr('id'));
+    } **/
+
+        menuArray = [];
+        uniqueArrayMenu = [];
+        uniqueArrayMenu.splice(0, uniqueArrayMenu.length);
+        menuHtml = '';
+        var getUserName = $(this).attr('data');
+        var getUserID = $(this).attr('id');
+
+        getUsersList.filter(function (x) {
+
+            if (x.Name == getUserName) {
+
+                menuArray.push(x);
+                uniqueArrayMenu = removeDuplicates(menuArray, "Menu");
+            } else {
+                //console.log('No Menus found');
+                menuHtml = '';
+            }
+
+        });
+
+        var checkedValue = '';
+        var searchMenuTags = '';
+        uniqueArrayMenu.forEach(function (val, i) {
+            //console.log(val);
+            var modifiedMenuName = val.Menu.split(/[ ,]+/).join('__');
+            searchMenuTags += '<a href="#squaredchkuV_' + val.Id +
+                '_title" class="btn btn-secondary" style="margin-right:5px;margin-bottom:5px">#' + val
+                .Menu + '</a>';
+            if (i % 4 == 0) {
+                searchMenuTags += '</br>';
+            }
+        });
+        menuHtml += '<div>' + searchMenuTags + '</div>';
+        uniqueArrayMenu.forEach(function (val, i) {
+            //console.log(val);
+            var modifiedName = val.Menu.split(/[ ,]+/).join('__');
+            //console.log(val.CanCreate + val.CanRead + val.CanUpdate + val.CanDelete);
+            if (val.CanCreate == true) {
+                checkedCValue = 'checked="checked"';
+            } else {
+                checkedCValue = '';
+            }
+            if (val.CanRead == true) {
+                checkedRValue = 'checked="checked"';
+            } else {
+                checkedRValue = '';
+            }
+            if (val.CanUpdate == true) {
+                checkedUValue = 'checked="checked"';
+            } else {
+                checkedUValue = '';
+            }
+            if (val.CanDelete == true) {
+                checkedDValue = 'checked="checked"';
+            } else {
+                checkedDValue = '';
+            }
+            menuHtml +=
+                '<div class="panel panel-default"><div class="panel-body"><a class="menuName" style="margin-right:20px;" href="javascript:void(0)" data="' +
+                val.Menu + '" id="squaredchkuV_' + val.Id + '_title">' + val.Menu + '</a>';
+            menuHtml +=
+                '<br><input type="checkbox"  value="CanCreate" class="rolesRight" id="squaredchkuV_' +
+                val.Id + '_CanCreate" name="checkss" ' + checkedCValue + '><label>Can Create</label>';
+            menuHtml +=
+                '<br><input type="checkbox" value="CanRead" class="rolesRight" id="squaredchkuV_' + val
+                .Id + '_CanRead" name="checkss" ' + checkedRValue + '><label>Can View</label>';
+            menuHtml +=
+                '<br><input type="checkbox" value="CanUpdate" class="rolesRight" id="squaredchkuV_' +
+                val.Id + '_CanUpdate" name="checkss" ' + checkedUValue + '><label>Can Update</label>';
+            menuHtml +=
+                '<br><input type="checkbox" value="CanDelete" class="rolesRight" id="squaredchkuV_' +
+                val.Id + '_CanDelete" name="checkss" ' + checkedDValue + '><label>Can Delete</label>';
+
+            menuHtml += '<div class="menuLs" id="' + val.Menu + '">';
+            menuHtml += '</div></div></div>';
+
+        });
+
+        $('#' + getUserID + '_menuNames').html(menuHtml);
+
+    });
+
+
+    $(document).on('change', '.rolesRight', function () {
+        var getRightsName;
+        var getRightsId;
+        var finalResult;
+
+        if ($(this).is(':checked')) {
+            getRightsName = $(this).val();
+
+            getRightsId = $(this).attr('id').split('_')[1];
+            //console.log($('#squaredchkuV_' + getRightsId + '_CanRead').val());
+
+            finalResult = {
+                EmployeeRightID: getRightsId,
+                Type: getRightsName,
+                Value: true,
+                Status: "",
+                Message: ""
+            };
+
+            var sendResult = {
+                Method: "UpdateEmployeesRights",
+                Data: finalResult
+            }
+            var response = PostDataCall(sendResult);
+            if (response['IsSuccess'] == false) {
+                alert(response['Message']);
+                // $('#userRoleSuccess').show().html('<strong>Warning!</strong>' + response['Message']).delay(2000)
+                //                 .fadeOut('slow');
+            } else {
+                alert(response['Message']);
+                // $('#userMenuMultiple').val(null).trigger("change");
+                // $('#userMultiple').val(null).trigger("change");
+                // $('.permission').prop('checked', false);
+
+            }
+
+
+        } else {
+            getRightsId = $(this).attr('id').split('_')[1];
+            getRightsName = $(this).val();
+
+            finalResult = {
+                EmployeeRightID: getRightsId,
+                Type: getRightsName,
+                Value: false,
+                Status: "",
+                Message: ""
+            };
+
+            var sendResult = {
+                Method: "UpdateEmployeesRights",
+                Data: finalResult
+            }
+            var response = PostDataCall(sendResult);
+            if (response['IsSuccess'] == false) {
+                alert(response['Message']);
+                // $('#userRoleSuccess').show().html('<strong>Warning!</strong>' + response['Message']).delay(2000)
+                //                 .fadeOut('slow');
+            } else {
+                alert(response['Message']);
+                // $('#userMenuMultiple').val(null).trigger("change");
+                // $('#userMultiple').val(null).trigger("change");
+                // $('.permission').prop('checked', false);
+
+            }
+
+        }
+    });
+
+    //end
+
+    //show directory lists
+
+    var getFileDirectoriesList = callgetDirectoryList();
+
+    //end
+
+    function open_menu_model() { 
+        $('#menuAddmodel').appendTo("body").modal('show');
+        //show folder list 
+        if (getFileDirectoriesList.length > 0) {
+            $('#menuFolder').html('<option value="0">Select Folder</option>');
+            getFileDirectoriesList.forEach(function (directoriesVal, i) {
+                $('#menuFolder').append('<option value="' + directoriesVal +'">' + directoriesVal + '</option>');
+            });
+           
+        } else {
+            $('#menuFolder').append('<option value="0">No datas Found</option>');
+        }
+        //end
+    }
+
+    function open_roles_model() { 
+        $('#rolesAddmodel').appendTo("body").modal('show');
+        
+       
+    }
+
+    function removeDuplicates(originalArray, prop) {
+        var newArray = [];
+        var lookupObject = {};
+
+        for (var i in originalArray) {
+            lookupObject[originalArray[i][prop]] = originalArray[i];
+        }
+
+        for (i in lookupObject) {
+            newArray.push(lookupObject[i]);
+        }
+        return newArray;
+    }
+
+    /*$('#saveRole').click(function () {
+        var groupRole = $('#groupRoleMultiple').val();
+        if (groupRole == '' || groupRole == null || groupRole == "Select") {
+            $('#groupMenuMultiple').focus();
+            $('.select2-container--default.select2-container--focus .select2-selection--multiple').css(
+                'border-color', 'red');
+            $('#roles_err').html('Please Select User.');
+            return false;
+        }
+        alert(groupRole);
+
+    });*/
+
+    function removeRole() {
+
+        $("#divGroup").hide();
+    }
+
+    function showGroup() {
+
+        $("#divGroup").show();
+    }
+
+    function getmenulist(){
+        var filterMenuData = JSON.stringify({
+            "IsActive": 1,
+            "Status": true,
+            "Message": '',
+        });
+
+        var getMenuData = [];
+        if (getDashList.length > 0) {
+            getDashList.forEach(function (i, index) {
+                ////console.log(index);
+                getMenuData.push({
+                    'id': i['Id'],
+                    'text': i['Menus']
+                });
+            });
+          
+            getMenuDropList(getMenuData);
+            //console.log('getmenudata',getMenuData);
+            
+        }    
+    }
+
+    function swalAlert(data){
+
+        swal({
+        title: data.title,
+        text: data.text,
+        icon: data.icon,
+        button:"Close"
+        });   
+    }
+</script>
+
+<style>
+    .select2-container .select2-selection--single { height: 32px;}
+    .select2-container--default .select2-selection--single .select2-selection__rendered { line-height: 32px; }
+    input[type=checkbox] { margin-top: 4px; }
+    @media(min-width: 767px) {
+        .mt-23 { margin-top: 23px; }
+    }
+</style>

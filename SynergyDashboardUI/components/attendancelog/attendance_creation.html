@@ -1,0 +1,82 @@
+
+    <!-- Attendance detail modal -->
+    <div class="modal fade" id="AttDetail-modal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h4 class="modal-title">Attendance Detail</h4>
+            </div>
+            <div class="modal-body"  data-simplebar>
+                <div class="row attendance-info-container">
+                    <div class="col-md-4 attendance-info-col">
+                        <div class="card punch-status">
+                            <div class="card-body">
+                                <h3 class="card-title">Timesheet <small class="text-muted">19 Aug 2019</small></h3>
+                                <div class="punch-det">
+                                    <h6>Punch In at</h6>
+                                    <p>Wed, 19 Aug 2019 10.00 AM</p>
+                                </div>
+                                <div class="punch-info">
+                                    <div class="punch-hours">
+                                        <div class="p-hrs">3:40 <span>hrs</span></div>
+                                    </div>
+                                </div>
+                                <div class="punch-btn-section">
+                                    <button type="button" class="btn btn-primary punch-btn">Punch Out</button>
+                                </div>
+                                <div class="statistics">
+                                    <div class="row">
+                                        <div class="col-md-6 col-6 text-center">
+                                            <div class="stats-box">
+                                                <p>Break</p>
+                                                <h6>1 hrs</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-6 text-center">
+                                            <div class="stats-box">
+                                                <p>Overtime</p>
+                                                <h6>2 hrs</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 attendance-info-col">
+                        <div class="card statistics">
+                            <div class="card-body">
+                                <h3 class="card-title">Statistics</h3>
+                                <div class="stats-list" id="statisticsdetails">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 attendance-info-col">
+                        <h3 class="text-left">Day Activity</h3>
+                        <table class="table-bordered table-striped  table-hover">
+                            <thead class="bg-primary">
+                                <tr>
+                                    <th>Punch In</th>
+                                    <th>Punch Out</th>
+                                    <th>In Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="attendancedetails">
+
+                            </tbody>
+                        </table>        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>          
+        </div>
+    </div>
+  

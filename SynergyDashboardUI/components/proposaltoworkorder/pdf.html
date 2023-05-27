@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="components/proposaltoworkorder/css/pdf/pdf-style.css" rel="stylesheet" media="screen">
+    <link href="components/proposaltoworkorder/css/pdf/print.css" rel="stylesheet" media="print">
+    <script type="text/javascript" src="components/proposaltoworkorder/js/workorder.js"></script>
+    <script type="text/javascript" src="js/callapi.js"></script>
+</head>
+<body>
+
+    <span id="assignedto" style="display: none"></span>
+    <span id="doc_type" style="display: none"></span>
+    <div class="download-btn">
+        <button class="download_content" onclick="IsDownload()"><i class="fa fa-download"></i>Download PDF</button>
+    </div>
+    <div class="pdf_main_div">
+        
+        <div id="client_name">
+            <h3>CLIENT NAME : <u><span class="pdf_proposal_client_name"></span></u></h3>
+        </div>
+        <div id="pdf_title">
+            <h3><u>Work Order</u></h3>
+        </div>   
+        <div id="pdf_proposal_table">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Project Name</td>
+                    
+                        <td>Client Name</td>
+                   
+                        <td>Signed Date</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pdf_proposal_projectName"></span></td>
+                   
+                        <td><span class="pdf_proposal_client_name"></span></td>
+                   
+                        <td><span class="pdf_proposal_wo_signedDate"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>       
+        
+        <div id="pdf_date_content">
+            <h3><b>Signed Date : <u><span class="pdf_proposal_wo_signedDate"></span></u></b></h3>
+            <h3><b>Expected Start Date : <u><span class="pdf_proposal_wo_expectedDate"></span></u></b></h3>
+        </div>
+        
+
+        <h3><b>Notes and Commercial Terms : </b></h3>
+        <span class="pdf_proposal_notes"></span>
+    </div>
+
+    <script>
+        var employee_id = localStorage.getItem("EmployeeID");
+        $(".download_content").click(function(){
+            window.print();
+            window.close();
+        })
+        var WorkOrderId = localStorage.getItem('workOrderID');
+        var assignedto = $('#assignedto').html();
+        var proposalID = $('#proposalID').html();
+        var RFPICode = $('#RFPICode').html();
+        var ProjectType = $('#Project_Type').html();
+        var Development_Hours = null; //$('#owo_development_hours').html();
+        var Currency_Type = 2;
+        var Project_name = null;
+        var RFPLost_CompetitorPrice = null;
+        var PriceCould_Won = null;
+        var RFP_Cost = null;
+        var Retainer_Duration = null;
+        var Total = null;
+        if (ProjectType === '99E78791-6C84-40AB-A6D3-6DA3E5A03AAB') {
+            //Retainer
+            Project_name = 'Retainer';
+            cost = "";
+            var filter_val = JSON.stringify({
+                "Token": localStorage.getItem('securityToken'),
+                "WorkOrderId": WorkOrderId
+            });
+            var GetWorkOrderRetainer = callgetlist('GetRetainerScope', filter_val);
+            GetWorkOrderRetainer.forEach(function (key, item) {
+                Development_Hours += key.DurationHours * key.Duration;
+                cost += key.Cost;
+            });
+            RFP_Cost = cost;
+            Retainer_Duration = Development_Hours;
+            console.log(Development_Hours);
+        }
+
+        if (ProjectType === '8317CC89-A2F9-421A-95B8-30B945F93545') {
+           //Fixed Bit
+           Project_name = 'Fixed Price';
+           cost = "";
+           var filter_val = JSON.stringify({
+                "Token": localStorage.getItem('securityToken'),
+                "WorkOrderID":WorkOrderId,
+                "ProposalId": proposalID,
+                "IsActive": 1
+            });
+            var result = callgetlist('GetEstimationAndPricingForWorkOrder', filter_val);
+            var Phases = 'Development & Unit Testing';
+            
+            result.forEach(function (key, item) {
+                if(key.ProjectPhases.indexOf(Phases) > -1){
+                    Development_Hours += key.ManHours;
+                }
+                cost += key.Total;
+                Total += key.ManHours;
+                Total = GetWorkOrderPackageById[0].Hours;
+            });
+            RFP_Cost = cost;
+
+        }
+
+        if (ProjectType === 'B2B93FB7-1C7B-4773-A0A4-9A2D3A09445F') {
+            //Package
+            Project_name = 'Package';
+            var duration = 1;
+            var filter_val = JSON.stringify({
+                "Token": localStorage.getItem('securityToken'),
+                "WorkOrderId": WorkOrderId,
+            });
+            var GetWorkOrderPackageById = callgetlist('GetWorkOrderPackage', filter_val);
+
+            GetWorkOrderPackageById.forEach(function (key, item) {
+                Development_Hours += key.Hours;
+            });
+            RFP_Cost = GetWorkOrderPackageById[0].Cost;
+
+        }
+
+        if (ProjectType === '4BE9AC26-A99A-4265-8404-ECC93D5E14F6') {
+            //Time and Material
+            Project_name = 'T&M';
+            cost = "";
+            var timeMaterialval = JSON.stringify({
+                "Token": localStorage.getItem('securityToken'),
+                "WorkOrderId": WorkOrderId,
+                "IsActive": 1
+            });
+            var GetWorkOrderTimeandMaterial = callgetlist('GetTimeAndMaterialScope', timeMaterialval);
+            GetWorkOrderTimeandMaterial.forEach(function (key, item) {
+                Development_Hours += key.Duration * key.MaxHours;
+                cost += key.CostPerHour;
+            });
+            RFP_Cost = cost;
+        }
+
+        if (ProjectType === '52997530-4E69-416B-847E-76BE921947EC') {
+           // R and D
+           Project_name = 'R&D';
+           var duration = 1;
+           var filter_val = JSON.stringify({
+                "Token": localStorage.getItem('securityToken'),
+                "WorkOrderId": WorkOrderId
+            });
+            var GetWorkOrderRandD = callgetlist('GetWorkOrderRandD', filter_val);
+            GetWorkOrderRandD.forEach(function (key, item) {
+                duration = Math.ceil(key.Duration/8);
+                // Development_Hours += duration * key.MaxHours;
+                Development_Hours += key.MaxHours;
+            });
+            RFP_Cost = GetWorkOrderRandD[0].Cost;
+            console.log(GetWorkOrderRandD);
+        }
+
+        function IsDownload(){
+            var WorkOrderId = localStorage.getItem('workOrderID');
+            var clientSigned = localStorage.getItem('clientSigned');
+            console.log("Download woID is ",WorkOrderId);
+            console.log("client signed is ",clientSigned);
+            if(!$('#is_client_signed').is(":checked")){
+                data = {
+                    "Method": "PostWorkOrderDownLoadedStatus",
+                    "Data": {  
+                        "WorkOrderId": WorkOrderId,
+                        "IsDownLoaded": 1,
+                        "Status": "",
+                        "Message": "",
+                    }
+                }
+                console.log("check download post",data);
+                var postCall = PostDataCall(data);
+                if (postCall['IsSuccess'] == true) {
+                    console.log("Downloaded Saved");    
+
+                    if(proposalID != null || proposalID != "" || RFPICode != "undefined"){
+                        var Assign_obj = {
+                            AssignedTo: assignedto,
+                            ProposalId: proposalID,
+                            Type: 'C',
+                            StageNumber: null,
+                        };
+                        data = {
+                            Method: "PostRFPAssign",
+                            Data: Assign_obj,
+                        };
+
+                        var postCall = PostDataCall(data);    
+
+                        if (postCall['IsSuccess'] == true) {
+                            console.log("For client submission - New RFP Updated");
+                            if(RFPICode != null || RFPICode != "" || RFPICode != "undefined"){
+                                var RFP_OldData = {
+                                    RFPICode : RFPICode,
+                                    RFPStatus : 4,
+                                    RFPSentDate : null,
+                                    RFPValue : null,
+                                    RFPUSDValue : null,
+                                    DiscountOffered : null,
+                                    FreeHoursOffered : null,
+                                    TotValueAfterFreeHours : null,
+                                    RFPEstimatedHours : Total,
+                                    DevelopmentHours : Development_Hours,
+                                    RFPProjectType : Project_name,
+                                    RFPWorkOrderNumber : WorkOrderId,
+                                    RFPCurrencyType : Currency_Type,
+                                    RetainerDuration : Retainer_Duration,
+                                    RetainerStartDate : null,
+                                    RetainerEndDate : null,
+                                    RFPLostReasonCode : null,
+                                    RFPLostReasonDescription : null,
+                                    RFPLostType : null,
+                                    PriceCouldWon : RFP_Cost,
+                                    RFPLostCompetitorPrice : RFPLost_CompetitorPrice,
+                                    RFPLostCurrencyType : Currency_Type,
+                                    User_Id : employee_id,
+                                };
+                                Old_RFP = {
+                                    Method: "PostUpdateRFPStatus",
+                                    Data: RFP_OldData,
+                                };
+
+                                var RFP_postCall = PostDataCall(Old_RFP);   
+
+                                if (postCall['IsSuccess'] == true) {
+                                    console.log("For client submission - Old RFP Updated");
+                                }else{
+                                    console.log("OLD RFP Error");
+                                }
+                            }
+                        }else{
+                            console.log("NEW RFP Error");
+                        } 
+                    }
+                        
+                }
+            } else {
+                console.log("Downloaded failed");
+            }
+
+        }
+
+
+        if(employee_id){
+            $(".download_content").css("display", "block");
+        }else{
+            $(".download_content").css("display", "none");
+        }
+    </script>
+</body>
+</html>

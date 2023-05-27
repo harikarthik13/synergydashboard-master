@@ -1,0 +1,161 @@
+.required_field {
+   border-color: #dd1313;
+      border-width:1px;
+      border-style:solid;
+}
+
+.hidden-btn {
+   display: none;
+}
+
+#manage_optiondemo{
+  height: 400px;
+}
+
+
+.manage_history_lists
+{
+border: solid 1px #D1D1D1;
+height: 370px;
+overflow-y: scroll;
+padding: 10px;
+background-color: #E3E3E3;
+margin-bottom: 10px;
+}
+
+.manage_history_lists .manage_comment
+{
+padding: 10px;
+border-radius: 4px;
+margin-top: 20px;
+word-break: break-all;
+background-color: #ffff;
+cursor:pointer;
+}
+
+.manage_history_lists label{
+font-weight: 100;
+}
+.manage_history_lists small{
+font-size: 8pt;
+font-weight: 600;
+display: block;
+}
+.manage_history_lists small span:last-child
+{
+margin-left: 5px;
+}
+
+
+#manage_rfp_table
+{
+width: 100% !important;
+}
+
+#manage_rfp_table td,#manage_rfp_table tr
+{
+border-bottom: none !important;
+border-right: none !important;
+padding: 8px;
+}
+
+.sorting_disabled
+{
+border-bottom: 10px !important;
+}
+
+#manage_rfp_table td:last-child
+{
+border-right:1px solid #D3D3D3 !important;
+}
+
+#manage_rfp_table
+{
+border-bottom: 1px solid #D3D3D3;
+}
+
+#tbl_assignRFPCard_length{
+display: none;
+}
+
+#manage_rfp_card .dataTables_filter {
+float: left !important;
+}
+
+#manage_rfp_card .searchBtn
+{
+color:rgb(49, 43, 43);
+border:1px solid #D3D3D3;
+border-radius: 5px;
+float: right;
+height: 25px;
+}
+
+#manage_reassign_display,#manage_ownership_display{
+   margin: 10px 0;
+  padding: 10px;
+  border-radius: 6px;
+  color: #270;
+   background-color: #DFF2BF;
+   font-weight: bold;
+   font-size: larger;
+   width: 100%;
+}
+
+#manage_rfp_dropzone .dropzone {
+   border: 2px dashed #0087F7;
+   border-radius: 5px;
+   background: white;
+   font-family: Roboto, "Open Sans", sans-serif;
+   font-size: 20px;
+   font-weight: 300;
+   line-height: 1.4rem;
+   background: #F3F4F5;
+   color: #646C7F;
+   text-rendering: optimizeLegibility;
+   margin-bottom: 10px;
+   height:375px;
+}
+
+#manage_rfp_dropzone .dropzone .dz-message {
+   text-align: center;
+   vertical-align: middle;
+   line-height: 230px;     
+   font-weight: 400;
+}
+
+#manage_rfp_dropzone .dropzone .dz-preview.dz-image-preview {
+  background-color: transparent;
+}
+
+#manage_rfp_dropzone .dropzone .dz-preview .dz-error-message {
+  color: white;
+}
+
+#manage_rfp_dropzone .dropzone .dz-message .note {
+  font-size: 0.8em;
+  font-weight: 200;
+  display: block;
+  margin-top: 1.4rem;
+}
+
+#manage_rfp_dropzone .dz-progress{
+   display: none;
+}
+
+#manageProposalModals .modal-body{
+   min-height:calc(100vh - 200px)
+}
+
+/* loader css */
+/* .loader {
+   position: fixed;
+   left: 0px;
+   top: 0px;
+   width: 100%;
+   height: 100%;
+   z-index: 9999;
+   background: url('http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif?e44397') 50% 50% no-repeat rgb(249,249,249);
+   background-size:10%;
+   }*/
+/* loader css */

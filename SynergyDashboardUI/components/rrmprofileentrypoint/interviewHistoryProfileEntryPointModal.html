@@ -1,0 +1,289 @@
+<link href="components/rrmprofileentrypoint/css/rrmprofileentrypoint.css" rel="stylesheet" />
+
+<div class="modal fade" id="interviewHistoryProfileEntryPointModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title"><span>Interview(s) History</span></h2>
+          </div>
+
+          <div class="modal-body" id="interviewHistoryProfileEntryPointModalBody" data-simplebar>
+              <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist" id="ProfileEntryPointTab">
+                  <li role="presentation" class="active" id="rrm_PreviousInterviewDetailsProfileEntryPointTab">
+                    <a aria-controls="rrm_PreviousInterviewDetailsProfileEntryPoint" role="tab">Interview(s) History</a>
+                  </li>
+                </ul>
+                <div class="tab-content col-md-12" id="ProfileEntryPointTabDetails">
+                  <div role="tabpanel" class="tab-pane active" id="rrm_PreviousInterviewDetailsProfileEntryPoint">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="panel-group" id="rrm_ProfileEntryPointInterviewHistoryAccordian">          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>          
+              </div>
+          </div>
+          <div class="modal-footer">           
+            <button type="button" class="close" data-dismiss="modal" >Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  $('ul#ProfileEntryPointTab li').click(function(e)
+  {            
+    var tab_details = $(this).attr("id");
+    var currentTab = $("#"+tab_details + " > a ").attr("aria-controls");            
+    $('ul#ProfileEntryPointTab li').removeClass("active");
+    $(this).addClass("active");
+    $("#ProfileEntryPointTabDetails .tab-pane").removeClass("active");
+    $("#" + currentTab).addClass("active");
+    new SimpleBar(document.getElementById('interviewHistoryProfileEntryPointModalBody'));
+  });
+
+  function openProfileEntryPointInterviewHistory(candidateId){
+    $("#interviewHistoryProfileEntryPointModal").appendTo("body").modal("show");
+    var filterData1 = JSON.stringify({
+        "CandidateId":candidateId,
+        "IsActive": true
+      });
+    callGetListSync("GetInterviewHistoryDetails", filterData1, function (data) {
+      mapProfileEntryPointPreviousInterviews(data)
+    }); 
+  }
+
+  function mapProfileEntryPointPreviousInterviews(data){
+    var result = data.reduce(function (r, a) {
+        r[a.RRMNo] = r[a.RRMNo] || [];
+        r[a.RRMNo].push(a);
+        return r;
+    }, Object.create(null));
+
+    var interviewCompletedState = false;
+    var html = ""
+    if(data != undefined && data.length > 0){
+
+       $.each(result,function(id,items){
+
+        if(items[0].SortOrder != null && items[0].SortOrder != ""){
+                if(items[0].SortOrder == "2" || items[0].SortOrder =="3" || items[0].SortOrder == "6"){
+                    html += "<div>"
+                    html += "<div ><strong>"+ id +"</strong></div> <br>"
+                }
+            }
+
+         items.forEach(function (key, item) {
+               
+                if(key.SortOrder == "2" || key.SortOrder == "3" || key.SortOrder == "6"){
+                if(key.SortOrder == "2"){
+                    html += "<div class='panel panel-success'>"
+                }
+                if(key.SortOrder == "3"){
+                    html += "<div class='panel panel-danger'>"
+                }
+                if(key.SortOrder == "6"){
+                    html += "<div class='panel panel-warning'>"
+                }
+                html += "<div class='panel-heading' data-toggle='collapse' data-parent='#rrm_ProfileEntryPointInterviewHistoryAccordian' href='#collapseProfileEntryPoint"+key.Id+"' onclick=rrmProfileEntryPointPanelClick('sdgd-RRMProfileEntryPointInterviewHistory-"+key.Id+"') style='cursor:pointer'>"
+                html += "<h3 class='panel-title'>"
+                html += "<a data-toggle='collapse' data-parent='#rrm_ProfileEntryPointInterviewHistoryAccordian' href='#collapseProfileEntryPoint"+key.Id+"'>"
+                if(key.SortOrder == "2"){
+                    html += key.RRMNo+"&nbsp;"+key.TypeName +"-"+key.RowNum+"</a> &nbsp;<label class='label label-success m-l-sm'>Passed</label><span style='float:right'>"+key.InterviewerName+"</span>"
+                }
+                if(key.SortOrder == "3"){
+                    html += key.RRMNo+"&nbsp;"+key.TypeName +"-"+key.RowNum+"</a> &nbsp;<label class='label label-danger m-l-sm'>Failed</label><span style='float:right'>"+key.InterviewerName+"</span>"
+                }
+                if(key.SortOrder == "6"){
+                    html += key.RRMNo+"&nbsp;"+key.TypeName +"-"+key.RowNum+"</a> &nbsp;<label class='label label-warning m-l-sm'>On-Hold</label><span style='float:right'>"+key.InterviewerName+"</span>"
+                }                
+                html += "</h3>"
+                html += "</div>"
+                html += "<div id='collapseProfileEntryPoint"+key.Id+"' class='panel-collapse collapse'>"
+                html += "<div class='panel-body' style='overflow-y:scroll;height:300px;'>"
+                html += "<div id='sdgd-RRMProfileEntryPointInterviewHistory-"+key.Id+"'></div>"
+                html += "<br><div><b>Remarks:</b></div>"
+                html += "<div class='row'><div class='col-md-12' id='rrm-remarks-profileEntyPoint'>"+key.Comments+"</div></div>"
+                html +="</div>"
+                html += "</div>"
+                html += "</div> <br>"                
+                interviewCompletedState = true;
+                
+            }
+        })
+        html += "</div>"
+        })      
+    }
+    if(interviewCompletedState == true){
+        $("#rrm_ProfileEntryPointInterviewHistoryAccordian").html(html);
+        
+        $.each(result,function(id,items){
+           
+          items.forEach(function (key, item) {
+            
+                var dataOnRRMId = [];
+                if(key.SortOrder == "2" || key.SortOrder == "3" || key.SortOrder == "6"){
+                    dataOnRRMId.push(key);
+                    binDataGridsForProfileEntryPointInterviewHistory(dataOnRRMId,"#sdgd-RRMProfileEntryPointInterviewHistory-"+key.Id)
+                }
+            })
+        });
+    }  
+    else{
+        $("#rrm_ProfileEntryPointInterviewHistoryAccordian").html("<h3>No Previous Interview available for this candidate</h3>");
+    }  
+  }
+  
+  function binDataGridsForProfileEntryPointInterviewHistory(data,id){
+    rrmProfileEntryPointInterviewHistoryGrid(data,id);
+  }
+  
+  function rrmProfileEntryPointInterviewHistoryGrid(interviewStages,id){   
+    $(id).dxDataGrid({
+        dataSource:interviewStages,
+        repaintChangesOnly: true,
+        highlightChanges: true,
+        searchPanel: {
+          visible: false
+        },
+        allowColumnReordering: true,
+        showBorders: true,
+        columnAutoWidth: true,
+        grouping: {
+          autoExpandAll: true,
+        },
+        pager: {
+          showPageSizeSelector: true,
+          allowedPageSizes: [5, 10, 20],
+          showInfo: true,
+        },
+        paging: {
+          pageSize: 10,
+        },
+        sorting: {
+          mode: "multiple",
+        },    
+        rowAlternationEnabled: true,
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        showBorders: true,  
+        columns: [
+          {
+            dataField: "ProfilePicture",
+            caption: "",
+            allowGrouping: false,
+            allowCollapsing: false,
+            allReordering:false,
+            allowFiltering: false,
+            width:70,
+            cellTemplate: function (container, options) {
+                
+              $("<div class='text-center'>")
+              .append("<img id='imgRRMProfileEntryPointInterviewHistory-"+options.data.Id+"' src='"+options.data.ProfilePicture+"' class='img-circle interviewer-image' width='25px' height='25px'></img><div id='imageTooltipRRMProfileEntryPointInterviewHistory"+options.data.Id+"'></div>")
+              .appendTo(container);
+              prepareImageTooltipForRRMProfileEntryPointInterviewHistory(options.data.Id,options.data.ProfilePicture,options.data.InterviewerName)
+            }
+          },
+          {
+            dataField: "RRMNo",
+            caption: "RRM No."
+          },
+          {
+            dataField: "RRMName",
+            caption: "RRM Name"
+          },
+          {
+            dataField: "InterviewerName",
+            caption: "Interviewer"
+          },
+          {
+            dataField: "Status",
+            caption: "Status",
+            width:180,
+            cellTemplate: function (container, options) {
+                $("<div>")
+              .append("<span>"+options.data.TypeName+"-"+options.data.RowNum+" "+options.data.StatusName+"</span>")
+              .appendTo(container);
+            }
+          },      
+          {
+            dataField: "ModeName",
+            caption: "Mode"
+          },
+          {
+            dataField: "InterviewDate",
+            caption: "Date"
+          },
+          {
+            dataField: "InterviewTime",
+            caption: "Time"
+          },
+          {
+            dataField: "InterviewDetails",
+            caption: "Interview Details"
+          },
+          {
+            dataField: "Comments",
+            caption: "Remarks",
+            visible:false
+          },
+          {
+              dataField:"OverallMark",
+              caption:"Score",
+              width:180,
+              cellTemplate:function(container, options){
+                  var meterhtml = "";
+                if(options.data.OverallMark <= 4){
+                    meterhtml += "<span class='scoremeter'><meter class='redmeter' min='0' max='10' value='"+options.data.OverallMark+"' tooltip='10' width='5px'></meter><b> "+options.data.OverallMark+"/10</b></span>"
+                } 
+                if(options.data.OverallMark < 8 && options.data.OverallMark >4){
+                    meterhtml += "<span class='scoremeter'><meter class='orangemeter' min='0' max='10' value='"+options.data.OverallMark+"' tooltip='10' width='5px'></meter><b> "+options.data.OverallMark+"/10</b></span>"
+                }
+                if(options.data.OverallMark > 8){
+                    meterhtml += "<span class='scoremeter'><meter class='greenmeter' min='0' max='10' value='"+options.data.OverallMark+"' tooltip='10' width='5px'></meter><b> "+options.data.OverallMark+"/10</b></span>"
+                }  
+                $(meterhtml).appendTo(container);  
+              }
+          }
+        ]
+      });
+  }
+  
+  function prepareImageTooltipForRRMProfileEntryPointInterviewHistory(Id,ProfilePicture,InterviewerName){
+    $("#imageTooltipRRMProfileEntryPointInterviewHistory"+Id).dxTooltip({
+      target: "#imgRRMProfileEntryPointInterviewHistory-"+Id,
+      showEvent: "mouseenter",
+      hideEvent: "mouseleave",
+      closeOnOutsideClick: false,
+      position: "right",
+      contentTemplate: function(data) {
+          data.html("<img width='150' height='150' src='"+ProfilePicture+"'><br/><b>"+InterviewerName+"</b>");
+      }
+  });
+  }
+  
+  function rrmProfileEntryPointPanelClick(id){
+    $("#"+id).dxDataGrid("instance").refresh();
+    setTimeout(function(){
+        new SimpleBar(document.getElementById('InterviewModalBody'));
+    }, 1000);    
+  }
+
+  $(document).on("click", ".rrmRemarksProfileEntryPoint", function (e) {
+   var comments =  $(this).attr("data-comments");
+   if(comments =="" && comments == null){
+       comments = "Comments Not Avalilable";
+   }
+   else{
+    $("#rrm-remarks-profileEntyPoint").html("");
+    $("#rrm-remarks-profileEntyPoint").html(comments);
+   }
+});
+</script>

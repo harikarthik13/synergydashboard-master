@@ -1,0 +1,29 @@
+#RRMProfileMapTableList_length {
+    display: none;
+}
+#RRMProfileMapTableList {
+    width: 100% !important;
+}
+#RRMProfileMapTableList_filter {
+    float: left !important;
+}
+#RRMProfileMapTableList_wrapper input[type=search]
+{
+    border-radius: 5px 0px 0px 5px;
+    border-right: none;
+    border: 1px solid #D3D3D3 !important;
+    padding: 6px;
+    margin-bottom: 15px;
+}
+#RRMProfileMapTableList_wrapper input[type=search]:focus
+{
+    outline: none;
+}
+
+#ProfileActionModal .modal-dialog{
+    overflow-y: initial !important;
+}
+
+#ProfileActionModal .modal-body{
+    overflow-y: auto;
+}

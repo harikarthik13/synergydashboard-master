@@ -1,0 +1,560 @@
+<link href="components/rrminterview/css/style.css" rel="stylesheet" />
+<script src='components/rrminterview/js/rrminterview.js'></script>
+<script src="https://unpkg.com/sweetalert2@7.8.2/dist/sweetalert2.all.js"></script>
+<div class="card-detail dashboard-notification">
+  <span><i><img src="components/rrminterviewschedule/images/interviewicon.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Interview</b></span>
+  <hr />
+
+  <div class="rrm-card-detail dashboard-home">
+    <div class="row">
+        <div class="cardDetailsInterviews col-sm-4">
+            <div class="item">
+                <div class="card item-card card-block text-center">
+                    <h5 class="mt-3 mb-3"><b>INTERVIEWS</b></h5>
+                    <h2 id="cardCandidateRRMInterviews">NA</h2> 
+                </div>
+            </div>
+        </div>
+        <div class="cardDetailsInterviews col-sm-4">
+          <div class="item">
+              <div class="card item-card card-block  text-center rrmEntryPointInterviewsRecommended">
+                  <h5 class="mt-3 mb-3"><b>RECOMMENDED</b></h5>
+                  <h2 id="cardCandidateRRMInterviewsRecommended">NA</h2> 
+              </div>
+          </div>
+      </div>
+      <div class="cardDetailsInterviews col-sm-4">
+        <div class="item">
+            <div class="card item-card card-block text-center rrmEntryPointInterviewsNotRecommended">
+                <h5 class="mt-3 mb-3"><b>NOT RECOMMENDED</b></h5>
+                <h2 id="cardCandidateRRMInterviewsNotRecommended">NA</h2> 
+            </div>
+        </div>
+    </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+          <div id="sdgd-rrmInterview" class="common-table"></div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="InterviewModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                      onclick="closeInterviewModal()">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title" id="interviewScheduleModaltitle"><span id="interviewSchedulemodelpagetitle">Interview Summary</span>&nbsp; <span><label id="RecruiterProfileMappingrrmType">&nbsp; </label></span></h2>
+          </div>
+
+          <div class="modal-body" id="InterviewModalBody" data-simplebar>
+              <span id="interviewStageId" class="hidden"></span>
+              <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist" id="interviewsTab">
+                  <li role="presentation" class="active" id="rrm_InterviewSummaryTab" data-tab="rrm_InterviewSummary">
+                    <a aria-controls="rrm_InterviewSummary" role="tab">Interview Summary</a>
+                  </li>
+                  <li role="presentation" id="rrm_DetailsForInterviewTab">
+                    <a aria-controls="rrm_DetailsForInterview" role="tab">RRM Details</a>
+                  </li>
+                  <li role="presentation" id="rrm_RelatedRRMInterviewTab">
+                    <a aria-controls="rrm_RelatedRRMInterview" role="tab">Related RRM</a>
+                  </li>
+                  <li role="presentation" id="candidateDetailsForInterviewTab">
+                    <a aria-controls="candidateDetailsForInterview" role="tab">Candidate Info</a>
+                  </li>
+                  <li role="presentation" id="rrm_PreviousInterviewDetailsTab">
+                    <a aria-controls="rrm_PreviousInterviewDetails" role="tab">Interview(s) History</a>
+                  </li>
+                  <li role="presentation" id="rrm_HRCommentsDetailsTab">
+                    <a aria-controls="rrm_HRCommentsDetails" role="tab">HR Comments</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="interviewSummaryDetails">
+                  <div role="tabpanel" class="tab-pane active" id="rrm_InterviewSummary">
+                    <div class="row">
+                        <!-- <div class="col-md-12">
+                          <h4>Details:</h4>
+                          <hr />
+                        </div>            -->
+                        <div class="col-md-2 text-center">
+                          <br/>
+                          <img src="components/rrminterviewschedule/images/profilepicture.png" id="img-interviewcandidateProfile" width="120px" height="120px" class="img-circle" /> 
+                        </div>
+                        <div class="col-md-5">
+                          <table class='table table-borderless' style='margin-bottom:0px'>
+                            <tbody>
+                              <tr>
+                                <td colspan="2"><span id="lbl-interviewcandidateName">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Mobile Number</b></td>
+                                <td><b>: </b><span id="lbl_interviewMobileNumber">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Email Id</b></td>
+                                <td><b>: </b><span id="lbl_interviewMailId">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Skype Id</b></td>
+                                <td><b>: </b><span id="lbl_interviewSkypeId">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Resume</b></td>
+                                <td><b>: </b><span id="lbl_interviewCandidateResume">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>URL(s)</b></td>
+                                <td><b>: </b><span id="lbl_interviewCandidateURL">Not Available</span></td>
+                              </tr>
+                            </tbody>
+                          </table> 
+                        </div>
+                        <div class="col-md-5">
+                          <div class="rrm-table">
+                          <table class='table table-borderless' style='margin-bottom:0px'>
+                            <tbody>
+                              <tr>
+                                <td><b>RRM No</b></td>
+                                <td><b>: </b><a id="lbl_interviewRRMNumber" style="cursor: pointer;" onclick="rrmNoOnclickInterview()">Not Available</a></td>
+                              </tr>
+                              <tr>
+                                <td><b>RRM Name</b></td>
+                                <td><b>: </b><span id="lbl_interviewRRMName">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Interview Type</b></td>
+                                <td><b>: </b><span id="lbl_interviewType">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Interview Mode</b></td>
+                                <td><b>: </b><span id="lbl_interviewMode">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Scheduled Date</b></td>
+                                <td><b>: </b><span id="lbl_interviewDate">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Scheduled Time</b></td>
+                                <td><b>: </b><span id="lbl_interviewTime">Not Available</span></td>
+                              </tr>
+                              <tr>
+                                <td><b>Meeting Details</b></td>
+                                <td><b>: </b><span id="lbl_interviewDetails">Not Available</span></td>
+                              </tr>
+                            </tbody>
+                          </table> 
+                          </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4>Comments & Summary:</h4>
+                        <hr />
+                      </div>
+                    </div>             
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label>Status &nbsp; <span style="color: red">*</span></label>
+                        <div id="sdcmb-statusForInterview"></div>
+                        <span class="error_message" id="statusForInterviewError"></span>
+                      </div> 
+                      <div class="col-md-4">
+                        <div id="sdchk-oneMoreRoundForInterview"></div>
+                        <div style="margin-top: 3px;" id="sdtxt-TechnologyForInterview"></div>
+                        <span class="error_message" id="technologyForInterviewError"></span>
+                      </div>    
+                      <div class="col-md-4">
+                        <label>Audio File</label>
+                        <div id="sdf-audioFileForInterview"></div>
+                      </div>           
+                    </div>
+                    <br/>
+                    <div class="row">                
+                      <div class="col-md-6">
+                        <label>Score <span id="txt_overallMark">(0.0) </span> &nbsp; <span style="color: red">*</span></label>
+                        <div id="sdsl-ratingForInterview"></div>
+                        <span class="error_message" id="overallMarkError"></span>
+                      </div>  
+                      <div class="col-md-6">
+                        <div class="col-md-3">
+                          <label>Hours (HH)</label>
+                          <div id="rrm_interview-worked-hours-counter"></div>
+                          <span class="error_message" id="rrm_interview-worked-hoursError"></span>
+                        </div>
+                        <div class="col-md-3">
+                         <label>(MM) &nbsp; <span style="color: red">*</span></label>  
+                          <div id="rrm_interview-worked-minutes-counter"></div>
+                          <span class="error_message" id="rrm_interview-worked-minutesError"></span>
+                        </div>
+                      </div>
+                      <div class="col-md-3">
+                        <label id="lbl-InterviewRescheduleDate">Re-Schedule Date</label>
+                        <div id="sddb-dateForInterview"></div>
+                      </div>
+                      <div class="col-md-3">
+                        <label id="lbl-InterviewRescheduleTime">Re-Schedule Time</label>
+                        <div id="sddb-timeForInterview"></div>
+                      </div>      
+                    </div>
+                    <br/>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label>Interview Comments &nbsp;<span style="color: red">*</span></label>
+                        <div id="sdtxt-CommentsForInterview"></div>
+                        <span class="error_message" id="interviewCommentsError"></span>
+                      </div>                
+                    </div>
+                    <br/>
+                    <div class="row">
+                      <!-- <div class="col-md-12">
+                        <label>Consolidated Scores</label>
+                        <div id="sdgd-ConsolidatedScores"></div>
+                        <span class="error_message" id="interviewCommentsError"></span>
+                      </div>                 -->
+                    </div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="rrm_DetailsForInterview">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <table class='table table-borderless' style='margin-bottom:0px'>
+                          <tbody>
+                            <tr>
+                              <td class="table-label"><b>RRM No</b></td>
+                              <td><b>: </b><span id="lbl_interviewRRMNumberTab">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Requirement Name</b></td>
+                              <td><b>: </b><span id="lbl_interviewRRMNameTab">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Required For</b></td>
+                              <td><b>: </b><span id="lbl_interviewRRMRequiredFor">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Department</b></td>
+                              <td><b>: </b><span id="lbl_interviewRRMDepartment">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Designation</b></td>
+                              <td><b>: </b><span id="lbl_interviewRRMDesignation">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Experience (Yrs)</b></td>
+                              <td><b>: </b><span id="lbl_interviewRRMExperience">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Owner</b></td>
+                              <td><b>: </b><span id="lbl_interviewRRMRecruiter">Not Available</span></td>
+                            </tr>
+                            <!-- <tr>
+                              <td class="table-label"><b>Plan (A) Information :</b></td>                              
+                            </tr>
+                            <tr>
+                              <td><span id="lbl_interviewRRMPlanA">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Plan (B) Information :</b></td>
+                            </tr>
+                            <tr>
+                              <td><span id="lbl_interviewRRMPlanB">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Skills :</b></td>
+                            </tr> -->
+                          </tbody>
+                        </table> 
+                        <!-- <div id="sdgd_rrmInterviewSkillsGrid"></div> -->
+                      </div>
+                      <div class="col-md-6">
+                        <table class='table table-borderless' style='margin-bottom:0px'>
+                          <tbody>                            
+                            <tr>
+                              <td class="table-label"><b>Plan (A) Information :</b></td>                              
+                            </tr>
+                            <tr>
+                              <td><span id="lbl_interviewRRMPlanA">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Plan (B) Information :</b></td>
+                            </tr>
+                            <tr>
+                              <td><span id="lbl_interviewRRMPlanB">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Skills :</b></td>
+                            </tr>
+                          </tbody>
+                        </table> 
+                        <div id="sdgd_rrmInterviewSkillsGrid"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="rrm_PreviousInterviewDetails">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="panel-group" id="rrm_PreviousInterviewDetailsAccordian">
+                                                 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane" id="rrm_HRCommentsDetails">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="panel-group" id="rrm_HRCommentsDetailsAccordian">
+                                                 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane" id="rrm_RelatedRRMInterview">
+                    <div class="row">
+                      <div class="col-md-5 offset-md-1">
+                        <label>Skills : </label>
+                        <select class="form-control" id="rrm_profileEntry_skills_interview" style="width: 100%;">
+                    
+                        </select>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                      <div class="col-md-12">
+                      <div id="sdgd_rrm_RelatedRRMGrid"></div>
+                    </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div role="tabpanel">
+                          <ul class="nav nav-tabs" role="tablist" id="interviewsRelatedTab">
+                            <li role="presentation" class="active" id="rrm_InterviewRRMDetailsRelatedTab">
+                              <a href="#rrm_InterviewRRMDetailsRelated" aria-controls="rrm_InterviewRRMDetailsRelated" role="tab" data-toggle="tab">RRM Details</a>
+                            </li>
+                            <li role="presentation" id="rrm_DetailsRecommedationInterviewTab">
+                              <a href="#rrm_DetailsRecommedationInterview" aria-controls="rrm_DetailsRecommedationInterview" role="tab" data-toggle="tab">Recommendation Remarks</a>
+                            </li>
+                          </ul>
+
+                          <div class="tab-content" id="interviewRelatedDetails">
+                            <div role="tabpanel" class="tab-pane active" id="rrm_InterviewRRMDetailsRelated">
+
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <table class='table table-borderless' style='margin-bottom:0px'>
+                                    <tbody>
+                                      <tr>
+                                        <td class="table-label"><b>RRM No</b></td>
+                                        <td><b>: </b><span id="lbl_interviewRRMNumberTabRelatedRRM">Not Available</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="table-label"><b>Requirement Name</b></td>
+                                        <td><b>: </b><span id="lbl_interviewRRMNameTabRelatedRRM">Not Available</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="table-label"><b>Required For</b></td>
+                                        <td><b>: </b><span id="lbl_interviewRRMRequiredForRelatedRRM">Not Available</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="table-label"><b>Department</b></td>
+                                        <td><b>: </b><span id="lbl_interviewRRMDepartmentRelatedRRM">Not Available</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="table-label"><b>Designation</b></td>
+                                        <td><b>: </b><span id="lbl_interviewRRMDesignationRelatedRRM">Not Available</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="table-label"><b>Experience (Yrs)</b></td>
+                                        <td><b>: </b><span id="lbl_interviewRRMExperienceRelatedRRM">Not Available</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="table-label"><b>Owner</b></td>
+                                        <td><b>: </b><span id="lbl_interviewRRMRecruiterRelatedRRM">Not Available</span></td>
+                                      </tr>
+                                    </tbody>
+                                  </table> 
+                                </div>
+                                <div class="col-md-6">
+                                  <table class='table table-borderless' style='margin-bottom:0px'>
+                                    <tbody>                            
+                                      <tr>
+                                        <td class="table-label"><b>Plan (A) Information :</b></td>                              
+                                      </tr>
+                                      <tr>
+                                        <td><span id="lbl_interviewRRMPlanARelatedRRM">Not Available</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="table-label"><b>Plan (B) Information :</b></td>
+                                      </tr>
+                                      <tr>
+                                        <td><span id="lbl_interviewRRMPlanBRelatedRRM">Not Available</span></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="table-label"><b>Skills :</b></td>
+                                      </tr>
+                                    </tbody>
+                                  </table> 
+                                  <div id="sdgd_rrmInterviewSkillsGridRelatedRRM"></div>
+                                </div>
+                              </div>
+
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="rrm_DetailsRecommedationInterview">
+                              
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <label>Score <span id="txt_overallMarkRelatedRRM">(0.0)</span></label>
+                                    <div id="sdsl-ratingForInterviewRelatedRRM"></div>
+                                    <span class="error_message" id="overallMarkRelatedRRMError"></span>
+                                  </div>
+                                  <div class="col-md-6">
+                                    <label>RRM </label>
+                                    <div><span id="txt_selectedRelatedRRM">Not Yet Selected</span></div>
+                                  </div>
+                              </div>
+                              <br/>
+                              <div class="row">
+                                <div class="col-md-12">
+                                <label>Interview Comments</label>
+                                <div id="sdtxt-CommentsForInterviewRRMRelated"></div>
+                                <span class="error_message" id="interviewCommentsRRMRelatedError"></span>
+                                           </div>   
+                              </div>
+                              <br/>
+                              <div class="row">
+                                  <div class="col-md-12">
+                                    <button type="button" class="btn btn-success pull-right" id="btnRecommendedRRMSave" >Recommend</button>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <br>
+                    
+                    <br/>
+                  </div>
+
+                  <div role="tabpanel" class="tab-pane" id="candidateDetailsForInterview">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <table class='table table-borderless' style='margin-bottom:0px'>
+                          <tbody>
+                            <tr>
+                              <td class="table-label"><b>Name</b></td>
+                              <td><b>: </b><span id="lbl_candidateDetailsNameInterview">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Mobile</b></td>
+                              <td><b>: </b><span id="lbl_candiateDetailsMobileInterview">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Email Id</b></td>
+                              <td><b>: </b><span id="lbl_candiateDetailsEmailInterview">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Links</b></td>
+                              <td><b>: </b><span id="lbl_candiateDetailsLinksInterview">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Communication Rating</b></td>
+                              <td><b>: </b><span id="star_candidateDetailsCommunicationRatingInterview">Not Available</span></td>
+                            </tr>
+                            <tr>
+                              <td class="table-label"><b>Native</b></td>
+                              <td><b>: </b><span id="lbl_candiateDetailsNativeInterview">Not Available</span></td>
+                            </tr>
+                          </tbody>
+                        </table> 
+                      </div>
+                      <div class="col-md-6">
+                        <table class='table table-borderless' style='margin-bottom:0px'>
+                          <tbody>
+                            <tr>
+                              <td class="table-label"><b>Work Experience</b></td>
+                            </tr>  
+                            <tr>
+                              <td><span id="lbl_candidateDetailsWorkExperienceInterview">Not Available</span></td>
+                            </tr>                          
+                            <tr>
+                              <td class="table-label"><b>Skills :</b></td>
+                            </tr>
+                          </tbody>
+                        </table> 
+                        <div id="sdgd_candidateDetailsSkillsInterview"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>          
+              </div>
+          </div>
+          <div class="modal-footer">           
+            <button type="button" class="btn btn-success" id="btnSaveInterviewSummary" onclick="saveInterviewStatusAlert()">Save</button>
+            <button type="button" class="btn btn-primary" onclick="closeInterviewModal()">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div id="rrmDetailsForInterview"></div>
+
+<script type="text/javascript">
+  var rrmData = [];
+  $(document).ready(function () {
+    getRRMList();
+    getInterviewCardsCount();
+  });
+  function getRRMList(){
+        rrmData = [];
+        var rrmListfilterData = JSON.stringify({
+            "IsActive": true
+        });
+        var rrmListList = callgetlist('GetRRM', rrmListfilterData);        
+        if (rrmListList.length > 0) {
+            rrmListList.forEach(function (i, index) {
+                rrmData.push({
+                    'RRMId': i['RRMId'],
+                    'RRMName':i['RRMNo']+" - "+i['RequirementName']
+                });
+            });
+        }
+    }
+
+    function getInterviewCardsCount(){
+
+      var filterData = JSON.stringify({
+        "Token":Token,
+        "IsActive": true
+      });
+
+      callGetListAsync('GetCardDetailsCountForInterviews', filterData, function (data) {
+          if(data!=undefined && data.length>0){
+              $("#cardCandidateRRMInterviews").html(data[0].Interviews);
+              $("#cardCandidateRRMInterviewsRecommended").html(data[0].Recommended);
+              $("#cardCandidateRRMInterviewsNotRecommended").html(data[0].NotRecommended);
+          }
+      });
+    }
+</script>
+
+<script>
+  $("#rrmDetailsForInterview").load("components/rrminterview/rrmdetailsinterviewmodal.html");
+  
+  $(document).on("click", ".rrmdetailInterviewCard", function (e) {
+      var rrmId = $(e.currentTarget).data("rrmid");           
+      getRRMDetailsForInterviewCard(rrmId);
+  });
+
+</script>

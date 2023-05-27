@@ -1,0 +1,153 @@
+image : kumarkpsaravana/ubuntuwithlftp
+
+stages:
+- lead-publish
+- dev-publish
+- ui-test
+- test-publish
+- uat-publish
+- prod-publish
+- cg-prod-publish
+
+cg-prod-publish:
+  stage: cg-prod-publish
+  only:
+  - master
+  before_script:
+  - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - echo "202.129.196.130 ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBEBiHrH7HFht4wKA1513REAgcPodBEn+gSoaBiDRs+Q1/sz9XejZgjKkUOSUezxrnw9UZx3meHkScJ9rmZ4c6d8=" >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+  script:
+  - URL=$CG_PROD_API_URL
+  - REPLACE_TEXT="var SynergyAPIURL =  '${URL}' \/\/"
+  - echo $REPLACE_TEXT
+  - sed -i "s/var SynergyAPIURL/${REPLACE_TEXT}/g" SynergyDashboardUI/js/callapi.js
+  - scp -r SynergyDashboardUI/* newsynergy@202.129.196.130:/D:/DefaultWebSites/
+  artifacts:
+    paths:
+    - 'SynergyDashboardUI/'
+
+lead-publish:
+  stage: lead-publish
+  only:
+  - john
+  - poobalan
+  - saravana
+  - leejoy
+  - nehemiah
+  - parry
+  - Dhanraj
+  - nitheesh
+  - chandralal
+  - christlin
+  - vijayabaskar
+  - shanmugadoss
+  - haribalaram
+  - Ramkumar
+  - yuvaraj
+  - DhanrajR
+  - Diviamon
+  - johnM
+  - jayanth
+  - rahul
+  - shankar
+  - veena
+  script:
+  - URL=$DEV_API_URL
+  - REPLACE_TEXT="var SynergyAPIURL =  '${URL}' \/\/"
+  - echo $REPLACE_TEXT
+  - sed -i "s/var SynergyAPIURL/${REPLACE_TEXT}/g" SynergyDashboardUI/js/callapi.js  
+  - echo "------"$CI_COMMIT_REF_NAME" environment release started-----";       
+  - lftp -e "mirror -R SynergyDashboardUI $CI_COMMIT_REF_NAME" -u sd_dev,sdev@123 ftp://172.16.2.30/synergydashboard_dev/;
+  - echo "------"$CI_COMMIT_REF_NAME" environment release completed-----";
+
+  artifacts:
+    paths:
+    - 'SynergyDashboardUI/'
+
+dev-publish:
+  stage: dev-publish
+  only:
+  - testing
+  script:
+  - URL=$DEV_API_URL
+  - REPLACE_TEXT="var SynergyAPIURL =  '${URL}' \/\/"
+  - echo $REPLACE_TEXT
+  - sed -i "s/var SynergyAPIURL/${REPLACE_TEXT}/g" SynergyDashboardUI/js/callapi.js  
+  - echo "------Development environment release started-----";     
+  - lftp -e "mirror -R SynergyDashboardUI/ /dev/synergydashboard_dev/" -u sd_dev,sdev@123 ftp://172.16.2.30/synergydashboard_dev/;
+  - echo "------Development environment release completed-----";
+
+  artifacts:
+    paths:
+    - 'SynergyDashboardUI/'
+
+test-publish:
+  stage: test-publish
+  only:
+  - testing
+  script:
+  - URL=$TEST_API_URL
+  - REPLACE_TEXT="var SynergyAPIURL =  '${URL}' \/\/"
+  - echo $REPLACE_TEXT
+  - sed -i "s/var SynergyAPIURL/${REPLACE_TEXT}/g" SynergyDashboardUI/js/callapi.js   
+  - echo "------"$CI_COMMIT_REF_NAME" environment release started-----"
+  - lftp -e "mirror -R SynergyDashboardUI/ /test/synergydashboard_test/ " -u sd_test,stest@123 ftp://172.16.2.30/synergydashboard_test/;
+  - echo "------"$CI_COMMIT_REF_NAME" environment release completed-----"  
+
+  artifacts:
+    paths:
+    - 'SynergyDashboardUI/'
+    
+uat-publish:
+  stage: uat-publish
+  only:
+  - testing
+  script:
+  - URL=$UAT_API_URL
+  - REPLACE_TEXT="var SynergyAPIURL =  '${URL}' \/\/"
+  - echo $REPLACE_TEXT
+  - sed -i "s/var SynergyAPIURL/${REPLACE_TEXT}/g" SynergyDashboardUI/js/callapi.js   
+  - echo "------"$CI_COMMIT_REF_NAME" environment release started-----"
+  - lftp -e "mirror -R SynergyDashboardUI/ /uat/synergydashboardui_uat/ " -u synergy_uat,Dashboard@123 ftp://172.16.2.55/synergydashboardui_uat/;
+  - echo "------"$CI_COMMIT_REF_NAME" environment release completed-----"  
+
+  artifacts:
+    paths:
+    - 'SynergyDashboardUI/'
+
+prod-publish:
+  stage: prod-publish
+  only:
+  - master
+  script:
+  - URL=$PROD_API_URL
+  - REPLACE_TEXT="var SynergyAPIURL =  '${URL}' \/\/"
+  - echo $REPLACE_TEXT
+  - sed -i "s/var SynergyAPIURL/${REPLACE_TEXT}/g" SynergyDashboardUI/js/callapi.js  
+  - echo "------Production environment release started-----"
+  - lftp -e "mirror -R SynergyDashboardUI/ / " -u sd_prod,sprod@123 ftp://172.16.2.30:22/;
+  - echo "------Production environment release completed-----"
+
+  artifacts:
+    paths:
+    - 'SynergyDashboardUI/'
+    
+
+ui-test:
+  stage: ui-test
+  image : kumarkpsaravana/seleniumdotnetcore
+  only:
+  - saravanatest
+
+  script: 
+    - dotnet restore SynergyDashboardUI.Test/
+    - dotnet build -c Release SynergyDashboardUI.Test/SynergyDashboard.UITest
+    - dotnet test -c Release SynergyDashboardUI.Test/SynergyDashboard.UITest/SynergyDashboard.UITest.csproj
+  artifacts:
+    paths:
+    - '/builds/g2tech/synergydashboard/SynergyDashboardUI.Test/SynergyDashboard.UITest/bin/Release/netcoreapp2.2/TestReport/'

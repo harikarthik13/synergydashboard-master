@@ -1,0 +1,11 @@
+#RRMOnboardModal {
+    width: 100%;
+}
+
+#RRMOnboardModal .modal-content{
+    width: 70%;
+}
+
+#RRMOnboardModal .modal-body{
+    min-height:calc(100vh - 200px)
+}

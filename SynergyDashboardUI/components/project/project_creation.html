@@ -1,0 +1,1410 @@
+<!-- RFP Style -->
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="css/library/dropzone.css" rel="stylesheet" />
+
+<!-- <script type="text/javascript" src="js/library/jquery.smartWizard.js"></script> -->
+<script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+
+
+<link href="components/project/css/project.css" rel="stylesheet" />
+
+<style>
+#project_smartwizard {
+    position: inherit;
+    height: 700px;
+    display: block;
+    overflow: auto;
+    padding-bottom: 50px;
+    overflow-x: hidden;
+    padding-top: 10px;
+}
+</style>
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> -->
+<!--POP-UP RFP MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="ProjectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">WO to Project</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div id="project_smartwizard" class="sw-main sw-theme-default">
+                    <ul class="nav nav-tabs step-anchor">
+                        <li><a href="#step-1"><span>1</span></a></li>
+                        <li><a href="#step-2"><span>2</span></a></li>
+                        <li><a href="#step-3"><span>3</span></a></li>
+                        <li><a href="#step-4"><span>4</span></a></li>
+                        <li><a href="#step-5"><span>5</span></a></li>
+                        <li><a href="#step-6"><span>6</span></a></li>
+                        <li><a href="#step-7"><span>7</span></a></li>
+                        <li><a href="#step-8"><span>8</span></a></li>
+                    </ul>
+                    <div class="form-hldr" id="modal_content">
+                        <div id="step-1" class="project-first-step">
+                            <div class="step-title">
+                                <h3>Step1: <span>Client</span></h3>
+                                <div class="pull-right">
+                                    <div class="dlClient">
+                                        <select class="form-control" id="dlclientWorkOrder">
+                                            <option value="0">Select Work Order</option>
+                                        </select>
+                                        <span class="error_message errWorkOrder"></span>
+                                    </div>
+                                </div>
+                                <label class="checkbox-inline pull-right">
+                                    <input type="checkbox" id="ProjectActivityStatus"> Isactive
+                                </label>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Name</label>
+                                            <div class="dlClient">
+                                                <input type="text" class="form-control" id="dlClientProjectName">
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Client</label>
+                                            <div class="dlClient">
+                                                <select class="form-control" id="dlClientName">
+                                                    <option value="0">Select Client</option>
+                                                </select>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Type</label>
+                                            <div class="dlClient">
+                                                <select class="form-control" id="dlClientProjectType">
+                                                    <option value="0">Select Project Type</option>
+                                                </select>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Development Model</label>
+                                            <div class="dlClient">
+                                                <select class="form-control" id="dlClientDevelopmentModel">
+                                                    <option value="0">Select Development Models</option>
+                                                </select>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Industry</label>
+                                            <div class="dlClient">
+                                                <div class="input-group">
+                                                    <select class="form-control" id="dlProjectIndustry">
+                                                        <option value="0">Select Project Industry</option>
+                                                    </select>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">
+                                                            <i class="glyphicon glyphicon-plus"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Domain</label>
+                                            <div class="dlClient">
+                                                <div class="input-group">
+                                                    <select class="form-control" id="dlProjectDomain">
+                                                        <option value="0">Select Project Domain</option>
+                                                    </select>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" type="button">
+                                                            <i class="glyphicon glyphicon-plus"></i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Planned Start Date</label>
+                                            <div class="dtpClient">
+                                                <div class="input-group date">
+                                                    <input type="text" class="form-control date-validator"
+                                                        id="dtpclientPlannedStartDate" readonly="">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Planned End Date</label>
+                                            <div class="dtpClient">
+                                                <div class="input-group date">
+                                                    <input type="text" class="form-control date-validator"
+                                                        id="dtpclientPlannedEndDate" readonly="">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <span class="error_message"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Actual Start Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control" id="dtpclientActualStartDate"
+                                                    readonly="">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Actual End Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control" id="dtpclientActualEndDate"
+                                                    readonly="">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>UTA Start Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control" id="dtpclientUtaStartDate"
+                                                    readonly="">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>UTA End Date</label>
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control" id="dtpclientUtaEndDate"
+                                                    readonly="">
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Project Description</label>
+                                            <textarea class="form-control" rows="4"
+                                                id="textProjectDescription"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Project Technology Notes</label>
+                                            <textarea id="tag-textAreaProject" class="form-control" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-2" class="project-second-step">
+                            <div class="step-title">
+                                <h3>Step2: <span>Project Contacts</span></h3>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-sm btn-secondary add-btn pull-right m-b-10"
+                                            onclick=clearProjectContact()>Add Contact</button>
+                                    </div>
+                                </div>
+                                <div id="add-project-contacts" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>New Client</h4>
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div class="txtContacts">
+                                                        <div class="input-group"> 
+                                                            <input type="checkbox" id="IsPrimary" name="IsPrimary" value="IsPrimary">
+                                                            <label for="IsPrimary">Is primary</label>
+                                                            <input type="checkbox" id="TimesheetTo" name="TimesheetTo" value="TimesheetTo">
+                                                            <label for="TimesheetTo">Timesheet To</label>
+                                                            <input type="checkbox" id="TimesheetCC" name="TimesheetCC" value="TimesheetCC">
+                                                            <label for="TimesheetCC">Timesheet CC</label>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Client Contact Name</label>
+                                                    <div class="txtContacts">
+                                                        <div class="input-group"> 
+                                                            <input type="hidden" val="" id="hdnClientContactId">                                
+                                                            <input type="text" class="form-control" id="txtClientName">
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email ID</label>
+                                                    <div class="txtContacts">
+                                                        <div class="input-group">                                 
+                                                            <input type="text" class="form-control" id="txtEmailId">
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone No 1</label>
+                                                    <div class="txtContacts">
+                                                        <div class="input-group">                                 
+                                                            <input type="text" class="form-control" id="txtPhoneNo1">
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone No 2</label>                                                      
+                                                    <div class="input-group">                                 
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Designation</label>
+                                                    <div class="dlContacts">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlDesignation">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Notes</label>
+                                                    <div class="input-group">                                 
+                                                        <input type="text" class="form-control" id="txtNotes">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    <div class="dlContacts">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlCountry">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>State</label>
+                                                    <div class="dlContacts">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlState">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <div class="dlContacts">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlCity">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Fax No</label>                                                       
+                                                    <div class="input-group">                                 
+                                                        <input type="text" class="form-control" id="txtFaxNo">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Skype Id</label>                                                       
+                                                    <div class="input-group">                                 
+                                                        <input type="text" class="form-control" id="txtSkypeId">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="pull-right btn-right">
+                                                <button class="btn btn-danger btn-sm add-btn" type="button" onclick=clearProjectContact()>Cancel</button>
+                                                <button class="btn btn-secondary btn-sm add-btn" type="button" id="btnContactsSave">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="displayProjectContacts">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-3" class="project-third-step">
+                            <div class="step-title">
+                                <h3>Step3: <span>Project Phases</span></h3>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" id="addNewProject" class="btn btn-sm btn-secondary add-btn pull-right m-b-10"  onclick=clearPhase()>Add New</button>
+                                    </div>
+                                </div>
+                                <div id="add-project-phases" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>New Project</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phase Name</label>
+                                                    <div class="txtPhaseName">
+                                                        <div class="input-group">
+                                                            <input type="hidden" val="" id="hdnPhaseId">
+                                                            <input type="text" class="form-control" id="txtPhaseName">
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Header Title</label>
+                                                    <div class="txtPhaseHeaderTitle">
+                                                        <div class="input-group">
+                                                            <input type="hidden" val="" id="hdnPhaseId">
+                                                            <input type="text" class="form-control" id="txtHeaderTitle">
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Start Date</label>
+                                                    <div class="dtpPhase">
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control phaseDateValidator" id="dtpPhaseStartDate" readonly="">
+                                                            <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>End Date</label>
+                                                    <div class="dtpPhase">
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control phaseDateValidator" id="dtpPhaseEndDate" readonly="">
+                                                            <span class="input-group-addon">
+                                                            <i class="glyphicon glyphicon-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Estimated Hours</label>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="HH/MM/SS" id="txtHours" readonly="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox" value="" id="PhaseStatus">IsActive</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Note</label>
+                                                    <textarea class="form-control" rows="4" id="txtNote"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="pull-right btn-right">
+                                                <button class="btn btn-danger btn-sm add-btn" type="button" onclick="clearPhase()">Cancel</button>
+                                                <button class="btn btn-secondary btn-sm add-btn" type="button" id="btnNewProjectSave">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="displayProjectPhase">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-4" class="project-fourth-step">
+                            <div class="step-title">
+                                <h3>Step4: <span>Project Modules</span></h3>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right m-b-10">
+                                        <button class="btn btn-secondary btn-sm add-btn" id="addNewProjectModule" data-toggle="collapse"
+                                            data-target="#new-project-module" type="button">Add New</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="new-project-module" class="panel panel-primary collapse">
+                                <div class="panel-heading">
+                                    <h4>New Project Module</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-section" id="form-block">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label>Project Name</label>
+                                                    <div class="txtModule">
+                                                        <input type="text" class="form-control"
+                                                            id="txtProjectModuleName" value="">
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="checkbox">
+                                                    <label><input type="checkbox">Is Active</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Start Date</label>
+                                                    <div class="txtModule">
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control date-validator"
+                                                                id="dtpModuleStartDate" readonly="">
+                                                            <span class="input-group-addon">
+                                                                <i class="glyphicon glyphicon-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>End Date</label>
+                                                    <div class="txtModule">
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control date-validator"
+                                                                id="dtpModuleEndDate" readonly="">
+                                                            <span class="input-group-addon">
+                                                                <i class="glyphicon glyphicon-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Project Description</label>
+                                                    <div class="txtModule">
+                                                        <textarea id="txtProjectDescription" class="form-control"
+                                                            rows="4"></textarea>
+                                                        <span class="error_message"></span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-danger btn-sm add-btn" data-toggle="collapse"
+                                                        data-target="#new-project-module" type="button">Cancel</button>
+                                                    <button id="btnSaveProjectModule"
+                                                        class="btn btn-secondary btn-sm add-btn"
+                                                        type="button">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="projectModule">
+
+                            </div>
+                        </div>
+
+                        <div id="step-5" class="project-fifth-step">
+                            <div class="step-title">
+                                <h3>Step5: <span>Project Members</span></h3>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right m-b-10">
+                                            <button class="btn btn-secondary btn-sm add-btn" data-toggle="collapse"
+                                                data-target="#add-project-members" type="button">Add New</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="add-project-members" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>New Member</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id='list_employees_for_project_div' class="table-responsive">
+                                                    <table class="table table-striped table-hover"
+                                                        id="list_employees_for_project_tbl">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                                <th>#</th>
+                                                                <th>Employee Name</th>
+                                                                <th>Role</th>
+                                                                <th>Projects</th>
+                                                                <th>Occupied Hrs</th>
+                                                                <th>Billable Hrs</th>
+                                                                <th>Total Hrs</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="checkbox"></td>
+                                                                <td>555</td>
+                                                                <td>Praveen</td>
+                                                                <td>Developer - PHP </td>
+                                                                <td>Auction ABC,New Synergy</td>
+                                                                <td>160</td>
+                                                                <td>150</td>
+                                                                <td>150</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="pull-right btn-right">
+                                                <button class="btn btn-danger btn-sm add-btn" type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#add-project-members">Cancel</button>
+                                                <button class="btn btn-secondary btn-sm add-btn" type="button"
+                                                    data-toggle="collapse" data-target=""
+                                                    id="btnMemberSave">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div id="displayProjectMembers">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-6" class="project-sixth-step">
+                            <div class="step-title">
+                                <h3>Step6: <span>Project Documents</span></h3>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right m-b-10">
+                                            <button class="btn btn-secondary btn-sm" onclick=resetDocumentUploadForm()
+                                                type="button">Upload</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="upload-documents" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>Upload</h4>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <div>
+                                            <form action="#" class="dropzone needsclick dz-clickable" id="demo-upload">
+                                                <div class="dz-message needsclick">
+                                                    Drop files here or click to upload.<br>
+                                                </div>
+                                            </form>
+                                            <span class="error_message error_upload"></span>
+                                        </div>
+                                        <div class="form-section" id="form-block">
+                                            <form id="formDocumentUpload">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <div class="form-group">
+                                                            <label>Document Name</label>
+                                                            <div class="txtDocument">
+                                                                <input type="hidden" id="DocumentFileId" value="">
+                                                                <input type="text" class="form-control"
+                                                                    id="txtProjectDocumentName" value="">
+                                                                <span class="error_message"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox"
+                                                                    id="chkDocumentActivityStatus">Is Active</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Project Description</label>
+                                                            <div class="txtDocument">
+                                                                <textarea class="form-control" rows="4"
+                                                                    id="txtProjectDocumentDescription"></textarea>
+                                                                <span class="error_message"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="pull-right">
+                                                            <button class="btn btn-danger btn-sm add-btn" type="button"
+                                                                onclick=resetDocumentUploadForm()>Cancel</button>
+                                                            <button id="btnUploadProjectDocument"
+                                                                class="btn btn-secondary btn-sm add-btn" type="button"
+                                                                onclick=saveProjectDocument()>Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 project-documents">
+                                        <div id="displayProjectDocuments">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-7" class="project-seventh-step">
+                            <div class="step-title">
+                                <h3>Step7: <span>Project Timesheet</span></h3>
+                            </div>
+                            <div class="TimesheetSubTitle">
+                                <b>Timesheet duration</b>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="radio">
+                                        <label><input type="radio" name="radiooption">Weekly</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="radio">
+                                        <label><input type="radio" name="radiooption">Forenight</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="radio">
+                                        <label><input type="radio" name="radiooption">Monthly</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="radio">
+                                        <label><input type="radio" name="radiooption">Internal project
+                                            non-billable</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="error_1">
+                                <span class="error_message"></span>
+                            </div>
+                            <div class="TimesheetSubTitle">
+                                <b>Timesheet Template</b>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="TimesheetTemplate" value="">Sub project
+                                            wise</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="TimesheetTemplate" value="">Domain
+                                            wise</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="TimesheetTemplate" value="">Technology
+                                            wise</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="error_2">
+                                <span class="error_message"></span>
+                            </div>
+                            <div class="TimesheetSubTitle">
+                                <b>Reports</b>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" id="autoGenerate" value=""
+                                                name="Reports">Autogenerate send to lead</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" id="generateReport" value="" name="Reports"
+                                                onclick="toggle('.generate_daily', this)">Generate daily reports</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label class="generate_daily"><input name="generateDaily" type="checkbox"
+                                                value="">Send to team</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label class="generate_daily"><input name="generateDaily" type="checkbox"
+                                                value="">Send to Lead</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="error_3">
+                                <span class="error_message"></span>
+                            </div>
+                            <hr>
+                        </div>
+                        <div id="step-8" class="project-eighth-step">
+                            <div class="step-title">
+                                <h3>Step8: <span>Sub Project</span></h3>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right m-b-10">
+                                            <button class="btn btn-secondary btn-sm add-btn" type="button"
+                                                onclick=resetSubProject()>Add New</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="new-sub-project" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>New Sub Project</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-section" id="form-block">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="txtSubProject">
+                                                        <div class="form-group">
+                                                            <label>Sub Project</label>
+                                                            <input type="hidden" id="hiddenSubProjectId">
+                                                            <input type="text" class="form-control"
+                                                                id="txtSubProjectName">
+                                                        </div>
+                                                        <span class="error_message"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Planned Start date</label>
+                                                        <div class="dtpSubProjectDate">
+                                                            <div class="input-group date">
+                                                                <input type="text" class="form-control subProjectDate"
+                                                                    id="dtpProjectPlannedDate" readonly="">
+                                                                <span class="input-group-addon">
+                                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                                </span>
+                                                            </div>
+                                                            <span class="error_message"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Planned End date</label>
+                                                        <div class="input-group date">
+                                                            <input type="text" class="form-control subProjectDate"
+                                                                id="dtpProjectEndDate" readonly="">
+                                                            <span class="input-group-addon">
+                                                                <i class="glyphicon glyphicon-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Project Domain</label>
+                                                        <div class="dlSubProject">
+                                                            <div class="input-group">
+                                                                <select class="form-control" id="dlSubProjectDomain">
+                                                                    <option value="0">Select Project Domain</option>
+                                                                </select>
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" type="button">
+                                                                        <i
+                                                                            class="glyphicon glyphicon-plus"></i></button>
+                                                                </span>
+                                                            </div>
+                                                            <span class="error_message"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>End Client Name</label>
+                                                        <div class="dlSubProject">
+                                                            <div class="input-group">
+                                                                <select class="form-control" id="dlSubClientName">
+                                                                    <option value="0">Select Client Name</option>
+                                                                </select>
+                                                            </div>
+                                                            <span class="error_message"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Project Description</label>
+                                                        <textarea class="form-control" rows="4"
+                                                            id="txtSubProjectDescription"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-danger btn-sm add-btn"
+                                                            onclick=resetSubProject()>Cancel</button>
+                                                        <button class="btn btn-secondary btn-sm add-btn" type="button"
+                                                            id="btnSubProjectSave"
+                                                            onclick=saveSubProject()>Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="displaySubProject">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-end">
+                            <div class="btn-group mr-2 sw-btn-group" role="group"><button
+                                    class="btn btn-secondary sw-btn-prev disabled"
+                                    type="button">Previous</button><button class="btn btn-secondary sw-btn-next"
+                                    type="button">Next</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEMBER SCREEN MODAL STARTS HERE -->
+        <div class="modal fade" id="open_projectMember" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">×</span></button>
+                                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                        <h3 class="modal-title" id="myModalLabel">Member Details</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-4" id="personal_info">
+                            <img src="./components/project/images/user.png" class="img-circle" alt="User photo">
+                            <h3>User Name</h3>
+                            <h4>Contact Number: 1234567890</h4>
+                            <h4>Mail-Id:user@mail.com</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#Contact_info">Contact Information</a>
+                                </li>
+                                <li><a data-toggle="tab" href="#Primary_skills">Primary Skills</a></li>
+                                <li><a data-toggle="tab" href="#Project_details">Project Details</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="Contact_info" class="tab-pane fade in active">
+                                    <div class="col-md-6">
+                                        <table>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h4>Current Address</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 1:</b></td>
+                                                <td>Address Line 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 2:</b></td>
+                                                <td>Address Line 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>City:</b></td>
+                                                <td>City Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>State:</b></td>
+                                                <td>State Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Country:</b></td>
+                                                <td>Country Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Pincode:</b></td>
+                                                <td>12345</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <table>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h4>Permanent Address</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 1:</b></td>
+                                                <td>Address Line 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 2:</b></td>
+                                                <td>Address Line 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>City:</b></td>
+                                                <td>City Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>State:</b></td>
+                                                <td>State Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Country:</b></td>
+                                                <td>Country Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Pincode:</b></td>
+                                                <td>12345</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="Primary_skills" class="tab-pane fade">
+                                    <h4>Primary Skills:PHP,CI,Drupal</h4>
+                                    <br>
+                                    <h4>Secondary Skills:Photoshop,Illustrator,Indesign</h4>
+                                </div>
+                                <div id="Project_details" class="tab-pane fade">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-heading" data-target="#InactiveProject"
+                                            data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="InactiveProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading" data-target="#ActiveProject" data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="ActiveProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading" data-target="#ClosedProject" data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="ClosedProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-sm add-btn" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MEMBER SCREEN MODAL ENDS HERE -->
+    </div>
+</div>
+        <script type="text/javascript">
+            // //var user_story = CKEDITOR.replace('user_story', {});
+
+            // $('#proposalDate').datepicker({
+            //    format: "yyyy-mm-dd ",
+            //    endDate: new Date(),
+            //    autoclose: true
+            // });
+            // if ($('#proposalDate').val() == " ") {
+            //    var date = new Date()
+            //    yr = date.getFullYear(),
+            //       month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth(),
+            //       day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate(),
+            //       current_Date = yr + '-' + month + '-' + day;
+            //    /*alert(current_Date);*/
+            //    $('#proposalDate').val(current_Date);
+            //    // $('#proposalDate1').val(current_Date);  
+            // }
+
+            // /* This is proposal listing scripts  */
+            // $(window).on("load ", function () {
+            //    getProposalList();
+            // });
+            // /* This is proposal listing scripts  */
+
+            $(document).ready(function () {
+                $('#dtpclientPlannedStartDate').datepicker({});
+                $('#dtpclientActualStartDate').datepicker({});
+                $('#dtpclientUtaStartDate').datepicker({});
+                $('#dtpclientPlannedEndDate').datepicker({});
+                $('#dtpclientActualEndDate').datepicker({});
+                $('#dtpclientUtaEndDate').datepicker({});
+                $('#dtpPhaseStartDate').datepicker({});
+                $('#dtpPhaseEndDate').datepicker({
+                    onSelect: function(dateText) {
+    }
+                });
+                $('#dtpMemberAssignedDate').datepicker({});
+                $('#dtpProjectPlannedDate').datepicker({});
+                $('#dtpProjectEndDate').datepicker({});
+                $('#dtpModuleStartDate').datepicker({});
+                $('#dtpModuleEndDate').datepicker({});
+
+
+                $("#project_smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection,
+                    stepPosition) {
+                    if (stepNumber == 0) {
+                        nextClick = true;
+                        let isValid = validateClientDetails();
+                        if (isValid) {
+                            nextClick = false;
+                            InsertUpdateClientDetails();
+                            displayAddedProjectContacts();
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                    if (stepNumber == 1) {
+                        displayAddedProjectPhase();
+                    }
+                    if (stepNumber == 2) {
+                        displayAddedProjectModules();
+                        projectModuleValidation();
+                    }
+                    if (stepNumber == 3) {
+                        nextClick = true;
+                        let isValid = validateProjectModules();
+                        if (isValid) {
+                            displayAddedProjectMembers();
+                            nextClick = false;
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                    if (stepNumber == 4) {
+                        displayAddedProjectDocuments();
+                    }
+                    if (stepNumber == 6) {
+                        nextClick = true;
+                        let isValid = validateProjectTimesheet();
+                        if (isValid) {
+                            displayAddedSubProject();
+                            nextClick = false;
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
+
+                $('#btnContactsSave').click(function () {
+                    contactSave = true;
+                    validateAddContacts()
+                });
+                $('#btnNewProjectSave').click(function () {
+                    projectSave = true;
+                    validateNewProject()
+                });
+                $('#btnMemberSave').click(function () {
+                    memberSave = true;
+                    validateProjectMembers()
+                });
+                $('#btnSubProjectSave').click(function () {
+                    subProjectSave = true;
+                    validateSubProject()
+                });
+
+                $("#list_employees_for_project_tbl").dataTable({
+                    "destroy": true,
+                    "pageLength": 5,
+                    "ordering": false,
+                    "info": false,
+                    "oLanguage": { "sSearch": '<a class="btn searchBtn" id="searchBtn"><i class="fa fa-search"></i></a>' }
+                });
+
+            });
+        </script>

@@ -1,0 +1,69 @@
+<link href="components/work_order/css/work_order.css" rel="stylesheet" />
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.dataTables.min.js"></script>
+<div  id="workorder_card" class="card-detail">
+ 
+    <span class="card-detail-title"><i><img src="components/work_order/images/work_order.png" width="40px" height="40px" /></i> <b>Work Order</b></span>
+    <span>(Dummy)</span>
+
+        <span class="pull-right">
+        <label class="radio-inline"><input type="radio" id="NewWorkOrder" name="workOrderType" checked="checked"> New</label>
+        <label class="radio-inline"><input type="radio" id="ExistingWorkOrder" name="workOrderType"> Existing</label>
+        
+        <button class="btn btn-sm btn-primary ml-10">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+        </span>
+
+    <hr />
+    <div id="WorkOrderCard">
+        <!-- <table id="tbl_workordercard" class="table table-striped"> -->
+            <!-- <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Client</td>
+                    <td>Project</td>
+                    <td>Date</td>
+                    <td>Action</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody id="DisplayProjectList">
+                <tr>
+                    <td>1</td>
+                    <td>Common Goals</td>
+                    <td>Migration Project</td>
+                    <td>15 July 2019</td>
+                    <td>
+                        <button class="btn btn-xs" title="View Proposal"><i class="fa fa-eye"></i></button>
+                        <button class="btn btn-xs" title="View WO Details"><i class="fa fa-eye"></i></button>                 
+                        <button class="btn btn-xs" onclick="ProjectModal();"><i class="glyphicon glyphicon-plus"></i></button>
+                    </td>
+                    <td>Some Status</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Interprix</td>
+                    <td>WPF Project</td>
+                    <td>20 July 2019</td>
+                    <td>
+                        <button class="btn btn-xs" title="View Proposal"><i class="fa fa-eye"></i></button>
+                        <button class="btn btn-xs" title="View WO Details"><i class="fa fa-eye"></i></button>
+                        <button class="btn btn-xs" onclick="ProjectModal();"><i class="glyphicon glyphicon-plus"></i></button>
+                    </td>
+                    <td>Some Status</td>
+                </tr>
+            </tbody> -->
+        <!-- </table> -->
+    </div>
+</div>
+
+<script src="components/work_order/js/work_order.js"></script>
+<script type="text/javascript">
+    $("#project_creation").load("components/project/project_creation.html");
+</script>
+
+<link href="components/work_order/css/work_order.css" rel="stylesheet" />
+

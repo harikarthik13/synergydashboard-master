@@ -1,0 +1,581 @@
+<div class="john-trail card-detail">
+    <!-- Add "modal-not-include" to a div for which we dont want to show them in modal  -->
+    <span>
+        <span class="card-detail-title modal-not-include"><b>Nomination</b></span>
+        <button type="button" id="btnleaveDetail"
+            class="btn btn-xs cmn-modal-ex-btn modal-not-include expandCommonDiv pull-right">
+            <i class="fa fa-expand"></i>
+        </button>
+        <hr>
+        
+    <button type="button" id="nominee_modal_button"
+        class="btn btn-primary  pull-right">
+        <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>  Add Nominee
+    </button>
+    <br/>
+    <div class="modal fade bd-example-modal-lg in" id="nominee_modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="getProposalList()"><span aria-hidden="true">×</span></button>
+                        <button class="expand modalExpanding">
+                            <i class="fas fa-expand" data-toggle="modal"></i>
+                          </button>
+                    <h4 class="modal-title">Add Nominee</h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Name: </label>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control nomineeEmpList" id="nomineeEmpList" style="width:100%;">
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Comments: </label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea name="nominee_comments" id="nominee_comments" class="form-control ckeditor"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Nomination For: </label>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control nominationMonth" id="nominationMonth" style="width:100%;">
+                                <option value="-1">Choose a Month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control nominationYear" id="nominationYear" style="width:100%;">
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Assets: </label>
+                        </div>
+                        <div class="col-md-6">
+                            <input id="nominee_file" class="nominee-file" type="file" placeholder="" data-title="Drop files here">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-4 text-center">
+                            <button class="btn btn-success uploadNomineeFile" style="margin: 15px 0px;">Upload</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-4">
+                            <button style="margin: 10px 0px;" class="btn btn-danger btn-xs delAllFile pull-right">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                            <table id="nomineeFileTable" style="width: 100%;">
+                                <thead>
+                                    <tr>
+                                        <td><input type="checkbox" class="selectAll"></td>
+                                        <td>Files</td>
+                                        <td>Date</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody id="nomineeFileList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-md-4 col-md-offset-8">
+                            <button class="btn btn-primary " id="nomineeFormSubmit" name="nomineeFormSubmit" style="margin-top: 15px;">Submit</button>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="nomineeFormSubmit" name="nomineeFormSubmit" type="button" class="btn btn-success">Save</button>
+                </div>
+            </div>
+
+        </div>
+    </div> <br/> <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover table-responsive table-bordered">
+                <thead class="bg-primary">
+                    <th>DeveloperName</th>
+                    <th>Month/Year</th>
+                    <th>Action</th>
+                </thead>
+                <tbody class="nomineeDevelopersList">
+
+                </tbody>
+                
+            </table>
+        </div>
+        
+    </div>
+    </span>
+   
+</div>
+
+<script src='components/addnominee/js/nominee.js'></script>
+
+<script>
+     var fileStore = []
+     function getEmployeeDataList() {
+              // User lit for select box
+            var filterData = JSON.stringify({
+                "IsActive": true
+            });
+            var getEmployeeList = callgetlist('GetEmployeeList', filterData);
+            var getEmployeeData = [];
+            if (getEmployeeList.length > 0) {
+                getEmployeeList.forEach(function (i, index) {
+                    getEmployeeData.push({
+                        'id': i['EmployeeId'],
+                        'text': i['Name']
+                    });
+                });
+            }
+            // To make the first data empty
+            getEmployeeData.unshift({ id: "", text: "" })
+            // Select 2 for user list
+            $(".nomineeEmpList").select2({
+                placeholder: "Select a User",
+                allowClear: true,
+                data: getEmployeeData
+            });
+        }
+    $('#nominee_modal_button').on('click', () => {
+       
+         
+            getEmployeeDataList(); 
+            try {
+                CKEDITOR.instances['nominee_comments'].destroy();
+            } catch (e) {
+                //console.log('error', e)
+            }
+            let editor1 = CKEDITOR.replace('nominee_comments', {});
+            $("#nominationMonth option").each(function() {
+                var $thisOption = $(this);
+                var previousMonth = new Date().getMonth();
+                var valueToCompare = $('#nominationMonth option').eq(previousMonth).val();
+
+                if($thisOption.val() != valueToCompare) {
+                    $thisOption.attr("disabled", "disabled");
+                }
+            });
+            $('#nominee_modal').appendTo('body').modal('show')
+      
+       
+    })
+
+  
+   function getDeveloperFile(DeveloperId) {
+       debugger
+    var filterval=JSON.stringify({
+            "NomineeDeveloperId":DeveloperId,
+            "IsActive": true
+        });
+    var getNomineeFilesData=callgetlist('GetNomineeDeveloperFiles',filterval);
+    return getNomineeFilesData;
+   }
+    var submitArr = []
+    var selectAllState = false
+    function showCommentsModal(index) {
+        $('#nominee_comments_modal').appendTo('body').modal('show')
+        $('.nominee_comment_display').html(submitArr[index].comments)
+    }
+    function resetNomineeModal() {
+        CKEDITOR.instances['nominee_comments'].setData('');
+        $(".nomineeEmpList").val(null).trigger('change');
+        fileStore = []
+        $('#nominationMonth').val('January').trigger('change');
+        document.getElementById('nominee_file').value = ""
+        $('#nominee_file').attr('data-title', 'Drop files here')
+        $('#nomineeFileList').html('')
+    }
+    function deleteConfirm(cb){
+        swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this again!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((res) => {
+        cb(res)
+      })
+    }
+    function deleteFile(key) {
+        // fileStore.splice(index, 1)
+        // debugger
+        let index = fileStore.findIndex(x => x.key == key)
+        fileStore.splice(index, 1)
+        updateFileTable()
+    }
+    function updateFileTable() {
+        let html = ``
+        fileStore.forEach((elem, index) => {
+            let timeDiff = moment(new Date(elem.date)).fromNow();
+            // alert("Element key is"+elem.key);
+            html += `
+                    <tr>
+                        <td><input type="checkbox" value="${elem.key}" class="fileCheck"></td>
+                        <td>${elem.name}</td>
+                        <td>${timeDiff}</td>
+                        <td>
+                            <button class="btn btn-danger btn-xs" onClick="deleteConfirm((data) => {if(data){deleteFile(${elem.key})}})">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `
+        })
+        // Filling the table with the uploaded file names
+        $('#nomineeFileList').html(html)
+
+        $('.fileCheck').click(function () {
+            // //console.log('fileCheck')
+            let selectedCount = 0
+            $('.fileCheck').each(function () {
+                // //console.log($(this).prop('checked'))
+                if($(this).prop('checked')){
+                    // $('.delAllFile').show()
+                    // return
+                    selectedCount += 1
+                }
+            })
+            if(selectedCount > 0){
+                $('.delAllFile').show()
+            }else{
+                $('.delAllFile').hide()
+            }
+        })
+    }
+    function updateVoteListTable() {
+        let html = ``
+        submitArr.forEach((elem, index) => {
+            html += `
+                        <tr>
+                            <td> <img src="components/voting/img/user.png" alt="" style="width: 10%;"> ${elem.resource_name}</td>
+                            <td onClick="showCommentsModal(${index})"><img src="components/voting/img/notepad.png" alt="" style="width: 15%;"></td>
+                            <td><input type="radio"></td>
+                            <td><input type="radio"></td>
+                            <td><input type="radio"></td>
+                            <td><input type="radio"></td>
+                        </tr>
+                `
+        })
+        $('#votingResourceList').html(html)
+    }
+    $(function () {
+        $('.delAllFile').hide()
+
+        $('.delAllFile').click(function(){
+            deleteConfirm(data => {
+                if(!data){
+                    return
+                }
+                $('.fileCheck').each(function () {
+                    if($(this).prop('checked')){
+                        deleteFile($(this).val())
+                    }
+                })
+            })
+        })
+        $('.selectAll').click(function(){
+            if(fileStore.length == 0){
+                return
+            }
+            $('.fileCheck').each(function(){
+                $(this).prop('checked',!selectAllState)
+            })
+            selectAllState = !selectAllState
+            if(selectAllState){
+                $('.delAllFile').show()
+            }else{
+                $('.delAllFile').hide()
+            }
+        })
+        function fileUploadTitleHandle() {
+            var nomineeFile = document.getElementById('nominee_file');
+            if (nomineeFile.files.length == 0) {
+                $('#nominee_file').attr('data-title', 'Drop files here')
+                return
+            }
+
+            $('#nominee_file').attr('data-title', nomineeFile.files[0].name)
+        }
+        $('#nominee_file').change(function () {
+            fileUploadTitleHandle()
+        })
+
+        try {
+            CKEDITOR.instances['nominee_comments'].destroy();
+        } catch (e) {
+            //console.log('error', e)
+        }
+        let editor1 = CKEDITOR.replace('nominee_comments', {});
+        $('.uploadNomineeFile').click(function () {
+            var nomineeFile = document.getElementById('nominee_file');
+            if (nomineeFile.files.length == 0) {
+                return
+            }
+            // Saving files to array
+            fileStore.push({
+                key: Math.random(),
+                file:nomineeFile.files[0],
+                name: nomineeFile.files[0].name,
+                type: nomineeFile.files[0].type,
+                fileName:(nomineeFile.files[0].name).substr(0, (nomineeFile.files[0].name).lastIndexOf(".")),
+                extension:(nomineeFile.files[0].name).split('.').pop(),
+                date: new Date()
+            })
+
+            updateFileTable()
+
+            // To reset the file input
+            nomineeFile.value = ""
+            fileUploadTitleHandle()
+            //console.log(fileStore);
+        })
+        
+      
+
+        // Form Submit handle
+        $('#nomineeFormSubmit').unbind().click(function () {
+            
+        var nomineeId=$(".nomineeEmpList").val();
+        var month=$("#nominationMonth").val();
+        var year=parseInt($("#nominationYear").val());
+        var nomineeComments=CKEDITOR.instances['nominee_comments'].getData();
+
+        // alert(nomineeId);
+        // alert(month);
+        // alert(year);
+        // alert(nomineeComments);
+        // let result = JSON.stringify({
+        //     "NomineeEmployeeId": nomineeId,
+        //     "Month": month,
+        //     "Year": year,
+        //     "Comments": nomineeComments,
+        //     "IsActive": true
+        //  });
+        var nomineeDeveloperData = editNominee();
+        var result = {
+            "NomineeEmployeeId": nomineeDeveloperData.length == 0 ? nomineeId: null,
+            "NomineeDeveloperId": nomineeDeveloperData.length != 0 ? nomineeDeveloperData[0].NomineeDeveloperId: null,
+            "Month": month,
+            "Year": year,
+            "Comments": nomineeComments,
+            "IsActive": true,
+            "Status":"",
+            "Message":""
+         };
+        var data = {
+        "Method": "PostNomineeDeveloper",
+        "Data": result
+        };
+        // //console.log(data);
+        var postCall = PostDataCall(data);
+        //console.log(postCall);
+        if(postCall['IsSuccess']==true)
+        {
+            var nomineeId=nomineeDeveloperData[0].NomineeDeveloperId;
+            if (fileStore.length > 0) {
+                for (i = 0; i < fileStore.length; i++) {
+                    var FileExtension = fileStore[i]['extension'];
+                    var FileType = fileStore[i]['type'];
+                    var FileName = fileStore[i]['fileName'];
+                    var formData = new FormData();
+                    formData.append('file', fileStore[i]['file']);
+                    var contentdetails =
+                        [{
+                        "DocumentTypeId": nomineeId,
+                        "DocumentType": "DOM",
+                        "DocumentName":FileName,
+                        "Extension": FileExtension,
+                        "ContentType": FileType
+                        }]
+
+                        formData.append('contentdetails', JSON.stringify(contentdetails));
+                        var result = postFileGeneric(formData);
+                        //console.log(result);
+                } 
+            }
+            $("#nominee_modal").modal("hide")
+            // alert(postCall['Message']);
+            swal({
+            title: "Success!",
+            text: postCall['Message'],
+            icon: "success",
+            }).then(function(){
+                resetNomineeModal();
+                editNominee();
+            });
+        }
+        else{
+            swal({
+            title: "Sorry!",
+            text: postCall['Message'],
+            icon: "error",
+            });
+        }
+        // if (!$(".nomineeEmpList").val() || !CKEDITOR.instances['nominee_comments'].getData())
+        //     return
+        // //console.log('user id', $(".nomineeEmpList").val())
+        // //console.log('resource_name', $(".nomineeEmpList").select2('data')[0].text)
+        // //console.log('comments', CKEDITOR.instances['nominee_comments'].getData())
+        // submitArr.push({
+        //     user_id: $(".nomineeEmpList").val(),
+        //     resource_name: $(".nomineeEmpList").select2('data')[0].text,
+        //     comments: CKEDITOR.instances['nominee_comments'].getData(),
+        // })
+
+        // updateVoteListTable()
+
+        // resetNomineeModal()
+        // $('#add_nominee_modal').modal('hide')
+
+    });
+    })
+    function editNominee() {
+        
+        var filterData = JSON.stringify({
+            "IsVoting": true,
+            "IsActive": true,
+        });
+        var getNomineeDeveloperData = callgetlist('GetNomineeDeveloper', filterData);
+        if(getNomineeDeveloperData.length != 0) {
+            $('#nominee_modal_button').attr('disabled', 'true');
+            $(`.nomineeDevelopersList`).html(`
+                <tr>
+                    <td>${getNomineeDeveloperData[0].DeveloperName}</td>
+                    <td>${getNomineeDeveloperData[0].Month} / ${getNomineeDeveloperData[0].Year}</td>
+                    <td><button class="btn btn-primary" onclick = "editNomineeModel()"><i class="fas fa-edit"></i></button>  <button class="btn btn-danger delete-btn" onclick="deleteNomineeModal('${getNomineeDeveloperData[0].NomineeDeveloperId}')"> <i class="fas fa-trash-alt"></i></button></td>    
+                        
+                </tr>
+            `)
+           
+            //console.log(getNomineeDeveloperData);
+        } else {
+            $('#nominee_modal_button').removeAttr('disabled');
+            $(`.nomineeDevelopersList`).html(`
+                <tr>
+                    <td  colspan='6'>No Data Found</td>    
+                </tr>
+            `)
+        }
+        return getNomineeDeveloperData;
+    }
+    editNominee();
+
+    function deleteNomineeModal(developerId) {
+        swal({
+    title: "Delete",
+    text: "Are you sure, Do you want to delete?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        data = {
+          "Method": "DeleteNomineeDeveloper",
+          "Data": {
+            "@NomineeDeveloperId": developerId,
+            "@IsActive": 0
+          }
+        }
+        var result = PostDataCall(data);
+        swal({
+          title: "Success!",
+          text: "Deleted Successfully!",
+          icon: "success",
+          button: "ok!",
+        })
+        editNominee()
+        
+      }
+    })
+    }
+   function editNomineeModel() {
+       
+       var filterData = JSON.stringify({
+            "IsVoting": true,
+            "IsActive": true,
+        });
+       var getNomineeDeveloperData = callgetlist('GetNomineeDeveloper', filterData);
+        if(getNomineeDeveloperData.length != 0) {
+            var NomineeDevepoler = [];
+            NomineeDevepoler.push({
+                    'id': getNomineeDeveloperData[0].NomineeDeveloperId,
+                    'text': getNomineeDeveloperData[0].DeveloperName
+                });
+
+            $(".nomineeEmpList").select2({
+                placeholder: "Select a User",
+                allowClear: true,
+                data: NomineeDevepoler
+            });
+            try {
+                CKEDITOR.instances['nominee_comments'].destroy();
+            } catch (e) {
+                //console.log('error', e)
+            }
+            let editor1 = CKEDITOR.replace('nominee_comments', {});
+            $('#nominationMonth').val(getNomineeDeveloperData[0].Month).attr('disabled', 'true');
+            $('#nominationYear').val(getNomineeDeveloperData[0].Year).attr('disabled', 'true');
+            $(".nomineeEmpList").val(getNomineeDeveloperData[0].NomineeDeveloperId).trigger('change').attr('disabled', 'true');
+            CKEDITOR.instances['nominee_comments'].setData(getNomineeDeveloperData[0].Comments);
+            // var nomineeFiles = getDeveloperFile(getNomineeDeveloperData[0].NomineeDeveloperId);
+            // //   // Saving files to array
+            // nomineeFiles.forEach( (data,i) => {
+            //     fileStore.push({
+            //         key: data.FileId,
+            //         name: data.DocumentName,
+            //         extension: data.Extension,
+            //         date: new Date()
+            //     })
+            // })
+            // //console.log(fileStore)
+
+            // updateFileTable()
+
+            // // To reset the file input
+            // nomineeFile.value = ""
+            // fileUploadTitleHandle()
+            // //console.log(fileStore);
+            //console.log(getNomineeDeveloperData);
+        }
+        $('#nominee_modal').appendTo('body').modal('show')
+    }
+    // const demo = () => {
+    //     debugger
+    //     var filterData = JSON.stringify({
+    //     });
+    //     var getNomineeData = callgetlist('GetNomineeDeveloper', filterData);
+    //     //console.log(getNomineeData);
+    // }
+    // demo();
+</script>

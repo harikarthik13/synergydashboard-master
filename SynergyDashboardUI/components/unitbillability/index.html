@@ -1,0 +1,586 @@
+<script>
+    $(function () {
+        $("#txtBillablityAbove").dxTextBox({
+            value: "40"
+        });
+        $("#txtPrimaryIncentive").dxTextBox({
+            value: "100"
+        });
+        $("#txtSecondaryIncentive").dxTextBox({
+            value: "50"
+        });
+        $("#txtNoOfUnit").dxTextBox({
+            value: "1"
+        });
+    });
+
+</script>
+<style>
+    #resourcebilling .showempbillingdetails{
+        color:blue;
+    }
+    #empbillabledata .empbillabledetails {
+        color: blue;
+    }
+</style>
+
+<!-- Template Report Grid Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>Unit Billabilty Incentive</b></span>
+    <!-- the below button for refresh Data -->
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="GetBillableCountSummary_getReportData()">
+            <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>BillablityAbove</label>
+                <div id="txtBillablityAbove"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>PrimaryIncentive</label>
+                <div id="txtPrimaryIncentive"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>SecondaryIncentive</label>
+                <div id="txtSecondaryIncentive"></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>NoOfUnit</label>
+                <div id="txtNoOfUnit"></div>
+            </div>
+        </div>
+    </div>
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="GetBillableCountSummary_toreportGrid()">
+            <!--<i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>-->
+            show
+        </button>
+    </span>
+    <hr />
+    <div id="GetBillableCountSummary_reportGrid"></div>
+</div>
+
+//modal popup
+
+<div class="modal fade" id="mdlBillableResourceFortheMonthAndYear" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="" style="float : right">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <!--<h2 class="modal-title"><span id="lblemployeeLeadsskillratingTitile"></span>Billable Resource For the Month And Year</h2>-->
+                <h2 class="modal-title"><span id="lblemployeeLeadsskillratingTitile"></span></h2>
+            </div>
+
+            <div class="modal-body" id="EmployeeBillableModalBody" data-simplebar>
+                <!--<div id="EmployeeSkillDetailsMappingsId" style="visibility:hidden"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="view_Billable_Resource">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <!--<button type="button" class="btn btn-primary">Close</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="mdlBillableDetailsOfResourceFortheMonthAndYear" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="" style="float : right">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <!--<h2 class="modal-title"><span id="lblemployeeBillableDetailsTitile"></span>Billable Details Of Resource For the Month And Year</h2>-->
+                <h2 class="modal-title"><span id="lblemployeeBillableDetailsTitile"></span></h2>
+            </div>
+
+            <div class="modal-body" id="EmployeeBillableDetailsModalBody" data-simplebar>
+                <!--<div id="EmployeeSkillDetailsMappingsId" style="visibility:hidden"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="view_Billable_Details">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <!--<button type="button" class="btn btn-primary">Close</button>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- internal script -->
+<script>
+    const GetBillableCountSummary_ProcedureName = 'GetBillableCountSummary';
+    $(document).ready(function () {
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token;
+        GetBillableCountSummaryGridBind();
+        //renderGetBillableCountSummaryGrid(GetBillableCountSummaryGridData);
+    });
+
+    function GetBillableCountSummary_toreportGrid() {
+        GetBillableCountSummaryGridBind();
+    }
+
+    function GetBillableCountSummaryGridBind() {
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "BillablityAbove": $("#txtBillablityAbove").dxTextBox('instance').option('value'),
+            "PrimaryIncentive": $("#txtPrimaryIncentive").dxTextBox('instance').option('value'),
+            "SecondaryIncentive": $("#txtSecondaryIncentive").dxTextBox('instance').option('value'),
+            "NoOfUnit": $("#txtNoOfUnit").dxTextBox('instance').option('value')
+        });
+        GetBillableCountSummaryGridData = callgetlist("GetBillableCountSummary", filterData);
+        renderGetBillableCountSummaryGrid(GetBillableCountSummaryGridData);
+    }
+
+    function renderGetBillableCountSummaryGrid(data) {
+        var OpeningELCLGrid = $("#GetBillableCountSummary_reportGrid")
+            .dxDataGrid({
+                filterRow: {
+                    visible: true,
+                    applyFilter: "auto",
+                },
+                dataSource: data,
+                export: {
+                    enabled: true,
+                    allowExportSelectedData: true,
+                },
+                searchPanel: {
+                    visible: true,
+                    width: 240,
+                    placeholder: "Search...",
+                },
+                headerFilter: {
+                    visible: true,
+                },
+                grouping: {
+                    autoExpandAll: true,
+                },
+                pager: {
+                    showPageSizeSelector: true,
+                    allowedPageSizes: [5, 10, 20],
+                    showInfo: true,
+                },
+                paging: {
+                    pageSize: 10,
+                },
+                groupPanel: {
+                    visible: true,
+                    emptyPanelText: "Drag a column"
+                },
+                sorting: {
+                    mode: "multiple",
+                },
+                selection: {
+                    mode: "multiple",
+                },
+                summary: {
+                    totalItems: [
+                        {
+                            column: "sno",
+                            summaryType: "count",
+                        },
+                    ],
+                    groupItems: [
+                        {
+                            column: "sno",
+                            summaryType: "count",
+                        },
+                    ],
+                },
+                editing: {
+                    mode: "popup",
+                    allowAdding: false,
+                    allowUpdating: false,
+                    useIcons: true,
+                },
+                onToolbarPreparing: function (e) {
+        var dataGrid = e.component;
+        e.toolbarOptions.items.unshift({
+            location: "after",
+            widget: "dxButton",
+            options: {
+                icon: "refresh",
+                onClick: function () {                            
+                    GetBillableCountSummary_toreportGrid();
+                }
+            }
+        });
+      },
+                columnChooser: {
+                    enabled: true,
+                },
+                rowAlternationEnabled: true,
+                filterPanel: { visible: true },
+                allowColumnReordering: true,
+                allowColumnResizing: true,
+                showBorders: true,
+                columns: [
+                    {
+                        caption: "#",
+                        dataField: "sno",
+                        cssClass: "rno",
+                        allowGrouping: false,
+                        allowCollapsing: false,
+                        allReordering: false,
+                        width: 70,
+                        cellTemplate: function (container, options) {
+                            container.text(
+                                OpeningELCLGrid.pageIndex() * OpeningELCLGrid.pageSize() + options.rowIndex + 1
+                            );
+                        },
+                    },
+                    {
+                        caption: "Unit Head Incentives",
+                        dataField: "Unit Head Incentives",
+                    },
+                    {
+                        caption: "Month",
+                        dataField: "Month",
+                    },
+                    {
+                        dataField: "Total No of resources on Billing above 40 hours",
+                        width: 100,
+                        allowFiltering: false,
+                        allowSorting: false,
+                        cellTemplate: function (container, options) {
+                            var domActions = "";
+                            var starHtml = "";
+                            starHtml += "<div id='resourcebilling'>"
+                            starHtml += "<span data-empbillingmnth =" + options.data.Month + " data-empbilling =" + options.data['Total No of resources on Billing above 40 hours'] + " class='showempbillingdetails'> " + options.data['Total No of resources on Billing above 40 hours'] + "</span>";
+
+                            starHtml += "</div>";
+                            domActions += "<span>" + starHtml + "</span>";
+                            $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                        }
+                    },
+                    {
+                        caption: "No. of resources of each unit",
+                        dataField: "No of resources of each unit",
+                    },
+                    {
+                        caption: "Incentive Rate/resource",
+                        dataField: "Incentive Rate/resource",
+                    },
+                    {
+                        caption: "Incentive Amount/mth Rs",
+                        dataField: "Incentive Amount/mth Rs",
+                    },
+                    {
+                        caption: "Deputy Head 50% of Unit heads incentive",
+                        dataField: "Deputy Head 50% of Unit heads incentive",
+                    }
+                ],
+            })
+            .dxDataGrid("instance");
+    }
+
+    $(document).on("click", ".showempbillingdetails", function (e) {
+        var Employeebillablemnth = $(e.currentTarget).data("empbillingmnth");
+        var Employeebillable = $("#txtBillablityAbove").dxTextBox('instance').option('value');
+        $("#mdlBillableResourceFortheMonthAndYear").appendTo("body").modal("show");
+
+        //model popup title
+
+        $("#lblemployeeLeadsskillratingTitile").html("Billable Resource For " + Employeebillablemnth);
+
+        //GetBillableResourceFortheMonthAndYear
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "MonthAndYear": Employeebillablemnth,
+            "BillableHours": Employeebillable
+        });
+        var GetEmpDetails = callgetlist('GetBillableResourceFortheMonthAndYear', filterData);
+        
+        if (GetEmpDetails != null) {
+            renderEmpOverallBillingGrid(GetEmpDetails);
+        }
+    
+        function renderEmpOverallBillingGrid(data) {
+            var OpeningskillratingGrid = $("#view_Billable_Resource")
+                .dxDataGrid({
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto",
+                    },
+                    dataSource: data,
+                    export: {
+                        enabled: true,
+                        allowExportSelectedData: true,
+                    },
+                    searchPanel: {
+                        visible: true,
+                        width: 240,
+                        placeholder: "Search...",
+                    },
+                    headerFilter: {
+                        visible: true,
+                    },
+                    grouping: {
+                        autoExpandAll: true,
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [5, 10, 20],
+                        showInfo: true,
+                    },
+                    paging: {
+                        pageSize: 10,
+                    },
+                    groupPanel: {
+                        visible: true,
+                        emptyPanelText: "Drag a column"
+                    },
+                    sorting: {
+                        mode: "multiple",
+                    },
+                    selection: {
+                        mode: "multiple",
+                    },
+                    summary: {
+                        totalItems: [
+                            {
+                                column: "sno",
+                                summaryType: "count",
+                            },
+                        ],
+                        groupItems: [
+                            {
+                                column: "sno",
+                                summaryType: "count",
+                            },
+                        ],
+                    },
+                    editing: {
+                        mode: "popup",
+                        allowAdding: false,
+                        allowUpdating: false,
+                        useIcons: true,
+                    },
+                    columnChooser: {
+                        enabled: true,
+                    },
+                    rowAlternationEnabled: true,
+                    //filterPanel: { visible: true },
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    showBorders: true,
+                    columns: [
+                        {
+                            caption: "#",
+                            dataField: "sno",
+                            cssClass: "rno",
+                            allowGrouping: false,
+                            allowCollapsing: false,
+                            allReordering: false,
+                            width: 70,
+                            cellTemplate: function (container, options) {
+                                container.text(
+                                    OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                );
+                            },
+                        },
+                        {
+                            caption: "Employee Number",
+                            dataField: "employeenumber",
+                        },
+                        {
+                            caption: "Employee Name",
+                            dataField: "employee_name",
+                            allowFiltering: false,
+                            allowSorting: false,
+                            cellTemplate: function (container, options) {
+                                var domActions = "";
+                              
+                                var starHtml = "";
+                                starHtml += "<div id='empbillabledata'>"
+                                starHtml += "<span data-empname =" + encodeURIComponent(options.data.employee_name) + " data-empnum =" + options.data.employeenumber + "  data-month =" + options.data.Month + " data-year =" + options.data.Year + " class='empbillabledetails'>" + options.data.employee_name + "</span>";
+                                starHtml += "</div>";
+                                domActions += "<span>" + starHtml + "</span>";
+                                $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                            }
+                        },
+                        {
+                            caption: "BillableHours",
+                            dataField: "BillableHours"
+                        }
+
+                    ],
+                })
+                .dxDataGrid("instance");
+        }
+    });
+    $(document).on("click", ".empbillabledetails", function (e) {
+        var employee_name = $(e.currentTarget).data("empname");
+        var Employeenumber = $(e.currentTarget).data("empnum");
+        var month = $(e.currentTarget).data("month");
+        var year = $(e.currentTarget).data("year");
+        $("#mdlBillableDetailsOfResourceFortheMonthAndYear").appendTo("body").modal("show");
+
+        $("#lblemployeeBillableDetailsTitile").html("Billable Details for " + decodeURIComponent(employee_name))
+
+        //GetBillableResourceFortheMonthAndYear
+        var filterData = JSON.stringify({
+            "Token": Token,
+            "EmployeeNumber": Employeenumber,
+            "Month": month,
+            "Year": year
+        });
+        var GetEmpBillableDetails = callgetlist('GetBillableDetailsOfResourceFortheMonthAndYear', filterData);
+
+
+        if (GetEmpBillableDetails != null) {
+            renderBillableDetailsOfResourceGrid(GetEmpBillableDetails);
+        }
+        function renderBillableDetailsOfResourceGrid(data) {
+            var OpeningskillratingGrid = $("#view_Billable_Details")
+                .dxDataGrid({
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto",
+                    },
+                    dataSource: data,
+                    export: {
+                        enabled: true,
+                        allowExportSelectedData: true,
+                    },
+                    searchPanel: {
+                        visible: true,
+                        width: 240,
+                        placeholder: "Search...",
+                    },
+                    headerFilter: {
+                        visible: true,
+                    },
+                    grouping: {
+                        autoExpandAll: true,
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [5, 10, 20],
+                        showInfo: true,
+                    },
+                    paging: {
+                        pageSize: 10,
+                    },
+                    groupPanel: {
+                        visible: true,
+                        emptyPanelText: "Drag a column"
+                    },
+                    sorting: {
+                        mode: "multiple",
+                    },
+                    summary: {
+                        totalItems: [
+                            {
+                                column: "Billed Hours",
+                                summaryType: "sum",
+                                displayFormat: "Total Billed Hours: {0}"
+                            },
+                        ],
+                        groupItems: [
+                            {
+                                column: "Billed Hours",
+                                summaryType: "sum",
+                                displayFormat: "Total Billed Hours: {0}"
+                            },
+                        ],
+                    },
+                    editing: {
+                        mode: "popup",
+                        allowAdding: false,
+                        allowUpdating: false,
+                        useIcons: true,
+                    },
+                    columnChooser: {
+                        enabled: true,
+                    },
+                    rowAlternationEnabled: true,
+                    //filterPanel: { visible: true },
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    showBorders: true,
+                    columns: [
+                        {
+                            caption: "#",
+                            dataField: "sno",
+                            cssClass: "rno",
+                            allowGrouping: false,
+                            allowCollapsing: false,
+                            allReordering: false,
+                            width: 70,
+                            cellTemplate: function (container, options) {
+                                container.text(
+                                    OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                );
+                            },
+                        },
+                        {
+                            caption: "Date",
+                            dataField: "Date",
+                            dataType: "date",
+                            format: "dd-MMM-yy"
+
+                            // caption: "Date",
+                            //dataField: "DateKey",
+                            //dataType: "date",
+                            //format: "yyyy-MM-dd",
+                            //width: 100
+                        },
+                        {
+                            caption: "Project Name",
+                            dataField: "projectname"
+                        },
+                        {
+                            caption: "Client",
+                            dataField: "Client"
+                        },
+                        {
+                            caption: "Approved Hours",
+                            dataField: "Approved Hours",
+                        },
+                        {
+                            caption: "Billed Hours",
+                            dataField: "Billed Hours"
+                        }
+                    ],
+                })
+                .dxDataGrid("instance");
+        }
+    });
+
+
+    //GetBillableCountSummary_getReportData();
+</script>

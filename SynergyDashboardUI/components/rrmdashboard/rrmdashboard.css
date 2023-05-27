@@ -1,0 +1,180 @@
+.rrmdasboard .card-box {
+    position: relative;
+    color: #fff;
+    padding: 20px 10px 40px;
+    margin: 20px 0px;
+}
+
+.rrmdasboard .card-box:hover {
+    text-decoration: none;
+    color: #f1f1f1;
+}
+
+.rrmdasboard .card-box:hover .icon i {
+    font-size: 100px;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+.rrmdasboard .card-box .inner {
+    padding: 5px 10px 0 30px;
+}
+
+.rrmdasboard .card-box h3 {
+    font-size: 27px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    white-space: nowrap;
+    padding: 0;
+    text-align: left;
+}
+
+.rrmdasboard .card-box p {
+    font-size: 15px;
+}
+
+.rrmdasboard .card-box .icon {
+    position: absolute;
+    top: auto;
+    bottom: 5px;
+    right: 5px;
+    z-index: 0;
+    font-size: 72px;
+    color: rgba(0, 0, 0, 0.15);
+}
+
+.rrmdasboard .card-box .card-box-footer {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
+    padding: 3px 0;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    text-decoration: none;
+}
+.rrmdasboard .card-box .card-box-footer i{
+    margin-left: .5rem;
+}
+
+.rrmdasboard .card-box:hover .card-box-footer {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.rrmdasboard .bg-blue {
+    background-color: darkcyan !important;
+}
+
+.rrmdasboard .bg-green {
+    background-color: seagreen !important;
+}
+
+.rrmdasboard .bg-orange {
+    background-color: orange !important;
+}
+
+.rrmdasboard .bg-red {
+    background-color: #d9534f !important;
+}
+
+.btn.activeRRMBoard {
+    background-color: #46ad46;
+    color: #fff;
+}
+
+
+
+/* rrmdasboard css */
+html{
+    font-size: 14px;
+}
+.card-box{
+    height: 100%;
+    border-radius: 0.3rem;
+    color: #000;
+    position: relative;
+    min-height: 10rem;
+    overflow: hidden; 
+    box-shadow: 0px 2px 7px -2px rgb(0 0 0 / 90%);   
+}
+.card-box:hover{
+    box-shadow: 0px 2px 7px -1px rgb(0 0 0 / 90%); 
+}
+.card-box .card-count{
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+.card-box .card-title{
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+.card-box .card-link {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, .1);
+    width: 100%;
+    left: 0;
+    font-size: .75rem;
+    text-align: center;
+    color: #000;
+    cursor: pointer;
+}
+
+.card-rrm{
+    background: #16eca0;
+}
+.card-profiles{
+    background: #149b81;
+}
+.card-no-interviews{
+    background: #297cb3;
+}
+
+.card-offer-dispatched{
+    background: #dd9815;
+}
+.card-candidates-onboard{
+    background: #8a42a8;
+}
+
+.pill-capsule{
+    background: #f1f1f1;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 2rem;
+    padding: 0 .8rem 0 0rem;
+    opacity: 1;
+    box-shadow: 1px 1px 2px -1px rgb(0 0 0 / 75%);
+    margin: 0 1.5rem 0.5rem 0;
+    cursor: pointer;
+}
+.pill-capsule:hover{
+    box-shadow: 1px 1px 6px -2px rgb(0 0 0 / 75%);
+}
+.pill-capsule .pill-pic{
+    max-width: 2.5rem;
+    width: 100%;
+    max-height: 2.5rem;
+    background: #fff;
+    border-radius: 50%;
+    margin: 0 1rem 0 0;
+    border: 2px solid #f1f1f1;
+    box-shadow: 1px 1px 1px 0px rgb(0 0 0 / 20%);
+    overflow: hidden;
+}
+.pill-capsule .pill-pic img{
+    max-width: 100%;
+    object-fit: cover;
+    min-width: 2.5rem;
+}
+.pill-capsule .pill-text{
+    white-space: nowrap;
+    width: 100%;
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

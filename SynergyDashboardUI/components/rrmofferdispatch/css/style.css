@@ -1,0 +1,39 @@
+#RRMOfferModal .table-label{
+    width:25%  !important;
+}
+
+#RRMOfferModal {
+    width: 100%;
+}
+
+#RRMOfferModal .modal-content{
+    width: 70%;
+}
+
+#RRMOfferModal .modal-body{
+    min-height:calc(100vh - 200px)
+}
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+    text-align: left !important;
+    padding:5px;
+    font-size: 11pt;
+}
+
+#RRMDetailsOfferDispatchModal .table-label{
+    width:25%  !important;
+}
+
+#RRMDetailsOfferDispatchModal {
+    width: 100%;
+}
+
+#RRMDetailsOfferDispatchModal .modal-content{
+    width: 70%;
+}

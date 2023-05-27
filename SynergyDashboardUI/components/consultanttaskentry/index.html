@@ -1,0 +1,188 @@
+<div class="card-detail">
+    <span class="modal-not-include">
+        <span class="card-detail-title"><b>Consultant Task Entry</b></span>
+        <hr>
+    </span>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Consultant</label>
+           </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Project</label>
+                </div>
+          </div> 
+          <div class="col-md-4">
+            <div class="form-group">
+                <label>Lead</label>
+                </div>
+          </div>             
+    </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div id="consultantSelectBox"></div>
+    </div>
+    <div class="col-md-4">
+      <div id="projectSelectBox"></div>
+    </div>
+    <div class="col-md-4">
+      <div id="leadSelectBox"></div>
+    </div>
+  </div>
+  <div id="dataGridContainer"></div>
+</div>
+<script src='components/consultanttaskentry/js/consultanttaskentry.js'></script>
+<script>
+   
+    var consultant_data = JSON.stringify({
+        "IsActive":true,
+    });
+    
+    var consultantDataSource = callgetlist('GetConsultantList', consultant_data)
+
+    $("#consultantSelectBox").dxSelectBox({
+        dataSource: consultantDataSource,
+        valueExpr: "ID",
+        displayExpr: "Name",
+      value: "Saravanan",
+      onValueChanged: function(e) {
+            consultantChanged(e)
+        }
+    });
+
+    var consultant =$("#consultantSelectBox").dxSelectBox('instance').option('value');
+    var project_filter_data = JSON.stringify({
+        "IsActive":true,
+       "ConsultantName":consultant,
+    });
+
+   var projectDataSource = callgetlist('GetProjectsForConsultant', project_filter_data);
+    $("#projectSelectBox").dxSelectBox({
+        dataSource: projectDataSource,
+        valueExpr: "Projects",
+        displayExpr: "Projects",
+        value:"test",
+        searchEnabled: true,
+        onValueChanged: function(e) {
+            projectLoadGrid(e)
+        }
+    });
+    
+    var lead_filter_data = JSON.stringify({
+        "IsActive":true,
+       "ConsultantName":consultant,
+    });
+    var leadDataSource = callgetlist('GetLeadsForConsultant', lead_filter_data);
+
+    $("#leadSelectBox").dxSelectBox({
+        dataSource: leadDataSource,
+        valueExpr: "ProjectLead",
+        displayExpr: "ProjectLead",
+        value:"Diviamon Antony",
+        searchEnabled: true,
+        onValueChanged: function(e) {
+            leadLoadGrid(e)
+        }
+    });
+
+   var filter_file_val = JSON.stringify({
+      "IsActive":true,
+       "ConsultantName":$("#consultantSelectBox").dxSelectBox('instance').option('value'),
+       "ProjectName":$("#projectSelectBox").dxSelectBox('instance').option('value'), 
+       "LeadName":$("#leadSelectBox").dxSelectBox('instance').option('value')
+    });
+
+   var tableDataSource = callgetlist('GetConsultantLog', filter_file_val);
+
+    var isEdit = function(position) {
+        return position;
+    };
+
+    var isDelete = function(position) {
+        return position;
+    };
+
+   $("#dataGridContainer").dxDataGrid({
+        dataSource: tableDataSource,
+        keyExpr: "Id",
+        showBorders: true,
+        allowColumnReordering: true,
+          columnChooser: {
+            enabled: true,
+            allowSearch: true
+          },
+          export: {
+            enabled: true,
+            allowExportSelectedData: true
+          },
+        paging: {
+            enabled: false
+        },
+        editing: {
+            mode: "row",
+            allowAdding: true,
+            allowUpdating: function(e) {
+                return isEdit(e.row.data.ApprovedHours==null);
+            },
+            allowDeleting: function(e) {
+                return isDelete(e.row.data.ApprovedHours==null);
+            }
+        }, 
+        columns: [
+            {
+                dataField: "Date",
+                caption: "Date",
+                dataType: "date",
+                validationRules: [{ type: "required" }]
+            }, {
+                dataField: "Task",
+                caption: "Task",
+                validationRules: [{ type: "required" }]
+            },
+            {
+                dataField: "LoggedHours",
+                caption: "LoggedHours",
+                validationRules: [{ type: "required" }]
+            },    
+        ],
+        onEditingStart: function(e) {
+            // logEvent("EditingStart");
+        },
+        onInitNewRow: function(e) {
+            // logEvent("InitNewRow");
+        },
+        onRowInserting: function(e) {
+            var filter = {"IsActive":true,
+            "ConsultantName":$("#consultantSelectBox").dxSelectBox('instance').option('selectedItem').Name,
+       "ConsultantId":$("#consultantSelectBox").dxSelectBox('instance').option('value'),
+       "ProjectName":$("#projectSelectBox").dxSelectBox('instance').option('value'), 
+       "LeadName":$("#leadSelectBox").dxSelectBox('instance').option('value')
+    };
+            addConsultantTaskEntry(e, filter);
+        },
+        onRowInserted: function(e) {
+            // logEvent("RowInserted");
+        },
+        onRowUpdating: function(e) {
+            var filter = {"IsActive":true,
+            "ConsultantName":$("#consultantSelectBox").dxSelectBox('instance').option('selectedItem').Name,
+            "ConsultantId":$("#consultantSelectBox").dxSelectBox('instance').option('value'),
+            "ProjectName":$("#projectSelectBox").dxSelectBox('instance').option('value'), 
+            "LeadName":$("#leadSelectBox").dxSelectBox('instance').option('value')
+            };
+            updateConsultantTaskEntry(e,filter);
+        },
+        onRowUpdated: function(e) {
+            // logEvent("RowUpdated");
+        },
+        onRowRemoving: function(e) {
+            // logEvent("RowRemoving");
+        },
+        onRowRemoved: function(e) {
+            // logEvent("RowRemoved");
+        }
+    });
+</script>

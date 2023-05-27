@@ -1,0 +1,41 @@
+<link href="components/employeePerformance/css/style.css" rel="stylesheet" />
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+<script src='components/employeePerformance/js/employeePerformance.js'></script>
+
+<div class="card-detail">
+	<span><i><img src="components/project/images/project.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Employee Performance</b></span>
+	<hr>
+    <div class="row">
+    <div class="col-md-3">
+    <div id="employeeSelectBox"></div>
+</div>
+    <div class="col-md-3">
+    <button class="btn btn-primary openbtn" onclick="getEmployeeId()">
+       GO
+     </button>
+    </div>
+    </div>
+    <br>
+
+	<div class="tab">
+        <button class="tablinks active" onclick="openEmpPerformancetab(event, 'EmpData')">Data <span style="color: red"></span></button>
+        <button class="tablinks" onclick="openEmpPerformancetab(event, 'EmpGraph')">Graph <span style="color: red"></span></button>
+    </div>
+
+	<div id="employeePerformance-tabConent">
+        <div id="EmpData" class="tabcontent" style="display: block;">
+            <div class="table-responsive">
+                <div id="emp-data-grid"></div>
+            </div>
+        </div>
+
+        <div id="EmpGraph" class="tabcontent">
+            <div class="table-responsive">
+                <div id="emp-data-graph"></div>
+            </div>
+        </div>
+	</div>
+</div>
+
+

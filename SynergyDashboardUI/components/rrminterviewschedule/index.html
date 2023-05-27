@@ -1,0 +1,219 @@
+<link href="components/rrminterviewschedule/css/style.css" rel="stylesheet" />
+<script src='components/rrminterviewschedule/js/rrminterviewschedule.js'></script>
+<div class="card-detail">
+  <span><i><img src="components/rrminterviewschedule/images/interviewicon.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Interview Schedule</b></span>
+  <hr />
+  <div>
+    <div id="sdgd-rrmInterviewSchedule"></div>
+  </div>
+</div>
+
+<div class="modal fade" id="InterviewScheduleModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                      onclick="closeInterviewScheduleModal()">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title" id="interviewScheduleModaltitle"><span id="interviewSchedulemodelpagetitle">Schedule Interview</span>&nbsp; <span><label id="RecruiterProfileMappingrrmType">&nbsp; </label></span></h2>
+          </div>
+
+          <div class="modal-body" id="rrm_InterviewScheduleModalBody" data-simplebar>
+              <span id="interviewScheduleId" class="hidden"></span>
+              <div role="tabpanel">
+                <ul class="nav nav-tabs" role="tablist" id="rrmInterviewScheduleTabs">
+                  <li role="presentation" class="active" id="rrm_InterviewScheduleTab" data-tab="rrm_InterviewSchedule">
+                    <a aria-controls="rrm_InterviewSchedule" role="tab">Interview Schedule</a>
+                  </li>
+                  <li role="presentation" id="rrm_InterviewScheduleInterviewHistoryTab" data-tab="rrm_InterviewScheduleInterviewHistory">
+                    <a aria-controls="rrm_InterviewScheduleInterviewHistory" role="tab">Interview(s) History</a>
+                  </li>
+                </ul>
+                <div class="tab-content" id="rrmOfferInterviewScheduleDetails">
+                  <div role="tabpanel" class="tab-pane active" id="rrm_InterviewSchedule">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h4>Candidate Details:</h4>
+                        <hr />
+                      </div>           
+                      <div class="col-md-3 text-center">
+                        <br/>
+                        <img src="components/rrminterviewschedule/images/profilepicture.png" id="img-candidateProfile" width="100px" height="100px" class="img-circle" /> 
+                      </div>
+                      <div class="col-md-4"> 
+                        <span id="lbl-candidateName"></span> 
+                        <br/>
+                        <span class="lbl-title"><b><i class="fa fa-mobile-alt"></i></b>                      
+                        </span> 
+                        <span class="lbl-value" id="lbl-candidateMobileNumber"></span> 
+                        <br/>                    
+                        <span class="lbl-title"><b><i class="fa fa-envelope"></i></b>                      
+                        </span> 
+                        <span class="lbl-value" id="lbl-candidateEmailId"></span>
+                        <br/>
+                        <span class="lbl-value" id="lbl-candidateSocialLinks" style="font-size: 16pt"></span>  
+                        <br/>                                
+                        <span class="lbl-value" id="lbl-CandidateResume"></span>
+                        <br/>
+                        <span colspan="2" class="lbl-value"> Communication Rating: <span id='star-communicationrating'></span></span>
+                      </div>
+                      <div class="col-md-5">
+                          <span class="lbl-value">Skills: </span><span id="lbl-candidateSkills"></span>
+                          <br/>
+                          <span class="lbl-value">Native: </span><span id="lbl-nativeInfo"></span>
+                          <br/>
+                          <span class="lbl-value">Work experience: </span><br/><span id="lbl-workexperience"></span>      
+                      </div>
+                  </div>
+                  <br/>
+                  <div class="row">
+                      <div class="col-md-12">
+                        <h4>Interview Details:</h4>
+                        <hr />
+                      </div>  
+                      <div class="col-md-4">
+                        <label>Interviewers &nbsp; <span style="color: red">*</span></label>
+                        <div id="sdd-interviewerForSchedule"></div>
+                        <span class="error_message" id="err-Interviewers"></span>
+                      </div>
+                      <div class="col-md-4">
+                        <label>Mode &nbsp; <span style="color: red" >*</span></label>
+                        <div id="sdd-modeForinterviewSchedule"></div>
+                        <span class="error_message" id="err-InterviewMode"></span>
+                      </div>
+                      <div class="col-md-4">
+                        <label id ="lbl-interviewDetails">Interview Detail</label>
+                        <div id="sdtxt-interviewDetailForSchedule"></div>
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label>Type &nbsp; <span style="color: red" >*</span></label>
+                      <div id="sdd-interviewTypeForSchedule"></div>
+                      <span class="error_message" id="err-InterviewType"></span>
+                    </div>               
+                    <div class="col-md-4">
+                      <label>Date</label>
+                      <div id="sddb-dateForInterviewSchedule"></div>
+                    </div>
+                  <div class="col-md-4">
+                    <label>Time</label>
+                    <div id="sddb-timeForInterviewSchedule"></div>
+                  </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <label>Hr Comments</label>
+                        <div id="sdtxt-hrCommmentsForInterviewSchedule"></div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <button type="button" id="btn-saveInterviewSchedule" class="btn btn-success" onclick="addStageToInterview()">Save</button>
+                      <button type="button" id="btn-updateInterviewSchedule" class="btn btn-success" onclick="addStageToInterview()">Update</button>
+                      <button type="button" class="btn btn-primary" onclick="refreshControlsForInterviewScheduleModal()">Cancel</button>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div id="sdgd-candidateStagesForSchedule"></div>
+                      </div>
+                  </div>
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="rrm_InterviewScheduleInterviewHistory">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="panel-group" id="rrm_InterviewScheduleInterviewHistoryAccordian" >
+                                                 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>              
+          </div>
+      </div>
+  </div>
+</div>
+
+<div id="rrmDetailsForInterviewSchedule"></div>
+
+<div class="modal fade" id="rrm_interviewschedule_remarks" role="dialog">
+  <div class="modal-dialog" role="document">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">            
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+           onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+           <h2 class="modal-title"><span id="lblcandidateTrackerTitile">Remarks </span><span id="RRMEntryPointCommentsRRMNo"></span>&nbsp;</h2>
+     </div>
+
+      <div class="modal-body" id="rrm_interviewschedule_remarksBody" data-simplebar>
+          <div id="remarksBodyRRM">
+          
+          </div>
+        
+      <div class="modal-footer">
+        <div>
+          <button type="button" class="btn btn-primary" onclick="closeRRMInterviewSchedule();">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var rrmData = [];
+  var interviewersData=[];
+  $(document).ready(function () {
+    getRRMList();
+    getInterviewersList();
+  });
+  function getRRMList(){
+        rrmData = [];
+        var rrmListfilterData = JSON.stringify({
+            "IsActive": true
+        });
+        var rrmListList = callgetlist('GetRRM', rrmListfilterData);        
+        if (rrmListList.length > 0) {
+            rrmListList.forEach(function (i, index) {
+                rrmData.push({
+                    'RRMId': i['RRMId'],
+                    'RRMName':i['RRMNo']+" - "+i['RequirementName']
+                });
+            });
+        }
+    }
+    function getInterviewersList(){
+        interviewersData = [];
+        var interviewersListfilterData = JSON.stringify({
+            "IsActive": true
+        });
+        var interviewersList = callgetlist('GetEmployeeList', interviewersListfilterData);        
+        if (interviewersList.length > 0) {
+            interviewersList.forEach(function (i, index) {
+                interviewersData.push({
+                    'EmployeeId': i['EmployeeId'],
+                    'EmployeeName': i['Name']
+                });
+            });
+        }
+    }    
+</script>
+
+<script>
+    $("#rrmDetailsForInterviewSchedule").load("components/rrminterviewschedule/rrmdetailsinterviewschedulemodal.html");
+    
+    $(document).on("click", ".rrmdetailInterviewSchedule", function (e) {
+        var rrmId = $(e.currentTarget).data("rrmid");           
+        getRRMDetailsForInterviewSchedule(rrmId);
+    });
+
+</script>
+

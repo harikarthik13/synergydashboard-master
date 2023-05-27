@@ -1,0 +1,23 @@
+<link href="components/applicationdefaults/style.css" rel="stylesheet" />
+<div class="card-detail" style="height: auto;">
+    <h4>Company Customization</h4>
+      <span class="pull-right">
+        <!-- <button class="btn btn-sm btn-primary" onclick="openAddDefaults();">
+          <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button> -->
+      </span> <br/>
+      <!-- <div class="row">
+        <div class="col-md-12"> -->
+        <!-- </div> -->
+      <!-- </div> -->
+      <div id="ad_grid_list"></div>
+</div>
+<div id="addDefaultsModel"></div>
+<script type="text/javascript" src="components/applicationdefaults/applicationdefaults.js"></script>
+<script>
+  $(document).ready(function () {   
+    var ad_desc = '';
+    $("#addDefaultsModel").load("components/applicationdefaults/addDefaultsModel.html");   
+  
+  })
+</script>

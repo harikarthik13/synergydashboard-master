@@ -1,0 +1,439 @@
+<!-- Timesheet Upload Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>Client Formated Timesheet Upload</b></span>
+    <button class="btn btn-primary pull-right btn-xs" id="ViewHistory" onclick="viewHistory();">View History</button>
+    <hr />
+
+    <div class="ucft-container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="ucftMonth">Month</label>
+                    <select class="form-control" id="ucftMonth">
+                        <option value="">Select Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="ucftYear">Year</label>
+                    <select class="form-control" id="ucftYear">
+                        <option value="">Select Year</option>
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="ucftType">File Type</label>
+                    <select class="form-control" id="ucftType">
+                        <option value="">Select Type</option>
+                        <option value="Type1">Type1</option>
+                        <option value="Type2">Type2</option>
+                        <option value="Type3">Type3</option>
+                        <option value="Type4">Type4</option>
+                        <option value="Type5">Type5</option>
+                        <option value="Type6">Type6</option>
+                        <option value="Type7">Type7</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="ucftUploadTimesheet">Example file input</label>
+                    <input type="file" class="form-control-file" id="ucftUploadTimesheet">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button id="ucftPostTimesheet" onclick="UploadClientFormatTimeSheet()"
+                    class="btn btn-success pull-right">Upload</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="ucft-help-container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ucftHelpTable">Information on Available Types</label>
+                    <table class="table table-bordered" id="ucftHelpTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Type</th>
+                                <th>Clients</th>
+                                <th>Sample</th>
+                                <th>Sample Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Type 1</td>
+                                <td>Polymorph</td>
+                                <td><a href="./components/uploadclientformattimesheet/samples/Type1.xlsx"
+                                        target="_blank">Download Sample</a></td>
+                                <td><a onclick="showInfo('type1')">Preview</a></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Type 2</td>
+                                <td>Common Goals Software, Interpix Design, Ramphou, Assist Cornerstone</td>
+                                <td><a href="./components/uploadclientformattimesheet/samples/Type2.xlsx"
+                                        target="_blank">Download Sample</a></td>
+                                        <td><a onclick="showInfo('type2')">Preview</a></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Type 3</td>
+                                <td>Kazaan, Nika Labs</td>
+                                <td><a href="./components/uploadclientformattimesheet/samples/Type3.xlsx"
+                                        target="_blank">Download Sample</a></td>
+                                        <td><a onclick="showInfo('type3')">Preview</a></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Type 4</td>
+                                <td>North Net</td>
+                                <td><a href="./components/uploadclientformattimesheet/samples/Type4.xlsx"
+                                        target="_blank">Download Sample</a></td>
+                                        <td><a onclick="showInfo('type4')">Preview</a></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Type 5</td>
+                                <td>Tracx TMS</td>
+                                <td><a href="./components/uploadclientformattimesheet/samples/Type5.xlsx"
+                                        target="_blank">Download Sample</a></td>
+                                        <td><a onclick="showInfo('type5')">Preview</a></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Type 6</td>
+                                <td>HWA, BIS_G2, Med49</td>
+                                <td>
+                                        <a href="./components/uploadclientformattimesheet/samples/SingleTaskSet.xlsx"
+                                        target="_blank"> Download (Single Task Set)</a><br/>
+                                        <a href="./components/uploadclientformattimesheet/samples/MultiTaskSet.xlsx"
+                                        target="_blank"> Download (Multi Task Set)</a>
+                                    </td>
+                                    <td><a onclick="showInfo('type6-1')">Preview (Single)</a><br/>
+                                        <a onclick="showInfo('type6-2')">Preview (Multiple)</a></td>
+                                    
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Type 7</td>
+                                <td>Astidian</td>
+                                <td><a href="./components/uploadclientformattimesheet/samples/Type7.xlsx"
+                                        target="_blank">Download Sample</a></td>
+                                        <td><a onclick="showInfo('type7')">Preview</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  View History Modal -->
+    <div class="modal fade bd-example-modal-lg in" id="ViewHistoryModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">View History </h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label>Select Year</label>
+                                <div class="form-group">
+                                    <select id="ddlUploadYears" class="form-control"></select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Select Month</label>
+                                <div class="form-group">
+                                    <select id="ddlUploadMonths" class="form-control">
+                                            <option value='January'>January</option>
+                                            <option value='February'>February</option>
+                                            <option value='March'>March</option>
+                                            <option value='April'>April</option>
+                                            <option value='May'>May</option>
+                                            <option value='June'>June</option>
+                                            <option value='July'>July</option>
+                                            <option value='August'>August</option>
+                                            <option value='September'>September</option>
+                                            <option value='October'>October</option>
+                                            <option value='November'>November</option>
+                                            <option value='December'>December</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <label></label>
+                                <div class="form-group">
+                                    <button id="btnShowHistory" type="button" class="btn btn-primary"
+                                        onclick="getHistory()">Show History</button>
+                                </div>                                
+                            </div>
+
+                            <div class="col-md-2">
+                                <label></label>
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-danger" id="ucfBack" onclick="getHistory()">Go Back</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div id="viewHistoryContainer"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>                       
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popup">       
+    </div>
+</div>
+
+<!-- internal script -->
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var listTimesheetHistory;
+        var date = new Date();
+        //For binding months
+        var select = document.getElementById('ddlUploadMonths');
+        var html = '';
+        var n;
+        for (var i = 0; i < 12; i++) {
+            n = date.getMonth()-1;
+        }
+        select.selectedIndex  = n;
+
+        //For binding years
+        $('#ddlUploadYears').each(function () {
+            var year = (new Date()).getFullYear();
+            var current = year;
+            year -= 3;
+            for (var i = 0; i < 6; i++) {
+                if ((year + i) == current)
+                    $(this).append('<option selected value="' + (year + i) + '">' + (year + i) + '</option>');
+                else
+                    $(this).append('<option value="' + (year + i) + '">' + (year + i) + '</option>');
+            }
+        });
+
+        var types = [{ ID: 1, Name: 'Type1' }, { ID: 2, Name: 'Type2' }, { ID: 3, Name: 'Type3' }, { ID: 4, Name: 'Type4' }, { ID: 5, Name: 'Type5' }, { ID: 6, Name: 'Type6' }, { ID: 7, Name: 'Type7' }];
+
+        $("#timesheettype").dxSelectBox({
+            dataSource: types,
+            valueExpr: "Name",
+            displayExpr: "Name",
+            searchEnabled: true
+        });
+    });
+
+    function viewHistory() {
+        $('#ViewHistoryModal').appendTo("body").modal('show');
+        getHistory();
+    }
+
+    function getHistory() {
+        var month = document.getElementById("ddlUploadMonths").value;
+        var year = document.getElementById("ddlUploadYears").value;
+        listTimesheetHistory = callgetlist('GetTimeSheetHistory', '{"Year":"' + year + '","Month":"' + month + '","Status":"","Message":""}');
+        bindTimesheetHistory();
+    }
+
+    function bindTimesheetHistory() {
+        var options = getDevExtremeGridJson();
+        options.dataSource = listTimesheetHistory;
+        options.columns = [
+            { caption: "Lead Name", dataField: "LeadName" },
+            { caption: "Project Name", dataField: "Project" },
+            { caption: "Period", dataField: "Period" },
+            { caption: "Billable Hours", dataField: "billableHours" },
+            {
+                dataField: "",
+                caption: "Action",
+                cellTemplate: function (container, options) {
+                    var project = options.data.Project;                    
+                    var domActions = "";
+                    domActions += "<button class='btn btn-xs btn-default' id='btnSummary' onclick=ViewSummary('" + encodeURIComponent(project) + "')>View Summary</button>";                    
+                    $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                }
+            },
+            {
+                dataField: "",
+                caption: "Action",
+                cellTemplate: function (container, options) {
+                    var project = options.data.Project;
+                    var domActions = "";
+                    domActions += "<button class='btn btn-xs btn-default' id='btnDetails' onclick=ViewDetails('" + encodeURIComponent(project) + "')>View Details</button>";
+                    
+                    $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                }
+            }
+        ];
+        var dataGrid = $("#viewHistoryContainer").dxDataGrid(options).dxDataGrid("instance");
+
+        var btnBack = document.getElementById("ucfBack");
+        btnBack.style.display = "none";
+        }
+    
+    function ViewSummary(project)
+    {
+        var month = document.getElementById("ddlUploadMonths").value;
+        var year = document.getElementById("ddlUploadYears").value;
+        var summary = callgetlist('GetTimeSheetHistorySummary', '{"Year":"' + year + '","Month":"' + month + '","Project":"' + project + '","Message":"","Status":""}');
+
+        var options = getDevExtremeGridJson();
+        options.dataSource = summary;
+        options.columns = [
+            { caption: "Resource Name", dataField: "ResourceName" },
+            { caption: "Billable Hours", dataField: "billableHours" }
+        ];
+        var dataGrid = $("#viewHistoryContainer").dxDataGrid(options).dxDataGrid("instance");
+        
+        var btnBack = document.getElementById("ucfBack");
+        btnBack.style.display = "block";
+    }
+
+    function ViewDetails(project)
+    {
+        var month = document.getElementById("ddlUploadMonths").value;
+        var year = document.getElementById("ddlUploadYears").value;
+        var summary = callgetlist('GetTimeSheetHistoryDetail', '{"Year":"' + year + '","Month":"' + month + '","Project":"' + project + '","Message":"","Status":""}');
+
+        var options = getDevExtremeGridJson();
+        options.dataSource = summary;
+        options.columns = [
+            { caption: "Date", dataField: "Date", dataType: "date", format: 'yyyy-MM-dd' },
+            { caption: "Resource Name", dataField: "ResourceName" },
+            { caption: "Task Description", dataField: "TaskDescription" },            
+            { caption: "Actual Hours", dataField: "ActualHours" },
+            { caption: "Billable Hours", dataField: "BillableHours" }
+        ];
+        var dataGrid = $("#viewHistoryContainer").dxDataGrid(options).dxDataGrid("instance");
+
+        var btnBack = document.getElementById("ucfBack");
+        btnBack.style.display = "block";
+    }
+
+    function UploadClientFormatTimeSheet() {
+        let filetype = $("#ucftType").val();
+        let month = $("#ucftMonth").val();
+        let year = $("#ucftYear").val();
+        var inputFile = document.getElementById('ucftUploadTimesheet');
+        if (filetype === null || filetype == "") {
+            alert("Please Select a Type");
+            return;
+        }
+        else if (month === null || month == "") {
+            alert("Please Select the Month");
+            return;
+        }
+        else if (year === null || year == "") {
+            alert("Please Select the Year");
+            return;
+        }
+        else if (!inputFile) {
+            alert("Sorry, cannot find the update control.");
+            return;
+        }
+        else if (!inputFile.files) {
+            alert("This browser doesn't seem to support the `files` property of file inputs.");
+            return;
+        }
+        else if (!inputFile.files[0]) {
+            alert("Please select a file before clicking 'Upload'");
+            return;
+        }
+        else {
+            let file = inputFile.files[0];
+            let formData = new FormData();
+
+            formData.append("file", file);
+            formData.append("month", month);
+            formData.append("year", year);
+            formData.append("filetype", filetype);
+
+            let token = localStorage.getItem("securityToken");
+            $.ajax({
+                url: SynergyAPIURL + "UploadClientFormatTimesheet",
+                type: 'POST',
+                beforeSend: function (request) {
+                    request.setRequestHeader("SecurityToken", token);
+                },
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        alert(data.Message);
+                        $("#ucftType").val('');
+                        $("#ucftMonth").val('');
+                        $("#ucftYear").val('');
+                        inputFile.files = [];
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                },
+                error: function () {
+                    alert("Upload Failed!")
+                }
+            });
+
+        }
+
+    }
+
+    var showInfo = function(data) {
+        imgsrc = "./components/uploadclientformattimesheet/samples/"+data+".png";
+        popupOptions = {
+            maxwidth: "75%",
+            height: 500,            
+            contentTemplate: function() {
+                return $("<div />").append(
+                    $("<img src='"+imgsrc+"' width='100%' />")
+                );
+            },
+            showTitle: true,
+            title: "Sample Image",
+            visible: false,
+            dragEnabled: false,
+            closeOnOutsideClick: true
+         };
+        popup = $("#popup").dxPopup(popupOptions).dxPopup("instance");
+        popup.show();
+    };
+
+</script>

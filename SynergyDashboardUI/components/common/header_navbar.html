@@ -1,0 +1,718 @@
+<script type="text/javascript" src="js/library/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="components/common/js/announcement_card.js"></script> -->
+<style>
+    @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+    /* Style for notificatons side bar */
+    .notes_badge {
+        background-color: #fff;
+        color: blue;
+    }
+
+    .sidebar {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 43px;
+        right: 0;
+        background-color: white;
+        overflow-x: hidden;
+        padding-top: 60px;
+        transition: 0.5s;
+    }
+
+        .sidebar a {
+            padding: 2px;
+            text-decoration: none;
+            font-size: 15px;
+            color: black;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 13px;
+            font-weight: 900;
+            /* left: -41px; */
+            font-size: 36px;
+            margin-left: 50px;
+            color: black;
+        }
+
+    #notificationsHeader {
+        top: 10px;
+        position: absolute;
+        left: 10px;
+    }
+
+    #main {
+        transition: margin-left .5s;
+        padding: 20px;
+    }
+    /* Style for notificatons side bar ends here*/
+
+    #star-Avg-communicationrating .checked {
+        color: orange;
+    }
+
+    #star-Avg-communicationrating .notchecked {
+        color: gray;
+    }
+
+    #overallempstarrating .checked {
+        color: orange;
+    }
+
+    #leadempstarrating .checked {
+        color: orange;
+    }
+</style>
+<div class="navbar navbar-synergy navbar-fixed-top">
+    <div class="">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="header-logo" href="dashboard.html">
+                <img id="imgDashboardMainLogo" class="navbar-brand" />
+            </a>
+
+
+
+        </div>
+        <div class="responsive-menu">
+
+            <ul class="nav navbar-nav">
+                <li onclick='funcHideMenuIn()' style='padding: 0;' id='button-hide-menuIn'><a href='#'><span class='icofont-close-line icofont-2x' width='20px' height='20px'></span></a></li>
+                <li onclick='funcHideMenuOut()' style='padding: 0;' id='button-hide-menuOut'><a href='#'> <span class='icofont-navigation-menu icofont-2x' width='20px' height='20px'></span></a></a></li>
+            </ul>
+
+
+            <ul class="nav navbar-nav side-hide-menu">
+                <li class="pull-left search-bar-menu">
+                    <input type="text" class="form-control navSearch col-md-4" placeholder="Search..." />
+                </li>
+            </ul>
+
+            <ul class="dropdown nav navbar-nav pull-right headerNav side-hide-menu">
+                <ul class="nav navbar-nav headerNav">
+                    <li id="notes_notification" class="dropdown">
+                        <a type="button" class="dropdown-toggle btn btn-primary" onclick="openNotificationsNav()" data-toggle="dropdown"
+                           href="#" style="background-color: #5D5D5D;">
+                            <i style="color: white!important;" class="fas fa-bell"></i><span class="badge notes_badge"></span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- <li><a id="dashboard-link" href="dashboard.html" style="color:white!important">Home</a></li> -->
+                <!--<li><a style="color:white!important">Meetings</a></li>-->
+                <li class="profile-pic dropdown-toggle" id="profile-pic" data-toggle="dropdown"></li>
+
+                <ul class="dropdown-menu  profileDropdown" role="menu" aria-labelledby="menu1">
+
+                    <li><span class="employeeName"></span></li>
+                    <li><a id="update_profile-link" onclick="updateProfileModal()">Update profile</a></li>
+                    <li><span id="showavgemprating" onclick="showempavgrating()"></span></></li>
+                    <li><a id="update_skill-link" onclick="updateSkillsModal()">Update skills</a></li>
+                    <li><a id="update_skill-link" onclick="resetProfileModal()">Reset Profile</a></li>
+                    <!-- <li><a id="update_skill-link" href="update_skill.html" >Update skills</a></li> -->
+                    <li><a href='#' onclick="sendMailModal()">Send Mail <i class="glyphicon glyphicon-send"></i></a></li>
+                    <li><a id="log_out">Logout <span class="glyphicon glyphicon-log-out"></span></a></li>
+                </ul>
+            </ul>
+            <!--<div style="color:#1cb153;" class="notify_swipe">
+                <ul>
+
+                </ul>
+            </div>-->
+
+            <div id="DisplayMentorDetails" class="side-hide-menu profile">
+
+            </div>
+            <ul class="nav navbar-nav pull-right headerNav side-hide-menu">
+                <li>
+                    <div style="color: white; padding-top: 15px; padding-bottom: 15px;">
+                        <span>SWIPE</span><div id="manual-swipe" style="margin-left: 10px;"></div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav pull-right headerNav side-hide-menu">
+                <li style="display:none" id="notification" class="dropdown">
+                    <a type="button" class="dropdown-toggle btn btn-primary" data-toggle="dropdown" href="#">
+                        Messages <span class="badge badge-light" id="header_notification_batch"></span>
+                    </a>
+                    <ul class="dropdown-menu" id="message_notification_list"></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div id="display-model"></div>
+<div class="modal fade" id="EmployeeSkillAvgRatingDetails" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="" style="float : right">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title"><span>Employee Skill Rating Details </span></h2>
+            </div>
+
+            <div class="modal-body" id="EmployeeSkillModalBody" data-simplebar>
+                <div id="EmployeecurrentSkillDetailsMappingsId" style="visibility:hidden"></div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="show_employee_overall_rating">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="EmployeeLeadRatingDetails" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="" style="float : right">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title"><span>Employee Lead Skill Rating Details </span></h2>
+            </div>
+
+            <div class="modal-body" id="EmployeeSkillModalBody" data-simplebar>
+                <!--<div id="EmployeecurrentSkillDetailsMappingsId" style="visibility:hidden"></div>-->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="show_employee_overall_leadrating">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="components/notes/js/notes.js"></script>
+<!-- <script type="text/javascript" src="components/backup_resource/js/backup_resource.js"></script>
+<script type="text/javascript" src="components/backupresource/js/backup_resource.js"></script> -->
+<script type="text/javascript" src="components\common\js\mentor_details.js"></script>
+<script>
+    $(document).ready(function () {
+        var Employee_id = localStorage.getItem("EmployeeID");
+        var Employee_profilepic = imageFilesPath+Employee_id+'.png';
+        GenerateEmployeeProfilePictures('GetAllEmployeeProfileImage', '{}');
+        console.log(Employee_profilepic,"header_navbar.html");
+        notes_showNotification();
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"100"}');
+        var conResult1 = result[0].Content
+        $('#imgDashboardMainLogo').attr('src', companyFilesPath + conResult1);
+
+        setInterval(function () { notes_showNotification() }, 55000);
+        $(".dropdown-toggle").dropdown();
+        $('.profileImage').attr('src', Employee_profilepic);
+        $(".profile-pic").css("background-image", "url(" + Employee_profilepic + ")");
+        $('.navSearch').keyup(function () {
+            let inpVal = $(this).val();
+
+            // menuFilter(inpVal)
+            $('.dynamicMenu').show();
+            if (inpVal == '') {
+                return;
+            }
+            $('.dynamicMenu')
+                .find('span[id="nav-title"]')
+                .each(function () {
+                    let isMatched = false;
+                    $(this)
+                        .text()
+                        .toLowerCase()
+                        .split(' ')
+                        .forEach((item, index) => {
+                            if (item.slice(0, inpVal.length) == inpVal.toLowerCase()) {
+                                isMatched = true;
+                            }
+                        });
+                    // if ($(this).text().toLowerCase().indexOf(inpVal.toLowerCase()) >= 0) {
+                    if (isMatched === true) {
+                        $(this)
+                            .parents('li')
+                            .show();
+                    } else {
+                        $(this)
+                            .parents('li')
+                            .hide();
+                    }
+                });
+        });
+
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token;
+
+        //get overall avg rating val
+        getEmployeeRating();
+    });
+
+    function getEmployeeRating() {
+        var GetEmpRating = callgetlist('GetMyTechnologyRating', '{"Token":"' + Token + ' "}')
+
+        GetEmpRating.forEach(function (key, item) {
+            var domActions = "";
+            var ratedCommunication = key.AverageRating;
+            var pendingRating = 5 - ratedCommunication;
+            var starHtml = "";
+            starHtml += "<div id='star-Avg-communicationrating' style=margin:10%>"
+            for (i = 0; i < ratedCommunication; i++) {
+                starHtml += "<span class='fa fa-star checked showempratingdetails'></span>";
+            }
+            for (i = 0; i < pendingRating; i++) {
+                starHtml += "<span class='fa fa-star notchecked showempratingdetails'></span>";
+            }
+            starHtml += "</div>";
+            domActions += "<span>" + starHtml + "</span>";
+            $("#showavgemprating").append($(domActions));
+        });
+    }
+
+
+    if (!localStorage.getItem('login_securityToken')) {
+        window.location.href = 'index.html';
+    }
+    // var profilePic = GetEmployeeProfilePicture();
+    var profilePic = localStorage.getItem("ProfilePicture");
+    if (profilePic != null) {
+        $('.profile-pic').css('background-image', 'url(' + profilePic + ')');
+    }
+
+    var path = window.location.pathname;
+    var page = path.split('/').pop();
+    //console.log(page);
+
+    /* if(page == "update_profile.html")
+          {
+              $('#dashboard-link').attr('href','../../dashboard.html');
+              $('#update_skill-link').attr('href','../update_skill/update_skill.html');
+          }
+           if(page == "update-skill.html")
+          {
+              $('#dashboard-link').attr('href','../../dashboard.html');
+              $('#update_profile-link').attr('href','../update_profile/update_profile.html');
+          }*/
+
+    $('#log_out').click(function () {
+        var filter_val = JSON.stringify({
+            Token: localStorage.getItem('securityToken'),
+            Status: true,
+            Message: ''
+        });
+        var result = callgetlist('DeleteValidToken', filter_val);
+        if (result) {
+            localStorage.removeItem('login_securityToken');
+            localStorage.removeItem('securityToken');
+            window.location.href = 'index.html';
+        }
+    });
+
+    $('#log_out').click(function () {
+        var filter_val = JSON.stringify({
+            "Token": localStorage.getItem('securityToken'),
+            "Status": true,
+            "Message": ''
+        });
+        var result = callgetlist('DeleteValidToken', filter_val);
+        if (result) {
+            localStorage.removeItem('login_securityToken');
+            localStorage.removeItem('securityToken');
+            window.location.href = 'index.html';
+        }
+    });
+
+    function sendMailModal() {
+        $('#send_mail').appendTo('body').modal('show');
+        let editor = CKEDITOR.instances.mail_content;
+        if (editor) {
+            editor.destroy(true);
+        }
+        CKEDITOR.replace('mail_content');
+    }
+
+    function updateProfileModal() {
+        var filter_val = JSON.stringify(
+            {
+                "Token": localStorage.getItem('securityToken'),
+                "Status": ""
+            }
+        );
+        var result = callgetlist('CheckValidToken', filter_val);
+        if (result) {
+            $('#update_profile').appendTo('body').modal('show');
+            $('#father_name_error,#doj_error,#dob_error,#blood_group_error,#marital_status_error,#corporate_email_id_error,#pan_error,#pf_error,#esi_error,#passport_error').empty();
+            $('#profile-img').val('')
+            getPersonalEmployeedetails()
+        }
+        else {
+            alert("Session Expired! Login Again.");
+            window.location.href = 'index.html';
+        }
+
+    }
+
+    $("#father-name,#date-of-joining,#dob,#blood-group,#marital_status,#cop-email,#Pan-no,#pf-no,#esi-no,#passport_no").focus(function () {
+        var nextSibiling = $(this)[0]['nextElementSibling'].id != undefined ? $(this)[0]['nextElementSibling'].id : null;
+        if (nextSibiling != null) {
+            $('#' + nextSibiling).empty();
+        }
+
+    });
+
+    // $("#update-profile-save").click(function (e) {
+    //   e.preventDefault();
+    //   var result = Validatepersonaldetails($(this).parents('fieldset'), true);
+    //   if (result == true) {
+    //     $("#update-profile-message").append("<p style='color:green'>Updated Successfully</p>");
+    //   }
+    //   setTimeout(function () {
+    //     $("#update-profile-message").empty();
+    //   }, 3000);
+    //   // $('#update_profile').modal('hide')
+    //   // //console.log('Updated Pic',GetEmployeeProfilePicture());
+    //   $(".profile-pic").css("background-image", "url(" + GetEmployeeProfilePicture() + ")");
+    // });
+
+    function updateSkillsModal() {
+        $('#update_skill').appendTo('body').modal('show');
+        clearAndShow_SkillInfo()
+    }
+
+    function resetProfileModal() {
+        $('#reset_profile_modal').appendTo('body').modal('show');
+        //clearAndShow_SkillInfo()
+    }
+
+    function reset_propfile() {
+
+        var data = [];
+        data = {
+            "Method": "PostEmployeeProfileReset",
+            "Data": {
+                "Token": localStorage.getItem('securityToken'),
+                "IsActive": true,
+                "Status": true,
+                "Message": ''
+            }
+        }
+        var postCall = PostDataCall(data);
+        //console.log(postCall);
+        $("#log_out").click();
+    }
+
+
+    $(document).ready(function () {
+        let text = localStorage.getItem('login_userName')
+        let Textarr = text ? text.split('') : []
+        let newArr = []
+        Textarr.map((elem, index) => {
+            if (elem == elem.toUpperCase() && index != 0) {
+                newArr.push(elem.toLowerCase())
+            } else {
+                newArr.push(elem)
+            }
+        })
+        let newText = newArr.join('')
+        $('.employeeName').html(newText);
+    })
+
+    /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
+    function openNotificationsNav() {
+        document.getElementById("mySidebar").style.width = "364px";
+        document.getElementById("main").style.marginLeft = "350px";
+    }
+
+    /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
+    function closeNotificationsNav() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+    }
+
+
+    $(document).on("click", ".showempratingdetails", function (e) {
+        $("#EmployeeSkillAvgRatingDetails").appendTo("body").modal("show");
+        var GetEmpOverallRating = callgetlist('GetMyTechonlogyRatingInDetail', '{"Token":"' + Token + ' "}')
+
+        if (GetEmpOverallRating != null) {
+            renderEmpLeadOverallRatingGrid(GetEmpOverallRating);
+        }
+    });
+
+    function renderEmpLeadOverallRatingGrid(data) {
+        var OpeningskillratingGrid = $("#show_employee_overall_rating")
+            .dxDataGrid({
+                //filterRow: {
+                //    visible: true,
+                //    applyFilter: "auto",
+                //},
+                dataSource: data,
+                export: {
+                    enabled: true,
+                    allowExportSelectedData: true,
+                },
+                searchPanel: {
+                    visible: true,
+                    width: 240,
+                    placeholder: "Search...",
+                },
+                //headerFilter: {
+                //    visible: true,
+                //},
+                grouping: {
+                    autoExpandAll: true,
+                },
+                pager: {
+                    showPageSizeSelector: true,
+                    allowedPageSizes: [5, 10, 20],
+                    showInfo: true,
+                },
+                paging: {
+                    pageSize: 10,
+                },
+                //groupPanel: {
+                //    visible: true,
+                //    emptyPanelText: "Drag a column"
+                //},
+                sorting: {
+                    mode: "multiple",
+                },
+                //selection: {
+                //    mode: "multiple",
+                //},
+                summary: {
+                    totalItems: [
+                        {
+                            column: "sno",
+                            summaryType: "count",
+                        },
+                    ],
+                    groupItems: [
+                        {
+                            column: "sno",
+                            summaryType: "count",
+                        },
+                    ],
+                },
+                editing: {
+                    mode: "popup",
+                    allowAdding: false,
+                    allowUpdating: false,
+                    useIcons: true,
+                },
+                columnChooser: {
+                    enabled: true,
+                },
+                rowAlternationEnabled: true,
+                //filterPanel: { visible: true },
+                allowColumnReordering: true,
+                allowColumnResizing: true,
+                showBorders: true,
+                columns: [
+                    {
+                        caption: "#",
+                        dataField: "sno",
+                        cssClass: "rno",
+                        allowGrouping: false,
+                        allowCollapsing: false,
+                        allReordering: false,
+                        width: 70,
+                        cellTemplate: function (container, options) {
+                            container.text(
+                                OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                            );
+                        },
+                    },
+                    {
+                        caption: "Skill",
+                        dataField: "Skill",
+                    },
+                    {
+                        caption: "Skill Family",
+                        dataField: "SkillFamily",
+                    },
+                    {
+                        caption: "Version",
+                        dataField: "Version",
+                    },
+                    {
+                        caption: "Grade",
+                        dataField: "Grade",
+                    },
+                    {
+                        dataField: "AverageRating",
+                        width: 100,
+                        allowFiltering: false,
+                        allowSorting: false,
+                        cellTemplate: function (container, options) {
+                            var domActions = "";
+                            var ratedCommunication = options.data.AverageRating;
+                            var pendingRating = 5 - ratedCommunication;
+                            var starHtml = "";
+                            starHtml += "<div id='overallempstarrating'>"
+                            for (i = 0; i < ratedCommunication; i++) {
+                                starHtml += "<span data-empovrlskillmappingid =" + options.data.ID + " class='fa fa-star checked showtechleaddetails'></span>";
+                            }
+                            for (i = 0; i < pendingRating; i++) {
+                                //starHtml += "<span class='fa fa-star'></span>";
+                                starHtml += "<span data-empovrlskillmappingid =" + options.data.ID + " class='fa fa-star showtechleaddetails'></span>";
+                            }
+                            starHtml += "</div>";
+                            domActions += "<span>" + starHtml + "</span>";
+                            $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                        }
+                    }
+
+                ],
+            })
+            .dxDataGrid("instance");
+    }
+
+    $(document).on("click", ".showtechleaddetails", function (e) {
+        var EmployeeSkillMappingsId = $(e.currentTarget).data("empovrlskillmappingid");
+        $("#EmployeecurrentSkillDetailsMappingsId").text($(e.currentTarget).data("empovrlskillmappingid"));
+        $("#EmployeeLeadRatingDetails").appendTo("body").modal("show");
+
+
+        var GetEmpOverallRating = callgetlist('GetEmployeeOverallRating', '{"EmployeeSkillMappingsId":"' + EmployeeSkillMappingsId + ' "}')
+        if (GetEmpOverallRating != null) {
+            renderEmpLeadallRatingGrid(GetEmpOverallRating);
+        }
+    });
+
+    function renderEmpLeadallRatingGrid(data) {
+        var OpeningskillratingGrid = $("#show_employee_overall_leadrating")
+            .dxDataGrid({
+                dataSource: data,
+                export: {
+                    enabled: true,
+                    allowExportSelectedData: true,
+                },
+                searchPanel: {
+                    visible: true,
+                    width: 240,
+                    placeholder: "Search...",
+                },
+                //headerFilter: {
+                //    visible: true,
+                //},
+                grouping: {
+                    autoExpandAll: true,
+                },
+                pager: {
+                    showPageSizeSelector: true,
+                    allowedPageSizes: [5, 10, 20],
+                    showInfo: true,
+                },
+                paging: {
+                    pageSize: 10,
+                },
+                //groupPanel: {
+                //    visible: true,
+                //    emptyPanelText: "Drag a column"
+                //},
+                sorting: {
+                    mode: "multiple",
+                },
+                //selection: {
+                //    mode: "multiple",
+                //},
+                summary: {
+                    totalItems: [
+                        {
+                            column: "sno",
+                            summaryType: "count",
+                        },
+                    ],
+                    groupItems: [
+                        {
+                            column: "sno",
+                            summaryType: "count",
+                        },
+                    ],
+                },
+                editing: {
+                    mode: "popup",
+                    allowAdding: false,
+                    allowUpdating: false,
+                    useIcons: true,
+                },
+                columnChooser: {
+                    enabled: true,
+                },
+                rowAlternationEnabled: true,
+                //filterPanel: { visible: true },
+                allowColumnReordering: true,
+                allowColumnResizing: true,
+                showBorders: true,
+                columns: [
+                    {
+                        caption: "#",
+                        dataField: "sno",
+                        cssClass: "rno",
+                        allowGrouping: false,
+                        allowCollapsing: false,
+                        allReordering: false,
+                        width: 70,
+                        cellTemplate: function (container, options) {
+                            container.text(
+                                OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                            );
+                        },
+                    },
+                    {
+                        caption: "Leads Name",
+                        dataField: "DisplayName",
+                    },
+                    {
+                        dataField: "Rating",
+                        width: 100,
+                        allowFiltering: false,
+                        allowSorting: false,
+                        cellTemplate: function (container, options) {
+                            var domActions = "";
+                            var ratedCommunication = options.data.Rating;
+                            var pendingRating = 5 - ratedCommunication;
+                            var starHtml = "";
+                            starHtml += "<div id='leadempstarrating'>"
+                            for (i = 0; i < ratedCommunication; i++) {
+                                starHtml += "<span class='fa fa-star checked'></span>";
+                            }
+                            for (i = 0; i < pendingRating; i++) {
+                                starHtml += "<span class='fa fa-star'></span>";
+                            }
+                            starHtml += "</div>";
+                            domActions += "<span>" + starHtml + "</span>";
+                            $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                        }
+                    }
+
+                ],
+            })
+            .dxDataGrid("instance");
+    }
+</script>

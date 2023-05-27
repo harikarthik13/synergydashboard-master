@@ -1,0 +1,1113 @@
+<div class="modal fade" id="RRMEntryPointModelRecruiter" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="rrmModaltitle"><span id="rrmmodelpagetitlerecruiter"></span>&nbsp; <span><label id="RecruiterrrmType">&nbsp; </label></span>&nbsp;<span><label id="rrmRequiterStatus" class="label label-primary m-l-xs"></label></span>
+                    &nbsp;<span><label id="OwnerrrmHoldStatusRecruiter">&nbsp; </label></span>
+                    &nbsp;<span><label id="RRMEntryPointRecruiterTypeDetails">&nbsp; </label></span></h2>
+            </div>
+
+            <div class="modal-body" id="RRMPEntryPointRecruiterModalBody" data-simplebar>
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="rrmtabRecruiter">
+                        <li role="presentation" class="active  disabled" id="rrm_requirementTabRecruiter" data-tab="rrm_RequirementDetailsRecruiter">
+                            <a href="#rrm_RequirementDetailsRecruiter" aria-controls="rrm_RequirementDetailsRecruiter" role="tab">Requirement Details</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsTabRecruiter">
+                            <a href="#rrm_SkillDetailsRecruiter" aria-controls="rrm_SkillDetailsRecruiter" role="tab">Skills Mapping</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsplanaTabRecruiter">
+                            <a href="#rrm_SkillsPlanADetailsRecruiter" aria-controls="rrm_SkillsPlanADetailsRecruiter" role="tab">Plan A</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_skillsplanbTabRecruiter">
+                            <a href="#rrm_SkillsPlanBDetailsRecruiter" aria-controls="rrm_SkillsPlanBDetailsRecruiter" role="tab">Plan B</a>
+                        </li>
+                        <li role="presentation" class="disabled" id="rrm_commentsrecruiterTabRecruiter">
+                            <a href="#rrm_CommentsDetailsRecruiter" aria-controls="rrm_CommentsDetailsRecruiter" role="tab">Comments</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" id="rrmDetailsRecruiter">
+                        <div role="tabpanel" class="tab-pane active" id="rrm_RequirementDetailsRecruiter">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Requirement Name <span style="color: red">*</span></label>
+                                        <div id="sdtxt_rrmrecruiter_requirementname"></div>
+                                        <span class="error_message" id="rrm_requirementnamerecruiterError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Required For <span style="color: red">*</span></label>
+                                        <div id="sdtxt_rrmrecruiter_requiredfor"></div>
+                                        <span class="error_message" id="rrm_requiredforrecruiterError"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="divRecruiterRFP">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>RFP ID</label>
+                                            <input type="text" class="form-control" name="rrm_rfpidrecruiter" id="rrm_rfpidrecruiter" placeholder="RFP ID" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>BDE</label>
+                                            <select class="form-control" name="rrm_entrybderecruiter" id="rrm_entrybderecruiter" placeholder="BDE"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="divRecruiterResigination">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>EMP ID</label>
+                                            <input type="text" class="form-control" name="rrm_empidrecruiter" id="rrm_empidrecruiter" placeholder="EMP ID" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Replacement For</label>
+                                            <select class="form-control" name="rrm_replacementrecruiter" id="rrm_replacementrecruiter"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Number of positions <span style="color: red">*</span></label>
+                                        <div id="sdnmb_rrmrecruiter_numberofpositions"></div>
+                                        <span class="error_message" id="rrm_numberofpositionsrecruiterError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Priority </label>
+                                        <div id="sdcmb_rrmrecruiter_priority"></div>
+                                        <span class="error_message" id="rrm_priorityrecruiterError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Department <span style="color: red">*</span></label>
+                                        <div id="sdcmb_rrmrecruiter_department"></div>
+                                        <span class="error_message" id="rrm_departmentrecruiterError"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Designation <span style="color: red">*</span></label>  
+                                        <div id="sdcmb_rrmrecruiter_designation"></div>                                      
+                                        <span class="error_message" id="rrm_designationrecruiterError"></span>
+                                    </div>
+                                </div>                                
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Communication <span style="color: red">*</span></label>
+                                        <div id="sdcmb_rrmrecruiter_communication"></div>
+                                        <span class="error_message" id="rrm_communicationrecruiterError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Location</label>
+                                        <div id="sdtxt_rrmrecruiter_location"></div>
+                                        <span class="error_message" id="rrm_locationforrecruiterError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Experience required (In Yrs)<span style="color: red">*</span></label>
+                                        <div id="sdnmb_rrmrecruiter_experiencerequired"></div>
+                                        <span class="error_message" id="rrm_experiencerequiredrecruiterError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label>Interviewers <span style="color: red">*</span></label>
+                                        <div id="sdtag_rrmrecruiter_intervierwers"></div>  
+                                        <span class="error_message" id="rrm_interviewersRecruiterError"></span>                              
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Requested Date</label>
+                                        <div id="sd_date_rrmrecruiter_requestedDate"></div>
+                                        <span class="error_message" id="rrm_requesteddaterecruiterError"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="sdchk_rrmrecruiter_leadApproval"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Importance</label>
+                                    </div>
+                                    <div class="form-group col-md-6" id="rrm_importance">
+                                        <div id="sdchk_rrmrecruiter_losingRevenue"></div>                                        
+                                    </div>
+                                    <div class="form-group col-md-6" id="rrm_importance">
+                                        <div id="sdchk_rrmrecruiter_fromVIP"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label id = "lblLeadNamerecruiter" ></label >
+                                        <div id="sdtxt_rrmrecruiter_requirementlead"></div>
+                                        <span class="error_message" id="rrm_requirementleadrecruiterError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillDetailsRecruiter">
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="skillset_status"></span>
+                                        <div id="sdgd-rrmRecruiterSkills"></div>
+                                        <br>
+                                    </div>
+                            </div>
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillsPlanADetailsRecruiter">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Skill details(Plan A)<span style="color: red"> *</span></label>
+                                    <!-- <textarea class="form-control" name="rrm_skilldetailsplanarecruiter" id="rrm_skilldetailsplanarecruiter" disabled="disabled"></textarea> -->
+                                    <div id="sd_txtEditorRecruiter_skillDetailsPlanA"></div>
+                                    <span class="error_message" id="rrm_skilldetailsplanarecruiterError" style="display: block;"></span>
+                                </div>
+                                <div>
+                                    <div class="form-group col-md-4">
+                                        <label>To On board <span style="color: red">*</span></label>
+                                        <!-- <input type="date" class="form-control" id="rrm_tobeonboardplanarecruiter" /> -->
+                                        <div id="sd_date_rrmrecruiter_tobeonboardplana"></div>
+                                        <span class="error_message" id="rrm_tobeonboardplanarecruiterError" style="display: block;"></span>
+                                    </div>
+
+                                    <div class="form-group col-md-4" id="planARecruiters">
+                                        <label for="recruiters" id="lblrecruiters">Recruiters </label>
+                                        <!-- <select class="form-control select_recruiter_inrecruiter" id="rrm_recruitersplanarecruiter" multiple="multiple"></select> -->
+                                        <div id="sd_tag_recruitersa_rrmrecruiter"></div>
+                                        <span class="error_message" id="rrm_recruitersplanarecruiterError"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_SkillsPlanBDetailsRecruiter">
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Skill details(Plan B)<span style="color: red"> *</span></label>
+                                    <!-- <textarea class="form-control" name="rrm_skilldetailsplanbrecruiter" rows="3" id="rrm_skilldetailsplanbrecruiter" disabled="disabled"></textarea> -->
+                                    <div id="sd_txtEditorRecruiter_skillDetailsPlanB"></div>
+                                    <span class="error_message" id="rrm_skilldetailsplanbrecruiterError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label>To On board<span style="color: red">*</span></label>
+                                    <!-- <input type="date" class="form-control" id="rrm_tobeonboardplanbrecruiter" /> -->
+                                    <div id="sd_date_rrmrecruiter_tobeonboardplanb"></div>
+                                    <span class="error_message" id="rrm_tobeonboardplanbrecruiterError" style="display: block;"></span>
+                                </div>
+                                <div class="form-group col-md-4" id="planBRecruiters">
+                                    <label for="recruiters">Recruiters </label>
+                                    <!-- <select class="form-control select_recruiter_inrecruiter" id="rrm_recruitersplanbrecruiter" multiple="multiple"></select> -->
+                                    <div id="sd_tag_recruitersb_rrmrecruiter"></div>
+                                    <span class="error_message" id="rrm_recruitersplanbrecruiterError"></span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rrm_CommentsDetailsRecruiter">
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>On Hold by BDE &nbsp</label>
+                                    <div id="switchClientRecruiter"></div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>On Hold by Owner &nbsp</label>
+                                    <div id="switchLeadRecruiter"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <div id="rrm_manage_plan_comments_documents_recruiter" class="rrm_comments_history">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label>Comments </label>
+                                    <div id="sd_popover_RRMrecruitermentions"></div>
+                                    <div id="sd_txtEditor_RRMRecruiterComments"></div>
+                                    <span class="error_message" id="rrm_commentsrecruiterError"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <span class="ApiResponse"></span>
+            </div>
+            <div class="modal-footer">
+                <div>
+                    <a class="btn btn-primary btnPrevious hidden-btn" onclick="toggleTabRRMEntryPreviousRecruiter()">Previous</a>
+                    <a class="btn btn-primary btnNext" onclick="toggleTabRRMEntryRecruiter()">Next</a>
+                    <button type="button" class="btn btn-success saveFamilyBtn hidden-btn" onclick="saveCommentsRecruiter()">Save & Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RRMEntryPointRecruiterTrackerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+             <h2 class="modal-title"><span id="lblrrmTrackerRecruiterTitile">RRM Candidates Tracker</span><span id="lblrrmTrackerRecruiterRRMNo"></span>&nbsp;</h2>
+       </div>
+  
+        <div class="modal-body" id="RRMEntryPointRecruiterRecruiterModalBody" data-simplebar>
+           
+                <!-- <div class="row" style="display: flex;">
+                    <div class="cardDetailsTracker">
+                        <div class="item">
+                            <div class="card item-card card-block">
+                                <h5 class="mt-3 mb-3"><b>CANDIATES</b></h5>
+                                <h2 id="cardCandidateRRMRecruiter" >NA</h2> 
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="card item-card card-block">
+                                <h5 class="mt-3 mb-3"><b>OFFERED</b></h5>
+                                <h2 id="cardOfferedRRMRecruiter">NA</h2> 
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="card item-card card-block">
+                                <h5 class="mt-3 mb-3"><b>IN-PROGRESS</b></h5>
+                                <h2 id="cardPendingRRMRecruiter">NA</h2> 
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="card item-card card-block">
+                                <h5 class="mt-3 mb-3"><b>RRM ONBOARD</b></h5>
+                                <h2 id="cardOnBoardRRMRecruiter">NA</h2> 
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div> -->
+               
+         
+            <div class="row" style="display: flex; margin-top:1%;">
+                <div class="cardDetailsTracker">
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>L1-Interviews Scheduled</b></h5>
+                            <h2 id="l1InterviewsScheduledRRMRecruiterCard" >NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>L1-Interviews Conducted</b></h5>
+                            <h2 id="l1InterviewsConductedRRMRecruiterCard" >NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>L2-Interviews Scheduled</b></h5>
+                            <h2 id="l2InterviewsScheduledRRMRecruiterCard">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>L2-Interviews Scheduled</b></h5>
+                            <h2 id="l2InterviewsConductedRRMRecruiterCard">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>Offer Made</b></h5>
+                            <h2 id="offerMadeRRMRecruiterCard">NA</h2> 
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card item-card card-block">
+                            <h5 class="mt-3 mb-3"><b>Offer Accepted</b></h5>
+                            <h2 id="offerAcceptedRRMRecruiterCard">NA</h2> 
+                        </div>
+                    </div>
+                
+                </div>
+               
+            </div>
+           
+            <br>
+            <br>
+            <div class="row">
+                <div id="rrmRecruiterCandidatesTrackerTree">
+                
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <div>
+            <button type="button" class="btn btn-primary" onclick="closeRRMTrackerRecruiter()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RRMRecruiterCandidateTrackerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+             <h2 class="modal-title"><span id="lblcandidateTrackerTitileRecruiter">Candidate Tracker</span><span id="lblcandidateTrackerRRMNoRecruiter"></span>&nbsp;</h2>
+       </div>
+  
+        <div class="modal-body" id="RRMRecruiterCandidatetrackerModalBody" data-simplebar>
+          
+          <div class="row">
+            <div class="col-md-12">
+                <label>Graphical View</label>
+                <div id="candidateTimeLineRRMRecruiter" data-simplebar>
+
+                </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12">
+                <label>Grid View</label>
+                <div id="sdgd-rrmRecruiterCandidateTracker">
+            
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div>
+            <button type="button" class="btn btn-primary" onclick="closeRRMRecruiterCandidateTracker()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="rrm_common_comments_recruiter" role="dialog">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">            
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick="" style="float : right"><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding">
+                <i class="fas fa-expand" data-toggle="modal"></i>
+              </button>
+             <h2 class="modal-title"><span id="lblcandidateTrackerTitile">Comments </span><span id="RRMEntryPointCommentsRRMNo_recruiter"></span>&nbsp;</h2>
+       </div>
+  
+        <div class="modal-body" id="rrm_common_comments_recruiterBody" data-simplebar>
+            
+            <ul class="nav nav-tabs" role="tablist" id="rrmtabs">
+                <li role="presentation" class="active disabled" id="rrm_commentsTab">
+                  <a href="#rrm_CommentsDetail_recruiter" aria-controls="rrm_CommentsDetail_recruiter" role="tab">Comments</a>
+                </li>
+              </ul>
+
+            <div role="tabpanel" class="tab-pane" id="rrm_CommentsDetail_recruiter">
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div id="rrm_common_manage_plan_comments_documents_recruiter" class="rrm_comments_history">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label>Comments </label>
+                        <div id="sd_popover_RRMmentions_common_recruiter"></div>
+                        <div id="sd_txtEditor_RRMComments_common_recruiter"></div>
+                        <span class="error_message" id="rrm_commentsError_common"></span>
+                    </div>
+                </div>
+            </div>
+          
+        <div class="modal-footer">
+          <div>
+              <button type="button" class="btn btn-success" onclick="saveCommonCommentsRecruiter();">Save Comments</button>
+            <button type="button" class="btn btn-primary" onclick="closeRRMCommonRecruiter();">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<style>
+
+    #RRMEntryPointModelRecruiter .modal-body{
+        min-height:calc(100vh - 200px)
+    }
+
+    .rrm_comments_history {
+        border: solid 1px #D1D1D1;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #E3E3E3;
+        margin-bottom: 10px;
+    }
+
+    .rrm_comments_history .message {
+        height:auto;
+        background-color: inherit;
+        display: inline-block;
+        max-width: 60%;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 10px;
+        box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .rrm_comments_history .text{
+        padding-top: 10px;
+    }
+
+    .rrm_comments_history .name {
+        font-weight: bold;
+    }
+
+    .rrm_comments_history .date {
+        opacity: 0.5;
+    }
+</style>
+<style>
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > thead > tr > th {
+        border: none;
+        text-align: left !important;
+    }
+</style>
+<script src='components/rrmentrypointrecruiter/js/rrmEntryPointRecruiterDevExtremeControls.js'></script>
+<script type="text/javascript" id="rrmEntryPointModalScript">
+    //var addRRMEntryPointJs;
+    $(document).ready(function () {
+        bindDevExtremeControlsForRRMEntryPointRecruiter();
+        bindCommonForRRMCommentsRecruiter();
+        initializeModalRecruiter();
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token
+        Department = jsonData.Data[0].DepartmentID
+        BackupLead = jsonData.Data["0"].mentorFirstName + " " + jsonData.Data["0"].mentorLastName
+        BackupLeadId = jsonData.Data["0"].MentorId
+        EmployeeId = jsonData.Data["0"].EmployeeID
+
+        //tab-toggle
+        $('ul#rrmtabRecruiter li').click(function (e) {
+            $('ul#rrmtabRecruiter li').removeClass("active");
+            $(this).addClass("active");
+            var tab_details = $(this).attr("id");
+            var currentTab = $("#" + tab_details + " > a ").attr("aria-controls");
+            $("#rrmDetailsRecruiter .tab-pane").removeClass("active");
+            $("#" + currentTab).addClass("active");
+            //alert(rrmId);            
+            if (currentTab == "rrm_SkillDetailsRecruiter") {
+                editRRMEntryPointJsRecruiter.getSkillsDetails(rrmId);
+                $("#editskillrecruiter").attr('disabled', 'disabled');
+                $("#deleteskillrecruiter").attr('disabled', 'disabled');
+                $(".btnPrevious").show();
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+            }
+            else if (currentTab == "rrm_CommentsDetailsRecruiter") {
+                $(".btnPrevious").show();
+                    $(".saveFamilyBtn").show();
+                    editRRMEntryPointJsRecruiter.getManageCommentHistory(rrmId);
+                    $("a.btnNext").hide();
+               
+            }
+            else if (currentTab == "rrm_SkillsPlanADetailsRecruiter") {
+                $("#sd_txtEditorRecruiter_skillDetailsPlanA").dxHtmlEditor('instance').option('value',planAcomments)
+                $(".btnPrevious").show();
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+            }
+            else if (currentTab == "rrm_SkillsPlanBDetailsRecruiter") {
+                $("#sd_txtEditorRecruiter_skillDetailsPlanB").dxHtmlEditor('instance').option('value',planBcomments)
+                $(".btnPrevious").show();
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+            }
+            else if (currentTab == "rrm_RequirementDetailsRecruiter") {
+                $(".btnPrevious").hide();
+                    $(".saveFamilyBtn").hide();
+                    $("a.btnNext").show();
+            }  
+            resetSimpleBarRRMEntryPointRecruiter();         
+        });
+        bindRecruitersinrecruiter();
+
+
+        $(function () {
+            $("#switchClientRecruiter").dxSwitch({
+                value: false,
+                switchedOffText: "NO",
+                switchedOnText: "YES",
+                disabled: true
+            });
+        });
+        $(function () {
+            $("#switchLeadRecruiter").dxSwitch({
+                value: false,
+                switchedOffText: "NO",
+                switchedOnText: "YES",
+                disabled: true
+            });
+        });
+    })
+
+    function bindRecruitersinrecruiter() {
+        //var getRecruiterList = callgetlist('GetHRForRRM', '{"IsActive":"True","Token":"' + Token + '"}');
+        callGetListAsync('GetHRForRRM', '{"IsActive":"True","Token":"' + Token + '"}', function (getRecruiterList) {
+            var getRecruiterData = [];
+            if (getRecruiterList.length > 0) {
+                getRecruiterList.forEach(function (i, index) {
+                    getRecruiterData.push({
+                        'id': i['EmployeeId'],
+                        'text': i['EmployeeName']
+                    });
+                });
+            }
+
+            $(".select_recruiter_inrecruiter").select2({
+                placeholder: "Select Recruiter",
+                allowClear: true,
+                data: getRecruiterData
+            });
+        });
+    }
+    var Token;
+    var Department;
+    var BackupLead;
+    var BackupLeadId;
+    var EmployeeId;
+    var planAcomments;
+    var planBcomments;
+    //rrm button type
+    function loadRRMByType(type) {
+        if (type == "add") {
+            initializeAddRRMRecruiter();
+
+        }
+        else if (type == "edit") {
+            initializeEditRRMRecruiter();
+        }
+    }
+
+    //tab toggle next button
+    function toggleTabRRMEntryRecruiter() {
+        
+        if (addRRMType == "edit") {
+            editRRMEntryPointJsRecruiter.toggleTabRRMEntry();
+        }
+        else if (addRRMType == "add") {
+            addRRMEntryPointJsRecruiter.toggleTabRRMEntry();
+        }
+    }
+
+    //tab toggle previous button
+    function toggleTabRRMEntryPreviousRecruiter() {
+        if (addRRMType == "edit") {
+            editRRMEntryPointJsRecruiter.toggleTabRRMEntryPrevious();
+        }
+        else if (addRRMType == "add") {
+            addRRMEntryPointJsRecruiter.toggleTabRRMEntryPrevious();
+        }
+    }
+
+    //save hr commnets
+    function saveCommentsRecruiter() {
+        if (addRRMType == "add") {
+            addRRMEntryPointJsRecruiter.saveComments();
+        }
+        else if (addRRMType == "edit") {
+            editRRMEntryPointJsRecruiter.saveComments();
+        }
+
+    }
+
+    //initialize model
+    function initializeModalRecruiter() {
+        $('.error_message').html('');
+        $('.nav-tabs a[href="#rrm_RequirementDetailsRecruiter"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        clearFormData();
+    }
+    function initializeModalAddRecruiter() {
+        $('.error_message').html('');
+        $('.nav-tabs a[href="#rrm_RequirementDetailsRecruiter"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        clearFormDataAddRecruiter();
+    }
+
+    //initialize Add RRM
+    function initializeAddRRMRecruiter() {
+        $("#rrm_rfpidrecruiter").attr('readonly', true);
+        $("#rrm_empidrecruiter").attr('readonly', true);
+        $('#rrm_entrybderecruiter').attr("disabled", "disabled");
+        $('#rrm_entrybderecruiter').attr('readonly', true);
+        $('#rrm_replacementrecruiter').attr('readonly', true);
+        $('#rrm_replacementrecruiter').attr("disabled", "disabled");
+        $("#sdcmb_rrmrecruiter_department").dxSelectBox('instance').option('readOnly',true);
+        $("#sdchk_rrmrecruiter_losingRevenue").dxCheckBox('instance').option('readOnly',true);
+        $("#sdchk_rrmrecruiter_fromVIP").dxCheckBox('instance').option('readOnly',true);
+        $("#sdtxt_rrmrecruiter_requirementlead").dxTextBox('instance').option('readOnly',true);
+        $("#sd_tag_recruitersa_rrmrecruiter").dxTagBox('instance').option("readOnly",true);
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0, 10);
+        $("#sd_date_rrmrecruiter_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sd_date_rrmrecruiter_tobeonboardplanb").dxDateBox('instance').option('value',nxtDate);
+        $("#sd_date_rrmrecruiter_tobeonboardplana").dxDateBox('instance').option('value',nxtDate);
+        $("#divRecruiterRFP").hide();
+        $("#divRecruiterResigination").hide();
+
+        loadAndBindForAddRRMRecruiter();
+    }
+
+    //load And Bind For Add RRM
+    function loadAndBindForAddRRMRecruiter() {
+        $("a.btnPrevious").hide();
+        $(".saveFamilyBtn").hide();
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy'
+        });
+
+        loadAndBindRequirementDetailsTabForAddRRMRecruiter();
+        loadAndBindSkillMappingTabForAddRRMRecruiter();
+
+        var getRecruiterList = loadRecruiterList();
+
+        loadAndBindPlanATabForAddRRM();
+        loadAndBindPlanBTabForAddRRM();
+        loadAndBindCommentsForAddRRM();
+    }
+
+    //load And Bind Requirement Details Tab For Add RRM
+    function loadAndBindRequirementDetailsTabForAddRRMRecruiter() {
+        //Load BDE
+
+      // var bderesult = callgetlist('GetBDExecutive', '{"IsActive":"True"}');
+        callGetListAsync('GetBDExecutive', '{"IsActive":"True"}', function (bderesult) {
+            var bdeoptions = "<option value =''>Select BDE</option>";
+            for (var i = 0; i < bderesult.length; i++) {
+                bdeoptions += "<option value='" + bderesult[i].Id + "'>" + bderesult[i].Name + "</option>";
+            }
+
+            $("#rrm_entrybderecruiter").html(bdeoptions);
+        });
+        //Load Departments
+        var departmentresult = callgetlist('GetDepartmentsForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetDepartmentsForRRM', '{"IsActive":"True"}', function (departmentresult) {
+            var departmentList = [];
+            for (i = 0; i < departmentresult.length; i++) {
+                var obj = {
+                    "Id":departmentresult[i].DepartmentId,
+                    "Name":departmentresult[i].DepartmentName
+                }
+                departmentList.push(obj);
+            }
+            $("#sdcmb_rrmrecruiter_department").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: departmentList,
+                key: "Id"
+            }));
+        });
+        //Load Designation
+       // var designationresult = callgetlist('GetDesignationsForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetDesignationsForRRM', '{"IsActive":"True"}', function (designationresult) {
+            var designationList = [];
+            for (i = 0; i < designationresult.length; i++) {
+                var obj = {
+                    "Id":designationresult[i].DesignationId,
+                    "Name":designationresult[i].DesignationName
+                }
+                designationList.push(obj);
+            }
+            $("#sdcmb_rrmrecruiter_designation").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: designationList,
+                key: "Id"
+            }));
+        });
+        //Load Priorities
+      //  var prioritiesresult = callgetlist('GetPrioritiesForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetPrioritiesForRRM', '{"IsActive":"True"}', function (prioritiesresult) {
+
+            var priorityList = [];
+            for (i = 0; i < prioritiesresult.length; i++) {
+                var obj = {
+                    "Id":prioritiesresult[i].PriorityId,
+                    "Name":prioritiesresult[i].PriorityName
+                }
+                priorityList.push(obj);
+            }
+            $("#sdcmb_rrmrecruiter_priority").dxSelectBox('instance').option('dataSource',new DevExpress.data.ArrayStore({
+                data: priorityList,
+                key: "Id"
+            }));
+        });
+        //Load ResourceReplacement
+       // var resorceresult = callgetlist('GetResourceReplacement', '{"IsActive":"True"}')
+        callGetListAsync('GetResourceReplacement', '{"IsActive":"True"}', function (resorceresult) {
+
+            var resorceoption = "<option value=''>Select Resource Replacement</option>";
+            for (i = 0; i < resorceresult.length; i++) {
+                resorceoption += "<option value='" + resorceresult[i].Id + "'>" + resorceresult[i].Name + "</option>"
+            }
+
+            $("#rrm_replacementrecruiter").html(resorceoption);
+        });
+        //bind defalut value for from
+        $("#sdcmb_rrmrecruiter_priority").dxSelectBox('instance').option('value',"224BE1C0-DC9A-4629-B888-2B4D4D6D1707");
+        $("#sdcmb_rrmrecruiter_department").dxSelectBox('instance').option('value',Department);
+        $("#sdtxt_rrmrecruiter_requirementlead").dxTextBox('instance').option('value',BackupLead);
+        $("#sdnmb_rrmrecruiter_numberofpositions").dxNumberBox('instance').option('value',"1");
+        $("#sdcmb_rrmrecruiter_communication").dxSelectBox('instance').option('value',"Good");
+        $("#sdtxt_rrmrecruiter_location").dxTextBox('instance').option('value',"Coimbatore");
+    }
+
+    //load And Bind Skill Mapping Tab For Add RRM
+    function loadAndBindSkillMappingTabForAddRRMRecruiter() {
+        var employee_id = '';
+        var filter_val = JSON.stringify({
+            "EmployeeId": employee_id
+        });
+        //var result = callgetlist('GetEmployeeSkills', filter_val);
+        // <!-- var loaddata = computeHTML_SkillInfoEntry(result); -->
+        //  <!-- $('#display_SkillsEntry').html(loaddata); -->
+
+        var filter_val = JSON.stringify({ "IsActive": true });
+        //var result = callgetlist('GetSkillFamilies', filter_val);
+        callGetListAsync('GetSkillFamilies', filter_val, function (result) {
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                options += "<option value='" + result[i].Id + "'>" + result[i].Name + "</option>";
+            }
+        });
+            }
+
+    //load RecruiterList
+    function loadRecruiterList() {
+        //return recuirtersdetails = callgetlist('GetHRForRRM', '{"IsActive":"True"}')
+        callGetListAsync('GetHRForRRM', '{"IsActive":"True"}', function (recuirtersdetails ) {
+
+            return recuirtersdetails ;
+        });
+    }
+
+
+    //initialize Edit RRM
+    function initializeEditRRMRecruiter(rrmid) {
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $('#RRMEntryPointModelRecruiter').appendTo("body").modal("show");
+        $('.nav-tabs a[href="#rrm_RequirementDetailsRecruiter_fromrrm"]').tab("show");
+        $("a.btnNext").show();
+        $(".saveFamilyBtn").hide();
+        $(".btnPrevious").hide();
+        $("#sdtxt_rrmrecruiter_requirementname").dxTextBox('instance').option('readOnly',true);
+        $("#sdtxt_rrmrecruiter_requiredfor").dxTextBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmrecruiter_priority").dxSelectBox('instance').option('readOnly',true);
+        $("#sdnmb_rrmrecruiter_experiencerequired").dxNumberBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmrecruiter_communication").dxSelectBox('instance').option('readOnly',true);
+        $("#sdtxt_rrmrecruiter_location").dxTextBox('instance').option('readOnly',true);
+        $("#editskillrecruiter").attr('disabled', 'disabled');
+        $("#deleteskillrecruiter").attr('disabled', 'disabled');
+        $("#sd_date_rrmrecruiter_tobeonboardplana").dxDateBox('instance').option('readOnly',true);
+        $("#sd_date_rrmrecruiter_tobeonboardplana").dxDateBox('instance').option('min',"");
+        $("#sd_date_rrmrecruiter_tobeonboardplanb").dxDateBox('instance').option('readOnly',true);
+        $("#sd_date_rrmrecruiter_tobeonboardplanb").dxDateBox('instance').option('min',"");
+        //$("#btnreminderrecruiter").attr('disabled', 'disabled');
+
+
+        $("#rrm_rfpidrecruiter").attr('readonly', true);
+        $("#rrm_empidrecruiter").attr('readonly', true);
+        $('#rrm_entrybderecruiter').attr("disabled", "disabled");
+        $('#rrm_entrybderecruiter').attr('readonly', true);
+        $('#rrm_replacementrecruiter').attr('readonly', true);
+        $('#rrm_replacementrecruiter').attr("disabled", "disabled");
+        $("#sdnmb_rrmrecruiter_numberofpositions").dxNumberBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmrecruiter_department").dxSelectBox('instance').option('readOnly',true);
+        $("#sdcmb_rrmrecruiter_designation").dxSelectBox('instance').option('readOnly',true);
+        $("#sd_tag_recruitersa_rrmrecruiter").dxTagBox('instance').option("readOnly",true);
+        $("#sd_tag_recruitersb_rrmrecruiter").dxTagBox('instance').option("readOnly",true);
+        $("#sd_date_rrmrecruiter_requestedDate").dxDateBox('instance').option('readOnly',true);
+        $("#sdchk_rrmrecruiter_losingRevenue").dxCheckBox('instance').option('readOnly',true);
+        $("#sdchk_rrmrecruiter_fromVIP").dxCheckBox('instance').option('readOnly',true);
+        $("#sdtxt_rrmrecruiter_requirementlead").dxTextBox('instance').option('readOnly',true);
+
+        $("#sd_txtEditorRecruiter_skillDetailsPlanA").dxHtmlEditor('instance').option('readOnly',true);
+        $("#sd_txtEditorRecruiter_skillDetailsPlanB").dxHtmlEditor('instance').option('readOnly',true);
+        loadAndBindRequirementDetailsTabForAddRRMRecruiter()
+        //loadAndBindEditRRMData(rrmid) ;
+
+
+        if (ResourceRequirementTypeRecruiter == "G") {
+            $("#divRecruiterRFP").hide();
+            $("#divRecruiterResigination").hide();
+        }
+        else if (ResourceRequirementTypeRecruiter == "P") {
+            $("#divRecruiterRFP").show();
+            $("#divRecruiterResigination").hide();
+        }
+        else if (ResourceRequirementTypeRecruiter == "R") {
+            $("#divRecruiterRFP").hide();
+            $("#divRecruiterResigination").show();
+
+        }
+
+        $("#sdtag_rrmrecruiter_intervierwers").dxTagBox('instance').option('dataSource',new DevExpress.data.ArrayStore({ 
+            data: interviewersData,
+            key: "EmployeeId"
+        }));
+    }
+
+    //clear addFormdata
+    function clearFormDataAddRecruiter() {
+        $("#sdtxt_rrmrecruiter_requirementname").dxTextBox('instance').option('value',"");
+        $("#sdtxt_rrmrecruiter_requiredfor").dxTextBox('instance').option('value',"");
+        $("#rrm_empidrecruiter").val("");
+        $("#rrm_entrybderecruiter").val("");
+        $("#sdnmb_rrmrecruiter_numberofpositions").dxNumberBox('instance').option('readOnly',"");
+
+        $("#sdcmb_rrmrecruiter_department").dxSelectBox('instance').option('value',"");
+        $("#sdcmb_rrmrecruiter_designation").dxSelectBox('instance').option('value',"");
+        $("#sdnmb_rrmrecruiter_experiencerequired").dxNumberBox('instance').option('value',"");
+        $("#sdtxt_rrmrecruiter_location").dxTextBox('instance').option('value',"");
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        $("#sd_date_rrmrecruiter_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sdtxt_rrmrecruiter_requirementlead").dxTextBox('instance').option('value',"");
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0,10);
+        $("#sd_date_rrmrecruiter_tobeonboardplana").dxDateBox('instance').option('value',nxtDate)
+        $("#sd_date_rrmrecruiter_tobeonboardplanb").dxDateBox('instance').option('value',nxtDate)
+
+        //reset form 
+
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $("#sdtxt_rrmrecruiter_requirementname").dxTextBox('instance').option('readOnly',false);
+        $("#sdtxt_rrmrecruiter_requiredfor").dxTextBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmrecruiter_priority").dxSelectBox('instance').option('readOnly',false);
+        $("#sdnmb_rrmrecruiter_experiencerequired").dxNumberBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmrecruiter_communication").dxSelectBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmrecruiter_department").dxSelectBox('instance').option('readOnly',false);
+        $("#rrm_rfpidrecruiter").removeAttr('readonly');
+        $("#rrm_empidrecruiter").removeAttr('readonly');
+        // $('#rrm_entrybde').attr("visible", "visible"); 
+        $('#rrm_entrybderecruiter').removeAttr('readonly');
+        $('#rrm_entrybderecruiter').removeAttr('disabled');
+        $('#rrm_replacementrecruiter').removeAttr('readonly');
+        $('#rrm_replacementrecruiter').removeAttr('disabled');
+        //$('#rrm_replacement').attr("disabled", "visible"); 
+        $("#sdnmb_rrmrecruiter_numberofpositions").dxNumberBox('instance').option('readOnly',false);
+        // $('#rrm_numberofpositions').attr("visible", "true"); 
+        //$('#rrm_department').attr("visible", "visible"); 
+        $("#sdcmb_rrmrecruiter_designation").dxSelectBox('instance').option('readOnly',false);
+        //$('#rrm_designation').attr("visible", "visible"); 
+        $("#sd_tag_recruitersa_rrmrecruiter").dxTagBox('instance').option("readOnly",false);
+        $("#sd_tag_recruitersb_rrmrecruiter").dxTagBox('instance').option("readOnly",false);
+        $("#sd_date_rrmrecruiter_requestedDate").dxDateBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmrecruiter_designation").dxSelectBox('instance').option('visible',true);
+        $("#sd_txtEditor_RRMRecruiterComments").dxHtmlEditor('instance').option("readOnly",false);
+        skillsClearAndShow();
+    }
+
+    //clear Form Data
+    function clearFormData() {
+        $("#sdtxt_rrmrecruiter_requirementname").dxTextBox('instance').option('value',"");
+        $("#sdtxt_rrmrecruiter_requiredfor").dxTextBox('instance').option('value',"");
+        $("#rrm_empidrecruiter").val("");
+        $("#rrm_entrybderecruiter").val("");
+        $("#sdnmb_rrmrecruiter_numberofpositions").dxNumberBox('instance').option('value',"");
+
+        $("#sdcmb_rrmrecruiter_department").dxSelectBox('instance').option('value',"");
+        $("#sdcmb_rrmrecruiter_designation").dxSelectBox('instance').option('value',"");
+        $("#sdnmb_rrmrecruiter_experiencerequired").dxNumberBox('instance').option('value',"");
+        $("#sdtxt_rrmrecruiter_location").dxTextBox('instance').option('value',"");
+        var date = new Date();
+        var currentDate = date.toISOString().slice(0, 10);
+        $("#sd_date_rrmrecruiter_requestedDate").dxDateBox('instance').option('value',currentDate);
+        $("#sdtxt_rrmrecruiter_requirementlead").dxTextBox('instance').option('value',"");
+          
+        var tdydate = new Date();
+        tdydate.setDate(tdydate.getDate() + 1);
+        var nxtDate = tdydate.toISOString().slice(0,10);
+        $("#sd_date_rrmrecruiter_tobeonboardplana").dxDateBox('instance').option('value',nxtDate)
+        $("#sd_date_rrmrecruiter_tobeonboardplanb").dxDateBox('instance').option('value',nxtDate)
+
+        //reset form
+        $('.form-control').removeClass('required_field');
+        $('.error_message').html('');
+        $("#rrm_rfpidrecruiter").removeAttr('readonly');
+        $("#rrm_empidrecruiter").removeAttr('readonly');
+        // $('#rrm_entrybderecruiter').attr("visible", "visible");
+        $('#rrm_entrybderecruiter').removeAttr('readonly');
+        $('#rrm_entrybderecruiter').removeAttr('disabled');
+        $('#rrm_replacementrecruiter').removeAttr('readonly');
+        $('#rrm_replacementrecruiter').removeAttr('disabled');
+        //$('#rrm_replacementrecruiter').attr("disabled", "visible");
+        $("#sdnmb_rrmrecruiter_numberofpositions").dxNumberBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmrecruiter_department").dxSelectBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmrecruiter_designation").dxSelectBox('instance').option('readOnly',false);
+        $("#sd_tag_recruitersa_rrmrecruiter").dxTagBox('instance').option("readOnly",false);
+        $("#sd_tag_recruitersb_rrmrecruiter").dxTagBox('instance').option("readOnly",false);
+        $("#sd_date_rrmrecruiter_requestedDate").dxDateBox('instance').option('readOnly',false);
+        $("#sdcmb_rrmrecruiter_designation").dxSelectBox('instance').option('visible',true);
+        $("#sd_txtEditor_RRMRecruiterComments").dxHtmlEditor('instance').option('readOnly',false)
+        skillsClearAndShow();
+    }
+
+    //skills Clear And Show
+    function skillsClearAndShow() { // Clear our fields
+
+    }
+
+    function readOnlyFormDataRecruiter() {
+        $("#sd_txtEditor_RRMRecruiterComments").dxHtmlEditor('instance').option('readOnly',true)
+    }
+
+    $(document).on("mouseover", "#RRMEntryPointModelRecruiter .dx-mention", function (e) {
+        var Id = $(e.currentTarget).data("id");
+        var MentionType = $(e.currentTarget).data("marker");
+        var Target = $(e.currentTarget);
+        LoadTooltipForMentionRRMRecruiter(Id,MentionType,Target);
+    });
+
+    function LoadTooltipForMentionRRMRecruiter(Id,MentionType,Target){
+        if(MentionType == "@"){  
+            var filterData = JSON.stringify({
+                "IsActive": true,
+                "EmployeeIdForMention":Id
+            });
+            callGetListAsync('GetEmployeeDetailsForMentions', filterData, function(e){
+                var Details = e[0];
+                $("#sd_popover_RRMrecruitermentions").dxPopover('instance').option('target',Target);  
+                $("#sd_popover_RRMrecruitermentions").dxPopover('instance').option("contentTemplate",function(data) {
+                    var html = "<div class='row'><div class='col-md-2'><img id='img-"+Details.EmployeeName+"' src='"+Details.ProfilePicture+"' class='img-circle interviewer-image' width='40px' height='40px'></img></div>"
+                        html += "<div class='col-md-10'><b> "+Details.EmployeeName+"</b><br/><i class='fas fa-envelope'></i> &nbsp;<a href='mailto:" + Details.CorporateEmailID + "' target='_blank'>"+Details.CorporateEmailID+"</a><div>"
+                        html += "</div>";
+                        data.html(html);
+                });         
+            });   
+            
+        }
+        if(MentionType == "#"){        
+            var filterData = JSON.stringify({
+                "IsActive": true,
+                "ResourceRequirementId":Id
+            });
+            callGetListAsync('GetRRMDetailsForMentions', filterData, function(e){
+                var Details = e[0];
+                $("#sd_popover_RRMrecruitermentions").dxPopover('instance').option('target',Target);  
+                $("#sd_popover_RRMrecruitermentions").dxPopover('instance').option("contentTemplate",function(data) {
+                    var html = "<table class='table table-borderless' style='margin-bottom:0px'><tbody>"
+                    html += "<tr><td><b>RRM Name</b></td><td><b>: </b>"+Details.RRMName+"</td><td><b>RRM No</b></td><td><b>: </b>"+Details.RRMNo+"</td></tr>";
+                    html += "<tr><td><b>Required For</b></td><td><b>: </b>"+Details.RequiredFor+"</td><td><b>Lead Name</b></td><td><b>: </b>"+Details.LeadName+"</td></tr>";
+                    html += "<tr><td><b>Department</b></td><td><b>: </b>"+Details.DepartmentName+"</td><td><b>Designation</b></td><td><b>: </b>"+Details.DesignationName+"</td></tr>";
+                    html += "<tr><td><b>Skills</b></td><td colspan='3'><b>: </b>"+Details.SkillName+"</td></tr>";
+                    html += "</tbody></table>"; 
+                    data.html(html);
+                });         
+            });
+        }
+    }
+
+    function resetSimpleBarRRMEntryPointRecruiter(){
+        new SimpleBar(document.getElementById('RRMPEntryPointRecruiterModalBody'));
+    }
+</script>
+
+
+<style>
+
+    .rrm_manage_plan_history_lists {
+        border: solid 1px #D1D1D1;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 10px;
+        background-color: #E3E3E3;
+        margin-bottom: 10px;
+    }
+
+        .rrm_manage_plan_history_lists .manage_comment {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 20px;
+            word-break: break-all;
+            background-color: #ffff;
+            cursor: pointer;
+        }
+
+        .rrm_manage_plan_history_lists label {
+            font-weight: 100;
+        }
+
+        .rrm_manage_plan_history_lists small {
+            font-size: 8pt;
+            font-weight: 400 !important;
+            display: block;
+        }
+
+            .rrm_manage_plan_history_lists small span:last-child {
+                margin-left: 5px;
+            }
+</style>

@@ -1,0 +1,853 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,500i,700,900&display=swap');
+
+body {font-family: 'Roboto', sans-serif !important;}
+a {color: #004f8a;}
+p {font-size: 14px !important;}
+#chartdiv {width: 100%;height: 400px;font-size: 11px;}
+.expand-div {display: none;}
+span.search_btn {float: right;padding-bottom: 15px;}
+input.form-control.col-md-4.pro_search {width: 83%;margin-right: 5px;height: 32px;}
+span.punch-text, span.log-hrs {font-weight: 600;font-size: 12px;padding: 10px;}
+.navbar-synergy {background-color: darkslategray;color: white !important;}
+.error {color: #ff0000ed;clear: both;}
+.modal-dialog.modealExpand, .skills-list {pointer-events: painted !important;}
+div#div-QuickAction-Edit-Modal, #skills {pointer-events: none;}
+a#skills-list {cursor: pointer;}
+li.profile-pic {width: 40px;height: 40px;background-size: cover;border-radius: 200px;overflow: hidden;border: 2px solid #fff;margin-top: 5px;margin-right: 10px;}
+.headerNav a {cursor: pointer;}
+.profileDropdown li:first-child {background-color: #fff;color: #dd2c36;padding: 10px 0;}
+.employeeName {cursor: default;margin-left: 20px;font-weight: 600;}
+body thead {font-weight: bold;font-size: 11px;}
+tbody {font-size: 12px;}
+.newsFeeds {max-height: calc(100vh - 130px);min-height: calc(100vh - 130px);overflow-y: auto;}
+ul.left-Navigation {list-style: none;padding: 5px 0;}
+.card-detail-title {font-size: 18px;text-transform: uppercase;}
+.card-detail {background-color: #fff;padding: 15px;border: 1px solid rgba(0, 0, 0, 0.1);margin-bottom: 15px;box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);-webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);-ms-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);border-radius: 5px;-webkit-border-radius: 5px;-ms-border-radius: 5px;}
+.card-detail i img {width: 25px;height: auto;float: left;margin-right: 10px;}
+.notification-cards {background-color: white;margin-right: 5px;}
+.quickActions-card {background-color: white;height: 100%;margin: 0;}
+.left-Navigation-card1 {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);background-color: white;min-height: 525px;padding: 1%;}
+ul.left-Navigation li {padding: 10px 5px 10px 0;margin-bottom: 0px;display: inline-block;width: 100%;cursor: pointer;transition: all ease 0.4s;border-bottom: 1px solid #f3f3f3;}
+ul.left-Navigation li i {float: left;margin-right: 5px;width: 30px;text-align: center;display: block;}
+.sidenav.in ul.left-Navigation li {text-align: center;padding: 10px 0 10px 0;}
+.sidenav.in ul.left-Navigation li i {margin-right: 0;float: none;display: inline-block;}
+.badge {color: #fff;padding-right: 8px;text-align: center;border-radius: 50%;}
+.badge-green {background-color: darkseagreen;}
+.badge-orange {background-color: darkorange;}
+.badge-red {background-color: indianred;-webkit-animation: flash linear 1s infinite;animation: flash linear 1s infinite;}
+#interview-save {visibility: hidden;min-width: 250px;margin-left: -125px;background-color: #333;color: #fff;text-align: center;border-radius: 2px;padding: 16px;position: fixed;z-index: 1;left: 50%;top: 10px;font-size: 17px;}
+#interview-save.show {visibility: visible;-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;animation: fadein 0.5s, fadeout 0.5s 2.5s;}
+#chartContainer {width: 100%;height: 300px;}
+#div-ChartItems {display: none;}
+#legenddiv>svg {position: static !important;}
+.sidenav {transition: 0.00000000000000001s all ease-in-out;width: 230px;float: left;padding-top: 45px;}
+.dashboard-page {display: flex;}.main-content {float: left;width: calc(100% - 230px);height: calc(100vh - 130px);display: flex;flex-wrap: wrap;}
+.main-content.expand {width: calc(100% - 15px);}
+.sidenav.in {width: 30px;}.main_nav_item {display: inline-block;width: 100%;}
+.sidenav.in .Synergy-menu-class {display: none;}
+.navbar-synergy {background-color: #5d5d5d;color: white !important;}
+.export-main {visibility: hidden;}
+.Synergy-menu-class {color: black !important;}
+.datepicker-container {z-index: 1111 !important;}
+@-webkit-keyframes flash {0% {opacity: 1;}50% {opacity: .1;}100% {opacity: 1;}}@keyframes flash {0% {opacity: 1;}50% {opacity: .1;}100% {opacity: 1;}}
+.list-group-item {position: relative;display: block;padding: 10px 15px;margin-bottom: -1px;background-color: #fff;border: 1px solid #ddd;}
+.list-group {padding-left: 0;margin-bottom: 20px;}
+#leave-modal .dropdown button {text-align: left;}
+#leave-modal .bot-sp {margin-bottom: 15px;}
+#leave-modal .dropdown button .caret {margin-top: 10px;float: right;}
+#leave-modal .dropdown-menu {min-width: 100%;}
+.squaredchk {position: relative;}
+.squaredchk input[type=checkbox] {visibility: hidden;}
+.squaredchk input[type=radio] {visibility: hidden;width: 25px;}
+#leave-modal .squaredchk label {position: inherit;margin-top: 0;}
+#leave-modal label {font-weight: normal;}
+.squaredchk label {width: 20px;height: 20px;cursor: pointer;position: absolute;top: 0;left: 0;background: #fcfff4;border: 1px solid #c1c1c1;}
+.squaredchk label:after {content: '';width: 9px;height: 5px;position: absolute;top: 5px;left: 5px;border: 2px solid #333;border-top: none;border-right: none;background: transparent;opacity: 0;-webkit-transform: rotate(-45deg);transform: rotate(-45deg);}
+.squaredchk label:hover::after {opacity: 0.5;}
+.squaredchk input[type=checkbox]:checked+label:after {opacity: 1;}
+.squaredchk input[type=radio]:checked+label:after {opacity: 1;}
+.roles_save button {float: right;margin-bottom: 30px;}
+.select2-selection--multiple {margin-bottom: 10px;}
+.res-item {width: 50%;float: left;border: none;}
+.form-section .emp-position h4 span {font-size: 15px;color: #46ad46;}.p-label {font-size: 15px;}
+.res-sub-success h1 {color: #46ad46;}
+#btnResign {margin-right: 10px;margin-top: 0;padding: 7px 15px;line-height: 15px;}
+.clnText {width: 50%;}.small-scroll {max-height: calc(100vh - 130px);min-height: calc(100vh - 130px);overflow-y: auto;}
+#button-hide-menuIn a, #button-hide-menuOut a {background-color: #004F8A;color: #fff;padding: 0px;width: 35px;display: inline-block;border-radius: 4px;position: fixed;top: 13px;left: 258px;}
+footer.navbar-fixed-bottom {background-color: #EFEFF6;border-top: 1px solid #cfcfcf;padding-top: 10px;}
+.notification-scroll.small-scroll {max-height: calc(100vh - 150px);min-height: calc(100vh - 150px);overflow-y: auto;}
+.simplebar-wrapper {width: 100%;}
+.btn.cmn-modal-ex-btn {color: #fff;padding: 5px 10px;margin-left: 10px;background-color: #dd2c36;border: 0;}
+td .btn.cmn-modal-ex-btn {float: none !important;padding: 2px 7px !important;}
+.common-modal-body {padding: 10px 30px !important;}
+.modal-header .close {margin-top: -2px;font-size: 35px;color: #ffff;opacity: 1;}
+.btn-default {padding: 6px 12px !important;}
+#rfp .table tr td:last-of-type {width: 100px;}
+table tr td:last-of-type {text-align: center !important;}
+.total-hours {text-align: right;}
+.total-hours .hrs {padding: 5px 13px;display: inline-block;background-color: #5d5d5d;color: #fff;line-height: 13px;border-radius: 4px;margin-left: 20px;}
+.h4, h4 {font-size: 16px;text-transform: uppercase;color: #000 !important }
+.card-detail+span {float: left;}
+.panel-body.users .row {margin: auto;}
+.panel-body.users a {font-size: 20px;}
+#quick_actions .pull-right {margin-top: -8px;margin-right: 44px;}
+.panel-body.users p {margin-top: 10px;}
+.navbar-nav>li>a:hover {background: none;}
+.dropdown-menu>li {border-bottom: 1px solid #f5f5f5;}
+.dropdown-menu>li>a {padding: 9px 20px;}
+.modal-header .common-modal-title {color: #fff;}
+.pull-right>.dropdown-menu {padding: 0;box-shadow: none;border-color: #ececec;border-radius: 0;margin: 1px 0 0 0;border-top: 0;right: -2px;}
+.dropdown-menu>li>a .glyphicon {float: left;margin-right: 10px;}
+.card-detail .table-responsive {max-height: 300px;}
+#proposals .card-detail .table-responsive thead td:last-child {width: 80px;}
+#projectmanagement .card-detail .table-responsive tbody td:nth-child(6),
+#projectmanagement .card-detail .table-responsive thead td:last-child,
+#rrm .card-detail .table-responsive tbody td:nth-child(5) { text-align: center;}
+#projectmanagement .card-detail .table-responsive tbody td:nth-child(6) button, #rrm .card-detail .table-responsive tbody td:nth-child(5) button {margin: 2px 0;}
+#projectmanagement .card-detail .table-responsive tbody td:last-child button {margin: 2px 0;}
+#rfp .table-responsive .table {width: 100%;}
+.btn-primary {background-color: #dd2c36;border-color: #dd2c36;}
+.newsFeeds {flex-grow: 1 !important;flex-shrink: 1 !important;flex-basis: 44%;}
+.flexdiv {flex: 1;justify-content: space-between;margin: 0 10px;flex-grow: 0;flex-shrink: 0;flex-basis: 30%;}
+.main-content .flexdiv:last-child {flex-basis: 20%;}
+#rednerBody {position: relative;}
+.d-quickmenu {position: absolute;left: 35%;right: 35%;top: -43px;z-index: 100;display: flex;}
+#emailTemplate_previewCard table {text-align: center;margin: auto;}
+#holidayincentivereport button {margin-top: 27px !important;}
+#sdgd-rrmInterview .dx-datagrid .dx-datagrid-rowsview tr td:nth-child(3) {text-transform: capitalize;}
+.d-quickmenu-inner {margin: 0 auto;}
+.d-quickmenu a {display: inline-block;margin: 0 3px;background: #fff;color: #5d5d5d;padding: 6px 8px;line-height: 18px;text-decoration: none;text-transform: uppercase;font-size: 12px;border-radius: 0;font-weight: 500;}
+.d-quickmenu a i {margin-left: 10px;color: #dd2c36;}
+.ac-btn {position: absolute;right: 17px;top: 18px;z-index: 999999999;margin: 0 auto;width: 30px;height: 30px;background: #5d5d5d;text-align: center;line-height: 30px;border-radius: 50%;cursor: pointer;color: #fff;}
+.navbar-fixed-bottom, .navbar-fixed-top {z-index: 99;}
+.designationTable {margin-top: 10px;}
+.input-group {width: 68%;position: relative;display: table;border-collapse: separate;}
+.total-leave-info-container {display: flex;}
+.total-leave-info {text-align: center;border: 1px solid #ccc;font-weight: bold;min-height: 65px;margin: 0;margin-bottom: 15px;display: flex;}
+.total-leave-content {padding: 10px;width: 100%;margin: 0;}
+.total-leave-content h4 {font-size: 12px;font-weight: bold;text-transform: capitalize;margin-top: 0;}
+.attendance-info-container {display: flex;}
+.attendance-info-col {border: 1px solid #e2e2e2;margin: 10px;}
+.leave-approve-status {padding: 2px 8px;border-radius: 20px;}
+.required_field {border-color: #dd1313;border-width: 1px;border-style: solid;}
+.hidden-btn {display: none;}
+#ProjectModal.steps-model .checkbox-inline {margin: 5px 15px !important;}
+#ProjectModal.steps-model .nav-tabs>li {margin-right: 10.3%;}
+#ProjectModal.steps-model .nav-tabs>li:last-child {margin-right: 0;}
+input[type=checkbox] {margin-right: 20px;margin-top: 7px;}
+#project-modalToggle {background-color: #337ab7;float: right;}
+.tab-pane {margin-top: 50px;}
+.modal-content {width: 100%;height: 600px;}
+#project-modal .modal-header h2 {display: inline-block;}
+#project-modal .modal-header .close {margin-top: 10px;}
+#project-modal .form-group label {width: 47% !important;}
+#project-modal .form-group.radio-sec {margin-bottom: 5px;}
+#project-modal .form-group.radio-sec>label {width: auto !important;margin-right: 15px;}
+#project-modal .form-group.radio-sec>label label {width: auto !important;margin-right: 0px;margin-left: 5px;font-weight: normal;}
+#project-modal .form-text {width: 60% !important;max-width: 52%;}
+#project-modal .nav-tabs>li>a {font-weight: 600;text-transform: uppercase;font-size: 12px;line-height: 0;padding: 20px;color: #333;transition: all 0.3s linear;cursor: pointer;}
+#project-modal .nav-tabs>li.active>a, #project-modal .nav-tabs>li.active>a:focus, #project-modal .nav-tabs>li.active>a:hover, #project-modal .nav-tabs>li>a:hover {color: #fff;cursor: default;background-color: #bb2d2d;border: 1px solid #ddd;border-bottom-color: #d23c3c00;box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);}
+.mr-btm-none {margin-bottom: 0;}
+.modal-content {width: 100%;height: auto;padding: 0;}
+.modal-body {padding: 30px 40px;}
+.modal-header {border: none;background: #fff;}
+.modal-header h2 {color: #fff;font-weight: 700;padding: 10px 40px;}
+.bottom-btn .btn-primary, .bottom-btn .btn-success {background: #3BB273;font-weight: 600;text-transform: uppercase;font-size: 12px;line-height: 0;padding: 16px;border-color: #3BB273;font-weight: 600;}
+.bottom-btn .btn-primary:hover, .bottom-btn .btn-success:hover {background: #31925F }
+.bottom-btn .btn.btn-secondary {padding: 16px;line-height: 0;background: #bb2d2d;color: #fff;font-weight: 600;text-transform: uppercase;font-size: 12px;}
+.bottom-btn .btn.btn-secondary:hover {background: #9A2525;}
+.mrg-right {margin-right: 5px;}.add-btn {font-size: 12px !important;}
+.m-b-10 {margin-bottom: 10px;}
+.btn-right {margin-right: 10px;margin-top: 13px;}
+.project-member h4 {color: #46AD46;}
+.project-member p {font-size: 14px;}
+.project-member img {width: 60px;}
+#step-5 .checkbox {margin-top: 40px;}
+#step-5 input[type=checkbox] {margin-top: 4px;}
+.project-documents .ico-word {color: #337ab7;}
+.project-documents .ico-excel {color: #1D7044;}
+.project-documents i {margin-right: 5px;}
+.project-documents tbody {font-size: 13px;}
+#step-6 input[type=checkbox] {margin-top: 4px;}
+#step-6 #upload-documents .checkbox {margin-top: 30px;}
+#step-6 .dropzone {border: 2px dashed #0087F7;border-radius: 5px;background: white;font-family: Roboto, "Open Sans", sans-serif;font-size: 20px;font-weight: 300;line-height: 1.4rem;background: #F3F4F5;color: #646C7F;text-rendering: optimizeLegibility;margin-bottom: 10px;}
+#step-6 .dropzone .dz-message {font-weight: 400;}
+#step-6 .dropzone .dz-preview.dz-image-preview {background-color: transparent;}
+#step-6 .dropzone .dz-preview .dz-error-message {color: white;}
+#step-6 .dropzone .dz-message .note {font-size: 0.8em;font-weight: 200;display: block;margin-top: 1.4rem;}
+.dx-datagrid-filter-panel-text {font-weight: 500;}
+#step-7 input[type=checkbox] {margin-top: 4px;}
+#step-4 input[type=checkbox] {margin-top: 4px;}
+#step-4 #new-project-module .checkbox {margin-top: 30px;}
+#step-4 .panel-default .panel-heading {background-color: #fff !important;}
+#step-4 .project-module-title {color: #46AD46;font-size: 16px;}
+#step-4 textarea {width: 100%;}
+#step-4 .form-section, #step-8 .form-section, #step-6 .form-section {border-bottom: 0px !important;margin-bottom: 0px;}
+#step-2 input[type=checkbox] {margin-top: 4px;}
+#step-3 .checkbox {margin-top: 30px;}
+#step-3 input[type=checkbox] {margin-top: 4px;}
+#step-4 textarea {width: 100%;}
+#step-4 .form-section {border-bottom: 0px !important;}
+#step-8 .form-section {border-bottom: 0px !important;}
+#step-1 input[type=checkbox] {margin-top: 4px;}
+#step-7 .TimesheetSubTitle {margin: 7px auto;font-size: 14pt !important;}
+#step-6 #displayProjectDocuments .actionButtons button {margin: 0px 3px;}
+.required_field {border-color: #dd1313;border-width: 1px;border-style: solid;border-color: #dd1313;border-width: 1px;border-style: solid;}
+.hidden-btn {display: none;}
+#ProjectModal.steps-model .checkbox-inline {margin: 5px 15px !important;}
+#ProjectModal.steps-model .nav-tabs>li {margin-right: 10.3%;}
+#ProjectModal.steps-model .nav-tabs>li:last-child {margin-right: 0;}
+input[type=checkbox] {margin-right: 20px;margin-top: 7px;}
+#project-modalToggle {background-color: #337ab7;float: right;}
+.tab-pane {margin-top: 50px;}.modal-content {width: 100%;height: 600px;}
+#project-modal .modal-header h2 {display: inline-block;}
+#project-modal .modal-header .close {margin-top: 10px;}
+#project-modal .form-group label {width: 47% !important;}
+#project-modal .form-group.radio-sec {margin-bottom: 5px;}
+#project-modal .form-group.radio-sec>label {width: auto !important;margin-right: 15px;}
+#project-modal .form-group.radio-sec>label label {width: auto !important;margin-right: 0px;margin-left: 5px;font-weight: normal;}
+#project-modal .form-text {width: 60% !important;max-width: 52%;}
+#project-modal .nav-tabs>li>a {font-weight: 600;text-transform: uppercase;font-size: 12px;line-height: 0;padding: 20px;color: #333;transition: all 0.3s linear;cursor: pointer;}
+#project-modal .nav-tabs>li.active>a, #project-modal .nav-tabs>li.active>a:focus, #project-modal .nav-tabs>li.active>a:hover, #project-modal .nav-tabs>li>a:hover {color: #fff;cursor: default;background-color: #bb2d2d;border: 1px solid #ddd;border-bottom-color: #d23c3c00;box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);}
+.mr-btm-none {margin-bottom: 0;}
+.modal-content {width: 100%;height: auto;padding: 0;box-shadow: none;}.modal-body {padding: 30px 40px;}
+.modal-header {border: none;background: #fff;}
+.modal-header h2 {color: #fff;font-weight: 700;padding: 10px 40px;}
+.bottom-btn .btn-primary, .bottom-btn .btn-success {background: #3BB273;font-weight: 600;text-transform: uppercase;font-size: 12px;line-height: 0;padding: 16px;border-color: #3BB273;font-weight: 600;}
+.bottom-btn .btn-primary:hover, .bottom-btn .btn-success:hover {background: #31925F }
+.bottom-btn .btn.btn-secondary {padding: 16px;line-height: 0;background: #bb2d2d;color: #fff;font-weight: 600;text-transform: uppercase;font-size: 12px;}
+.bottom-btn .btn.btn-secondary:hover {background: #9A2525;}.mrg-right {margin-right: 5px;}
+.add-btn {font-size: 12px !important;}
+.m-b-10 {margin-bottom: 10px;}
+.btn-right {margin-right: 10px;margin-top: 13px;}
+.project-member h4 {color: #46AD46;}
+.project-member p {font-size: 14px;}
+.project-member img {width: 60px;}
+#step-5 .checkbox {margin-top: 40px;}
+#step-5 input[type=checkbox] {margin-top: 4px;}
+.project-documents .ico-word {color: #337ab7;}
+.project-documents .ico-excel {color: #1D7044;}
+.project-documents i {margin-right: 5px;}
+.project-documents tbody {font-size: 13px;}
+#step-6 input[type=checkbox] {margin-top: 4px;}
+#step-6 #upload-documents .checkbox {margin-top: 30px;}
+#step-6 .dropzone {border: 2px dashed #0087F7;border-radius: 5px;background: white;font-family: Roboto, "Open Sans", sans-serif;font-size: 20px;font-weight: 300;line-height: 1.4rem;background: #F3F4F5;color: #646C7F;text-rendering: optimizeLegibility;margin-bottom: 10px;}
+#step-6 .dropzone .dz-message {font-weight: 400;}
+#step-6 .dropzone .dz-preview.dz-image-preview {background-color: transparent;}
+#step-6 .dropzone .dz-preview .dz-error-message {color: white;}
+#step-6 .dropzone .dz-message .note {font-size: 0.8em;font-weight: 200;display: block;margin-top: 1.4rem;}
+.modal-footer {background: #fff;}
+#step-7 input[type=checkbox] {margin-top: 4px;}
+#step-4 input[type=checkbox] {margin-top: 4px;}
+#step-4 #new-project-module .checkbox {margin-top: 30px;}
+#step-4 .panel-default .panel-heading {background-color: #fff !important;}
+#step-4 .project-module-title {color: #46AD46;font-size: 16px;}#step-4 textarea {width: 100%;}
+#step-4 .form-section, #step-8 .form-section, #step-6 .form-section {border-bottom: 0px !important;margin-bottom: 0px;}
+#step-2 input[type=checkbox] {margin-top: 4px;}
+#step-3 .checkbox {margin-top: 30px;}#step-3 input[type=checkbox] {margin-top: 4px;}
+#step-4 textarea {width: 100%;}
+#step-4 .form-section {border-bottom: 0px !important;}
+#step-8 .form-section {border-bottom: 0px !important;}
+#step-1 input[type=checkbox] {margin-top: 4px;}
+#step-7 .TimesheetSubTitle {margin: 7px auto;font-size: 14pt !important;}
+#step-6 #displayProjectDocuments .actionButtons button {margin: 0px 3px;}
+input.select2-search__field {width: 100% !important;}
+table#nomineeFileTable {border: 1px solid black;}
+#nomineeFileTable td {border: none;border-bottom: 1px solid black;}
+#nominee_file:before {content: attr(data-title);color: #007f00;font-size: 12px !important;position: absolute;top: 0.5em;left: 0;width: 100%;padding-top: 1.2em;padding-bottom: 1.2em;opacity: 1;visibility: visible;text-align: center;border: 0.15em dashed#c0c0c1;transition: all 0.3s cubic-bezier(0.8, 0.8, 0.8, 0.8);overflow: hidden;}
+#nominee_file {position: relative;width: 100%;height: 100%;min-height: 4.5em;outline: none;visibility: hidden;cursor: pointer;background-color: #c61c23;}
+#voteRatingTable td, th {text-align: center;}
+.votingGuideBox {border: 1px solid #ccc;border-radius: 8px;margin-top: 10px;}
+.votingGuideBox h4 {color: red !important;margin-left: 20px }
+.votingGuideBox {border: 1px solid #ccc;border-radius: 8px;margin-top: 10px;}
+.votingGuideBox h4 {color: red !important;margin-left: 20px }
+.votingGuideBox ol {list-style: none;counter-reset: li }
+.votingGuideBox li::before {content: counter(li);color: red;display: inline-block;width: 1em;margin-left: -1em }
+.votingGuideBox li {counter-increment: li }
+body {padding: 40px 10px 40px 15px !important;}
+.body-content {height: calc(100vh - 110px);}
+#button-hide-menuIn a, #button-hide-menuOut a {background-color: transparent;text-decoration: none;}
+#button-hide-menuIn a {text-align: left;}input {border: 1px solid #ccc;border-radius: 0;padding: 4px 10px;}
+#BenchToBilling .table-responsive>.table {width: 800px;}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {outline: none;box-shadow: none;border-color: #eaeaea;background: none;height: auto;line-height: 16px;padding: 7px 10px 5px;}
+#BenchToBilling form {margin-top: 10px;}
+#BenchToBilling input {width: 100%;outline: none;}
+.btn, .btn:hover, .btn:focus, .btn:active {outline: none !important;box-shadow: none;}
+.card-detail .AddLeaveButton {padding: 4px 10px;}
+.modal-content, .modal-header, .modal .modal-dialog>.modal-content {border-radius: 0 !important;}
+.modal.in .modal-dialog {box-shadow: none !important;}
+.form-control, .form-control:hover, .form-control:focus {border-radius: 0 !important;box-shadow: none;}
+.no-padd {padding: 0;}
+.nav-notification {float: right;background-color: #dd2c36;width: 23px;text-align: center;border-radius: 17px;font-size: 10px;color: #fff !important;height: 23px;line-height: 23px;width: 20px;height: 20px;text-align: center;border-radius: 17px;font-size: 10px;line-height: 20px;color: #fff !important;}
+#notes_notification a {border-width: 0;}
+.modal-header .expand {margin-top: -2px;font-size: 22px;color: #ffff;opacity: 1;background: transparent !important;border: 0;float: right;}
+.modal .modal-dialog>.modal-content.modal-expand {width: 92%;height: 95vh;}
+.proposal-popup {padding: 0px 17px !important;}
+.proposal-popup .modal-footer {background: #fff;}
+#RfpModal .btn-primary {background-color: #dd2c36;border-color: #dd2c36 !important;}
+#comment_data_dxEditor h4 {text-transform: inherit;}
+@media (max-width: 767px) {
+    #sddgd-proposalcard table {table-layout: inherit;display: block;overflow: auto;}
+    #manage_rpm_dropzone .dropzone {height: auto;}
+    #manage_rpm_dropzone .dropzone .dz-message {line-height: 1.9;}
+    .quickmenu {margin-top: 15px;}.side-hide-menu {display: none;}
+    #closedRRMPEntryPointModalBody .tab-pane {margin-top: 20px;}
+    #sddgd-proposalcard .dx-toolbar .dx-texteditor {width: 150px !important;}
+    #RfpModal .modal-content {width: 95% !important;height: 80% !important;}
+    .steps-model .nav-tabs>li>a {width: 35px;height: 35px;font-size: 13px;line-height: 35px;margin-right: 12px !important;margin-bottom: 10px !important;}
+    .steps-model .step-anchor {border: none;display: inline-block;justify-content: space-between;overflow: hidden;height: auto;padding: 0px;}
+    #RfpModal .simplebar-content {padding: 25px 32px 10px 12px !important;}
+    .steps-model .nav-tabs>li::after {top: 15px;}
+    .steps-model .right-btn-hldr {position: relative;top: 0px;}
+    .proposal-popup .simplebar-content {padding: 25px 32px 10px 12px !important;}
+    .proposal-popup .modal-footer {background: #fff;}
+    #RfpModal .tab-pane {margin-top: 20px;}
+    #RfpModal .steps-model .step-title h3, #RfpModal .form-section h3 {font-size: 16px !important;}
+    #RfpModal .steps-model .nav-tabs>li::after {top: 10px;}
+    .proposal-popup .modal-content {width: 100% !important;}
+    #RfpModal .dx-toolbar .dx-texteditor {width: 150px !important;margin-left: 10px !important;}
+    #sddgd-proposalcard .dx-toolbar .dx-texteditor {width: 150px !important;margin-left: 10px !important;}
+    #RfpModal .btn-primary {background-color: #dd2c36;border-color: #dd2c36;}
+    .steps-model .step-title h3 {font-size: 16px !important;}
+    #sddgd-proposalcard .dx-toolbar-after, #sddgd-proposalcard .dx-toolbar-before {position: relative;padding: 0px;}
+    #sddgd-proposalcard .dx-toolbar .dx-toolbar-items-container {height: auto;overflow: visible;}
+    .proposal-popup .btn-primary {background-color: #dd2c36;border-color: #dd2c36;}
+    #sddgd-proposalcard table {table-layout: inherit;display: block;overflow: auto;}
+    #sddgd-proposalcard .dx-toolbar .dx-texteditor {width: 150px !important;}
+    #sddgd-proposalcard table {table-layout: inherit;display: block;overflow: auto;}
+    #sddgd-proposalcard .dx-toolbar .dx-texteditor {width: 150px !important;}
+    .navbar {min-height: 70px;}
+    .navbar-synergy {background-color: #eeeeee;color: white !important;}
+    .d-quickmenu {top: -35px !important;}
+    .dashboard-page .dx-datagrid-table-fixed {table-layout: auto;width: auto;display: block;overflow: auto;}
+    .dashboard-page .dx-toolbar .dx-texteditor {width: 150px !important;}
+    .dx-toolbar .dx-toolbar-items-container {height: auto;overflow: visible;}
+    .dx-toolbar-after, .dx-toolbar-before {position: inherit;}
+    .dx-toolbar-after {padding-left: 0px !important;}
+    .rrm-card-detail.dashboard-home .row {display: block !important;}
+    .rrm-card-detail.dashboard-home .cardDetailsInterviews {display: block;margin-bottom: 15px;}
+    .cardDetailsInterviews .item {padding: 0px;}
+    .rrm-card-detail .cardDetailsHrHead {display: block !important;margin-bottom: 15px;}
+    .rrm-card-detail-NewInterviewCard .pull-right {float: none !important;}
+    .common-table table {table-layout: inherit;display: block;overflow: auto;}
+    .dashboard-notification {overflow: auto;}
+    .dashboard-notification .dx-toolbar .dx-texteditor {width: 150px !important;}
+    .dashboard-notification .dx-datagrid-group-panel {font-size: 11px;}
+    #tb_projectCard, #tblLeaveApprovalentry, #tb_projectCard {width: 100% !important;display: block;overflow: auto;}
+    .sidenav.in {width: 0px;position: fixed;right: 0px;padding-top: 0px;}
+    .sidenav.in #button-hide-menuOut a {width: 30px;right: 10px;left: auto;top: 13px;}body {padding: 0px !important;margin-top: 90px;}
+    .main-content.expand, .main-content {width: 100% !important;}
+    #button-hide-menuIn a, #button-hide-menuOut a {text-align: left;right: 3px;left: auto !important;z-index: 9999;color: #000 !important;width: 35px;top: 10px;}
+    .sidenav.in ul.left-Navigation .main_nav_item {display: none;}
+    .navbar-fixed-top {z-index: -1;}
+    .sidenav {width: 320px;padding-top: 0px;right: 0px;position: fixed;top: 70px;background: #fff;z-index: 2;height: 100%;}
+    ul.left-Navigation li {padding: 10px 15px 10px 10px;}
+    .rrm-card-detail .cardDetailsHrHead {display: block;margin-bottom: 15px;}
+    .rrm-card-detail .row {display: block !important;}
+    .main_nav_item #button-hide-menuIn, .main_nav_item #button-hide-menuOut {margin: 0px;padding: 10px 20px 10px 10px;}
+    #managePropsalModalDialog .modal .modal-dialog>.modal-content {margin: auto;width: 90%;}
+    #managePropsalModalDialog .modal-body, #assignRFPModal .modal-body {padding: 20px 10px !important;}
+    #ProposalRfpTitle {text-align: left !important;}
+    #displayProjectphase .dx-datagrid-table-fixed {table-layout: auto;width: auto;display: block;overflow: auto;}
+    #MappedUserTable {display: block;overflow: auto;}
+    #sddgd-apidbmapping .dx-datagrid-table-fixed {table-layout: fixed;width: 100%;display: table;}
+    .dx-datagrid-group-panel .dx-group-panel-message {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 250px;}
+    .modal .modal-dialog>.modal-content {margin: auto;width: 90% !important;}
+    #LeaveModal .text-right {text-align: left !important;}
+    #modal-AddNotes .text-right {text-align: left !important;}
+    .dataTables_wrapper .dataTables_paginate .paginate_button {padding: 0.5em 0.5em;}
+    #sddgd-notesCard .dx-datagrid-table .btn {padding: 1px 5px;}
+    #tbl_workordercard {table-layout: auto;width: auto;display: block;overflow: auto;}
+    #SAAddRoutinemodel .input-group {width: 100%;}
+    #rrmGridReportOwner .dx-datagrid-table .btn {padding: 1px 5px;}
+    #managePropsalModalDialog .tab-content.col-md-12 {padding: 0px;}
+    #managePropsalModalDialog .nav>li>a {padding: 10px 10px;}
+    #managePropsalModalDialog .tab-pane {margin-top: 20px;margin-bottom: 20px;}
+    #ProjectModal .form-group .input-group .form-control {height: 34px;}
+    #ProjectModal.steps-model .nav-tabs>li {margin-right: 5px !important;}
+    #ProjectModal.steps-model #step-1 .pull-right {float: none !important;}
+    #ProjectModal.steps-model .step-title {margin: 0px 0px 20px 0px;border-bottom: 1px solid #eee;padding-bottom: 6px;}
+    #ProjectModal .project-first-step {margin-top: 20px !important;}
+    #ProjectModal.steps-model #step-1 .checkbox-inline {margin: 9px 2px !important;width: auto;}
+    #ProjectModal .steps-model .step-title h3 {margin-bottom: 5px;}
+    #ProjectModal.steps-model #step-1 .checkbox-inline {margin: 9px 2px !important;width: auto;}
+    #ProjectModal .steps-model .step-title h3 {margin-bottom: 5px;}
+    .dx-popup-wrapper>.dx-overlay-content {width: 95% !important;transform: translate(10px, 25px) !important;}
+    .dx-popup-content {padding: 10px !important;overflow: auto;}
+    .dx-popup-title.dx-toolbar .dx-toolbar-after {padding-left: 15px;position: absolute;}
+    #displayProjectPhase .dx-toolbar .dx-texteditor {width: 150px !important;}
+    #displayProjectPhase .dx-datagrid-table-fixed {table-layout: auto;width: auto;display: block;overflow: auto;}
+    #sddgd-saroutine-report .dx-datagrid-table-fixed {table-layout: auto;width: auto;display: block;overflow: auto;}
+    #displayProjectContacts .dx-datagrid-table-fixed {table-layout: auto;width: auto;display: block;overflow: auto;}
+    #Project_Modal .dx-toolbar .dx-texteditor {width: 150px !important;}
+    #displayProjectphase .dx-datagrid-table-fixed {table-layout: auto;width: auto;display: block;overflow: auto;}
+    .body-content .nav-notification {float: right;background-color: #dd2c36;width: 23px;text-align: center;border-radius: 17px;font-size: 10px;color: #fff !important;height: 23px;line-height: 23px;}
+    .dx-popup-bottom.dx-toolbar .dx-toolbar-items-container {height: auto;overflow: visible;}
+    #NreModal #rfp-alignment {margin-top: 0px;}
+    #NreModal input[type=checkbox] {margin-top: 3px;}
+    #NreModal #rfp-alignmentClient {margin-top: 0px;}
+    #NreModal .tab-pane {margin-top: 20px;}
+    .modal-open .modal {padding: 0px !important;}
+    #RRMPEntryPointHrHeadModalBody .tab-pane {margin-top: 20px;}
+    #rrmDetailsHrHead .dx-datebox.dx-auto-width .dx-texteditor-input {padding-right: 10px;}
+    #rrmDetailsHrHead .dx-texteditor-buttons-container {display: none;}
+    #rrmDetailsHrHead .prevbtn {display: inline-block;}
+    #manageProposalModals .tab-pane {margin-top: 20px;}
+    #manageProposalModals .dropzone .dz-message {line-height: 1.7 !important;font-size: 20px;}
+    #manage_rfp_dropzone .dropzone {height: auto !important;}
+    #manageProposalModals #managerfp_Description_dxeditor {margin-bottom: 10px;}
+    #notify_caret {right: 33px !important;}
+    .d-quickmenu a {display: inline-block;margin: 0 1px;padding: 6px 6px;font-size: 12px;}
+   #leaveentry-dropzone .dropzone .dz-message {font-weight: 400;font-size: 16px;margin: 0 1px;padding: 6px 6px;font-size: 12px;}
+   #projectcreation .tab button.active {color: #fff;}
+   #assignbackleadModel table {margin-bottom: 0px;}
+   #project_smartwizard .tab-pane {margin-top: 20px;}
+   #div-opening_elcl-View-Modal .dx-toolbar .dx-texteditor {width: 150px !important;}
+   #RRMPEntryPointRecruiterModalBody .nav-tabs {padding: 0px;}
+   #rrm_common_comments_headBody .tab-pane {margin-top: 20px;}
+   .sidenav .userMenu #button-hide-menuIn {display: block !important;}
+   .sidenav.in .userMenu #button-hide-menuIn {display: none !important;}
+   .notification-scroll.small-scroll {max-height: calc(100vh - 110px);min-height: calc(100vh - 110px);overflow-y: auto;}
+   .main_nav_item {margin-top: 30px;display: inline-block;width: 100%;margin-bottom: 30px;}
+   .opening_elcl_modal_content input[type=text] {width: 100%;border: 1px solid #ddd;height: 37px;}
+   #div-opening_elcl-Edit-Modal.modal .modal-content .modal-footer .btn-secondary {border-width: 1px;color: #fff;}
+   .opening_elcl_modal_content .input-group {width: 100%;}.steps-model .nav-tabs>li.active a {border-radius: 50%;}
+   #WorkOrderModelbox .tab-pane {margin-top: 20px;}#div-ChartItems .table-responsive {border: none;}
+   #LeaveModal .modal-body {padding: 20px 30px 20px 30px !important;}
+   .opening_elcl_modal_content .input-group {width: 100%;}
+   .steps-model .nav-tabs>li.active a {border-radius: 50%;}
+   #WorkOrderModelbox .tab-pane {margin-top: 20px;}
+   #nre_post_message_action .dropzone {min-height: auto !important;line-height: 10vh;}
+   #sdgd-projectReportsGrid .dx-select-checkboxes-hidden {table-layout: auto !important;display: block !important;}
+   #sdgd-projectReportsGrid .dx-datagrid-table-fixed {table-layout: fixed;width: 100%;display: inline-table;overflow: auto;}
+   #project_smartwizard .steps-model .step-title {border: none !important;}
+   #div-ChartItems #commit-hrs {margin-top: 15px !important;}
+   #smartwizard_workorder .tab-pane {margin-top: 20px;}
+   #rrmGridReportRecruiter .dx-datagrid-rowsview .dx-row>.dx-master-detail-cell {padding: 12px;}
+   .rrm-card-detail .cardDetailsHrHead .item-card {width: auto;}
+   #rrm_PreviousInterviewDetails .panel-title span {float: none !important;margin-left: 10px;}
+   #rrm_OfferApprovalInterviewHistoryAccordian .panel-title span {float: none !important;margin-left: 10px;}
+   #rrm_InterviewScheduleInterviewHistoryAccordian .panel-title span {float: none !important;margin-left: 10px;}
+    #rrm_OfferApprovalInterviewHistoryAccordian .panel-title,
+    #rrm_InterviewScheduleInterviewHistoryAccordian .panel-title {line-height: 1.7;font-size: 15px;}
+    #rrm_InterviewScheduleInterviewHistoryAccordian .panel-title {line-height: 1.7;font-size: 15px;}
+    #rrm_ProfileScreeningInterviewHistoryAccordian .panel-title {line-height: 1.7;font-size: 15px;}
+    #rrm_ProfileScreeningInterviewHistoryAccordian .panel-heading{overflow: hidden;}
+    #interviewSummaryDetails .dx-datagrid-search-panel {width: 180px !important;}
+    #rrmApprovalTabs>li>a {padding: 10px 12px;}
+    #rrmOfferApprovalDetails .tab-pane {margin-top: 20px;}
+    #sdchk-oneMoreRoundForInterview {margin-bottom: 10px;margin-top: 10px;}
+    .opening_elcl_modal_content .input-group {width: 100%;}
+    #NreModal #rfp-alignment {margin-top: 0px;}
+    .opening_elcl_modal_content .input-group {width: 100%;}
+    #sdgd-mappedCandidatesGridNew .dx-datagrid-table-fixed {table-layout: auto;width: auto;display: block;overflow: auto;}
+    #rrm_OfferApprovalDetails {margin-top: 20px;}
+    #rrmOfferDispatchDetails .tab-pane {margin-top: 20px;}
+    #RRMOnBoardProfileEntryPointTableModel {width: 100% !important }
+    .padding-title {padding: 10px 0px 10px 0px !important;}
+    #rrm_OfferDispatchInterviewHistoryAccordian .panel-title span {float: none !important;margin-left: 10px;}
+    #rrm_OfferDispatchInterviewHistoryAccordian .panel-title {font-size: 15px;line-height: 1.7;}
+    #rrmOfferInterviewScheduleDetails .dx-toolbar .dx-texteditor {width: 150px !important;}
+    #EmployeePerformance .tab button.active {color: #fff;}
+    #EmployeePerformance .tab button.active {color: #fff;}
+    #rrm_InterviewScheduleInterviewHistoryAccordian h3 {font-size: 20px;}
+    #rrmDetailsOfferDispatchDivTitle {font-size: 20px;}
+    #rrm_PreviousInterviewDetailsAccordian .panel-title {line-height: 1.7;font-size: 15px;}
+    .opening_elcl_modal_content .input-group {width: 100%;}
+    .rrmdashboardbtn label {display: none;}
+    #EmployeePerformance .openbtn {margin-top: 10px;}
+    .closed-project .projectdetail {margin-top: 10px;}
+    .closed-project .table-responsive {width: 100%;margin-bottom: 0px;border: 1px solid #fff;}
+    .navbar-synergy .navbar-collapse.in {display: none;}
+    #rrm_OfferApprovalDetails {margin-top: 15px;}
+    #WorkOrderModelbox.steps-model .step-anchor { display: flex; }
+    #WorkOrderModelbox.steps-model .nav-tabs>li>a { margin-right: 0 !important; }
+    #WorkOrderModelbox.steps-model .step-anchor {display: flex;}
+    #WorkOrderModelbox.steps-model .nav-tabs>li>a {margin-right: 0 !important;}
+    .mt-23 {margin-top: 23px;}
+}
+@media(max-width: 1199px) {
+    .flexdiv, .main-content .flexdiv:last-child {flex-basis: calc(100% - 15px);}
+}
+@media (min-width: 768px) {
+#ProjectModal .input-group select {border-radius: 4px; }
+#ProjectModal .input-group select+.input-group-btn>.btn { padding: 3px 7px; margin-left: 10px;border-radius: 4px; }
+.notify_col .ac-btn.dataHideCard { right: 40px;}
+#rrm_PreviousInterviewDetailsProfileScreening .panel-title{font-size: 14px;}
+}
+@media screen and (max-width: 992px) {
+    .d-quickmenu {left: 0; right: 0; top: -22px; }
+    #step-6 #upload-documents .checkbox {margin-top: 0px;}
+    #step-4 #new-project-module .checkbox {margin-top: 0px;}
+    #step-6 #upload-documents .checkbox {margin-top: 0px;}
+    #step-4 #new-project-module .checkbox { margin-top: 0px;}
+    .d-quickmenu { left: 0; right: 0; }
+    .side-hide-menu.profile { display: none; }
+    .card-detail .btn { margin-top: 10px; }
+}
+@media only screen and (min-width:768px) and (max-width:1200px) {
+    .sidenav .userMenu #button-hide-menuIn {display: block !important;}
+    .dashboard-page .sidenav { padding-top: 30px !important; }
+    .sidenav.in .userMenu #button-hide-menuIn { display: none !important;}
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) {
+    .d-quickmenu { top: -13px; }
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait) {
+    .sidenav .userMenu #button-hide-menuIn { display: block !important;}
+    .sidenav.in .userMenu #button-hide-menuIn { display: none !important;}
+    .dashboard-page .sidenav { padding-top: 30px !important;}
+    #RRMEntryPointModel .tab-pane {margin-top: 20px; }
+}
+@media only screen and (max-device-width: 767px) and (orientation: landscape) {
+    .dx-datagrid-group-panel .dx-group-panel-message { max-width: 200px;}
+    .dx-toolbar .dx-toolbar-items-container {display: flex;}
+}
+@media (min-width:1400px) {
+    #WorkOrderModelbox.modal .modal-dialog>.modal-content { width: 52%; }
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+    .dx-popup-wrapper>.dx-overlay-content {width: 95% !important; transform: translate(22px, 221px) !important;}
+    .dx-popup-content {padding: 10px !important; overflow: auto;}
+    .dx-popup-title.dx-toolbar .dx-toolbar-after { padding-left: 15px;position: absolute;}
+}
+
+#ProjectModal .form-group .form-control {height: 34px;}
+#ProjectModal .form-hldr .input-group select+.input-group-btn>.btn {padding: 3px 7px;margin-left: -1px;border-radius: 0px;}
+.overflow-hidden {overflow: hidden;}
+#manageProposalModals .select2-container--default .select2-selection--single {background-color: #fff;border: 1px solid #ccc;border-radius: 0px;height: 40px;}
+#manageProposalModals .select2-container--default .select2-selection--single .select2-selection__arrow {height: 40px;}
+#manageProposalModals .select2-container--default .select2-selection--single .select2-selection__rendered {color: #444;line-height: 40px;}
+#manageProposalModals #managerfp_Description_dxeditor {margin-bottom: 10px;}#manage_rfp_dropzone .dropzone {font-size: 18px !important;}
+#manageProposalModals .tab-pane {margin-top: 20px;}
+#div-QuickAction-Edit-Big-Modal .dx-datagrid-header-panel .dx-toolbar {margin-bottom: 10px;margin-top: 10px;}
+#notify_caret {right: 17px;}
+#managePropsalModalDialog .tab-pane {margin-top: 20px;}
+#tb_projectCard, #MappedUserTable {width: 100% !important;border: none;}
+#tb_projectCard thead td {border: none;}
+#MappedUserTable thead td {border: none;}
+#assignPropsalModalDialog #cke_comment {margin-bottom: 10px;}
+#rrm_common_comments_recruiterBody .tab-pane, #rrmDetailsRecruiter .tab-pane {margin-top: 20px;}
+#RRMEntryPointModel .tab-pane {margin-top: 20px;}
+#RRMEntryPointModel .tab-pane {margin-top: 20px;}
+.dashboard-page .sidenav {padding-top: 0px;}
+#WorkOrderModelbox .tab-pane {margin-top: 20px;}
+.dashboard-page .sidenav {padding-top: 0px;}
+.dashboard-page .sidenav {padding-top: 0px;}
+.steps-model .nav-tabs>li.active a {border-radius: 50%;}
+#RRMPEntryPointHrHeadModalBody .tab-pane {margin-top: 20px;}
+#manage_plan_reassign_cancel {margin-top: 10px;}
+#manage_plan_reassign_save {margin-top: 10px;}
+#ProjectCardDetails #tb_projectCard thead td {border: 1px solid #ddd;}
+#LeaveModal .modal-body {padding: 20px 30px 20px 30px !important;}
+#sddgd-notesCard .btn {padding: 1px 5px;}
+#project_smartwizard .tab-pane {margin-top: 20px;}
+.cardDetailsInterviews .item-card {padding: 10px;}
+#nre_post_message_action .dropzone {min-height: 300px;line-height: 15rem;}
+#assignRFPModal #assign_rfp_dxEditor_description {height: 380px !important;}
+#div-opening_elcl-Edit-Modal .modal-footer .btn-secondary {border-width: 1px !important;}
+#MappedUserTable table.dataTable thead th {border-bottom: 1px solid #d3d3d3;}
+#project_smartwizard .form-control {height: 37px;}
+#tab_assign_rfp_client_project_details h3 {font-size: 20px;margin-top: 10px;margin-bottom: 5px;}
+#assignRFPModal #assign_rfp_dxEditor_description {height: 380px !important;}
+#proposal_Description_ckeditor {height: 380px !important;}
+.rrm-card-detail .cardDetailsHrHead .item-card {width: auto;}
+.rrm-card-detail .cardDetailsHrHead {display: inline-block;margin-left: 0px;}
+.rrm-card-detail .cardDetailsHrHead .item-card h2 {margin-top: 0px !important;font-size: 15px;text-align: center;}
+.rrm-card-detail .cardDetailsHrHead .item-card h4 {font-size: 15px;}
+#sd_txtEditor_RRMHRHeadComments {height: 250px;}
+#benchToBillingGrid p {margin-bottom: 0px;}
+#project_smartwizard .steps-model .step-title {border: none;}
+#commit-hrs {margin-top: 0px !important;}
+#smartwizard_workorder .tab-pane {margin-top: 20px;}
+#rrmGridReportRecruiter .dx-datagrid-rowsview .dx-row>.dx-master-detail-cell {padding: 12px;}
+#managePropsalModalDialog #cke_comment {margin-bottom: 15px;}
+#TechnologyCountForRFPStatus svg {transform: scale(1);width: 100%;height: 100%;}
+#RFPFunnelStatus svg {transform: scale(1);width: 100%;height: 100%;}
+#GetRFPStatusCount svg {transform: scale(1);width: 100%;height: 100%;}
+#RFPCountByMonth svg {transform: scale(1);width: 100%;height: 100%;}
+#BDECountWiseRFPStatus svg {transform: scale(1);width: 100%;height: 100%;}
+#DetailsForBDEOwnerStatus svg {transform: scale(1);width: 100%;height: 100%;}
+#rfpdashboard .chartBox .dxc-title text, .chartBox text {font-size: 16px !important;font-weight: 600 !important;margin-top: 5px;}
+#rrmDetails .error_message {margin-top: 5px;display: block;}#InterviewModalBody .tab-pane {margin-top: 20px;}
+#rfpdashboard .chartBox .btn-primary {padding: 4px 7px;margin-bottom: 10px;}
+#rfpdashboard .chartBox {border: solid 1px;border-color: #dddddd;width: 100%;margin-bottom: 20px;padding: 20px;}
+#BDEWiseCountForRFPStatusModal svg rect {width: 100%;height: 100%;}#sddgd-actionitems {margin-top: 10px;}
+#BDEWiseCountForRFPStatusModal svg, #RFPMonthStatusModal svg {margin-bottom: 20px;padding: 20px;width: 100%;}
+.cardDetailsInterviews .item-card {padding: 10px;}
+#GetRFPStatusCountexp .dxc-title text {font-size: 16px !important;font-weight: 600 !important;margin-top: 5px;}
+#smartwizard .tab-pane {margin-top: 30px;}
+.notification-scroll p {padding: 0px;}
+.notification-scroll .notification-cards {background-color: white;margin-right: 0px;margin-bottom: 0px;}
+.notification-scroll #accordion {margin-bottom: 0px;}
+#tab_assign_rfp_document_details h3 {font-size: 20px;margin-top: 10px;margin-bottom: 5px;}
+#rrm_InterviewSummary label {margin-bottom: 12px;}
+#sdchk-oneMoreRoundForInterview {margin-bottom: 10px;}
+#project_smartwizard .form-control {height: 37px;}
+#sdchk-oneMoreRoundForInterview {margin-bottom: 10px;}
+#project_smartwizard .form-control {height: 37px;}
+#rrm_common_commentsBody .tab-pane {margin-top: 30px;}
+#RRMOnBoardProfileEntryPointTableModel-content .tab-pane {margin-top: 20px;}
+#rrm_OnBoardcandidateinformationTab .dx-fieldset-header {margin-bottom: 10px;}
+.cardDetailsTrackerNewHrHead .item-card {transition: 0.5s;cursor: pointer;width: 170px;padding: 3px 10px;background-color: gainsboro;border-radius: 10px;}
+.cardDetailsTrackerNewHrHead .item {padding-left: 3px;padding-right: 3px;}
+#OfferApprovalStatus .alert-danger {padding: 8px 10px;margin-bottom: 0px;}
+#closedProjectAuditReport .tab button.active {color: #fff;}
+#EmployeePerformance .tab button.active {color: #fff;}
+#EmployeePerformance .tab button.active {color: #fff;}
+#rrm_OnBoardcandidateinformationTab .dx-fieldset-header {margin-bottom: 10px;}.quickmenu {margin-top: 30px;}
+.search-bar-menu {margin-left: 110px;margin-top: 10px;}
+ul.left-Navigation {list-style: none;padding: 0px 0;margin-top: -10px;}
+#rrmdashboard .btn-sm {margin-bottom: 10px;}
+#rrmOfferApprovalModalBody .tab-pane {margin-top: 20px;}
+#rrmOfferDispatchDetails .tab-pane {margin-top: 20px;}
+#RRMOnBoardProfileEntryPointTableModel-content .tab-pane {margin-top: 20px;}
+#sd_txtEditor_RRMHRHeadComments {height: 230px !important;}
+#RRMOfferApprovalModal .rrm_comments_history {border: solid 1px #D1D1D1;height: 305px !important;}
+#rrm_InterviewScheduleModalBody .tab-pane {margin-top: 20px;}
+#rrmOfferInterviewScheduleDetails .tab-pane {margin-top: 20px;}
+#sdchk-oneMoreRoundForInterview {margin-bottom: 10px;}
+#project_smartwizard .form-control {height: 37px;}
+#rrm_common_commentsBody .tab-pane {margin-top: 30px;}
+#closedProjectAuditReport-tabConent h1 {font-size: 18px;text-transform: capitalize;}
+#rrm_AllProfileViewPointInterviewHistoryAccordian h3 {font-size: 18px;margin-top: 0px;}
+.rrmdashboardbtn .btn-sm {padding: 10px 10px;font-size: 12px;line-height: 1.5;border-radius: 4px;margin-right: 5px;margin-bottom: 10px;}
+#RfpModal .simplebar-content {padding: 25px 32px 10px 12px !important;}
+.steps-model .nav-tabs>li::after {top: 15px;}
+#ProjectModal.steps-model #step-1 .checkbox-inline {margin: 9px 2px !important;width: auto;}
+#rrm_InterviewSummary label {margin-bottom: 12px;}
+#rrm_OfferDispatchInterviewHistoryAccordian .panel-title {font-size: 16px;line-height: 1.7;}
+#benchToBillingGrid p {margin-bottom: 0px;}
+#notes_notification a {border-width: 0px;}
+#rrm_OfferApprovalDetails {margin-top: 20px;}
+table.dataTable thead th, table.dataTable thead td {border-bottom: 1px solid lightgrey !important;}
+#WorkOrderCard .btn-xs {margin-bottom: 4px;}
+.rrmdashboardbtn .btn-sm {padding: 10px 10px;font-size: 12px;line-height: 1.5;border-radius: 4px;margin-right: 5px;margin-bottom: 10px;}
+#rrm_CommentsDetail_head {margin-top: 0px;}
+#rrmOfferDispatchDetails .tab-pane {margin-top: 20px;}
+.profile-img {background-size: cover;border-radius: 200px;overflow: hidden;border: 2px solid #fff;display: inline-block;}
+.simplebar-content .nav-tabs>li>a{background-color: #eee;}
+.simplebar-content .nav-tabs>li>a:hover{color: #fff;background-color: #003C64 !important;}
+.rfp_comments_history .message{width: 100%;}
+#projectmodulereports .input-group {width: 100%;}
+#showemployeeskills .table {margin-bottom: 0px;}
+#assignbackleadModel .table {margin-bottom: 0px;}
+#manualSwipe .input-group {width: 100%;}
+#rrm_InterviewSummary label {margin-bottom: 12px;}
+#sdchk-oneMoreRoundForInterview {margin-bottom: 10px;}
+#project_smartwizard .form-control {height: 37px;}
+#sdchk-oneMoreRoundForInterview, #list_employees_for_project_div {margin-bottom: 10px;}
+#project_smartwizard .form-control {height: 37px;}
+#assign_rfp_modal_contentl .form-section p {padding: 0px !important;}
+#assign_rfp_modal_contentl .select2-container {width: 100% !important;}
+#add-project-members .btn-sm {padding: 6px 12px }
+#assignbackleadModel table {margin-bottom: 0px;}
+#workorder_content_import_Modal.steps-model .checklist p:empty { margin: 0; }
+.displayDefault_workorder_content_import { margin-left: 0; }
+#workorder_content_import_Modal.steps-model .checklist p { margin-top: 3px; }
+.select2-container .select2-selection--single { border-radius: 0; height: 34px; }
+.select2-container--default .select2-selection--single .select2-selection__rendered { line-height:34px; }
+.select2-container--default .select2-selection--single .select2-selection__arrow { height: 34px; }
+#lbl_candiateDetailsLinksRRMRecruiter a, #lbl_candiateDetailsLinksProfileScreening a, #lbl_interviewCandidateURL a { background: #004f8a; color: #fff; width: 25px; display: inline-block; height: 25px; line-height: 28px; text-align: center; border-radius: 2px; }
+#proposal_comments_histor h3 { font-size: 14px; margin-bottom: 20px; }
+#closedrrm_SkillDetails .row .row { margin: 0; padding: 0 15px; }
+#closedrrm_SkillDetails .row .row .col-md-12 { padding: 0; }
+#rrm_onboard_profile-existingResumeDownload { display: flex; }
+#rrm_onboard_profile-existingResumeDownload button[onclick="RemoveReplaceResume()"] { padding: 1px 10px; left: -12px; position: relative; }
+#onboardphoto-uploader .dx-fileuploader-button { width: 100%; }
+.d-flex-mar { display: flex; flex-wrap: wrap; align-items: center; }
+.padding-title { text-align: center; }
+.padding-title button.btn { min-width: 80px; margin: 5px 0; }
+#workorder_content_import_Modal.steps-model .checklist p:empty {margin: 0;}
+.displayDefault_workorder_content_import {margin-left: 0;}
+#workorder_content_import_Modal.steps-model .checklist p {margin-top: 3px;}
+.select2-container .select2-selection--single {border-radius: 0;height: 34px;}
+.select2-container--default .select2-selection--single .select2-selection__rendered {line-height: 34px;}
+.select2-container--default .select2-selection--single .select2-selection__arrow {height: 34px;}
+#lbl_candiateDetailsLinksRRMRecruiter a, #lbl_candiateDetailsLinksProfileScreening a, #lbl_interviewCandidateURL a {background: #004f8a;color: #fff;width: 25px;display: inline-block;height: 25px;line-height: 28px;text-align: center;border-radius: 2px;}
+#proposal_comments_histor h3 {font-size: 14px;margin-bottom: 20px;}
+#closedrrm_SkillDetails .row .row {margin: 0;padding: 0 15px;}
+#closedrrm_SkillDetails .row .row .col-md-12 {padding: 0;}
+#rrm_onboard_profile-existingResumeDownload {display: flex;}
+#rrm_onboard_profile-existingResumeDownload button[onclick="RemoveReplaceResume()"] {padding: 1px 10px;left: -12px;position: relative;}
+#onboardphoto-uploader .dx-fileuploader-button {width: 100%;}
+.d-flex-mar {display: flex;flex-wrap: wrap;align-items: center;}
+.padding-title {text-align: center;}
+.padding-title button.btn {min-width: 80px;margin: 5px 0;}
+#GetRFPStatusCount svg, #chart_B2_Box svg { height: 400px; }
+.skillsetField #myTable {border: 1px solid lightgrey;margin-left: 0px;padding-top: 0px; width: 100%;margin-bottom: 10px;}
+.skillsetField #myTable .btn{padding: 4px 10px;}
+.skillsetField #myTable th {background-color: #c5122c;color: white;}
+#attached_fileMail{margin-top: 10px;}
+.float-right{float: right;}
+#proposal_dropzone .dropzone{height: 375px;}
+#NreModal .tab-pane {margin-top: 20px;}
+#WorkOrderModelbox .steps-model .form-control{height: 37px;}
+#proposal_dropzone .dropzone .dz-message{line-height: 200px;}
+#assign_rfp_modal_content .select2.select2-container.select2-container--default {width:100% !important;}
+#assign_rfp_modal_content p {padding: 0px !important;}
+.proposal-popup .simplebar-content {padding: 15px !important;}
+.proposal-popup .btn-toolbar>.btn-group{margin-left: 9px;}
+#RRMEntryPointModel .btnPrevious{padding: 7px 12px;}
+.select2-container{margin-bottom: 10px;}
+#RRMPEntryPointModalBody .rrm_comments_history{height: 200px;}
+#workorder_content_import_Modal.steps-model .checklist p:empty { margin: 0; }
+.displayDefault_workorder_content_import { margin-left: 0; }
+.rrm-table tr td:first-child{width:150px;}
+.padding-title button.btn { min-width: 80px; margin: 5px 0; }
+#showemployeeskills .table {margin-bottom: 0px;}
+#assignbackleadModel .table {margin-bottom: 0px;}
+#RRMEntryPointModel .tab-pane {margin-top: 20px;}
+.proposal-popup .simplebar-content {padding: 15px !important;}
+#Project_Modal .modal-body{margin-bottom: 20px;}
+#holidayincentivereport .pull-right button{margin-top: 0px !important;}
+#closedRRMPEntryPointModalBody .tab-pane {margin-top: 20px !important;}
+#closedRRMEntryPointModel .closedbtnPrevious{display: inline-block;}
+#closedrrm_common_commentsBody .tab-pane {margin-top: 20px !important;}
+.displayDefault_workorder_content_import {margin-left: 0;}
+#update_profile .modal-body{background: #fff;margin-bottom: 50px;display: inline-block;}
+#projectmodulereports .input-group {width: 100%;}
+#showemployeeskills .table {margin-bottom: 0px;}
+#rrm_common_commentsBody .tab-pane {margin-top: 30px;}
+#rrm_InterviewScheduleInterviewHistoryAccordian h3 {font-size: 16px;}
+#rrm-remarks p {font-size: 17px!important;padding: 0px;}
+#rrmApprovalTabs>li>a{margin-bottom: 8px;}
+#assignbackleadModel table {margin-bottom: 0px;}
+#rrm_PreviousInterviewDetailsAccordian h2 {font-size: 24px;margin-top: 0px;}
+#RRMEntryPointModelRecruiter .nav>li>a{margin-bottom: 5px;}
+#RRMPEntryPointModalBody .nav>li>a{margin-bottom: 5px;}
+#OfferApprovedStatus .alert-danger{margin-bottom: 0px;padding: 10px;}
+.displayDefault_workorder_content_import {margin-left: 0;}
+#workorder_content_import_Modal.steps-model .checklist p {margin-top: 3px;}
+#sdlist-DefaultOfferDetails .dx-list-item-content {padding: 10px;}
+#displayProjectModules{margin-bottom: 10px;}
+#btnRecommendedRRMSave{margin-bottom: 10px;}
+#rrm_HRCommentsDetailsAccordian{margin-bottom: 15px;}
+#candidateDetailsForProfileScreening  {margin-top: 20px;}
+#rrm_PreviousInterviewDetailsProfileScreening{margin-top: 20px;}
+#rrm_PreviousInterviewDetailsProfileScreening .panel-title{font-size: 14px;}
+#rrm_PreviousInterviewDetailsProfileScreening .panel-title{font-size: 14px;}
+#rrm_PreviousInterviewDetailsAccordian .panel-body{height: auto !important;}
+#rrm_ProfileScreeningInterviewHistoryAccordian .panel-body{height: auto !important;}
+#rrm_HRCommentsDetailsAccordian .panel-body{height: auto !important;}
+#roleandrightsetmodel textarea.form-control{margin-bottom: 10px;}
+#rolesandrights .select2-selection--multiple {margin-bottom: 0px;}
+#SkillsetsBtn{color:#fff;}
+#RRMPEntryPointModalBody .modal .nav>li>a {margin-bottom: 1px;}
+#showemployeeskills .table {margin-bottom: 0px;}
+#assignbackleadModel .table {margin-bottom: 0px;}
+#leave-modal label {font-weight: normal;}
+#incometaxemployeeentry .dx-fileuploader-wrapper {padding: 0px;}
+#WorkOrderModelbox .steps-model .form-control{height: 38px !important;}
+#manage_technology .select2-container {margin-bottom: 0px;}
+#smartwizard_workorder .step-title .form-group {margin-bottom: 8px;}
+#rrmGridReportClosed .cardDetailsTrackerNew .item {margin-bottom: 5px;padding: 0px 5px 0px 5px;}
+#RfpModal .simplebar-wrapper .simplebar-content {padding: 15px !important;}
+#form-block .table-sec h3 {font-size: 20px;}
+#displayEstimatePricing h6{font-size: 15px;}
+#assign_rfp_modal_content .nav-tabs li a{color:#000;}
+#assign_rfp_modal_content .nav-tabs li a:hover{color:#fff;}
+#rfp_history_lists .rfp_history_lists label {font-weight: 500;}
+#assign_rfp_modal_content .select2.select2-container.select2-container--default {width: 100% !important;margin-bottom: 0px;}
+#commentsHistoryProposalModal .btn-secondary{color:#fff;}
+#comments_proposal_modal_content .rfp_history_lists{overflow-y: auto;}
+#assign_rfp_modal_content .nav-tabs li a:hover{color:#fff;}
+#Project_Modal .btn-secondary:hover{color:#fff !important;}
+#Project_Modal .rfp_history_lists{overflow-y: auto;}
+#assignbackleadModel table {margin-bottom: 0px;}
+#RfpModalBody .btn-secondary.import:hover{color:#fff !important;}
+#manage_rpm_dropzone .dropzone{height: 313px;}
+#manageBenchlistPlanModals .manage_plan_history_lists{overflow-y: auto;}
+#RRMPEntryPointModalBody .modal .nav>li>a {margin-bottom: 1px;}
+#showemployeeskills .table {margin-bottom: 0px;}
+#closedProjectAuditReport-tabConent h1 {font-size: 17px;text-transform: capitalize;margin-top: 10px;margin-bottom: 10px;}
+#RRMEntryPointModel .btnPrevious{padding: 7px 12px;}
+#notes_notification a {border-width: 0px;}
+#project-modal .form-group.radio-sec {margin-bottom: 5px;}
+#profile-img-tag {padding-top: 4%; margin-left: auto;margin-right: auto;display: block;}
+.f1-buttons {margin-top: 10px;}
+#manage_tab_comments .manage_history_lists{overflow-y: auto;}
+#manage_rpm_dropzone .dropzone{height: 310px !important;}
+#menuAddmodel .quickmenu input[type=checkbox] {margin-right: 20px;margin-top: 3px;}
+.proposal-popup .btn-toolbar>.btn-group{margin-left: 12px;}
+.rrmlabel{width:100%;margin-bottom: 5px;line-height: 25px;;}
+#rrmHrReportsFilter {background-color: #337AB7;border-color: #337AB7;}
+#btnOnBoardbanprofile{margin-right: 10px;}
+#rrm_RequirementDetailsBDEHead{margin-top: 20px;}
+#rrm_CommentsDetailsBDEHead{margin-top: 20px;}
+#nre_ClientDetails .select2-container { margin-bottom: 0px;}
+#nre_ClientDetails .form-group {margin-bottom: 10px;}
+#nre_ClientDetails input[type=checkbox] {margin-right: 10px;margin-top: 3px;}
+#rrm_close_hr_headBody .modal-footer{padding:15px 0px 0px 0px;}
+#rrmRecruiterCandidatesTrackerTree h3{margin-left: 30px;font-size: 20px;margin-top: 0px;}
+#RRMEntryPointRecruiterRecruiterModalBody .cardDetailsTracker{margin-left: 20px;}
+#rrmOfferDispatchModalBody h3{font-size: 20px;margin-top: 0px;}
+#rfpdashboard .chartBox{height: 550px;overflow: auto;width:100%;}
+.profilemap .btn{width:100%;text-align: center;}
+.mainCol .backup-width{width: 33.3%;}
+#interviewSummaryDetails p{padding: 0px;}
+#rrm_ProfileScreeningInterviewHistoryAccordian h3{font-size: 20px;}
+#step-1 .form-group input[type=checkbox] {margin-top: 3px;}
+#tab_assign_rfp_document_details h3 {font-size: 18px;margin-top: 10px;margin-bottom: 0px;}
+#rrm_InterviewSummaryTab .nav-tabs > li > a {background-color: rgb(238, 238, 238);}
+#ProjectCardDetails .btn-secondary:hover{color:#fff;}
+#WorkOrderMappingModal .ProjectName {font-size: 20px;margin-top: 0px;}
+#WorkOrderMappingModal .add-btn:hover{color: #fff;}
+#manage_plan_reassign_cancel {margin-top: 10px;}
+#step-4 input[type=checkbox] {margin-top: 5px;}
+#smartwizard_workorder .step-title .form-group {margin-bottom: 10px;}
+#projectcreation .tab button.active {color: #fff;}
+#NreModal .tab-pane {margin-top: 25px;}
+table#nomineeFileTable {border: 1px solid #222;}
+#reset_profile_modal .btn-secondary:hover{color:#fff;}
+#reset_profile_modal .btn-secondary:focus{color:#fff;}
+.backup-width .billablity{text-align: center;}
+.backup-width .billablity span{text-align: center;}
+#incometaxemployeeentry .dx-fileuploader-wrapper {padding: 3px;}
+#btnOnBoardbanprofile{margin-right: 13px;}
+#btnRecommendedRRMSave{margin-bottom: 10px;}
+#rrm_close_hr_headBody .modal-footer{padding:20px 0px 0px 0px;}
+@media only screen and (min-width:991px) and (max-width:1280px){
+    .h4, h4{font-size: 15px}
+    #notify_caret{right: 30px}
+    .card-detail{padding: 12px}
+    #quickActionDate{margin-top: 15px}
+    .notification-scroll .panel-title{font-size: 14px}
+    .notification-scroll p{padding: 0px;font-size: 12px !important}
+    #huddle .card-detail-title{font-size: 16px;text-transform: uppercase}
+    .card-detail-title{font-size: 16px;text-transform: uppercase}
+    span.punch-text, span.log-hrs{display: inline-block;}
+    #rrmGridReportOwner .dx-datagrid-rowsview .dx-row > .dx-master-detail-cell{overflow: auto;}
+    #WorkOrderModelbox .steps-model .form-section label{font-size: 12px !important;}
+    #comments_proposal_modal_content .simplebar-content {padding: 15px calc(35px) 15px 15px !important;}
+    #RRMEntryPointModel .btnPrevious{padding: 7px 12px;}
+    #showemployeeskills .table {margin-bottom: 0px;}
+    #assignbackleadModel .table {margin-bottom: 2px;}
+    #step-4 input[type=checkbox] {margin-top: 5px;}
+    #manage_plan_reassign_cancel {margin-top: 13px;}
+    .backup-width .billablity{text-align: center;}
+    .backup-width .billablity span{text-align: center;}
+    #projectcreation .tab button.active {color: #fff;}
+    #NreModal .tab-pane {margin-top: 25px;}
+    .dx-toolbar .dx-texteditor {
+        width: 150px !important;
+    }
+    .dx-datagrid-group-panel .dx-group-panel-message{width: 170px !important;}
+}
+@media only screen and (min-width:1281px) and (max-width:1400px) {
+    .dx-datagrid-group-panel .dx-group-panel-message{width: 170px !important;}
+    .dx-toolbar .dx-texteditor {width: 150px !important;}
+}
+@media only screen and (min-width:768px) and (max-width:1024px) {
+    .dx-datagrid-group-panel .dx-group-panel-message{width: 270px !important;}
+    .dx-toolbar .dx-texteditor {width: 150px !important;}
+}
+#project_smartwizard {
+    position: inherit;
+    height: 700px;
+    display: block;
+    overflow: auto;
+    padding-bottom: 50px;
+    overflow-x: hidden;
+    padding-top: 10px;
+}

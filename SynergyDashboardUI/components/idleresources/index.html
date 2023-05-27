@@ -1,0 +1,113 @@
+<div class="john-trail card-detail">
+        <!-- Add "modal-not-include" to a div for which we dont want to show them in modal  -->
+        <span>
+                <span class="card-detail-title modal-not-include"><b>Idle Resources</b></span>
+        <button style="float: right;" type="button" id="btnleaveDetail"
+                    class="btn btn-xs cmn-modal-ex-btn modal-not-include expandCommonDiv">
+                    <i class="fa fa-expand"></i>
+                </button>
+        <hr>
+        </span>
+        <div class="row ">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading ">Idle Resource Details</div>
+                    <table id="resourceTbl" class="table table-striped removetable" style="cursor: default">
+                        <tbody>
+                            <tr>
+                                <td><a onclick="open_model_idle('full');">Full Time Bench Count</a></td>
+                                <td id="fullTime">0</td>
+                            </tr>
+                            <tr>
+                                <td><a onclick="open_model_idle('part');">Part Time Bench Count</a></td>
+                                <td id="partTime">0</td>
+                            </tr>
+                            <tr>
+                                <td><a onclick="open_model_idle('total');">Total Bench Count</a></td>
+                                <td id="totalTime">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    
+        <hr />
+    </div>
+    
+    <div class="modal fade" id="benchmodel" tabindex="-1" role="dialog">
+        <div class="modal-dialog modealExpand">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title text-center">Idle Resource Details</h4>
+                </div>
+    
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table id="benchTbl" class="table table-striped" style="cursor: default">
+                            <thead>
+                                <tr>
+                                    <th colspan="3" style="text-align: center;" id="tblTitle">Full Time Bench Resources</th>
+                                </tr>
+                            </thead>
+                            <tbody>                                
+                            </tbody>                            
+                        </table>
+                    </div>
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade bd-example-modal-lg" id="benchsubmodel" tabindex="-1" role="dialog">
+        <div class="modal-dialog modealExpand">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <!-- <div class="modal-header">
+                            <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title text-center">Bench Resources</h4>
+                        </div> -->
+    
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table id="benchsubTbl" class="table table-striped" style="cursor: default">
+                            <thead>
+                                <tr>
+                                    <th colspan="8" style="text-align: center;" id="subtblTitle">Android Resources</th>
+                                </tr>
+                            </thead>
+                            <thead id="normalHeader">
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Karthick S</td>
+                                    <td>September 9,2019</td>
+                                    <td>22</td>
+                                    <td>Diviamon</td>
+                                    <td>Srinivasan</td>
+                                    <td>Supporting Internal Project</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="components/idleresources/js/idleresources.js"></script>

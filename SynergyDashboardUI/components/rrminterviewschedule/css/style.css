@@ -1,0 +1,65 @@
+#InterviewScheduleModal {
+    width: 100%;
+}
+
+#InterviewScheduleModal .modal-body{
+    min-height:calc(100vh - 200px)
+}
+
+
+#InterviewScheduleModal .modal-content{
+    width: 70%;
+}
+#lbl-candidateName{
+    font-size: 18pt !important;
+    font-weight: 600;
+    color: #2F2F2F;
+}
+
+.borderless td, .borderless th {
+    border: none !important;
+}
+
+#InterviewScheduleModal .lbl-title{
+    width: 50px !important;
+    text-align: center;
+    font-size: 16pt !important;
+    color:#C5122C;
+}
+
+#InterviewScheduleModal .lbl-value{
+    text-align: left !important;
+    font-size: 11pt;
+    color:#5D5D5D;
+    font-weight: 600;
+}
+
+#InterviewScheduleModal .checked {
+    color: orange;
+}
+
+/* RRM Details for interview schedule card  */
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+    text-align: left !important;
+    padding:5px;
+    font-size: 11pt;
+}
+
+#RRMDetailsInterviewScheduleModal .table-label{
+    width:25%  !important;
+}
+
+#RRMDetailsInterviewScheduleModal {
+    width: 100%;
+}
+
+#RRMDetailsInterviewScheduleModal .modal-content{
+    width: 70%;
+}

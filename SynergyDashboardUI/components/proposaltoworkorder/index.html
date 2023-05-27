@@ -1,0 +1,45 @@
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<!-- <script type="text/javascript" src="js/library/jquery.smartWizard.js"></script> -->
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+<script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+
+
+
+<div class="card-detail">
+    <span><i><img src="components/proposals/images/rfp.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Proposal To Workorder</b></span>
+    <span class="pull-right">       
+        <button class="btn btn-sm btn-primary" onclick="WorkOrderModelDialog(null, null)" >
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+	</span>
+    <hr />
+    
+    <div id="proposal_to_workorder_card">
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $("#openWorkOrderModel").load("components/proposaltoworkorder/WorkOrderModel.html");
+
+    function include_proposal(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+
+    include_proposal('./components/proposaltoworkorder/js/workorder.js');
+
+
+
+   
+</script>

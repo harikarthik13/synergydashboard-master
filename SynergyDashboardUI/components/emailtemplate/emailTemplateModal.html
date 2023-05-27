@@ -1,0 +1,702 @@
+<!-- Email Template Style -->
+<link href="components/emailtemplate/css/emailTemplate.css" rel="stylesheet" />
+
+<!--POP-UP  MODAL STARTS HERE -->
+<div class="modal fade" id="email_template_modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">×</span></button> -->
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h4 class="modal-title">New Template</h4>
+         </div>
+
+         <div class="modal-body" data-simplebar>
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-3">
+                     <label>Email Template Type</label>
+                  </div>
+                  <div class="col-md-9">
+                     <select class="form-control" id="select_emailTemplateType">
+                        <!-- <option value="0">------Select Email Template Type------</option> -->
+                     </select>
+                     <label id="emailTemplate_showType"></label>
+                     <span class="error_message" id="select_emailTemplateTypeError"></span>
+                  </div>
+               </div>
+            </div>
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-3">
+                     <label>To</label>
+                  </div>
+                  <div class="col-md-9">
+                     <!-- <textarea id="emailTemplate_mailTo" class="form-control"></textarea> -->
+                     <input type="text"  placeholder="Mail To" id="emailTemplate_mailTo">
+                  </div>
+               </div>
+            </div>
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-3">
+                     <label>CC</label>
+                  </div>
+                  <div class="col-md-9">
+                     <!-- <textarea id="emailTemplate_mailCcTo" class="form-control"></textarea> -->
+                     <input type="text"  placeholder="CC To" id="emailTemplate_mailCcTo">
+                  </div>
+               </div>
+            </div>
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-3">
+                     <label>BCC</label>
+                  </div>
+                  <div class="col-md-9">
+                     <!-- <textarea id="emailTemplate_mailBccTo" class="form-control"></textarea> -->
+                     <input type="text"  placeholder="BCC To" id="emailTemplate_mailBccTo">
+                  </div>
+               </div>
+            </div>
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-3">
+                     <label>Mail Subject</label>
+                  </div>
+                  <div class="col-md-9">
+                     <input type="text" class="form-control" placeholder="Mail Subject" id="emailTemplate_mailSubject">
+                     <span class="error_message" id="emailTemplate_mailSubjectError"></span>
+                  </div>
+               </div>
+            </div>
+            <div class="form-group">
+               <div class="row">
+                  <div class="col-md-3">
+                     <label>Template</label>
+                     <!-- Help Icon to display -->
+                     <!-- <span class="fa fa-question-circle email_template_help" onclick="email_template_helpModal()" ;
+                        title="Help:To Create Template with Custom Properties"></span> -->
+                  </div>
+                  <div class="col-md-9">
+                     <textarea class="form-control ckeditor" name="email_template_details" rows="5"
+                        id="email_template_comments"></textarea>
+                     <span class="error_message" id="email_template_commentsError"></span>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div class="modal-footer">
+            <button type="button" class="btn btn-sm  btn-danger" data-dismiss="modal"
+               id="btn_emailTemplate_close">Close</button>
+            <button id="btn_emailTemplate_save" type="button" class="btn btn-sm btn-success">Save</button>
+            <button id="btn_emailTemplate_update" type="button" class="btn btn-sm btn-success">Update</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+<div class="modal fade" id="previewEmail_template_modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">×</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h4 class="modal-title">Preview Template</h4>
+         </div>
+
+         <div class="modal-body" data-simplebar id="previewEmail_template_body">
+            <label>Template Type:</label> <span id="preview_templateType"></span>
+            <h5>Template</h5>
+            <div class="card" id="emailTemplate_previewCard">
+               <table
+                  style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;"
+                  bgcolor="#f6f6f6">
+                  <tbody>
+                     <tr
+                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
+                           valign="top"></td>
+                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;"
+                           width="600" valign="top">
+                           <div
+                              style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">
+                              <table itemprop="action" itemscope="" itemtype="http://schema.org/ConfirmAction"
+                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;"
+                                 width="100%" cellspacing="0" cellpadding="0" bgcolor="#fff">
+                                 <tbody>
+                                    <tr>
+                                       <td style="padding:20px;" width="580" bgcolor="#ffffff" align="center">
+                                          <table cellspacing="0" cellpadding="0" border="0">
+                                             <tbody>
+                                                <tr>
+                                                   <td style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px"
+                                                      align="center">
+                                                      <a href="#DomainURL#" target="_blank"
+                                                         style="color:#ef4056;font-weight:bold;text-decoration:none">
+                                                         <img src="components/emailtemplate/images/logo.png" alt="Synergy Application"
+                                                            style="display:block;" height="60">
+                                                      </a>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                    <tr>
+                                       <td style="border-bottom: 4px double #e9e9e9;box-shadow: 1px red;"></td>
+                                    </tr>
+                                    <tr
+                                       style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                       <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;"
+                                          valign="top">
+                                          <meta itemprop="name" content="Confirm Email"
+                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                          <table
+                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"
+                                             width="100%" cellspacing="0" cellpadding="0">
+                                             <tbody>
+
+                                                <tr
+                                                   style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                   <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;border: 1px;"
+                                                      valign="top" id="emailTemplate_preview_body">
+
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                              <div
+                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;">
+                                 <table
+                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"
+                                    width="100%">
+                                    <tbody>
+                                       <tr>
+                                          <td style="padding-top:0px;padding-right:15px;padding-bottom:30px;padding-left:15px"
+                                             align="center">
+                                             <table cellspacing="0" cellpadding="0" border="0" align="center">
+
+                                                <tbody>
+                                                   <tr>
+                                                      <td style="font-family:'Helvetica Neue',Arial,Helvetica,sans-serif;color:#777777;font-size:11px;line-height:10px"
+                                                         valign="top" align="center">
+                                                         <a href="#"
+                                                            style="color:#777777;text-decoration:none;font-weight:bold"
+                                                            target="_blank">Privacy Policy</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+                                                         <a href="#"
+                                                            style="color:#777777;text-decoration:none;font-weight:bold"
+                                                            target="_blank">Terms of Use</a>&nbsp;&nbsp;•&nbsp;&nbsp;
+                                                         <a href="https://www.g2techsoft.com/contact-us/"
+                                                            style="color:#777777;text-decoration:none;font-weight:bold"
+                                                            target="_blank">Contact Us</a><br><br>
+                                                      </td>
+                                                   </tr>
+                                                   <tr>
+                                                      <td style="font-family:'Helvetica Neue',Arial,Helvetica,sans-serif;color:#777777;font-size:11px;line-height:14px"
+                                                         valign="top" align="center">
+                                                         You are receiving this email from Synergy.<br><br>
+
+                                                         <span>® <span id="email_template_year"></span><a href="#" style="color:#777777"
+                                                               > Synergy
+                                                               Software</a>. All Rights Reserved.</span>
+                                                      </td>
+                                                   </tr>
+                                                </tbody>
+                                             </table>
+                                          </td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
+                           </div>
+                        </td>
+                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
+                           valign="top"></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+<div class="modal fade" id="helpEmail_template_modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">×</span></button>
+                  <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h4 class="modal-title">Help</h4>
+         </div>
+
+         <div class="modal-body" data-simplebar>
+            <h6 class="email_template_cardTitle">You can use # tag to get custom properties inside the template textarea
+            </h6>
+            <div class="panel-group">
+               <div class="panel panel-default emailTemplate_commonCursor" data-toggle="collapse"
+                  data-parent="#emailTemplate_customProperty" href="#custom_emailTemplate">
+                  <div class="panel-heading">
+                     <h4 class="panel-title">
+                        <span># Custom Properties</span><i class="fa fa-plus pull-right"></i>
+                        <!-- <a data-toggle="collapse" data-parent="#emailTemplate_customProperty" href="#custom_emailTemplate"></a> -->
+                     </h4>
+                  </div>
+                  <div id="custom_emailTemplate" class="panel-collapse collapse">
+                     <div class="panel-body">
+                        <table class="table table-striped ">
+                           <tr>
+                              <th>
+                                 Email Template
+                              </th>
+                              <th>
+                                 Custom Properties
+                              </th>
+                              <th>
+                                 Description
+                              </th>
+                           </tr>
+                           <tr>
+                              <td>
+                                 ChangeContactDetails
+                              </td>
+                              <td>
+                                 #NAME#
+                              </td>
+                              <td>
+                                 For get the User/Customer name.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 #USERID#
+                              </td>
+                              <td>
+                                 For get the User Id.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 #ACCOUNTTYPE#
+                              </td>
+                              <td>
+                                 For identifying changing account details(eg:User Primary Contact).
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 #ACCOUNTNAME#
+                              </td>
+                              <td>
+                                 For get the Account NAme.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 #ACCOUNTID#
+                              </td>
+                              <td>
+                                 For get the Account Id.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 #ACCOUNTPRIMARYCONTACTID#
+                              </td>
+                              <td>
+                                 For get the Account Primary Contact Id.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td></td>
+                              <td>
+                                 #ORGANIZATION#
+                              </td>
+                              <td>
+                                 For get the Organization name.
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+               <div class="panel panel-default emailTemplate_commonCursor">
+                  <div class="panel-heading" data-toggle="collapse" data-parent="#emailTemplate_customProperty"
+                     href="#urlFormat_emailTemplate">
+                     <h4 class="panel-title">
+                        <span class="fa fa-navicon"> URL Format</span><i class="fa fa-plus pull-right"></i>
+                        <!-- <a data-toggle="collapse" data-parent="#emailTemplate_customProperty" href="#urlFormat_emailTemplate">Collapsible Group 2</a> -->
+                     </h4>
+                  </div>
+                  <div id="urlFormat_emailTemplate" class="panel-collapse collapse">
+                     <div class="panel-body">
+                        <table class="table table-striped ">
+                           <tr>
+                              <th>
+                                 Email Template
+                              </th>
+                              <th>
+                                 URL Format
+                              </th>
+                              <th>
+                                 Description
+                              </th>
+                           </tr>
+                           <tr>
+                              <td>
+                                 Forgot Password
+                              </td>
+                              <td>
+                                 Reset Password link
+                              </td>
+                              <td>
+                                 For reset old password.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>UserRegisteration</td>
+                              <td>
+                                 User Registeration Link
+                              </td>
+                              <td>
+                                 For create new password.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>UserFileUpload</td>
+                              <td>
+                                 Link to File Upload
+                              </td>
+                              <td>
+                                 For download newly added document.
+                              </td>
+                           </tr>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+               <div class="panel panel-default emailTemplate_commonCursor">
+                  <div class="panel-heading">
+                     <h4 class="panel-title" data-toggle="collapse" data-parent="#emailTemplate_customProperty"
+                        href="#sampleTemplate_emailTemplate">
+                        <span class="fa fa-clone"> Sample Templates</span><i class="fa fa-plus pull-right"></i>
+                        <!-- <a data-toggle="collapse" data-parent="#emailTemplate_customProperty" href="#sampleTemplate_emailTemplate">Collapsible Group 3</a> -->
+                     </h4>
+                  </div>
+                  <div id="sampleTemplate_emailTemplate" class="panel-collapse collapse">
+                     <div class="panel-body">
+                        <div role="tabpanel">
+                           <!-- Nav tabs -->
+                           <div>
+                              <ul class="nav nav-tabs" role="tablist">
+                                 <li role="presentation" class="active"><a href="#tab_contactDetails"
+                                       aria-controls="tab_contactDetails" role="tab"
+                                       data-toggle="tab">ChangeContactDetails</a>
+                                 </li>
+                                 <li role="presentation"><a href="#tab_contactUs" aria-controls="tab_contactUs"
+                                       role="tab" data-toggle="tab">ContactUs</a>
+                                 </li>
+                                 <li role="presentation"><a href="#tab_forgotPassword"
+                                       aria-controls="tab_forgotPassword" role="tab"
+                                       data-toggle="tab">ForgotPassword</a>
+                                 </li>
+                                 <li role="presentation"><a href="#tab_userRegisteration"
+                                       aria-controls="tab_userRegisteration" role="tab"
+                                       data-toggle="tab">UserRegisteration</a>
+                                 </li>
+                                 <li role="presentation"><a href="#tab_userFileUpload"
+                                       aria-controls="tab_userFileUpload" role="tab"
+                                       data-toggle="tab">UserFileUpload</a>
+                                 </li>
+                                 <li role="presentation"><a href="#tab_webServiceFileUpload"
+                                       aria-controls="tab_webServiceFileUpload" role="tab"
+                                       data-toggle="tab">WebServiceFileUpload</a>
+                                 </li>
+                              </ul>
+                           </div>
+                           <!-- Tab panes -->
+                           <div class="tab-content col-md-12">
+                              <div role="tabpanel" class="tab-pane active" id="tab_contactDetails">
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>Hello #NAME#</label>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>We have recieved a request to change contact details. If you didn't make
+                                          the request, just ignore this mail. Otherwise, you can change contact details
+                                          using this link:
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <button class="btn btn-primary">Change Your Contact Details</button>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>Thanks,</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>The Synergy Team</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <img src="components/emailtemplate/images/logo.png" id="profile-img-tag"
+                                          class="profile-img-tag" height="80px" width="120px"
+                                          placeholder="Preview Image" alt="" /><br>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="tab_contactUs">
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>Hello #NAME#</label>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>We have recieved a request to change contact Us. If you didn't make
+                                          the request, just ignore this mail. Otherwise, you can change contact Us
+                                          using this link:
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <button class="btn btn-primary">Contact Us</button>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>Thanks,</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>The Synergy Team</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <img src="components/emailtemplate/images/logo.png" id="profile-img-tag"
+                                          class="profile-img-tag" height="80px" width="120px"
+                                          placeholder="Preview Image" alt="" /><br>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="tab_forgotPassword">
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>Hello #NAME#</label>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>We have recieved a request to change password. If you didn't make
+                                          the request, just ignore this mail. Otherwise, you can change password
+                                          using this link:
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <button class="btn btn-primary">Reset Your Password</button>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>Thanks,</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>The Synergy Team</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <img src="components/emailtemplate/images/logo.png" id="profile-img-tag"
+                                          class="profile-img-tag" height="80px" width="120px"
+                                          placeholder="Preview Image" alt="" /><br>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="tab_userRegisteration">
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>Hello #NAME#</label>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>We have recieved a request to register new user. If you didn't make
+                                          the request, just ignore this mail. Otherwise, you can register as new user
+                                          using this link:
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <button class="btn btn-primary">New User Registeration</button>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>Thanks,</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>The Synergy Team</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <img src="components/emailtemplate/images/logo.png" id="profile-img-tag"
+                                          class="profile-img-tag" height="80px" width="120px"
+                                          placeholder="Preview Image" alt="" /><br>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="tab_userFileUpload">
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>Hello #NAME#</label>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>We have recieved a request to upload a file. If you didn't make
+                                          the request, just ignore this mail. Otherwise, you can upload files
+                                          using this link:
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <button class="btn btn-primary">Upload Files</button>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>Thanks,</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>The Synergy Team</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <img src="components/emailtemplate/images/logo.png" id="profile-img-tag"
+                                          class="profile-img-tag" height="80px" width="120px"
+                                          placeholder="Preview Image" alt="" /><br>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div role="tabpanel" class="tab-pane" id="tab_webServiceFileUpload">
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>Hello #NAME#</label>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <label>We have recieved a request to upload web service file. If you didn't make
+                                          the request, just ignore this mail. Otherwise, you can upload web service file
+                                          using this link:
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div class="row ">
+                                    <div class="col-md-12">
+                                       <button class="btn btn-primary">Upload Web service File</button>
+                                    </div>
+                                 </div>
+                                 <br>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>Thanks,</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <label>The Synergy Team</label>
+                                    </div>
+                                 </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                       <img src="components/emailtemplate/images/logo.png" id="profile-img-tag"
+                                          class="profile-img-tag" height="80px" width="120px"
+                                          placeholder="Preview Image" alt="" /><br>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script src='components/emailtemplate/js/emailTemplate.js'></script>
+<script>
+   $(document).ready(function () {
+      // try {
+      //    CKEDITOR.instances.email_template_comments.destroy(true);
+      // }
+      // catch (e) {
+      //    var email_template_comments = CKEDITOR.replace(
+      //       "email_template_comments",
+      //       {}
+      //    );
+      // }
+
+   });
+
+</script>

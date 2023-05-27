@@ -1,0 +1,244 @@
+<div class="modal fade" id="provisionAndProjectionModel" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Upload provisions and Projections - Tech Department</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+<div class="col-md-4">
+                        <div class="form-group">
+							<label><b>Select File </b></label>
+  <input type="file" id="ppUploadFile" class="form-control file-upload-info" name="CouponFile" placeholder="Please Upload File">
+</input>
+						</div>
+                </div>
+
+                <div class="col-md-4">
+                    <label>Select Year</label>
+                    <div class="form-group">
+                        <select id="ppddlUploadYears" class="form-control"></select>
+                    </div>
+            </div>
+            <div class="col-md-4">
+                    <label>Select Month</label>
+                    <div class="form-group">
+                        <select id="ppddlUploadMonths" class="form-control">
+                                <option value='January'>January</option>
+                                <option value='February'>February</option>
+                                <option value='March'>March</option>
+                                <option value='April'>April</option>
+                                <option value='May'>May</option>
+                                <option value='June'>June</option>
+                                <option value='July'>July</option>
+                                <option value='August'>August</option>
+                                <option value='September'>September</option>
+                                <option value='October'>October</option>
+                                <option value='November'>November</option>
+                                <option value='December'>December</option>
+                        </select>
+                    </div>
+                </div>
+
+                </div>
+                <hr>
+                <div class="btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-end">
+                   <div class="btn-group mr-2 sw-btn-group pull-right" role="group">
+
+                            <button id="ppbtnUpload" onclick="UploadProvisionalAndProjection()" class="btn btn-secondary">Upload File</button>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="timesheetTechModel" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h3 class="modal-title" id="myModalLabel">Upload TimeSheet - Tech Department</h3>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><b>Client</b></label>
+                            <div class="">
+                                <div class="input-group">
+                                    <select class="form-control" id="">
+                                        <option value="0">Select Client Name</option>
+										<option value="Synergy">Synergy</option>
+                                    </select>
+                                </div>
+                                <span class="error_message"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                                <label><b>Project</b></label>
+                            <div class="">
+                                <div class="input-group">
+                                    <select class="form-control" id="">
+                                        <option value="0">Select Project Name</option>
+										<option value="Synergy">Synergy</option>
+                                    </select>
+                                </div>
+                                <span class="error_message"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><b>File</b></label>
+                            <div class="">
+                                <label><b>Select File </b></label>
+  <input type="file" class="form-control file-upload-info" name="CouponFile" placeholder="Please Upload File">
+							<!-- <div><input id="csv" name="csv" type="file" /></div> -->
+</input>
+                                <span class="error_message"></span>
+                            </div>
+                        </div>
+                    </div>                   
+                    </div>
+                </div>
+                <h4>Period</h4>
+                <hr>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><b>From</b></label>
+                            <div class="">
+                                <div class="input-group date">
+                                    <input type="date" class="form-control date-validator"
+                                        id="">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                </div>
+                                <span class="error_message"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><b>To</b></label>
+                            <div class="">
+                                <div class="input-group date">
+                                    <input type="date" class="form-control date-validator"
+                                        id="">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                </div>
+                                <span class="error_message"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <hr>
+                <div class="btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-end">
+                    <div class="btn-group mr-2 sw-btn-group pull-right" role="group">
+                        <button class="btn btn-secondary" 
+                            type="button">Submit</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+$(document).ready(function () {
+    var date = new Date();
+var select = document.getElementById('ppddlUploadMonths');
+        var html = '';
+        var n;
+        for (var i = 0; i < 12; i++) {
+            n = date.getMonth()-1;
+        }
+        select.selectedIndex  = n;
+
+        //For binding years
+        $('#ppddlUploadYears').each(function () {
+            var year = (new Date()).getFullYear();
+            var current = year;
+            year -= 3;
+            for (var i = 0; i < 6; i++) {
+                if ((year + i) == current)
+                    $(this).append('<option selected value="' + (year + i) + '">' + (year + i) + '</option>');
+                else
+                    $(this).append('<option value="' + (year + i) + '">' + (year + i) + '</option>');
+            }
+        });
+});
+
+function UploadProvisionalAndProjection() {
+        let month = $("#ppddlUploadMonths").val();
+        let year = $("#ppddlUploadYears").val();
+        var inputFile = document.getElementById('ppUploadFile');
+        if (month === null || month == "") {
+            alert("Please Select the Month");
+            return;
+        }
+        else if (year === null || year == "") {
+            alert("Please Select the Year");
+            return;
+        }
+        else if (!inputFile) {
+            alert("Sorry, cannot find the update control.");
+            return;
+        }
+        else if (!inputFile.files) {
+            alert("This browser doesn't seem to support the `files` property of file inputs.");
+            return;
+        }
+        else if (!inputFile.files[0]) {
+            alert("Please select a file before clicking 'Upload'");
+            return;
+        }
+        else {
+            let file = inputFile.files[0];
+            let formData = new FormData();
+
+            formData.append("file", file);
+            formData.append("month", month);
+            formData.append("year", year);
+
+            let token = localStorage.getItem("securityToken");
+            $.ajax({
+                url: SynergyAPIURL + "UploadProvisionAndProjection",
+                type: 'POST',
+                beforeSend: function (request) {
+                    request.setRequestHeader("SecurityToken", token);
+                },
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        alert(data.Message);
+                        $("#ppddlUploadMonths").val('');
+                        $("#ppddlUploadYears").val('');
+                        inputFile.files = [];
+                    }
+                    else {
+                        alert(data.Message);
+                    }
+                },
+                error: function () {
+                    alert("Upload Failed!")
+                }
+            });
+
+        }
+
+    }
+
+</script>

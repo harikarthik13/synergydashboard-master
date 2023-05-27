@@ -1,0 +1,261 @@
+<!-- RFP Style -->
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/dropzone.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/select2.min.js"></script>
+
+<link href="css/library/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/jquery-ui.js"></script>
+
+
+<link href="components/managerfp/css/manageProposal.css" rel="stylesheet" />
+
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> -->
+<!--POP-UP RFP MODAL STARTS HERE -->
+<style>
+    .modal-header {
+        padding: 9px 15px;
+        border-bottom: 1px solid #eee;
+        background-color: #c5122c;
+        -webkit-border-top-left-radius: 5px;
+        -webkit-border-top-right-radius: 5px;
+        -moz-border-radius-topleft: 5px;
+        -moz-border-radius-topright: 5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+</style>
+<div class="modal fade" id="manageProposalModals" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="closeManageModal();"><span aria-hidden="true">&times;</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">Manage RFP</h2>
+            </div>
+            <div class="modal-body" data-simplebar id="manage_proposals_modal_body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="manage_rfp_tab">
+                        <li role="presentation" class="active"><a href="#manage_tab_take_ownersihp"
+                                aria-controls="manage_tab_take_ownersihp" role="tab" data-toggle="tab">Take
+                                Ownership</a>
+
+                        </li>
+                        <li role="presentation" id = "manage_tab_reassign_li" class="disabled"><a href="#manage_tab_reassign" aria-controls="manage_tab_reassign"
+                                role="tab" data-toggle="tab" id="manage_tab_reassign_link">Re Assign</a>
+
+                        </li>
+                        <li role="presentation" id = "manage_tab_comments_li"><a href="#manage_tab_comments"
+                                aria-controls="manage_tab_comments" role="tab" 
+                                id="manage_tab_comments_link" data-toggle="tab">Comments</a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="manage_tab_take_ownersihp">
+                            <input type="hidden" class="form-control" disabled="disabled" id="manage_rfp_RFPId" />
+                            </input>
+                            <input type="hidden" class="form-control" disabled="disabled" id="manage_rfp_RFPICode" />
+                            </input>
+                            <input type="hidden" class="form-control" disabled="disabled" id="manage_rfp_TechStream" />
+                            </input>
+                            <div class="form-group">
+                                <label for="client">Client :</label>
+                                <input type="text" class="form-control" id="manageRfpClientName" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="client">Project Title :</label>
+                                <input type="text" class="form-control" id="manageRfpProjectTitle" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="technology">Technology :</label>
+                                <select class="form-control" id="manage_technology" multiple="multiple"
+                                    style="width: 100%;">
+
+                                </select>
+                                <span class="error_message" id="manage_technologyError"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="applicationtype">Application Type:</label>
+                                <select class="form-control" id="manageRfpApplicationtype">
+
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="endUserIndustry">End User Industry:</label>
+                                <select class="form-control" id="manage_userIndustry">
+                                    <option value="0">-----Select End User Industry-----</option>
+                                </select>
+                                <span class="error_message" id="manage_userIndustryError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="rfpStatus">RFP Status:</label>
+                                <select class="form-control" id="manage_rfpStatus">
+                                    <option value="0">-----Select Rfp Status-----</option>
+                                </select>
+                                <span class="error_message" id="manage_rfpStatusError"></span>
+                            </div>
+                            <div class="form-group overflow-hidden">
+                                <div class="pull-right">
+                                <input type="button" class="btn btn-default" value="Cancel"
+                                    id="manage_rfp_ownership_cancel">
+                                <input type="button" class="btn btn-success" value="Save"
+                                    id="manage_rfp_save_ownership">
+                                    </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="manage_tab_reassign">
+                            <div class="form-group">
+                                <label for="client">Client :</label>
+                                <input type="text" class="form-control" id="manage_RfpClientName2" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="client">Project Title :</label>
+                                <input type="text" class="form-control" id="manage_RfpProjectTitle2" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="client">Initial Expected Date :</label>
+
+                                <input type="text" class="form-control" id="manageRfpEstimatedDate"
+                                    placeholder="DD/MM/YYYY " readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="reassignto">Re-assign to:</label>
+                                <select class="form-control" id="manage_reassignto" style="width: 100%;">
+                                    <option value="0">-----Select An Employee-----</option>
+                                </select>
+                                <span class="error_message" id="manage_reassigntoError"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="newexpecteddate">New Expected Date:</label>
+                                <input type="text" class="form-control date-validator" id="manage_newexpecteddate">
+                                <span class="error_message" id="manage_newexpecteddateError"></span>
+                            </div>
+
+                            <div class="form-group overflow-hidden">
+                                <div class="pull-right">
+                                <input type="button" class="btn btn-success" value="Next" id="next_manage_rfp_reassign">
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="manage_tab_comments">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <label>Comments history</label>
+                                    <div class="manage_history_lists" id="manage_comments_documents">
+                                        <!-- Comments Section -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Files</label>
+                                    <div id="manage_rfp_dropzone">
+                                        <form class="dropzone needsclick dz-clickable" id="manage_rfp_document_upload"
+                                            method="post" enctype="multipart/form-data">
+                                            <div class="dz-message needsclick">
+                                                Drop files here or click to upload.<br />
+                                            </div>
+                                        </form>
+                                        <span class="error_message manageDocumentError"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Comments :</label>
+                                    <!-- <textarea class="form-control" rows="5" id="managerfp_Description_ckeditor"
+                                        name='managerfp_Description_ckeditor'></textarea> -->
+                                        <div id="managerfp_Description_dxeditor"></div>
+                                    <div class="form-group pull-left">
+
+                                        <input type="button" class="btn btn-success" value="Previous"
+                                            id="manage_rfp_previous">
+                                    </div>
+                                    <div class="form-group overflow-hidden pull-right">
+                                        <input type="button" class="btn btn-default" value="Cancel"
+                                            id="manage_rfp_reassign_cancel">
+                                        <input type="button" class="btn btn-success" value="Save"
+                                            id="manage_rfp_reassign_save">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal"
+                    id="manage_rfp_close_modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- POP-UP FOR DELETE RFP  -->
+ <div class="modal fade" id="deleteManageRFPModal" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                   aria-hidden="true" id="btn_delete_manage_rfp_close">&times;</span></button>
+                   <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+             <h2 class="modal-title" id="deleteManageRFPModalTitle"></h2>
+          </div>
+          <span id="RFPICode" style="display: none;"></span>
+          <span id="RFP_Id" style="display: none;"></span>
+          <div class="modal-body" data-simplebar id="delete_rfp_modal_content">
+             <div class="form-section">
+                <div class="row">
+                   <div class="col-md-12">
+                      <div class="form-group">
+                         <label>Status *</label>
+                         <select class="form-control Delete" id="deleteManageRfpDropDown">
+                         </select>
+                      </div>
+                      <span id="deletestatus_err" class="error_message"></span>
+                      <div class="form-group">
+                         <label>Comments *</label><br/>
+                         <div id="deletemanage_rfp_comment_dxEditor"></div>
+                         <!-- <textarea class="form-control ckeditor" name="deletemanage_rfp_comment" id="deletemanage_rfp_comment">
+                         </textarea> -->
+                      </div>
+                      <span id="deletemanage_rfp_err" class="error_message"></span>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="modal-footer">
+             <button type="button" class="btn btn-md btn-primary" id="btnDeleteProposal" onclick="close_rfp()">Save</button>
+             <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+       </div>
+    </div>
+ </div>
+ <!-- POP-UP FOR DELETE RFP ENDS -->
+
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+<script type="text/javascript" src="components/managerfp/js/manageRfp.js"></script>
+<script>
+    $(document).ready(function () {
+        Dropzone.autoDiscover = false;
+        var ManageRfpDocumentUpload = new Dropzone("#manage_rfp_document_upload", {
+            addRemoveLinks: true,
+            uploadMultiple: true,
+            autoProcessQueue: false,
+            url: saveManageRfpDocuments,
+        });
+        CKEDITOR.replace( "deletemanage_rfp_comment" );
+    });
+
+
+</script>

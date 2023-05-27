@@ -1,0 +1,20 @@
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+    text-align: left !important;
+    padding:5px;
+    font-size: 11pt;
+}
+
+/* #swipe_reports_toDate .dx-texteditor-buttons-container, #swipe_reports_fromDate .dx-texteditor-buttons-container {
+    display: none;
+} */
+/* 
+#swipe_reports_toDate .dx-texteditor-input, #swipe_reports_fromDate .dx-texteditor-input {
+    padding-right: 10px !important;
+} */

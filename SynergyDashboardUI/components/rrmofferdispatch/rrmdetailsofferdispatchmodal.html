@@ -1,0 +1,182 @@
+<link href="components/rrmofferdispatch/css/style.css" rel="stylesheet" />
+
+<div class="modal fade" id="RRMDetailsOfferDispatchModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title"><span>RRM Details - </span>&nbsp;<span id="rrmDetailsOfferDispatchRRMNo"></span>&nbsp;&nbsp; <span><label id="rrmOfferDispatchRRM" class="label label-primary m-l-xs"></label></span></h2>
+          </div>
+
+          <div class="modal-body" data-simplebar>
+            <div class="row">
+              <div class="col-md-6">
+                <table class='table table-borderless' style='margin-bottom:0px'>
+                  <tbody>
+                    <tr>
+                      <td class="table-label"><b>RRM No</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsOfferDispatchRRMNumberTab">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Requirement Name</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsOfferDispatchRRMNameTab">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Required For</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsOfferDispatchRRMRequiredFor">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Department</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsOfferDispatchRRMDepartment">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Designation</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsOfferDispatchRRMDesignation">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Experience (Yrs)</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsOfferDispatchRRMExperience">Not Available</span></td>
+                    </tr>
+                  </tbody>
+                </table> 
+              </div>
+              <div class="col-md-6">
+                <table class='table table-borderless' style='margin-bottom:0px'>
+                  <tbody>                            
+                    <tr>
+                      <td class="table-label"><b>Plan (A) Information :</b></td>                              
+                    </tr>
+                    <tr>
+                      <td><span id="lbl_rrmDetailsOfferDispatchRRMPlanA">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Plan (B) Information :</b></td>
+                    </tr>
+                    <tr>
+                      <td><span id="lbl_rrmDetailsOfferDispatchRRMPlanB">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Skills :</b></td>
+                    </tr>
+                  </tbody>
+                </table> 
+                <div id="sdgd_rrmOfferDispatchSkillsGrid"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  // RRM Details for interview schedule
+
+function getRRMDetailsForOfferDispatchModal(rrmId){
+  $("#RRMDetailsOfferDispatchModal").appendTo("body").modal("show");
+  var filterData2 = JSON.stringify({
+      IsActive: true,
+      ResourceRequirementId : rrmId
+  });
+  callGetListSync("GetRRMById", filterData2, function (RRMData) {
+    mapRRMDetailsForOfferDispatchModal(RRMData[0])
+  });
+}
+
+function mapRRMDetailsForOfferDispatchModal(data){
+  if(data.RRMNo != null && data.RRMNo != ""){
+      $("#lbl_rrmDetailsOfferDispatchRRMNumberTab").html(data.RRMNo);
+      $("#rrmDetailsOfferDispatchRRMNo").html(data.RRMNo)
+  }
+  else{
+      $("#lbl_rrmDetailsOfferDispatchRRMNumberTab").html("Not Available");
+  }
+  if(data.RequirementName != null && data.RequirementName != ""){
+      $("#lbl_rrmDetailsOfferDispatchRRMNameTab").html(data.RequirementName)
+  }
+  else{
+      $("#lbl_rrmDetailsOfferDispatchRRMNameTab").html("Not Available")
+  }
+  if(data.RequiredFor != null && data.RequiredFor != ""){
+      $("#lbl_rrmDetailsOfferDispatchRRMRequiredFor").html(data.RequiredFor)
+  }
+  else{
+      $("#lbl_rrmDetailsOfferDispatchRRMRequiredFor").html("Not Available")
+  }
+  if(data.Department != null && data.Department != ""){
+      $("#lbl_rrmDetailsOfferDispatchRRMDepartment").html(data.Department)
+  }
+  else{
+      $("#lbl_rrmDetailsOfferDispatchRRMDepartment").html("Not Available")
+  }
+  if(data.Designation != null && data.Designation != ""){
+      $("#lbl_rrmDetailsOfferDispatchRRMDesignation").html(data.Designation)
+  }
+  else{
+      $("#lbl_rrmDetailsOfferDispatchRRMDesignation").html("Not Available")
+  }
+  if(data.ExperiencerequiredInYrs != null && data.ExperiencerequiredInYrs != ""){
+      $("#lbl_rrmDetailsOfferDispatchRRMExperience").html(data.ExperiencerequiredInYrs)
+  }
+  else{
+      $("#lbl_rrmDetailsOfferDispatchRRMExperience").html("Not Available")
+  }
+  if(data['PlanA-SkillPlanInfo'] != null && data['PlanA-SkillPlanInfo'] != ""){
+      $("#lbl_rrmDetailsOfferDispatchRRMPlanA").html(data['PlanA-SkillPlanInfo'])
+  }
+  else{
+      $("#lbl_rrmDetailsOfferDispatchRRMPlanA").html("Not Available")
+  }
+  if(data['PlanB-SkillPlanInfo'] != null && data['PlanB-SkillPlanInfo'] != ""){
+      $("#lbl_rrmDetailsOfferDispatchRRMPlanB").html(data['PlanB-SkillPlanInfo'])
+  }
+  else{
+      $("#lbl_rrmDetailsOfferDispatchRRMPlanB").html("Not Available")
+  }
+  if(data.Status != null && data.Status != ""){
+    $("#rrmOfferDispatchRRM").text(data.Status);
+  }
+  else{
+    $("#rrmOfferDispatchRRM").text("");
+  }
+  getRRMOfferDispatchModalDataGrid(data.RRMId)
+}
+
+function getRRMOfferDispatchModalDataGrid(RRMId){
+  var filterData = JSON.stringify({
+      "ResourceRequirementId": RRMId,
+      "IsActive": true,
+  });        
+
+  callGetListAsync('GetResourceRequrirementSkill', filterData, function (e) {
+      var GetSkillList = e;
+      $("#sdgd_rrmOfferDispatchSkillsGrid").dxDataGrid({
+          dataSource: GetSkillList,
+          showBorders: true,
+          paging: {
+              enabled: false
+          },
+          wordWrapEnabled: true,
+          columns: [
+              {
+                  dataField:"SkillFamily",
+                  caption:"Skill Family"
+              },
+              {
+                  dataField:"Skill",
+                  caption:"Skill"
+              },
+              {
+                  dataField:"SkillVersion",
+                  caption:"Skill Version"
+              }
+          ],
+      });
+  })
+}
+</script>

@@ -1,0 +1,605 @@
+<link href="components/nre/css/nre.css" rel="stylesheet" />
+<link href="css/library/dropzone.css" rel="stylesheet" />
+
+<link href="css/library/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!--POP-UP NRE MODAL STARTS HERE -->
+<div class="modal fade" id="NreModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modealExpand">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--getNewRfpList()---To Generate the list in Nre Card-->
+        <button type="button" class="close modal_close" data-dismiss="modal" id="NreCloseButton">
+          &times;
+        </button>
+        <button class="expand modalExpanding">
+          <i class="fas fa-expand" data-toggle="modal"></i>
+        </button>
+        <h2 class="modal-title text-left">New Requirement Entry</h2>
+      </div>
+
+      <div class="modal-body" data-simplebar>
+        <div role="tabpanel">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist" id="nretab">
+            <li role="presentation" class="active disabled" id="nre_clientTab">
+              <a href="#nre_ClientDetails" aria-controls="nre_ClientDetails" role="tab">Client Details</a>
+            </li>
+            <li role="presentation" class="disabled" id="nre_projectTab">
+              <a href="#nre_ProjectDetails" aria-controls="nre_ProjectDetails" role="tab">Project Details</a>
+            </li>
+            <li role="presentation" class="disabled" id="nre_documentTab">
+              <a href="#nre_Documents" aria-controls="nre_Documents" role="tab">Document Upload</a>
+            </li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content col-md-12">
+            <div role="tabpanel" class="tab-pane active" id="nre_ClientDetails">
+              <div class="row">
+                <div class="form-section" id="form-block">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Client <span style="color: red" class="">*</span></label>
+                        <div>
+                          <select class="form-control SmsClientlist proposalError" id="nre_SmsClientlist">
+                          </select>
+                          <span class="error_message" id="nre_ClientError"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Person</label>
+                        <input type="text" class="form-control" disabled="disabled" name="company_name"
+                          id="nre_company_Person" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h4>Client Details</h4>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <!-- Client Details Section-->
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Department <span style="color: red" class="">*</span></label>
+                        <select class="form-control SmsClientDepartment" name="department" id="nre_dl_department">
+                          <option value="0">Select Department</option>
+                          <option value="Software">Software</option>
+                          <option value="MT">MT</option>
+                          <option value="IMS">IMS</option>
+                          <option value="QA">QA</option>
+                          <option value="PB">PB</option>
+                        </select>
+                        <span class="error_message" id="nre_ClientDepartmentError"></span>
+                      </div>
+
+                      <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" class="form-control" disabled="disabled" name="company_name"
+                          id="nre_company_name" />
+                      </div>
+
+                      <div class="form-group">
+                        <label>Country</label>
+                        <input type="text" disabled="disabled" class="form-control" name="country"
+                          id="nre_country_name" />
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Client Code</label>
+                        <input type="text" class="form-control" disabled="disabled" name="client_code"
+                          id="nre_client_code" />
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-6" id="rfp-alignment">
+                          <label>Wish-list</label>
+                          <input type="checkbox" name="wish_list" id="nre_wish_list" disabled="disabled" />
+                        </div>
+                        <div class="form-group col-md-6" id="rfp-alignment">
+                          <label>VIP</label>
+                          <input type="checkbox" name="VIP" id="nre_vip" disabled="disabled" />
+                        </div>
+                      </div>
+
+                      <div class="form-group" id="rfp-alignmentClient">
+                        <label> New Client</label>
+                        <input type="checkbox" class="form-control" name="new_client" id="nre_new_client"
+                          disabled="disabled" />
+                      </div>
+                    </div>
+                    <!-- Client Details Section-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="nre_ProjectDetails">
+              <div class="row">
+                <div class="col-md-6">
+                  <h4>Project Details</h4>
+                </div>
+              </div>
+
+              <!-- Project Details Section-->
+              <div class="row ">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Project Title</label>
+                    <input type="text" class="form-control" name="project_title" id="nre_project_title" />
+                    <span class="error_message" id="nre_projectTitleError"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Tech Stream </label>
+                    <select class="form-control" name="tech_stream" id="nre_tech_stream">
+                      <option value="">Select Stream</option>
+                      <option value="QA &amp; Documentation">QA &amp; Documentation</option>
+                      <option value="Dot Net">Dot Net</option>
+                      <option value="Open Stream">Open Stream</option>
+                      <option value="PB">PB</option>
+                      <option value="Adobe">Adobe</option>
+                      <option value="Mobile App">Mobile App</option>
+                      <option value="IMS">IMS</option>
+                    </select>
+                    <span class="error_message" id="nre_techStreamError"></span>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Technology </label>
+                    <select class="form-control" name="technology" id="nre_technology" multiple>
+                      <option value="">Select Technology</option>
+                    </select>
+                    <span class="error_message" id="nre_technologyError"></span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Project Type <span style="color: red">*</span></label>
+                    <select class="form-control" name="project_type" id="nre_project_type">
+                      <option value="">Select Type</option>
+                      <option value="Not Yet Decided">Not Yet Decided</option>
+                      <option value="Fixed Price">Fixed Price</option>
+                      <option value="Package">Package</option>
+                      <option value="Retainer">Retainer</option>
+                    </select>
+                    <span class="error_message" id="nre_projectTypeError"></span>
+                  </div>
+                  <div class="form-group">
+                    <label> Application Type</label>
+                    <select class="form-control" name="application_type" id="nre_application_type">
+                      <option value="">Select Application</option>
+                      <option value="5">Business application </option>
+                      <option value="4">CMS website </option>
+                      <option value="3">Web site simple </option>
+                      <option value="1">Yet to Choose</option>
+                      <option value="8">component</option>
+                      <option value="2">e-com /Web Application </option>
+                    </select>
+                    <span class="error_message" id="nre_applicationError"> </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <h4>Date Details</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label> Received Date</label>
+                    <input type="text" class="form-control date-validator" id="nre_dtp_received_date" />
+                    <span class="error_message" id="nre_RecievedError"></span>
+                  </div>
+                </div>
+                <!-- DATE VALIDATOR -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label> Estimation Needed On</label>
+                    <input type="text" class="form-control date-validator" id="nre_dtp_estimation_needed_date" />
+                    <span class="error_message" id="nre_EstimationError"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- Project Details Section-->
+            </div>
+            <div role="tabpanel" class="tab-pane" id="nre_Documents">
+              <div id="nre-dropzone">
+                <form class="dropzone needsclick dz-clickable" id="nre_document_upload" method="post"
+                  enctype="multipart/form-data">
+                  <div class="dz-message needsclick">
+                    Drop files here or click to upload.<br />
+                  </div>
+                </form>
+
+                <span class="error_message error_upload"></span>
+              </div>
+              <h3>Description:</h3>
+              <div id="nre_txtareaDescriptionDx"></div>
+            </div>
+          </div>
+        </div>
+        <span class="ApiResponse"></span>
+      </div>
+
+      <div class="modal-footer">
+        <div>
+          <a class="btn btn-primary btnPrevious hidden-btn" onclick="toggleTabNrePrevious()">Previous</a>
+          <a class="btn btn-primary btnNext" onclick="toggleTabNre()">Next</a>
+          <a class="btn btn-primary btnSaveAndContinue hidden-btn" onclick="toggleTabNre()">Save & Continue</a>
+          <button type="button" class="btn btn-primary saveFamilyBtn hidden-btn"
+            onclick="saveSynergyNewRfpDocuments()">Save & Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--POP-UP RFP MODAL ENDS HERE -->
+
+<!--POP-UP COMMENTS HISTORY STARTS HERE-->
+<div class="modal fade" id="commentsHistoryNREModal" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                 aria-hidden="true" id="btn_comments_nre_close">&times;</span></button>
+                 <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+           <h2 class="modal-title" id="commentsHistoryNREModalTitle">Comments And Documents</h2>           
+        </div>
+        <div class="modal-body" data-simplebar id="comments_nre_modal_content">
+           <div class="form-section">
+            <div class="row">
+              <div class="col-md-12">
+                <input type="hidden" id="NRE_RFPID">
+                 <label>Comments history</label>
+                 <div class="rfp_history_lists" id="nre_comments_history">
+                    <!-- Comments and Documents History Will be displayed here.. -->
+                 </div>
+              </div>
+           </div>
+           <div class="row" id="nre_post_message_action">
+              <div class="col-md-6">
+                  <label>Files</label>
+                  <div id="nre_dropzone">
+                      <form class="dropzone needsclick dz-clickable" id="nre_message_document_upload"
+                          method="post" enctype="multipart/form-data">
+                          <div class="dz-message needsclick">
+                              <small>Drop files here or click to upload.</small><br />
+                          </div>
+                      </form>
+                      <span class="error_message text-danger nre_document_eror_message nreDocumentError"></span>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                  <label>Comments :</label>
+                  <!-- <textarea class="form-control" rows="5" id="nre_message_Description_ckeditor"
+                      name='nre_message_Description_ckeditor'></textarea> -->
+                      <div id="nre_message_Description_dxeditor"></div>
+              </div>
+           </div>
+           </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn btn-default"  data-dismiss="modal" value="Cancel" id="nre_reassign_cancel">
+          <input type="button" class="btn btn-success" value="Save" id="nre_save">
+       </div>
+     </div>
+  </div>
+</div>
+<!--POP-UP COMMENTS HISTORY ENDS HERE-->
+
+<!--POP-UP COMMENTS HISTORY STARTS HERE-->
+<div class="modal fade" id="deleteNREModal" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                 aria-hidden="true" id="btn_delete_proposal_close">&times;</span></button>
+                 <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+           <h2 class="modal-title" id="deleteNREModalTitle"></h2>
+        </div>
+        <!-- <span id="ProposalId" style="display: none;"></span> -->
+        <span id="RFPICode_NRE" style="display: none;"></span>
+        <div class="modal-body" data-simplebar id="delete_rfp_modal_content">
+           <div class="form-section">
+              <div class="row">
+                 <div class="col-md-12">
+                    <div class="form-group">
+                       <label>Status <span style="color: red" class="">*</span></label></label>
+                       <select class="form-control Delete" id="deleteNREDropDown">
+                       </select>
+                    </div>
+                    <span id="deletestatus_err_NRE" class="error_message"></span>
+                    <div class="form-group">
+                       <label>Comments <span style="color: red" class="">*</span></label></label><br/>
+                       <!-- <textarea class="form-control ckeditor" name="deleteNRE_comment" id="deleteNRE_comment">
+                       </textarea> -->
+                       <div id="deleteNRE_comment_dxeditor"></div>
+                    </div>
+                    <span id="deleteProposal_err_NRE" class="error_message"></span>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="modal-footer">
+           <button type="button" class="btn btn-md btn-primary" id="btnDeleteProposal" onclick="close_NRE()">Save</button>
+           <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+     </div>
+  </div>
+</div>
+<!--POP-UP COMMENTS HISTORY ENDS HERE-->
+
+<div class="modal fade" id="RFP_RRMDetails" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                 aria-hidden="true" id="btn_RFP_RRMDetails">&times;</span></button>
+                 <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+           <h3 class="modal-title" id="RFP_RRMDetailsTitle"></h3>
+        </div>
+        <!-- <span id="ProposalId" style="display: none;"></span> -->
+        <span id="RFPICode_RRMDetails" style="display: none;"></span>
+        <div class="modal-body" data-simplebar id="delete_rfp_modal_content">
+           <div class="form-section">
+              <div class="row">
+                 <div class="col-md-12">
+                    <div class="form-group">
+                       <h2>We hope that there is no reply or response from the client and we are closing the RRM(RRR0001) against this RFP.</h2>
+                    </div>
+                   
+              </div>
+           </div>
+        </div>
+        <div class="modal-footer">
+          <div class="alert alert-danger text-center" role="alert">
+            <b>Note : This RFP will be closed by the system automatically in 15 days of notice. Since HR closed the RRM with respective comments. So you have only (10/15) days to respond or reopen this RRM. Thanks </b>
+          </div>
+
+          <!-- <div id="rrm_reopen_reason_dxeditor"></div> -->
+          <button type="button" class="btn btn-md btn-primary" id="Reopen-rrm" onclick="close_RRMDetails()">Re-Open RRM</button>
+          <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+     </div>
+  </div>
+</div>
+
+<div class="modal fade" id="reopen_rrm" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+        <div class="modal-header">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                 aria-hidden="true" id="btn_reopen_rrm">&times;</span></button>
+                 <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+           <h2 class="modal-title" id="reopen_rrmTitle">Re-Open RRM</h2>
+        </div>
+        <!-- <span id="ProposalId" style="display: none;"></span> -->
+        <span id="RRMId" style="display: none;"></span>
+        <div class="modal-body" data-simplebar id="delete_rfp_modal_content">
+           <div class="form-section">
+              <div class="row">
+                 <div class="col-md-12">
+                   <input type="text" id="re-open_rmm" class="re-open_rmm" placeholder="Enter Re-Open Reason">
+                </div>
+           </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-md btn-primary" id="Reopen-rrm" onclick="saverrm()">Save</button>
+          <button type="button" class="btn btn-md btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+     </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+<script type="text/javascript" src="components/nre/js/nre.js"></script>
+<script type="text/javascript" src="components/nre/js/datepicker.min.js"></script>
+<script>
+  $(document).ready(function () {
+      Dropzone.autoDiscover = false;
+      var NREDocumentUpload = new Dropzone("#nre_message_document_upload", {
+          addRemoveLinks: true,
+          uploadMultiple: true,
+          autoProcessQueue: false,
+          url: saveNREDocuments,
+      });
+      // CKEDITOR.replace( "deleteNRE_comment" );
+  });
+  // var ProposalId = localStorage.getItem('ProposalId');
+  var NRESecurityToken = localStorage.getItem("securityToken");
+function NREDropzoneRemoveFiles() {
+ Dropzone.forElement("#nre_message_document_upload").removeAllFiles(true);
+}
+
+function saveNREDocuments(RfpId) 
+{
+ var NREDocumentFiles = $('#nre_message_document_upload').get(0).dropzone.getAcceptedFiles();
+ if (NREDocumentFiles.length > 0) {
+   for (i = 0; i < NREDocumentFiles.length; i++) {
+     var FileExtensions = NREDocumentFiles[i].name.slice((Math.max(0, NREDocumentFiles[i].name.lastIndexOf(".")) || Infinity) + 1);
+     var FileTypes = NREDocumentFiles[i].type;
+     var FileNames = NREDocumentFiles[i].name.substr(0, NREDocumentFiles[i].name.lastIndexOf("."));
+     var NREDocumentsFormData = new FormData();
+     NREDocumentsFormData.append('file', NREDocumentFiles[i]);
+     var Contentdetails =
+       [{
+         "DocumentTypeId": RfpId,
+         "DocumentType": "RFP",
+         "DocumentName":FileNames,
+         "Extension": FileExtensions,
+         "ContentType": FileTypes
+       }]
+
+       NREDocumentsFormData.append('Contentdetails', JSON.stringify(Contentdetails));
+       var SaveNREDocumentsResult = postFileGeneric(NREDocumentsFormData);
+   }
+ }
+}
+
+// try {
+//    CKEDITOR.instances['nre_message_Description_ckeditor'].destroy();
+//  } catch (e) {
+//  }
+
+//  var nre_message_Description_ckeditor = CKEDITOR.replace(
+//    "nre_message_Description_ckeditor",
+//    {});
+
+//  nre_message_Description_ckeditor.on("paste", function (evt) {
+//    if (evt.data.dataTransfer.getFilesCount() > 0) {
+//        var NREDescriptionFile = evt.data.dataTransfer.getFile(0);
+//        var NREDescriptionReader = new FileReader();
+//        NREDescriptionReader.onload = function (evt) {
+//            var NREDescriptionPictureElement = nre_message_Description_ckeditor.document.createElement(
+//                "img",
+//                {
+//                    attributes: {
+//                        src: evt.target.result
+//                    }
+//                }
+//            );
+
+//            setTimeout(function () {
+//                nre_message_Description_ckeditor.insertElement(
+//                  NREDescriptionPictureElement
+//                );
+//            }, 0);
+//        };
+//        NREDescriptionReader.readAsDataURL(NREDescriptionFile);
+//    }
+//  });
+ $("#nre_reassign_cancel").on("click", function () {
+//  CKEDITOR.instances.nre_message_Description_ckeditor.setData("");
+ debugger
+ nre_message_Description_dxeditor.option("value", "");
+ NREDropzoneRemoveFiles();
+});
+function saveNREComments(RFPId, comments) {
+  debugger
+ var comments = {
+   Token: NRESecurityToken,
+   RFPId: RFPId,
+   Comments: comments,
+   IsActive: true
+ };
+
+ data = {
+   Method: "PostCommentsinRFP",
+   Data: comments
+ };
+ var postComments = PostDataCall(data);
+}
+$('#nre_save').on('click', () => {
+  debugger
+  saveNREDocuments($('#NRE_RFPID').val());
+  //  if (CKEDITOR.instances.nre_message_Description_ckeditor.getData() != "") {
+  //   saveNREComments($('#NRE_RFPID').val(), CKEDITOR.instances.nre_message_Description_ckeditor.getData());
+  //   openCommentsHistoryForNRE($('#NRE_RFPID').val(), 'demo');
+  //    NREDropzoneRemoveFiles();
+  //    CKEDITOR.instances.nre_message_Description_ckeditor.setData(""); 
+  //  }
+   if (nre_message_Description_dxeditor.option("value") != "") {
+    saveNREComments($('#NRE_RFPID').val(), nre_message_Description_dxeditor.option("value"));
+    openCommentsHistoryForNRE($('#NRE_RFPID').val(), 'demo');
+     NREDropzoneRemoveFiles();
+     nre_message_Description_dxeditor.option("value", ""); 
+   }
+})
+
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    Dropzone.autoDiscover = false;
+    getTechnologyList("nre_technology");
+
+    $("#nre_SmsClientlist").on({
+      "select2:open": function () {
+        $('body').on('keyup', '#NreModal input.select2-search__field', function () {
+          var activeTab = $('#nretab').find('li.active').attr('id');
+          if (activeTab == "nre_clientTab") {
+            var searchKey = $(this).val();
+            if (searchKey == "") {
+              let selectE1 = $("select#nre_SmsClientlist");
+              selectE1.empty();
+              selectE1.select2('close');
+              selectE1.select2('open');
+            }
+            else {
+              delay(function () {
+                SmsClientlist("nre_SmsClientlist", searchKey);
+              }, 700);
+            }
+          }
+        });
+
+        $("#nre_dl_department").on('change', function (e) {
+          if ($(this).val() != "0") {
+            $("#nre_ClientDepartmentError").html("");
+          }
+        });
+
+          $("select#nre_SmsClientlist").on('change', function (e) {
+            let parent = $(this);
+            parent.children().each(function () {
+              if ($(this).val() == $("#nre_SmsClientlist").val()) {
+                let IsNewClient = CheckIsNewClient($(this).val())
+                if ($(this).attr("data-WishList") == "true") {
+                  $("#nre_wish_list").prop("checked", true);
+                } else {
+                  $("#nre_wish_list").prop("checked", false);
+                }
+                var VIPAC = $(this).attr("data-Approved");
+
+                if (VIPAC.includes("Y")) {
+                  $("#nre_vip").prop("checked", true);
+                } else {
+                  $("#nre_vip").prop("checked", false);
+                }
+                if (IsNewClient[0].IsNew == "YES") {
+                  $("#nre_new_client").prop("checked", true);
+                }
+                else {
+                  $("#nre_new_client").prop("checked", false);
+                }
+                $("#nre_company_name").val($(this).attr("data-address")),
+                  $("#nre_company_Person").val($(this).attr("data-person")),
+                  $("#nre_country_name").val($(this).attr("data-CountryName")),
+                  $("#nre_country_name").attr("data-countryid", $(this).attr("data-CountryIcode"));
+                $("#nre_client_code").val($(this).val());
+              }
+            });
+          });
+        }
+    })
+      .select2({
+        dropdownParent: $("#NreModal"),
+        placeholder: "Select Client"
+      });
+    var nre_document_upload = new Dropzone("#nre_document_upload", {
+      addRemoveLinks: true,
+      uploadMultiple: true,
+      autoProcessQueue: false,
+      url: saveSynergyNewRfpDocuments
+    });
+  });
+
+  $(".import").click(function () {
+    var modalId = $(this).attr("mid");
+    $("#" + modalId).modal("show");
+  });
+
+  $('#nre_SmsClientlist').val(0).trigger('change.select2');
+
+</script>

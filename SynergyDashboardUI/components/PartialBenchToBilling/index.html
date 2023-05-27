@@ -1,0 +1,22 @@
+<div class="card-detail">
+<span class="card-detail-title"><b>Low Billing To Average Billing</b></span>
+   <!-- <form>
+  <input type="text" placeholder="Search.." id="btbsearch" name="search">
+  </form> -->
+	  <hr />
+    <div id="grid-card">
+        <div id="partialBenchToBillingGrid"></div>
+    </div>
+	<div id="partial_manage_proposal_plan"></div>
+</div>
+
+<script>
+    $(document).ready(function(){
+    renderPartialBenchToBillingReportGrid();
+})
+  $("#partial_manage_proposal_plan").load("components/PartialBenchToBilling/partialmanagePlanlModel.html");
+</script>
+<script type="text/javascript" src="components/PartialBenchToBilling/js/partialbenchtobilling.js"></script>
+<script type="text/javascript" src="components/PartialBenchToBilling/js/partialbenchtobillingcardgrid.js"></script>
+
+

@@ -1,0 +1,311 @@
+<div class="daily-card card-detail">
+    <span class="card-detail-title modal-not-include"><b>Daily Resource Plan</b></span>
+    <button type="button" id="btnleaveDetail" class="btn btn-xs cmn-modal-ex-btn modal-not-include expandCommonDiv pull-right">
+        <i class="fa fa-expand"></i>
+    </button> 
+    <hr>
+    <div class="form-group">
+        <label for="res_name">Resource Name</label>
+        <select class="form-control res_name" id="res_name" ></select>
+    </div>
+
+    <div class="form-group">
+        <label for="pro_bk_lead">Backup Lead</label>
+        <select class="form-control pro_bk_lead" id="pro_bk_lead"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="drp_clients">Client</label>
+        <select class="form-control drp_clients" id="drp_clients" multiple="multiple"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="drp_projects">Project</label>
+        <select class="form-control drp_projects" id="drp_projects" multiple="multiple"></select>
+    </div>
+
+    <table class="table table-borderless" id="drp_project_table">
+      <thead>
+        <th class="text-center"></th>
+        <th class="text-center">PL</th>
+        <th class="text-center">OH</th>
+        <th class="text-center">BH</th>
+        <th class="text-center">Till Date</th>
+      </thead>
+      <tbody class="project_details_custom">
+      </tbody>
+    </table>
+
+    <div>
+        <p>Free Hours : <span class="freeHrs">8</span></p>
+    </div>
+    <!-- <div class="today_plan_text">
+        <textarea name="" id="today_text"></textarea>
+    </div> -->
+    <button id="drc_save" type="button" class="btn btn-primary pull-right" onclick="postDailyResourcePlan()">Save</button>
+    <br/>
+    <br/>
+</div>
+
+<script>
+    function getEmployeeName() {
+        let filterData = JSON.stringify({
+            "IsActive": true
+        });
+
+        let getEmployeeList = callgetlist('GetEmployeeList', filterData);
+        let getEmployeeData = [];
+        if (getEmployeeList.length > 0) {
+            getEmployeeList.forEach(function (i, index) {
+                getEmployeeData.push({
+                    'id': i['EmployeeId'],
+                    'text': i['Name']
+                });
+            });
+        }
+
+        $(".res_name").select2({
+            placeholder: "Select Resource Name",
+            allowClear: true,
+            data: getEmployeeData
+        });
+
+        $('.res_name').val(null).trigger('change');
+    }
+
+    function getBackupLeadName() {
+        let filterData = JSON.stringify({
+            "IsActive": false
+        });
+        let backupLeadData = callgetlist('GetMyMentor', filterData);
+        //console.log(backupLeadData); 
+
+        let backupLeadNames = [];
+        if (backupLeadData.length > 0) {
+            backupLeadData.forEach(function (i, index) {
+                backupLeadNames.push({
+                    'id': i['MentorId'],
+                    'text': `${i['mentorFirstName']} ${i['mentorLastName']}`
+                });
+            });
+        }
+
+        $(".pro_bk_lead").select2({
+            placeholder: "Select Backup Lead",
+            allowClear: true,
+            data: backupLeadNames
+        });
+
+        $('.pro_bk_lead').val(null).trigger('change');
+    }
+
+    function getPrjBackupLeadName(selector) {
+        let filterData = JSON.stringify({
+            "IsActive": false
+        });
+        let backupLeadData = callgetlist('GetMyMentor', filterData);
+
+        let backupLeadNames = [];
+        if (backupLeadData.length > 0) {
+            backupLeadData.forEach(function (i, index) {
+                backupLeadNames.push({
+                    'id': i['MentorId'],
+                    'text': `${i['mentorFirstName']} ${i['mentorLastName']}`
+                });
+            });
+        }
+
+        $(`.${selector}`).select2({
+            placeholder: "Select Project Lead",
+            allowClear: true,
+            data: backupLeadNames
+        });
+
+        $(`.${selector}`).val(null).trigger('change');
+    }
+
+    function getClientsName() {
+        let filterData = JSON.stringify({
+            "IsActive": true
+        });
+        let clientsData = callgetlist('GetClients', filterData);
+        //console.log(clientsData); 
+
+        let clientNames = [];
+        if (clientsData.length > 0) {
+            clientsData.forEach(function (i, index) {
+                clientNames.push({
+                    'id': i['Id'],
+                    'text': i['Client']
+                });
+            });
+        }
+
+        $(".drp_clients").select2({
+            placeholder: "Select Client",
+            allowClear: true,
+            data: clientNames
+        });
+
+
+        $('.drp_clients').val(null).trigger('change');
+    }
+
+    function addProj(data) {
+        let html = `
+                <tr id="drptb${data.id.replace(/ /g,"_")}">
+                  <td class="col-md-2" style="vertical-align: middle !important;"><label>${data.text}</label></td>
+                  <td class="col-md-3">
+                    <select class="form-control prjbklead${data.id.replace(/ /g,"_")}" style="width: 100%"></select>
+                  </td>
+                  <td class="col-md-2"><input type="number" onChange="calcHrs(this)" class="form-control occ_hrs ohrs${data.id.replace(/ /g,"_")}" value="0" min="0" max="8" maxlength="1" oninput="allowOnlySingleChar(this)" /></td>
+                  <td class="col-md-2"><input type="number" class="form-control phrs${data.id.replace(/ /g,"_")}" value="0" min="0" max="8" maxlength="1" oninput="allowOnlySingleChar(this)"/></td>
+                  <td class="col-md-3"><input type="date" class="form-control" id="drp_till_date${data.id.replace(/ /g,"_")}" name="att_from_date"></td>
+                </tr>
+                `
+
+        $('.project_details_custom').append(html);
+        calcHrs();
+        getPrjBackupLeadName(`prjbklead${data.id.replace(/ /g,"_")}`);
+        $("#drp_project_table").show();
+    }
+
+    function removeProj(data) {
+        $(`#drptb${data.id.replace(/ /g,"_")}`).remove();
+        calcHrs();
+        //console.log("Selected value is: "+$(".drp_projects").select2("val"));
+
+        if($(".drp_projects").select2("val") === null) {
+            $("#drp_project_table").hide();
+        }
+    }
+
+    function calcHrs(parm) {
+        
+        if(parm){
+            if (isNaN($(parm).val())) {
+                $(parm).val('');
+                return
+            }
+        }
+        let occHrs = 0;
+
+        $('.occ_hrs').each(function () {
+            occHrs += +$(this).val();
+        })
+        let freeHrs = 8 - occHrs;
+        $('.freeHrs').html(freeHrs)
+
+        if(freeHrs < 0) {
+            $(".freeHrs").addClass("errorAlert");
+            $("#drc_save").attr("disabled", true);
+        } else {
+            $(".freeHrs").removeClass("errorAlert");
+            $("#drc_save").removeAttr("disabled");
+        }
+    }
+
+    function allowOnlySingleChar(elm) {
+        if (elm.value.length > elm.maxLength) {
+            elm.value = elm.value.slice(0, elm.maxLength);  
+        }
+
+        if(elm.value == 9) {
+            elm.value = "";
+        } 
+    }
+
+    function postDailyResourcePlan() {
+        let resNameArray = $(".res_name").select2("data");
+        let blNameArray = $(".pro_bk_lead").select2("data");
+        let drpClientObj = [];
+        let drpClientsArray = $(".drp_clients").select2("data");
+        drpClientsArray.forEach((client) => {
+            // //console.log(client.text);
+            drpClientObj.push(client.text);
+        })
+
+        let projectsObj = [];
+        let projectsArray = $(".drp_projects").select2("data");
+        projectsArray.forEach((project) => {
+            let drpprjId = project.text.replace(/ /g,"_");
+            let drpPLArray = $(`.prjbklead${drpprjId}`).select2("data");
+            let drpOH = $(`.ohrs${drpprjId}`).val();
+            let drpBH = $(`.phrs${drpprjId}`).val();
+            let drpTillDate = $(`#drp_till_date${drpprjId}`).val();
+            //console.log({prjName: project.text, pl: drpPLArray[0].text, oh: drpOH, bh: drpBH, tillDate: drpTillDate});
+            projectsObj.push({prjName: project.text, pl: drpPLArray[0].text, oh: drpOH, bh: drpBH, tillDate: drpTillDate});
+        });
+
+        drpPostData = {
+            resourceName: resNameArray[0].text,
+            backupLead: blNameArray[0].text,
+            clients: drpClientObj,
+            projects: projectsObj
+        }
+ 
+        console.dir(drpPostData);
+
+        let postData = {
+            "Method": "PostDailyResourcePlan",
+            "Data": { Data: "drpPostData"}
+        }
+
+        var postCall = PostDataCall(postData);
+        if (postCall['IsSuccess'] == true) {
+            //console.log(postCall['Message']);
+            // return true;
+            //console.log('Success');
+        } else {
+            //console.log(postCall['Message']);
+            // return true;
+            //console.log("Unknown")
+        }
+    }
+    
+    $(document).ready(function () {
+        getEmployeeName();
+        getBackupLeadName();
+        getClientsName();
+
+        $(".drp_projects").select2({
+            tags: true,
+            placeholder: "Add Project",
+            allowClear: true,
+            "language":{
+                "noResults" : function () { return ''; }
+            }
+        });
+
+        $('.drp_projects').on('select2:select', function (e) {
+            var data = e.params.data;
+            addProj(data);
+        });
+
+        $('.drp_projects').on('select2:unselect', function (e) {
+            var data = e.params.data;
+            removeProj(data);
+        });
+
+        $('.drp_projects').on('select2:clear', function (e) {
+            $("#drp_project_table").hide(); 
+        });
+
+
+        $("#drp_project_table").hide(); 
+    })
+</script>
+
+<style>
+    .table-borderless > tbody > tr > td,
+    .table-borderless > tbody > tr > th,
+    .table-borderless > tfoot > tr > td,
+    .table-borderless > tfoot > tr > th,
+    .table-borderless > thead > tr > td,
+    .table-borderless > thead > tr > th {
+        border: none;
+    }
+    .errorAlert {
+        color: red;
+    }
+</style>

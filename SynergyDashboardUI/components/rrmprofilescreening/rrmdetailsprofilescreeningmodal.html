@@ -1,0 +1,183 @@
+<link href="components/rrmprofilescreening/css/style.css" rel="stylesheet" />
+
+<div class="modal fade" id="RRMDetailsProfileScreeningModal" role="dialog">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+              <h2 class="modal-title"><span>RRM Details - </span>&nbsp;<span id="rrmDetailsProfileScreeningRRMNo"></span>&nbsp;&nbsp; <span><label id="rrmStatusProfileScreeningRRM" class="label label-primary m-l-xs"></label></span></h2>
+          </div>
+
+          <div class="modal-body" data-simplebar>
+            <div class="row">
+              <div class="col-md-6">
+                <table class='table table-borderless' style='margin-bottom:0px'>
+                  <tbody>
+                    <tr>
+                      <td class="table-label"><b>RRM No</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsProfileScreeningRRMNumberTab">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Requirement Name</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsProfileScreeningRRMNameTab">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Required For</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsProfileScreeningRRMRequiredFor">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Department</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsProfileScreeningRRMDepartment">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Designation</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsProfileScreeningRRMDesignation">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Experience (Yrs)</b></td>
+                      <td><b>: </b><span id="lbl_rrmDetailsProfileScreeningRRMExperience">Not Available</span></td>
+                    </tr>
+                  </tbody>
+                </table> 
+              </div>
+              <div class="col-md-6">
+                <table class='table table-borderless' style='margin-bottom:0px'>
+                  <tbody>                            
+                    <tr>
+                      <td class="table-label"><b>Plan (A) Information :</b></td>                              
+                    </tr>
+                    <tr>
+                      <td><span id="lbl_rrmDetailsProfileScreeningRRMPlanA">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Plan (B) Information :</b></td>
+                    </tr>
+                    <tr>
+                      <td><span id="lbl_rrmDetailsProfileScreeningRRMPlanB">Not Available</span></td>
+                    </tr>
+                    <tr>
+                      <td class="table-label"><b>Skills :</b></td>
+                    </tr>
+                  </tbody>
+                </table> 
+                <div id="sdgd_rrmProfileScreeningSkillsGrid"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+  // RRM Details for interview schedule
+
+function getRRMDetailsForProfileScreening(rrmId){
+  $("#RRMDetailsProfileScreeningModal").appendTo("body").modal("show");
+  var filterData2 = JSON.stringify({
+      IsActive: true,
+      ResourceRequirementId : rrmId
+  });
+  callGetListSync("GetRRMById", filterData2, function (RRMData) {
+    mapRRMDetailsForProfileScreening(RRMData[0])
+  });
+}
+
+function mapRRMDetailsForProfileScreening(data){
+  if(data.RRMNo != null && data.RRMNo != ""){
+      $("#lbl_rrmDetailsProfileScreeningRRMNumberTab").html(data.RRMNo);
+      $("#rrmDetailsProfileScreeningRRMNo").html(data.RRMNo)
+  }
+  else{
+      $("#lbl_rrmDetailsProfileScreeningRRMNumberTab").html("Not Available");
+  }
+  if(data.RequirementName != null && data.RequirementName != ""){
+      $("#lbl_rrmDetailsProfileScreeningRRMNameTab").html(data.RequirementName)
+  }
+  else{
+      $("#lbl_rrmDetailsProfileScreeningRRMNameTab").html("Not Available")
+  }
+  if(data.RequiredFor != null && data.RequiredFor != ""){
+      $("#lbl_rrmDetailsProfileScreeningRRMRequiredFor").html(data.RequiredFor)
+  }
+  else{
+      $("#lbl_rrmDetailsProfileScreeningRRMRequiredFor").html("Not Available")
+  }
+  if(data.Department != null && data.Department != ""){
+      $("#lbl_rrmDetailsProfileScreeningRRMDepartment").html(data.Department)
+  }
+  else{
+      $("#lbl_rrmDetailsProfileScreeningRRMDepartment").html("Not Available")
+  }
+  if(data.Designation != null && data.Designation != ""){
+      $("#lbl_rrmDetailsProfileScreeningRRMDesignation").html(data.Designation)
+  }
+  else{
+      $("#lbl_rrmDetailsProfileScreeningRRMDesignation").html("Not Available")
+  }
+  if(data.ExperiencerequiredInYrs != null && data.ExperiencerequiredInYrs != ""){
+      $("#lbl_rrmDetailsProfileScreeningRRMExperience").html(data.ExperiencerequiredInYrs)
+  }
+  else{
+      $("#lbl_rrmDetailsProfileScreeningRRMExperience").html("Not Available")
+  }
+  if(data['PlanA-SkillPlanInfo'] != null && data['PlanA-SkillPlanInfo'] != ""){
+      $("#lbl_rrmDetailsProfileScreeningRRMPlanA").html(data['PlanA-SkillPlanInfo'])
+  }
+  else{
+      $("#lbl_rrmDetailsProfileScreeningRRMPlanA").html("Not Available")
+  }
+  if(data['PlanB-SkillPlanInfo'] != null && data['PlanB-SkillPlanInfo'] != ""){
+      $("#lbl_rrmDetailsProfileScreeningRRMPlanB").html(data['PlanB-SkillPlanInfo'])
+  }
+  else{
+      $("#lbl_rrmDetailsProfileScreeningRRMPlanB").html("Not Available")
+  }
+  if(data.Status != null && data.Status != ""){
+    $("#rrmStatusProfileScreeningRRM").text(data.Status);
+  }
+  else{
+    $("#rrmStatusProfileScreeningRRM").text("");
+  }
+  
+  getRRMProfileScreeningDataGrid(data.RRMId)
+}
+
+function getRRMProfileScreeningDataGrid(RRMId){
+  var filterData = JSON.stringify({
+      "ResourceRequirementId": RRMId,
+      "IsActive": true,
+  });        
+
+  callGetListAsync('GetResourceRequrirementSkill', filterData, function (e) {
+      var GetSkillList = e;
+      $("#sdgd_rrmProfileScreeningSkillsGrid").dxDataGrid({
+          dataSource: GetSkillList,
+          showBorders: true,
+          paging: {
+              enabled: false
+          },
+          wordWrapEnabled: true,
+          columns: [
+              {
+                  dataField:"SkillFamily",
+                  caption:"Skill Family"
+              },
+              {
+                  dataField:"Skill",
+                  caption:"Skill"
+              },
+              {
+                  dataField:"SkillVersion",
+                  caption:"Skill Version"
+              }
+          ],
+      });
+  })
+}
+</script>

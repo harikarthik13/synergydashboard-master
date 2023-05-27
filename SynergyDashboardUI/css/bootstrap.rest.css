@@ -1,0 +1,50 @@
+﻿.ns-panel {
+    background-color: #fff;
+    border: none;
+    -webkit-box-shadow: none;
+    margin-bottom: 10px;
+}
+
+.ns-panel-heading {
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding-left: 0px;
+    padding-right: 0px;
+    cursor: pointer;
+}
+
+.panel-default > .ns-panel-heading {
+    color: #333;
+    border-color: #ddd;
+}
+
+.panel-group .ns-panel-heading {
+    border-bottom: 0;
+}
+
+.panel-default > .ns-panel-heading > a {
+    text-decoration: none;
+}
+
+.ns-panel-title > a {
+    color: inherit;
+}
+
+.ns-panel-body {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+/* CSS Method for adding Font Awesome Chevron Icons */
+.accordion-toggle:after {
+    font-family: 'FontAwesome';
+    content: "\f068";
+    float: right;
+    color: inherit;
+}
+
+.ns-panel-heading.collapsed .accordion-toggle:after {
+    content: "\f067";
+}

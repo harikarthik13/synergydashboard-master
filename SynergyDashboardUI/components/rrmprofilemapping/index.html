@@ -1,0 +1,114 @@
+<script src='components/rrmprofilemapping/js/script.js'></script>
+<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="components/rrmprofilemapping/css/style.css" />
+<link href="css/library/bootstrap.min.css" rel="stylesheet" />
+
+<div class="card-detail">
+    <span class="card-detail-title modal-not-include"><b>Profile Mapping</b></span>
+    <hr />
+    <div class="table-responsive">
+        <table id="RRMProfileMapTableList" class="table table-striped">
+            <thead>
+                <tr>
+                    <td>RRM ID</td>
+                    <td>Requirement</td>
+                    <td>Skills</td>
+                    <td>Experience</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Senior .NET Developer</td>
+                    <td>.NET, ASP .NET MVC, SQL</td>
+                    <td>4</td>
+                    <td><button class="profileactionButton btn btn-primary btn-xs"><i class='fa fa-expand'></i></button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Action Modal(Candidate) -->
+<div id="ProfileActionModal" class="modal fade bd-example-modal-lg in" role="dialog">
+    <div class="modal-dialog">
+        Candidate Modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">RRM Profile Mapping</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="col-md-12">
+                    <h5 style="text-align: center;">SKILLS: .NET, ASP .NET MVC, SQL</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td>Action</td>
+                                <td>RRM ID</td>
+                                <td>Candidate ID</td>
+                                <td>Candidate Name</td>
+                                <td>Skills</td>
+                                <td>Experience</td>
+                                <td>Contact</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="candidate1" value=""></td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>Candidate1</td>
+                                <td>.NET, ASP .NET MVC, SQL</td>
+                                <td>7</td>
+                                <td>1234567890</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="candidate2" value=""></td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>Candidate2</td>
+                                <td>.NET, ASP .NET MVC, SQL</td>
+                                <td>4</td>
+                                <td>9876543210</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="candidate1" value=""></td>
+                                <td>1</td>
+                                <td>3</td>
+                                <td>Candidate3</td>
+                                <td>.NET, Node JS, Mongo DB</td>
+                                <td>6</td>
+                                <td>1593578462</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="candidate2" value=""></td>
+                                <td>1</td>
+                                <td>4</td>
+                                <td>Candidate4</td>
+                                <td>.NET, ASP .NET MVC, Oracle</td>
+                                <td>5</td>
+                                <td>5468279135</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Map</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <script src="js/callapi.js"></script> -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".profileactionButton").click(function () {
+            $("#ProfileActionModal").appendTo("body").modal('show');
+        });
+    });
+</script>

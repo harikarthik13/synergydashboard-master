@@ -1,0 +1,761 @@
+<div class="card-detail">
+    <!-- Change the chart title here -->
+    <span class="card-detail-title"><b>Demo Chart</b> </span>
+    <hr />
+    <!-- change the chart card id here -->
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_A1_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_A1" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_A2_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_A2" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_A3_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_A3" class=""></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_B1_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_B1" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_B2_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_B2" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_B3_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_B3" class=""></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_C1_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_C1" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_C2_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_C2" class=""></div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <!-- Set Unique Id for the chart box div -->
+                <div id="chart_C3_Box" class="chartBox">
+                    <button style="float: right;" type="button" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                    <!-- Set Unique Id for the chart -->
+                    <div id="chart_C3" class=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .chartBox {
+        border: solid 1px;
+        border-color: bisque;
+    }
+</style>
+
+<script>
+    
+    $(document).ready(function () {
+        loadCharts();
+    });
+
+    function loadCharts() {
+        loadChartA1();
+        loadChartA2();
+        loadChartA3();
+        loadChartB1();
+        loadChartB2();
+        loadChartB3();
+        loadChartC1();
+        loadChartC2();
+        loadChartC3();
+    }
+
+    function loadChartA1() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chart1DS = [
+            {
+                country: "Russia",
+                area: 12,
+            },
+            {
+                country: "Canada",
+                area: 7,
+            },
+            {
+                country: "USA",
+                area: 7,
+            },
+            {
+                country: "China",
+                area: 7,
+            },
+            {
+                country: "Brazil",
+                area: 6,
+            },
+            {
+                country: "Australia",
+                area: 5,
+            },
+            {
+                country: "India",
+                area: 2,
+            },
+            {
+                country: "Others",
+                area: 55,
+            },
+        ];
+
+        $("#chart_A1").dxPieChart({
+            size: {
+                width: 400,
+                height: 300,
+            },
+            palette: "bright",
+            dataSource: chart1DS,
+            series: [
+                {
+                    argumentField: "country",
+                    valueField: "area",
+                    label: {
+                        visible: true,
+                        connector: {
+                            visible: true,
+                            width: 1,
+                        },
+                    },
+                },
+            ],
+            title: "Area of Countries",
+            export: {
+                enabled: true,
+            },
+            onPointClick: function (e) {
+                var point = e.target;
+
+                toggleVisibility(point);
+            },
+            onLegendClick: function (e) {
+                var arg = e.target;
+
+                toggleVisibility(this.getAllSeries()[0].getPointsByArg(arg)[0]);
+            },
+        });
+
+        function toggleVisibility(item) {
+            if (item.isVisible()) {
+                item.hide();
+            } else {
+                item.show();
+            }
+        }
+    }
+
+    function loadChartA2() {
+        //valueField
+        var YaxisField = "Value";
+        //argumentField
+        var XaxisField = "Date";
+        //color
+        var color = "#ffaa66";
+
+        // call the web api service for get datasource here
+        var filterData = "";
+        var chartA2DS = callgetlist("GetRFPCountByMonth", filterData);
+
+        //change the chart card id here
+        var prefix_standardbarchartInstance = $("#chart_A2")
+            .dxChart({
+                dataSource: chartA2DS,
+                legend:{visible:false},
+                size: {
+                    width: 400,
+                    height: 300,
+                },
+                series: {
+                    argumentField: XaxisField,
+                    valueField: YaxisField,
+                    name: "RFP Count",
+                    type: "bar",
+                    color: color,
+                },
+            })
+            .dxChart("instance");
+    }
+
+    function loadChartA3() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartA3DS = [
+            {
+                state: "USA",
+                maleyoung: 29.956,
+                malemiddle: 90.354,
+                maleolder: 14.472,
+                femaleyoung: 28.597,
+                femalemiddle: 91.827,
+                femaleolder: 20.362,
+            },
+            {
+                state: "Brazil",
+                maleyoung: 25.607,
+                malemiddle: 55.793,
+                maleolder: 3.727,
+                femaleyoung: 24.67,
+                femalemiddle: 57.598,
+                femaleolder: 5.462,
+            },
+            {
+                state: "Russia",
+                maleyoung: 13.493,
+                malemiddle: 48.983,
+                maleolder: 5.802,
+                femaleyoung: 12.971,
+                femalemiddle: 52.14,
+                femaleolder: 12.61,
+            },
+            {
+                state: "Japan",
+                maleyoung: 9.575,
+                malemiddle: 43.363,
+                maleolder: 9.024,
+                femaleyoung: 9.105,
+                femalemiddle: 42.98,
+                femaleolder: 12.501,
+            },
+            {
+                state: "Mexico",
+                maleyoung: 17.306,
+                malemiddle: 30.223,
+                maleolder: 1.927,
+                femaleyoung: 16.632,
+                femalemiddle: 31.868,
+                femaleolder: 2.391,
+            },
+            {
+                state: "Germany",
+                maleyoung: 6.679,
+                malemiddle: 28.638,
+                maleolder: 5.133,
+                femaleyoung: 6.333,
+                femalemiddle: 27.693,
+                femaleolder: 8.318,
+            },
+            {
+                state: "United Kindom",
+                maleyoung: 5.816,
+                malemiddle: 19.622,
+                maleolder: 3.864,
+                femaleyoung: 5.519,
+                femalemiddle: 19.228,
+                femaleolder: 5.459,
+            },
+        ];
+
+        $("#chart_A3").dxChart({
+            dataSource: chartA3DS,
+            size: {
+                width: 400,
+                height: 300,
+            },
+            commonSeriesSettings: {
+                argumentField: "state",
+                type: "stackedBar",
+            },
+            series: [
+                { valueField: "maleyoung", name: "Male: 0-14", stack: "male" },
+                { valueField: "malemiddle", name: "Male: 15-64", stack: "male" },
+                { valueField: "maleolder", name: "Male: 65 and older", stack: "male" },
+                { valueField: "femaleyoung", name: "Female: 0-14", stack: "female" },
+                { valueField: "femalemiddle", name: "Female: 15-64", stack: "female" },
+                { valueField: "femaleolder", name: "Female: 65 and older", stack: "female" },
+            ],
+            legend: {
+                horizontalAlignment: "right",
+                position: "inside",
+                border: { visible: true },
+                columnCount: 2,
+                customizeItems: function (items) {
+                    var sortedItems = [];
+
+                    items.forEach(function (item) {
+                        var startIndex = item.series.stack === "male" ? 0 : 3;
+                        sortedItems.splice(startIndex, 0, item);
+                    });
+                    return sortedItems;
+                },
+            },
+            valueAxis: {
+                title: {
+                    text: "Populations, millions",
+                },
+            },
+            title: "Population: Age Structure",
+            export: {
+                enabled: true,
+            },
+            tooltip: {
+                enabled: true,
+            },
+        });
+    }
+
+    function loadChartB1() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartB1DS = [
+            {
+                region: "Asia",
+                val: 4119626293,
+            },
+            {
+                region: "Africa",
+                val: 1012956064,
+            },
+            {
+                region: "Northern America",
+                val: 344124520,
+            },
+            {
+                region: "Latin America and the Caribbean",
+                val: 590946440,
+            },
+            {
+                region: "Europe",
+                val: 727082222,
+            },
+            {
+                region: "Oceania",
+                val: 35104756,
+            },
+        ];
+        $("#chart_B1").dxPieChart({
+            type: "doughnut",
+            size: {
+                width: 400,
+                height: 300,
+            },
+            palette: "Soft Pastel",
+            dataSource: chartB1DS,
+            title: "Population",
+            tooltip: {
+                enabled: true,
+                format: "millions",
+                customizeTooltip: function (arg) {
+                    return {
+                        text: arg.valueText + " - " + (arg.percent * 100).toFixed(2) + "%",
+                    };
+                },
+            },
+            legend: {
+                horizontalAlignment: "right",
+                verticalAlignment: "top",
+                margin: 0,
+            },
+            export: {
+                enabled: true,
+            },
+            series: [
+                {
+                    argumentField: "region",
+                    label: {
+                        visible: true,
+                        format: "millions",
+                        connector: {
+                            visible: true,
+                        },
+                    },
+                },
+            ],
+        });
+    }
+
+    function loadChartB2() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartB2DS = [
+            { argument: "Visited the Website", value: 9152 },
+            { argument: "Downloaded a Trial", value: 6879 },
+            { argument: "Contacted Support", value: 5121 },
+            { argument: "Subscribed", value: 2224 },
+            { argument: "Renewed", value: 1670 },
+        ];
+
+        $("#chart_B2").dxFunnel({
+            dataSource: chartB2DS,
+            size: {
+                width: 400,
+                height: 300,
+            },
+            title: {
+                text: "Website Conversions",
+                margin: { bottom: 30 },
+            },
+            argumentField: "argument",
+            valueField: "value",
+            palette: "Soft Pastel",
+            export: {
+                enabled: true,
+            },
+            tooltip: {
+                enabled: true,
+                format: "fixedPoint",
+            },
+            item: {
+                border: {
+                    visible: true,
+                },
+            },
+            label: {
+                visible: true,
+                position: "inside",
+                backgroundColor: "none",
+                customizeText: function (e) {
+                    return "<span style='font-size: 28px'>" + e.percentText + "</span><br/>" + e.item.argument;
+                },
+            },
+        });
+    }
+
+    function loadChartB3() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartB3DS = [
+            {
+                country: "USA",
+                hydro: 59.8,
+                oil: 937.6,
+                gas: 582,
+                coal: 564.3,
+                nuclear: 187.9,
+            },
+            {
+                country: "China",
+                hydro: 74.2,
+                oil: 308.6,
+                gas: 35.1,
+                coal: 956.9,
+                nuclear: 11.3,
+            },
+            {
+                country: "Russia",
+                hydro: 40,
+                oil: 128.5,
+                gas: 361.8,
+                coal: 105,
+                nuclear: 32.4,
+            },
+            {
+                country: "Japan",
+                hydro: 22.6,
+                oil: 241.5,
+                gas: 64.9,
+                coal: 120.8,
+                nuclear: 64.8,
+            },
+            {
+                country: "India",
+                hydro: 19,
+                oil: 119.3,
+                gas: 28.9,
+                coal: 204.8,
+                nuclear: 3.8,
+            },
+            {
+                country: "Germany",
+                hydro: 6.1,
+                oil: 123.6,
+                gas: 77.3,
+                coal: 85.7,
+                nuclear: 37.8,
+            },
+        ];
+
+        $("#chart_B3")
+            .dxChart({
+                palette: "Violet",
+                dataSource: chartB3DS,
+                size: {
+                    width: 400,
+                    height: 300,
+                },
+                commonSeriesSettings: {
+                    argumentField: "country",
+                    type: "line",
+                },
+                margin: {
+                    bottom: 20,
+                },
+                argumentAxis: {
+                    valueMarginsEnabled: false,
+                    discreteAxisDivisionMode: "crossLabels",
+                    grid: {
+                        visible: true,
+                    },
+                },
+                series: [
+                    { valueField: "hydro", name: "Hydro-electric" },
+                    { valueField: "oil", name: "Oil" },
+                    { valueField: "gas", name: "Natural gas" },
+                    { valueField: "coal", name: "Coal" },
+                    { valueField: "nuclear", name: "Nuclear" },
+                ],
+                legend: {
+                    verticalAlignment: "bottom",
+                    horizontalAlignment: "center",
+                    itemTextPosition: "bottom",
+                },
+                title: {
+                    text: "Energy",
+                    // subtitle: {
+                    //     text: "(Millions of Tons, Oil Equivalent)"
+                    // }
+                },
+                export: {
+                    enabled: true,
+                },
+                tooltip: {
+                    enabled: true,
+                },
+            })
+            .dxChart("instance");
+    }
+
+    function loadChartC1() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartC1DS = [
+            {
+                country: "China",
+                y014: 320866959,
+                y1564: 853191410,
+                y65: 87774113,
+            },
+            {
+                country: "India",
+                y014: 340419115,
+                y1564: 626520945,
+                y65: 47063757,
+            },
+            {
+                country: "United States",
+                y014: 58554755,
+                y1564: 182172625,
+                y65: 34835293,
+            },
+            {
+                country: "Indonesia",
+                y014: 68715705,
+                y1564: 146014815,
+                y65: 10053690,
+            },
+            {
+                country: "Brazil",
+                y014: 50278034,
+                y1564: 113391494,
+                y65: 9190842,
+            },
+            {
+                country: "Russia",
+                y014: 26465156,
+                y1564: 101123777,
+                y65: 18412243,
+            },
+        ];
+
+        $("#chart_C1")
+            .dxChart({
+                palette: "Harmony Light",
+                dataSource: chartC1DS,
+                size: {
+                    width: 400,
+                    height: 300,
+                },
+                commonSeriesSettings: {
+                    type: "area",
+                    argumentField: "country",
+                },
+                series: [
+                    { valueField: "y1564", name: "15-64 years" },
+                    { valueField: "y014", name: "0-14 years" },
+                    { valueField: "y65", name: "65 years and older" },
+                ],
+                margin: {
+                    bottom: 20,
+                },
+                title: "Population: Age Structure (2000)",
+                argumentAxis: {
+                    valueMarginsEnabled: false,
+                },
+                export: {
+                    enabled: true,
+                },
+                legend: {
+                    verticalAlignment: "bottom",
+                    horizontalAlignment: "center",
+                },
+            })
+            .dxChart("instance");
+    }
+
+    function loadChartC2() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartC2DS = [
+            {
+                state: "Illinois",
+                year1998: 423.721,
+                year2001: 476.851,
+                year2004: 528.904,
+            },
+            {
+                state: "Indiana",
+                year1998: 178.719,
+                year2001: 195.769,
+                year2004: 227.271,
+            },
+            {
+                state: "Michigan",
+                year1998: 308.845,
+                year2001: 335.793,
+                year2004: 372.576,
+            },
+            {
+                state: "Ohio",
+                year1998: 348.555,
+                year2001: 374.771,
+                year2004: 418.258,
+            },
+            {
+                state: "Wisconsin",
+                year1998: 160.274,
+                year2001: 182.373,
+                year2004: 211.727,
+            },
+        ];
+       
+        $("#chart_C2").dxChart({
+            dataSource: chartC2DS,
+            size: {
+                width: 400,
+                height: 300,
+            },
+            commonSeriesSettings: {
+                argumentField: "state",
+                type: "bar",
+                hoverMode: "allArgumentPoints",
+                selectionMode: "allArgumentPoints",
+                label: {
+                    visible: true,
+                    format: {
+                        type: "fixedPoint",
+                        precision: 0,
+                    },
+                },
+            },
+            series: [
+                { valueField: "year2004", name: "2004" },
+                { valueField: "year2001", name: "2001" },
+                { valueField: "year1998", name: "1998" },
+            ],
+            title: "Gross State",
+            legend: {
+                verticalAlignment: "bottom",
+                horizontalAlignment: "center",
+            },
+            export: {
+                enabled: true,
+            },
+            onPointClick: function (e) {
+                e.target.select();
+            },
+        });
+    }
+
+    function loadChartC3() {
+        // Get the Datasource by calling the API. API call implemented in loadChartA2() function, please refer.
+        var chartC3DS = [47.27, 65.32, 84.59, 71.86];
+
+        $("#chart_C3").dxBarGauge({
+            startValue: 0,
+            size: {
+                width: 400,
+                height: 300,
+            },
+            endValue: 100,
+            values: chartC3DS,
+            label: {
+                indent: 30,
+                format: {
+                    type: "fixedPoint",
+                    precision: 1,
+                },
+                customizeText: function (arg) {
+                    return arg.valueText + " %";
+                },
+            },
+            export: {
+                enabled: true,
+            },
+            title: {
+                text: "Series' Ratings",
+                font: {
+                    size: 28,
+                },
+            },
+        });
+    }
+</script>

@@ -1,0 +1,2418 @@
+<!-- RFP Style -->
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<link href="css/library/jquery-ui.css" rel="stylesheet" />
+
+<!-- <script type="text/javascript" src="js/library/jquery-ui.js"></script> -->
+<!-- <script type="text/javascript" src="js/library/jquery.smartWizard.js"></script> -->
+<!-- <script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script> -->
+
+<style>
+    .ui-datepicker{z-index:10000 !important}
+
+    .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url(image/step_loader.gif) 50% 50%   no-repeat rgb(0 0 0 / 20%);    
+    }
+
+    #project_smartwizard {
+    position: inherit;
+    height: 700px;
+    display: block;
+    overflow: auto;
+    padding-bottom: 50px;
+    overflow-x: hidden;
+    padding-top: 10px;
+}
+
+</style>
+
+<script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+
+<script type="text/javascript" src="js/library/jquery-ui.js"></script>
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+
+<link href="./components/projectcreation/css/project.css" rel="stylesheet" />
+                     <div id="loader" class="loader" style="display:none;"></div>
+
+    <div class="modal fade steps-model" id="Project_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                    onclick="{$('#project_smartwizard').smartWizard('reset');}"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="cpm_form_title"></h2>
+            </div>
+
+            <div class="modal-body" data-simplebar>
+                <div id="project_smartwizard" class="sw-main sw-theme-default">
+                     <ul class="nav nav-tabs step-anchor">
+                        <li><a href="#step-1"><span>1</span></a></li>
+                        <li><a href="#step-2"><span>2</span></a></li>
+                        <li><a href="#step-3"><span>3</span></a></li>
+                        <li><a href="#step-4"><span>4</span></a></li>
+                        <li><a href="#step-5"><span>5</span></a></li>
+                        <li><a href="#step-6"><span>6</span></a></li>
+                        <li><a href="#step-7"><span>7</span></a></li>
+                        <li><a href="#step-8"><span>8</span></a></li>
+                        <li><a href="#step-9"><span>9</span></a></li>
+                        <li><a href="#step-10"><span>10</span></a></li>
+                    </ul>
+                    <div class="form-hldr" id="modal_content">
+                        <div id="step-1" class="project-first-step">
+                            <div class="step-title">
+                                <h3>Step1: <span>Project Creation</span></h3>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Name <span style="color: red"> *</span></label>
+                                            <div class="dlClient">
+                                                <input type="text" class="form-control" id="dlClientProjectName">
+                                                <input type="hidden" class="form-control" id="dlworkOrderID">
+                                                <input type="hidden" class="form-control" id="dlProjectId">
+                                                <input type="hidden" name="form-control" id="ProjectTypeId">
+                                                <span class="dlClientProjectName_error dlerror_messgae"></span>
+                                                <input type="hidden" class="dlProjectIsClosed" id="dlProjectIsClosed" value="0"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Client <span style="color: red"> *</span></label>
+                                            <div class="dlClient">
+                                                <select class="form-control " id="dlClientName" style="display: block;">
+                                                    <option value="0">Select Client Name</option>
+                                                </select>
+                                                <span class="dlClientName_error dlerror_messgae"></span>
+                                                <input type="hidden" class="select_hidden" value="0">
+                                                <input type="text" class="form-control" id="ClientName" class="ClientName" value="" style="display: none;" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Type<span style="color: red"> *</span></label>
+                                            <div class="dlClient">
+                                               <select class="form-control" id="dlClientProjectType" name="dlClientProjectType" onchange="projectTypeValidation()">
+                                                    <option value="0">Select Project Type</option>
+                                                </select>
+                                               
+                                                <span class="dlClientProjectType_error dlerror_messgae"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Development Model <span style="color: red"> *</span></label>
+                                            <div class="dlClient">
+                                                <select class="form-control" id="dlClientDevelopmentModel">
+                                                    <option value="0">Select Development Models</option>
+                                                </select>
+                                                <span class="dlClientDevelopmentModel_error dlerror_messgae"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Industry <span style="color: red"> *</span></label>
+                                            <div class="dlClient">
+                                                <div class="input-group">
+                                                    <select class="form-control" id="dlProjectIndustry">
+                                                    </select>
+                                                    <span id="addDlProjectIndustrybtn" class="input-group-addon btn btn-default">
+                                                        <i class="glyphicon glyphicon-plus"></i>
+                                                    </span>
+                                                </div>
+                                                <span class="dlProjectIndustry_error dlerror_messgae"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Domain <span style="color: red"> *</span></label>
+                                            <div class="dlClient">
+                                                <div class="input-group">
+                                                    <select class="form-control" id="dlProjectDomain">
+                                                    </select>
+                                                    <span id="addDlProjectDomainbtn" class="input-group-addon btn btn-default">
+                                                        <i class="glyphicon glyphicon-plus"></i>
+                                                    </span>
+                                                </div>
+                                                <span class="dlProjectDomain_error dlerror_messgae"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Planned Start Date <span style="color: red"> *</span></label>
+                                            <div class="dtpClient">
+                                                <div class="input-group date">
+                                                    <div id="dtpclientPlannedStartDate"></div>
+                                                </div>
+                                                <span class="dtpclientPlannedStartDate_error dlerror_messgae"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Planned End Date</label>
+                                            <div class="dtpClient">
+                                                <div class="input-group date">
+                                                    <div id="dtpclientPlannedEndDate"></div>
+                                                </div>
+                                                <span class="dtpclientPlannedEndDate_error dlerror_messgae"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Actual Start Date</label>
+                                            <div class="input-group date">
+                                                <!-- <input type="text" class="form-control" id="dtpclientActualStartDate"> -->
+                                                <div id="dtpclientActualStartDate"></div>
+                                            </div>
+                                            <span class="dtpclientActualStartDate_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Actual End Date</label>
+                                            <div class="input-group date">
+                                                <!-- <input type="text" class="form-control" id="dtpclientActualEndDate"> -->
+                                                <div id="dtpclientActualEndDate"></div>
+                                            </div>
+                                            <span class="dtpclientActualEndDate_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="dtpclientUta">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>UAT Start Date</label>
+                                            <div class="input-group date">
+                                                <!-- <input type="text" class="form-control" id="dtpclientUtaStartDate"> -->
+                                                    <div id="dtpclientUtaStartDate"></div>
+                                            </div>
+                                            <span class="dtpclientUtaStartDate_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>UAT End Date</label>
+                                            <div class="input-group date">
+                                                <!-- <input type="text" class="form-control" id="dtpclientUtaEndDate"> -->
+                                                <div id="dtpclientUtaEndDate"></div>
+                                            </div>
+                                            <span class="dtpclientUtaEndDate_error dlerror_messgae"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Project Description <span style="color: red"> *</span></label>
+                                                <div id="textProjectDescription"></div>
+                                            <span class="textProjectDescription_error dlerror_messgae"></span>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Project Technology Notes <span style="color: red"> *</span></label>
+                                              <select class="form-control addSkill-tag-input" id="add-skill-tag-input-timematerial" multiple="multiple"
+                                                style="width:100%">
+                                                <option value="0">Select Technology</option>
+                                            </select>
+                                            <span class="tag-textAreaProject_error dlerror_messgae"></span>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-2" class="project-second-step">
+                            <div class="step-title">
+                                <h3>Step2: <span>Project Contacts</span></h3>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <!-- <div class="col-md-3">
+                                        <select class="form-control" id="selectClientName" name="state">
+                                            <option value="0">Select Technology</option>
+                                        </select>
+                                    </div>     -->
+                                    <div class="col-md-12">
+                                        <button type="button" class="btn btn-sm btn-secondary add-btn pull-right m-b-10 add_contact"
+                                            onclick=toggleProjectContacts()>Add Contact</button>
+                                    </div>
+                                </div>
+                                <div id="add-project-contacts" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>New Client</h4>
+
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <div class="txtContacts">
+                                                        <div class="input-group"> 
+                                                            <input type="checkbox" id="IsPrimary" name="IsPrimary">
+                                                            <label for="IsPrimary">&nbsp;Is primary&nbsp;&nbsp;</label>
+                                                            <input type="radio" id="TimesheetTo" name="TimesheetToCC" value="TimesheetTo">
+                                                            <label for="TimesheetTo">&nbsp;Timesheet To&nbsp;&nbsp;</label>
+                                                            <input type="radio" id="TimesheetCC" name="TimesheetToCC" value="TimesheetCC">
+                                                            <label for="TimesheetCC">&nbsp;Timesheet CC</label>
+                                                        </div>
+                                                        <span style="margin-left: 15px;" class="error_message txtContatcTypeError"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Client Contact Name <span style="color: red"> *</span></label>
+                                                    <div class="txtContacts">
+                                                        <div class="input-group"> 
+                                                            <input type="hidden" id="hdnClientContactId">                                
+                                                            <input type="hidden" id="hdnProjectContactId">                                
+                                                            <input type="hidden" id="hdnProjectId">                                
+                                                            <input type="text" class="form-control" id="txtClientName">
+                                                           
+                                                        </div>
+                                                        <span class="error_message txtClientName_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email ID <span style="color: red"> *</span></label>
+                                                    <div class="txtContacts">
+                                                        <div class="input-group">                                 
+                                                            <input type="text" class="form-control" id="txtEmailId">
+                                                        </div>
+                                                        <span class="error_message txtEmailId_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone No 1</label>
+                                                    <div class="txtContacts">
+                                                        <div class="input-group">                                 
+                                                            <input type="number" maxlength="10" class="form-control" id="txtPhoneNo1">
+                                                        </div>
+                                                        <span class="error_message txtPhoneNo1_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone No 2</label>                                                      
+                                                    <div class="input-group">                                 
+                                                        <input type="number" maxlength="10" class="form-control" id="txtPhoneNo2">
+                                                    </div>
+                                                    <span class="error_message txtPhoneNo2_error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Designation </label>
+                                                    <div class="dlContacts">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlDesignation">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message dlDesignation_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Notes</label>
+                                                    <div class="input-group">                                        
+                                                        <textarea name="notes" id="txtNotes" style="width:100%">                                                           
+                                                        </textarea>
+                                                    </div>
+                                                    <span class="error_message txtNotes_error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    <div class="dlContacts">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlCountry">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message dlCountry_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>State</label>
+                                                    <div class="dlContacts">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlState">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message dlState_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <div class="dlContacts">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlCity">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message dlCity_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Fax No</label>                                                       
+                                                    <div class="input-group">                                 
+                                                        <input type="text" class="form-control" id="txtFaxNo">
+                                                    </div>
+                                                    <span class="error_message txtFaxNo_error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Skype Id</label>                                                       
+                                                    <div class="input-group">                                 
+                                                        <input type="text" class="form-control" id="txtSkypeId">
+                                                    </div>
+                                                    <span class="error_message txtSkypeId_error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>From Email <span style="color: red"> *</span></label>
+                                                    <div class="dlFromEmail">
+                                                        <div class="input-group" id="name">
+                                                            <select class="form-control" id="dlFromEmail">
+                                                            </select>
+                                                        </div>
+                                                        <span class="error_message dlFromEmail_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="pull-right btn-right">
+                                                <button class="btn btn-danger btn-sm add-btn" type="button" onclick=clearProjectContact()>Cancel</button>
+                                                <button class="btn btn-secondary btn-sm add-btn" type="button" id="btnContactsSave" onclick=btnAddContacts()>Save</button>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="displayProjectContacts">
+                                            
+                                        </div>         
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-3" class="project-third-step">
+                            <div class="step-title">
+                                <h3>Step3: <span>Project Phases</span></h3>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button type="button" id="addNewProject" class="btn btn-sm btn-secondary add-btn pull-right m-b-10"  onclick=clearPhase()>Add New</button>
+                                    </div>
+                                </div>
+                                <div id="add-project-phases" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>Project Tasks</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phase Name <span style="color: red"> *</span></label>
+                                                    <div class="txtPhaseName">
+                                                        <div class="input-group">
+                                                            <input type="hidden" id="hdnPhaseId">
+                                                            <select class="form-control disp_projectPhase" id="txtPhaseName"></select>
+                                                        </div>
+                                                        <span class="txtPhaseName_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Project Tasks <span style="color: red"> *</span></label>
+                                                    <div class="txtPhaseHeaderTitle">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="txtPPTasks">
+                                                        </div>
+                                                        <span class="txtPPTasks_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Start Date <span style="color: red"> *</span></label>
+                                                    <div class="dtpPhase">
+                                                        <div class="input-group date">
+                                                            <div id="dtpPhaseStartDate"></div>
+                                                        </div>
+                                                        <span class="dtpPhaseStartDate_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>End Date <span style="color: red"> *</span></label>
+                                                    <div class="dtpPhase">
+                                                        <div class="input-group date">
+                                                            <div id="dtpPhaseEndDate"></div>
+                                                        </div>
+                                                        <span class="dtpPhaseEndDate_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Estimated Hours <span style="color: red"> *</span></label>
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" id="txtHours">
+                                                    </div>
+                                                    <span class="txtHours_error dlerror_messgae"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Task Details <span style="color: red"> *</span></label>
+                                                    <textarea class="form-control" rows="4" id="txtPPNote"></textarea>
+                                                    <span class="txtPPNote_error dlerror_messgae"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="pull-right btn-right">
+                                                <button class="btn btn-danger btn-sm add-btn" type="button" onclick="clearPhase()">Cancel</button>
+                                                <button class="btn btn-secondary btn-sm add-btn" type="button" id="btnNewProjectSave" onclick="validateProjectPhases()">Add</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">                   
+                                        <div id="displayProjectPhase">
+                                            
+                                        </div>                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-4" class="project-fourth-step">
+                            <div class="step-title">
+                                <h3>Step4: <span>Project Sub Tasks</span></h3>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right m-b-10">
+                                        <button class="btn btn-secondary btn-sm add-btn" id="addNewProjectModule" data-toggle="collapse"
+                                            data-target="#new-project-module" onclick="clearProjectModules()" type="button">Add New</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="new-project-module" class="panel panel-primary collapse">
+                                <div class="panel-heading">
+                                    <h4>PROJECT SUB TASKS</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-section" id="form-block">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Project Tasks <span style="color: red"> *</span></label>
+                                                    <div class="txtPhaseName">
+                                                        <div class="input-group">
+                                                            <input type="hidden" id="pmo_hdnprojectModuleId">
+                                                            <input type="hidden" id="pmo_hdnEstimation">
+                                                            <input type="text" class="form-control" id="pmo_projectPhase">
+                                                        </div>
+                                                        <span class="pmo_projectPhase_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Estimated Hours <span style="color: red"> *</span></label>
+                                                    <div class="txtPhaseHeaderTitle">
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" name="pmo_estimatedHours" id="pmo_estimatedHours"
+                                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                                        </div>
+                                                        <span class="pmo_estimatedHours_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Project Sub Tasks <span style="color: red"> *</span></label>
+                                                    <div class="txtModule">
+                                                        <input type="text" class="form-control" id="pmo_headerTitle">
+                                                        <span class="pmo_headerTitle_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Project Description</label>
+                                                    <div class="txtModule">
+                                                        <textarea id="pmo_txtProjectDescription" class="form-control"
+                                                            rows="4"></textarea>
+                                                            <span class="pmo_txtProjectDescription_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="pull-right">
+                                                    <button class="btn btn-danger btn-sm add-btn" data-toggle="collapse"
+                                                        data-target="#new-project-module" onclick="clearProjectModules()" type="button">Cancel</button>
+                                                    <button id="btnSaveProjectModule" data-toggle="collapse" 
+                                                        class="btn btn-secondary btn-sm add-btn" onclick="validateProjectModules()"
+                                                        type="button">Save</button>
+                                                </div>
+                                            </div>
+                                        </div>                                      
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 mt-2">                   
+                                    <div id="displayProjectModules">
+                                        
+                                    </div>                            
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="step-5" class="project-fifth-step">
+                            <div class="step-title">
+                                <h3>Step5: <span>Project Members</span></h3>
+                            </div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right m-b-10">
+                                            <button class="btn btn-secondary btn-sm add-btn add-project" data-toggle="collapse"
+                                                data-target="#add-project-members" type="button">Add New</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="add-project-members" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>New Member</h4>
+                                    </div>
+                                    <div class="panel-body">                                      
+
+                                        <!-- Project Member Fields Starts  -->
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Project Member <span style="color: red"> *</span></label>
+                                                    <div class="txtContacts">
+                                                        <select class="form-control" id="pc_projectMember" name="pc_projectMember"
+                                                            style="width:100%">
+                                                            <option value="0">Select Project Member</option>
+                                                        </select>
+                                                        <span class="error_message pc_projectMember_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Project Role <span style="color: red"> *</span></label>
+                                                    <div class="txtContacts">
+                                                        <select class="form-control" id="pc_projectMemberRole" name="pc_projectMemberRole"
+                                                            style="width:100%">
+                                                            <option value="0">Select Project Role</option>
+                                                        </select>
+                                                        <span class="error_message pc_projectMemberRole_error"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Alias Name <span style="color: red"> </span></label>
+                                                    <div class="txtContacts">
+                                                        <input type="text" name="alias-name" id="PCalias-name" class="alias-name form-control" placeholder="Alias Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Assigned Date <span style="color: red">*</span></label>
+                                                    <div class="dtpPhase">
+                                                        <div class="input-group date">
+                                                            <div id="PCmemberAssignedDate"></div>
+                                                        </div>
+                                                        <span class="memberAssignedDate_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Is Active <span style="color: red"> </span></label>
+                                                    <div class="txtContacts">
+                                                        <input type="checkbox" class="form-check-input" id="PCmemberIsActive">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Project Member Fields Ends  -->
+
+                                        <div class="row">
+                                            <div class="pull-right btn-right">
+                                                <button class="btn btn-danger btn-sm add-btn" type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#add-project-members">Cancel</button>
+                                                <button class="btn btn-secondary btn-sm add-btn" type="button" onclick="btnAddProjectMembers()">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-md-12">
+                                        <div id='list_employees_for_project_div' class="table-responsive">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-6" class="project-sixth-step">
+                            <div class="step-title">
+                                <h3>Step6: <span>Project Documents</span></h3>
+                            </div>
+                          
+                            <div class="form-section">
+                                <div class="row">
+                                  <div class="col-md-12">
+                                    <input type="hidden" id="NRE_RFPID">
+                                     <label>Conversation history</label>
+                                     <div class="rfp_history_lists" id="Project_comments_history">
+                                        <!-- Comments and Documents History Will be displayed here.. -->
+                                     </div>
+                                  </div>
+                                </div>
+                                <div class="row" id="nre_post_message_action">
+                                    <div class="col-md-6">
+                                        <label>Files</label>
+                                        <div id="nre_dropzone">
+                                            <form class="dropzone needsclick dz-clickable" id="crproject_message_document_upload"
+                                                method="post" enctype="multipart/form-data">
+                                                <div class="dz-message needsclick">
+                                                    <small>Drop files here or click to upload.</small><br />
+                                                </div>
+                                            </form>
+                                            <span class="error_message text-danger crproject_document_eror_message crprojectDocumentError"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Conversation Message</label>
+                                        <div id="Project_message_Description"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6"></div>
+                                    <div class="col-md-6">
+                                        <button class="btn btn-success" id="saveProjectComments" onclick="saveProjectComments()">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-7" class="project-seventh-step">
+                            <div class="step-title">
+                                <h3>Step7: <span>Project Timesheet</span></h3>
+                            </div>
+                            <div class="TimesheetSubTitle" id="timesheetDuration">
+                                <b>Timesheet duration</b>
+                            </div>
+                            <input type="hidden" id="projectconfigurationid" value="" />
+                            <div class="row" id="timesheetDurationData">
+                                <div class="col-sm-3">
+                                    <div class="radio">
+                                        <label><input type="radio" value="W" name="radiooption">Weekly</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="radio">
+                                        <label><input type="radio" value="F" name="radiooption">Forenight</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="radio">
+                                        <label><input type="radio" value="M" name="radiooption">Monthly</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="radio">
+                                        <label><input type="radio" value="N" name="radiooption">Internal project non-billable</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="error_1">
+                                <span class="radiooption_error_message error_message"></span>
+                            </div>
+                            <div class="TimesheetSubTitle" id="timesheetTemplate">
+                                <b>Timesheet Template</b>
+                            </div>
+                            <div class="row" id="timesheetTemplateData">
+                                <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <div class="dlTimesheet">
+                                            <div class="input-group" id="name">
+                                                <select class="form-control" id="dlTimesheetTemplate">
+                                                </select>
+                                            </div>
+                                            <span class="dlTimesheetTemplate_error_message error_message"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class=TimesheetImage_Display>
+                                            <span id="image" class="TimesheetImage">
+
+                                                    <img src="components/project/images/project.png" width="40px" height="40px" />
+                                            </span>
+                                            <span id="image1" class="TimesheetImage">
+                                                    <img src="components/project/images/project.png" width="40px" height="40px" />
+                                            </span>
+
+                                            <div class="modal fade" id="Timesheet_imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">              
+                                                    <div class="modal-body">
+                                                      <img src="" class="imagepreview"  >
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="error_2">
+                                <span class="error_message"></span>
+                            </div>
+                            <div class="TimesheetSubTitle">
+                                <b>Reports</b>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" id="autoGenerate" value=""
+                                                name="Reports">Autogenerate send to lead</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" id="generateReport" value="" name="Reports"
+                                                onclick="toggle('.generate_daily', this)">Generate daily reports</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3" id="send_to_team_div">
+                                    <div class="checkbox">
+                                        <label class="generate_daily"><input id="send_to_team" name="send_to_team" type="checkbox"
+                                                value="">Send to team</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" id="send_to_lead_div">
+                                    <div class="checkbox">
+                                        <label class="generate_daily"><input id="send_to_lead" name="send_to_lead" type="checkbox"
+                                                value="">Send to Lead</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" id="send_to_client_div">
+                                    <div class="checkbox">
+                                        <label class="generate_daily"><input id="send_to_client" name="send_to_client" type="checkbox"
+                                                value="" disabled="true">Send to Client</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="error_3">
+                                <span class="error_message"></span>
+                            </div>
+                            <hr>
+                        </div>
+                       <div id="step-8" class="project-eighth-step">
+                            <div class="step-title">
+                                <h3>Step8: <span>Gantt Chart</span></h3>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-12">                                    
+                                        <div id="displayGanttChart">
+                                            <!-- <input type="text"> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-9" class="project-ninth-step">
+                            <div class="step-title">
+                                <h3>Step9: <span>Sub Project</span></h3>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right m-b-10">
+                                            <button class="btn btn-secondary btn-sm add-btn sub-products" type="button" onclick="clearSubProject()"
+                                            data-toggle="collapse" data-target="#new-sub-project">Add New</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="new-sub-project" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>New Sub Project</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-section" id="form-block">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="txtSubProject">
+                                                        <div class="form-group">
+                                                            <label>Sub Project</label>
+                                                            <input type="hidden" id="hiddenSubProjectId">
+                                                            <input type="text" class="form-control"
+                                                                id="txtSubProjectName">
+                                                        </div>
+                                                        <span class="txtSubProjectName_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Planned Start date</label>
+                                                        <div class="dtpSubProjectDate">
+                                                            <div class="input-group date">
+                                                                <div id="dtpProjectPlannedStartDate" class="subProjectDate"></div>
+                                                            </div>
+                                                            <span class="dtpProjectPlannedStartDate_error dlerror_messgae"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Planned End date</label>
+                                                        <div class="input-group date">
+                                                            <div id="dtpProjectEndDate" class="subProjectDate"></div>
+                                                        </div>
+                                                        <span class="dtpProjectEndDate_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Project Domain</label>
+                                                        <div class="dlSubProject">
+                                                            <div class="input-group">
+                                                                <select class="form-control" id="dlSubProjectDomain">
+                                                                    <option value="0">Select Project Domain</option>
+                                                                </select>
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" type="button">
+                                                                        <i
+                                                                            class="glyphicon glyphicon-plus"></i></button>
+                                                                </span>
+                                                            </div>
+                                                            <span class="dlSubProjectDomain_error dlerror_messgae"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>End Client Name</label>
+                                                        <div class="dlSubProject">
+                                                            <div class="input-group">
+                                                                <!-- <select class="form-control " id="dlSubClientName">
+                                                                    <option value="0">Select Client Name</option>
+                                                                </select> -->
+                                                                <input type="text" name="dlSubClientName" id="dlSubClientName" class="form-control">
+                                                            </div>
+                                                            <span class="dlSubClientName_error dlerror_messgae"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Project Description</label>
+                                                        <div class="input-group">
+                                                            <textarea style="width:100%"
+                                                            id="txtSubProjectDescription"></textarea>
+                                                        </div>
+                                                            <span class="txtSubProjectDescription_error dlerror_messgae"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="pull-right">
+                                                        <button class="btn btn-danger btn-sm add-btn"
+                                                            data-toggle="collapse" data-target="#new-sub-project" onclick="clearSubProject()">Cancel</button>
+                                                        <button class="btn btn-secondary btn-sm add-btn" type="button"
+                                                            id="btnSubProjectSave"
+                                                            data-toggle="collapse" onclick="validateSubProject()">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">                                    
+                                        <div id="displaySubProject">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-10" class="project-tenth-step">
+                            <div class="step-title">
+                                <h3>Step10: <span>Project Work Order Management</span></h3>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="pull-right m-b-10">
+                                            <button class="btn btn-secondary btn-sm add-btn workorder_mapping" data-toggle="collapse"
+                                                data-target="#add-work-orders" type="button">Add New</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="add-work-orders" class="panel panel-primary collapse">
+                                    <div class="panel-heading">
+                                        <h4>New Work Order</h4>
+                                    </div>
+                                    <div class="panel-body">
+                                        <span style="display: none;" class="WorkOrder_ids" id="WorkOrder_ids"></span>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div id='list_workorders'>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="pull-right btn-right">
+                                                <button class="btn btn-danger btn-sm add-btn" type="button"
+                                                    data-toggle="collapse"
+                                                    data-target="#add-work-orders">Cancel</button>
+                                                <button class="btn btn-secondary btn-sm add-btn" type="button"
+                                                    data-toggle="collapse" data-target="#add-work-orders"
+                                                    id="btnMemberSave" onclick="assignWorkorderto_Project()">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">                                    
+                                        <div id="displayProjectWorkOrder">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-end">
+                            <div class="btn-group mr-2 sw-btn-group" role="group">
+                                <button class="btn btn-secondary sw-btn-prev disabled" type="button">Previous</button>
+                                <button class="btn btn-secondary sw-btn-next wostepsform" type="button">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEMBER SCREEN MODAL STARTS HERE -->
+        <div class="modal fade" id="open_projectMember" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">×</span></button>
+                        <h3 class="modal-title" id="myModalLabel">Member Details</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-4" id="personal_info">
+                            <img src="./components/project/images/user.png" class="img-circle" alt="User photo">
+                            <h3>User Name</h3>
+                            <h4>Contact Number: 1234567890</h4>
+                            <h4>Mail-Id:user@mail.com</h4>
+                        </div>
+                        <div class="col-md-8">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#Contact_info">Contact Information</a>
+                                </li>
+                                <li><a data-toggle="tab" href="#Primary_skills">Primary Skills</a></li>
+                                <li><a data-toggle="tab" href="#Project_details">Project Details</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="Contact_info" class="tab-pane fade in active">
+                                    <div class="col-md-6">
+                                        <table>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h4>Current Address</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 1:</b></td>
+                                                <td>Address Line 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 2:</b></td>
+                                                <td>Address Line 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>City:</b></td>
+                                                <td>City Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>State:</b></td>
+                                                <td>State Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Country:</b></td>
+                                                <td>Country Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Pincode:</b></td>
+                                                <td>12345</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <table>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <h4>Permanent Address</h4>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 1:</b></td>
+                                                <td>Address Line 1</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 2:</b></td>
+                                                <td>Address Line 2</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Address 3:</b></td>
+                                                <td>Address Line 3</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>City:</b></td>
+                                                <td>City Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>State:</b></td>
+                                                <td>State Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Country:</b></td>
+                                                <td>Country Name</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Pincode:</b></td>
+                                                <td>12345</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="Primary_skills" class="tab-pane fade">
+                                    <h4>Primary Skills:PHP,CI,Drupal</h4>
+                                    <br>
+                                    <h4>Secondary Skills:Photoshop,Illustrator,Indesign</h4>
+                                </div>
+                                <div id="Project_details" class="tab-pane fade">
+                                    <div class="panel panel-danger">
+                                        <div class="panel-heading" data-target="#InactiveProject"
+                                            data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="InactiveProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading" data-target="#ActiveProject" data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="ActiveProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-warning">
+                                        <div class="panel-heading" data-target="#ClosedProject" data-toggle="collapse">
+                                            <div class="col-md-6">
+                                                <h4>Project Name</h4>
+                                            </div>
+                                            <div>
+                                                <h4>Type-Fixed</h4>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body collapse" id="ClosedProject">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Project Lead</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Client Name</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>Hours Contribution</label>
+                                                    <input type="text" class="form-control" readonly="">
+                                                </div>
+                                            </div>
+                                            <div class="row projectDescriptions">
+                                                <div class="col-md-6">
+                                                    <label>Project Open Task</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Maximum Hours</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Feedbacks</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label>Rating</label>
+                                                    <textarea class="projectScrollBox"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-sm add-btn" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- MEMBER SCREEN MODAL ENDS HERE -->
+        <!-- ADD PROJECT INDUSTRY MODAL STARTS HERE -->
+        <div class="modal fade" id="open_addDlProjectIndustryModel" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" id="close_addDlProjectIndustryModel">&times;</button>
+        <h2 class="modal-title">Add Project Industry</h2>
+        </div>
+        <div class="modal-body">
+        <div class="form-group">
+        <label>Project Industry Title <span style="color: red"> *</span></label>
+        <input type="text" class="form-control" name="addDlProjectIndustry"
+        id="addDlProjectIndustry">
+        <span style="color: red" class="addDlProjectIndustry_error"></span>
+        </div>
+        <div class="form-group">
+        <label>Project Industry Description <span style="color: red"> *</span></label>
+        <textarea class="form-control" name="addDlProjectIndustryDesc"
+        id="addDlProjectIndustryDesc"></textarea>
+        <span style="color: red" class="addDlProjectIndustryDesc_error"></span>
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default woclosemodel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="addDlProjectIndustryModel_btn">Add</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- ADD PROJECT INDUSTRY MODAL MODAL ENDS HERE -->
+
+        <!-- ADD PROJECT DOMAIN MODAL STARTS HERE -->
+        <div class="modal fade" id="open_addDlProjectDomainModel" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" id="close_addDlProjectDomainModel">&times;</button>
+        <h2 class="modal-title">Add Project Domain</h2>
+        </div>
+        <div class="modal-body">
+        <div class="form-group">
+        <label>Project Domain Title <span style="color: red"> *</span></label>
+        <input type="text" class="form-control" name="addDlProjectDomain"
+        id="addDlProjectDomain">
+        <span style="color: red" class="addDlProjectDomain_error"></span>
+        </div>
+        <div class="form-group">
+        <label>Project Domain Description <span style="color: red"> *</span></label>
+        <textarea  class="form-control" name="addDlProjectDomain"
+        id="addDlProjectDomainDesc"></textarea>
+        <span style="color: red" class="addDlProjectDomainDesc_error"></span>
+        </div>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default woclosemodel">Cancel</button>
+        <button type="button" class="btn btn-primary" id="addDlProjectDomainModel_btn">Add</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        <!-- ADD PROJECT DOMAIN MODAL ENDS HERE -->
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        // clientname_dropdown();
+        // $("#dlSubClientName").on({
+        //     "select2:open": function () {
+        //         $('body').on('keyup', '#Project_Modal input.select2-search__field', function () {
+        //             var searchKey = $(this).val();
+        //             if (searchKey == "") {
+        //                 let selectE1 = $("select#dlSubClientName");
+        //                 selectE1.empty();
+        //                 selectE1.select2('close');
+        //                 selectE1.select2('open');
+        //             }else {
+        //                 setTimeout(function () {
+        //                     SubProjectClientName(searchKey);
+        //                 }, 700);
+        //             }
+        //         });
+        //     }
+        // }).select2({
+        //     dropdownParent: $("#Project_Modal"),
+        //     placeholder: "Select Client"
+        // });
+
+        // $("#pc_projectMember").select2({
+        //     placeholder: "Select a User",
+        //     dropdownParent: $("#Project_Modal"),
+        //     allowClear: true,
+        // });
+        // var filter_val = JSON.stringify({
+        //     "Token": localStorage.getItem('securityToken'),
+        // });
+        // var result = callgetlist('GetInternalClientDetails');
+        // console.log(result,'result');
+    //     $("#dlClientName").on({
+	// 	"select2:open": function () {
+	// 		$('body').on('keyup', '#Project_Modal input.select2-search__field', function () {
+	// 			var searchKey = $(this).val();
+	// 			if (searchKey == "") {
+	// 				let selectE1 = $("select#dlClientName");
+	// 				selectE1.empty();
+	// 				selectE1.select2('close');
+	// 				selectE1.select2('open');
+	// 			}else {
+	// 				setTimeout(function () {
+	// 					ProjectClientName(searchKey);
+	// 				}, 700);
+	// 			}
+	// 		});
+	// 		$("select#dlClientName").on('change', function (e) {
+	// 			let parent = $(this);
+	// 			parent.children().each(function () {
+	// 				if ($(this).val() == $("#dlClientName").val()) {  
+	// 					$("#txtClientName").val($(this).attr("data-person"));
+	// 					$("#txtEmailId").val($(this).attr("data-email"));
+	// 					$("#ClientName").val($(this).attr("data-name"));
+	// 				}
+	// 			})
+	// 			$("#ClientName").val($("#dlClientName option:selected").attr("data-name"));
+	// 		})
+	// 	}
+	// }).select2({
+	// 	dropdownParent: $("#Project_Modal"),
+	// 	placeholder: "Select Client",
+	// 	// containerCssClass: "dlclient_Name"
+	// });
+       
+        comment_data_dxEditor = $('#Project_message_Description').dxHtmlEditor({
+            height: 300,
+            toolbar: {
+                items: [
+                    "undo", "redo", "separator",
+                    {
+                        formatName: "size",
+                        formatValues: ["8pt", "10pt", "12pt", "14pt", "18pt", "24pt", "36pt"] },
+                    {
+                        formatName: "font",
+                        formatValues: ["Arial", "Courier New", "Georgia", "Impact", "Lucida Console", "Tahoma", "Times New Roman", "Verdana"]
+                    },
+                    "separator", "bold", "italic", "strike", "underline", "separator",
+                    "alignLeft", "alignCenter", "alignRight", "alignJustify", "separator",
+                    "orderedList", "bulletList", "separator",
+                    {
+                        formatName: "header",
+                        formatValues: [false, 1, 2, 3, 4, 5]
+                    }, "separator",
+                    "color", "background", "separator",
+                    "link", "image", "separator",
+                    "clear", "codeBlock", "blockquote"
+                ]
+            },
+            mediaResizing: {
+                enabled: true
+            },
+            value:""
+        }).dxHtmlEditor('instance');
+
+
+
+
+        $('#dlSubClientName').val(0).trigger('change.select2');
+        // $('#dlClientName').val(0).trigger('change.select2');
+        if (!$.datepicker.initialized) {
+            $(document).mousedown($.datepicker._checkExternalClick)
+                .find(document.body).append($.datepicker.dpDiv);
+            $.datepicker.initialized = true;
+        }
+
+        include_project('./components/projectcreation/js/project_contacts.js');
+
+        function GetFormattedDate(proposalDate) {
+            var d = new Date(proposalDate),
+                month = '' + (d.toLocaleString('en-us', { month: 'short' })),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [day, month, year].join('-');
+        }
+
+        function addDaysToDate(date, days){
+            mydate = new Date(date);
+            mydate.setTime(mydate.getTime() + 86400000* days);
+            
+            return GetFormattedDate(mydate);
+        }
+
+        function addMonthsToDate(date, months){
+            let mydate = new Date(date);
+            mydate.setMonth(mydate.getMonth()+ months);
+            return GetFormattedDate(mydate);
+        }
+
+        $('#dtpclientUtaStartDate').dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            // min : $("#dtpclientUtaEndDate").dxDateBox('instance').option('value'),
+            value: new Date(),
+        }).dxDateBox("instance");
+
+        $('#dtpclientUtaEndDate').dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            // max : $("#dtpclientUtaStartDate").dxDateBox('instance').option('value'),
+            value: new Date(),
+        }).dxDateBox("instance");
+
+        $('#dtpclientPlannedEndDate').dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            value: new Date(),
+        }).dxDateBox("instance");
+
+        $("#dtpclientActualStartDate").dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            value: new Date(),
+        }).dxDateBox("instance");
+
+        $('#dtpclientActualEndDate').dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            value: new Date(),
+        }).dxDateBox("instance");
+        
+        $('#dtpProjectPlannedStartDate').dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            value: new Date(),
+        }).dxDateBox("instance");
+
+        $('#dtpProjectEndDate').dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            value: new Date(),
+        }).dxDateBox("instance");
+
+        $('#dtpPhaseStartDate').dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            value: new Date(),
+        }).dxDateBox("instance"); 
+
+        $('#dtpPhaseEndDate').dxDateBox({
+            type: "date",
+            displayFormat: "dd-MMM-yyyy",
+            placeholder: "Select Date",
+            value: new Date(),
+        }).dxDateBox("instance");
+
+        $('#PCmemberAssignedDate').dxDateBox({
+            // type: "date",
+            // displayFormat: "dd-MMM-yyyy",
+            // placeholder: "Select Date",
+            // value: new Date(),
+        });
+
+        $("#project_smartwizard").smartWizard({
+            selected: 0, // Initial selected step, 0 = first step
+            theme: 'default', // theme for the wizard, related css need to include for other than default theme
+            justified: true, // Nav menu justification. true/false
+            darkMode:false, // Enable/disable Dark Mode if the theme supports. true/false
+            autoAdjustHeight: true, // Automatically adjust content height
+            cycleSteps: false, // Allows to cycle the navigation of steps
+            backButtonSupport: true, // Enable the back button support
+            enableURLhash: true, // Enable selection of the step based on url hash
+            transition: {
+                animation: 'none', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+                speed: '400', // Transion animation speed
+                easing:'' // Transition animation easing. Not supported without a jQuery easing plugin
+            },
+            toolbarSettings: {
+                toolbarPosition: 'bottom', // none, top, bottom, both
+                toolbarButtonPosition: 'right', // left, right, center
+                showNextButton: true, // show/hide a Next button
+                showPreviousButton: true, // show/hide a Previous button
+                toolbarExtraButtons: [
+                    $('<button></button>').text('Preview')
+                    .addClass('btn btn-info previewButton hidden-btn')
+                    .attr('id', 'preview_btn')
+                    .on('click', function() {
+                        
+                    }),
+
+                    $('<button></button>').text('Finish')
+                    .addClass('btn btn-success finishButton hidden-btn')
+                    .on('click', function() {
+                        $('#project_smartwizard').smartWizard('reset');
+                        $('#Project_Modal').modal("hide");
+                    })
+                ] // Extra buttons to show on toolbar, array of jQuery input/buttons elements
+            },
+            anchorSettings: {
+                anchorClickable: true, // Enable/Disable anchor navigation
+                enableAllAnchors: false, // Activates all anchors clickable all times
+                markDoneStep: true, // Add done state on navigation
+                markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
+                removeDoneStepOnNavigateBack: false, // While navigate back done step after active step will be cleared
+                enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+            },
+            keyboardSettings: {
+                keyNavigation: true, // Enable/Disable keyboard navigation(left and right keys are used if enabled)
+                keyLeft: [37], // Left key code
+                keyRight: [39] // Right key code
+            },
+            lang: { // Language variables for button
+                next: 'Next',
+                previous: 'Previous'
+            },
+            disabledSteps: [], // Array Steps disabled
+            errorSteps: [], // Highlight step with errors
+            hiddenSteps: [] // Hidden steps
+        });
+
+        $('.wostepsform').unbind('click').click(function () {
+            if ($("#dlClientProjectName").val() == "") {
+            $(".dlClientProjectNamey_error").html('This Field is required');
+            err = 1;
+            } else {
+            $(".dlClientProjectName_error").html('')
+            }
+
+            if ($("#dlClientName").val() == "") {
+            $(".dlClientName_error").html('This Field is required');
+            err = 1;
+            } else {
+            $(".dlClientName_error").html('')
+            }
+            var radio = document.getElementsByName("radiooption");
+            alert(radio);
+            if (radio == "") {
+            $("#error_1").html('This Field is required');
+            err = 1;
+            } else {
+            $("#error_1").html('')
+            }
+
+
+
+
+        });
+
+        $('#addDlProjectIndustryModel_btn').unbind('click').click(function () {
+            let err = 0;
+
+            if ($("#addDlProjectIndustry").val() == "") {
+                $(".addDlProjectIndustry_error").html('This Field is required');
+                err = 1;
+            } else {
+                $(".addDlProjectIndustry_error").html('')
+            }
+
+            if ($("#addDlProjectIndustryDesc").val() == "") {
+                $(".addDlProjectIndustryDesc_error").html('This Field is required');
+                err = 1;
+            } else {
+                $(".addDlProjectIndustryDesc_error").html('')
+            }
+
+            if (err == 1) {
+                return false;
+             } else {
+                if($("#dlProjectIsClosed").val() != 1){
+                    data = {
+                        "Method": "PostProjectIndustries",
+                        "Data": {
+                            "ProjectIndustryId" : null,
+                            "IndustryType" : $("#addDlProjectIndustry").val(),
+                            "Description" : $("#addDlProjectIndustryDesc").val(),
+                            "IsActive" : 1,
+                            "Status": 1,
+                            "Message": ""
+                        }
+                    }
+
+                    var postCall = PostDataCall(data);
+                    if (postCall['IsSuccess'] == true) {
+                        if(postCall['Data'].length == 1) {
+                            var projectIndustryId_res = (postCall['Data'][0]['ProjectIndustryId']);
+                            // $("#dlProjectId").val(ProjectId);
+                        }
+                        var swalEMRSucc = {
+                            title: 'Success!',
+                            text: postCall['Message'],
+                            icon: "success"
+                        }
+                        swalAlert(swalEMRSucc); 
+                        closeAddDlProjectIndustryModel();
+
+                        var filter_val = JSON.stringify({ "Token": localStorage.getItem('securityToken'),"ISActive": 1 });
+                        var GetProjectIndustry = callgetlist('GetProjectIndustries', filter_val);
+
+                        //show GetProjectIndustry list
+                        if (GetProjectIndustry.length > 0) {
+                        $('#dlProjectIndustry').html('<option value="0">Select Project Indutry</option>');
+                            GetProjectIndustry.forEach(function (GetProjectIndustry, i) {
+                                $('#dlProjectIndustry').append('<option value="' + GetProjectIndustry.Id +'">' + GetProjectIndustry.ProjectIndustry + '</option>');
+                            });
+                        } else {
+                            $('#dlProjectIndustry').append('<option value="0">No datas Found</option>');
+                        }
+                        $("#dlProjectIndustry").val(projectIndustryId_res);
+                    } else {
+                        var swalEMRErr = {
+                            title: 'Warning!',
+                            text: postCall['Message'],
+                            icon: "error"
+                        }
+                        swalAlert(swalEMRErr);
+                    } 
+                }               
+            } 
+        });
+
+        $('#addDlProjectDomainModel_btn').unbind('click').click(function () {
+            let err = 0;
+
+            if ($("#addDlProjectDomain").val() == "") {
+                $(".addDlProjectDomain_error").html('This Field is required');
+                err = 1;
+            } else {
+                $(".addDlProjectDomain_error").html('')
+            }
+
+            if ($("#addDlProjectDomainDesc").val() == "") {
+                $(".addDlProjectDomainDesc_error").html('This Field is required');
+                err = 1;
+            } else {
+                $(".addDlProjectDomainDesc_error").html('')
+            }
+
+            if (err == 1) {
+                return false;
+            } else {
+                if($("#dlProjectIsClosed").val() != 1){
+                    data = {
+                        "Method": "PostProjectDomain",
+                        "Data": {
+                            // "Id" : null,
+                            "Domain" : $("#addDlProjectDomain").val(),
+                            "Description" : $("#addDlProjectDomainDesc").val(),
+                            "IsActive" : 1,
+                            "Status": 1,
+                            "Message": ""
+                        }
+                    }
+                    var postCall = PostDataCall(data);
+                    if (postCall['IsSuccess'] == true) {
+                        if(postCall['Data'].length == 1) {
+                            var projectDomainId_res = (postCall['Data'][0]['Id']);
+                            // $("#dlProjectId").val(ProjectId);
+                        }
+                        var swalEMRSucc = {
+                            title: 'Success!',
+                            text: postCall['Message'],
+                            icon: "success"
+                        }
+                        swalAlert(swalEMRSucc); 
+                        closeAddDlProjectDomainModel();
+
+                        var fil_value = JSON.stringify({ "Token": localStorage.getItem('securityToken'),"IsActive": 1 });
+                        var GetProjectDomain = callgetlist('GetProjectDomain', fil_value);
+                        
+                        //show GetProjectDomain list
+                        if (GetProjectDomain.length > 0) {
+                            $('#dlProjectDomain').html('<option value="0">Select Project Domain</option>');
+                            GetProjectDomain.forEach(function (GetProjectDomain, i) {
+                            $('#dlProjectDomain').append('<option value="' + GetProjectDomain.Id +'">' + GetProjectDomain.ProjectDomain + '</option>');
+                            });
+                        } else {
+                            $('#dlProjectDomain').append('<option value="0">No datas Found</option>');
+                        }
+                        $("#dlProjectDomain").val(projectDomainId_res);
+
+                    } else {
+                        var swalEMRErr = {
+                            title: 'Warning!',
+                            text: postCall['Message'],
+                            icon: "error"
+                        }
+                        swalAlert(swalEMRErr);
+                    }
+                }                
+            } 
+        });
+
+        $("#project_smartwizard").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection,
+            stepPosition) {
+                if (stepDirection == "forward") {
+                switch (stepNumber) {
+                    case 0:
+                        $(".loader").show();
+                        var validateClientDetail = validateClientDetails();
+                        if(validateClientDetail == false){
+                            $(".loader").hide();
+                            return false;
+                        }else{
+
+                            if($("#dlClientProjectType option:selected").text() == "Time and Material"){
+                                $('#project_smartwizard').smartWizard("stepState", [2,3,7,9], "disable");
+                            } 
+                            else if($("#dlClientProjectType option:selected").text() == "RandD") {
+                                $('#project_smartwizard').smartWizard("stepState", [7,9], "disable");
+                            }
+                            else if($("#dlClientProjectType option:selected").text() == "Fixed Bid") {
+                                $('#project_smartwizard').smartWizard("stepState", [6,8,9], "disable");
+                            }
+                            else if($("#dlClientProjectType option:selected").text() == "Retainer") {
+                                $('#project_smartwizard').smartWizard("stepState", [2,3,7], "disable");                            
+                            }
+                            else if($("#dlClientProjectType option:selected").text() == "Package") {
+                                $('#project_smartwizard').smartWizard("stepState", [2,3,7,9], "disable");
+                            }
+                            $('#preview_btn').prop('disabled',true);
+                       
+                            //show Project Members list
+                            var fil_value = JSON.stringify({ "Token": localStorage.getItem('securityToken'),"IsActive": 1 });
+                            var GetEmployeeList = callgetlist('GetEmployeeList', fil_value);
+
+                            if (GetEmployeeList.length > 0) {
+                                $('#pc_projectMember').html('<option value="0">Select Project Member</option>');
+                                GetEmployeeList.forEach(function (GetEmployeeList, i) {
+                                    $('#pc_projectMember').append('<option value="' + GetEmployeeList.EmployeeId +'">' + GetEmployeeList.Name + '</option>').select2({placeholder: "Select a User",dropdownParent: $("#Project_Modal"),});
+                                });
+                                // $('#pc_projectMember').select2({placeholder: "Select a User",dropdownParent: $("#Project_Modal"),});
+                            } else {
+                                $('#pc_projectMember').append('<option value="0">No datas Found</option>');
+                            } 
+
+                            //show Project Members list
+                            var fil_value1 = JSON.stringify({ "Token": localStorage.getItem('securityToken')});
+                            var GetProjectMemberRolesList = callgetlist('GetProjectMemberRoles', fil_value1);
+
+                            if (GetProjectMemberRolesList.length > 0) {
+                                $('#pc_projectMemberRole').html('<option value="0">Select Project Role</option>');
+                                GetProjectMemberRolesList.forEach(function (GetProjectMemberRolesList, i) {
+                                    $('#pc_projectMemberRole').append('<option value="' + GetProjectMemberRolesList.ProjectMemberRoleId +'">' + GetProjectMemberRolesList.ProjectMemberRole + '</option>');
+                                });
+                            } else {
+                                $('#pc_projectMemberRole').append('<option value="0">No datas Found</option>');
+                            } 
+
+                            //Get 
+                            var filter_val = JSON.stringify({
+                                "ProjectId": localStorage.getItem('ProjectId'),
+                                "IsActive": true
+                            });
+
+                            var result = callgetlist('GetProjectMembers', filter_val); 
+                            renderProjectMembersGrid(result);
+                            $(".loader").hide();
+                            get_projectContacts();
+                            return true;
+                        }
+                        break;
+
+                    case 1:
+                        var fil_val_GetProjectContacts = JSON.stringify({ "Token": localStorage.getItem('securityToken'),"ProjectId": $("#dlProjectId").val(),"IsActive":1 });
+                        var GetProjectContactsData = callgetlist('GetProjectContacts',fil_val_GetProjectContacts);
+                        if (GetProjectContactsData.length > 0){
+                            get_projectPhasesByProjectId();
+                            return true;
+                        } else {
+                            var swalEMRErr = {
+                            title: 'Warning!',
+                            text: 'Please add a contact before proceeding further.',
+                            icon: "error"
+                            }
+                            swalAlert(swalEMRErr);
+                            return false;
+                        }
+                        break;
+
+                    case 2:
+                        break;
+
+                    case 3:
+                        return true;
+                        break;
+
+                    case 4:
+                        var fil_val_GetProjectMembers = JSON.stringify({ 
+                            "ProjectId": $("#dlProjectId").val(),
+                            "IsActive": 1 
+                        });
+                        openCommentsHistoryForProject();
+
+                        var GetProjectMemberssData = callgetlist('GetProjectMembers',fil_val_GetProjectMembers);
+
+                        let bProjectInchargeFound = false;
+                        if (GetProjectMemberssData){
+                            for (let i=0; i<GetProjectMemberssData.length; i++){
+                                if (GetProjectMemberssData[i].ProjectMembersRoleName == 'Project In-Charge'){
+                                    bProjectInchargeFound = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if (bProjectInchargeFound){
+                            // setTimeout(()=>{
+                            //     initializeNreMessageDescriptionCkeditor();
+                            // }, 0)
+                            clearEditProjectMembers();
+                            return true;
+                        } else {
+                            var swalEMRErr = {
+                            title: 'Warning!',
+                            text: 'Please add a project in-charge before proceeding further.',
+                            icon: "error"
+                            }
+                            swalAlert(swalEMRErr);
+                            return false;
+                        }
+                        break;
+
+                    case 5:
+
+                        var template_option  = GetTimesheetTemplates();
+                        GetProjectConfigurations();
+                        let projectTypeText = $("#dlClientProjectType :selected").text();
+                        if (projectTypeText == 'Retainer'){
+                            $('#timesheetDuration').show();
+                            $('#timesheetDurationData').show();
+                        } else {
+                            $('#timesheetDuration').hide();
+                            $('#timesheetDurationData').hide();
+                        }
+                        
+                        return true;
+                        break;
+
+                    case 6:
+                         
+                        var validateProject = validateGetProjectConfigurations();
+                        if(validateProject == false){
+                            return false;
+                        }
+                        //  displayGanttChart('./components/projectcreation/js/project_ganttchart.js');
+                        return true;
+                        break;
+
+                    case 7:
+                        return true;
+                        break;
+
+                    case 8:
+                        workordergrid_list();
+                        WorkOrderManagement_Grid();
+
+                        return true;
+                        break;
+                    case 9:
+                        
+
+                        break;
+                    default:
+
+                        break;
+                }
+            } else if (stepDirection == "backward") {
+                switch (stepNumber) {
+                    case 1:
+                        return true;
+                        break;
+
+                    case 2:
+                        return true;
+                        break;
+
+                    case 3:
+                        return true;
+                        break;
+
+                    case 4:
+                        // clearEditProjectMembers();
+                        return true;
+                        break;
+
+                    case 5:
+                        return true;
+                        break;
+
+                    case 6:
+                        return true;
+                        break;
+
+                    case 7:
+                        return true;
+                        // displayGanttChart('./components/projectcreation/js/project_ganttchart.js');
+                        break;
+
+                    case 8:
+                        return true;
+                        break;
+                    
+                    case 9: 
+                        return true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            if (stepNumber == 5) {
+                // debugger;
+                // displayGanttChart('./components/projectcreation/js/project_ganttchart.js');
+    
+                var tasks = [{
+                    'id': 1,
+                    'parentId': 0,
+                    'title': 'System Requirement Analysis',
+                    'start': new Date('2020-11-18T05:00:00.000Z'),
+                    'end': new Date('2020-11-20T12:00:00.000Z'),
+                    'progress': 31
+                }, {
+                    'id': 2,
+                    'parentId': 1,
+                    'title': 'UI development',
+                    'start': new Date('2020-11-20T05:00:00.000Z'),
+                    'end': new Date('2020-11-25T09:00:00.000Z'),
+                    'progress': 60
+                }, {
+                    'id': 3,
+                    'parentId': 2,
+                    'title': 'Application Development',
+                    'start': new Date('2020-11-25T05:00:00.000Z'),
+                    'end': new Date('2020-11-31T09:00:00.000Z'),
+                    'progress': 100
+                }, {
+                    'id': 4,
+                    'parentId': 3,
+                    'title': 'System and Functional Testing',
+                    'start': new Date('2020-11-31T10:00:00.000Z'),
+                    'end': new Date('2020-12-03T09:00:00.000Z'),
+                    'progress': 100
+                }, {
+                    'id': 5,
+                    'parentId': 4,
+                    'title': 'UAT',
+                    'start': new Date('2020-12-03T10:00:00.000Z'),
+                    'end': new Date('2020-12-06T09:00:00.000Z'),
+                    'progress': 60
+                }];
+     
+                var dependencies = [{
+                    "id": 1,
+                    "predecessorId": 3,
+                    "successorId": 4,
+                    "type": 0
+                }, {
+                    "id": 2,
+                    "predecessorId": 4,
+                    "successorId": 5,
+                    "type": 0
+                }, {
+                    "id": 3,
+                    "predecessorId": 5,
+                    "successorId": 6,
+                    "type": 0
+                }, {
+                    "id": 4,
+                    "predecessorId": 6,
+                    "successorId": 7,
+                    "type": 0
+                }, {
+                    "id": 5,
+                    "predecessorId": 7,
+                    "successorId": 9,
+                    "type": 0
+                }
+                ];
+     
+                var resources = [{
+                    'id': 1,
+                    'text': 'Management'
+                }, {
+                    'id': 2,
+                    'text': 'Project Manager'
+                }, {
+                    'id': 3,
+                    'text': 'Analyst'
+                }, {
+                    'id': 4,
+                    'text': 'Developer'
+                }, {
+                    'id': 5,
+                    'text': 'Testers'
+                }];        
+     
+                var resourceAssignments = [{
+                    'id': 0,
+                    'taskId': 3,
+                    'resourceId': 1
+                }, {
+                    'id': 1,
+                    'taskId': 4,
+                    'resourceId': 1
+                }, {
+                    'id': 2,
+                    'taskId': 5,
+                    'resourceId': 2
+                }, {
+                    'id': 3,
+                    'taskId': 6,
+                    'resourceId': 2
+                }, {
+                    'id': 4,
+                    'taskId': 9,
+                    'resourceId': 3
+                }, {
+                    'id': 5,
+                    'taskId': 10,
+                    'resourceId': 3
+                }];
+
+                $("#displayGanttChart").dxGantt({
+                    tasks: {
+                        dataSource: tasks
+                    },
+                    dependencies: {
+                        dataSource: dependencies
+                    },
+                    resources: {
+                        dataSource: resources
+                    },
+                    resourceAssignments: {
+                        dataSource: resourceAssignments
+                    },
+                    editing: {
+                        enabled: true
+                    },
+                    validation: {
+                        autoUpdateParentTasks: true
+                    },
+                    toolbar: {
+                        items: [
+                            "undo",
+                            "redo",
+                            "separator",
+                            "collapseAll",
+                            "expandAll",
+                            "separator",
+                            "addTask",
+                            "deleteTask",
+                            "separator",
+                            "zoomIn",
+                            "zoomOut"
+                        ]
+                    },
+                    columns: [{
+                        dataField: "title",
+                        caption: "Subject",
+                        width: 300
+                    }, {
+                        dataField: "start",
+                        caption: "Start Date"
+                    }, {
+                        dataField: "end",
+                        caption: "End Date"
+                    }],
+                    scaleType: "weeks",
+                    taskListWidth: 500
+                });
+            }
+            
+        });
+
+        $('.project-second-step').find('#dlCountry').on("change",function(){
+            let country = $(this).val()
+            getStates(country);
+        })
+
+        $('.project-second-step').find('#dlState').on("change",function(){
+            let state = $(this).val()
+            getCity(state);
+        })
+
+        $("#project_smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+            if (stepNumber == 9) {
+                $('.finishButton').removeClass('hidden-btn');
+                $('.sw-btn-next').addClass('hidden-btn');
+
+                $('.previewButton').removeClass('hidden-btn');
+            } 
+            else if($("#dlClientProjectType option:selected").text() == "Fixed Bid" && stepNumber == 7) {
+                $('.finishButton').removeClass('hidden-btn');
+                $('.sw-btn-next').addClass('hidden-btn');
+                $('.previewButton').removeClass('hidden-btn');
+            }
+            else if($("#dlClientProjectType option:selected").text() == "RandD" && stepNumber == 8) {
+                $('.finishButton').removeClass('hidden-btn');
+                $('.sw-btn-next').addClass('hidden-btn');
+                $('.previewButton').removeClass('hidden-btn');
+            }
+            else if($("#dlClientProjectType option:selected").text() == "Time and Material" && stepNumber == 8) {
+                $('.finishButton').removeClass('hidden-btn');
+                $('.sw-btn-next').addClass('hidden-btn');
+                $('.previewButton').removeClass('hidden-btn');
+            }
+            else if($("#dlClientProjectType option:selected").text() == "Package" && stepNumber == 8) {
+                $('.finishButton').removeClass('hidden-btn');
+                $('.sw-btn-next').addClass('hidden-btn');
+                $('.previewButton').removeClass('hidden-btn');
+            }
+            else {
+                $('.finishButton').addClass('hidden-btn');
+                $('.sw-btn-next').removeClass('hidden-btn');
+                $('.previewButton').addClass('hidden-btn');
+            }
+        });
+
+        document.getElementById("addDlProjectIndustrybtn").onclick = function() {addDlProjectIndustry()};
+        document.getElementById("addDlProjectDomainbtn").onclick = function() {addDlProjectDomain()};
+        document.getElementById("close_addDlProjectDomainModel").onclick = function() {closeAddDlProjectDomainModel()};
+        document.getElementById("close_addDlProjectIndustryModel").onclick = function() {closeAddDlProjectIndustryModel()};
+
+        function addDlProjectIndustry() {
+            $('#open_addDlProjectIndustryModel').modal('show');
+        }
+
+        function addDlProjectDomain() {
+            $('#open_addDlProjectDomainModel').modal('show');
+        }
+
+        function closeAddDlProjectDomainModel() {
+            $('#open_addDlProjectDomainModel').modal('hide');
+        }
+
+        function closeAddDlProjectIndustryModel() {
+            $('#open_addDlProjectIndustryModel').modal('hide');
+        }
+
+        function displayGanttChart(filename, onload) {
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.src = filename;
+            script.type = 'text/javascript';
+            head.appendChild(script);
+        }
+       
+        function postDlProjectInductry() {
+            let err = 0;
+
+            if ($("#addDlProjectIndustry").val() == "") {
+                $(".addDlProjectIndustry_error").html('This Field is required');
+                err = 1;
+            } else {
+                $(".addDlProjectIndustry_error").html('')
+            }
+
+            if ($("#addDlProjectIndustryDesc").val() == "") {
+                $(".addDlProjectIndustryDesc_error").html('This Field is required');
+                err = 1;
+            } else {
+                $(".addDlProjectIndustryDesc_error").html('')
+            }
+
+            if (err == 1) {
+                return false;
+             } else {
+                    data = {
+                        "Method": "PostProjectsForWorkOrder",
+                        "Data": {
+                            // "Token": localStorage.getItem('securityToken'),
+                            // "ProjectId" : (dlProjectID != null && dlProjectID != '') ? dlProjectID : null,
+                            // "WorkOrderId" : dlworkOrderID,
+                            // "Type": null,
+                            // "ClientId" : dlClientName,
+                            // "Name" : null,
+                            // "StartDate" : null,
+                            // "EndDate" : null,
+                            // "StatusId":null,
+                            // "ProjectType" : dlClientProjectType,
+                            // "DevelopmentModel" : dlClientDevelopmentModel,
+                            // "ProjectIndustry" : dlProjectIndustry,
+                            // "ProjectDomain" : dlProjectDomain,
+                            // "PlannedStartDate" : (dtpclientPlannedStartDate != "" && dtpclientPlannedStartDate != null) ? dtpclientPlannedStartDate : null,
+                            // "PlannedEndDate" : (dtpclientPlannedEndDate != "" && dtpclientPlannedEndDate != null) ? dtpclientPlannedEndDate : null,
+                            // "ActualStartDate" : (dtpclientActualStartDate != "" && dtpclientActualStartDate != null) ? dtpclientActualStartDate : null,
+                            // "ActualEndDate" : (dtpclientActualEndDate != "" && dtpclientActualEndDate != null) ? dtpclientActualEndDate : null,
+                            // "UATStartDate" : (dtpclientUtaStartDate != "" && dtpclientUtaStartDate != null) ? dtpclientUtaStartDate : null,
+                            // "UATEndDate" : (dtpclientUtaEndDate != "" && dtpclientUtaEndDate != null) ? dtpclientUtaEndDate : null,
+                            // "ProjectDescription" : CKEDITOR.instances.textProjectDescription.getData(),
+                            // "ProjectTechnologyNotes" : textAreaProjectNotes_value,
+                            "IsActive" : 1,
+                            "Status": 1,
+                            "Message": ""
+                        }
+                    }
+                } 
+        }
+
+        $('#image,#image1').hide();
+        $('#dlTimesheetTemplate').on('change', function() {
+        if ( this.value === '01E71340-9C4F-4313-A3F4-2A217102AD65') 
+        {
+            $("#image").show();
+            $("#image1").hide();
+        }
+        else if(this.value === 'B1273FF9-1845-4F76-B5B7-C30EA536683A')
+        {
+            $("#image1").show();
+            $("#image").hide();
+        }
+        else
+        {
+            $("#image").hide();
+            $("#image1").hide();
+        }
+        })
+
+        $('.TimesheetImage').on('click', function() {
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#Timesheet_imagemodal').modal('show');   
+        });		
+
+        //Get the modal container
+        var modal = document.getElementById("Timesheet_imagemodal");
+        
+        modal.onclick = function() { 
+            $('#Timesheet_imagemodal').modal('hide'); 
+        }
+
+    });
+
+    /* SwalAlert */
+    function swalAlert(data){
+        swal({
+        title: data.title,
+        text: data.text,
+        icon: data.icon,
+        button:"Close"
+        });   
+    }
+
+</script>
+<script type="text/javascript" src="js/library/dropzone.js"></script>

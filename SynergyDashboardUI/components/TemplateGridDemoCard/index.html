@@ -1,0 +1,54 @@
+<!-- Template Report Grid Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>Template Grid Demo Card</b></span>
+    <!-- the below button for refresh Data -->
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="GetLeaveType_getReportData()">
+            <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+    <div id="GetLeaveType_reportGrid"></div>
+</div>
+
+<!-- internal script -->
+<script>
+    // TODO : CHANGE ALL PREFIX
+    // 1. Change Your card name in span line number 3
+    // 2. Update your procedure name in line number 31
+    // 3. Find and replace prefix_ to your card prefix, eg: holiday master Card = hm_
+    // ---- Line Numbers 
+    // -------- 6 - onclick function name prefix, 
+    // -------- 11 - div id prefix, 
+    // -------- 30 - const name prefix, 
+    // -------- 32 - function name prefix, 
+    // -------- 33 - parameter name prefix, 
+    // -------- 47 - storageKey prefix, 
+    // -------- 49 - element id prefix,
+    // -------- 53 - function name prefix in function call.
+
+    const GetLeaveType_ProcedureName = 'GetLeaveType'; //Change Prefix and Procedure Name Here
+
+    function GetLeaveType_getReportData() {
+        const dataForReport = callgetlist(GetLeaveType_ProcedureName, JSON.stringify({})); //Provide additional Parameters if any
+        if(dataForReport !== null && dataForReport.length > 0){
+            let columns = [];
+            $.each(dataForReport[0],function(index,value){
+                columns.push({
+                    caption: index, dataField: index
+                });
+            });
+            let options = getDevExtremeGridJson();
+            options.dataSource = dataForReport;
+            options.columns = columns;
+            options.stateStoring = {
+                enabled: true,
+                type: "localStorage",
+                storageKey: "GetLeaveType_reportGridState" 
+            };
+            $("#GetLeaveType_reportGrid").dxDataGrid(options).dxDataGrid("instance"); 
+        }
+    }
+
+    GetLeaveType_getReportData();
+</script>

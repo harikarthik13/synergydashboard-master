@@ -1,0 +1,74 @@
+<link href="components/hrreports/css/style.css" rel="stylesheet" />
+<script src='components/hrreports/js/HrModulereports.js'></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+<div class="card-detail">
+  <span><i><img src="components/hrreports/images/attendance.png" width="40px" height="40px" /></i></span>
+  <span class="card-detail-title"><b>Employee Attendance Reports</b></span>
+  <hr />
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <div name="departmentList" id="departmentList" class="departmentList"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>From Date</label>
+        <!-- <div class="input-group date"> -->
+          <div id="swipe_reports_fromDate"></div>
+        <!-- </div> -->
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>To Date</label>
+        <!-- <div class="input-group date"> -->
+          <div id="swipe_reports_toDate"></div>
+        <!-- </div> -->
+      </div>  
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label>Employee List</label>
+        <div name="Hr_employeeList" id="Hr_employeeList" class="Hr_employeeList"></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <br>
+      <button style="margin-top: 7px;" type="button" class="btn btn-primary btn-md" id="projectHrReportsFilter" onclick="getSwipeReportsFilter();">
+        <i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search Reports
+    </button>
+    </div>
+  </div>
+  <div>
+    <br>
+    <div id="sdgd-SwipeReportsGrid"></div>
+  </div>
+</div>
+
+<script>
+  // $(document).ready(function(){
+  //   var date = new Date();
+  //   var todayDate = date.toISOString().slice(0, 10);
+
+  //   // var yesterdayDate = new Date((new Date()).valueOf() - 1000*60*60*24);
+  //   // var maxDate = yesterdayDate.toISOString().slice(0,10)
+
+  //   $("#swipe_reports_toDate").dxDateBox({
+  //     type: "date",
+  //     placeholder: "Select Date",
+  //     displayFormat: "dd/MMM/yyyy",
+  //     value: new Date(),
+  //   }).dxDateBox("instance");
+
+  //   $("#swipe_reports_fromDate").dxDateBox({
+  //     type: "date",
+  //     placeholder: "Select Date",
+  //     displayFormat: "dd/MMM/yyyy",
+  //     value: new Date(),
+  //   }).dxDateBox("instance");
+
+  // });
+</script>

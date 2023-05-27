@@ -1,0 +1,448 @@
+<!-- Template Report Grid Card -->
+<style>
+    @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+    fieldset, label {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        margin: 20px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+        margin: 10px;
+    }
+
+    /****** Style Star Rating Widget *****/
+
+    .rating {
+        border: none;
+        float: left;
+    }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating > .half:before {
+            content: "\f089";
+            position: absolute;
+        }
+
+        .rating > label {
+            color: #ddd;
+            float: right;
+        }
+
+        /***** CSS Magic to Highlight Stars on Hover *****/
+
+        .rating > input:checked ~ label, /* show gold star when clicked */
+        .rating:not(:checked) > label:hover, /* hover current star */
+        .rating:not(:checked) > label:hover ~ label {
+            color: orange;
+        }
+            /* hover previous stars in list */
+
+            .rating > input:checked + label:hover, /* hover current star when changing rating */
+            .rating > input:checked ~ label:hover,
+            .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+            .rating > input:checked ~ label:hover ~ label {
+                color: #FFED85;
+            }
+
+    #star-communicationrating .checked {
+        color: orange;
+    }
+    #empstarrating .checked {
+    color:orange;
+    }
+</style>
+<div class="card-detail">
+    <span class="card-detail-title"><b>Employee Skill Rating</b></span>
+    <!-- the below button for refresh Data -->
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="GetEmployeeSkillsForRating_getReportData()">
+            <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+    <h6>Click the Golden Star for More Details. </h6>
+    <div id="GetEmployeeSkillsForRating_reportGrid"></div>
+
+    <div class="modal fade" id="EmployeeSkillRatingCard" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            onclick="" style="float : right">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h2 class="modal-title"><span id="lblemployeeskillratingTitile"></span></h2>
+
+                </div>
+
+                <div class="modal-body" id="EmployeeSkillModalBody" data-simplebar>
+                    <div id="EmployeeSkillMappingsId" style="visibility:hidden"></div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Skill Rating</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <fieldset class="rating">
+                                    <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="5 stars"></label>
+                                    <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="4 stars"></label>
+                                    <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="3 stars"></label>
+                                    <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="2 stars"></label>
+                                    <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="1 star"></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button type="button" class="btn btn-primary" onclick="saveemployeeskillrating()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="modal fade" id="EmployeeSkillRatingDetails" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            onclick="" style="float : right">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h2 class="modal-title"><span id="lblemployeeLeadsskillratingTitile"></span><span id="lblcandidateTrackerRRMNo"></span>&nbsp;</h2>
+                </div>
+
+                <div class="modal-body" id="EmployeeSkillModalBody" data-simplebar>
+                    <div id="EmployeeSkillDetailsMappingsId" style="visibility:hidden"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="view_employee_rating">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div>
+                            <!--<button type="button" class="btn btn-primary">Close</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- internal script -->
+    <script>
+        $(document).ready(function () {
+            var localget = localStorage.getItem("UserCheckRes");
+            var jsonData = JSON.parse(localget);
+            Token = jsonData.Data[0].Token;
+            Department = jsonData.Data[0].DepartmentID;
+            Designation = jsonData.Data[0].Designation;
+            EmployeeName = jsonData["Data"][0].FirstName + ' ' + jsonData["Data"][0].LastName;
+            //BackupLead = jsonData.Data["0"].mentorFirstName + " " + jsonData.Data["0"].mentorLastName;
+            //LoggedUser = jsonData.Data["0"].FirstName + " " + jsonData.Data["0"].LastName;
+            //BackupLeadId = jsonData.Data["0"].MentorId;
+            //EmployeeId = jsonData.Data["0"].EmployeeID;
+        });
+
+        const GetEmployeeSkillsForRating_ProcedureName = 'GetEmployeeSkillsForRating'; //Change Prefix and Procedure Name Here
+
+        function GetEmployeeSkillsForRating_getReportData() {
+            const dataForReport = callgetlist(GetEmployeeSkillsForRating_ProcedureName, JSON.stringify({})); //Provide additional Parameters if any
+            if (dataForReport !== null && dataForReport.length > 0) {
+                let columns = [];
+                $.each(dataForReport[0], function (index, value) {
+                    columns.push({
+                        caption: index, dataField: index
+                    });
+                });
+                let options = getDevExtremeGridJson();
+                options.dataSource = dataForReport;
+                //options.columns = columns;
+                options.columns = [
+                    {
+                        caption: "Employee No",
+                        dataField: "EmployeeNumber",
+                    },
+                    {
+                        caption: "Display Name",
+                        dataField: "DisplayName",
+                    },
+                    {
+                        caption: "Skill Family",
+                        dataField: "SkillFamily",
+                    },
+                    {
+                        caption: "Skill",
+                        dataField: "Skill",
+                    },
+                    {
+                        caption: "Version",
+                        dataField: "Version",
+                    },
+                    {
+                        caption: "Grade",
+                        dataField: "Grade",
+                    },
+                    {
+                        dataField: "Average Rating",
+                        width: 100,
+                        allowFiltering: false,
+                        allowSorting: false,
+                        cellTemplate: function (container, options) {
+                            var domActions = "";
+                            var ratedCommunication = options.data.AverageRating;
+                            var pendingRating = 5 - ratedCommunication;
+                            var starHtml = "";
+                            starHtml += "<div id='star-communicationrating'>"
+                            for (i = 0; i < ratedCommunication; i++) {
+                                starHtml += "<span data-empskillmappingid =" + options.data.Id + " data-empskill =" + options.data.Skill + " data-empname =" + encodeURIComponent(options.data.DisplayName) + " class='fa fa-star checked showratingdetails'></span>";
+                            }
+                            for (i = 0; i < pendingRating; i++) {
+                                //starHtml += "<span class='fa fa-star'></span>";
+                                starHtml += "<span data-empskillmappingid =" + options.data.Id + " data-empskill =" + options.data.Skill + " data-empname =" + encodeURIComponent(options.data.DisplayName) + " class='fa fa-star showratingdetails'></span>";
+                            }
+                            starHtml += "</div>";
+                            domActions += "<span>" + starHtml + "</span>";
+                            $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                        }
+                    },
+                    {
+                        dataField: "",
+                        caption: "Action",
+                        allowGrouping: false,
+                        width: 80,
+                        allowCollapsing: false,
+                        allReordering: false,
+                        allowFiltering: false,
+                        cellTemplate: function (container, options) {
+                            var domActions = "";
+                            if (Designation == "Team Lead" || Designation == "Associate PM" || Designation == "Associate Group Leader" ||
+                                Designation == "Group Leader" || Designation == "Technical Lead" || Designation == "Techincal Head" || Designation == "Technology Lead" || Designation == "Project Leader" || Designation == "Associate PL" || Designation == "Project Manager" || Designation == "Senior Group Leader") {
+                                domActions += "<button data-type='edit' class='btn btn-xs btn-primary edit-btn' OnClick=showrating('" + options.data.Id + "','" + options.data.AverageRating + "','" + options.data.Skill + "','" + encodeURIComponent(options.data.DisplayName )+ "') title='Edit Rating'><i class='fas fa-pencil-alt'></i></button>";
+                            }
+                            else {
+                                domActions += "<button data-type='edit' class='btn btn-xs btn-primary edit-btn disabled'  title='Edit Rating'><i class='fas fa-pencil-alt'></i></button>";
+                            }
+                            $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                        }, fixedPosition: "right", fixed: true, allowExporting: false, hidingPriority: 0
+                    }
+                ];
+                options.stateStoring = {
+                    enabled: true,
+                    type: "localStorage",
+                    storageKey: "GetEmployeeSkillsForRating_reportGridState"
+                };
+                $("#GetEmployeeSkillsForRating_reportGrid").dxDataGrid(options).dxDataGrid("instance");
+            }
+        }
+        function showrating(empSkillMappingsId, rating, skill, DisplayName) {
+            $("#EmployeeSkillMappingsId").text(empSkillMappingsId);
+
+            //reset rating star
+            for (i = 1; i <= 5; i++) {
+                document.getElementById('star' + i).checked = false;
+            }
+            //bind rating
+            if (rating != 0) {
+                $("#star" + rating).click()
+            }
+            $("#EmployeeSkillRatingCard").appendTo("body").modal("show");
+            $("#lblemployeeskillratingTitile").text("Edit " + decodeURIComponent(DisplayName) + " Skill Rating for " + decodeURIComponent(skill) + "");
+        }
+
+        function saveemployeeskillrating() {
+            var rating = $("input[name='rating']:checked").val();
+            var EmployeeSkillMappingsId = $("#EmployeeSkillMappingsId").text();
+            dataResource = {
+                "Method": "PostEmployeeSkillRating",
+                "Data": {
+                    "EmployeeSkillMappingsId": EmployeeSkillMappingsId,
+                    "Rating": rating
+                }
+            }
+            PostDataCallAsync(dataResource, function (result) {
+                if (result.IsSuccess == true) {
+                    swal({
+                        title: "Success!",
+                        text: result.Message,
+                        icon: "success",
+                        button: "ok!",
+                    })
+                }
+                else if (result.IsSuccess == false) {
+                    swal({
+                        title: "Sorry!",
+                        text: result.Message,
+                        icon: "error",
+                        button: "ok!",
+                    });
+
+                }
+                $("#EmployeeSkillRatingCard").appendTo('body').modal("hide");
+
+            });
+        }
+
+
+        $(document).on("click", ".showratingdetails", function (e) {
+            var EmployeeSkillMappingsId = $(e.currentTarget).data("empskillmappingid");
+            $("#EmployeeSkillDetailsMappingsId").text($(e.currentTarget).data("empskillmappingid"));
+            $("#EmployeeSkillRatingDetails").appendTo("body").modal("show");
+            var skill = $(e.currentTarget).data("empskill");
+            var empname = $(e.currentTarget).data("empname");
+
+            $("#lblemployeeLeadsskillratingTitile").text("Rating for " + skill + " from all Leads for " + decodeURIComponent(empname));
+            var GetEmpOverallRating = callgetlist('GetEmployeeOverallRating', '{"EmployeeSkillMappingsId":"' + EmployeeSkillMappingsId + ' "}')
+
+            if (GetEmpOverallRating != null) {
+                renderEmpOverallRatingGrid(GetEmpOverallRating);
+            }
+
+        });
+
+
+        function renderEmpOverallRatingGrid(data) {
+            var OpeningskillratingGrid = $("#view_employee_rating")
+                .dxDataGrid({
+                    //filterRow: {
+                    //    visible: true,
+                    //    applyFilter: "auto",
+                    //},
+                    dataSource: data,
+                    export: {
+                        enabled: true,
+                        allowExportSelectedData: true,
+                    },
+                    searchPanel: {
+                        visible: true,
+                        width: 240,
+                        placeholder: "Search...",
+                    },
+                    //headerFilter: {
+                    //    visible: true,
+                    //},
+                    grouping: {
+                        autoExpandAll: true,
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [5, 10, 20],
+                        showInfo: true,
+                    },
+                    paging: {
+                        pageSize: 10,
+                    },
+                    //groupPanel: {
+                    //    visible: true,
+                    //    emptyPanelText: "Drag a column"
+                    //},
+                    sorting: {
+                        mode: "multiple",
+                    },
+                    //selection: {
+                    //    mode: "multiple",
+                    //},
+                    summary: {
+                        totalItems: [
+                            {
+                                column: "sno",
+                                summaryType: "count",
+                            },
+                        ],
+                        groupItems: [
+                            {
+                                column: "sno",
+                                summaryType: "count",
+                            },
+                        ],
+                    },
+                    editing: {
+                        mode: "popup",
+                        allowAdding: false,
+                        allowUpdating: false,
+                        useIcons: true,
+                    },
+                    columnChooser: {
+                        enabled: true,
+                    },
+                    rowAlternationEnabled: true,
+                    //filterPanel: { visible: true },
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    showBorders: true,
+                    columns: [
+                        {
+                            caption: "#",
+                            dataField: "sno",
+                            cssClass: "rno",
+                            allowGrouping: false,
+                            allowCollapsing: false,
+                            allReordering: false,
+                            width: 70,
+                            cellTemplate: function (container, options) {
+                                container.text(
+                                    OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                );
+                            },
+                        },
+                        {
+                            caption: "Leads Name",
+                            dataField: "DisplayName",
+                        },
+                        {
+                            dataField: "Rating",
+                            width: 100,
+                            allowFiltering: false,
+                            allowSorting: false,
+                            cellTemplate: function (container, options) {
+                                var domActions = "";
+                                var ratedCommunication = options.data.Rating;
+                                var pendingRating = 5 - ratedCommunication;
+                                var starHtml = "";
+                                starHtml += "<div id='empstarrating'>"
+                                for (i = 0; i < ratedCommunication; i++) {
+                                    starHtml += "<span class='fa fa-star checked'></span>";
+                                }
+                                for (i = 0; i < pendingRating; i++) {
+                                    starHtml += "<span class='fa fa-star'></span>";
+                                }
+                                starHtml += "</div>";
+                                domActions += "<span>" + starHtml + "</span>";
+                                $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                            }
+                        }
+
+                    ],
+                })
+                .dxDataGrid("instance");
+        }
+        GetEmployeeSkillsForRating_getReportData();
+    </script>

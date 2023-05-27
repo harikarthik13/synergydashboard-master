@@ -1,0 +1,54 @@
+<!-- Annouvement Model -->
+<div id="AnnouncementModal" style="display: none;">
+<div data-options="dxTemplate: { name: 'AnnouncementModelContent' }">
+ 
+   <form id="form">
+         <div class="form-group">
+               <div class="col-md-4">
+                  <div class="form-group">
+                     <input type="hidden" class="form-control" name="project_title" id="hiddenID" />
+                     <input type="hidden" class="form-control" name="type" id="type" />
+                  </div>
+                  <div class="form-group">
+                     <label>Subject: <span style="color: red">*</span></label>       
+                     <div id="txtsubject"></div>                    
+                  </div>
+                  <br />
+                  <div class="form-group">
+                     <label>From Date: <span style="color: red">*</span></label>
+                     <div id="dtfromdate"></div>                   
+                  </div>
+                  <br />
+                  <div class="form-group">
+                     <label>To Date: <span style="color: red">*</span></label>
+                     <div id="dttodate"></div>                     
+                  </div>
+               </div>
+               <div class="col-md-8">
+                  <div class="form-group">
+                     <label>Content: <span style="color: red">*</span></label>
+                     <div id="txtareaDescription"></div>                     
+                  </div>
+               </div>
+          </div>
+            <div class="form-group">
+               <div class="col-md-12">
+              <div id="announceMent_update_BL"></div>
+              <div id="announceMent_close_BL"></div>   
+              </div>            
+            </div>
+         </form>
+   <span class="ApiResponse"></span>
+ </div>
+</div>
+
+<script>
+ 
+  function AnnouncementModal() {
+  renderPopup();  
+      $("#txtsubject").dxTextBox("instance").option('value', '');      
+      $("#dtfromdate").dxDateBox("instance").option('value', null);      
+      $("#dttodate").dxDateBox("instance").option('value', null);      
+      $("#txtareaDescription").dxHtmlEditor("instance").option('value','');
+   }
+</script>

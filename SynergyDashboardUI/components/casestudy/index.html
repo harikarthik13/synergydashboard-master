@@ -1,0 +1,66 @@
+<script src='components/casestudy/js/casestudy.js'></script>
+<link href="components/casestudy/css/casestudy.css" rel="stylesheet" />
+<div class="card-detail">
+    <span class="pull-right">
+        <button class="btn btn-sm btn-primary" onclick="DownloadCaseStudy('add')">
+          <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+      </span>
+
+    <span class="card-detail-title"><b>Case Studies</b></span>
+    <hr />
+    <div id="sddgd-saroutinelist"></div>
+</div>
+
+<div class="modal fade" id="SAAddRoutinemodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-center">Add New Casestudy</h4>   
+            </div>
+            <div class="modal-body"  data-simplebar>
+                <div class="form-group">
+                    <div class="row" >
+                        Input goes Here
+                        
+                    </div>
+                    <br />
+                </div>
+            </div>
+            <div id= "modalFooter" class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary RoutinesaveBtn" id="RoutinesaveBtn">Save</button>             
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="SAReportRoutinemodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Report Routine</h4>   
+            </div>            
+            <div class="modal-body"  data-simplebar>
+                <div id="sddgd-saroutine-report"></div>                    
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- History Model -->
+<div id="saHistoryModel" style="display: none;">
+    <div data-options="dxTemplate: { name: 'saHistoryModelContent' }">    
+        <div class="form-group">
+            <div id="saHistoryGrid"></div>
+        </div>    
+     </div>
+</div>

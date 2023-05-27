@@ -1,0 +1,129 @@
+<link href="components/notes/css/notes.css" rel="stylesheet" />
+<link href="components/notes/css/bootstrap-datetimepicker.css" rel="stylesheet">
+<link href="components/notes/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+<script src="components/notes/js/bootstrap-datetimepicker.min.js"></script>
+<!-- <script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script> -->
+
+<div class="modal fade" id="modal-AddNotes" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="notesRefresh();">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Add Notes</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <input type="hidden" class="form-control" disabled="disabled" id="notes_id" />
+                </input>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Need Alert</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" data-toggle="toggle" id="chkNeedAlert">
+                        </div>
+                        <div id="divNeedAlert" class="col-md-4">
+                            <div class="input-group" id="notes_alert">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                            </div>
+                            <span class="error_message" id="notes_alert_error"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Project</label>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control" id="cmb-project" name="drpProject">
+                                <option value="0">--Select--</option>
+                                <option value="1">CheckSheet</option>
+                                <option value="2">SmartTech</option>
+                                <option value="3">RRM</option>
+                                <option value="4">KYC</option>
+                            </select>
+                            <span class="error_message" id="cmb-project_error"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Add to calendar</label>
+                        </div>
+                        <div class="col-md-1">
+                            <input type="checkbox" data-toggle="toggle" id="chkAddToCalendar">
+                        </div>
+                        <div id="divAddToCalendar" class="col-md-4">
+                            <div class="input-group" id="notes_calendarAlert">
+                                <!-- <input type="date" id="dateAddToCalendar" class="form-control custom-datepicker"
+									title="Set Date">
+								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+                                <input type="datetime" id="timeAddToCalendar" class="form-control" title="Set Time"
+                                    placeholder="select Date">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                            </div>
+                            <span class="error_message" id="timeAddToCalendar_error"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Notes</label>
+                        </div>
+                        <div class="col-md-6">
+                            <textarea id="txtNotes" rows="3" cols="10" class="form-control" placeholder="Notes"
+                                style="resize:none;"></textarea>
+                            <span class="error_message" id="txtNotes_error"></span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-4 text-right">
+                            <label>Priority</label>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" id="notes_priority">
+                                <option value="0">--Select--</option>
+                            </select>
+                            <span class="error_message" id="notes_priority_error"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" id="btnCancelNotes">Cancel</button>
+                        <button id="btnNotesSave" type="button" class="btn btn-success">Save</button>
+                        <button id="btnUpdateNotes" type="button" class="btn btn-success">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="components/notes/js/notes.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnUpdateNotes").hide();
+        $("#divNeedAlert").hide();
+        $("#divAddToCalendar").hide();
+        $("#notes_calendarAlert").datetimepicker({
+           
+        });
+
+
+        $('#chkNeedAlert').click(function () {
+            $("#divNeedAlert").toggle(this.checked);
+            $("#notes_alert").dxDateBox("instance").reset();
+            $("#notes_alert_error").html("");
+        });
+
+        $('#chkAddToCalendar').click(function () {
+            $("#divAddToCalendar").toggle(this.checked);
+            $("#timeAddToCalendar").val("");
+            $("#timeAddToCalendar_error").html("");
+        });
+    })
+
+</script>

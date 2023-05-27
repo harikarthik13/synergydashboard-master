@@ -1,0 +1,315 @@
+<link href="components/rrmonboard/css/style.css" rel="stylesheet" />
+<script src="components/rrmonboard/js/devextremescript.js"></script>
+<script src='components/rrmonboard/js/rrmonboard.js'></script>
+<script src="components/rrmonboard/js/editonboardRRMProfileEntryPoint.js"></script>
+<script src="components/rrmonboard/js/previewonboardRRMProfileEntryPoint.js"></script>
+<div class="card-detail">
+  <span><i><img src="components/rrmonboard/images/interviewicon.png" width="40px" height="40px" /></i></span>
+  <span class="card-detail-title modal-not-include"><b>RRM OnBoard</b></span>
+  <hr />
+  <div>
+    <div id="sdgd-rrmOnBoard"></div>
+  </div>
+
+  <div id="RRMOnBoardProfileEntryPointTableListDetails">
+    <div id="rrmOnBoardProfileGridReport"></div>
+  </div>
+  <div id="showbanmodal"></div>
+</div>
+
+<div id="rrmOnBoardProfileEntryPointInterviewHistoryDiv">
+
+</div>
+
+<div id="onBoardskillsGridForExport" style="visibility: hidden;height: 0px;">
+
+</div>
+
+<div id="onBoardworkHistoryGridForExport" style="visibility: hidden;height: 0px;">
+
+</div>
+
+<script type="text/javascript">
+  var candidateProfilesDataSourceForMentions = [];
+
+  $(document).ready(function () {
+    initializeRRMOnBoardProfileEntryPoint();
+  })
+
+  var candidateIdForSkillAndWorkExperience;
+  var addRRMOnBoardProfileEntryPointJs;
+  var editRRMOnBoardProfileEntryPointJs;
+  var previewOnBoardProfileEntryPointJs;
+  var CandidateId = null;
+  var CandidateProfileId = "";
+  var skillfamilydata = [];
+  var maxdate;
+
+  var skillGrade = [{
+    "ID": "9D5255DE-0214-4EF1-A92C-D28096F737F0",
+    "Name": "Primary"
+  }, {
+    "ID": "ED621B3E-659B-4C8A-9B81-C923720F8196",
+    "Name": "Secondary"
+  }, {
+    "ID": "22A1A75C-735F-4876-9573-45BC3B817DC3",
+    "Name": "Level 1"
+  }, {
+    "ID": "3450B0E6-751F-4B86-8E03-D94035E22D96",
+    "Name": "Level 2"
+  }, {
+    "ID": "000F5386-FE1D-4C0B-AC55-4FEFD9ECC35F",
+    "Name": "Level 3"
+  },
+  {
+    "ID": "47B04B16-7C1D-40DA-8797-B6281EC88B28",
+    "Name": "Level 4"
+  },
+  {
+    "ID": "E87A1A4B-5B39-43B0-9AA6-081231233C8D",
+    "Name": "Level 5"
+  }];
+
+  var maritalstatus = [];
+
+  var skilldata = [];
+  var version = [];
+  var getcities = [];
+  var getcountry = [];
+  var getstate = [];
+  var flagreason = [];
+  var Communication = [{
+    "ID": 1,
+    "Name": "Poor"
+  }, {
+    "ID": 2,
+    "Name": "Average"
+  }, {
+    "ID": 3,
+    "Name": "Good"
+  }, {
+    "ID": 4,
+    "Name": "Very Good"
+  }
+  ];
+  var willingtoreloaction = [{
+    "ID": 1,
+    "Name": "Yes"
+  }, {
+    "ID": 0,
+    "Name": "No"
+  }]
+
+  $("#rrm_onboard_profileentrypointmodel").load("components/rrmonboard/rrmonboardprofileentrypointmodal.html");
+  //set max date for datepicker
+  maxdate = new Date();
+  // subtract one day from specified time
+  maxdate.setDate(maxdate.getDate() - 1);
+  maxdate.toLocaleDateString();
+
+  function resetForm() {
+    loadcandidatedetailsform()
+
+    $(".candidateAlreadyExist").addClass('hidden');
+    $(".newCandidateForm").addClass('hidden');
+    $("a.btnNext").addClass('hidden');
+  }
+
+  function initializeRRMOnBoardProfileEntryPoint() {
+    // addRRMOnBoardProfileEntryPointJs = AddRRMOnBoardForProfileEntryPoint();
+    editRRMOnBoardProfileEntryPointJs = EditRRMOnBoardForProfileEntryPoint();
+    previewOnBoardProfileEntryPointJs = PreviewRRMOnBoardForProfileEntryPoint();
+  }
+
+  var rrmProfileType;
+var rrmId;
+  function EditOnBoard(e,id) {
+    rrmId=id;
+    candidateIdForSkillAndWorkExperience = null;
+    loadcandidatedetailsforms(id);
+    $('#RRMOnBoardProfileEntryPointTableModel').modal("show");
+    //$("#modelText").text("Edit Candidate Entry");
+    CandidateProfileId = e;
+    editRRMOnBoardProfileEntryPointJs.RRMEntryProfileForm(CandidateProfileId);
+    rrmProfileType = "edit";
+    // rrmProfileType = $(e.currentTarget).data("type");
+    //getCandidateNotesHistory(CandidateProfileId);
+    //to start with first tab
+    $('.nav-tabs a[href="#rrm_OnBoardCandidateContactDetails"]').tab("show");
+    $("#btnOnBoardbanprofile").hide();
+    var isBannedProfile = !($("#rrmonboardprofile-bannedprofilewarning").hasClass('hidden'))
+    if (isBannedProfile)
+      $("a.btnNext").hide();
+    else
+      $("a.btnNext").show();
+    $("a.btnSaveAndContinue").show();
+    $(".saveFamilyBtn").hide();
+    $(".btnPrevious").hide();
+  }
+
+  function PreviewOnBoard(e,id) {
+    rrmId=id;
+    candidateIdForSkillAndWorkExperience = null;
+    loadcandidatedetailsforms(id);
+    $('#RRMOnBoardProfileEntryPointTableModel').modal("show");
+    CandidateProfileId = e;
+    previewOnBoardProfileEntryPointJs.RRMEntryProfileForm(CandidateProfileId);
+    rrmProfileType = "preview";
+    $('.nav-tabs a[href="#rrm_OnBoardCandidateContactDetails"]').tab("show");
+    $("#btnOnBoardbanprofile").hide();
+    var isBannedProfile = !($("#rrmonboardprofile-bannedprofilewarning").hasClass('hidden'))
+    if (isBannedProfile)
+      $("a.btnNext").hide();
+    else
+      $("a.btnNext").show();
+    $("a.btnSaveAndContinue").show();
+    $(".saveFamilyBtn").hide();
+    $(".btnPrevious").hide();
+  }
+
+  $(document).on("click", "#bindexistingcandidates", function (e) {
+    showexistusers(e)
+  });
+
+  function showexistusers(e) {
+    $("#bindexistingcandidates").text("");
+
+    //to start with first tab
+    $('.nav-tabs a[href="#rrm_OnBoardCandidateContactDetails"]').tab("show");
+    //$("#btnbanprofile").hide();
+    $("a.btnNext").show();
+    $("a.btnSaveAndContinue").show();
+    $(".saveFamilyBtn").hide();
+    $(".btnPrevious").hide();
+
+    // loadcandidatedetailsforms();
+    $('#RRMOnBoardProfileEntryPointTableModel').modal("show");
+    $("#modelText").text("Edit Candidate Entry");
+    var CandidateProfileId = $("#bindexistingcandidates").val();
+    editRRMOnBoardProfileEntryPointJs.RRMEntryProfileForm(CandidateProfileId);
+    rrmProfileType = "edit";
+
+    //to start with first tab
+    $('.nav-tabs a[href="#rrm_OnBoardCandidateContactDetails"]').tab("show");
+    //$("#btnbanprofile").hide();
+    $("a.btnNext").show();
+    $("a.btnSaveAndContinue").show();
+    $(".saveFamilyBtn").hide();
+    $(".btnPrevious").hide();
+  }
+
+  function banRRMOnBoardProfile() {
+    // $("#rrm_onboard_candidatecommunication").dxSelectBox("instance").option('value', '');
+    // $("#banonboardtxtareaComments").dxHtmlEditor("instance").option('value', '');
+    swal({
+      title: "Are you sure?",
+      text: "You want to ban the candidate from G2 interview process? This operation is irreversible.\n Please select the reason and share the comments. ",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then((res) => {
+        $('#RPMOnBoardBanModel').modal("show");
+        $('#rrm_onboard_bancandidateerror').html("");
+        $('#rrm_onboard_bancommentsError').html("");
+      })
+  }
+
+  function flagthiscandidates() {
+    var banreason = $("#rrm_onboard_bancandidate").dxSelectBox("instance").option('value');
+    var reasonComments = $("#banonboardtxtareaComments").dxHtmlEditor("instance").option('value');
+   
+    if (banreason == "" || banreason == undefined || reasonComments == "" || reasonComments == undefined) {
+      if (banreason == "" || banreason == undefined) {
+        //$('#rrm_onboard_bancandidate').addClass('input-error');
+        $('#rrm_onboard_bancandidateerror').html("Please Select Reason");
+      }
+      else {
+        //$('#rrm_onboard_bancandidate').removeClass('input-error');
+        $('#rrm_onboard_bancandidateerror').html("");
+      }
+      if (reasonComments == "" || reasonComments == undefined || reasonComments == null) {
+        $('#rrm_onboard_bancomments').addClass('input-error');
+        $('#rrm_onboard_bancommentsError').html("Please Enter Comments");
+      }
+      else {
+        $('#rrm_onboard_bancomments').removeClass('input-error');
+        $('#rrm_onboard_bancommentsError').html("");
+      }
+    }
+    else {
+      swal({
+        title: "Are you sure?",
+        text: "you want to ban the candidate from G2 interview process? This operation is irreversible.\n Please select the reason and share the comments.",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((res) => {
+          dataComments = {
+            "Method": "PostCandidateFlagged",
+            "Data": {
+              "Token": Token,
+              "CandidateId": CandidateProfileId,
+              "CandidateFlagMasterId": banreason,
+              "Comments": reasonComments,
+              "IsActive": 'True'
+            }
+          }
+
+          //var resultComments = PostDataCall(dataComments);
+          PostDataCallAsync(dataComments, function (resultComments) {
+            if (resultComments.IsSuccess == true) {
+              swal({
+                title: "Success!",
+                text: "Candidate has been Flagged Successfully",
+                icon: "success",
+                button: "ok!",
+              });
+              
+              $('#RPMOnBoardBanModel').modal("hide");
+              $('#RRMOnBoardProfileEntryPointTableModel').modal("hide")
+            }
+          });
+        })
+    }
+  }
+  $(document).on("click", "#RRMOnBoardcandidateresumedownload", function (e) {
+        getcandidateresume(e)
+    })
+    function getcandidateresume(e) {
+        CandidateProfileId = $(e.currentTarget).data("profile");
+        var filterData = JSON.stringify({
+            "IsActive": true,
+            "CandidateId": CandidateProfileId,
+            "Token": Token
+        });
+
+        callGetListSync('GetCandidateResume', filterData, function (e) {
+            saveByteArray(e[0].CandidateId, e[0].Content, e[0].Extension)
+        })
+
+        function saveByteArray(reportName, byte, extension) {
+            var blob = new Blob([byte], { type: "application/"+extension+"" });
+            var link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            var fileName = reportName;
+            link.download = fileName;
+            link.click();
+        };
+    }
+    function downloadProfileResumeForRRMOnBoard(FileId){
+        // swal({
+        //     title: "Are you sure?",
+        //     text: "You want to download the Resume",
+        //     icon: "warning",
+        //     buttons: true,
+        //   })
+        //   .then((willDownload) => {
+        //     if (willDownload) {
+              window.open(SynergyAPIURL + "DownloadFile?query=GetDownloadProfileResume&filters={'FileId':'" + FileId + "'}&Token=" + localStorage.getItem("securityToken") , '_blank');
+        //     }
+        //   });
+    }
+
+</script>

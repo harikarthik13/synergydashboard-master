@@ -1,0 +1,53 @@
+<link href="components/assignleadtobackupresource/css/style.css" rel="stylesheet" />
+<div class="card-detail">
+  <span class="card-detail-title"><b>Assign Backup Lead</b></b></span>
+  <hr/>
+  <div id="sddgd-assignbackuplead"></div>
+</div>
+<!-- Modal Starts Here -->
+<div class="modal fade steps-model assignbacklead" id="assignbackleadModel" role="dialog"
+  aria-labelledby="BLModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" class="close" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+        <h2 class="modal-title" id="BLModalLabel">Assign Backup Lead</h2>
+      </div>
+
+      <div class="modal-body" data-simplebar>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td>Employee Name</td>
+              <td>Designation</td>
+              <td>Backup Lead</td>
+            </tr>
+          </thead>
+          <tbody id="AssignBackupTable">
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-md btn-primary" id="update_BL" onclick="updateBacklead()">Add</button>
+        <button type="button" data-dismiss="modal" class="btn btn-secondary btn-md">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Ends Here -->
+
+<script type="text/javascript">
+  function include_files(filename, onload) {
+    var head = document.getElementsByTagName('head')[0];
+    var script = document.createElement('script');
+    script.src = filename;
+    script.type = 'text/javascript';
+    head.appendChild(script);
+  }
+
+  include_files('./components/assignleadtobackupresource/js/script.js');
+</script>

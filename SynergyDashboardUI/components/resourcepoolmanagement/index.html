@@ -1,0 +1,476 @@
+<link rel="stylesheet" href="components/resourcepoolmanagement/css/resourcepoolmangement.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.tab button span{
+	color: red;
+    display: inline-block;
+    width: 15px;
+    line-height: 15px;
+    height: 15px;
+    /* background: white; */
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    top: -5px;
+}
+.tab button.active span {
+    color: #fff !important;
+}
+input#nre_wish_list {
+    margin-right: 5px;
+    margin-top: 0px;
+    zoom: 2;
+}
+input#inprojetc {
+    margin-right: 5px;
+    margin-top: 0px;
+    zoom: 2;
+}
+input#shadow {
+    margin-right: 5px;
+    margin-top: 0px;
+    zoom: 2;
+}
+    input[type=radio] {
+        transform: scale(2);
+    }
+    input[type=text] {
+        /*width :130px;
+  box-sizing : border-box;
+  border : 2px solid #ccc;
+  border-radius: 4px;*/
+        font-size: 16px;
+        background-color: white;
+        background-image: url('searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        /*padding: 12px 20px 12px 40px; Following code is commented because, column alignment was not possible. Preventing devextreme default functionality -webkit-transition: width 0.4s ease-in-out; */
+        -webkit-transition: width 0.4s ease-in-out;
+        transition: width 0.4s ease-in-out;
+    }
+
+input[type=text] {
+  width: 100%;
+}
+
+.tab button.active {
+    background-color: green;
+    color: #fff;
+}
+#projectid thead tr {
+    display: table-row !important;
+}
+#tblwoexpired thead tr {
+    display: table-row !important;
+}
+#tblnonbillable thead tr {
+    display: table-row !important;
+}
+#tblshadow thead tr {
+    display: table-row !important;
+}
+#tblbenchsearch thead tr {
+    display: table-row !important;
+}
+#tblconsultant thead tr {
+    display: table-row !important;
+}
+
+#conslt_txtprojectlead{
+height:70px !important;
+}
+.resourcetable{width: 50%;margin-left: auto;margin-right: auto;}
+.resourcetable td p span{background: #e9e9e9;padding: 5px 15px;border: 1px solid #ddd;margin: 5px;font-weight: 550;color: #dd2c36;}
+.resourcetable td p {font-weight: 600;display: block;width: 100%;margin-bottom: 15px;font-size: 12px !important;text-align: center;}
+.resourcetable td{text-align: left;padding: 12px !important;}
+.resourcetable th {font-size: 13px;text-align: center;padding: 12px !important;}
+@media (max-width: 767px) {
+  .resourcetable {width: 100%;}
+  .resourcetable td, .resourcetable th {text-align: center;padding: 7px !important;font-weight: 500;font-size: 12px !important;}
+  .resourcetable td p span{padding: 5px;}
+  .resourcetable td p {font-size: 12px !important;margin-top: 5px;font-weight: 500;}
+  }
+  @media (max-width: 991px) {
+    .resourcetable {width: 100%;}
+  }
+</style>
+<div id="HistoryPopupModelBox"></div>
+<div id="DeletedConsultantHistoryPopupModelBox"></div>
+<div class="card-detail">
+    <span class="card-detail-title"><b>Resource Pool Management</b> <sup><span style="color: red; font-weight: bold;" id="ResourceBillingCount"></span></sup></span>
+    <hr />
+    <!-- <table class="table table-striped resourcetable" style="cursor: default">
+      <thead>
+          <th>Resources on Billing</th>
+          <th>Effective Resources on Billing</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <p>Count: <span id="ResBillCount"></span></p>
+          <p> Percentage: <span id="ResBillPercentage"></p>
+          </td>
+          <td>
+            <p>Count: <span id="EffResBillCount"></span></p>
+            <p>Percentage: <span id="EffResBillPercentage"></span></p>
+          </td>
+        </tr>
+          
+      </tbody>
+  </table> -->
+
+    <div class="tab">
+        <button class="tablinks" id="btninproject" onclick="opentab(event, 'InProjects')">In Projects <span style="color: red" id="InProjectscount"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'WOExpired')">WO Expired <span style="color: red" id="WOExpiredListcount"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'NonBillable')">Non-Billable <span style="color: red" id="GetNonBillableListcount"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'Shadow')">Shadow <span style="color: red" id="ShadowListcount"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'Bench')">Bench <span style="color: red" id="BenchListcount"></span></button>
+        <button class="tablinks" onclick="opentab(event, 'Consultants')">Consultants <span style="color: red" id="ConsultantsListcount"></span></button>
+    </div>
+    <div id="resourcemanagementpool-tabConent">
+        <div id="InProjects" class="tabcontent">
+            <div class="table-responsive">
+                <div id="tblinprojectsList"></div>
+            </div>
+        </div>
+
+
+        <div id="WOExpired" class="tabcontent">
+            <div class="table-responsive">
+                <div id="tblWOExpiredList"></div>
+            </div>
+        </div>
+
+        <div id="NonBillable" class="tabcontent">
+            <div class="table-responsive">
+
+                <div id="tblNonBillableList"></div>
+            </div>
+        </div>
+
+        <div id="Shadow" class="tabcontent">
+            <div class="table-responsive">
+
+                <div id="tblShadowList"></div>
+            </div>
+        </div>
+
+        <div id="Bench" class="tabcontent">
+            <div class="table-responsive">
+                <div id="tblBenchList"></div>
+            </div>
+        </div>
+        <div id="Consultants" class="tabcontent">
+            <span class="pull-right">
+                <button class="btn btn-sm btn-primary" onclick="consultantModel();">
+                    <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+                </button>
+            </span>
+            <!--<form>
+                <input type="text" placeholder="Search.." id="consultantsearch" name="search" style="visibility: hidden;">
+            </form>-->
+            <br />
+            <div class="table-responsive">
+                <div id="tblConsultantsList"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- model starts -->
+<div class="modal fade" id="rpmmodel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick=""><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+          <h2 class="modal-title" id="rrmModalLabel">Add Status</h2>
+       </div>
+  
+        <div class="modal-body" data-simplebar>
+		 <div class="tab-content col-md-12">
+	<input type="hidden" id="empidval" name="Id">	
+	<div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Employee Code<span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtemployeeCode" id="rpm_txtemployeeCode" readonly />
+                      <span class="error_message" id="txtemployeeCodeerror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Employee Name<span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtemployeeName" id="txtemployeeName" readonly />
+                      <span class="error_message" id="txtemployeeNameerror"></span>
+                    </div>
+                  </div>
+                </div>
+				<div class="row">
+				 
+				<div class="col-md-12 btn-group">
+                        <form id='form-id' class="form-inline">
+                            <div class="form-group col-md-3">
+                                 <input id='rbench' class="radioallign" name='test' type='radio' checked />
+                                <label for="bnch" style="margin-left: 10px;">Move to Bench
+								 </label>
+								</div>
+                            <div class="form-group left-sp col-md-3">
+                                <input id='rproject' class="radioallign" name='test' type='radio' />
+                                <label for="lblproject" style="margin-left: 10px;">In Project
+								</label>
+								</div>
+							<div class="form-group left-sp col-md-3">
+                               <input id='rshadow' class="radioallign" name='test' type='radio' />
+                                <label for="lblshadow" style="margin-left: 10px;">Shadow
+								</label>
+								 </div>
+                        </form>
+                    </div>                  
+				</div>
+			<div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Project <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtProject" id="txtProject" placeholder="Project"/>
+                      <span class="error_message" id="txtProjecterror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Client  <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtclient " id="rpm_txtclient"  placeholder="Client"/>
+                      <span class="error_message" id="rpmclienterrormsg"></span>
+                    </div>
+                  </div>
+            </div>
+			<div class="row">                   
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Till Date<span style="color: red">*</span></label>
+                      <input type="date" class="form-control" id="dttilldate" />
+                      <span class="error_message" id="dttilldateerror"></span>
+				
+                    </div>
+                  </div>
+				  </div>
+			<div class="row">
+                   <div class="col-md-8">
+                    <div class="form-group">
+                      <label>Project Lead<span style="color: red">*</span> </label>
+                     <!-- <input type="text" class="form-control" name="txtprojectlead" id="txtprojectlead" /> -->
+				<select class="form-control select_user_lead" id="txtprojectlead" multiple="multiple" style="width:100%;">
+                            </select>
+					 <span class="error_message" id="rpmtxtprojectleaderror"></span>
+                    </div>
+  
+                  </div>
+                </div>
+			<div class="row">
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Occupied Hours<span style="color: red">*</span></label>
+                      <input type="number" class="form-control" min="1" max="50" name="occupiedHours" id="occupiedHours" placeholder="Occupied Hours"/>
+                      <span class="error_message" id="occupiedHourserror"></span>
+                    </div>
+                  </div>
+				   <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Billable Hours <span style="color: red">*</span></label>
+                      <input type="number" class="form-control" min="1" max="50" name="billableHours" id="billableHours" placeholder="Billable Hours"/>
+                      <span class="error_message" id="billableHourserror"></span>
+                    </div>
+                  </div>
+				  </div>
+				
+		</div>
+		<div class="modal-footer">
+<div style="float:right">
+		<button type="button" class="btn btn-success"  onclick="updateresourcedetails()">Save</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+	</div>	
+        </div>        
+		</div>
+        </div>
+        </div>
+        </div>
+		
+<!-- ends here -->
+
+<!-- consultant model starts -->
+<div class="modal fade" id="consultantModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick=""><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+          <h2 class="modal-title" id="rrmModalLabel">Add Status</h2>
+       </div>
+  
+        <div class="modal-body" data-simplebar>
+		 <div class="tab-content col-md-12">
+		 <input type="hidden" id="consultantidval" name="Id">
+		   <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Employee Name<span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtemployeeCode" id="conslt_txtemployeename" placeholder="Employee Name" />
+                      <span class="error_message" id="conslttxtemployeenameerror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Email Id<span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtemployeeName" id="conslt_txtemployeemail" placeholder="Email Id" />
+                      <span class="error_message" id="conslttxtemployeemailerror"></span>
+                    </div>
+                  </div>
+                </div>
+				
+			<div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Phone Number <span style="color: red">*</span></label>
+                      <input type="number" class="form-control" name="txtPhone" id="phnum" placeholder="Phone Number"/>
+                      <span class="error_message" id="consltphnumerror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Skype Id  <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtclient" id="txtskypeid" placeholder="Skype Id"/>
+                      <span class="error_message" id="consltskypeiderror"></span>
+                    </div>
+                  </div>
+            </div>	
+			<div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Project <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="txtProject" id="conslt_txtProject" placeholder="Project"/>
+                      <span class="error_message" id="conslttxtProjecterror"></span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Client  <span style="color: red">*</span></label>
+                      <input type="text" class="form-control" name="conslt_txtclient" id="txtclient" placeholder="Client"/>
+                      <span class="error_message" id="consltclienterror"></span>
+                    </div>
+                  </div>
+                
+            </div>
+			<div class="row">                   
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Project Start Date<span style="color: red">*</span></label>
+                      <input type="date" class="form-control" id="dtprojectstartdate" />
+                      <span class="error_message" id="consltdtprojectstartdateerror"></span>
+                    </div>
+                  </div>
+				    <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Project End Date<span style="color: red">*</span></label>
+                      <input type="date" class="form-control" id="dtprojectenddate" />
+                      <span class="error_message" id="consltdtprojectenddateerror"></span>
+                    </div>
+                  </div>
+				  </div>
+			<div class="row">
+                   <div class="col-md-8">
+                    <div class="form-group">
+                      <label>Project Lead<span style="color: red">*</span> </label>
+                     <!-- <input type="text" class="form-control" name="txtprojectlead " id="conslt_txtprojectlead" /> -->
+				```<select class="form-control select_user_lead_consultant" id="conslt_txtprojectlead" multiple="multiple" style="width:100%; height:70%">
+                            </select>
+					 <span class="error_message" id="conslttxtprojectleaderror"></span>
+                    </div>
+                  </div>
+                </div>
+			<div class="row">
+			<div class="col-md-3">
+                    <div class="form-group">
+                      <label>Available Hours <span style="color: red">*</span></label>
+                      <input type="number" class="form-control" min="1" max="50" name="AvailableHours" id="conslt_AvailableHours" placeholder="AvailableHours"/>
+                      <span class="error_message" id="consltavailbleHourserror"></span>
+                    </div>
+                  </div>
+                   <div class="col-md-3">
+                    <div class="form-group">
+                      <label>Billable Hours <span style="color: red">*</span></label>
+                      <input type="number" class="form-control" min="1" max="50" name="billableHours" id="conslt_billableHours" placeholder="Billable Hours"/>
+                      <span class="error_message" id="consltbillableHourserror"></span>
+                    </div>
+                  </div>
+				  
+				  </div>
+				
+		</div>
+		<div class="modal-footer">
+<div style="float:right">
+		<button type="button" class="btn btn-success"  onclick="updateconsultantdata()">Save</button>
+		<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+	</div>	
+        </div>        
+		</div>
+        </div>
+        </div>
+        </div>
+		
+<!-- ends here -->
+<script>
+$(document).ready(function(){
+      rendershowinprojectsListGrid();
+       renderShowWOExpiredListGrid();
+       renderNonBillableList();
+       renderShadowList();
+       renderBenchList();
+       renderConsultantsList();
+       BillingCount();
+});
+var getLeadsList = callgetlist('GetBackupLeads','{"IsActive":"True"}');
+        var getLeadData = [];
+        if (getLeadsList.length > 0) {
+            getLeadsList.forEach(function (i, index) {
+                getLeadData.push({
+                    'id': i['Name'],
+                    'text': i['Name']
+                });
+            });
+        }
+ 
+   $(".select_user_lead").select2({
+            placeholder: "Select a Project lead",
+            allowClear: true,
+            data: getLeadData
+        });
+  $(".select_user_lead_consultant").select2({
+            placeholder: "Select a Project lead",
+            allowClear: true,
+            data: getLeadData
+        });
+</script>
+
+
+
+<script type="text/javascript" src="components/resourcepoolmanagement/script.js"></script>
+<script type="text/javascript" src="components/resourcepoolmanagement/resourcePoolMangementGrid.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

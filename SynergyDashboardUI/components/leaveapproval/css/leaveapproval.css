@@ -1,0 +1,71 @@
+
+  .textarealeavereason{
+      padding: 24px;
+  }
+
+  .labelreason{
+      padding-left: 24px;
+      padding-bottom: 2px;
+  }
+  .commentHistoryList{
+    height: 270px;
+    overflow-y: scroll;
+}
+.commentstring {
+    word-wrap: break-word;
+}
+.dateborder {
+    border-bottom: solid 2px;
+}
+.receiver .attachment a button i {
+   
+    color: #337ab7 !important;
+}
+
+#leaveapproval-dropzone .dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    font-family: Roboto, "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.4rem;
+    background: #F3F4F5;
+    color: #646C7F;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 10px;
+}
+
+#leaveapproval-dropzone .dropzone .dz-message {
+   font-weight: 400;
+   /* padding: 30px;
+   text-align: center; */
+}
+
+#leaveapproval-dropzone .dropzone .dz-preview.dz-image-preview {
+   background-color: transparent;
+}
+
+#leaveapproval-dropzone .dropzone .dz-preview .dz-error-message {
+   color: white;
+}
+
+#leaveapproval-dropzone .dropzone .dz-message .note {
+   font-size: 0.8em;
+   font-weight: 200;
+   display: block;
+   margin-top: 1.4rem;
+}
+
+#leaveapproval-dropzone .dz-progress{
+    display: none;
+}
+.attachment{
+    display: flex;
+}
+.attachment a{
+    margin-right: 1%;
+}
+.receiver_file button {
+    background-color: #fff !important;
+}

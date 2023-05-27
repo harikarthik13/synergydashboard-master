@@ -1,0 +1,151 @@
+<!-- Template Report Grid Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>Generic Meeting Report</b></span>
+    <!-- the below button for refresh Data -->
+    <span class="pull-right">
+        <button type="submit" class="btn btn-primary btn-xs pull-right" onclick="GenericMeetingReport_getReportData()">
+            <i class="glyphicon glyphicon-refresh" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+    <div id="GenericMeetingReport_reportGrid"></div>
+</div>
+
+<!-- internal script -->
+<script>
+    const GenericMeetingReport_ProcedureName = 'GenericMeetingReport'; //Change Prefix and Procedure Name Here
+
+    function GenericMeetingReport_getReportData() {
+        const dataForReport = callgetlist(GenericMeetingReport_ProcedureName, JSON.stringify({})); //Provide additional Parameters if any
+        if (dataForReport != null) {
+            renderdataForReportGrid(dataForReport);
+        }
+
+        function renderdataForReportGrid(data) {
+            var OpeningskillratingGrid = $("#GenericMeetingReport_reportGrid")
+                .dxDataGrid({
+                    filterRow: {
+                        visible: true,
+                        applyFilter: "auto",
+                    },
+                    dataSource: data,
+                    export: {
+                        enabled: true,
+                        allowExportSelectedData: true,
+                    },
+                    searchPanel: {
+                        visible: true,
+                        width: 240,
+                        placeholder: "Search...",
+                    },
+                    headerFilter: {
+                        visible: true,
+                    },
+                    grouping: {
+                        autoExpandAll: true,
+                    },
+                    pager: {
+                        showPageSizeSelector: true,
+                        allowedPageSizes: [5, 10, 20],
+                        showInfo: true,
+                    },
+                    paging: {
+                        pageSize: 10,
+                    },
+                    groupPanel: {
+                        visible: true,
+                        emptyPanelText: "Drag a column"
+                    },
+                    sorting: {
+                        mode: "multiple",
+                    },
+                    selection: {
+                        mode: "multiple",
+                    },
+                    editing: {
+                        mode: "popup",
+                        allowAdding: false,
+                        allowUpdating: false,
+                        useIcons: true,
+                    },
+                    columnChooser: {
+                        enabled: true,
+                    },
+                    rowAlternationEnabled: true,
+                    //filterPanel: { visible: true },
+                    allowColumnReordering: true,
+                    allowColumnResizing: true,
+                    showBorders: true,
+                    columns: [
+                        {
+                            caption: "#",
+                            dataField: "sno",
+                            cssClass: "rno",
+                            allowGrouping: false,
+                            allowCollapsing: false,
+                            allReordering: false,
+                            width: 70,
+                            cellTemplate: function (container, options) {
+                                container.text(
+                                    OpeningskillratingGrid.pageIndex() * OpeningskillratingGrid.pageSize() + options.rowIndex + 1
+                                );
+                            },
+                        },
+                        {
+                            caption: "Employee Name",
+                            dataField: "EmployeeName",
+                        },
+                        {
+                            caption: "Employee Number",
+                            dataField: "EmployeeNumber"
+                        },
+                        {
+                            caption: "Name",
+                            dataField: "Name"
+                        },
+                        {
+                            caption: "Description",
+                            dataField: "Description"
+                        },
+                        {
+                            caption: "MeetingType",
+                            dataField: "MeetingType"
+                        },
+                        {
+                            caption: "MeetingDate",
+                            dataField: "MeetingDate",
+                            dataType: "date",
+                            format: "dd-MMM-yy"
+                        },
+                        {
+                            caption: "IsPresent",
+                            dataField: "IsPresent"
+                        }
+
+                    ],
+                })
+                .dxDataGrid("instance");
+        }
+
+
+        //if(dataForReport !== null && dataForReport.length > 0){
+        //    let columns = [];
+        //    $.each(dataForReport[0],function(index,value){
+        //        columns.push({
+        //            caption: index, dataField: index
+        //        });
+        //    });
+        //    let options = getDevExtremeGridJson();
+        //    options.dataSource = dataForReport;
+        //    options.columns = columns;
+        //    options.stateStoring = {
+        //        enabled: true,
+        //        type: "localStorage",
+        //        storageKey: "GenericMeetingReport_reportGridState" 
+        //    };
+        //    $("#GenericMeetingReport_reportGrid").dxDataGrid(options).dxDataGrid("instance"); 
+        //}
+    }
+
+    GenericMeetingReport_getReportData();
+</script>

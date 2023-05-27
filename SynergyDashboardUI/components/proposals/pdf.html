@@ -1,0 +1,435 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link href="components/proposals/css/pdf/pdf-style.css" rel="stylesheet" media="screen">
+    <link href="components/proposals/css/pdf/print.css" rel="stylesheet" media="print">
+    <script type="text/javascript" src="components/proposals/js/assign.js"></script>
+    <script type="text/javascript" src="js/callapi.js"></script>
+</head>
+<body>
+
+    <!-- <span id="bde_id" style="display: none"></span> -->
+    <span id="assignedto" style="display: none"></span>
+    <span id="doc_type" style="display: none"></span>
+    <span id="RFP_ICode" style="display: none;"></span>
+    <button class="download_content" style="display: none" onclick="IsDownload()">Download PDF</button>
+    <div class="pdf_main_div">
+        <!-- page-1 -->
+        <table class="Estimation_details" border="0">
+            <tbody>
+                <tr>
+                    <td border="0">Estimation No: <span id="pdf_estimation_number"></span></td>
+                    <td align="right" border="0" id="docVersion">Document Version <span id="version_no"></span>.0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="page print-row page_1" id="pdf_id1">
+            <div class="fitpage">
+                <div class="pdf-head">
+                    <img id="imgProposalsPDFLogo" alt="">
+                </div>
+                <div class="name-section" style=" width: 100%;
+    /* content-color:#eee!important; */
+    padding: 15px;
+    height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+                <h1 class="pdf_document_name"></h1>
+            </div>
+            <div class="about-info">
+                <div class="about_pdf">
+                    <!-- <h4>Contact person: <span id="pdf_contact_person"></span></h4> -->
+                    <h4>Company: <span id="pdf_client_name"></span></h4>
+                </div>
+                <div class="address">                    
+                    <h4>Address: </h4>
+                    <p id="pdf_proposal_address"></p>
+                </div>
+                <div class="company_address">
+                    <!-- <p>Document prepared by <span class="pdf_PreparedBy"></span></p> -->
+                    <p>G2 TECHNOLOGY SOLUTIONS INDIA PVT LTD ., S.F. No. 174 2, First Floor, Vellakinar Pirivu, (Po),<br>
+                        Thiruvalluvar St, GN Mills, Coimbatore, Tamil Nadu 641029</p>
+                    <p><strong>Website</strong> <a href="http://www.g2techsoft.com/">http:www.g2techsoft.com</a>, Contact: +1 818-357-2282</p>
+                </div>
+            </div>
+        </div>
+        <!-- page-1 -->
+        <div class="page-break"></div>
+        <!-- page-2 -->
+        <div class=" page print-row page_3" >
+            <div class="about_us"> 
+                <h2>About us</h2>
+                <p id="paraProposalsPDFAboutus1"></p>
+            </div>
+            <div class="about_us_content" id="aboutUsBackgroundImg" style="
+    background-repeat:no-repeat;">
+                <p id="paraProposalsPDFAboutus2"></p>
+            </div>
+            <div class="about_us_img">
+                <img id="aboutUsGroupImage" src="" alt="">
+            </div>
+            <div class="aboutus_icons" id="countBackgroundImage" style="
+    background-repeat:no-repeat;
+    background-size:100% auto;">
+                <div class="col-md-4">
+                    <img id="experianceImage" src="" alt="experience" />
+                    <h2 id="experianceCount" class="number"></h2>
+                    <p>Years Experience</p>
+                </div>
+                <div class="col-md-4">
+                    <img id="projectsDeliveredImage" src="" alt="experience" />
+                    <h2 id="projectsDeliveredCount" class="number"></h2>
+                    <p>projects delivered sucessfully</p>
+                </div>
+                <div class="col-md-4">
+                    <img id="happyClientsImage" src="" alt="experience" />
+                    <h2 id="happyClientsCount" class="number"></h2>
+                    <p>happy clients</p>
+                </div>
+                <div class="col-md-4">
+                    <img id="experiancedProfessionalsImage" src="" alt="experience" />
+                    <h2 id="experiancedProfessionalsCount" class="number"></h2>
+                    <p>exprienced professionals</p>
+                </div>
+            </div>
+        </div>
+                <!-- page-2 -->
+        <div class="page-break"></div>
+        <!-- page-3 -->
+        <div class="page print-row page_2" id="pdf_id2">
+            <div class="table_of_contents">
+                <h2>Table of Contents</h2>
+                <!-- <p><span class="bold">About us</span></p> -->
+                <ol>
+                    <a href="#revision_history_scroll"><li id="Revision_history_title"></li>
+                        <p id="Prepared_by"></p>
+                        <p id="Estimated_by"></p>
+                        <p id="Reviewed_by"></p></a>
+                    <a href="#user_story_scroll"><li id="User_story"></li></a>   
+                    <a href="#estimation_table_scroll"><li id="Estimation_pricing"  class="pdf_EstimationTable" ></li></a>
+                    <a href="#assumptions_scroll"><li id="Assumptions"></li></a>
+                    <a href="#out_of_scope_scroll"><li id="Out_of_scope"></li></a>
+                    <a href="#other_notes_scroll"><li id="Other_notes"></li></a>
+                    <a href="#technology_environment_scroll"><li id="Technology_environment"></li>
+                        <p id="technology_title"></p>
+                        <p id="environment_title"></p>
+                        <p id="backend_title"></p></a>
+                    <a href="#suggestions_scroll"><li id="Suggestion"></li></a>
+                    <a href="#project_deliverable_scroll"><li id="Project_deliverable"></li></a>
+                </ol>
+                    <!-- <a href="#feature_list_scroll"><li id="Feature_list"></li></a> -->
+                
+            </div>
+        </div>
+        <!-- page-3 -->
+        <div class="page-break"></div>
+        <!-- page-4 -->
+        <ol class="list">
+        <div class="print-row page_4">
+            <div class="Revision_history">
+                <h2><li id="revision_history_scroll">Revision History</li></h2>
+                <h4>Prepared by</h4>
+                <p class="pdf_PreparedBy"></p>
+                <h4>Estimated by</h4>
+                <p id="pdf_EstimatedBy"></p>
+                <h4>Reviewed by</h4>
+                <p id="pdf_ReviewedBy"></p>
+            </div>
+        </div>
+        <!-- page-4 -->
+        <div class="page-break"></div>
+        <!-- page-5 -->
+        <div class="print-row page_5">
+            <div class="user_story_block">
+                <!-- <div class="user_story" id="user_story_scroll"> -->
+                    <h2 class="user_story" id="user_story_scroll">2. <span id="pdf_UserStoryHeading">User Story / Understanding</span></h2>
+                    <!-- <p>We will be developing a mobile application for customer and vendor as explained below.</p> -->
+                    <div id="pdf_UserStory"></div>
+                <!-- </div> -->
+            </div>
+        </div>
+        <!-- page-5 -->
+        <div class="page-break"></div>
+        <!-- page-6 -->
+        <!-- <div class="print-row page_7">
+            <div class="feature_list" id="feature_list_scroll">
+            <h2>3. Feature list based on the above <span id="pdf_UserStoryHeadingEstimate">user story / understanding</span></h2>
+            <div id="pdf_Estimate"></div>
+         </div>
+        </div> -->
+        <!-- page-6 -->
+        <div class="page-break"></div>
+        <!-- page-7 -->
+        <div class="print-row page_7">
+            <div class="estimation">
+                <h2 id="estimation_table_scroll">4. <span id="pdf_EstimationTable" class="pdf_EstimationTable">Estimation & Pricing</span></h2>
+                <span class="estimation_table" id="pdf_EstimatePricing">
+                </span>
+                <span class="estimation_content">
+                    <p>The estimated cost for analysis, design, development, testing and implementation of the <span class="textprimary">“<span class="pdf_document_name"></span>”</span> </span>works out to <span class="total_value_estimate"></span>(<span class="selected_currency_value"></span>)</p>
+                    <p class="primaryblock"><span class="textsecondary">Payment Schedule:</span> The payment schedule shall be decided at the time of signing the work order and will be based on the deliverables with an initial payment at the time of signup.</p>
+                </span>
+            </div>
+        </div>
+        <!-- page-7 -->
+        <div class="page-break"></div>
+        <!-- page-8 -->
+        <div class="print-row page_8">
+            <div class="assumptions_block">
+                <h2><li id="assumptions_scroll"><span id="assumptions_pdf">Assumptions</span></li></h2>
+                <div class="assumptions">
+                    <p id="pdf_Assumptions"></p>
+                </div>
+            </div>
+
+            <div class="outofscope_block">
+                <h2><li id="out_of_scope_scroll"><span id="outOfScope_pdf">Out of Scope</span></li></h2>
+                <div class="out_of_scope" >
+                    <p id="pdf_OutOfScope"></p>
+                </div>
+            </div>
+
+            <div class="other_notes_block">
+                <h2><li id="other_notes_scroll"><span id="othernote_pdf">Other Notes</span></li></h2>
+                <div class="other_notes">
+                    <p id="pdf_OtherNotes"></p>
+                </div>
+            </div>
+        </div>
+        <!-- page-8 -->
+        <div class="page-break"></div>
+        <!-- page-9 -->
+        <div class="print-row page-9">
+            <div class="technology_environment_block">
+                <h2><li id="technology_environment_scroll">Technology and Environment</li><h2></h2>
+                <div class="Technology">
+                    <div class="technology_block">
+                        <ul>
+                            <li>
+                                <b>Technology</b>
+                                <ul>
+                                    <li id="pdf_Technology"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="environment_block">
+                        <ul>
+                            <li>
+                                <b>Environment</b>
+                                <ul>
+                                    <li id="pdf_Environment"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="backend_block">
+                        <ul>
+                            <li>
+                                <b>Backend</b>
+                                <ul>
+                                    <li id="pdf_BackEnd"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- page-9 -->
+        <div class="page-break"></div>
+        <!-- page-10 -->
+        <div class="print-row page-10">
+            <div class="suggestions_block">
+                <h2><li id="suggestions_scroll"><span id="suggestions_pdf">Suggestions</span></li></h2>
+                <div class="suggestions">
+                    <!-- <p>We propose to go for a Fix-bid basis for this project.</p> -->
+                    <p id="pdf_Suggestions"></p>
+                </div>
+            </div>
+
+            <div class="project_deliverable_block">
+                <h2><li id="project_deliverable_scroll">Project Deliverables</li></h2>
+                <div class="project_deliverable" id="pdf_Deliverables"></div>
+            </div>
+        </div>
+        <!-- page-10 -->
+        </ol>
+    </div>
+    <!-- <script type="text/javascript" src="../main/js/library/jquery-1.11.1.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-1.11.1.js"></script> -->
+    <!-- <script src="../main/js/library/jquery-1.11.1.min.js"></script>
+    <script src="../main/js/library/jquery.smartWizard.js"></script> -->
+    <!-- <script type="text/javascript" src="components/proposals/js/pdf/html2canvas.js"></script>
+    <script type="text/javascript" src="components/proposals/js/pdf/jspdf.debug.js"></script>
+    <script type="text/javascript" src="components/proposals/js/pdf/jspdf.min.js"></script> -->
+    <script>
+        var $employee_id = localStorage.getItem("EmployeeID");
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"104"}');
+        var conResult1 = result[0].Content
+        $('#imgProposalsPDFLogo').attr('src', companyFilesPath + conResult1);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"105"}');
+        var conResult2 = result[0].Content
+        $('#lblProposalsPDFAdd1').html(conResult2);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"106"}');
+        var conResult3 = result[0].Content
+        $('#lblProposalsPDFAdd2').html(conResult3);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"107"}');
+        var conResult4 = result[0].Content
+        $('#anchorProposalsPDFWebsite').html(conResult4);
+        $('#anchorProposalsPDFWebsite').attr("href", conResult4);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"108"}');
+        var conResult5 = result[0].Content
+        $('#anchorProposalsPDFPhone').html('Contact: ' + conResult5);
+        $('#anchorProposalsPDFPhone').attr("href", 'tel:' + conResult5);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"109"}');
+        var conResult6 = result[0].Content
+        $('#paraProposalsPDFAboutus1').html(conResult6);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"110"}');
+        var conResult7 = result[0].Content
+        $('#paraProposalsPDFAboutus2').html(conResult7);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"111"}');
+        var conResult8 = result[0].Content
+        $('#aboutUsBackgroundImg').css("background-image", "url(" + conResult8 + ")");
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"112"}');
+        var conResult9 = result[0].Content
+        $('#aboutUsGroupImage').attr("src", companyFilesPath + conResult9);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"113"}');
+        var conResult10 = result[0].Content
+        $('#countBackgroundImage').css("background-image", "url(" + conResult10 + ")");
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"114"}');
+        var conResult11 = result[0].Content
+        $('#experianceImage').attr("src", companyFilesPath + conResult11);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"115"}');
+        var conResult12 = result[0].Content
+        $('#experianceCount').html(conResult12);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"116"}');
+        var conResult13 = result[0].Content
+        $('#projectsDeliveredImage').attr("src", companyFilesPath + conResult13);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"117"}');
+        var conResult14 = result[0].Content
+        $('#projectsDeliveredCount').html(conResult14);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"118"}');
+        var conResult15 = result[0].Content
+        $('#happyClientsImage').attr("src", companyFilesPath + conResult15);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"119"}');
+        var conResult16 = result[0].Content
+        $('#happyClientsCount').html(conResult16);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"120"}');
+        var conResult17 = result[0].Content
+        $('#experiancedProfessionalsImage').attr("src", companyFilesPath + conResult17);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"121"}');
+        var conResult18 = result[0].Content
+        $('#experiancedProfessionalsCount').html(conResult18);
+
+        $(".download_content").click(function () {
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"104"}');
+            var conResult1 = result[0].Content
+            $('#imgProposalsPDFLogo').attr('src', companyFilesPath + conResult1);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"105"}');
+            var conResult2 = result[0].Content
+            $('#lblProposalsPDFAdd1').html(conResult2);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"106"}');
+            var conResult3 = result[0].Content
+            $('#lblProposalsPDFAdd2').html(conResult3);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"107"}');
+            var conResult4 = result[0].Content
+            $('#anchorProposalsPDFWebsite').html(conResult4);
+            $('#anchorProposalsPDFWebsite').attr("href", conResult4);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"108"}');
+            var conResult5 = result[0].Content
+            $('#anchorProposalsPDFPhone').html('Contact: ' + conResult5);
+            $('#anchorProposalsPDFPhone').attr("href", 'tel:' + conResult5);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"109"}');
+            var conResult6 = result[0].Content
+            $('#paraProposalsPDFAboutus1').html(conResult6);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"110"}');
+            var conResult7 = result[0].Content
+            $('#paraProposalsPDFAboutus2').html(conResult7);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"111"}');
+            var conResult8 = result[0].Content
+            $('#aboutUsBackgroundImg').css("background-image", "url(" + conResult8 + ")");
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"112"}');
+            var conResult9 = result[0].Content
+            $('#aboutUsGroupImage').attr("src", companyFilesPath + conResult9);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"113"}');
+            var conResult10 = result[0].Content
+            $('#countBackgroundImage').css("background-image", "url(" + conResult10 + ")");
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"114"}');
+            var conResult11 = result[0].Content
+            $('#experianceImage').attr("src", companyFilesPath + conResult11);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"115"}');
+            var conResult12 = result[0].Content
+            $('#experianceCount').html(conResult12);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"116"}');
+            var conResult13 = result[0].Content
+            $('#projectsDeliveredImage').attr("src", companyFilesPath + conResult13);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"117"}');
+            var conResult14 = result[0].Content
+            $('#projectsDeliveredCount').html(conResult14);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"118"}');
+            var conResult15 = result[0].Content
+            $('#happyClientsImage').attr("src", companyFilesPath + conResult15);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"119"}');
+            var conResult16 = result[0].Content
+            $('#happyClientsCount').html(conResult16);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"120"}');
+            var conResult17 = result[0].Content
+            $('#experiancedProfessionalsImage').attr("src", companyFilesPath + conResult17);
+
+            var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"121"}');
+            var conResult18 = result[0].Content
+            $('#experiancedProfessionalsCount').html(conResult18);
+
+            window.print();
+            // window.close();
+        })
+        var assignedto = $('#assignedto').html();
+        var Document_Type = $('#doc_type').html();
+
+        // if (assignedto == $employee_id && Document_Type == 'C') {
+            $(".download_content").css("display", "block");
+        // } else {
+        //     $(".download_content").css("display", "none");
+        // }
+    </script>
+</body>
+</html>

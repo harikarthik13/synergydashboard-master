@@ -1,0 +1,148 @@
+<div class="john-trail card-detail">
+    <!-- Add "modal-not-include" to a div for which we dont want to show them in modal  -->
+    <span class="modal-not-include">
+        <span class="card-detail-title"><b>Resignation</b></span>
+        <!-- <button type="button" id="btnleaveDetail" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv pull-right">
+            <i class="fa fa-expand"></i>
+        </button> -->
+        <!-- <button type="button" id="btnResign" onclick="openResign()" class="btn btn-success pull-right">
+            Resign your position
+        </button> -->
+        <hr>
+    </span>
+    
+
+    <div class="row modal-not-include">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <table id="noDueTbl" class="table table-striped removetable">
+              <thead>
+                <th>No</th>
+                <th>Employee</th>
+                <th>Resignation Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><i class="fa fa-user-circle"></i>Emp1</td>
+                  <td>11-06-2019</td>
+                  <td>Pending</td>
+                  <td><button class="btn btn-primary" onclick="showEmpAns()">view</button></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><i class="fa fa-user-circle"></i>Emp1</td>
+                  <td>11-06-2019</td>
+                  <td>Pending</td>
+                  <td><button class="btn btn-primary">view</button></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><i class="fa fa-user-circle"></i>Emp1</td>
+                  <td>11-06-2019</td>
+                  <td>Pending</td>
+                  <td><button class="btn btn-primary">view</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+</div>
+
+<!-- Resignation Details modal-->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal-ResginationDetail" role="dialog"
+aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h4 class="modal-title">Resignation Details</h4>
+        </div>
+        <div class="modal-body" data-simplebar>
+           <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <label>Employee name:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Emp1</label>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <label>Resignation Details:</label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam accusantium, repellendus dolorem nobis assumenda aspernatur officia quisquam ad, modi itaque dolor accusamus illum facilis sunt, quas iure suscipit reprehenderit facere!</p>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <label>Notice Period</label>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control" id="notice_period_selection">
+                            <option value="">Select Number Of days</option>
+                            <option value="30">30</option>
+                            <option value="60">60</option>
+                            <option value="90">90</option>
+                            <option value="0">immediate</option>
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-4 text-right">
+                        <label>Expected Relieving Date:</label>
+                    </div>
+                    <div id="divNeedAlert" class="col-md-4">
+                        <!-- <div class="input-group">
+                            <input type="date" id="dateNeedAlert" class="form-control reliveDate custom-datepicker" title="Set Date">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                        </div> -->
+                        <span class="reliveDateView">N/A</span>
+                    </div>
+                </div>
+
+               
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="">Save</button>
+                    <!-- <button id="btnSubmit" type="button" class="btn btn-primary" data-dismiss="modal" onclick="">Submit</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Resignation Details modal-->
+
+
+<script>
+
+    function showEmpAns(){
+      $('#modal-ResginationDetail').appendTo('body').modal('show')
+      $('#notice_period_selection').change(function(){
+        if($(this).val() == "" || $(this).val() == " "){
+            //console.log("Date is required")
+            $('.reliveDateView').html('N/A')
+            return
+        }
+        let now = new Date();
+        now.setDate(now.getDate() + +$(this).val());
+        let day = ("0" + now.getDate()).slice(-2);
+        let month = ("0" + (now.getMonth() + 1)).slice(-2);
+        let today = now.getFullYear() + "-" + (month) + "-" + (day);
+        // $('.reliveDate').val(today);
+        $('.reliveDateView').html(today)
+    })
+    }
+
+</script>

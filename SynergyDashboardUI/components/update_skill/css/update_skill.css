@@ -1,0 +1,283 @@
+   #chartdiv {
+     width: 100%;
+     height: 400px;
+     font-size: 11px;
+   }
+
+   span.search_btn {
+     float: right;
+     padding-bottom: 15px;
+   }
+
+   input.form-control.col-md-4.pro_search {
+     width: 83%;
+     margin-right: 5px;
+     height: 32px;
+   }
+
+
+   span.punch-text,
+   span.log-hrs {
+     font-weight: 600;
+     font-size: 12px;
+     padding: 10px;
+   }
+
+   .navbar-synergy {
+     background-color: #004f8a;
+     color: white !important;
+     margin: 0;
+     padding: 0;
+   }
+
+   .error {
+     color: #ff0000ed;
+     clear: both;
+   }
+
+   .modal-dialog.modealExpand,
+   .skills-list {
+     pointer-events: painted !important;
+   }
+
+   div#div-QuickAction-Edit-Modal,
+   #skills {
+     pointer-events: none;
+   }
+
+   a#skills-list {
+     cursor: pointer;
+   }
+
+   li.profile-pic {
+     width: 40px;
+     height: 40px;
+     background-size: cover;
+     border-radius: 200px;
+     overflow: hidden;
+     border: 2px solid #fff;
+     margin-top: 5px;
+     margin-right: 10px;
+   }
+
+   
+
+
+
+   /* styles from register html */
+
+
+
+   .outer-wrapper {
+     display: table;
+     width: 100%;
+     height: 100%;
+   }
+
+   .jumbotron1 {
+     background: #fff;
+   }
+
+   .inner-wrapper {
+     display: table-cell;
+     vertical-align: middle;
+     padding: 15px;
+   }
+
+   .login-btn {
+     position: fixed;
+     top: 15px;
+     right: 15px;
+   }
+
+   /*Style for clone form */
+
+   .cloneform {
+     padding: 10px;
+   }
+
+   .clonedInput {
+     padding: 10px;
+     border-radius: 5px;
+     margin-bottom: 10px;
+   }
+
+   .clonedInput div {
+     margin: 5px;
+   }
+
+   .remove1 {
+     visibility: visible;
+   }
+
+   .js-title-step .label.label-success {
+     position: relative;
+     top: -2px;
+   }
+
+   .tp-margin {
+     margin-top: 25px;
+   }
+
+
+   #myTable {
+     border: 1px solid lightgrey;
+     margin-left: 15px;
+     padding-top: 10px;
+     width: 96%;
+   }
+
+   #myTable tr,
+   td,
+   th {
+     border: 1px solid lightgrey;
+   }
+
+
+   #myTable td,
+   th {
+     padding: 10px 10px;
+   }
+
+   #myTable th {
+     background-color: #FF5733;
+     color: white;
+   }
+
+   .resume {
+     padding-top: 10px;
+   }
+
+   #profile-img-tag {
+     padding-top: 4%; margin-left: auto;margin-right: auto;
+   }
+
+   .text-red {
+     color: red;
+   }
+
+   .download-icon {
+     color: #eb5231;
+   }
+
+   .data_success {
+     color: green;
+   }
+
+   .data_error {
+     color: red;
+   }
+
+   .error_message {
+     font-weight: 700;
+     color: red;
+   }
+
+   .success_message {
+     font-weight: 700;
+     color: green;
+   }
+
+   .fa-input {
+     font-family: FontAwesome, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   }
+
+   .delete_file {
+     color: white;
+     border: none;
+     margin: 0 5px !important;
+     background-color: #C5122C !important;
+     width: 30px;
+     min-width: 35px !important;
+     padding: 0 !important;
+     height: 34px !important;
+     line-height: 32px !important;
+     font-size: 15px !important;
+     border-radius: 4px;
+   }
+
+  
+
+   fieldset h2 {
+     text-align: center;
+     color: #eb5231;
+     padding-bottom: 2%;
+   }
+
+ 
+   .f1-buttons
+   {
+    margin-top: 20px;
+   }
+
+   .inputDnD .form-control-file {
+	 position: relative;
+	 width: 85%;
+	 height: 100%;
+	 min-height: 4.5em;
+	 outline: none;
+	 visibility: hidden;
+	 cursor: pointer;
+	 background-color: #c61c23;
+	 /* box-shadow: 0 0 5px solid currentColor; */
+}
+ .inputDnD .form-control-file:before {
+   content: attr(data-title);
+   color:#007f00;
+   font-size: 12px !important;
+	 position: absolute;
+	 top: 0.5em;
+	 left: 0;
+	 width: 100%;
+   padding-top: 1.2em;
+   padding-bottom: 1.2em;
+	 opacity: 1;
+	 visibility: visible;
+	 text-align: center;
+	 border: 0.15em dashed#c0c0c1;
+	 transition: all 0.3s cubic-bezier(0.8, 0.8, 0.8, 0.8);
+	 overflow: hidden;
+}
+ .inputDnD .form-control-file:hover:before {
+	 /* border-style: solid; */
+	 /* box-shadow: inset 0px 0px 0px 0.25em currentColor; */
+}
+
+.doc-icon{
+    font-size: 20px;
+    padding-right: 10px;
+    padding-left: 10px;
+    color: grey;
+
+}
+.doc-name{
+  padding-right: 15px;
+  padding-left: 10px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.doc-close-btn{
+  background: transparent;
+  color:#c5122c;
+  border:none;
+  font-size: 16px;
+}
+
+.edit-btn{
+  background: #fe5734;
+    color: white;
+    margin-right: 10px;
+}
+
+.delete-btn{
+  background: #c5122c;
+  color: white;
+}
+
+.btn-add{
+  background: green;
+  color: white;
+}
+
+a.resume-links { cursor: pointer; }

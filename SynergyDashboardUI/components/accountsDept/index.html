@@ -1,0 +1,37 @@
+<div class="card-detail">
+    <span><i><img src="components/accountsDept/images/addimage.jpg" width="40px" height="40px" class="img-circle" /></i></span>
+        <span class="card-detail-title"><b>Accounts Department</b></span>
+        <hr />
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>Provisions & Projections</td>
+                    <td><button class="btn btn-success " id="provision-modalToggle" onclick="provisionsProjectionAccounts()">
+                        <i class="glyphicon glyphicon-plus" id="btn-QuickAction-Add" data-toggle="modal"></i>
+                      </button></td>
+                  </tr>
+                  <tr>
+                    <td>Download TimeSheet</td>
+                    <td><button class="btn btn-success " id="timeSheet-modalToggle" onclick="downloadTimesheet()">
+                        <i class="glyphicon glyphicon-plus" id="btn-QuickAction-Add" data-toggle="modal"></i>
+                      </button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    
+    
+    <script type="text/javascript">
+    
+        $("#accounts_dept").load("components/accountsDept/accountsModel.html");
+        
+        function provisionsProjectionAccounts()
+        {
+            $('#provisionAndProjectionAccounts').appendTo('body').modal('show');
+        }
+        function downloadTimesheet()
+        {
+            $('#timesheetAccountModel').appendTo('body').modal('show');
+        }
+    </script>

@@ -1,0 +1,108 @@
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+
+<link href="components/skillsetmaster/css/skillsetmaster.css" rel="stylesheet" />
+
+<div class="card-detail">
+    <span class="card-detail-title modal-not-include"><b>Skill Set Master</b></span>
+    <span class="pull-right">
+        <button class="btn btn-sm btn-primary addFamily_btn" onclick="open_addfamily();">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i> Add Family
+        </button>
+    </span>
+    <hr />
+
+    <div class="skillsetmaster-container">
+        <div id="skillset_gridContainer"></div>
+    </div>
+    
+</div>
+
+<div class="modal fade" id="addFamilyModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-left">Add Family</h4>
+            </div>
+            
+            <div class="modal-body"  data-simplebar>
+                <div class="form-group">
+                    <label for="family_name">Family Name</label>
+                    <input class="form-control" type="text" name="family_name" id="family_name" value="" placeholder="Family Name" onkeypress="clear_skillset_error()">   
+                    <br>
+                    <span class="error_message error_message1" id="family_name_err"></span>
+                </div>
+                <span class="ApiResponse"></span>
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="familySkillId" onclick="SaveFamilySkill();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addSkillModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-left">Add Skill</h4>
+            </div>
+            
+            <div class="modal-body"  data-simplebar>
+                <div class="form-group">
+                    <label for="skill_name">Skill Name</label>
+                    <input class="form-control" type="text" name="skill_name" id="skill_name" value="" placeholder="Skill Name" onkeypress="clear_skillset_error()">   
+                    <br>
+                    <span class="error_message error_message1" id="skill_name_err"></span>
+                </div>
+                <span class="ApiResponse"></span>
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="SkillId" onclick="SaveSkillName();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addVersionModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close modal_close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title text-left">Add Version</h4>
+            </div>
+            
+            <div class="modal-body"  data-simplebar>
+                <div class="form-group">
+                    <label for="version_name">Version Name</label>
+                    <input class="form-control" type="text" name="version_name" id="version_name" value="" placeholder="Version Name" onkeypress="clear_skillset_error()">   
+                    <br>
+                    <span class="error_message error_message1" id="version_name_err"></span>
+                </div>
+                <span class="ApiResponse"></span>
+            </div>
+        
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="versionId" onclick="SaveVersionSkill();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="components/skillsetmaster/js/skillsetmaster.js"></script>
+<script type="text/javascript" src="components/skillsetmaster/js/skillsetdata.js"></script>
+

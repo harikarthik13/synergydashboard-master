@@ -1,0 +1,277 @@
+<!--<link href="css/library/dataTables.bootstrap.min.css" rel="stylesheet" />-->
+<!--<script type="text/javascript" src="js/library/jquery.dataTables.min.js"></script>-->
+<!--<link href="css/library/jquery-ui.css" rel="stylesheet" />-->
+<script type="text/javascript" src="js/library/jquery-ui.js"></script>
+
+<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+      rel='stylesheet'>
+<style>
+    #opening_view_elcl_grid .dx-datagrid-content .dx-datagrid-table .dx-row > td:first-child, .dx-datagrid-content .dx-datagrid-table .dx-row > tr > td:first-child {
+        padding: 0px;
+    }
+
+    #opening_view_elcl_grid .dx-datagrid-content .dx-datagrid-table .dx-row > td, .dx-datagrid-content .dx-datagrid-table .dx-row > tr > td {
+        vertical-align: inherit;
+    }
+    /*#opening_view_elcl_grid table > tr > td:last-of-type {
+         text-align: right !important; 
+    }*/
+  /*  #opening_view_elcl_grid table tr td:last-of-type {
+        text-align: center !important;
+    }*/
+</style>
+
+
+<div class="card-detail">
+    <div id="OpeningELCL">
+        <div class="elcl_top">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group elcl_input_grp">
+                        <label>Opening EL/CL as on</label>
+                        <div class="input-group">
+                            <div id="elcl_date" class="elcl_Datepicker"></div>
+                            <!-- <input type="text" class="elcl_Datepicker" name="elcl_date" id="elcl_date" readonly> -->
+                            <!-- <span class="input-group-addon"><i class="fa fa-calendar-alt"></i></span> -->
+                        </div>
+                        <!--<div class="input-group ">
+                            <input type="text" class="form-control" id="elcl_date" name="elcl_date" readonly="">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
+                        </div>
+                        <span class="error_message elcl_date_date_err"></span>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--<div class="col-md-4">
+            <label>Start Date<span class="required">*</span></label>
+            <div class="input-group ">
+                <input type="text" class="form-control" id="routine_start_date" name="routine_start_date" readonly="">
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+            </div>
+            <small class="text-danger routinestart_error_message"></small>
+
+        </div>-->
+
+        <div class="elcl_tabs">
+            <div class="tab">
+                <button class="elcl_tablinks active" onclick="openElclTab(event, 'enter_opening_elcl')">Enter</button>
+                <button class="elcl_tablinks" onclick="openElclTab(event, 'view_opening_elcl')">View</button>
+            </div>
+        </div>
+
+        <div id="enter_opening_elcl" class="elcl_tabcontent" style="display:block">
+        </div>
+
+        <div id="view_opening_elcl" class="elcl_tabcontent">
+        </div>
+    </div>
+</div>
+
+
+<!-- Add an Action Modal-->
+<!-- Modal -->
+<div class="modal fade" id="div-opening_elcl-Edit-Modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title text-left">Enter Opening EL/CL</h2>
+            </div>
+            <div class="modal-body">
+                <div class="opening_elcl_modal_content">
+                    <div class="opening_elcl_employee_details">
+                        <div class="row">
+                            <div class="col-md-12 prof-pic" style="text-align:center">
+                                <img src="" id="el_cl_profile-img-tag" alt="emp_image">
+                            </div>
+                        </div>
+                        <div id="elcl_employeeId" style="visibility:hidden"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Employee Name</label>
+                                    <div id="elcl_employeename"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Employee No </label>
+                                    <div id="elcl_employee_no"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Primary Phone No</label>
+                                    <div id="elcl_primaryphone_number"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <div id="elcl_email"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Secondary Phone No</label>
+                                    <div id="elcl_secondaryphone_number"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>As On</label>
+                                    <div class="input-group">
+                                        <div class="elcl_Datepicker" id="elcl_date_entergrid"></div>
+                                        <!-- <input type="text" class="elcl_Datepicker" name="elcl_date" id="elcl_date_entergrid" readonly>
+                                        <span class="input-group-addon"><i class="fa fa-calendar-alt"></i></span> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>EL Balance</label><br />
+                                    <input type="text" class="" name="el_value" id="el_value"><br />
+                                    <span class="error_message el_value_err"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class=" form-group">
+                                    <label>CL Balance</label><br />
+                                    <input type="text" class="" name="cl_value" id="cl_value"><br />
+                                    <span class="error_message cl_value_err"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <span class="error_message asondate_value_err"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-md btn-primary" onclick="opening_elcl_popup_validation()">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add an Action Modal-->
+<!-- View an Action Modal-->
+<!-- Modal -->
+<div class="modal fade" id="div-opening_elcl-View-Modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title text-left">Leave Ledger</h2>
+            </div>
+            <div class="modal-body">
+                <div class="opening_view_elcl_modal_content">
+                    <div id="opening_view_elcl_grid"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Add an Action Modal-->
+<script type="text/javascript">
+
+    function include_openingjs(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+
+    /*WO to project creation page related scripts*/
+
+    include_openingjs('./components/OpenningELCL/js/openingelcl_table.js');
+
+
+
+    function openElclTab(evt, tabViewName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("elcl_tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("elcl_tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabViewName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    // $("#elcl_date").datepicker({
+    //     autoclose: true,
+    //     maxDate: new Date()
+    // });
+    $('#elcl_date').dxDateBox({
+    type: 'date',
+    value: new Date(),
+  });
+
+    // $("#elcl_date_entergrid").datepicker({
+    //     autoclose: true,
+    //     maxDate: new Date()
+    // });
+    $('#elcl_date_entergrid').dxDateBox({
+    type: 'date',
+    value: new Date(),
+  });
+    $('body').on('keyup', '#el_value, #cl_value', function (e) {
+        var val = this.value,
+            field = $(this),
+            type = "decimal";
+        numericValidator(val, field, type);
+    });
+    function numericValidator(val, field, type) {
+        var re, re1;
+        //like: 01.01
+        if (type == "decimal") {
+            re = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)$/g;
+            re1 = /^([0-9]+[\.]?[0-9]?[0-9]?|[0-9]+)/g;
+        }
+        //Like: 01
+        else if (type == "digit") {
+            re = /^([0-9]?[0-9]?[0-9]?|[0-9]+)$/g;
+            re1 = /^([0-9]?[0-9]?[0-9]?|[0-9]+)/g;
+        }
+
+        if (re.test(val)) {
+            //do something here
+            return true;
+        } else {
+            val = re1.exec(val);
+            if (val) {
+                field.val(val[0]);
+                return true;
+            } else {
+                field.val("");
+                return false;
+            }
+        }
+    }
+
+</script>
+
+

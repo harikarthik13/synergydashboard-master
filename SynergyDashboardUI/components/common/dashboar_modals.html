@@ -1,0 +1,982 @@
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<link href="components/backup_resource/css/style.css" rel="stylesheet" />
+<link href="components/backupresource/css/style.css" rel="stylesheet" />
+<style>
+#mentor_message_dropzone .dropzone {
+    border: 2px dashed #0087F7;
+    border-radius: 5px;
+    background: white;
+    font-family: Roboto, "Open Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 1.4rem;
+    background: #F3F4F5;
+    color: #646C7F;
+    text-rendering: optimizeLegibility;
+    margin-bottom: 10px;
+}
+
+#mentor_message_dropzone .dropzone .dz-message {
+   font-weight: 400;
+ 
+}
+
+#mentor_message_dropzone .dropzone .dz-preview.dz-image-preview{
+   background-color: transparent;
+}
+
+#mentor_message_dropzone .dropzone .dz-preview .dz-error-message {
+   color: white;
+}
+
+#mentor_message_dropzone .dropzone .dz-message .note {
+   font-size: 0.8em;
+   font-weight: 200;
+   display: block;
+   margin-top: 1.4rem;
+}
+
+#mentor_message_dropzone .dz-progress{
+    display: none;
+}
+</style>
+<!-- Timesheet model -->
+<div class="modal fade bd-example-modal-lg" id="modal-timesheet" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title"> Time Sheet</h4>
+
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="col-md-10" style="padding-left: 0px">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <label for="fromDate">From Date:</label>
+                            <input type="text" class="form-control datetimepicker" id="fromDate" name="fromDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="toDate">To Date:</label>
+                            <input type="text" class="form-control" id="toDate" name="toDate">
+                        </div>
+                        <button class="btn btn-success"><span class="glyphicon glyphicon-search"></span>
+                            Search</button>
+                    </form>
+                </div>
+                <div class="pull-right">
+                    <button class="btn btn-primary"><i class="fa fa-file-pdf" aria-hidden="true"></i> Generate
+                        PDF</button>
+                </div>
+                <div class="clearfix"></div>
+                <div class="table-responsive">
+                    <table class="table" style="margin-top:30px">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Module</th>
+                                <th>Component</th>
+                                <th>Booked Hours</th>
+                                <th>Actual Hours</th>
+                                <th>Billed Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Module 1</td>
+                                <td>Component</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Module 2</td>
+                                <td>Component 2</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Module 3</td>
+                                <td>Component 3</td>
+                                <td>6</td>
+                                <td>6</td>
+                                <td>6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Leave Approval Details modal-->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal-Listingemp" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Leave Approval Details</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <form class="form-hordizontal form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table id="tblListingemp" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <td>UserId</td>
+                                            <td>Name</td>
+                                            <td>From</td>
+                                            <td>To</td>
+                                            <td>#days</td>
+                                            <td>TotalsHours</td>
+                                            <td>leaveReason</td>
+                                            <td>ApprovedBy</td>
+                                            <td>Details</td>
+                                            <td>Approve/Reject</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <span></span>
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Leave Approval Details modal-->
+
+
+<!-- Resignation Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal-ListResignDetail" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Resignation Details</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">No Due</div>
+                        <table id="noDueTbl" class="table table-striped removetable" style="cursor: default">
+                            <thead>
+                                <th>Team</th>
+                                <th>Status</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Project Manager 1</td>
+                                    <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Project Manager 2</td>
+                                    <td><i class="fa fa-times" aria-hidden="true"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Project Manager 3</td>
+                                    <td><i class="fa fa-check" aria-hidden="true"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Resignation Modal End -->
+
+<!-- send email Modal -->
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade" id="send_mail" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">Send Mail</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="form-section">
+                    <label>Send To:</label>
+                    <input type="text" name="user_name">
+                </div>
+                <div class="form-section">
+                    <label>Description:</label>
+                    <textarea name="mail_content" id="mail_content" class="form-control ckeditor"></textarea>
+                </div>
+                <br>
+                <div>
+                    <form action="#">
+                        <input type="file" id="sendMailMessage" style="display: none;"
+                            onchange="fileMailSelected(this)" />
+                        <input type="button" class="btn btn-sm btn-primary" id="btnMailAttachment"
+                            onclick="openMailAttachment()" value="Upload">
+                        <br>
+                        <label id="attached_fileMail">File:</label>
+                    </form>
+                </div>
+                <div class="text-right">
+                    <button class="btn" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-secondary">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+<!-- IMPORT MODAL STARTS HERE -->
+
+<!-- IMPORT MODAL ENDS HERE -->
+
+<script>
+    $(document).ready(function () {
+        CKEDITOR.replace('mail_content');
+    });
+    function openMailAttachment() {
+        $('#sendMailMessage').click();
+    }
+
+    function fileMailSelected(input) {
+        $('#attached_fileMail').text("File: " + input.files[0].name);
+    }
+</script>
+<!-- send email Modal -->
+
+<!-- Update Profile Modal -->
+<div class="modal fade" id="update_profile" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">Update Profile</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <fieldset id="personal-details" class="personal-details">
+                    <div class="text-center title-wrap">
+                        <p class="text-red result-msg"></p>
+                        <p class="text-green result-msg"></p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <div class="form-group">
+                                <img src="https://via.placeholder.com/150" id="profile-img-tag" data-src=""
+                                    class="img-circle profile-img-tag" height="200px" width="200px" placeholder="Preview Image"
+                                    alt="" /><br>
+                            </div>
+                            <div class="form-group text-center">
+                                <label for="image">Browse file</label>
+                                <input type="file" name="file" value="Upload" id="profile-img-dashboard"
+                                    accept="image/png, image/jpeg">
+                                    <span id="image_upload_error" class="error_message image_upload_error"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="father_name">Father Name <span style="color: red">*</span></label>
+                                <input type="text" id="father-name" class="form-control" placeholder="">
+                                <span id="father_name_error" class="error_message"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="date_of_joining">Date of joining <span style="color: red">*</span></label>
+                                <input type="date" id="date-of-joining" class="form-control" name="date_of_joining">
+                                <span id="doj_error" class="error_message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date_of_birth">Date of Birth <span style="color: red">*</span></label>
+                                <input type="date" id="dob" class="form-control" name="date_of_birth">
+                                <span id="dob_error" class="error_message"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="blood_group_id">Blood Groupid <span style="color: red">*</span></label>
+                                <select name="" id="blood-group" class="form-control">
+                                    <option value="">Select your blood group</option>
+                                    <option value="A+">A+</option>
+                                    <option value="O+">O+</option>
+                                    <option value="B+">B+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="O-">O-</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                                <span id="blood_group_error" class="error_message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="marital_status">Marital Status <span style="color: red">*</span></label>
+                                <select name="" class="form-control" id="marital_status">
+                                    <!--  <option value="">Select status</option>
+                                          <option value="single">Single</option>
+                                          <option value="married">Married</option> -->
+                                </select>
+                                <span id="marital_status_error" class="error_message"></span>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <div class="form-group">
+                                <label for="corporate_email_id">Corporate E-mail <span
+                                        style="color: red">*</span></label>
+                                <input type="text" id="cop-email" class="form-control" placeholder="">
+                                <span id="corporate_email_id_error" class="error_message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gitlab_name">GitLab UserName</label>
+                                <input type="text" id="gitlab-name" class="form-control" placeholder="">
+                                <span id="gitlab_name_error" class="error_message"></span>
+                              </div>
+
+                            <div class="form-group">
+                                <label for="pan_no">PAN Number </label>
+                                <input type="text" id="Pan-no" max-length="16" class="form-control" placeholder="">
+                                <span id="pan_error" class="error_message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="pf_no">PF Number </label>
+                                <input type="text" id="pf-no" max-length="6" class="form-control" placeholder="">
+                                <span id="pf_error" class="error_message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="esi_no">ESI Number </label>
+                                <input type="text" id="esi-no" max-length="16" class="form-control" placeholder="">
+                                <span id="esi_error" class="error_message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="passport_no">Passport Number </label>
+                                <input type="text" id="passport_no" max-length="20" class="form-control" placeholder="">
+                                <span id="passport_error" class="error_message"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="">*Are Mandatory Fields</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="f1-buttons text-center">
+                        <div id="update-profile-message"></div>
+                        <button type="button" class="btn btn-success" id="update-profile-save">Update</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <!-- <a href="dashboard.html" class="btn btn-danger">Back</a> -->
+
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#update-profile-save").click(function (e) {
+            var inputFile = document.getElementById("profile-img-dashboard");
+            e.preventDefault();
+            var result = Validatepersonaldetails($(this).parents('fieldset'), true,inputFile);
+            if (result == true) {
+                // $("#update-profile-message").append("<p style='color:green'>Updated Successfully</p>");
+                swal({
+                title: "Success!",
+                text: "Updated Successfully",
+                icon: "success",
+                });
+            }
+            else
+            {
+                swal({
+                title: "Sorry!",
+                text: "Something Went Wrong!",
+                icon: "error",
+                });
+            }
+            // setTimeout(function () {
+            // $("#update-profile-message").empty();
+            //     }, 3000);
+                // $('#update_profile').modal('hide')
+            GenerateEmployeeProfilePictures('GetAllEmployeeProfileImage', '{}');
+            var Employee_id = localStorage.getItem("EmployeeID");
+            var Employee_profilepic = imageFilesPath+Employee_id+'.png';
+            console.log(Employee_profilepic,'dashboar_modals.html');
+            $(".profile-pic").css("background-image", "url(" + Employee_profilepic + ")");
+        });
+    });
+    function readURL(input) {
+        //var immg = compress(input.files[0], 70, 600, 'png');
+        ////console.log("IMMG" , immg); return false;
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.profile-img-tag').attr('src', e.target.result);  
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#profile-img-dashboard").change(function () {
+        readURL(this);
+    });
+
+    
+    // var profilePic = GetEmployeeProfilePicture();
+    //     if (profilePic != null) {
+    //         if ($(".profile-pic")) {
+    //             $(".profile-pic").css("background-image", "url(" + profilePic + ")");
+    //         }
+    //     }
+</script>
+<!-- Update Profile Modal -->
+
+<!-- Update Skills Modal -->
+<div class="modal fade" id="update_skill" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">Update Skills</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <fieldset class="skillsetField" id="skill_fieldset">
+
+                    <p class="text-red" id="skill-caption"></p>
+
+                    <p class="text-green" style="text-align:center;color: green;" id="skill-success"></p>
+
+                    <div class="cloneform0 pd-bt">
+                        <div id="clonedInput0" class="clonedInput0">
+
+                            <div class="row">
+                                <div class="form-group col-md-2">
+                                    <label for="skill_grade">Grade<span style="color: red;">*</span></label>
+                                    <select tabindex="1" id="skill_grade" name="" class="form-control">
+                                        <option value="Primary">Select Grade</option>
+                                        <option value="Primary">Primary</option>
+                                        <option value="Secondary">Secondary</option>
+                                    </select>
+                                    <span id="skill_grade_error" class="error_message"></span>
+                                </div>
+
+                                <div class="form-group col-md-3 ">
+                                    <label for="family">Family<span style="color: red;">*</span></label>
+                                    <select tabindex="2" id="family" name="" onchange="get_skill(this.value)"
+                                        class="form-control">
+                                        <option value="">Select family</option>
+
+                                    </select>
+                                    <span id="family_error" class="error_message"></span>
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    <label for="skill">Skills<span style="color: red;">*</span></label>
+                                    <select tabindex="3" id="skill" onchange="get_version(this.value)" name=""
+                                        class="form-control">
+                                        <option value="">Select Skills</option>
+                                    </select>
+                                    <span id="skill_error" class="error_message"></span>
+                                </div>
+                                <div class="form-group col-md-3 ">
+                                    <label for="skillversion">Version<span style="color: red;">*</span></label>
+                                    <select tabindex="4" id="skillversion" name="" class="form-control">
+                                        <option value="">Select Skill Version</option>
+                                    </select>
+                                    <span id="skillversion_error" class="error_message"></span>
+                                </div>
+
+                                <div class="form-group col-md-1  ">
+                                    <label for="actions">Action:</label><br>
+                                    <input tabindex="5" type="button" id="SkillsetsBtn" class="btn btn-add" value="+"
+                                        onclick="insert_SkillInfo()" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4 resume" id="originalresume_row">
+                                    <span id="or_success_message" class="success_message"></span>
+                                    <span class="or_error_message err_message"
+                                        style="color: red ; font-weight: 600 ;"></span>
+                                    <label for="resume">Upload Resume (Original)<span
+                                            style="color: red">*</span></label>
+                                    <div id="or-upload-div" hidden>
+
+                                    </div>
+                                    <div id="or-result-div" hidden>
+
+                                    </div>
+
+                                    <!-- <input id="resume" class="skill-resume no-resume" type="file" accept=" .doc, .pdf "
+                                        placeholder=""> -->
+                                    <!-- <input id="or_resume" class="reset-resume" hidden type="button" value="x"> -->
+                                    <span id="or_error_message" class="error_message"></span>
+                                    <!-- <br>
+                                    <div class="upload-btns">
+                                        <input type="button" class="btn upload fa-input" value="&#xf093;"
+                                            onclick="uploadResumeFiles('OR')" value="Upload" /
+                                            style="background: green;color: #fff;"><input id="or_resume"
+                                            class="fa-input reset-resume delete_file" hidden type="button"
+                                            value="&#xf1f8;">
+                                    </div> -->
+                                    <!-- <input type="button" value="Download Result" id="orResume" onclick="DownloadOR()" /> -->
+                                    <!-- <a href="#" id="orResume" class="hidden" onclick="DownloadOR('OR')">
+                                        <i class="fas fa-download download-icon"> Original Resume</i>
+                                    </a> -->
+                                </div>
+
+                                <div class="form-group col-md-4 resume" id="g2resume_row">
+
+                                    <span id="gr_success_message" class="success_message"></span>
+                                    <span class="gr_error_message err_message"
+                                        style="color: red ; font-weight: 600 ;"></span>
+                                    <label for="resume">Upload Resume (G2 resume)<span
+                                            style="color: red">*</span></label>
+                                    <!-- <input id="resumeg2" class="skill-resume no-resume" type="file"
+                                        accept=" .doc, .pdf " placeholder=""> -->
+                                    <div id="gr-upload-div" hidden>
+                                        <div class="form-group inputDnD">
+                                            <label class="sr-only" for="inputFile">File Upload</label>
+                                            <input type="file" class="form-control-file text-warning font-weight-bold"
+                                                id="resumeg2" accept=" .doc, .pdf " onchange="uploadResumeFiles('GR')"
+                                                data-title="Drop Files to upload or Browse">
+                                        </div>
+                                        <span id="gr_error_message" class="error_message"></span>
+                                    </div>
+                                    <div id="gr-result-div" hidden>
+
+                                    </div>
+                                    <!-- <br>
+                                    <input type="button" class="fa-input btn upload" value="&#xf093;"
+                                        onclick="uploadResumeFiles('GR')" value="Upload" /
+                                        style="background: green;color: #fff;"><input id="gr_resume"
+                                        class="fa-input reset-resume delete_file" hidden type="button" value="&#xf1f8;">
+                                    <br>
+                                    <a href="#" id="grResume" class="hidden" onclick="DownloadOR('GR')">
+                                        <i class="fas fa-download download-icon"> G2 Resume</i>
+                                    </a> -->
+                                </div>
+
+                                <div class="form-group col-md-4 resume">
+                                    <label for="resume">Please download the sample resume format here </label>
+                                    <br>
+                                    <a href="files/sample.doc">
+                                        <i class="fas fa-download download-icon"> Download</i>
+                                    </a>
+                                </div>
+                                <div class="form-group col-md-1  ">
+                                    <!--  <input type="button" class="btn upload" value="Upload" onclick="uploadResumeFiles()" value="Upload" / style="background: green;color: #fff;"> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span class="skillset_status"></span>
+                                    <div id="display_SkillInfo"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-12 float-right" >
+                        <button type="button" class="btn btn-sm btn-primary float-right" data-dismiss="modal">Close</button>
+                        <!-- <button tabindex="6" type="button" class="btn btn-submit skillSetNext" onclick="FinalSubmit_update()">Update</button> -->
+                    </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Skills Modal -->
+
+
+<!-- Reset Profile Modal -->
+<div class="modal fade" id="reset_profile_modal" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">Reset Profile</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <p>Are you sure to reset your profile.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="reset_propfile()">Reset Profile</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- reset profile Modal -->
+
+<!-- common Modal start -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal-commonModal" role="dialog"
+    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="common-modal-title"></h4>
+            </div>
+            <div class="common-modal-body" data-simplebar>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- common Modal end -->
+
+
+<!-- Leave Approval Modal -->
+<div class="modal fade" id="modal-EmpDetails" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Leave Approval </h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="col-md-12">
+                    <input id="hidden-emp-userid" name="userid" class="form-control" type="hidden">
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Employee name</label>
+                        <input id="txt-firstname" name="firstname" class="form-control col-md-7" type="text" disabled>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Number of days leave </label>
+                        <input id="txt-days" name="days" class="form-control  col-md-7" type="text" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Start date </label>
+                        <input id="txt-start-date" name="start-date" class="form-control  col-md-7" type="text"
+                            disabled>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">End date </label>
+                        <input id="txt-end-date" name="end-date" class="form-control col-md-7 " type="text" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Reason of absence </label>
+                        <textarea class="form-control" rows="3" id="Reason" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label"> Reporting to </label>
+                        <!--<input id="txt-Reporting" name="Reporting" value="Diviamon" class="form-control col-md-7 " type="text" disabled>-->
+                        <select class="form-control " id="cmbReporting" name="AssignTo">
+                            <option value="1">Diviamon Antony</option>
+                            <option value="2">Jyothi kumar</option>
+                            <option value="3">Srinivasan Mani</option>
+                        </select>
+                    </div>
+                    <div class="form-group toggleallign">
+                        <label class="col-md-5 control-label">Compensation required </label>
+                        <input id="toggle-one" checked type="checkbox">
+
+                    </div>
+                    <div class="form-group" id="divCompensationDate">
+                        <label class="col-md-5 control-label">Compensation dates </label>
+
+
+                        <input type="text" id="txt-rrm-Interview-Datetime" placeholder="24-08-2018"
+                            class="form-control col-md-7" required />
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <span></span>
+                <div class="modal-footer">
+                    <div class="col-md-12 text-center emp_button">
+                        <button type="button" class="btn btn-success">Accept</button>
+
+                        <button type="button" class="btn btn-danger" id="btn-rrm-modal-close"
+                            data-dismiss="modal">Reject</button>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Leave Approval Modal -->
+
+
+<!-- Reject Leave entry Modal -->
+<div class="modal fade" id="modal-rejectleave" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Reject Leave entry</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <form class="form-hordizontal form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Comments</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group"></div>
+                                    <input id="hidden-leave-userid" name="userid" class="form-control" type="hidden">
+                                    <input id="txt-leave-Comments" name="Comments" class="form-control" type="text">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <span></span>
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="button" class="btn btn-success"
+                                            onclick="submitcomments()">Save</button>
+
+                                        <button type="button" class="btn btn-danger" id="btn-rrm-modal-close"
+                                            data-dismiss="modal">Close</button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Reject Leave entry Modal -->
+
+<!-- Manual Swipe Employee Details modal -->
+<div class="modal fade" id="modal-ManualSwipeEmpDetails" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Manual Swipe Employee Details </h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="col-md-12">
+                    <input id="hidden-emp-userid" name="userid" class="form-control" type="hidden">
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Employee name</label>
+                        <input id="txt-firstname" name="firstname" class="form-control col-md-7" type="text" disabled>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">PunchDate</label>
+                        <input id="txt-days" name="days" class="form-control  col-md-7" type="text" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Time</label>
+                        <input id="txt-start-date" name="start-date" class="form-control  col-md-7" type="text"
+                            disabled>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Loaction </label>
+                        <input id="txt-end-date" name="end-date" class="form-control col-md-7 " type="text" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Comments</label>
+                        <textarea class="form-control" rows="3" id="Reason" disabled></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label"> Reporting to </label>
+                        <select class="form-control " id="cmbReporting" name="AssignTo">
+                            <option value="1">Diviamon Antony</option>
+                            <option value="2">Jyothi kumar</option>
+                            <option value="3">Srinivasan Mani</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-5 control-label">Satus </label>
+                        <input id="txt-Compensation-required" name="Compensation-required"
+                            class="form-control col-md-7 " type="swipes" onclick="time()" disabled>
+                    </div>
+
+
+                </div>
+
+                <div class="form-group">
+                    <span></span>
+                    <div class="modal-footer">
+                        <div class="col-md-12 text-center emp_button">
+                            <button type="button" class="btn btn-success">Accept</button>
+
+                            <button type="button" class="btn btn-danger" id="btn-rrm-modal-close"
+                                data-dismiss="modal">Reject</button>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Manual Swipe Employee Details modal -->
+
+
+<!-- Reject Manual Swipe modal -->
+
+<div class="modal fade" id="modal-rejectswipe" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">Reject Manual Swipe</h4>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <form class="form-hordizontal form-horizontal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Comments</label>
+                                <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group"></div>
+                                    <input id="hidden-Swipe-userid" name="userid" class="form-control" type="hidden">
+                                    <input id="txt-Swipe-Comments" name="Comments" class="form-control" type="text">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <span></span>
+                            <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <button type="button" class="btn btn-success"
+                                            onclick="submitcomments()">Save</button>
+
+                                        <button type="button" class="btn btn-danger" id="btn-rrm-modal-close"
+                                            data-dismiss="modal">Close</button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Reject Manual Swipe modal -->
+
+
+<div class="modal fade" id="div-QuickActions-List" style="display: none;">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">List of Actions</h4>
+            </div>
+            <div class="modal-body" id="div-ListOfActions-Modal" data-simplebar>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="in_project_resourece">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h4 class="modal-title">List of Actions</h4>
+            </div>
+            <div class="modal-body" id="div-projectresourece-Modal" data-simplebar>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- IMPORT MODAL STARTS HERE -->
+<!-- Modal For Employee Chat Box - Added By Lingesh Deepak-->
+ <div class="modal fade" id="mentor_open_chat" class ="open_chat" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- HTML Design Generated in openChatModal()-->
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+
+<!-- <script type="text/javascript" src="components/backup_resource/js/backup_resource.js"></script> -->
+<!-- <script type="text/javascript" src="components/backupresource/js/backup_resource.js"></script> -->
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+<script>
+    // Performance issue Commented by Christlin, Need to review
+    // $('#mentor_open_chat').on('show.bs.modal', function () {
+    //     setTimeout(getMessageOnLoad, 1000);
+    // });
+</script>

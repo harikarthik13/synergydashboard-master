@@ -1,0 +1,45 @@
+<link href="components/projectmodulereports/css/style.css" rel="stylesheet" />
+<script src='components/projectmodulereports/js/projectmodulereports.js'></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+<div class="card-detail">
+  <span><i><img src="components/projectmodulereports/images/interviewicon.png" width="40px" height="40px" /></i></span>
+  <span class="card-detail-title"><b>Project Module Reports</b></span>
+  <hr />
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group">
+        <div id="project_reports_SelectBox"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <label>From Date</label>
+      <div class="input-group date">
+        <input type="text" class="form-control" id="project_reports_fromDate">
+        <span class="input-group-addon">
+            <i class="glyphicon glyphicon-calendar"></i>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label>To Date</label>
+      <div class="input-group date">
+        <input type="text" class="form-control" id="project_reports_toDate">
+        <span class="input-group-addon">
+            <i class="glyphicon glyphicon-calendar"></i>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <br>
+      <button style="margin-top: 7px;" type="button" class="btn btn-primary btn-md" id="projectHrReportsFilter" onclick="getProjectReportsFilter();">
+        <i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search Reports
+    </button>
+    </div>
+  </div>
+  <div>
+    <br>
+    <div id="sdgd-projectReportsGrid"></div>
+  </div>
+</div>

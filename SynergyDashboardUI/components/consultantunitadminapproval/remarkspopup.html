@@ -1,0 +1,100 @@
+<div class="modal fade" id="consultantremarksPoppup" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+             onclick=""><span aria-hidden="true">&times;</span></button>
+             <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+          <!-- <h2 class="modal-title" id="rrmModaltitle"><span id="rrmmodelpagetitle"></span>&nbsp; <span><label id="OwnerrrmType">&nbsp; </label></span></h2> -->
+          <h2 class="modal-title" id="remarkLabel">Lead Remarks</h2>
+       </div>
+  
+        <div class="modal-body" data-simplebar>
+            <!-- <div id="remarksID" hidden="hidden"></div> -->
+            <span id="remarksID" style="
+            visibility: hidden;
+        " ></span>
+            <div id="remarksGrid"></div>
+        </div>
+          <span class="ApiResponse"></span>
+        </div>
+    </div>
+</div>
+<script>
+function remarkLoad(){
+        var logId= $("#remarksID").text();
+        var filter = JSON.stringify({
+         "IsActive":true,
+         "ConsultantLogId":$("#remarksID").text()
+      });
+    var tableDataSource = callgetlist('GetConsultantTaskRemarks', filter);
+     $("#remarksGrid").dxDataGrid({
+          dataSource: tableDataSource,
+          showBorders: true,
+          allowColumnReordering: true,
+          columnChooser: {
+            enabled: true,
+            allowSearch: true
+          },
+          export: {
+            enabled: true,
+            allowExportSelectedData: true
+          },
+          paging: {
+              enabled: false
+          },
+          columns: [
+            {
+                dataField: "Date",
+                caption: "Date",
+                dataType: "date",
+                allowEditing: false
+            },
+            {
+                dataField: "Lead",
+                caption: "Lead",
+                allowEditing: false
+            },
+            {
+                dataField: "Consultant",
+                caption: "Consultant",
+                allowEditing: false
+            },
+            {
+                dataField: "Task",
+                caption: "Task",
+                allowEditing: false
+            },
+            {
+                  dataField: "Project",
+                  caption: "Project",
+                  allowEditing: false
+            },
+            {
+                dataField: "LoggedHours",
+                caption: "LoggedHours",
+                allowEditing: false
+            }, 
+            {
+                dataField: "ApprovedHours",
+                caption: "ApprovedHours",
+                allowEditing: false
+            }, 
+            {
+                dataField: "BillableHours",
+                caption: "BillableHours",
+                allowEditing: false
+            }, 
+            {
+                dataField: "Remarks",
+                caption: "Remarks",
+                allowEditing: false
+            }, 
+        ]
+          });
+    }
+
+</script>
+
+  

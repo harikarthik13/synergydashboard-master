@@ -1,0 +1,87 @@
+
+<div class="card-detail">
+    <span><i><img src="components/projectmanagement/images/project-management.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>Project Management</b></span>
+    <span>(Dummy)</span>
+    <!-- <span class="pull-right">
+        <button class="btn btn-sm btn-primary" onclick="ProjectManagementModal();">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span> -->
+    <hr />
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <!-- <td>Client</td> -->
+                    <td>Project</td>
+                    <td width="18%">Client</td>
+                    <td>Type</td>
+                    <td>Status</td>
+                    <td></td>
+                    <td>Action</td>
+                    <!-- <td></td> -->
+                </tr>
+            </thead>
+            <tbody id="DisplayProjectList">
+                <tr>
+                    <td>1</td>
+                    <td>Application Portal</td>
+                    <td>CommonGoals Software</td>
+                    <td>Fixed Bit</td>
+                    <td>Approved</td>
+                    <td>
+                        <button alt="Feed Back" class="btn btn-xs"><i class="fa fa-file"></i></button>
+                        <button alt="History" class="btn btn-xs"><i class="fa fa-history"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                        <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Client Portal</td>
+                    <td>CommonGoals Software</td>
+                    <td>Retainer</td>
+                    <td>Pending</td>
+                    <td>
+                        <button alt="Feed Back" class="btn btn-xs"><i class="fa fa-file"></i></button>
+                        <button alt="History" class="btn btn-xs"><i class="fa fa-history"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-pencil"></i></button>
+                        <button class="btn btn-xs btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $("#project_management").load("components/projectmanagement/project_management.html");
+    
+    function include_project(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+
+    /*WO to project creation page related scripts*/
+    include_project('./components/projectmanagement/js/project_management.js');
+    include_project('./components/projectmanagement/js/project_management_taskmanagement.js');
+    include_project('./components/project/js/project.js');
+    include_project('./components/projectmanagement/js/project_management_documentmanagement.js');
+    include_project('./components/projectmanagement/js/project_management_contacts.js');
+    include_project('./components/projectmanagement/js/project_management_phase.js');
+    // /*WO to project creation page related scripts Deliverables*/
+</script>
+<!-- <script src="components/projectmanagement/js/projectmanagement.js"></script> -->
+<link href="components/project/css/projectmanagement.css" rel="stylesheet" />
+

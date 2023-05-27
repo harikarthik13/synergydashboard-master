@@ -1,0 +1,43 @@
+.input-group {
+    width: 68%;
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.total-leave-info-container{
+    display: flex;
+}
+.total-leave-info{
+    text-align: center;
+    border: 1px solid #ccc;
+		font-weight: bold;
+		min-height: 65px;
+		margin: 0;
+		margin-bottom: 15px;
+		display: flex;
+}
+.total-leave-content{
+    padding: 10px;		
+    width: 100%;
+    margin: 0;
+}
+.total-leave-content h4{
+	font-size: 12px;
+	font-weight: bold;
+	text-transform: capitalize;
+    margin-top: 0;
+}
+
+.attendance-info-container{
+	display: flex;
+}
+
+.attendance-info-col{
+	border:1px solid #e2e2e2;
+    margin: 10px;
+}
+
+.leave-approve-status{
+    padding: 2px 8px;
+    border-radius:20px;
+}

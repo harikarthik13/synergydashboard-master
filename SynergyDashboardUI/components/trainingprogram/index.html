@@ -1,0 +1,115 @@
+<link href="components/skillset/css/trainingprogram.css" rel="stylesheet" />
+<div class="card-detail">
+    <span class="card-detail-title modal-not-include"><b>New Training Program</b></span>
+    <span class="pull-right">
+           	<div class="col-sm-2 text-right">
+				<button class="btn btn-sm btn-primary" onclick="fncQuickactiontraning()"
+				id="ActionModal"><i class="glyphicon glyphicon-plus" id="btn-QuickAction-Add" data-toggle="modal"></i>
+				</button>
+			</div>
+        </button>
+    </span>
+    <hr />
+    <div id="div-ChartItems" style="display:block;">
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Training Program</td>
+                        <td>Family</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="rfp_1">
+                        <td>Asp.Net</td>
+                        <td>Microsoft</td>
+
+                    </tr>
+                    <tr id="rfp_2">
+                        <td>Php</td>
+                        <td>OpenSource</td>
+
+                    </tr>
+                </tbody>
+            </table>												
+        </div>
+        <div id="legenddiv"></div>
+        <div class="col-md-12 text-center">
+        </div>
+
+    </div>
+
+</div>
+<!-- Add an Action Modal-->
+    <div class="modal fade" id="div-QuickAction-Add-Modal" role="dialog">
+        <div class="modal-dialog modealExpand">
+
+            <!-- Modal content-->
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h2 class="modal-title text-left">Add a new Training Program</h2>
+
+                </div>
+                <div class="modal-body" data-simplebar>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="form-horizontal" method="POST">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="email">Program Name:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="name" placeholder="Enter Program Name" name="name">
+                                        <small class="text-danger pull-left program_error_message"></small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="training_dl_family">Family:</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="training_dl_family" name="training_dl_family">
+
+                                        </select>
+                                        <small class="text-danger pull-left family_error_message"></small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="training_dl_technology">Technology:</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="training_dl_technology" name="training_dl_technology">
+
+                                        </select>
+                                        <small class="text-danger pull-left technology_error_message"></small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="training_dl_version">Version:</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="training_dl_version" name="training_dl_version">
+                                            <option value="-1">Please Select Technology</option>
+                                        </select>
+                                        <small class="text-danger pull-left version_error_message"></small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="pwd">Source:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="source" placeholder="Enter Source" name="source">
+                                        <small class="text-danger pull-left source_error_message"></small>
+                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button id="training_program_data" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add an Action Modal-->
+
+    <script type="text/javascript" src="components/trainingprogram/js/trainingprogram.js"></script>

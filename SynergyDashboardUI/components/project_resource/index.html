@@ -1,0 +1,198 @@
+<div class="inproject_resource">
+  <div class="card-detail">
+    <span><i><img src="components/project_resource/images/resource.png" width="40px" height="40px"></i></span>
+    <span class="card-detail-title"><b>In Project Resource</b></span>
+    <span>&nbsp;</span>
+    <span class="pull-right">
+    </span>
+    <hr>
+    <span class="search_btn">
+      <input class="form-control col-md-4 pro_search" type="text" placeholder="Search.." name="search">
+      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
+    </span>
+
+    <div class="project_resource_detail">
+      <h4>Common Goal - 1 Jan 2019 to 31 Dec 2019 - In Progress</h4>
+      <ul>
+        <li>
+          <span class="pr_img"><img src="components/project_resource/images/rs_img.png" width="30px"
+              height="30px"></span>
+          <span class="pr_content">
+            <h5 class="r_name">Sarvana</h5>
+            <p><a id="skills-list" onclick="">Skills</a></p>
+            <h6>160/160</h6>
+          </span>
+        </li>
+
+        <li>
+          <span class="pr_img"><img src="components/project_resource/images/rs_img.png" width="30px"
+              height="30px"></span>
+          <span class="pr_content">
+            <h5 class="r_name">Sarvana</h5>
+            <p><a href="#">Skills</a></p>
+            <h6>160/160</h6>
+          </span>
+        </li>
+
+        <li>
+          <span class="pr_img"><img src="components/project_resource/images/rs_img.png" width="30px"
+              height="30px"></span>
+          <span class="pr_content">
+            <h5 class="r_name">Jayanth</h5>
+            <p><a href="#">Skills</a></p>
+            <h6>160/160</h6>
+          </span>
+        </li>
+
+        <li>
+          <span class="pr_img"><img src="components/project_resource/images/rs_img.png" width="30px"
+              height="30px"></span>
+          <span class="pr_content">
+            <h5 class="r_name">Vidhya Prakash</h5>
+            <p><a href="#">Skills</a></p>
+            <h6>160/160</h6>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="project_resource_detail">
+      <h4>JKC - 15 Jan 2019 to 31 Dec 2019 - UAT</h4>
+      <ul>
+        <li>
+          <span class="pr_img"><img src="components/project_resource/images/rs_img.png" width="30px"
+              height="30px"></span>
+          <span class="pr_content">
+            <h5 class="r_name">Sarvana</h5>
+            <p><a href="#">Skills</a></p>
+            <h6>160/160</h6>
+          </span>
+        </li>
+
+        <li>
+          <span class="pr_img"><img src="components/project_resource/images/rs_img.png" width="30px"
+              height="30px"></span>
+          <span class="pr_content">
+            <h5 class="r_name">Sarvana</h5>
+            <p><a href="#">Skills</a></p>
+            <h6>160/160</h6>
+          </span>
+        </li>
+
+        <li>
+          <span class="pr_img"><img src="components/project_resource/images/rs_img.png" width="30px"
+              height="30px"></span>
+          <span class="pr_content">
+            <h5 class="r_name">Jayanth</h5>
+            <p><a href="#">Skills</a></p>
+            <h6>160/160</h6>
+          </span>
+        </li>
+
+        <li>
+          <span class="pr_img"><img src="components/project_resource/images/rs_img.png" width="30px"
+              height="30px"></span>
+          <span class="pr_content">
+            <h5 class="r_name">Vidhya Prakash</h5>
+            <p><a href="#">Skills</a></p>
+            <h6>160/160</h6>
+          </span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal fade" id="modal-submitproposal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+        <h4 class="modal-title">Enter Project Details</h4>
+        <button class="btn btn-sm btn-primary" style="float:right" onclick="fncProjectaction()">
+          <i class="glyphicon glyphicon-plus" id="btn-project-Add" data-toggle="modal"></i>
+        </button>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td>Resource</td>
+              <td>Task</td>
+              <td>Completed Hours</td>
+              <td>Balance Hours</td>
+              <td>Action</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="rfp_1">
+              <td class="r_id">Test1</td>
+              <td class="clientname">Stanley</td>
+              <td class="bde">00:00</td>
+              <td class="bde_Lead">00:00</td>
+              <td>
+                <button data-rfpid="1" type="button" class="btn btn-info btn-xs assignRfp" data-toggle="modal"
+                  value="Assign"><span class="glyphicon glyphicon-check"></span></button>
+                <a href="#"><button class="btn btn-xs btn-info"><span data-submitproposal="1"
+                      class="glyphicon glyphicon-send submitproposal" title="Submit Proposal"></span></button></a>
+              </td>
+            </tr>
+            <tr id="rfp_2">
+              <td class="r_id">Test2</td>
+              <td class="clientname">Stanley</td>
+              <td class="bde">00:00</td>
+              <td class="bde_Lead">00:00</td>
+              <td>
+                <button data-rfpid="2" type="button" class="btn btn-info btn-xs assignRfp" data-toggle="modal"
+                  value="Assign"><span class="glyphicon glyphicon-check"></span></button>
+                <a href="#"><button class="btn btn-xs btn-info"><span data-submitproposal="2"
+                      class="glyphicon glyphicon-send submitproposal" title="Submit Proposal"></span></button></a>
+              </td>
+            </tr>
+            <tr id="rfp_3">
+              <td class="r_id">Test3</td>
+              <td class="clientname">Stanley</td>
+              <td class="bde">00:00</td>
+              <td class="bde_Lead">00:00</td>
+              <td>
+                <button data-rfpid="3" type="button" class="btn btn-info btn-xs assignRfp" data-toggle="modal"
+                  value="Assign"><span class="glyphicon glyphicon-check"></span></button>
+                <a href="#"><button class="btn btn-xs btn-info"><span data-submitproposal="3"
+                      class="glyphicon glyphicon-send submitproposal" title="Submit Proposal"></span></button></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Skills Modal start -->
+
+<div class="modal fade" id="skills" style="display: none;">
+  <div class="modal-dialog skills-list">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+        <h4 class="modal-title">Skills</h4>
+      </div>
+      <div class="modal-body" id="skills-list"  data-simplebar>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Skills Modal End -->
+
+<script>
+
+  $("#skills-list").click(function () {
+    $("#skills").modal('show');
+  });
+
+</script>

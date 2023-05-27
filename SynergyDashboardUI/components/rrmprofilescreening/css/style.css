@@ -1,0 +1,49 @@
+/* RRM Details for interview schedule card  */
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+    text-align: left !important;
+    padding:5px;
+    font-size: 11pt;
+}
+
+#RRMDetailsProfileScreeningModal .table-label{
+    width:25%  !important;
+}
+
+#RRMDetailsProfileScreeningModal {
+    width: 100%;
+}
+
+#RRMDetailsProfileScreeningModal .modal-content{
+    width: 70%;
+}
+
+#candidateDetailsProfileScreeningModal {
+    width: 100%;
+}
+
+#candidateDetailsProfileScreeningModal .modal-content{
+    width: 70%;
+}
+
+#candidateDetailsProfileScreeningModal .modal-body{
+    min-height:calc(100vh - 200px)
+}
+
+
+.swal-popup .swal2-close{      
+    top: 0px;
+    background: #dd2c36;
+    right: 0px;
+    font-size: 26px;
+    border-radius: 3px;
+    color: #fff;
+    font-weight: 600;
+    padding: 0px;
+}

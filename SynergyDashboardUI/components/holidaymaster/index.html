@@ -1,0 +1,390 @@
+<!-- Holiday Master Card -->
+<div class="card-detail">
+    <span class="card-detail-title"><b>Holiday Master</b></span>
+    <!-- the below button for add new Holiday -->
+    <span class="pull-right">
+        <button type="submit" class="btnAddHoliday btn btn-primary btn-xs pull-right">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+
+
+    <!-- Add Holiday Modal -->
+    <div class="modal fade bd-example-modal-lg in" id="HolidayModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Holiday Master </h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="date" class="form-control" id="hmDate" />
+                                    <small class="text-danger hmDate_error_message"></small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Department</label>
+                                    <div id="deptcheckboxes">
+                                    </div>
+                                    <small class="text-danger hmDepartment_error_message"></small>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" class="form-control" id="hmDescription" cols="30"
+                                              rows="10"></textarea>
+                                    <small class="text-danger hmDescription_error_message"></small>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-6">
+                                <div id="isIncentive"></div>
+                        </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="PostHoliday" type="button" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Delete Holiday Modal -->
+    <div class="modal fade bd-example-modal-lg in" id="DeleteHolidayModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <h4 class="modal-title">Delete Holiday</h4>
+                </div>
+                <div class="modal-body" style="border: black;" role="dialog">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4 text-right">
+                                <label>Remarks</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <textarea name="remarks" class="form-control" id="hmRemarks" cols="30"
+                                              rows="10"></textarea>
+                                    <small class="text-danger hmRemarks_error_message"></small>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="hmDeleteHoliday" type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label>Select Year</label>
+            <div class="form-group">
+                <select id="ddlYears" class="form-control"></select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label>Select Month</label>
+            <div class="form-group">
+                <select id="ddlMonths" class="form-control">
+                    <option value='1'>January</option>
+                    <option value='2'>February</option>
+                    <option value='3'>March</option>
+                    <option value='4'>April</option>
+                    <option value='5'>May</option>
+                    <option value='6'>June</option>
+                    <option value='7'>July</option>
+                    <option value='8'>August</option>
+                    <option value='9'>September</option>
+                    <option value='10'>October</option>
+                    <option value='11'>November</option>
+                    <option value='12'>December</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label>Select Departments </label>
+            <div class="form-group">
+                <select id="ddlDepartmentList" class="form-control">
+                    <option value='all' selected>All</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <label></label>
+            <div class="form-group">
+                <button id="GetHolidays" type="button" class="btn btn-primary">Get Holidays</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="holidayMaster"></div>
+</div>
+
+<!-- internal script -->
+<script>
+    $(document).ready(function () {
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token;
+
+        var deptData = [];
+        var holidayList;
+        var date = new Date();
+        //For binding months
+        var select = document.getElementById('ddlMonths');
+        var html = '';
+        var n;
+        for (var i = 0; i < 12; i++) {
+            n = date.getMonth();
+        }
+        select.selectedIndex = n;
+
+        //For binding years
+        $('#ddlYears').each(function () {
+            var year = (new Date()).getFullYear();
+            var current = year;
+            year -= 3;
+            for (var i = 0; i < 6; i++) {
+                if ((year + i) == current)
+                    $(this).append('<option selected value="' + (year + i) + '">' + (year + i) + '</option>');
+                else
+                    $(this).append('<option value="' + (year + i) + '">' + (year + i) + '</option>');
+            }
+        });
+
+        getHolidays();
+        loadDepartment();
+
+        loadDepartmentinadd();
+
+    });
+
+    function loadDepartment() {
+        deptList = callgetlist('GetDepartmentList', '{"Token":"' + Token + '","IsActive":"' + true + '"}');
+        var option = '';
+        deptList.forEach(function (data) {
+            option += '<option value="' + data.Id + '">' + data.Departments + '</option>';
+        });
+        $('#ddlDepartmentList').append(option);
+    }
+
+    function loadDepartmentinadd() {
+        debugger;
+        deptData = [];
+
+        var deptList = callgetlist('GetDepartmentList', '{"Token":"' + Token + '","IsActive":"' + true + '"}');
+
+        if (deptList.length > 0) {
+            deptList.forEach(function (i, index) {
+                deptData.push({
+                    'Id': i['Id'],
+                    'Department': i['Departments']
+                });
+            });
+        }
+
+        $("#deptcheckboxes").dxTagBox({
+            dataSource: new DevExpress.data.ArrayStore({
+                data: deptData,
+                key: "Id"
+            }),
+            maxDisplayedTags:5,
+            showSelectionControls: true,
+            onMultiTagPreparing: function(args){
+            var selectedItemsLength = args.selectedItems.length,
+                totalCount = 5;
+    
+            if (selectedItemsLength < totalCount) {
+                args.cancel = true;
+            } else {
+                args.text = "All selected (" + selectedItemsLength + ")";
+            }
+        },
+            placeholder: "Select  Department",
+            displayExpr: "Department",
+            valueExpr: "Id",
+        });
+
+        $("#isIncentive").dxCheckBox({
+        value: false,
+        text: "Is Eligible for Holiday Incentive",
+        onValueChanged(e) {
+          }
+    });
+    }
+
+    $("#GetHolidays").click(function () {
+        getHolidays();
+    });
+    function getHolidays() {
+        var month = document.getElementById("ddlMonths").value;
+        var year = document.getElementById("ddlYears").value;
+        var department = document.getElementById("ddlDepartmentList").value;
+        holidayList = callgetlist('GetHolidays', '{"Year":"' + year + '","Month":"' + month + '","DepartmentId":"' + department + '"}');
+        bindHolidayList();
+    }
+
+    function bindHolidayList() {
+        var options = getDevExtremeGridJson();
+        options.dataSource = holidayList;
+        options.columns = [
+            { caption: "Date", dataField: "Date", dataType: "date", format: 'dd-MMM-yyyy' },
+            { caption: "Description", dataField: "Description" },
+            { caption: "Department", dataField: "Department" },
+            { caption: "Holiday Incentive", 
+            dataField: "IsHolidayIncentive",
+            alignment:"left",
+              cellTemplate: function (container, options) {
+                  var fieldData = options.data.IsHolidayIncentive;
+                  if(fieldData == true) {
+                    var html = "<label class='label label-success m-l-sm'>Eligible</label>";
+                      
+                  }
+                  else{
+                    var html = "<label class='label label-danger m-l-sm'>Not Eligible</label>";
+                  }
+                  $(html).appendTo(container);
+              }, fixedPosition: "right",
+         },
+            {
+                dataField: "",
+                caption: "Action",
+                width: 50,
+                cellTemplate: function (container, options) {
+                    var leaveId = options.data.Id;
+                    var domActions = "";
+                    domActions += "<button class='btn btn-xs btn-primary trash-btn' id='btnDelete' onclick=deleteHoliday('" + leaveId + "')><i class='glyphicon glyphicon-trash'></i></button>";
+                    $("<div class='text-center'>").append($(domActions)).appendTo(container);
+                }, fixedPosition: "right", fixed: true, allowExporting: false, hidingPriority: 0
+            }
+        ];
+        var dataGrid = $("#holidayMaster").dxDataGrid(options).dxDataGrid("instance");
+    }
+
+    var deleteHolidayId = "";
+    function deleteHoliday(id) {
+        deleteHolidayId = id;
+        $('#DeleteHolidayModal').appendTo("body").modal('show');
+
+        //Reset - Error Msg
+        $('.hmRemarks_error_message').text('');
+        document.getElementById("hmRemarks").value = "";
+    }
+    function holidayMasterGrid() {
+        var options = getDevExtremeGridJson();
+        options.dataSource = holidayList;
+        options.columns = [
+            { caption: "Date", dataField: "Date", dataType: "date", format: 'dd-MMM-yyyy' },
+            { caption: "Description", dataField: "Description" }
+        ];
+        var dataGrid = $("#holidayMaster").dxDataGrid(options).dxDataGrid("instance");
+    }
+
+    $(".btnAddHoliday").click(function () {
+        $('#HolidayModal').appendTo("body").modal('show');
+
+        //Reset - Error Msg
+        $('.hmDate_error_message').text('');
+        $('.hmDepartment_error_message').text('');
+        $('.hmDescription_error_message').text('');
+
+        document.getElementById("hmDate").value = "";
+        document.getElementById("hmDescription").value = "";
+        $("#deptcheckboxes").dxTagBox('instance').reset(); // Department Section
+        $("#isIncentive").dxCheckBox("instance").reset();
+
+    });
+
+    $("#PostHoliday").click(function () {
+        var holidayDate = document.getElementById("hmDate").value;
+        var holidayDescription = document.getElementById("hmDescription").value;
+        var deptselectedval = $("#deptcheckboxes").dxTagBox('instance').option('value');
+        var isIncentiveVal = $("#isIncentive").dxCheckBox('instance').option('value');
+        if (holidayDescription == "null" || holidayDescription == "") {
+            $('.hmDescription_error_message').text('Description is required')
+            if (holidayDate == "null" || holidayDate == "") {
+                $('.hmDate_error_message').text('Date is required')
+            }
+            if (deptselectedval.length == 0) {
+                $('.hmDepartment_error_message').text('Department is required')
+            }
+        }
+        else if (holidayDate == "null" || holidayDate == "") {
+            $('.hmDate_error_message').text('Date is required')
+        }
+        else if (deptselectedval.length == 0) {
+            $('.hmDepartment_error_message').text('Department is required')
+        }
+        else {
+            var deptselectedstr = deptselectedval.join(",");
+            dataSource = {
+                "Method": "PostHolidays",
+                "Data": {
+                    "Token": Token,
+                    "DepartmentId": deptselectedstr,
+                    "Data": JSON.stringify({
+                        "Date": holidayDate,
+                         "Description": holidayDescription,
+                      "IsHolidayIncentive":isIncentiveVal
+                    }),
+                }
+            }
+            var postCall = PostDataCall(dataSource);
+            if (postCall['IsSuccess'] == true) {
+                swal("Success..!", postCall['Message'], "success");
+                $("#HolidayModal").modal("hide");
+                getHolidays();
+            }
+            else {
+                swal("Warning..!", postCall['Message'], "warning");
+            }
+        }
+    });
+
+    $("#hmDeleteHoliday").click(function () {
+        var remarks = document.getElementById("hmRemarks").value;
+        if (remarks == "null" || remarks == "") {
+            $('.hmRemarks_error_message').text('Remarks is required')
+        } else {
+            var data = {
+                "Method": "DeleteHoliday",
+                "Data": { "Data": JSON.stringify({ "ID": deleteHolidayId, "Remarks": remarks }) }
+            };
+            var postCall = PostDataCall(data);
+            if (postCall['IsSuccess'] == true) {
+                swal("Success..!", postCall['Message'], "success");
+                deleteHolidayId = "";
+                $("#DeleteHolidayModal").modal("hide");
+                getHolidays();
+            }
+            else {
+                swal("Warning..!", postCall['Message'], "warning");
+            }
+        }
+    });
+
+</script>

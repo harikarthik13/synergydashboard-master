@@ -1,0 +1,240 @@
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<link href="components/backupresource/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="js/library/dropzone.js"></script>
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade" id="open_message" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="mail_send" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">Send Mail</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Send To:</label>
+                        <select type="text" class="form-control" name="BR_sendMessageList" id="backupResource_message" style="width:100%;" multiple></select>
+                    </div>                    
+                </div>
+                <div class="form-section">
+                    <label>Description:</label>
+                    <textarea name="message_content" id="message_content" class="form-control ckeditor"></textarea>
+                </div>
+                <br>
+                <div>
+                    <form action="#" enctype="multipart/form-data">
+                        <input type="file" id="sendMessage" style="display: none;" onchange="fileMessageSelected(event)" multiple="true" />
+                        <div id="filelist"></div>
+                        <input type="button" class="btn btn-sm btn-primary" id="btnMessageAttachment" onclick="openMessageAttachment()" value="Upload">
+                        <br>
+                        <label id="attached_fileMessage">File:</label>
+                    </form>
+                </div>
+                <div class="text-right model-footer">
+                    <button class="btn btn-default" data-dismiss="model" id="close_model">Cancel</button>
+                    <button class="btn btn-secondary" onclick="mail_to_resource()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade" id="open_skill" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title skill-label" id="myModalLabel"></h2>
+            </div>
+            <div id="DisplayBackupResourceSkills"></div>
+        </div>
+    </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade" id="open_project" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title project-label" id="myModalLabel"></h2>
+            </div>
+
+            <div class="modal-body projectDetailmodal" data-simplebar>
+                <div id="DisplayProjectLists"></div><br>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade" id="open_plan" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" id="plan_message" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title plan-label" id="myModalLabel"></h2>
+               
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4" id="SelectMessageType"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Messages:</label>
+                        <div class="message_lists" id="message_lists">
+                           
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 plan_message_area">
+                        <div class="form-section">
+                            <input type="hidden" id="plan-id">
+                            <label>Plan Message:</label>
+                            <div class="form-group plan-subject" style="display:none;">
+                                <label>Subject :</label>
+                                <input type="text" name="plan_subject" id="plan-subject" class="form-control">
+                            </div>
+                            <textarea name="plan_content_message" id="plan_content_message" rows="7" class="form-control ckeditor"></textarea>
+                            <p class="error_message message_text"></p>
+                            <br>                           
+                            <div class="bottom-section">
+                                <div class="pull-right">
+                                    <button class="btn btn-secondary btn-sm" type="button" onclick="planSubmit()">Send</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-sm-6">
+                        <form action="#" enctype="multipart/form-data">
+                            <input type="file" id="attachment" style="display: none;" onchange="fileSelected(event)" multiple="true" />
+                            <input type="button" class="btn btn-sm btn-primary" id="btnAttachment" onclick="openAttachment()" value="Upload">
+                            <br>
+                            <label id="attached_file">File:</label>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+<!-- IMPORT MODAL STARTS HERE-->
+<div class="modal fade" id="open_leave" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title leave-label" id="myModalLabel"></h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="DisplayLeavePlanLists"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+
+<!-- IMPORT MODAL STARTS HERE-->
+<div class="modal fade" id="openLeaveApproverDetails" tabindex="1" role="dialog" aria-labelledby="openLeaveApproverDetails">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title">Leave Approver Details</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div id="DisplayLeaveApproverDetails"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+<!-- Code For Chat Area - Added By Lingesh Deepak  -->
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade" id="open_chat" class="open_chat" tabindex="1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- HTML Design Generated in openChatModal()-->
+</div> 
+<!-- IMPORT MODAL ENDS HERE -->
+
+<script type="text/javascript" src="components/backupresource/js/backup_resource.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#dtpLeaveDate').datepicker({});
+        $('#dtpCompensateDate').datepicker({});
+        // $("#message_chat_list").scrollTop(10000000000000000000000000000);
+    });
+
+    function openMsgAttachment() {
+        $('#chat_attachment').click();
+    }
+
+    function fileSelected(input){
+        
+        var files = $('#chat_attachment')[0].files;
+        for (var i = 0; i < files.length; i++) {
+            $("#attached_file_list").append('<p><button>'+files[i].name+'<span class="close" >x</span></button></p>');
+        }
+    }
+
+    function openMessageAttachment() {
+        $('#sendMessage').click();
+    }
+
+    function fileMessageSelected(input){
+       
+        var files = $('#sendMessage')[0].files;
+        for (var i = 0; i < files.length; i++) {
+            $("#attached_fileMessage").append('<p><button>'+files[i].name+'<span class="close" >x</span></button></p>');
+        }
+    }
+
+    $(document).on('click','.close',function(){
+	    $(this).parents('p').remove();
+    })
+
+   
+    $("#chat_message").on("click", function() { 
+        $("#chat_content_message").val("");
+        dropzone_remove_files();
+    });
+
+    var sendmessage = $("#attached_fileMessage");
+    $("#mail_send").on("click", function() { 
+        $("#message_content").val("");
+        sendmessage.val("");
+    });
+
+    var msg_document_upload = new Dropzone("#msg_document_upload", {
+      addRemoveLinks: true,
+      uploadMultiple: true,
+      autoProcessQueue: false,
+      url: messageSubmit
+    });
+
+    $("#open_chat").animate({ scrollBottom: $('#open_chat').prop("scrollHeight")}, 1000);
+</script>

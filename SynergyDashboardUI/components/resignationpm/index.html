@@ -1,0 +1,153 @@
+<div class="john-trail card-detail">
+  <!-- Add "modal-not-include" to a div for which we dont want to show them in modal  -->
+  <span class="modal-not-include">
+    <span class="card-detail-title"><b>Resignation</b></span>
+    <!-- <button type="button" id="btnleaveDetail" class="btn btn-xs cmn-modal-ex-btn expandCommonDiv pull-right">
+            <i class="fa fa-expand"></i>
+        </button> -->
+    <!-- <button type="button" id="btnResign" onclick="openResign()" class="btn btn-success pull-right">
+            Resign your position
+        </button> -->
+    <hr>
+  </span>
+
+
+  <div class="row modal-not-include">
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <table id="noDueTbl" class="table table-striped removetable">
+          <thead>
+            <th>No</th>
+            <th>Employee</th>
+            <th>Resignation Date</th>
+            <th>Expected Resignation Date</th>
+            <th>Status</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td><i class="fa fa-user-circle"></i>Emp1</td>
+              <td>11-06-2019</td>
+              <td>11-07-2019</td>
+              <td>Pending</td>
+              <td><button class="btn btn-primary" onclick="showResPlan()">Plan</button></td>
+              <td><button class="btn btn-danger" onclick="showResClosure()">Closure</button></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><i class="fa fa-user-circle"></i>Emp1</td>
+              <td>11-06-2019</td>
+              <td>11-07-2019</td>
+              <td>Pending</td>
+              <td><button class="btn btn-primary" onclick="showResPlan()">Plan</button></td>
+              <td><button class="btn btn-danger" onclick="showResClosure()">Closure</button></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><i class="fa fa-user-circle"></i>Emp1</td>
+              <td>11-06-2019</td>
+              <td>11-07-2019</td>
+              <td>Pending</td>
+              <td><button class="btn btn-primary" onclick="showResPlan()">Plan</button></td>
+              <td><button class="btn btn-danger" onclick="showResClosure()">Closure</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Plan Modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal-resignationpm-plan" role="dialog"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+        <h4 class="modal-title">Replacement Plan</h4>
+      </div>
+      <div class="modal-body" data-simplebar>
+        <label for="">Replacement Plan</label>
+        <textarea name="" id="resPlanMsg" cols="30" rows="10"></textarea>
+        <br />
+        <label for="create_rrm">Do You want to create RRM ?</label>
+        Yes <input type="radio">
+        No <input type="radio">
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" onclick="">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Plan Modal -->
+
+<!-- closure modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal-resignationpm-closure" role="dialog"
+  aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+        <h4 class="modal-title">Resignation Closure</h4>
+      </div>
+      <div class="modal-body" data-simplebar>
+        <input type="checkbox" name="leaveProject" id="leaveProject">
+        <label for="leaveProject">No Objection to relive </label>
+        <br />
+        <div class="row">
+          <div class="col-md-4">
+            <label for="">Attendance</label>
+          </div>
+          <div class="col-md-4">
+            <select name="attendance" class="form-control" id="attendanceSelect">
+              <option value="">Select Rating</option>
+              <option value="">Excellent</option>
+              <option value="">Good</option>
+              <option value="">Average</option>
+              <option value="">Poor</option>
+            </select>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-4">
+            <label for="">responsibilities</label>
+          </div>
+          <div class="col-md-4">
+            <select name="responsibilities" class="form-control" id="responsibilitiesSelect">
+              <option value="">Select Rating</option>
+              <option value="">Excellent</option>
+              <option value="">Good</option>
+              <option value="">Average</option>
+              <option value="">Poor</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+           <button type="button" class="btn btn-success" data-dismiss="modal" onclick="">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- closure modal -->
+<script>
+
+  function showResPlan() {
+    var editor = CKEDITOR.instances.resPlanMsg;
+    if (editor) {
+        editor.destroy(true); 
+    }   
+    CKEDITOR.replace('resPlanMsg');
+    $('#modal-resignationpm-plan').appendTo('body').modal('show')
+  }
+  function showResClosure () {
+    $('#modal-resignationpm-closure').appendTo('body').modal('show')
+  }
+
+</script>

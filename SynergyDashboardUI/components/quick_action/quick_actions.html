@@ -1,0 +1,372 @@
+<style>
+	.select2-container{
+		width: 100% !important;
+	}
+	 
+	#add-task-button,#add-subtask-button{
+		margin-bottom: 10px;
+	}
+</style>
+<div class="quickActions-card card-detail" id="quickActions">
+	<div class="row">
+		<div class="col-md-12">
+			<h4>
+				Quick Actions
+				<span style="font-size: 13px"></span>
+				<span class="pull-right">
+
+					<button class="btn btn-sm btn-primary" onclick="refreshQuickActionTasks(1)">
+						<i class="glyphicon glyphicon-refresh"></i>
+					</button>
+					<button class="btn btn-sm btn-primary" id="btn-QuickAction-list" onclick="ListOfAction()">
+						<i class="glyphicon glyphicon glyphicon-list"></i>
+					</button>
+					<button class="btn btn-sm btn-primary" onclick="fncQuickaction()" id="ActionModal">
+						<i class="glyphicon glyphicon-plus" id="btn-QuickAction-Add" data-toggle="modal"></i>
+					</button>
+
+				</span>
+			</h4>
+
+			<div id="quickActionDate" style="width:150px;"></div> 
+			
+			<hr />
+			<div id="div-ChartItems" style="display:block;">
+
+				<div class="text-center">
+					<span class="punch-text">Punched Hours: <span id="punchedInHrs">HH.MM</span></span><span class="log-hrs">Logged
+						Hours: <span id="loggedHrs">HH.MM</span></span>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<td>Tasks</td>
+								<!-- <td>Particulars</td> -->
+								<td style="text-align:center;">Hours</td>
+								<td style="text-align:center;">Billable hours</td>
+								<td>Action</td>
+							</tr>
+						</thead>
+						<tbody id="quickActionsData">
+							<!-- <tr id="rfp_1">
+								<td>RFPx</td>
+								<td>text</td>
+								<td>3</td>
+								<td>0</td>
+							</tr>
+							<tr id="rfp_2">
+								<td>luxnote</td>
+								<td>text</td>
+								<td>6</td>
+								<td>6</td>
+							</tr> -->
+						</tbody>
+					</table>
+					<!-- <div class="text-center total-hours">
+						<span class="hours-txt">Total Hours</span><span class="hrs">6</span>
+					</div> -->
+					<button class="btn btn-sm btn-primary" style="margin-top:16px;" disabled onclick="" id="commit-hrs">
+						Commit Hours
+					</button>
+				</div>
+				<div id="legenddiv"></div>
+				<div class="col-md-12 text-center">
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<!-- button class="btn btn-sm btn-primary" onclick="" id="commit-hrs">Commit Hours</button -->
+</div>
+<div id="legenddiv"></div>
+<div class="col-md-12 text-center">
+</div>
+
+
+<!-- Add an Action Modal Default-->
+<div class="modal fade" id="div-QuickAction-Edit-Modal" role="dialog">
+	<div class="modal-dialog modealExpand">
+
+		<!-- Modal content-->
+		<div class="modal-content text-center-no">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+				<h2 class="modal-title text-left">Add an Action</h2>
+
+
+			</div>
+			<div class="modal-body" data-simplebar>
+				<label for="Action">Select an activity <span style="color: red">*</span></label>
+				<select class="form-control actionList" id="Action" name="Action" onchange="edit_action_OnChange(this)">
+					<option value="">Select an activity</option>
+				</select>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Add an Action Modal KT/PreSales-->
+<div class="modal fade" id="div-QuickAction-Edit-Small-Modal" role="dialog">
+	<div class="modal-dialog modealExpand">
+
+		<!-- Modal content-->
+		<div class="modal-content text-center-no">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+				<h2 class="modal-title text-left">Add an Action</h2>
+
+
+			</div>
+			<div class="modal-body" data-simplebar>
+				<label for="Action" class="selectAnActivity">Select an activity <span style="color: red">*</span></label>
+				<select class="form-control actionList" id="ActionSmall" name="Action" onchange="edit_action_OnChange(this)">
+					<option value="">Select an activity</option>
+				</select>
+
+
+				<div class="row">
+					<div class="col-md-12">
+						<div style="margin-top:5px;">
+							<label for="text-area">Description <span style="color: red">*</span></label>
+							<textarea class="form-control" id="text-area-action" name="text-area" rows="3"></textarea>
+							<span class="error_message" id="descriptionError"></span>
+						</div>
+						<div style="margin-top:5px;">
+							<label for="worked-hours-counter">Worked hours <span style="color: red">*</span></label><br>
+							<input id="worked-hours-counter" name="worked-hours-counter" value="0" min="0" max="23"
+								placeholder="hh" type="number" style="width:56px;">
+							:
+							<input id="worked-mins-counter" name="worked-mins-counter" value="0" min="0" max="59"
+								placeholder="mm" type="number" style="width:56px;">
+							<span class="error_message" id="workingHrsError"></span>
+						</div>
+						<div>
+							<button class="btn btn-sm btn-primary float-right"
+								onclick="saveQuickActionsEntry('presales')" id="save_QuickActionActivity-2" style="float:right;">
+								Save
+							</button>
+							<button class="btn btn-sm btn-secondary float-right"
+							data-dismiss="modal" id="" style="float:right;margin-right:16px;background-color:gray;color:white;">
+								Close
+							</button>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- <div id="quickActionDetails">
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Add an Action Modal - Projects/RFP/RRM/Meetings-->
+<div class="modal fade" id="div-QuickAction-Edit-Big-Modal" role="dialog">
+	<div class="modal-dialog modealExpand">
+
+		<!-- Modal content-->
+		<div class="modal-content text-center-no">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+				<h2 class="modal-title text-left">Add an Action</h2>
+
+
+			</div>
+			<div class="modal-body" data-simplebar>
+				<label for="Action" class="selectAnActivity">Select an activity <span style="color: red">*</span></label>
+				<select class="form-control actionList" id="ActionBig" name="Action" onchange="edit_action_OnChange(this)">
+					<option value="">Select an activity</option>
+				</select>
+
+				<div id="sddgd-actionitems"></div>
+
+				<!-- <div id="quickActionDetails">
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div> 
+
+<!-- Add an Activity Modal -->
+<div class="modal fade" id="div-QuickActionActivity-Edit-Modal" role="dialog">
+	<div class="modal-dialog modealExpand">
+
+		<!-- Modal content-->
+		<div class="modal-content text-left" style="width:50%;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+				<h2 class="modal-title text-left">Edit activity</h2>
+
+
+			</div>
+			<div class="modal-body" data-simplebar>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group" id="phaseDiv">
+							<label>Select a Phase <span style="color: red">*</span></label>
+							<select class="form-control actionList" id="selectPhase" name="selectPhase" onchange="selectPhase_OnChange(this)">
+								<option value="">Select a phase</option>
+							</select>
+							<span class="error_message" id="phaseError-modal"></span>
+						</div>
+						<div class="form-group" id="taskDiv">
+							<label for="selectTask" id="selectTaskLabel">Select a Task <span style="color: red">*</span></label>
+							<div id="taskSelectDiv">
+								<select class="form-control actionList" id="selectTask" name="selectTask"
+									onchange="select_task_OnChange()">
+									<option value="">Select a Task</option>
+								</select>
+								<span class="input-group-btn" id="add-task-button-group">
+									<button class="btn btn-default" id="add-task-button" type="button" onclick="addTask();">
+										<i class="glyphicon glyphicon-plus"></i>
+									</button>
+								</span>
+							</div>
+							<span class="error_message" id="taskError-modal"></span>
+						</div>
+
+						<div class="form-group" id="subTaskDiv">
+							<label for="selectSubTask" id="selectSubTaskLabel">Select a Sub-task</label>
+							<div style="display:table;">
+								<select class="form-control actionList" id="selectSubTask" name="selectSubTask">
+									<option value="">Select a Sub-task</option>
+								</select>
+								<span class="input-group-btn">
+									<button class="btn btn-default" id="add-subtask-button" type="button" onclick="addSubTask()">
+										<i class="glyphicon glyphicon-plus"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+
+						<div style="margin-top:10px;">
+							<label for="text-area">Description <span style="color: red">*</span></label>
+							<textarea class="form-control" id="text-area-action-2" name="text-area" rows="3"></textarea>
+							<span class="error_message" id="descriptionError-modal"></span>
+						</div>
+						<div class="row" style="margin-top:10px;">
+							<div class="col-md-6">
+								<label for="worked-hours-counter">Worked hours <span style="color: red">*</span></label><br>
+								<input id="worked-hours-counter-2" name="worked-hours-counter" value="0" min="0" max="23"
+									placeholder="hh" type="number" style="width:56px;">
+								:
+								<input id="worked-mins-counter-2" name="worked-mins-counter" value="0" min="0" max="59"
+									placeholder="mm" type="number" style="width:56px;">
+									<span class="error_message" id="workingHrsError-modal"></span>
+							</div>
+							<div class="col-md-6" id="estimatedHoursDiv">
+								<label for="estimated-hours-counter">Estimated hours</label><br>
+								<input disabled id="estimated-hours-counter" name="estimated-hours-counter"
+									value="01:00" placeholder="hh:mm" type="text" style="width:56px;">
+							</div>
+						</div>
+						<div class="row" style="margin-top:10px;" id="availableHoursDiv">
+							<div class="col-md-6">
+								<label for="available-hours-counter">Available hours</label><br>
+								<input disabled id="available-hours-counter" name="available-hours-counter"
+									value="01:00" placeholder="hh:mm" type="text" style="width:56px;">
+							</div>
+							<div class="col-md-6">
+								<label for="completion-percentage">% of completion <span style="color: red">*</span></label><br>
+								<input id="completion-percentage" name="completion-percentage" value="0" placeholder="percentage"
+									type="number" style="width:56px;">
+									<span class="error_message" id="completionError-modal"></span>
+							</div>
+						</div>
+						<div class="row" style="margin-top:10px;">
+							<div class="col-md-12">
+								<button class="btn btn-sm btn-primary float-right" onclick="saveQuickActionsEntry(true)"
+									id="save_QuickActionActivity" style="float:right;">
+									Save & Close
+								</button>
+								<button class="btn btn-sm btn-primary float-right" onclick="saveQuickActionsEntry(false)"
+									id="save_QuickActionActivity_noclose" style="float:right;margin-right:16px;">
+									Save
+								</button>
+								<button class="btn btn-sm btn-secondary float-right"
+							data-dismiss="modal" id="" style="float:right;margin-right:16px;background-color:gray;color:white;">
+								Close
+							</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ADD SUB-TASK MODAL STARTS HERE -->
+<div class="modal fade" id="addSubTask_Modal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h2 class="modal-title">Add Sub-task</h2>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Sub-task Title <span style="color: red"> *</span></label>
+					<input type="text" class="form-control" name="addSubTaskTitle" id="addSubTaskTitle">
+					<span class="error_message" id="subTaskTitleError"></span>
+				</div>
+				<div class="form-group">
+					<label>Sub-task Description <span style="color: red"> *</span></label>
+					<textarea class="form-control" name="addSubTaskDesc" id="addSubTaskDesc"></textarea>
+					<span class="error_message" id="subTaskDescError"></span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-default woclosemodel">Cancel</button> -->
+				<button type="button" class="btn btn-primary" id="addSubTaskModal_btn"
+					onclick="saveSubTaskDetails()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ADD SUB-TASK MODAL ENDS HERE -->
+
+<!-- ADD TASK MODAL STARTS HERE -->
+<div class="modal fade" id="addTask_Modal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h2 class="modal-title">Add Task</h2>
+			</div>
+			<div class="modal-body">
+				<!-- <div class="form-group" id="div_selectPhase">
+					<label>Phase</label>
+					<select class="form-control actionList" id="selectPhase" name="selectPhase" onchange="selectPhase_OnChange(this)">
+						<option value="">Select a phase</option>
+					</select>
+				</div> -->
+				<div class="form-group">
+					<label>Task Title <span style="color: red"> *</span></label>
+					<input type="text" class="form-control" name="addTaskTitle" id="addTaskTitle">
+					<span class="error_message" id="taskTitleError"></span>
+				</div>
+				<div class="form-group">
+					<label>Task Description <span style="color: red"> *</span></label>
+					<textarea class="form-control" name="addTaskDesc" id="addTaskDesc"></textarea>
+					<span class="error_message" id="taskDescError"></span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="addTaskModal_btn"
+					onclick="saveTaskDetails()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ADD TASK MODAL ENDS HERE -->

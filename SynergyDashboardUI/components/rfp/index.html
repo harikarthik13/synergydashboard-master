@@ -1,0 +1,66 @@
+<!-- <script src='components/proposals/js/proposal.js'></script> -->
+<!-- <script src='components/rfp/js/proposal.js'></script> -->
+<script src='components/rfp/js/rfp.js'></script>
+<script src='components/rfp/js/workorder.js'></script>
+
+<div class="card-detail">
+    <span><i><img src="components/rfp/images/rfp.png" width="40px" height="40px" /></i></span>
+
+    <span class="card-detail-title"><b>Request for Proposal</b></span>
+    <span class="pull-right">
+        <button class="btn btn-sm btn-primary" onclick="OpenRfpModal();" disabled>
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+    <div id="DisplayWorkOrderListTable">
+
+    </div>
+    <!-- <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>#</td>
+
+    <td>RFP #</td>
+    <td>RFP Date</td>
+    <td>BDE Name</td>
+    <td>Client</td>
+    <td>Project Title</td>
+    <td>Action</td>
+    
+    </tr>
+    </thead>
+    <tbody id="DisplayWorkOrderListTable12">
+
+
+    </tbody>
+    </table>
+</div> -->
+</div>
+
+
+<script type="text/javascript">
+
+    $("#assignproposalModal").load("components/rfp/assignProposalModel.html");
+    $("#manageproposalModal").load("components/rfp/manageProposalModel.html");
+    $("#openWorkOrderModel").load("components/rfp/openWorkOrderModel.html");
+
+    function include_rfp(filename, onload) {
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.src = filename;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+
+    /*Rfp to proposal page related scripts*/
+    //include_rfp('./components/rfp/js/proposal.js');
+    //include_rfp('./components/rfp/js/workorder.js');
+    /**Load rfps v**/
+    /* getProposalList();
+    getProposalListTable(); */
+    getWorkorderListTable();
+
+
+</script>

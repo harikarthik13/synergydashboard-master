@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-md-12 defaulters-actionForm" style="text-align: left;">
+        <form id="addAnActionFormDefaulters" method="post" role="form">
+            
+            <div class="col-md-12" id="defaulters-supportToMarketing-edit">
+                <label>Type</label>
+                <div>
+                    <select class="form-control defaulters-supportToMarketingList"
+                        id="defaulters-Support_to_marketing_Team" name="Support to marketing Team"
+                        onchange="defaulters_marketingtype_OnChange(this)">
+
+                    </select>
+                </div>
+                <label>To Whom</label>
+                <div>
+                    <select class="form-control supportToMarketToWhom"
+                        id="defaulters-Support_to_marketing_person" name="Support to marketing Team"
+                        onchange="defaulters_marketingtype_OnChange(this)">
+
+                    </select>
+                </div>
+                <label>Hours</label>
+                <div>
+                    <input class="form-control" id="defaulters-MarketingHours" name="defaulters-MarketingHours"
+                        placeholder="Marketing Hours" type="number"
+                        oninput="validity.valid||(value='');" value="0" />
+                </div>
+            </div>
+
+            <div id="defaulters-detailsDiv-edit">
+                <div class="col-md-12" id="defaulters-commentsDiv">
+                    <label>Comments</label>
+                    <div>
+                        <textarea class="form-control defaulters-actionComment" cols="10" id="defaulters-Comments"
+                            name="defaulters-Comments" placeholder="Comments" rows="3"></textarea>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 text-left" id="sucess-response" style="color:green">
+
+                </div>
+
+                <div class="col-md-12 text-left" id="error-response" style="color:red">
+
+                </div>
+
+                <div class="col-md-12 text-center" id="form-btn">
+                    <br />
+                    <input type="reset" class="btn btn-danger clear-form" value="Clear" />
+                    <input type="button" class="btn btn-success" value="Add" id="btn-SubmitAction"
+                        onclick="return AddPostDataDefaulters();" />
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

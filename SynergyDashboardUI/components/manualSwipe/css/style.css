@@ -1,0 +1,163 @@
+#InterviewModal .modal-body{
+    min-height:calc(100vh - 200px)
+}
+
+#InterviewModal {
+    width: 100%;
+}
+
+#InterviewModal .modal-content{
+    width: 70%;
+}
+#lbl-interviewcandidateName{
+    font-size: 18pt !important;
+    font-weight: 600;
+    color: #2F2F2F;
+}
+
+#InterviewModal .lbl-title{
+    width: 50px !important;
+    text-align: center;
+    font-size: 16pt !important;
+    color:#C5122C;
+}
+
+#InterviewModal .lbl-value{
+    text-align: left !important;
+    font-size: 11pt;
+    color:#5D5D5D;
+    font-weight: 600;
+}
+
+#InterviewModal .checked {
+    color: orange;
+}
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+    text-align: left !important;
+    padding:5px;
+    font-size: 11pt;
+}
+
+#InterviewModal .dx-fileuploader-input-wrapper:before{
+    padding-top: 0px !important;
+}
+#InterviewModal .dx-fileuploader-wrapper{
+    padding-left: 0px !important;
+}
+#InterviewModal .table-label{
+    width:25%  !important;
+}
+#InterviewModal .dx-checkbox-text{  
+    font-weight: bold !important;  
+} 
+.redmeter::-webkit-meter-optimum-value {
+    background: rgb(98, 0, 10) !important; /* Green */
+}
+
+.greenmeter::-webkit-meter-optimum-value {
+    background: rgb(5, 97, 6) !important; /* Green */
+}
+
+.orangemeter::-webkit-meter-optimum-value {
+    background: rgb(244, 149, 28) !important; /* Green */
+}
+
+.tree .scoremeter{
+    float: left;
+}
+
+/* RRM Details for interview card  */
+
+.table-borderless > tbody > tr > td,
+.table-borderless > tbody > tr > th,
+.table-borderless > tfoot > tr > td,
+.table-borderless > tfoot > tr > th,
+.table-borderless > thead > tr > td,
+.table-borderless > thead > tr > th {
+    border: none;
+    text-align: left !important;
+    padding:5px;
+    font-size: 11pt;
+}
+
+#RRMDetailsInterviewModal .table-label{
+    width:25%  !important;
+}
+
+#RRMDetailsInterviewModal {
+    width: 100%;
+}
+
+#RRMDetailsInterviewModal .modal-content{
+    width: 70%;
+}
+
+#rrm-remarks p{
+    font-size: 17px!important;
+}
+
+.cardDetailsInterviews{
+    display: flex;
+    margin-left: 20px;
+}
+
+.cardDetailsInterviews .item{
+    padding-left:3px;
+    padding-right:3px;
+}
+
+.cardDetailsInterviews .item-card{
+    transition: 0.5s;
+    cursor: pointer;
+    width: 190px;
+    padding: 3px 10px;
+    background-color: gainsboro;
+    border-radius: 10px;
+}
+
+.cardDetailsInterviews .item-card h2{
+    margin-top: 0px !important;
+    font-size: 15px;
+}
+
+.cardDetailsInterviews .item-card h5{
+    font-size: 16px;
+    text-align: center;
+}
+
+.cardDetailsInterviews .card:hover{
+    transform: scale(1.05);
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.3);
+}
+
+.cardDetailsInterviews .card-text{
+    height:60px;  
+}
+
+.cardDetailsInterviews .card::before, .card::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: scale3d(0, 0, 1);
+    transition: transform .3s ease-out 0s;
+    background: rgba(255, 255, 255, 0.1);
+    content: '';
+    pointer-events: none;
+}
+
+.cardDetailsInterviews .rrmEntryPointInterviewsRecommended{
+    background-color: #149B81;
+}
+
+.cardDetailsInterviews .rrmEntryPointInterviewsNotRecommended{
+    background-color: #EC1349;
+}

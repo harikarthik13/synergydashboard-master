@@ -1,0 +1,1514 @@
+<!-- RFP Style -->
+<link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+
+<link href="components/rfp/css/proposal.css" rel="stylesheet" />
+<link href="css/library/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript" src="js/library/jquery-ui.js"></script>
+
+
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> -->
+<!--POP-UP RFP MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="openWorkOrderModelbox" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick=""><span
+                        aria-hidden="true">&times;</span></button>
+                        <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title" id="myModalLabel">Proposal to work order</h2>
+            </div>
+            <div class="modal-body" data-simplebar>
+                <div id="smartwizard_workorder">
+                    <ul>
+                        <li><a href="#step-1"><span>1</span></a></li>
+                        <li><a href="#step-2"><span>2</span></a></li>
+                        <li><a href="#step-3"><span>3</span></a></li>
+                        <li><a href="#step-4"><span>4</span></a></li>
+                    </ul>
+                    <div class="form-hldr" id="modal_content">
+                        <input type="hidden" class="edit_enable" value="0">
+                        <input type="hidden" class="smartwizsteps" value="0">
+                        <div id="step-1" class="">
+                            <div class="step-title">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <h3>Step 1: <span>Client</span></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>
+                                                <input type="checkbox" class="not_req" value="">IsActive</label>
+                                        </div>
+                                    </div>
+                                   <!--  <div class="col-md-4">
+                                        <div class="form-group">
+                                            <select class="form-control proposalError not_req proposalCls" id="WO_ProposalRfplist" style="width:90%;">
+                                                <option></option>
+                                            </select> 
+                                            <select class="form-control" id="WO_ProposalRfplist" style="width:90%;">
+                                            </select>
+
+                                        </div>
+                                    </div> -->
+                                    <span class="error_message"></span>
+                                </div>
+                            </div>
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Name <span style="color: red"></span></label>
+                                            <input type="text" class="form-control" name="owo_project_name"
+                                                id="owo_project_name">
+                                            <span class="error_message pro_name_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Client <span style="color: red"></span></label>
+                                            <input type="text" class="form-control" name="owo_client_name"
+                                                id="owo_client_name">
+                                            <span class="error_message pro_client_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Type <span style="color: red"></span></label>
+                                            <select type="text" class="form-control" name="owo_project_type"
+                                                id="owo_project_type" style="width:100%;">
+                                                <option></option>
+                                            </select>
+                                            <span class="error_message pro_type_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Development Model <span style="color: red"></span></label>
+                                            <select type="text" class="form-control" name="owo_development_model"
+                                                id="owo_development_model" style="width:100%;">
+                                                <option></option>
+                                            </select>
+                                            <span class="error_message dev_model_err"></span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Industry <span style="color: red"></span></label>
+                                            <select class="form-control" name="owo_project_industry"
+                                                id="owo_project_industry" style="width:100%;">
+                                                <option value="">Select Industry</option>
+                                            </select>
+
+                                            <span class="error_message pro_ind_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Project Domain <span style="color: red"></span></label>
+                                            <select class="form-control" name="owo_project_domain"
+                                                id="owo_project_domain" style="width:100%;">
+                                                <option></option>
+                                                <option>2</option> 
+                                            </select>
+                                            <span class="error_message pro_domain_err"></span>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Workorder Signed Date <span style="color: red"></span></label>
+                                            <input type="text" class="form-control" name="owo_planned_start_date"
+                                                id="owo_planned_start_date" placeholder="mm/dd/yyyy">
+                                            <span class="error_message pro_planned_start_date_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Expected Start Date <span style="color: red"></span></label>
+                                            <input type="text" class="form-control" name="owo_planned_end_date"
+                                                id="owo_planned_end_date" placeholder="mm/dd/yyyy">
+                                            <span class="error_message pro_planned_end_date_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Actual Start Date <span style="color: red"></span></label>
+                                            <input type="text" class="form-control" name="owo_actual_start_date"
+                                                id="owo_actual_start_date" placeholder="mm/dd/yyyy">
+                                            <span class="error_message pro_actual_start_date_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Actual End Date <span style="color: red"></span></label>
+                                            <input type="text" class="form-control" name="owo_actual_end_date"
+                                                id="owo_actual_end_date" placeholder="mm/dd/yyyy">
+                                            <span class="error_message pro_actual_end_date_err"></span>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <!-- <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>UAT Start Date <span style="color: red"></span></label>
+                                            <input type="text" class="form-control" name="owo_uat_start_date"
+                                                id="owo_uat_start_date" placeholder="mm/dd/yyyy">
+                                            <span class="error_message pro_uat_start_date_err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>UAT End Date <span style="color: red"></span></label>
+                                            <input type="text" class="form-control" name="owo_uat_end_date"
+                                                id="owo_uat_end_date" placeholder="mm/dd/yyyy">
+                                            <span class="error_message pro_uat_end_date_err"></span>
+                                        </div>
+                                    </div>
+                                </div>  -->
+
+                               <!--  <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Project Description <span style="color: red"></span></label>
+                                            <textarea class="form-control" name="owo_project_decription"
+                                                id="owo_project_decription"></textarea>
+                                            <span class="error_message pro_decription_err"></span>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Project Technology Notes <span style="color: red"></span></label>
+                                            <textarea class="form-control" name="owo_project_technology_notes"
+                                                id="owo_project_technology_notes"></textarea>
+                                            <span class="error_message pro_tech_notes_err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div id="step-2" class="">
+                            <div class="step-title">
+                                <h3>Step 2: <span>Project Type</span></h3>
+                            </div>
+                            <div class="form-section">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="radio">
+                                            <label for="estimation_doc">
+                                                <input type="hidden" id="WorkOrderId">
+                                                <div id="target_div">
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="step-3" class="">
+                            <div class="class_retainer_div" id="class_retainer_div">
+                                <input type="hidden" name="ProjectType_name" class="ProjectType_name"
+                                    id="ProjectType_name">
+                                <div class="step-title">
+                                    <h3>Step 3: <span>Retainer</span></h3>
+                                </div>
+                                <div class="form-section">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Add Skills</label>
+                                            <div class="tag-container" id="tag-container">
+                                                <span class='skills-tag'>tag1</span>
+                                            </div>
+                                            <input type="text" value="" class="form-control" placeholder="Add Skills" id="add-skill-tag-input" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Resource</label>
+                                            <input type="text" class="form-control" name="retainer_resource"
+                                                id="retainer_resource"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message retainer_resource_error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Hours and Duration(In Months)</label>
+                                            <input type="text" class="form-control" name="retainer_hours_duration"
+                                                id="retainer_hours_duration"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message retainer_hours_duration_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Cost per hour</label>
+                                            <input type="text" class="form-control" name="retainer_cost_per_hour"
+                                                id="retainer_cost_per_hour"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message retainer_cost_per_hour_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Allocated Period <span style="color: red"></span></label>
+                                                <select type="number" class="form-control" name="owo_allocated_period"
+                                                    id="owo_allocated_period">
+                                                    <option value="">Select Allocated Period</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                </select>
+                                                <span class="error_message owo_allocated_period_error"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Resource Type as <span style="color: red"></span></label>
+                                                <input type="text" class="form-control" name="owo_resource_type"
+                                                    id="owo_resource_type">
+                                                <span class="error_message owo_resource_type_error"></span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Number of Resources <span style="color: red"></span></label>
+                                                <input type="text" min="0" class="form-control"
+                                                    name="owo_no_of_resources" id="owo_no_of_resources"
+                                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                                <span class="error_message owo_no_of_resources_error"></span>
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="row">
+                                        <!-- <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Utilization <span style="color: red"></span></label>
+                                                <select type="text" class="form-control" name="owo_utilization"
+                                                    id="owo_utilization" style="width:100%;">
+                                                    <option value="">Select Utilization</option>
+                                                </select>
+                                                <span class="error_message owo_utilization_error"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Hours <span style="color: red"></span></label>
+                                                <input type="text" class="form-control" name="owo_hours" id="owo_hours"
+                                                    onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                                <span class="error_message owo_hours_error"></span>
+                                            </div>
+                                        </div> -->
+
+                                       
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Additional Hours <span style="color: red"></span></label>
+                                                <div id="GetWorkOrderRetainerWorkType_div_additional_hour">
+                                                    <input type="radio" id="" name="additional_hours" value="Additional hours are not allowed">
+                                                    <label for="Additional hours are not allowed">Additional hours are not allowed</label><br>
+                                                    <input type="radio" id="" name="additional_hours" value="Additional hours allowed">
+                                                    <label for="Additional hours allowed">Additional hours allowed</label><br>
+                                                    <input type="radio" id="" name="additional_hours" value="Additional hours will be allowed based on prior approval">
+                                                    <label for="Additional hours will be allowed based on prior approval">Additional hours will be allowed based on prior approval</label>
+                                                </div>
+                                            </div>
+                                            <span class="error_message hrs_prior_allowed_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Work on weekend and holidays<span style="color: red"></span></label>
+                                                <div id="GetWorkOrderRetainerWorkType_div_onweekend_holidays">
+                                                    <input type="radio" id="" name="work_on_weekend" value="Not allowed">
+                                                    <label for="Not allowed">Not allowed</label><br>
+                                                    <input type="radio" id="" name="work_on_weekend" value="Allowed">
+                                                    <label for="Allowed">Allowed</label><br>
+                                                    <input type="radio" id="" name="work_on_weekend" value="Allowed with prior approval">
+                                                    <label for="Allowed with prior approval">Allowed with prior approval</label>
+                                                </div>
+                                            </div>
+                                            <span class="error_message onweekend_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Compensation<span style="color: red"></span></label>
+                                                <div id="GetWorkOrderRetainerWorkType_div_oncompensation">
+                                                    <input type="radio" id="" name="compensation" value="Not allowed">
+                                                    <label for="Not allowed">Not allowed</label><br>
+                                                    <input type="radio" id="" name="compensation" value="Allowed">
+                                                    <label for="Allowed">Allowed</label><br>
+                                                    <input type="radio" id="" name="compensation" value="Allowed with prior approval">
+                                                    <label for="Allowed with prior approval">Allowed with prior approval</label>
+                                                </div>
+                                            </div>
+                                            <span class="error_message oncompensation_error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Timesheet Frequency <span style="color: red"></span></label>
+                                                <div id="GetWorkOrderRetainerWorkType_div_timesheet_frequency">
+                                                    <!-- <input type="radio" id="" name="timesheet_frequency" value="Weekly">
+                                                    <label for="Weekly">Weekly</label><br>
+                                                    <input type="radio" id="" name="timesheet_frequency" value="Bi monthly">
+                                                    <label for="Bi monthly">Bi monthly</label><br>
+                                                    <input type="radio" id="" name="timesheet_frequency" value="Monthly">
+                                                    <label for="Monthly">Monthly</label> -->
+                                                    <select type="text" class="form-control" name="GetWorkOrderRetainerWorkType_timesheet_frequency"
+                                                        id="GetWorkOrderRetainerWorkType_timesheet_frequency">
+                                                        <option value="">Select timesheet frequency</option>
+                                                        <option value="Weekly">Weekly</option>
+                                                        <option value="Bi monthly">Bi monthly</option>
+                                                        <option value="Monthly">Monthly</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span class="error_message timesheet_frequency_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Invoice Frequency<span style="color: red"></span></label>
+                                                <div id="GetWorkOrderRetainerWorkType_div_oninvoice_frequency">
+                                                    <!-- <input type="radio" id="" name="invoice_frequency" value="Weekly">
+                                                    <label for="Weekly">Weekly</label><br>
+                                                    <input type="radio" id="" name="invoice_frequency" value="Bi monthly">
+                                                    <label for="Bi monthly">Bi monthly</label><br>
+                                                    <input type="radio" id="" name="invoice_frequency" value="Monthly">
+                                                    <label for="Monthly">Monthly</label> -->
+                                                    <select type="text" class="form-control" name="GetWorkOrderRetainerWorkType_invoice_frequency"
+                                                        id="GetWorkOrderRetainerWorkType_invoice_frequency">
+                                                        <option value="">Select invoice frequency</option>
+                                                        <option value="Weekly">Weekly</option>
+                                                        <option value="Bi monthly">Bi monthly</option>
+                                                        <option value="Monthly">Monthly</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <span class="error_message invoice_frequency_error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                        <div class="form-group pull-right">
+                                            <button type="button" class="btn btn-defaul"
+                                                onclick="clear_retainer();">Cancel</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="add_retainer();">Add</button>
+                                        </div></div>
+                                    </div>
+
+                                    <div class="row" id='DisplayWorkOrderRetainer'>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="class_package_div" id="class_package_div">
+                                <div class="step-title">
+                                    <h3>Step 3: <span>Package</span></h3>
+                                </div>
+                                <div class="form-section">
+                                    <!-- <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Resource Type</label>
+                                            <select class="form-control" id="package_resource_type">
+                                                <option value="">Select Type</option>
+                                                <option value="retainer">retainer</option>
+                                                <option value="fixedbid">fixedbid</option>
+                                            </select>
+                                            <span class="error_message package_resource_type_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Number of Resources</label>
+                                            <input type="text" class="form-control" name="package_no_of_resources"
+                                                id="package_no_of_resources"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message package_no_of_resources_error"></span>
+                                        </div>
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Add Skills</label>
+                                            <div class="tag-container" id="tag-container">
+                                                <span class='skills-tag'>tag1</span>
+                                            </div>
+                                            <input type="text" value="" class="form-control" placeholder="Add Skills" id="add-skill-tag-input" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Hours</label>
+                                            <input type="text" class="form-control" name="package_hours"
+                                                id="package_hours"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message package_hours_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Duration</label>
+                                            <input type="text" class="form-control" name="package_allocated_period"
+                                                id="package_allocated_period"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message package_allocated_period_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Cost per hour</label>
+                                            <input type="text" class="form-control" name="package_cost_per_hour"
+                                                id="package_cost_per_hour"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message package_cost_per_hour_error"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6 text-right">
+                                            <button class="btn btn-outline-primary"
+                                                onclick="clear_package();">Cancel</button>
+                                            <button class="btn btn-primary" onclick="add_package();">Add</button>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="DisplayWorkOrderPackage">
+                                        <th>#</th>
+                                        <th>Resource Type</th>
+                                        <th>Nos</th>
+                                        <th>Resource Allocation</th>
+                                        <th>Allocation</th>
+                                        <th>Rate per men(hours in USD)</th>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="class_randd_div" id="class_randd_div">
+                                <div class="step-title">
+                                    <h3>Step 3: <span>R & D</span></h3>
+                                </div>
+                                <div class="form-section" id="">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Add Skills</label>
+                                            <div class="tag-container" id="tag-container">
+                                                <span class='skills-tag'>tag1</span>
+                                            </div>
+                                            <input type="text" value="" class="form-control" placeholder="Add Skills" id="add-skill-tag-input" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Percentage of absorption if failed</label>
+                                            <div class="absorption-percentage">
+                                                <label>G2tech</label>
+                                                <input type="number" min="0" max="100" step="5" id="g2tech_percentage" class="form-control">
+                                                <label>Client</label>
+                                                <input type="number" min="0" max="100" step="5" id="client_percentage" class="form-control"> 
+                                            </div>           
+                                        </div>                                  
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Duration(In Days)</label>
+                                            <input type="text" class="form-control" name="randd_duration"
+                                                id="randd_duration"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message randd_duration_error"></span>
+                                        </div> 
+                                        <div class="col-md-4">
+                                            <label>Max hours allowed</label>
+                                            <input type="text" class="form-control"
+                                                name="randd_max_hours_allowed"
+                                                id="randd_max_hours_allowed"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message randd_max_hours_allowed_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Cost per hour</label>
+                                            <input type="text" class="form-control" name="randd_cost_per_hour"
+                                                id="randd_cost_per_hour"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message randd_cost_per_hour_error"></span>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Resource Type</label>
+                                            <select class="form-control" id="rnd_resource_type">
+                                                <option value="">Select Type</option>
+                                                <option value="retainer">retainer</option>
+                                                <option value="fixedbid">fixedbid</option>
+                                            </select>
+                                            <span class="error_message rnd_resource_type_error"></span>
+                                            <br>
+                                            <label>Number of Resources</label>
+                                            <input type="text" class="form-control" name="rnd_no_of_resources"
+                                                id="rnd_no_of_resources"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message rnd_no_of_resources_error"></span>
+                                            <br>
+                                            <label>Maximum Hours</label>
+                                            <input type="text" class="form-control" name="rnd_max_hours"
+                                                id="rnd_max_hours"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message rnd_max_hours_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="checkbox" name="payment" value=""> On success 100% payment
+                                            <br>
+                                            <label for="75_pay">
+                                                <input value="" type="radio" id="rnd_ProjectType"
+                                                    name="rnd_ProjectType"> On failure 75% pay
+                                            </label>
+                                            <label for="50_pay">
+                                                <input value="" type="radio" id=rnd_ProjectType" name="rnd_ProjectType">
+                                                On failure 50% pay
+                                            </label>
+                                            <label for="25_pay">
+                                                <input value="" type="radio" id="rnd_ProjectType"
+                                                    name="rnd_ProjectType"> On failure 25% pay
+                                            </label>
+                                            <span class="error_message rnd_ProjectType_error"></span>
+
+                                        </div>
+                                    </div> -->
+
+                                    <div class="row">
+                                        <div class="col-md-8"></div>
+                                        <div class="col-md-4 text-right">
+                                            <button class="btn btn-outline-primary"
+                                                onclick="clear_rnd()">Cancel</button>
+                                            <button class="btn btn-primary" onclick="add_rnd()">Add</button>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Resource Type</th>
+                                                    <th>Nos</th>
+                                                    <th>Maximum Hours</th>
+                                                    <th>Rate Per Men(hour in USD)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="DisplayWorkOrderRandD">
+
+                                            </tbody>
+                                        </table>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="class_fixedbid_div" id="class_fixedbid_div">
+                                <div class="step-title">
+                                    <h3>Step 3: <span>Fixed Bid</span></h3>
+                                </div>
+                                <div class="form-section">
+                                   <!--  <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Minimum Hours</label>
+                                            <input type="text" class="form-control" id="fixedbit_minimum_hours"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            </select>
+                                            <span class="error_message fixedbit_minimum_hours_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Cost Per Hour</label>
+                                            <input type="text" class="form-control" name="fixed_cost_per_hr"
+                                                id="fixed_cost_per_hr"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message fixed_cost_per_hr_error"></span>
+                                        </div>
+                                    </div> -->
+                                    <!-- <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4"></div>
+                                        <div class="col-md-4 text-right">
+                                            <button class="btn btn-outline-primary"
+                                                onclick="clear_fixedbid();">Cancel</button>
+                                            <button class="btn btn-primary" onclick="add_fixedbid();">Add</button>
+                                        </div>
+                                    </div> -->
+                                    <div class="row" id="DisplayWorkOrderFixedBi">
+                                        <table id="EstimateTable" class="table table-striped" rows="2" cellspacing="0" border="1">
+                                            <tbody>
+                                                <tr>
+                                                    <td rowspan="2">
+                                                        <nobr>#</nobr>
+                                                    </td>
+                                                    <td rowspan="2">
+                                                        <nobr>Project Phases</nobr>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <nobr>Man</nobr>
+                                                    </td>
+                                                    <td rowspan="2">
+                                                        <nobr># of Resources</nobr>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <nobr>Business</nobr>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <nobr>
+                                                            Rate : 
+                                                            <select name="currency" id="proposalCurrency" class="currency">
+                                                                <option value="">Select Currency</option>
+                                                                <option value="">USD </option>
+                                                                <option value="">EUR </option>
+                                                                <option value="">JPY</option>
+                                                                <option value="">GBP </option>
+                                                                <option value="">AUD </option>
+                                                                <option value="">CAD </option>
+                                                                <option value="">CHF </option>
+                                                                <option value="">CNY </option>
+                                                                <option value="">SEK </option>
+                                                                <option value="">NZD </option>
+                                                                <option value="">MXN </option>
+                                                                <option value="">SGD </option>
+                                                                <option value="">HKD </option>
+                                                                <option value="">NOK </option>
+                                                                <option value="">KRW</option>
+                                                                <option value="">TRY </option>
+                                                                <option value="">RUB </option>
+                                                                <option value="">INR </option>
+                                                                <option value="">BRL</option>
+                                                                <option value="">ZAR</option>
+                                                                <option value="">DKK</option>
+                                                                <option value="">PLN </option>
+                                                                <option value="">TWD </option>
+                                                                <option value="">THB</option>
+                                                                <option value="">MYR</option>
+                                                                <option value="">HUF</option>
+                                                                <option value="">SAR</option>
+                                                                <option value="">CZK </option>
+                                                                <option value="">ILS </option>
+                                                                <option value="">CLP </option>
+                                                                <option value="">IDR </option>
+                                                                <option value="">COP </option>
+                                                                <option value="">PHP </option>
+                                                                <option value="">RON </option>
+                                                                <option value="">PEN </option>
+                                                            </select>
+                                                        </nobr>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <nobr>Hours</nobr>
+                                                    </td>
+                                                    <td>
+                                                        <nobr>Days</nobr>
+                                                    </td>
+                                                    <td>
+                                                        <nobr>Hours</nobr>
+                                                    </td>
+                                                    <td>
+                                                        <nobr>Days</nobr>
+                                                    </td>
+                                                    <td>
+                                                        <nobr>Per Hour Cost</nobr>
+                                                    </td>
+                                                    <td>
+                                                        <nobr>Total</nobr>
+                                                    </td>
+                                                </tr>
+                                                <tr" class="row_0" id="">
+                                                    <td><input type="hidden" class="id_1" value=""><input type="hidden" class="phase" value="1"> 1</td>
+                                                    <td><input type="hidden" class="title" value="System Requirement Analysis"><span id="projectPhase_1">System Requirement Analysis</span></td>
+                                                    <td><input type="hidden" class="mHours_1" value="100"><span id="mHours_1">100</span></td>
+                                                    <td><input type="hidden" class="phase" value="13"><span id="mDays_1">13</span></td>
+                                                    <td><input min="0" type="number" class="Resource_1" value="0" ></td>
+                                                    <td><input type="hidden" class="bHours_1" value="100"><span id="bHours_1">100</span></td>
+                                                    <td><input type="hidden" class="bDays_1" value="13"><span id="bDays_1">13</span></td>
+                                                    <td><input min="0" type="number" class="rHours_1" value="0" ></td>
+                                                    <td><input type="hidden" class="rTotal_1" value="0"><span id="Total_1">0</span></td>
+                                                </tr>
+                                                <tr class="row_1" id="">
+                                                    <td><input type="hidden" class="id_2" value=""><input type="hidden" class="phase" value="2"> 2</td>
+                                                    <td><input type="hidden" class="title" value="Development &amp; Unit Testing"><span id="projectPhase_2">Development &amp; Unit Testing</span></td>
+                                                    <td><input type="hidden" class="mHours_2" value="150"><span id="mHours_2">150</span></td>
+                                                    <td><input type="hidden" class="phase" value="19"><span id="mDays_2">19</span></td>
+                                                    <td><input min="0" type="number" class="Resource_2" value="0"></td>
+                                                    <td><input type="hidden" class="bHours_2" value="150"><span id="bHours_2">150</span></td>
+                                                    <td><input type="hidden" class="bDays_2" value="19"><span id="bDays_2">19</span></td>
+                                                    <td><input min="0" type="number" class="rHours_2" value="0"></td>
+                                                    <td><input type="hidden" class="rTotal_2" value="0"><span id="Total_2">0</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>TOTAL</td>
+                                                    <td>250</td>
+                                                    <td>32</td>
+                                                    <td></td>
+                                                    <td id="total_bHours">250</td>
+                                                    <td id="total_bDays">32</td>
+                                                    <td></td>
+                                                    <td id="total_Total">0</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="class_timeandmatreial_div" id="class_timeandmatreial_div">
+                                <div class="step-title">
+                                    <h3>Step 3: <span>Time and Material</span></h3>
+                                </div>
+                                <div class="form-section">
+                                    <!-- <div class="row">
+                                        <div class="col-md-4">
+                                            <label>Resource Type</label>
+                                            <select class="form-control" id="time_material_resource_type">
+                                                <option value="">Select Type</option>
+                                                <option value="retainer">retainer</option>
+                                                <option value="fixedbid">fixedbid</option>
+                                            </select>
+                                            <span class="error_message time_material_resource_type_error"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Number of Resources</label>
+                                            <input type="text" class="form-control" name="time_no_of_resources"
+                                                id="time_no_of_resources"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message time_no_of_resources_error"></span>
+                                        </div>
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Add Skills</label>
+                                            <div class="tag-container" id="tag-container">
+                                                <span class='skills-tag'>tag1</span>
+                                            </div>
+                                            <input type="text" value="" class="form-control" placeholder="Add Skills" id="add-skill-tag-input" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>Add Duration(In Months)</label>
+                                            <input type="text" class="form-control" name="time_material_duration"
+                                                id="time_material_duration"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message time_material_duration_error"></span>
+                                        </div> 
+                                        <div class="col-md-3">
+                                            <label>Min Hours(Per Month)</label>
+                                            <input type="text" class="form-control"
+                                                name="time_material_min_hours"
+                                                id="time_material_min_hours"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message time_material_min_hours_error"></span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Max Hours(Per Month)</label>
+                                            <input type="text" class="form-control"
+                                                name="time_material_max_hours"
+                                                id="time_material_max_hours"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message time_material_max_hours_error"></span>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Cost per hour</label>
+                                            <input type="text" class="form-control" name="time_material_cost_per_hour"
+                                                id="time_material_cost_per_hour"
+                                                onkeyup="if (/\D/g.test(this.value)) this.value = this.value.replace(/\D/g,'')">
+                                            <span class="error_message time_material_cost_per_hour_error"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
+                                        <div class="col-md-6 text-right">
+                                            <button class="btn btn-outline-primary"
+                                                onclick="clear_timeandmaterial();">Cancel</button>
+                                            <button class="btn btn-primary"
+                                                onclick="add_timeandmaterial();">Add</button>
+                                        </div>
+                                    </div>
+                                    <div id="DisplayWorkOrderTimeandMaterial">
+
+                                        <!-- <table class="table table-striped">
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Resource Type</th>
+                                                <th>Nos</th>
+                                                <th>Resource Allocation</th>
+                                                <th>Allocation</th>
+                                                <th>Rate per men(hours in USD)</th>
+                                            </tr>
+                                            <tbody id="DisplayWorkOrderTimeandMaterial">
+                                            </tbody>
+                                        </table> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="step-4" class="">
+                            <div class="step-title">
+                                <div class="row">
+                                    <div class="col-xs-8">
+                                        <h3>Step 4: <span>Notes and Commercial Terms</span></h3>
+                                    </div>
+                                    <div class="col-xs-4">
+                                        <div class="pull-right right-btn-hldr">
+                                            <button class="btn btn-secondary import" mid="workorder_content_import_Modal">Import</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <textarea class="form-control" rows="5" id="comment_data" name='comment_data'></textarea>
+                            <div class="form-section" id="form-block">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- IMPORT MODAL STARTS HERE -->
+<div class="modal fade steps-model" id="workorder_content_import_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                aria-hidden="true">&times;</span></button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+            <h2 class="modal-title" id="myModalLabel">Notes and Commercial Terms</h2>
+        </div>
+        <div class="modal-body" data-simplebar>
+            <label class="container selectall"><span class="slect-label">Select All</span>
+                <input type="checkbox" id="select_all">
+                <span class="checkmark"></span>
+            </label>
+            <div id="content-1" class="content checklist displayDefault_workorder_content_import">
+                <label class="container">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                    <input type="checkbox" class="checkbox" value="<P>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</P>">
+                    <span class="checkmark">
+                        
+                    </span>
+                </label>
+            </div>
+            <div class="text-right">
+                <button class="btn btn-secondary" id="import_workorder_content" data-dismiss="modal">Import</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<!-- IMPORT MODAL ENDS HERE -->
+
+
+<script type="text/javascript" src="components/rfp/js/rfp.js"></script>
+<script type="text/javascript" src="components/rfp/js/workorder.js"></script>
+<!-- For PDF content -->
+
+<script type="text/javascript">
+    //PDF onload
+    $("#pdf_content").load("components/rfp/pdf.html");
+
+    /* RFP Related queries*/
+    $(document).ready(function () {
+
+        var projectType_Filter = JSON.stringify({
+            "IsActive": true,
+        });
+        var _GetProjectType = callgetlist('GetProjectType', projectType_Filter);
+        var GetProjectType = $.map(_GetProjectType, function (obj) {
+            obj.text = obj.text || obj.ProjectType; // replace name with the property used for the text
+            obj.id = obj.id || obj.Id; // replace name with the property used for the text
+            return obj;
+        });
+/* 
+        $("#owo_project_type").select2({
+            placeholder: "Select project Type",
+            allowClear: true,
+            data: GetProjectType
+        }); */
+
+        var proposalFilter = JSON.stringify({
+            "IsActive": true,
+        });
+        var _proposalList = callgetlist('GetWorkOrder', proposalFilter); //GetRFPDetailsByRFPId //PostRFPClientDetails
+        var proposalList = $.map(_proposalList, function (obj) {
+            obj.text = obj.text || obj.ProposalName // replace name with the property used for the text   (RFPId)
+            obj.id = obj.id || obj.Id; // replace name with the property used for the text
+
+            return obj;
+        });
+        // $.each(proposalList, function(key, value) {
+        // $('#WO_ProposalRfplist').append($("<option></option>").attr("value",value.Id).text(value.ProposalId)).select2(); 
+        //     //$('#WO_proposalRfplist').append("<option value="+value.Id+">"+value.ProposalName+"</option>");
+        // });      
+
+        $('#WO_ProposalRfplist').select2({
+            placeholder: 'Select Rfp List',
+            allowClear: true,
+            data: proposalList
+        });
+
+
+        var industryFilter = JSON.stringify({
+            "IsActive": true,
+        });
+        var _industryList = callgetlist('GetProjectIndustry', industryFilter);
+        var industryList = $.map(_industryList, function (obj) {
+            obj.text = obj.text || obj.ProjectIndustry; // replace name with the property used for the text
+            obj.id = obj.id || obj.Id; // replace name with the property used for the text
+            return obj;
+        });
+        $("#owo_project_industry").select2({
+            placeholder: "Select a Industry",
+            allowClear: true,
+            data: industryList
+        });
+        var industryFilter = JSON.stringify({
+            "IsActive": true,
+        });
+        var _devModelList = callgetlist('GetDevModel', industryFilter);
+        var devModelList = $.map(_devModelList, function (obj) {
+            obj.text = obj.text || obj.DevModel; // replace name with the property used for the text
+            obj.id = obj.id || obj.Id; // replace name with the property used for the text
+            return obj;
+        });
+        $("#owo_development_model").select2({
+            placeholder: "Select a Development model",
+            allowClear: true,
+            data: devModelList
+        })
+        var industryFilter = JSON.stringify({
+            "IsActive": true,
+        });
+        var _domainList = callgetlist('GetProjectDomain', industryFilter);
+        var domainList = $.map(_domainList, function (obj) {
+            obj.text = obj.text || obj.ProjectDomain; // replace name with the property used for the text
+            obj.id = obj.id || obj.Id; // replace name with the property used for the text
+            return obj;
+        });
+        $("#owo_project_domain").select2({
+            placeholder: "Select a Development model",
+            allowClear: true,
+            data: domainList
+        });
+       
+        $("#owo_planned_start_date").datepicker({
+            format: 'mm-dd-yyyy',
+            todayBtn: 1,
+            autoclose: true,
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $('#owo_planned_end_date').datepicker('setStartDate', minDate);
+        });
+
+        $("#owo_planned_end_date").datepicker({
+            format: 'mm-dd-yyyy',
+            autoclose: true,
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $('#owo_planned_start_date').datepicker('setEndDate', minDate);
+        });
+
+        $("#owo_actual_start_date").datepicker({
+            format: 'mm-dd-yyyy',
+            todayBtn: 1,
+            autoclose: true,
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $('#owo_actual_end_date').datepicker('setStartDate', minDate);
+        });
+
+        $("#owo_actual_end_date").datepicker({
+            format: 'mm-dd-yyyy',
+            autoclose: true,
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $('#owo_actual_start_date').datepicker('setEndDate', minDate);
+        });
+
+        $("#owo_uat_start_date").datepicker({
+            format: 'mm-dd-yyyy',
+            todayBtn: 1,
+            autoclose: true,
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $('#owo_uat_end_date').datepicker('setStartDate', minDate);
+        });
+
+        $("#owo_uat_end_date").datepicker({
+            format: 'mm-dd-yyyy',
+            autoclose: true,
+        }).on('changeDate', function (selected) {
+            var minDate = new Date(selected.date.valueOf());
+            $('#owo_uat_start_date').datepicker('setEndDate', minDate);
+        });
+
+        var _GetProjectType_forSteptwo = callgetlist('GetProjectType');
+        var GetProjectType_forSteptwo = $.map(_GetProjectType, function (obj) {
+            obj.text = obj.text || obj.ProjectType; // replace name with the property used for the text
+            obj.id = obj.id || obj.Id; // replace name with the property used for the text
+            return obj;
+        });
+
+        $.each(GetProjectType_forSteptwo, function (key, value) {
+            var radioBtn = $('<div class="radio"><label for="estimation_doc"><input value="' + value.ProjectType + '" type="radio" id="' + value.ProjectType + '" name="ProjectType" class="ProjectType"> ' + value.ProjectType + '</label></div>');
+            radioBtn.appendTo('#target_div');
+        });
+
+        var filter_val = JSON.stringify({
+            "ISActive": true
+        });
+        var GetWorkOrderRetainerWorkType = callgetlist('GetWorkOrderRetainerWorkType', filter_val);
+        //console.log(GetWorkOrderRetainerWorkType);
+        $.each(GetWorkOrderRetainerWorkType, function (key, value) {
+            if (value.RetainerWorkType == "Additional Hours") {
+                var radioBtn = $('<div class="radio"><label for="estimation_doc"><input value="' + value.Id + '" type="radio"    id="additional_hours" name="additional_hours" class="ProjectType"> ' + value.Description + '</label></div>');
+                radioBtn.appendTo('#GetWorkOrderRetainerWorkType_div_additional_hours');
+            }
+
+            if (value.RetainerWorkType == "Work on Weekend") {
+                var radioBtn = $('<div class="radio"><label for="estimation_doc"><input value="' + value.Id + '" type="radio" id="onweekend" name="onweekend" class="ProjectType"> ' + value.Description + '</label></div>');
+                radioBtn.appendTo('#GetWorkOrderRetainerWorkType_div_onweekend');
+            }
+        });
+
+        var filter_val = JSON.stringify({
+            "ISActive": true
+        });
+        var _GetWorkOrderRetainerUtilizatoin = callgetlist('GetWorkOrderRetainerUtilizatoin', filter_val);
+        //console.log(_GetWorkOrderRetainerUtilizatoin);
+        //owo_utilization
+        var GetWorkOrderRetainerUtilizatoin = $.map(_GetWorkOrderRetainerUtilizatoin, function (obj) {
+            obj.text = obj.text || obj.Utilizatoin; // replace name with the property used for the text
+            obj.id = obj.Id || obj.Id; // replace name with the property used for the text
+            return obj;
+        });
+        $.each(GetWorkOrderRetainerUtilizatoin, function (key, value) {
+            $('#owo_utilization').append($("<option></option>").attr("value", value.Id).text(value.Utilizatoin)).select2();
+        });
+        //console.log("!_!_!_!_!_!_!_!_!_!_!_!_!_!_!_!_!");
+
+
+        getProposalList();
+
+        $('#smartwizard_workorder').smartWizard({
+            showStepURLhash: false,
+            keyNavigation: false,
+            anchorSettings: {
+                anchorClickable: true,
+                enableAllAnchors: true,
+            },
+            toolbarSettings: {
+                toolbarExtraButtons: [
+                    $('<button></button>').text('Preview')
+                        .addClass('btn btn-info previewButton hidden-btn')
+                        .attr('id', 'preview_btn')
+                        .on('click', function() {
+                            
+                    }),
+                    $('<button></button>').text('Finish')
+                        .addClass('btn btn-success finishButton hidden-btn')
+                        .on('click', function () {
+                            //alert('Botton finish');
+                            //PostWorkOrderNotesandCommercialTerms	@Token, @WorkOrderId, @IsActive, @Status, @Message
+                            let comment_data = CKEDITOR.instances['comment_data'].getData();
+                            let WorkOrderId = $('#WorkOrderId').val();
+
+                            data = {
+                                "Method": "PostWorkOrderNotesandCommercialTerms",
+                                "Data": {
+                                    "WorkOrderId": WorkOrderId,
+                                    "IsActive": true,
+                                    "Status": '',
+                                }
+                            }
+
+                            var postCall = PostDataCall(data);
+                            if (postCall['IsSuccess'] == true) {
+                                //console.log(postCall['Message']);
+                            } else {
+                                alert(postCall['Message']);
+                                //console.log(postCall['Message']);
+                            }
+                        }),
+                        $('<button></button>').text('Export')
+                            .addClass('btn btn-secondary exportButton hidden-btn')
+                            .attr('id', 'export_btn')
+                            .on('click', function() {
+                                
+                        })
+
+                ]
+            }
+        });
+
+        $("#smartwizard_workorder").on("showStep", function (e, anchorObject, stepNumber, stepDirection) {
+
+            console.log('###################');
+            console.log(stepNumber);
+            console.log('###################');
+
+            $('.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover').css('background-color', '#46ad46');
+            $('.nav-tabs > li.done > a, .nav-tabs > li.done > a:focus, .nav-tabs > li.done > a:hover').css('background-color', '#eee');
+
+            if (stepNumber == 3) {
+                $('.finishButton').removeClass('hidden-btn');
+                $('.sw-btn-next').addClass('hidden-btn');
+                $('.previewButton').removeClass('hidden-btn');
+                $('.exportButton').removeClass('hidden-btn');
+            } else {
+                $('.finishButton').addClass('hidden-btn');
+                $('.sw-btn-next').removeClass('hidden-btn');
+                $('.previewButton').addClass('hidden-btn');
+                $('.exportButton').addClass('hidden-btn');
+            }
+        });
+
+        $("#smartwizard_workorder").on("leaveStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
+            //alert(stepNumber);
+            if (stepDirection == "forward") {
+                switch (stepNumber) {
+                    case 0:
+                        let proposalId = $('#WO_ProposalRfplist').val();  //'FFD87BD3-5C7D-4524-BC14-F9787FD21810'; 
+                        let projectName = $('#owo_project_name').val();
+                        let clientName = $('#owo_client_name').val();
+                        let projectType = $('#owo_project_type').val();
+                        let devModel = $('#owo_development_model').val();
+                        let ProjectIndustry = $('#owo_project_industry').val();
+                        let projectDomain = $('#owo_project_domain').val();
+                        let plannedStartDate = $('#owo_planned_start_date').val();
+                        let plannedEndDate = $('#owo_planned_end_date').val();
+                        let actualStartDate = $('#owo_actual_start_date').val();
+                        let actualEndDate = $('#owo_actual_end_date').val();
+                        let uatStartDate = $('#owo_uat_start_date').val();
+                        let uatEndDate = $('#owo_uat_end_date').val();
+                        let projectDes = $('#owo_project_decription').val();
+                        let technologyNotes = $('#owo_project_technology_notes').val();
+                        let err = 0;
+
+                        if ($("#owo_project_name").val() == "") {
+                            $(".pro_name_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_name_err").html('')
+                        }
+
+                        if ($("#owo_client_name").val() == "") {
+                            $(".pro_client_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_client_err").html('')
+                        }
+
+                        if ($("#owo_development_model").val() == "") {
+                            $(".dev_model_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".dev_model_err").html('')
+                        }
+                        if ($("#owo_project_industry").val() == "") {
+                            $(".pro_ind_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_ind_err").html('')
+                        }
+                        if ($("#owo_project_domain").val() == "") {
+                            $(".pro_domain_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_domain_err").html('')
+                        }
+                       /*  if ($("#owo_project_type").val() == "") {
+                            $(".pro_type_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_type_err").html('')
+                        } */
+
+
+
+                        if ($("#owo_planned_start_date").val() == "") {
+                            $(".pro_planned_start_date_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_planned_start_date_err").html('')
+                        }
+
+                        if ($("#owo_planned_end_date").val() == "") {
+                            $(".pro_planned_end_date_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_planned_end_date_err").html('')
+                        }
+
+                        if ($("#owo_actual_start_date").val() == "") {
+                            $(".pro_actual_start_date_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_actual_start_date_err").html('')
+                        }
+
+                        if ($("#owo_actual_end_date").val() == "") {
+                            $(".pro_actual_end_date_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_actual_end_date_err").html('')
+                        }
+
+                        if ($("#owo_uat_start_date").val() == "") {
+                            $(".pro_uat_start_date_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_uat_start_date_err").html('')
+                        }
+
+                        if ($("#owo_uat_end_date").val() == "") {
+                            $(".pro_uat_end_date_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_uat_end_date_err").html('')
+                        }
+                        if ($("#owo_project_decription").val() == "") {
+                            $(".pro_decription_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_decription_err").html('')
+                        }
+                        if ($("#owo_project_technology_notes").val() == "") {
+                            $(".pro_tech_notes_err").html('This Field is required');
+                            err = 1;
+                        } else {
+                            $(".pro_tech_notes_err").html('')
+                        }
+
+
+                        /*   $('#step-1 :input').each(function(){
+                              //console.log($(this).val())
+                              if ($(this).val().trim() == "") {
+                                  if(!$(this).attr('class').split(" ").includes('not_req')){
+                                      err += 1;
+                                      $(this).next('.error_message').html("This Field is required")
+                                  }
+                              }else{
+                                  $(this).next('.error_message').html("")
+                              }
+                          }) */
+
+                        if (err == 1) {
+                            return false;
+                        } else {
+                            data = {
+                                "Method": "postworkorder",
+                                "Data": {
+                                    "WorkOrderId": null,
+                                    "ProposalId": proposalId,
+                                    "ProjectName": projectName,
+                                    "Client": clientName,
+                                    "ProjectTypeId": projectType,
+                                    "ProjectDevModelId": devModel,
+                                    "ProjectIndustryId": ProjectIndustry,
+                                    "ProjectDomainId": projectDomain,
+                                    "PlannedStartDate": plannedStartDate,
+                                    "PlannedEndDate": plannedEndDate,
+                                    "ActualStartDate": actualStartDate,
+                                    "ActualEndDate": actualEndDate,
+                                    "UATStartDate": uatStartDate,
+                                    "UATEndDate": uatEndDate,
+                                    "ProjectDescription": projectDes,
+                                    "ProjectTechNotes": technologyNotes,
+                                    "Status": 1,
+                                    "Message": ""
+
+                                }
+                            }
+                            var postCall = PostDataCall(data);
+                            //console.log(postCall);
+                            if (postCall['IsSuccess'] == true) {
+                                //console.log(postCall['Message']);
+                                var WorkOrderId = (postCall['Data'][0]['WorkOrderId']);
+
+                                $("#WorkOrderId").val(WorkOrderId);
+                            } else {
+                                //alert(postCall['Message']);
+                                //console.log(postCall['Message']);
+                            }
+                        }
+                        // let projectDomain = $('#owo_actual_end_date').val()
+                        //$("#WorkOrderId").val('62BEA4F3-7442-43B4-B9B3-629A8A91F6B2');
+                        break;
+                    case 1:
+                        //GetWorkOrderRetainerWorkType
+                        var WorkOrderId = $("#WorkOrderId").val();
+                        if ($('input[name="ProjectType"]:checked').length == 0) {
+                            alert('Please select one option');
+                            return false;
+                        } else {
+                            $('#ProjectType_name').val($('input[name="ProjectType"]:checked').val());
+                        }
+                        //value is taken from hidden field #ProjectType_name
+                        if ($('#ProjectType_name').val() === 'Retainer') {
+                            $('#class_retainer_div').show();
+                            $('#class_fixedbid_div').hide();
+                            $('#class_package_div').hide();
+                            $('#class_randd_div').hide();
+                            $('#class_timeandmatreial_div').hide();
+                            get_retainer(WorkOrderId);
+                        }
+
+                        if ($('#ProjectType_name').val() === 'Fixed Bit') {
+                            $('#class_retainer_div').hide();
+                            $('#class_fixedbid_div').show();
+                            $('#class_package_div').hide();
+                            $('#class_randd_div').hide();
+                            $('#class_timeandmatreial_div').hide();
+                            get_fixedbid(WorkOrderId);
+                        }
+
+                        if ($('#ProjectType_name').val() === 'Package') {
+                            $('#class_retainer_div').hide();
+                            $('#class_fixedbid_div').hide();
+                            $('#class_package_div').show();
+                            $('#class_randd_div').hide();
+                            $('#class_timeandmatreial_div').hide();
+                            get_package(WorkOrderId);
+                        }
+
+                        if ($('#ProjectType_name').val() === 'Time and Material') {
+                            $('#class_retainer_div').hide();
+                            $('#class_fixedbid_div').hide();
+                            $('#class_package_div').hide();
+                            $('#class_randd_div').hide();
+                            $('#class_timeandmatreial_div').show();
+                            get_timeandmaterial(WorkOrderId);
+                        }
+
+                        if ($('#ProjectType_name').val() === 'RandD') {
+                            $('#class_retainer_div').hide();
+                            $('#class_fixedbid_div').hide();
+                            $('#class_package_div').hide();
+                            $('#class_randd_div').show();
+                            $('#class_timeandmatreial_div').hide();
+                            get_rnd(WorkOrderId);
+                        }
+
+                        break;
+                    case 2:
+                        var WorkOrderId = $("#WorkOrderId").val();
+                        get_GetWorkOrderNotesandCommercialTerms(WorkOrderId);
+                        /*  //console.log("asasasasasasasa");
+                         var nPostData = {
+                            
+                         }
+                         let postData = {
+                             "Method": "PostRFPStatustoAssigned",
+                             "Data": PostData
+                         }
+                         //PostWorkOrderNotesandCommercialTerms	@Token, @WorkOrderId, @IsActive, @Status, @Message
+                         //PostWorkOrderNotesandCommercialTerms(WorkOrderId);
+                         //console.log("asasasasasasasa"); */
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+            if (stepDirection == "backward") {
+
+            }
+        });
+
+        $("#add-skill-tag-input").on({
+            focusout : function() {
+            var txt = this.value.replace(/[^a-z0-9\+\-\.\#]/ig,''); // allowed characters
+            if(txt) $("<span/>", {text:txt.toLowerCase(), appendTo:"#tag-container", class:"skills-tag"});
+
+            this.value = "";
+            },
+            keyup : function(ev) {
+            // if: comma|enter (delimit more keyCodes with | pipe)
+            if(/(188|13)/.test(ev.which)) $(this).focusout(); 
+            }
+        });
+        $('.tag-container').on('click', 'span', function() {
+            if(confirm("Remove "+ $(this).text() +"?")) $(this).remove(); 
+        });
+
+    });
+
+    /* function openWorkOrderModelDialog() {
+        $('#openWorkOrderModelbox').modal('show');
+        //Reset the RFP model step
+        $("#smartwizard_workorder").smartWizard('reset');
+    } */
+
+    $('.import').click(function () {
+        var modalId = $(this).attr('mid');
+        $("#" + modalId).modal("show");
+    });
+
+    $('.ProjectType').click(function () {
+        //console.log(this.value);
+    });
+
+    /*    try { CKEDITOR.instances['comment_data'].destroy();
+       } catch (e) {
+       }
+        var editor1 = CKEDITOR.replace('comment_data', {});
+     */
+    //Notes and commercials (step - 4)
+    try {
+        CKEDITOR.instances['comment_data'].destroy();
+    } catch (e) {
+
+    }
+    var editor1 = CKEDITOR.replace('comment_data', {});
+
+    var GetProjectType = callgetlist("GetProjectType");
+    //console.log(GetProjectType);
+    /*  $.each(result, function(key, value) {
+         $('#owo_project_type').append($("<option></option>").attr("value",value.SkillId).text(value.Skill)).select2();
+     }); */
+</script>

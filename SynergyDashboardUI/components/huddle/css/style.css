@@ -1,0 +1,156 @@
+.hurdlebox {
+    width: calc(20% - 20px);
+    padding: 10px;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: all ease 0.4s;
+}
+.hurdlebox:hover {
+    border: 1px solid #dd2c36;
+}
+.hurdlebox img {
+    width: 45px;
+    transition: all ease 0.4s;
+}
+.hurdlebox:hover img{
+    transform: scale(1.085);
+}
+
+.hurdlebox p {
+    font-size: 13px !important;
+    line-height: 16px;
+}
+
+.huddle-width {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0 5px;
+}
+
+.hurdlebox .notification {
+    background-color: #dd2c36;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 17px;
+    font-size: 10px;
+    line-height: 20px;
+    color: #fff !important;
+    position: absolute;
+    display: inline-block;
+    top: -10px;
+    right: -10px;
+}
+
+
+
+.hurdlebox p {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+
+.fullwidth .hurdlebox {
+    width: calc(12.5% - 20px);
+}
+
+.fullcolumn .hurdlebox {
+    width: calc(12.5% - 20px);
+}
+
+.fullcolumn.fullwidth .hurdlebox {
+    width: calc(10% - 20px);
+}
+
+
+@media only screen and (min-width:991px) and (max-width:1300px) {
+
+    .fullwidth .hurdlebox {
+        width: calc(16.5% - 20px);
+    }
+
+    .fullcolumn .hurdlebox {
+        width: calc(12.5% - 20px);
+    }
+
+    .fullcolumn.fullwidth .hurdlebox {
+        width: calc(12.5% - 20px);
+    }
+
+    .hurdlebox {
+        width: calc(25% - 20px);
+        padding: 10px 6px;
+        margin: 10px;
+    }
+
+    .hurdlebox p {
+        font-size: 11px !important;
+        line-height: 14px!important;
+    }
+}
+
+@media only screen and (min-width:1301px) and (max-width:1400px) {
+    .fullwidth .hurdlebox {
+        width: calc(16.5% - 20px);
+    }
+
+    .fullcolumn .hurdlebox {
+        width: calc(16.6666% - 20px);
+    }
+
+    .fullcolumn.fullwidth .hurdlebox {
+        width: calc(12.5% - 20px);
+    }
+
+    .hurdlebox {
+        width: calc(25% - 20px);
+        padding: 10px 6px;
+        margin: 10px;
+    }
+
+    .hurdlebox p {
+        font-size: 12px !important;
+        line-height: 14px!important;
+    }
+}
+@media screen and (max-width: 991px){
+    .hurdlebox{
+        padding: 10px;
+    }
+}
+@media (max-width: 767px) {
+    .hurdlebox {
+        width: calc(50% - 20px) !important;
+    }
+
+    .fullwidth .hurdlebox {
+        width: calc(50% - 20px) !important;
+    }
+
+    .fullcolumn .hurdlebox {
+        width: calc(50% - 20px) !important;
+    }
+
+    .fullcolumn.fullwidth .hurdlebox {
+        width: calc(50% - 20px) !important;
+    }
+
+    #huddle .card-detail {
+        padding: 10px;
+    }
+
+    .hurdlebox p {
+        font-size: 12px !important;
+    }
+}

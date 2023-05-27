@@ -1,0 +1,1614 @@
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<link href="components/rrminterview/css/style.css" rel="stylesheet" />
+<script src='components/rrminterview/js/rrminterview.js'></script>
+<link href="css/library/dropzone.css" rel="stylesheet" />
+<style>
+    .profileEntryWrappedColumn {
+        white-space: normal !important;
+        word-wrap: break-word !important;
+    }
+
+    #RRMOnBoardProfileEntryPointTableModel .modal-body {
+        min-height: calc(100vh - 200px);
+    }
+
+    .star-rating {
+        line-height: 32px;
+        font-size: 1.25em;
+    }
+
+    .star-rating .fa-star {
+        color: yellow;
+    }
+
+    .star-rating .fa-star-o {
+        color: aliceblue;
+    }
+</style>
+<!--POP-UP RRM candidate MODAL STARTS HERE -->
+<div class="modal fade" id="RRMOnBoardProfileEntryPointTableModel" tabindex="-1" role="dialog" style="width: 100%;">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content" id="RRMOnBoardProfileEntryPointTableModel-content">
+            <div class="modal-header">
+                <!-- <div style="float:right"> -->
+                    <button type="button" class="close modal_close" style="float:right !important" data-dismiss="modal"
+                        id="RrmCloseButton">
+                        &times;
+                    </button>
+                    <button class="expand modalExpanding" style="float:right;"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                    <button class="btn btn-primary" style="float:right;" id="btnOnBoardbanprofile" style="background-color : red"
+                    onclick="banRRMOnBoardProfile()"><i class='ui-icon-flag'></i>Ban</button>
+                                    <!-- </div> -->
+                <h2 class="modal-title text-left"><span id="modelText"></span></h2>
+            </div>
+
+            <div class="modal-body" id="RRMOnBoardProfileEntryPointTableModel-body" data-simplebar>
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist" id="rrmonboardprofiletab">
+                        <li role="presentation" class="active" id="rrm_onboard_candidatecontactTab">
+                            <a href="#rrm_OnBoardCandidateContactDetails"
+                                aria-controls="rrm_OnBoardCandidateContactDetails" role="tab">Basic</a>
+                        </li>
+                        <li role="presentation" class="" id="rrm_onboard_candidateinfoTab">
+                            <a href="#rrm_OnBoardcandidateinformationTab"
+                                aria-controls="rrm_OnBoardcandidateinformationTab" role="tab">Additional information</a>
+                        </li>
+                        <li role="presentation" class="" id="rrm_onboard_candidateaddressTab">
+                            <a href="#rrm_OnBoardcandidateaddressdetail"
+                                aria-controls="rrm_OnBoardcandidateaddressdetail" role="tab">Address</a>
+                        </li>
+                        <li role="presentation" class="" id="rrm_onboard_employerdetailsTab">
+                            <a href="#rrm_OnBoardEmployerDetails" aria-controls="rrm_OnBoardEmployerDetails"
+                                role="tab">Work History</a>
+                        </li>
+                        <li role="presentation" class="" id="rrm_onboard_candidateCareerTab">
+                            <a href="#rrm_OnBoardCandidateCareerDetails"
+                                aria-controls="rrm_OnBoardCandidateCareerDetails" role="tab">Skills</a>
+                        </li>
+                        <li role="presentation" class="" id="rrm_OnBoard_EmployeeProfileTab">
+                            <a href="#rrm_OnBoardEmployeeProfile"
+                                aria-controls="rrm_OnBoardEmployeeProfile" role="tab">Employee Profile</a>
+                        </li>
+                        <!-- <li role="presentation" class="disabled" id="rrm_onboardTab">
+                            <a href="#rrm_OnBoardDetails"
+                                aria-controls="rrm_OnBoardDetails" role="tab">Onboard</a>
+                        </li> -->
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content" id="onBoardProfileTabDetails">
+                        <!--contact details-->
+                        <div role="tabpanel" class="tab-pane active" id="rrm_OnBoardCandidateContactDetails">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="form-section" id="form-block">
+                                    <span class="hidden" style="color: red" id="bindexistingcandidates"></span>
+                                    <div id="rrmonboardprofile-bannedprofilewarning" class="alert alert-danger hidden">
+                                        <strong>Banned Profile: </strong>
+                                        <span id="rrmonboardprofile-flaggedprofilereason"></span>
+                                    </div>
+                                    <div style="visibility:hidden">
+                                        <div>
+                                            <label>id</label>
+                                            <span id="rrm_onboard_candidateid"></span>
+                                            <span class="error_message" id="rrm_onboard_candidateiderror"></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Candidate Details Section-->
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>Name</label>
+                                            <div id="rrm_onboard_candidatename"></div>
+                                            <span class="error_message" id="rrm_onboard_candidatenameerror"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Email</label>
+                                            <div id="rrm_onboard_candidateemail"></div>
+                                            <span class="error_message" id="rrm_onboard_candidateemailerror"></span>
+                                        </div>
+
+                                    </div>
+                                    <div class="candidateAlreadyExist hidden">
+                                        <div class="row">
+                                            <div class="form-group col-md-12">
+                                                <div id="rrm_onboard_existingcandidateByEmail"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="newCandidateForm hidden">
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label>Phone No</label>
+                                                <div id="rrm_onboard_candidatephoneno"></div>
+                                                <span class="error_message"
+                                                    id="rrm_onboard_candidatephonenoerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Notice Period (in days, for immediate joinee enter 0) <span style="color: red">*</span></label>
+                                                <div id="rrm_onboard_candidatenoticeperiod"></div>
+                                                <span class="error_message"
+                                                    id="rrm__onboardcandidatenoticeperioderror"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <!-- <div class="form-group col-md-4">
+                                            <label>PAN No</label>
+                                            <div id="rrm_candidatepanno"></div>
+                                            <span class="error_message" id="rrm_candidatepannoerror"></span>
+                                        </div> -->
+                                            <div class="form-group col-md-6">
+                                                <label>Native </label>
+                                                <div id="rrm_onboard_native"></div>
+                                                <span class="error_message" id="rrm_onboard_nativeError"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Willing to Relocate <span style="color: red">*</span></label>
+                                                <div id="rrm_onboard_candidatewilling"></div>
+                                                <span class="error_message"
+                                                    id="rrm_onboard_candidatewillingerror"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                <label>Communication <span style="color: red">*</span></label>
+                                                <div id="rrm_onboard_candidatecommunication"></div>
+                                                <span class="error_message"
+                                                    id="rrm_onboard_candidatecommunicationerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Total Experience <span style="color: red">*</span></label>
+                                                <div id="rrm_onboard_candidateTotalExperience"></div>
+                                                <span class="error_message"
+                                                    id="rrm_onboard_candidateTotalExperienceerror"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Passport No</label>
+                                                <div id="rrm_onboard_candidatepassportno"></div>
+                                                <span class="error_message"
+                                                    id="rrm_onboard_candidatepassportnoerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>Aadhar No</label>
+                                                <div id="rrm_onboard_candidateaadharno"></div>
+                                                <span class="error_message"
+                                                    id="rrm_onboard_candidateaadharnoerror"></span>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label>PAN No</label>
+                                                <div id="rrm_onboard_candidatepanno"></div>
+                                                <span class="error_message" id="rrm_onboard_candidatepannoerror"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-md-4">
+                                                <label>Referral</label>
+                                                <div id="rrm_onboard_candidatereferral"></div>
+                                                <span class="error_message"
+                                                    id="rrm_onboard_candidatereferralerror"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Additional information-->
+                        <div role="tabpanel" class="tab-pane" id="rrm_OnBoardcandidateinformationTab">
+                            <div class="row">
+                                <div class="form-section" id="form-block">
+                                    <!-- Candidate Details Section-->
+                                    <div class="col-md-6">
+                                        <div class="dx-fieldset-header">
+                                            Professional Information
+                                        </div>
+                                        <div class="row ">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="rrm_onboard_profile-divShowFileUploader">
+                                                        <div id="onboardfile-uploader"></div>
+                                                    </div>
+                                                    <div id="rrm_onboard_profile-divShowResumeDownloader"
+                                                        class="hidden">
+                                                        <div id="rrm_onboard_profile-existingResumeDownload"
+                                                            style="margin-top: 18px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="audio-uploader"></div>
+                                                </div>
+                                            </div> -->
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="onboardphoto-uploader"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Audio File </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="audio-uploader"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Profile Photo </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <div id="photo-uploader"></div>
+                                                    <span class="error_message error_profilephotoupload"></span>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group">
+                                            <label>Skype </label>
+                                            <div id="rrm_onboard_candidateskype"></div>
+                                            <span class="error_message" id="rrm_onboard_candidateskypeerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>LinkedIn</label>
+                                            <div id="rrm_onboard_candidatelinkedin"></div>
+                                            <span class="error_message" id="rrm_onboard_candidatelinkedinerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>GitHub </label>
+                                            <div id="rrm_onboard_candidategithub"></div>
+                                            <span class="error_message" id="rrm_onboard_candidategithuberror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>URL</label>
+                                            <div id="rrm_onboard_candidateurl"></div>
+                                            <span class="error_message" id="rrm_onboard_candidateurlerror"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="dx-fieldset-header">Personal Information</div>
+                                        <div class="form-group">
+                                            <label>Father's Name </label>
+                                            <div id="rrm_onboard_candidatefathername"></div>
+                                            <span class="error_message"
+                                                id="rrm_onboard_candidatefathernameerror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Marital Status <span style="color: red">*</span></label>
+                                            <div id="rrm_onboard_candidatemaritalstatus"></div>
+                                            <span class="error_message" id="rrm_onboard_candidatemaritalstatuserror"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Date of Birth <span style="color: red">*</span></label>
+                                            <div id="rrm_onboard_candidatedob"></div>
+                                            <span class="error_message"
+                                                id="rrm_onboard_candidatemaritaldoberror"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Address details-->
+                        <div role="tabpanel" class="tab-pane" id="rrm_OnBoardcandidateaddressdetail">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="form-section" id="form-block">
+                                    <!-- Candidate Details Section-->
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>Address <span style="color: red">*</span></label>
+                                            <div id="rrm_onboard_candidateaddress"></div>
+                                            <span class="error_message" id="rrm_onboard_candidateaddresserror"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Country <span style="color: red">*</span></label>
+                                            <div id="rrm_onboard_candidatecountry"></div>
+                                            <span class="error_message" id="rrm_onboard_candidatecountryerror"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>State <span style="color: red">*</span></label>
+                                            <div id="rrm_onboard_candidatepstate"></div>
+                                            <span class="error_message" id="rrm_onboard_candidatestateerror"></span>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>City <span style="color: red">*</span></label>
+                                            <div id="rrm_onboard_candidatecity"></div>
+                                            <span class="error_message" id="rrm_onboard_candidatecityerror"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <label>Pin Code</label>
+                                            <div id="rrm_onboard_candidatepincode"></div>
+                                            <span class="error_message" id="rrm_onboard_candidatepincodeerror"></span>
+                                        </div>
+                                    </div>
+                               
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Employer Details Section -->
+                        <div role="tabpanel" class="tab-pane" id="rrm_OnBoardEmployerDetails">
+                            <div class="row">
+                                <div class="col-md-12">
+                                <div class="demo-container">
+                                    <span class="gridContainer_status"></span>
+                                    <div id="onboard_gridContainer"></div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Candidate Career Details-->
+                        <div role="tabpanel" class="tab-pane" id="rrm_OnBoardCandidateCareerDetails">
+                            <!-- Career Details Section-->
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <span class="skillset_status"></span>
+                                        <span class="display_Skillsprofile_status"></span>
+                                        <div id="onboard_display_Skillsprofile"></div>
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                            </div>
+
+                        </div>
+                         <!--Employee Profile Details-->
+                         <div role="tabpanel" class="tab-pane" id="rrm_OnBoardEmployeeProfile">
+                            <!-- Employee Profile Section-->
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div id="onboard_display_Employeeprofile">
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Department </label>
+                                                    <div id="rrm_onboard_Department"></div>
+                                                    <span class="error_message" id="rrm_onboard_Departmenterror"></span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Designation </label>
+                                                    <div id="rrm_onboard_Designation"></div>
+                                                    <span class="error_message" id="rrm_onboard_Designationerror"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Employee No</label>
+                                                    <div id="rrm_onboard_EmployeeNo"></div>
+                                                    <span class="error_message"
+                                                        id="rrm_onboard_EmployeeNoerror"></span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Joining Date</label>
+                                                    <div id="rrm_onboard_JoiningDate"></div>
+                                                    <span class="error_message"
+                                                        id="rrm_onboard_JoiningDateerror"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Email</label>
+                                                    <div id="rrm_onboard_EmailId"></div>
+                                                    <span class="error_message"
+                                                        id="rrm_onboard_EmailIderror"></span>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Pseudo Name</label>
+                                                    <div id="rrm_onboard_pseudoName"></div>
+                                                    <span class="error_message"
+                                                        id="rrm_onboard_pseudoNameerror"></span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    <label>Login User Name</label>
+                                                    <div id="rrm_onboard_loginUserName"></div>
+                                                    <span class="error_message"
+                                                        id="rrm_onboard_loginUserNameerror"></span>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="row" style="text-align: center;">
+                                                <div id="onboard_Complete"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--</div>-->
+                            </div>
+                        </div>
+                        <!--Onboard Details-->
+<!-- <div role="tabpanel" class="tab-pane" id="rrm_OnBoardDetails">
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12" style="text-align: center;">
+                <div id="onboard_Complete" >
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary btnPrevious hidden-btn" onclick="toggleTabRRMOnBoardPrevious()">Previous</a>
+            <a class="btn btn-primary btnNext hidden" onclick="toggleTabRRMOnBoardProfile()">Next</a>
+        </div>
+    </div>
+</div>
+</div>
+<!--POP-UP RRM Candidate MODAL ENDS HERE -->
+<!--POP-UP RRM candidate Ban MODAL STARTS HERE -->
+
+<div id="rrmDetailsForOnboard"></div>
+<div class="modal fade" id="RPMOnBoardBanModel" tabindex="-1" role="dialog">
+    <div class="modal-dialog modealExpand">
+        <!-- Modal content-->
+        <div class="modal-content" id="RPMOnBoardBanModel-content">
+            <div class="modal-header">
+
+                <button type="button" class="close modal_close" data-dismiss="modal" id="RrmCloseButton">
+                    &times;
+                </button>
+                <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+                <h2 class="modal-title text-left">Ban the Candidate</h2>
+            </div>
+
+            <div class="modal-body" id="RPMOnBoardBanModel-body" data-simplebar>
+                <div role="tabpanel">
+                    <div class="form-group col-md-12">
+                        <div class="row">
+                            <div class="form-section" id="form-block">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label>Flag reason <span style="color: red">*</span></label>
+                                        <div id="rrm_onboard_bancandidate"></div>
+                                        <span class="error_message" id="rrm_onboard_bancandidateerror"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <div class="row">
+                            <label>Comments <span style="color: red">*</span></label>
+                            <div id="banonboardtxtareaComments"></div>
+                            <span class="error_message" id="rrm_onboard_bancommentsError"></span>
+                            <span class="ApiResponse"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-success " onclick="flagthiscandidates()">Flag</a>
+                <a class="btn btn-danger" onclick="closebanmodals()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="./js/library/bootstrap.js"></script>
+<script type="text/javascript">
+$("#rrmDetailsForOnboard").load("components/rrminterview/rrmdetailsinterviewmodal.html");
+
+var rrmId;
+    $(document).ready(function () {
+        //Global variable
+        loadRRMGetCandidateFlagMaster();
+        loadCompleteOnboard();
+        $("#banonboardtxtareaComments").dxHtmlEditor("instance").option('value', '');
+
+        var localget = localStorage.getItem("UserCheckRes");
+        var jsonData = JSON.parse(localget);
+        Token = jsonData.Data[0].Token
+        getRRMOnBoardList();
+        GetOnBoardEmployeeList();
+        //tab-toggle
+        $('ul#rrmonboardprofiletab li').click(function (e) {
+            if (rrmProfileType == "edit") {
+                var isBannedProfile = !($("#rrmonboardprofile-bannedprofilewarning").hasClass('hidden'))
+
+                $('ul#rrmonboardprofiletab li').removeClass("active");
+                $("#onBoardProfileTabDetails .tab-pane").removeClass("active");
+
+                $(this).addClass("active");
+                var tab_details = $(this).attr("id");
+                var currentTab = $("#" + tab_details + " > a ").attr("aria-controls");
+                $("#" + currentTab).addClass("active");
+                if (currentTab == "rrm_OnBoardCandidateContactDetails") {
+                    $('.nav-tabs a[href="#rrm_OnBoardCandidateContactDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").hide();
+                }
+                else if (currentTab == "rrm_OnBoardcandidateinformationTab") {
+                    $('.nav-tabs a[href="#rrm_OnBoardcandidateinformationTab"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                }
+                else if (currentTab == "rrm_OnBoardEmployerDetails") {
+                    $('.nav-tabs a[href="#rrm_OnBoardEmployerDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show;
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.GetPreviousEmployersForCandidate();
+                    }
+                }
+                else if (currentTab == "rrm_OnBoardcandidateaddressdetail") {
+                    $('.nav-tabs a[href="#rrm_OnBoardcandidateaddressdetail"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                }
+                else if (currentTab == "rrm_OnBoardCandidateCareerDetails") {
+                    $('.nav-tabs a[href="#rrm_OnBoardCandidateCareerDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.getSkillsDetails();
+                    }
+                }
+                else if (currentTab == "rrm_OnBoardEmployeeProfile") {
+                    $('.nav-tabs a[href="#rrm_OnBoard_EmployeeProfileTab"]').tab("show");
+                    $("a.btnNext").hide();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                }
+
+                if (isBannedProfile) {
+                    $("a.btnNext").hide();
+                    $("a.btnSaveAndContinue").hide();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").hide();
+                }
+                resetSimpleBarProfileEntryPoints();
+            }
+            else if(rrmProfileType == "preview"){
+                var isBannedProfile = !($("#rrmonboardprofile-bannedprofilewarning").hasClass('hidden'))
+
+                $('ul#rrmonboardprofiletab li').removeClass("active");
+                $("#onBoardProfileTabDetails .tab-pane").removeClass("active");
+
+                $(this).addClass("active");
+                var tab_details = $(this).attr("id");
+                var currentTab = $("#" + tab_details + " > a ").attr("aria-controls");
+                $("#" + currentTab).addClass("active");
+                if (currentTab == "rrm_OnBoardCandidateContactDetails") {
+                    $('.nav-tabs a[href="#rrm_OnBoardCandidateContactDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").hide();
+                }
+                else if (currentTab == "rrm_OnBoardcandidateinformationTab") {
+                    $('.nav-tabs a[href="#rrm_OnBoardcandidateinformationTab"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                }
+                else if (currentTab == "rrm_OnBoardEmployerDetails") {
+                    $('.nav-tabs a[href="#rrm_OnBoardEmployerDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show;
+                    if (rrmProfileType == "preview") {
+                        previewOnBoardProfileEntryPointJs.GetPreviousEmployersForCandidate();
+                    }
+                }
+                else if (currentTab == "rrm_OnBoardcandidateaddressdetail") {
+                    $('.nav-tabs a[href="#rrm_OnBoardcandidateaddressdetail"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                }
+                else if (currentTab == "rrm_OnBoardCandidateCareerDetails") {
+                    $('.nav-tabs a[href="#rrm_OnBoardCandidateCareerDetails"]').tab("show");
+                    $("a.btnNext").show();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                    if (rrmProfileType == "preview") {
+                        previewOnBoardProfileEntryPointJs.getSkillsDetails();
+                    }
+                }
+                else if (currentTab == "rrm_OnBoardEmployeeProfile") {
+                    $('.nav-tabs a[href="#rrm_OnBoard_EmployeeProfileTab"]').tab("show");
+                    $("a.btnNext").hide();
+                    $("a.btnSaveAndContinue").show();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").show();
+                }
+
+                if (isBannedProfile) {
+                    $("a.btnNext").hide();
+                    $("a.btnSaveAndContinue").hide();
+                    $(".saveFamilyBtn").hide();
+                    $(".btnPrevious").hide();
+                }
+                resetSimpleBarProfileEntryPoints();
+            }
+        });
+        loadAndBindSkillMappingTabForAddRRMProfiles();
+        getRRMRRMProfileEntryEmployerTables();
+        //details tab
+         loadcandidatedetailsforms();
+        getRRMRRMProfileEntrySkillTables();
+        loadRRMcountries();
+        GetRRMMaritalStatusMaster();
+        
+      
+    })
+
+    function resetSimpleBarProfileEntryPoints() {
+        new SimpleBar(document.getElementById('RRMOnBoardProfileEntryPointTableModel-body'));
+    }
+
+    function loadAndBindSkillMappingTabForAddRRMProfiles() {
+        var employee_id = '';
+        var filter_val = JSON.stringify({
+            "EmployeeId": employee_id
+        });
+        var filter_val = JSON.stringify({ "IsActive": true });
+        // var result = callgetlist('GetSkillFamilies', filter_val);
+        callGetListAsync('GetSkillFamilies', filter_val, function (result) {
+            //addRRMEntryPointJs.family = result;
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                // options += "<option value='" + result[i].Id + "'>" + result[i].Name + "</option>";
+                skillfamilydata.push({
+                    "Id": result[i].Id,
+                    "Name": result[i].Name
+                });
+            }
+        })
+    }
+
+    var candidateData;
+    function getRRMRRMProfileEntryEmployerTables() {
+        var filterData = JSON.stringify({
+            "IsActive": true,
+            "CandidateId": candidateIdForSkillAndWorkExperience,
+            "Token": Token
+        });
+        callGetListSync('GetPreviousEmployersForRRMOnBoardCandidateByCandidateId', filterData, function (e) {
+            $("#onboard_gridContainer").dxDataGrid({ dataSource: e });
+            candidateData = e;
+        })
+    }
+
+    function getRRMRRMProfileEntrySkillTables() {
+
+        function logEvent(eventName) {
+            var logList = $("#events ul"),
+                newItem = $("<li>", { text: eventName });
+
+            logList.prepend(newItem);
+        }
+
+        var SkillDataFilter = JSON.stringify({
+            "Token": Token
+        });
+        var allSkilldata = [];
+        callGetListAsync('GetAllSkills', SkillDataFilter, function (e) {
+            allSkilldata = e;
+        });
+        var allSkillversion = [];
+        callGetListAsync('GetAllSkillVersions', SkillDataFilter, function (e) {
+            allSkillversion = e;
+        });
+
+        var filter_val = JSON.stringify({
+            "CandidateId ": candidateIdForSkillAndWorkExperience,
+            "IsActive": "True",
+            "Token": Token
+        });
+
+        callGetListAsync('GetRRMOnBoardCandidateSkillMappingsbyCandidateId', filter_val, function (e) {
+            getskilldata = e;
+            $("#onboard_display_Skillsprofile").dxDataGrid({
+                dataSource: getskilldata,
+                keyExpr: "CandidateSkillMappingId",
+                showBorders: true,
+                paging: {
+                    enabled: false
+                },
+                editing: {
+                    mode: "row",
+                    allowUpdating: true,
+                    allowDeleting: true,
+                    allowAdding: true
+                },
+                columns: [
+                    {
+                        dataField: "CandidateSkillMappingId",
+                        visible: false,
+                        allowEditing: false,
+                        allowAdding: false
+                    },
+                    {
+                        caption: "Grade", dataField: "SkillGradeId",
+                        lookup: {
+                            dataSource: skillGrade,
+                            displayExpr: "Name",
+                            valueExpr: "ID"
+                        },
+                        validationRules: [{ type: "required" }]
+                    },
+                    {
+                        dataField: "SkillFamilieId",
+                        caption: "Family",
+                        setCellValue: function (rowData, value) {
+                            rowData.SkillFamilieId = value;
+                            rowData.skillId = "";
+                            rowData.SkillVersionId = "";
+                        },
+                        lookup: {
+                            dataSource: skillfamilydata,
+                            displayExpr: "Name",
+                            valueExpr: "Id",
+                        },
+                        validationRules: [{ type: "required" }]
+                    },
+                    {
+                        caption: "Skills", dataField: "skillId",
+                        setCellValue: function (rowData, value) {
+                            rowData.skillId = value;
+                            rowData.SkillVersionId = ""
+                        },
+                        lookup: {
+                            dataSource: function (options) {
+                                return {
+                                    store: allSkilldata,
+                                    filter: options.data ? ["FamilyID", "=", options.data.SkillFamilieId] : null,
+                                };
+                            },
+                            valueExpr: "Id",
+                            displayExpr: "Name",
+                        },
+                        validationRules: [{ type: "required" }]
+                    },
+                    {
+                        caption: "Versions", dataField: "SkillVersionId",
+                        setCellValue: function (rowData, value) {
+                            rowData.SkillVersionId = value;
+                        },
+                        lookup: {
+                            dataSource: function (options) {
+                                return {
+                                    store: allSkillversion,
+                                    filter: options.data ? ["SkillID", "=", options.data.skillId] : null,
+                                };
+                            },
+                            valueExpr: "Id",
+                            displayExpr: "Name",
+                        },
+                        validationRules: [{ type: "required" }]
+                    },
+                    {
+                        caption: "Exp (in years)",
+                        dataField: "SkillExperience",
+                        dataType: "number",
+                        validationRules:
+                            [
+                                {
+                                    type: "range",
+                                    message: "Should be greater than 0.1 years",
+                                    min: 0.1,
+                                }
+                            ]
+                    },
+                    {
+                        caption: "Rating",
+                        dataField: "Rating",
+                        dataType: "number",
+                        validationRules:
+                            [
+                                {
+                                    type: "range",
+                                    message: "Rating should be within 1 to 5",
+                                    min: 1,
+                                    max: 5,
+
+                                }
+                            ]
+                    },
+                ],
+
+                onEditingStart: function (e) {
+                    logEvent("EditingStart");
+                },
+                onRowEdited: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.uploadSkill(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMOnBoardProfileEntryPointJs.uploadSkill(e);
+                    }
+                    logEvent("EditingStart");
+                },
+                onRowInserted: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.uploadSkill(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMOnBoardProfileEntryPointJs.uploadSkill(e);
+                    }
+                },
+                onRowUpdating: function (e) {
+                    logEvent("RowUpdating");
+                },
+                onRowUpdated: function (e) {
+
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.uploadSkill(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMOnBoardProfileEntryPointJs.uploadSkill(e);
+                    }
+                },
+                onRowRemoving: function (e) {
+                    logEvent("RowRemoving");
+                },
+                onRowRemoved: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.deleteSkill(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMOnBoardProfileEntryPointJs.deleteSkill(e);
+                    }
+                }
+            });
+        });
+
+        $("#clear").dxButton({
+            text: "Clear",
+            onClick: function () {
+                $("#events ul").empty();
+            }
+        });
+    }
+
+    function loadcandidatedetailsforms(id) {
+        rrmId=id;
+        loadEmployeeProfile();
+         renderProfilePopup();
+        CandidateProfileId = "";
+        if (rrmProfileType != "edit") {
+            CandidateId = null;
+        }
+        $("#rrm_onboard_candidateid").html("");
+        $("#rrm_onboard_candidatenoticeperiod").dxNumberBox("instance").option('value', '');
+        $("#rrm_onboard_candidatename").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidatereferral").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidateemail").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidatephoneno").dxNumberBox("instance").option('value', '');
+        $("#rrm_onboard_candidatepassportno").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidateaadharno").dxNumberBox("instance").option('value', '');
+        $("#rrm_onboard_candidatepanno").dxTextBox("instance").option('value', '');
+        $('#rrm_onboard_candidateTotalExperience').dxNumberBox("instance").option('value', '');
+
+        $("#rrm_onboard_candidatewilling").dxSelectBox({
+            displayExpr: "Name",
+            valueExpr: "ID",
+            searchEnabled: true,
+            showClearButton: true,
+            dataSource: willingtoreloaction
+        });
+        $("#rrm_onboard_candidatecommunication").dxSelectBox({
+            displayExpr: "Name",
+            valueExpr: "ID",
+            searchEnabled: true,
+            showClearButton: true,
+            dataSource: Communication
+        });
+        $("#onboard_gridContainer").dxDataGrid({ dataSource: new Array() })
+        $("#onboard_display_Skillsprofile").dxDataGrid({ dataSource: new Array() })
+        //carrer tab
+        $("#rrm_onboard_native").dxTextBox("instance").option('value', '');
+        //document upload
+        // $("#banonboardtxtareaComments").dxHtmlEditor("instance").option('value', '');
+        $("#onboardfile-uploader").dxFileUploader({
+            selectButtonText: "Upload CV",
+            labelText: "",
+            allowedFileExtensions: [".doc", ".docx", ".pdf", ".odt"],
+            uploadMode: "useForm",
+            maxFileSize: 8000000
+        });
+
+        $("#onboardphoto-uploader").dxFileUploader({
+            selectButtonText: "Select photo",
+            labelText: "",
+            accept: "image/*",
+            uploadMode: "useForm",
+            maxFileSize: 8000000
+        });
+
+        //additional information tab
+        $("#rrm_onboard_candidateskype").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidatelinkedin").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidategithub").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidateurl").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidatefathername").dxTextBox("instance").option('value', '');
+        $("#rrm_onboard_candidatedob").dxDateBox("instance").option('value', null);
+        $("#rrm_onboard_candidatecommunication").dxSelectBox("instance").option('value', '');
+        $("#rrm_onboard_candidatewilling").dxSelectBox("instance").option('value', '');
+        $("#rrm_onboard_candidatemaritalstatus").dxSelectBox({
+            displayExpr: "Name",
+            valueExpr: "ID",
+            searchEnabled: true,
+            showClearButton: true,
+            dataSource: maritalstatus
+        });
+        $("#rrm_onboard_candidatemaritalstatus").dxSelectBox("instance").option('value', null);
+        //address details
+        $("#rrm_onboard_candidateaddress").dxTextBox("instance").option('value', null);
+        $("#rrm_onboard_candidatepincode").dxTextBox("instance").option('value', null);
+        $("#rrm_onboard_candidatecity").dxSelectBox("instance").option('value', null);
+        $("#rrm_onboard_candidatepstate").dxSelectBox("instance").option('value', null);
+        $("#rrm_onboard_candidatecountry").dxSelectBox("instance").option('value', null);
+        $("#rrm_onboard_bancandidate").dxSelectBox("instance").option('value', null);
+       // $("#banonboardtxtareaComments").dxHtmlEditor("instance").option('value', null);
+        $('#onboardfile-uploader').dxFileUploader('instance').reset();
+        $('#onboardphoto-uploader').dxFileUploader('instance').reset();
+        //Employee Profile
+      
+
+        //Error messages:
+        $('#rrm_onboard_candidatename').removeClass('input-error');
+        $('#rrm_onboard_candidatenameerror').html("");
+        $('#rrm_onboard_candidateemail').removeClass('input-error');
+        $('#rrm_onboard_candidateemailerror').html("");
+        $('#rrm_onboard_candidatephoneno').removeClass('input-error');
+        $('#rrm_onboard_candidatephonenoerror').html("");
+        $('#rrm_onboard_candidateaadharno').removeClass('input-error');
+        $('#rrm_onboard_candidateaadharnoerror').html("");
+        $('#rrm_onboard_candidatewilling').removeClass('input-error');
+        $('#rrm_onboard_candidatewillingerror').html("");
+        $('#rrm_onboard_candidatecommunication').removeClass('input-error');
+        $('#rrm_onboard_candidatecommunicationerror').html("");
+        $('#rrm_onboard_candidatecommunication').removeClass('input-error');
+        $('#rrm_onboard_candidatecommunicationerror').html("");
+        $('#rrm_onboard_candidateaadharno').removeClass('input-error');
+        $('#rrm_onboard_candidatepassportnoerror').html("");
+        $('#rrm_onboard_candidatenoticeperioderror').removeClass('input-error');
+        $('#rrm_onboard_candidatenoticeperioderror').html("");
+        $('#rrm_onboard_candidatenoticeperioderror').removeClass('input-error');
+        $('#rrm_onboard_candidatenoticeperioderror').html("");
+
+        $("#rrmonboardprofile-bannedprofilewarning").addClass("hidden")
+        $("#rrmonboardprofile-flaggedprofilereason").text(" ");
+        $("#bindexistingcandidates").addClass("hidden");
+
+        $("#rrm_onboard_profile-divShowFileUploader").removeClass("hidden");
+        $("#rrm_onboard_profile-divShowResumeDownloader").addClass("hidden");
+        $("#rrm_onboard_profile-existingResumeDownload").html("");
+    }
+
+    function loadRRMcountries() {
+        var filter_val = JSON.stringify({
+            "Token": Token
+        });
+        callGetListAsync('GetCountries', filter_val, function (result) {
+            for (var i = 0; i < result.length; i++) {
+                getcountry.push({
+                    "Id": result[i].Id,
+                    "Name": result[i].Name
+                });
+            }
+        })
+    }
+
+    function loadRRMstate(CountryId) {
+        var filter_val = JSON.stringify({
+            "CountryId  ": CountryId,
+            "Token": Token
+        });
+        var getState = [];
+        $("#rrm_onboard_candidatepstate").dxSelectBox("instance").option("dataSource", getState)
+        callGetListAsync('GetStates', filter_val, function (result) {
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                getstate.push({
+                    "Id": result[i].Id,
+                    "Name": result[i].Name
+                });
+            }
+            $("#rrm_onboard_candidatepstate").dxSelectBox("instance").option("dataSource", getstate);
+        })
+
+    }
+
+    function loadRRMcities(StateID) {
+        var filter_val = JSON.stringify({
+            "StateID  ": StateID,
+            "Token": Token
+        });
+        var getCities = [];
+        $("#rrm_onboard_candidatecity").dxSelectBox("instance").option("dataSource", getCities);
+        callGetListAsync('GetCities', filter_val, function (result) {
+            var options = "<option value=''>Select Family</option>";
+            for (var i = 0; i < result.length; i++) {
+                getCities.push({
+                    "Id": result[i].Id,
+                    "Name": result[i].Name
+                });
+            }
+            $("#rrm_onboard_candidatecity").dxSelectBox("instance").option("dataSource", getCities);
+        })
+
+    }
+
+    function GetRRMMaritalStatusMaster() {
+        var filter_val = JSON.stringify({
+            "Token": Token
+        });
+        callGetListAsync('GetMaritalStatusMaster', filter_val, function (result) {
+            for (var i = 0; i < result.length; i++) {
+                maritalstatus.push({
+                    "ID": result[i].Id,
+                    "Name": result[i].Status
+                });
+            }
+        })
+    }
+
+    function loadRRMGetCandidateFlagMaster() {
+        var filter_val = JSON.stringify({
+            "Token": Token
+        });
+        var result = callgetlist('GetCandidateFlagMaster', filter_val);
+        for (var i = 0; i < result.length; i++) {
+            flagreason.push({
+                "Id": result[i].Id,
+                "Name": result[i].Name
+            });
+        }
+    }
+
+    function toggleTabRRMOnBoardPrevious() {
+        if (rrmProfileType == "edit") {
+            editRRMOnBoardProfileEntryPointJs.toggleTabRRMOnBoardPrevious();
+        }
+        else if (rrmProfileType == "add") {
+            addRRMOnBoardProfileEntryPointJs.toggleTabRRMOnBoardPrevious();
+        }
+        else if(rrmProfileType == "preview"){
+            previewOnBoardProfileEntryPointJs.toggleTabRRMOnBoardPrevious();
+        }
+    }
+
+    function toggleTabRRMOnBoardProfile() {
+        if (rrmProfileType == "edit") {
+            editRRMOnBoardProfileEntryPointJs.toggleTabRRMOnBoardProfile();
+        }
+        else if (rrmProfileType == "add") {
+            addRRMOnBoardProfileEntryPointJs.toggleTabRRMOnBoardProfile();
+        }
+        else if(rrmProfileType == "preview"){
+             previewOnBoardProfileEntryPointJs.toggleTabRRMOnBoardProfile();
+
+        }
+    }
+
+    function get_versions(skill_id) {
+        var skill_id = skill_id;
+        var filter_val = JSON.stringify({
+            "SkillId": skill_id
+        });
+        var result = callgetlist('GetSkillVersions', filter_val);
+        for (var i = 0; i < result.length; i++) {
+            version.push({
+                "Id": result[i].Id,
+                "Name": result[i].Name
+            });
+        }
+    }
+
+    function saveSkillset() {
+        if (rrmProfileType == "edit") {
+            editRRMOnBoardProfileEntryPointJs.uploadSkill
+        }
+        else if (rrmProfileType == "add") {
+            addRRMOnBoardProfileEntryPointJs.uploadSkill();
+        }
+    }
+
+    $(function () {
+        function logEvent(eventName) {
+            var logList = $("#events ul"),
+                newItem = $("<li>", { text: eventName });
+
+            logList.prepend(newItem);
+        }
+
+        var filter_val = JSON.stringify({
+            "CandidateId ": null,
+            "IsActive": "True",
+            "Token": Token
+        });
+
+        callGetListAsync('GetCandidatePreviousEmployersByCandidateId', filter_val, function (e) {
+            getskilldata = e;
+            $("#onboard_gridContainer").dxDataGrid({
+                dataSource: getskilldata,
+                //keyExpr: "ID",
+                showBorders: true,
+                paging: {
+                    enabled: false
+                },
+                editing: {
+                    mode: "row",
+                    allowUpdating: true,
+                    allowDeleting: true,
+                    allowAdding: true
+                },
+                columns: [
+                    {
+                        dataField: "EmployerId",
+                        caption: "",
+                        visible: false
+                    },
+                    {
+                        dataField: "EmployerName",
+                        caption: "Employer Name"
+                    },
+                    {
+                        dataField: "Designation",
+                        caption: "Designation"
+                    },
+                    {
+                        dataField: "Location",
+                        caption: "Location"
+                    },
+
+                    {
+                        dataField: "FromDate",
+                        caption: "From Date",
+                        dataType: "date",
+                        width: 125,
+                        validationRules: [{
+                            type: "range",
+                            max: new Date(maxdate),
+                            message: "Date can not be greater than today"
+                        }],
+                    },
+                    {
+                        dataField: "ToDate",
+                        caption: "To Date",
+                        dataType: "date",
+                        width: 125,
+                        validationRules: [{
+                            type: "range",
+                            max: new Date(maxdate),
+                            message: "Date can not be greater than today"
+                        },
+                        {
+                            type: "custom",
+                            message: "Date can not be lesser than From Date",
+                            validationCallback: function (e) {
+                                var fromDate = new Date(e.data.FromDate);
+                                var toDate = new Date(e.value);
+                                if (toDate < fromDate) {
+                                    return false;
+                                }
+                                else {
+                                    return true;
+                                }
+                            }
+                        }
+                        ],
+                    },
+                    {
+                        dataField: "Experience",
+                        caption: "Experience",
+                        allowEditing: false
+                    },
+                    {
+                        dataField: "ReasonForLeaving",
+                        caption: "Reason For Leaving",
+                        validationRules: [{
+                            type: "required",
+                            message: "Reason for leaving is required"
+                        }]
+                    }
+                ],
+                summary: {
+                    totalItems: [{
+                        column: "ToDate",
+                        summaryType: "sum",
+                        customizeText: function (data) {
+                            return "Total Experience:";
+                        }
+                    }, {
+                        column: "Experience",
+                        summaryType: "sum",
+                        customizeText: function (data) {
+                            return data.value;
+                        }
+                    }]
+                },
+                onEditingStart: function (e) {
+                    logEvent("EditingStart");
+                },
+                onRowEdited: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.updateEmployer(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMOnBoardProfileEntryPointJs.updateEmployer(e);
+                    }
+                    logEvent("EditingStart");
+                },
+                onInitNewRow: function (e) {
+                    logEvent("InitNewRow");
+                },
+                onRowInserting: function (e) {
+                    logEvent("RowInserting");
+                },
+                onRowInserted: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.saveEmployer(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMOnBoardProfileEntryPointJs.saveEmployer(e);
+                    }
+                },
+                onRowUpdating: function (e) {
+                    logEvent("RowUpdating");
+                },
+                onRowUpdated: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.saveEmployer(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMOnBoardProfileEntryPointJs.saveEmployer(e);
+                    }
+                },
+                onRowRemoving: function (e) {
+                    logEvent("RowRemoving");
+                },
+                onRowRemoved: function (e) {
+                    if (rrmProfileType == "edit") {
+                        editRRMOnBoardProfileEntryPointJs.deleteEmployer(e);
+                    }
+                    else if (rrmProfileType == "add") {
+                        addRRMOnBoardProfileEntryPointJs.deleteEmployer(e);
+                    }
+                }
+            });
+        });
+        $("#clear").dxButton({
+            text: "Clear",
+            onClick: function () {
+                $("#events ul").empty();
+            }
+        });
+    });
+
+    function closebanmodals() {
+        $("#rrm_onboard_bancandidate").dxSelectBox("instance").option('value', null);
+        $("#banonboardtxtareaComments").dxHtmlEditor("instance").option('value', null);
+       
+        $('#RPMOnBoardBanModel').modal("hide");
+    }
+
+    function RemoveReplaceResume() {
+        $("#rrm_onboard_profile-divShowFileUploader").removeClass("hidden");
+        $("#rrm_onboard_profile-divShowResumeDownloader").addClass("hidden");
+        $("#rrm_onboard_profile-existingResumeDownload").html("");
+    }
+
+    var rrmData = [];
+    var candidateProfileMentions = [];
+    var employeeData = [];
+    function getRRMOnBoardList() {
+        rrmData = [];
+        var rrmListfilterData = JSON.stringify({
+            "IsActive": true
+        });
+        callGetListAsync('GetRRM', rrmListfilterData, function (e) {
+            var rrmListList = e;
+            if (rrmListList.length > 0) {
+                rrmListList.forEach(function (i, index) {
+                    rrmData.push({
+                        'RRMId': i['RRMId'],
+                        'RRMName': i['RRMNo'] + " - " + i['RequirementName']
+                    });
+                });
+            }
+        })
+    }
+
+    function GetOnBoardEmployeeList() {
+        employeeData = [];
+        var filter_val = JSON.stringify({
+            "IsActive": true
+        });
+        callGetListAsync('GetEmployeeList', filter_val, function (e) {
+            var employeeList = e;
+            if (employeeList.length > 0) {
+                employeeList.forEach(function (i, index) {
+                    employeeData.push({
+                        'EmployeeId': i['EmployeeId'],
+                        'EmployeeName': i['Name']
+                    });
+                });
+            }
+
+        })
+    }
+
+
+    function loadCompleteOnboard(){
+        $("#onboard_Complete").dxButton({
+            stylingMode: "contained",
+        text: "Complete Onboard",
+        type: "success",
+        width: 180,
+        onClick: function() {
+            completedOnboard();
+        }
+    });
+    }
+
+
+    function completedOnboard(){
+        var empName=$("#rrm_onboard_candidatename").dxTextBox("instance").option('value');
+                swal({
+                title: "Warning!",
+                text:  "Are you sure, you want to complete the On-Board Process for "+empName +"?",
+                icon: "warning",
+                buttons: true,
+            })
+            .then((postData) => {
+                if (postData) {
+                    completedOnboardSave();
+                }
+            });
+    }
+    // var maximumDate = new Date();
+    // maximumDate.setFullYear(maximumDate.getFullYear() - 18);
+    // var minimumDate = new Date()
+    // minimumDate.setFullYear(minimumDate.getFullYear()-58)
+    function loadEmployeeProfile(){
+var departmentsData = new DevExpress.data.DataSource({
+        store: {
+            data: callgetlist('GetDepartmentsForRRM','{"IsActive":"True"}'),
+            type: "array",
+            key: "DepartmentId"
+        }
+    });
+  $("#rrm_onboard_Department").dxSelectBox({
+    dataSource: departmentsData,
+        displayExpr: "DepartmentName",
+        valueExpr: "DepartmentId",
+        searchEnabled: true,
+        showClearButton: true
+    });
+    var designationsData = new DevExpress.data.DataSource({
+        store: {
+            data: callgetlist('GetDesignationsForRRM','{"IsActive":"True"}'),
+            type: "array",
+            key: "DesignationId"
+        }
+    });
+    $("#rrm_onboard_Designation").dxSelectBox({
+        dataSource: designationsData,
+        displayExpr: "DesignationName",
+        valueExpr: "DesignationId",
+        searchEnabled: true,
+        showClearButton: true
+    });
+
+    $("#rrm_onboard_EmployeeNo").dxTextBox({
+        placeholder:"EmployeeNo",
+        showClearButton:true,
+        readOnly: true,
+    });
+
+    $("#rrm_onboard_EmailId").dxTextBox({
+        placeholder:"Email Id",
+        showClearButton:true
+    }).dxValidator({
+        name: "Enter Valid Mail address", 
+        validationRules: [{
+            type: "email"
+        }]
+    }); 
+
+    $("#rrm_onboard_pseudoName").dxTextBox({
+        placeholder:"Pseudo Name",
+        showClearButton:true
+    });
+
+    $("#rrm_onboard_loginUserName").dxTextBox({
+        placeholder:"User Name",
+        showClearButton:true
+    });
+
+    $("#rrm_onboard_JoiningDate").dxDateBox({
+        placeholder: "Joining Date ",
+        type: "date",
+        value: null,
+        showClearButton: true,
+        displayFormat: "dd MMM yyyy",
+    }).dxDateBox("instance");
+    getRRMRRMEmployeeProfileDetails();
+
+    }   
+
+    function getRRMRRMEmployeeProfileDetails() {
+        var empfilterData = JSON.stringify({
+            "Token": Token,
+            "@ResourceRequirementId": rrmId,
+            "IsActive": "True"
+        });
+        callGetListSync('GetRRMOnBoardEmployeeProfileDetailsById', empfilterData, function (e) {
+        $("#rrm_onboard_Designation").dxSelectBox("instance").option('value',  e[0].DesignationId);
+        $("#rrm_onboard_Department").dxSelectBox("instance").option('value',  e[0].DepartmentId);
+$("#rrm_onboard_EmployeeNo").dxTextBox("instance").option('value',  e[0].EmpNo);
+        });
+    }
+
+    $(document).on("click", ".rrmdetailInterviewCard", function (e) {
+      var rrmId = $(e.currentTarget).data("rrmid");           
+      getRRMDetailsForInterviewCard(rrmId);
+  });
+
+  function completedOnboardSave(){
+      
+        var empName=$("#rrm_onboard_EmployeeNo").dxTextBox("instance").option('value');
+        var department = $("#rrm_onboard_Department").dxSelectBox("instance").option("value");
+        var designation = $("#rrm_onboard_Designation").dxSelectBox("instance").option("value");
+        var joiningDate = $("#rrm_onboard_JoiningDate").dxDateBox("instance").option('value');
+        var emailId =  $("#rrm_onboard_EmailId").dxTextBox("instance").option('value');
+        var pseudoName = $("#rrm_onboard_pseudoName").dxTextBox("instance").option('value');
+        var loginUserName = $("#rrm_onboard_loginUserName").dxTextBox("instance").option('value');
+        var resourceRequirementId = rrmId;
+        var candidateId = CandidateId;
+        if(empName =="" || department =="" || designation== "" || joiningDate == "" || pseudoName == "" || loginUserName == ""|| empName==null || department == null ||
+            designation == null || joiningDate == null || emailId == null || emailId == "" || pseudoName == null || loginUserName == null){
+
+            if(empName =="" || empName == null){
+                $('#rrm_onboard_EmployeeNo').addClass('input-error');
+                $('#rrm_onboard_EmployeeNoerror').html("Enter Employee Number");
+            }
+            else{
+                $('#rrm_onboard_EmployeeNo').removeClass('input-error');
+                $('#rrm_onboard_EmployeeNoerror').html("");
+            }
+
+            if(department == "" || department == null){
+                $('#rrm_onboard_Department').addClass('input-error');
+                $('#rrm_onboard_Departmenterror').html("Select Department");
+            }
+            else{
+                $('#rrm_onboard_Department').removeClass('input-error');
+                $('#rrm_onboard_Departmenterror').html("");
+            }
+
+            if(designation == "" || designation == null){
+                $('#rrm_onboard_Designation').addClass('input-error');
+                $('#rrm_onboard_Designationerror').html("Select Designation");
+            }
+            else{
+                $('#rrm_onboard_Designation').removeClass('input-error');
+                $('#rrm_onboard_Designationerror').html("");
+            }
+
+            if(joiningDate == "" || joiningDate == null){
+                $('#rrm_onboard_JoiningDate').addClass('input-error');
+                $('#rrm_onboard_JoiningDateerror').html("Select Joining Date");
+            }
+            else{
+                $('#rrm_onboard_JoiningDate').removeClass('input-error');
+                $('#rrm_onboard_JoiningDateerror').html("");
+            }
+
+            if(emailId == "" || emailId == null){
+                $('#rrm_onboard_EmailId').addClass('input-error');
+                $('#rrm_onboard_EmailIderror').html("Select Email Id");
+            }
+            else{
+                $('#rrm_onboard_EmailId').removeClass('input-error');
+                $('#rrm_onboard_EmailIderror').html("");
+            }
+
+            if(pseudoName == "" || pseudoName == null){
+                $('#rrm_onboard_pseudoName').addClass('input-error');
+                $('#rrm_onboard_pseudoNameerror').html("Enter Pseudo Name");
+            }
+            else{
+                $('#rrm_onboard_pseudoName').removeClass('input-error');
+                $('#rrm_onboard_pseudoNameerror').html("");
+            }
+
+            if(loginUserName == "" || loginUserName == null){
+                $('#rrm_onboard_loginUserName').addClass('input-error');
+                $('#rrm_onboard_loginUserNameerror').html("Enter User Name");
+            }
+            else{
+                $('#rrm_onboard_loginUserName').removeClass('input-error');
+                $('#rrm_onboard_loginUserNameerror').html("");
+            }
+        }
+        else{
+            if(empName !="" && department != "" && designation != "" && joiningDate != "" && joiningDate != null && pseudoName != "" && pseudoName != null && loginUserName != "" && loginUserName != null){
+                PostRRMData = {
+                Method: "PostRRMOnBoardComplete",
+                Data: {
+                    "Token": Token,
+                    "ResourceRequirementId":resourceRequirementId,
+                    "CandidateId":candidateId,
+                    "DepartmentId":department,
+                    "DesignationId":designation,
+                    "EmployeeNumber": empName,
+                    "JoiningDate":joiningDate,
+                    "EmailId":emailId,
+                    "LoginUserName": loginUserName,
+                    "pseudoname": pseudoName,
+                    "IsActive" : 'True'
+                }
+            };
+        var RRMDataResult = PostDataCallAsync(PostRRMData, function (resultResorce) {
+            if(resultResorce['IsSuccess'] == false)
+            {
+                // var RRMSwalError = {
+                // title: "Error",
+                // text: resultResorce['Message'],
+                // icon: 'error'
+                // }
+                swal({
+                title: "Error",
+                text:  resultResorce['Message'],
+                icon: "error",
+                buttons: true,
+            })
+            }
+            else{
+                swal({
+                    title: "Success!",
+                    text: "Saved Successfully!",
+                    icon: "success",
+                    button: "ok!",
+                })    
+                $('#RRMOnBoardProfileEntryPointTableModel').modal("hide");
+                getOfferApprovedCandidatesForOnboard();
+            }          
+         });
+        }
+    }
+  }
+</script>

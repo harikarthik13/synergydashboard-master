@@ -1,0 +1,63 @@
+<link href="components/defaultersentry/css/style.css" rel="stylesheet" />
+<script src='components/defaultersentry/js/defaultersEntryReportsGrid.js'></script>
+<div class="card-detail">
+  <span><i><img src="components/defaultersentry/images/defaulters.png" width="40px" height="40px" /></i></span>
+  <span class="card-detail-title"><b>Defaulters Entry</b></span>
+  <span class="pull-right">
+    <button class="btn btn-sm"  onclick="openDefaultersActionsModal(this);">
+        <i class="fa fa-address-card" aria-hidden="true"></i>&nbsp; New Defaulters Entry
+    </button>
+</span>
+  <hr />
+  <div class="row">
+    <div class="col-md-3">
+      <label>Date</label>
+      <div id="defaulters_entry_reports_Date"></div>
+    </div>
+    <div class="col-md-4" id="divDefaultersButton">
+      <br>
+      <button type="button" class="btn btn-primary btn-md" id="defaultersEntryReportsFilter"
+        onclick="getDefaultersReportsBasedOnSelectedDate();">
+        <i class="fa fa-search" aria-hidden="true"></i>&nbsp; Get Details
+      </button>
+    </div>
+  </div>
+  <div>
+    <br>
+    <div id="sdgd-DefaultersEntryGrid"></div>
+  </div>
+</div>
+
+<div id="divDefaultersActionsModal">
+
+</div>
+
+<script src='components/defaultersentry/js/add_defaulters_entry.js'></script>
+<script type="text/javascript">
+    $("#divDefaultersActionsModal").load("components/defaultersentry/defaulters_entry.html");
+
+    function openDefaultersActionsModal() {
+
+      $("#defaulters-presales_task").hide();
+      $("#sddgd-defaulters-actionitems").hide();
+      var filter_val = JSON.stringify({});
+      var result = callgetlist("GetQuickActionItems", filter_val);
+
+      var options = "<option value=''>Select an activity</option>";
+      for (var i = 0; i < result.length; i++) {
+        options +=
+          "<option value='" + result[i].Id + "'>" + result[i].ActionItem + "</option>";
+      }
+
+      $("#defaultersEntryAction").html(options);
+      $("#div-DefaultersEntry-Edit-Modal").appendTo('body').modal("show");
+      $("#div-DefaultersEntry-Edit-Modal .modal-body").css({"height": "310px"});
+      $(".divDefaultersEdit").show();
+      $("#defaulterModalTitle").text("Add an Action");
+      $("#sddgd-defaulters-actionitems").hide();
+      $("#defaultersEntryAction").val("");
+      var selectedDate = $("#defaulters_entry_reports_Date").dxDateBox("instance").option("text");
+      $("#defaultersSelectedDate").text(selectedDate);
+  }
+
+</script>

@@ -1,0 +1,110 @@
+<script id = "TechnicalHead">
+    var folderName = "rrmentrypointtechnicalhead";
+    $(document).ready(function () {
+        var pageId = "TechnicalHead";
+        PageInitializeTechnicalHead(pageId)
+    });
+
+    function PageInitializeTechnicalHead(pageId) {
+        var rrmEntryGrid = RRMEntryPointGridTechnicalHead(pageId);
+        rrmEntryGrid.getRRMEntryTable();
+    }
+</script>
+
+<link href="components/rrmentrypointtechnicalhead/css/rrmentrypoint.css" rel="stylesheet" />
+
+<script src='components/rrmentrypointtechnicalhead/js/addRRMEntryPointTechnicalHead.js'></script>
+<script src='components/rrmentrypointtechnicalhead/js/editRRMEntryPointTechnicalHead.js'></script>
+<script src='components/rrmentrypointtechnicalhead/js/rrmentrypointgridrtechnicalhead.js'></script>
+
+<div class="rrm-card-detail-NewInterviewCard card-detail">
+    <span><i><img src="./image/dashboard/rrm.png" width="40px" height="40px" /></i></span>
+    <span class="card-detail-title"><b>RRM Entry Point</b></span>
+    <span class="pull-right">
+        <button id="rrmEntryPointAddBtnTechnicalHead" class="btn btn-sm btn-primary" data-type="add">
+            <i class="glyphicon glyphicon-plus" data-toggle="modal"></i>
+        </button>
+    </span>
+    <hr />
+   
+    <div class="rrm-card-detail">
+        <div id="rrmGridReportTechnicalHead"></div>
+    </div>
+</div>
+
+<div id="rrm_entrypointmodelTechnicalHead"></div>
+
+<script type="text/javascript">
+    $("#rrm_entrypointmodelTechnicalHead").load("components/rrmentrypointtechnicalhead/rrmEntryPointModalTechnicalHead.html");
+
+$(document).ready(function(){
+    initializeRRMEntryPointTechnicalHead();
+    //editRRMEntryPointTechnicalHeadJs = EditRRMEntryPointTechnicalHead();
+
+    var localget = localStorage.getItem("UserCheckRes");
+    var jsonData = JSON.parse(localget);
+    loggedInUserDepartment =  jsonData.Data[0].Department 
+    Token =jsonData.Data[0].Token 
+})
+
+var loggedInUserDepartment;
+var Token;
+var addRRMEntryPointJsTechnicalHead;
+var editRRMEntryPointJsTechnicalHead;
+var addRRMTypeTechnicalHead;
+    var rrmId;
+    var ResourceRequirementTypeTechHead;
+//initialize RRM Entry Point TechnicalHead
+function initializeRRMEntryPointTechnicalHead(){
+    addRRMEntryPointJsTechnicalHead = AddRRMEntryPointTechnicalHead();  
+    editRRMEntryPointJsTechnicalHead = EditRRMEntryPointOwnerTechnicalHead();  
+}
+
+//edit funct clcick event
+$(document).on("click",".editRRMEntryPointTechnicalHead", function(e){
+    openEditRRMEntryPointTechnicalHead(e)
+    })
+
+//edit rrm entry    
+function openEditRRMEntryPointTechnicalHead(e){
+    initializeModalTechnicalHead();
+    $('#RRMEntryPointModelTechnicalHead').appendTo("body").modal("show");
+    addRRMTypeTechnicalHead = $(e.currentTarget).data("type"); 
+    rrmId = $(e.currentTarget).data("rrmid");
+    ResourceRequirementTypeTechHead = $(e.currentTarget).data("rrmtype");
+    $("#TechnicalHeadrrmType").attr('class', '');
+    if (ResourceRequirementTypeTechHead == "G") {
+        $("#lblLeadNameTechnicalHead").text("Requirement lead");
+        $("#TechnicalHeadrrmType").html("RRM").addClass("label label-success m-l-xs");
+    }
+    else if (ResourceRequirementTypeTechHead == "P") {
+        $("#lblLeadNameTechnicalHead").text("RFP Owner");
+        $("#TechnicalHeadrrmType").html("RFP").addClass("label label-info m-l-xs");
+    }
+    else if (ResourceRequirementTypeTechHead == "R") {
+        $("#lblLeadNameTechnicalHead").text("Backup Lead");
+        $("#TechnicalHeadrrmType").html("Resignation").addClass("label label-warning m-l-xs");
+    }
+
+    initializeEditRRMTechnicalHead(rrmId);
+
+    editRRMEntryPointJsTechnicalHead.RRMEntryFromRRM(rrmId);
+}
+
+//add btn clcick event
+$(document).on("click","#rrmEntryPointAddBtnTechnicalHead", function(e){
+    rrmAddBtnClickedTechnicalHead(e)
+})
+    //addm rrm entry func
+ function rrmAddBtnClickedTechnicalHead(e) {
+        
+        addRRMTypeTechnicalHead = "add";
+    initializeModalTechnicalHead()
+     $('#RRMEntryPointModelTechnicalHead').appendTo("body").modal("show");
+     $("#TechnicalHeadrrmType").attr('class', '');
+  $("#OwnerrrmTypeTechnicalTeam").attr('class', '');
+        $("#rrmmodelpagetitleTechnicalHead").text("Add RRM");
+    var rrmType = $(e.currentTarget).data("type");
+        initializeAddRRMTechnicalHead(rrmType);
+}
+</script>

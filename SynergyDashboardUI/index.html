@@ -1,0 +1,549 @@
+<title>Synergy Dashboard</title>
+<script src="./js/library/jquery-1.9.1.min.js"></script>
+<script src="./js/library/bootstrap.min.js"></script>
+<link href="./css/library/bootstrap.min.css" rel="stylesheet" />
+<script src="./js/library/dropzone.js"></script>
+<script src="./js/library/modal-steps.min.js"></script>
+<!-- <link rel="stylesheet" href="./css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+  integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<link href="css/index.css" rel="stylesheet" />
+<!-- <header>
+  <a href="index.html"><img src="image/logo.png"></a>
+</header> -->
+<style>
+
+.twoToneButton {
+    display: inline-block;
+    border:1px solid darken(#e2e2e2,50%);
+    outline:none;
+    padding:7px 12px;
+    line-height: 1.4;   
+    border-radius: 4px;
+    border: 1px solid darken(#212121,30%);
+    color:lighten(silver,10%);
+    text-shadow: darken(silver,80%) -1px -1px 0px;
+    position: relative;
+    transition: padding-right .3s ease;
+    font-weight:700;
+    box-shadow:0 1px 0 lighten(#fafafa,30%);
+    
+}
+
+.twoToneButton:hover {
+    box-shadow:0 0 10px darken(#212121,10%);
+    color:lighten(silver,20%);
+}
+
+.twoToneButton:active{
+    box-shadow:0 0 10px darken(#212121,10%);
+    color:lighten(silver,30%);
+    background: darken(#212121,10%); 
+}
+
+.twoToneButton.spinning {
+    padding-right: 40px;
+}
+.twoToneButton.spinning:after {
+    content: '';
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    width: 0;
+    height: 0;
+    box-shadow: 0px 0px 0 1px darken(#212121,10%);
+    position: absolute;
+    border-radius: 50%;
+    animation: rotate360 .5s infinite linear, exist .1s forwards ease;
+}
+
+.twoToneButton.spinning:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    border-radius: 50%;
+    right: 6px;
+    top: 50%;
+    position: absolute;
+    border: 2px solid #FFFFFF;
+    border-right: 3px solid #27ae60;
+    animation: rotate360 .5s infinite linear, exist .1s forwards ease ;
+    
+}
+
+@keyframes rotate360 { 
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes exist { 
+    100% {
+        width: 15px;
+        height: 15px;
+        margin: -8px 5px 0 0;
+    }
+}
+
+</style>
+<div class="login-page"> 
+<section id="loginform" class="outer-wrapper">
+  <div class="inner-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="login-inner">
+            <div class="login-logo">
+              <a href="index.html"><img id="imgLoginLogo"></a>
+            </div>
+          <h2>LOGIN</h2>
+          <form role="form" id="login_form">
+            <div class="form-group">
+              <!-- <label for="exampleInputEmail1">Enter Email or Employee ID</label> -->
+              <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Email or Employee ID">
+              <span style="color: red;" id="email-error" class="error_message"></span>
+            </div>
+            <div class="form-group">
+              <!-- <label for="exampleInputPassword1">Password</label> -->
+              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              <span toggle="#exampleInputPassword1" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+              <span style="color: red;" id="password-error" class="error_message"></span>
+            </div>
+            <input type="hidden" id="uid" class="uid">
+            <span style="color: red;" id="login_error"></span>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="rememberMe"><span>Remember me</span>
+              </label>
+            </div>
+            <div class="twoToneCenter form-group f-submit">
+              <!-- <button type="reset" id="reset" class="btn btn-danger">Reset</button> -->
+              <button type="submit" class="btn btn-success twoToneButton getUidToken" id="submit_btn" >Submit</button>
+            </div>
+           
+          </form>
+          <div class="text-center">
+          <a data-toggle="modal" id="forget_popup" data-target="#ForgetPasswordModal" href="#"> Forgot Password </a> |
+          <a href="register.html"> Register </a>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- forget password modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="ForgetPasswordModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <form>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button class="expand modalExpanding">
+            <i class="fas fa-expand" data-toggle="modal"></i>
+          </button>
+          <h4 class="modal-title">Forgot Password</h4>
+        </div>
+        <div class="modal-body" data-simplebar>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-user color-blue"></i></span>
+              <input id="user_id" name="user_id" placeholder="Email" class="form-control" type="text">
+              <!-- <input type="text" name="user_id" placeholder="User ID">
+                             -->
+            </div>
+            <p class="status error_message"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger close-btn" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary forget_submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>
+<!-- forget password modal -->
+</div>
+
+
+
+<script>
+  $('#RegistrationModal').modalSteps({});
+
+  $(document).ready(()=>{
+    var Uidvalue = "";
+
+      //Generate Cookie
+      function generateUUID() { // Public Domain/MIT
+          var d = new Date().getTime();//Timestamp
+          var d2 = (performance && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+          return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+              var r = Math.random() * 16;//random number between 0 and 16
+              if(d > 0){//Use timestamp until depleted
+                  r = (d + r)%16 | 0;
+                  d = Math.floor(d/16);
+              } else {//Use microseconds since page-load if supported
+                  r = (d2 + r)%16 | 0;
+                  d2 = Math.floor(d2/16);
+              }
+              return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+          });
+      }
+
+      //Read and Check cookie
+      Uidvalue = readCookie('Uid');
+
+      if(Uidvalue == null){
+        //Create Cookie and save
+        var uidToken = generateUUID();
+        var CookieDate = new Date;
+        CookieDate.setFullYear(CookieDate.getFullYear() +10);
+        //document.cookie = "Uid=" + uidToken +'; expires=' + CookieDate.toUTCString() + ';';
+        document.cookie = 'Uid=' + uidToken + '; expires=' + CookieDate.toGMTString() + ';';
+        console.log(document.cookie);
+      }
+      else{
+        //alert(Uidvalue);
+        console.log('UidToken - ' + Uidvalue);
+      }
+      $('#uid').val(Uidvalue);
+
+      //Read Cookie
+      function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+      }
+      //console.log('getUid-found', value);
+  })
+</script>
+
+<script>
+
+  $(".toggle-password").click(function () {
+
+    $(this).toggleClass("fa-eye fa-eye-slash");
+    var input = $($(this).attr("toggle"));
+    if (input.attr("type") == "password") {
+      input.attr("type", "text");
+    } else {
+      input.attr("type", "password");
+    }
+  });
+
+  $(".close-btn").click(function (e) {
+    $('#user_id').val("");
+    $('.status.error_message').html("");
+  });
+
+
+
+  $("#forget_popup").click(function (e) {
+    if ($('#exampleInputEmail1').val() != "") {
+      var lEmail = $('#exampleInputEmail1').val();
+      var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+      if (filter.test(lEmail)) {
+        $('#user_id').val(lEmail);
+      } else {
+        $('#user_id').val("");
+        $('.status.error_message').html("");
+      }
+    } else {
+      $('#user_id').val("");
+      $('.status.error_message').html("");
+    }
+
+  });
+
+  $(document).ready(function () {
+    $('.remove1').hide();
+    $('.remove2').hide();
+
+    var remember = $.cookie('remember');
+    if (remember == 'true') {
+      var username = $.cookie('userEmail');
+      var password = $.cookie('userpassword');
+      // autofill the fields
+      $('#exampleInputEmail1').attr("value", username);
+      $('#exampleInputPassword1').attr("value", password);
+      $('#rememberMe').prop('checked', true);
+      }
+
+      var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"100"}');
+      var imgLogoPath = result[0].Content
+      $('#imgLoginLogo').attr('src', companyFilesPath + imgLogoPath);
+
+    //Forget Password
+    $(".forget_submit").on("click", function () {
+
+      var filter = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+
+
+
+      var forgetuserID = $('input[id="user_id"]').val();
+
+      if (forgetuserID == "") {
+        $(".status").html("Please enter email");
+        $(".status").css("color", "red");
+      }
+      else if (!filter.test(forgetuserID)) {
+        $(".status").html("Please enter valid email");
+        $(".status").css("color", "red");
+      }
+      else {
+        $(this).attr("disabled", true);
+        var data = []
+        data = {
+          "Method": "ForgotPassword",
+          "Data": {
+            "User": forgetuserID
+          }
+        }
+
+        var postCall = PostDataCall(data);
+
+        if (postCall['IsSuccess'] == true) {
+          $('input[id="user_id"]').val('');
+          $(".status").html(postCall['Message']);
+          $(".status").css("color", "green");
+          $(this).attr("disabled", false);
+        } else {
+          $(this).attr("disabled", false);
+          $(".status").html(postCall['Message']);
+          $(".status").css("color", "red");
+        }
+        return false;
+      }
+
+    });
+
+  });
+
+  var cloneCount1 = 0;
+
+  function clone1() {
+    $(this).parents(".clonedInput1").clone()
+      .appendTo(".cloneform1 ")
+      .attr("id", "clonedInput1")
+      .find("*").val("")
+
+      .on('click', 'button.clone1', clone1)
+      .on('click', 'button.remove1', remove1);
+
+    $('.remove1').show();
+    cloneCount1++;
+
+  }
+  function remove1() {
+    $(this).parents(".clonedInput1").remove();
+    cloneCount1--;
+    if (cloneCount1 < 1) {
+      $('.remove1').hide();
+    }
+  }
+  $("button.clone1").on("click", clone1);
+
+  $("button.remove1").on("click", remove1);
+
+
+
+  var cloneCount2 = 0;
+
+  function clone2() {
+    $(this).parents(".clonedInput2").clone()
+      .appendTo(".cloneform2 ")
+      .attr("id", "clonedInput2")
+      .find("*").val("")
+
+      .on('click', 'button.clone2', clone2)
+      .on('click', 'button.remove2', remove2);
+
+    $('.remove2').show();
+    cloneCount2++;
+
+  }
+  function remove2() {
+    $(this).parents(".clonedInput2").remove();
+    cloneCount2--;
+    if (cloneCount2 < 1) {
+      $('.remove2').hide();
+    }
+  }
+
+
+  $("#login_form").submit(function (e) {
+
+
+    $('#submit_btn').prop('disabled', true);
+    e.preventDefault();
+    if ($('#rememberMe').prop("checked") == true) {
+      //console.log('checked')
+      $.cookie('userEmail', $("#exampleInputEmail1").val(), { expires: 14 });
+      $.cookie('userpassword', $("#exampleInputPassword1").val(), { expires: 14 });
+      $.cookie('remember', true, { expires: 14 });
+    }
+    else {
+      $.cookie("userEmail", "");
+      $.cookie("userpassword", "");
+      $.cookie("remember", false);
+      //console.log('not checked');
+    }
+    $('.toggle-password').toggleClass("fa-eye fa-eye-slash");
+    $("#exampleInputPassword1").attr("type", "password");
+    var userid = $("#exampleInputEmail1").val();
+    var pass = $("#exampleInputPassword1").val();
+
+    if (userid == "" || pass == "") {
+      if (userid == "") {
+        $('#submit_btn').prop('disabled', false);
+        $("#email-error").html("Please Enter Email or Employee ID");
+        $("#login_error").html("");
+        $('#exampleInputEmail1').addClass('input-error');
+      }
+      else {
+        $("#email-error").html(" ");
+        $('#exampleInputEmail1').removeClass('input-error');
+      }
+      if (pass == "") {
+        $('#submit_btn').prop('disabled', false);
+        $("#password-error").html("Please Enter Password");
+        $("#login_error").html("");
+        $('#exampleInputPassword1').addClass('input-error');
+      }
+      else {
+        $("#password-error").html(" ");
+        $('#exampleInputPassword1').removeClass('input-error');
+      }
+    }
+    else {
+      var encryptedPassword = EncryptPassword($("#exampleInputPassword1").val());
+      var device_id = $('#uid').val();
+
+      $("#exampleInputPassword1").val(encryptedPassword);
+      var userEmail = $("#exampleInputEmail1").val();
+      var password = $("#exampleInputPassword1").val();
+      var data = [];
+      data = {
+        "Method": "ValidateLogin",
+        "Data": {
+          "User": userEmail,
+          "Secret": password,
+          "DeviceId":device_id
+        }
+      }
+      
+      //console.log(data);
+      var postCall = PostDataCall(data);
+      //  console.log(postCall);
+      //console.log(postCall.data[0].EmployeeID); return false;
+      var jsonData = JSON.stringify(postCall);
+      //var profile_Picture = delete postCall.Data[0].ProfilePicture;
+      //var mentor_profile_Picture = delete postCall.Data[0].MentorProfilePicture;
+      if (postCall['IsSuccess'] == true) {
+        // console.log('success');
+        var profile_Picture = delete postCall.Data[0].ProfilePicture;
+        var mentor_profile_Picture = delete postCall.Data[0].MentorProfilePicture;
+        $('#login_form').trigger("reset");
+
+        if (postCall.Data[0].LandingNumber != null) {
+          localStorage.setItem('LandingNumberFront', postCall.Data[0].LandingNumber);
+          localStorage.setItem('LandingStageFront', postCall.Data[0].LandingStage);
+          localStorage.setItem("UserCheckRes", jsonData);
+          localStorage.setItem('securityToken', postCall.Data[0].Token);
+          location.href = 'register.html';
+        } else {
+          var jsonData = JSON.stringify(postCall);
+          var profile_Picture = delete postCall.Data[0].ProfilePicture;
+          var mentor_profile_Picture = delete postCall.Data[0].MentorProfilePicture;
+          localStorage.setItem("UserCheckRes", jsonData);
+          localStorage.setItem('EmployeeID', postCall.Data[0].EmployeeID);
+          localStorage.setItem('securityToken', postCall.Data[0].Token);
+          localStorage.setItem('login_securityToken', postCall.Data[0].Token);
+          localStorage.setItem('login_userName', postCall.Data[0].FirstName);
+          setTimeout( 
+            function  (){ location.href = 'dashboard.html';},500);
+          }
+      }
+      else {
+        $("#login_error").html(postCall['Message']);
+        $("#exampleInputPassword1").val("");
+        $('#submit_btn').prop('disabled', false);
+        $("#password-error").html(" ");
+        //console.log('Something Went Wrong');
+      }
+    }
+
+  });
+
+
+  function EncryptPassword(password) {
+    var passwordSaltKey = '11ebf1673f3a4c08813e10851346ba06';
+    var passwordSaltIv = 'dcb95b4564cb4667'
+
+    var key = CryptoJS.enc.Utf8.parse(passwordSaltKey);
+    var iv = CryptoJS.enc.Utf8.parse(passwordSaltIv);
+
+    var encryptedpassword = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(password), key,
+      {
+        keySize: 256 / 8,
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+      });
+    //console.log(encryptedpassword);
+    return encryptedpassword;
+  }
+
+
+  $("#reset").click(function (e) {
+    e.preventDefault();
+    $.cookie("userEmail", "");
+    $.cookie("userpassword", "");
+    $.cookie("remember", false);
+    $("#exampleInputEmail1").val("");
+    $("#exampleInputPassword1").val("");
+    $("#rememberMe").prop("checked", false);
+    $(".error_message").html("");
+    $(".input-error").removeClass("input-error");
+    $("#login_error").html('');
+  });
+
+
+
+  $("button.clone2").on("click", clone2);
+
+  $("button.remove2").on("click", remove2);
+  
+  $(function(){
+    
+    var twoToneButton = document.querySelector('.twoToneButton');
+   
+    twoToneButton.addEventListener("click", function() {
+      twoToneButton.innerHTML = "Signing In";
+      twoToneButton.classList.add('spinning');
+     
+      setTimeout( 
+        function  (){  
+            twoToneButton.classList.remove('spinning');
+            twoToneButton.innerHTML = "Sign In";
+        }, 1000);
+    }, true);
+    
+});
+</script>
+<script type="text/javascript" src="./js/library/crypto-js.js"></script>
+<script src="./js/callapi.js"></script>
+<script src="./js/library/jquery.cookie.js"></script>
+<script src="./js/profile_picture.js"></script>
+<!-- Some text for testing -->

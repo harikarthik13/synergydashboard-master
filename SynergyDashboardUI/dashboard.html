@@ -1,0 +1,438 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synergy</title>
+    <link rel="shortcut icon" href="image/favicon.png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/0.7.8/pace.min.js"></script>    
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/0.7.8/themes/red/pace-theme-center-circle.min.css" integrity="sha512-9BsOMGXZVjPUPbzAJFrMZxgN3MDaNB1PHEM+6tVgoOdn3WWsORBRDv/UH0da4hRYHHhaAQ/D/RB1YTYusP+NzQ==" crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/0.7.8/themes/red/pace-theme-minimal.min.css" integrity="sha512-xxMsbBJU/Oafe5V7QiXgTZDn0jcRHBa20Hte7/q+xzTugA3bLVeIOW8H939DshbrnYBmQlJhVkfyncDTS7IAIA==" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="./css/library/bootstrap.css" rel="stylesheet" />
+    <link href="./css/library/textext.core.css" rel="stylesheet" />
+    <script src="./js/library/jquery-3.3.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@5.15.1/dist/d3.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="./css/library/export.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="./css/icofont.min.css" type="text/css" media="all" />
+    <!-- <script type="text/javascript" src="./js/library/jquery-1.11.1.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script>
+    <script type="text/javascript" src="./js/devextreme/dx-gantt.min.js"></script>
+    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>-->
+    <!-- DevExtreme themes -->
+    <link rel="stylesheet" href="./css/devextreme/dx.common.css">
+    <link rel="stylesheet" href="./css/devextreme/dx.light.css">
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/20.2.3/css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/20.2.3/css/dx.light.css" /> -->
+    <!-- DevExtreme library -->
+    <script type="text/javascript" src="./js/devextreme/jszip.min.js"></script>
+    <!-- <script src="https://cdn3.devexpress.com/jslib/20.2.3/js/dx.all.js"></script> -->
+    
+    <link rel="stylesheet" href="./css/devextreme/dx-gantt.min.css">
+    <script type="text/javascript" src="./js/devextreme/dx.all.js"></script>
+    <!-- <script type="text/javascript" src="js/dx.web.js"></script> -->
+    <!-- <script type="text/javascript" src="js/dx.viz.js"></script> -->
+    <!-- <script type="text/javascript" src="js/dx.viz-web.js"></script> -->
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/3.3.1/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.4.0/polyfill.min.js"></script>
+
+    <script src="./js/library/amcharts.js"></script>
+    <script src="./js/library/pie.js"></script>
+    <script src="./js/library/dropzone.js"></script>
+    <link href="./css/library/dropzone.css" rel="stylesheet" />
+    <script src="./js/library/serial.js"></script>
+    <script src="./js/library/animate.min.js"></script>
+    <script src="./js/library/export.min.js"></script>
+    <script src="./js/library/light.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href="css/library/simplebar.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <!-- PDF js -->
+    <!-- <script src='./js/library/pdfmake.js'></script>
+    <script src='./js/library/pdfmake.min.js'></script> -->
+    <script src='./js/library/vfs_fonts.js'></script>
+    <!-- PDF js -->
+    <script src="./js/leave_entry_script.js"></script>
+    <script src="./js/manual_swipe_script.js"></script>
+    <script src="./js/library/sidemenutoggleScript.js"></script>
+    <script src="./js/quick_action_change_script.js"></script>
+    <script src="./js/defaulters_entry_change_script.js"></script>
+    <script src="./js/interview_scheduled_card_script.js"></script>
+    <script src="./js/library/modernizr-2.8.3.js"></script>
+    <!--<script src="./js/library/bootstrap.js"></script>-->
+    <script src="./js/library/moment-with-locales.js"></script>
+    <script src="./js/library/bootstrap-datetimepicker.min.js"></script>
+    <script src="./js/library/bootstrap-toggle.min.js"></script>
+    <link href="./css/library/bootstrap-toggle.min.css" rel="stylesheet" />
+    <script src="./js/library/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" crossorigin="anonymous" />
+    <!-- <link href="./css/bootstrap.min.css" rel="stylesheet" /> -->
+    <!-- <link rel="stylesheet" href="./css/library/jquery.timepicker.css">
+    <script src="./js/library/bootstrap-datepicker.js"></script>-->
+    <!-- <link href="./css/library/datepicker.css" rel="stylesheet" />
+    <link href="./css/library/datepicker.min.css" rel="stylesheet" /> -->
+    <!-- <script src="./js/library/jquery.timepicker.js"></script>
+    <script src="./js/library/Datepair.js"></script>
+    <script src="./js/library/jquery.datepair.js"></script> --> 
+    <script src="./js/profile_picture.js"></script>
+    <script src="./js/library/simplebar.min.js"></script>
+    <script src="./plugin/ckeditor/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/12.4.0/classic/ckeditor.js"></script>-->
+    <link href="./css/library/select2.min.css" rel="stylesheet" />
+    <script src="./js/library/select2.min.js"></script>
+    <script type="text/javascript" src="./js/library/jquery.textext.min.js"></script>
+    <!--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>-->
+    <script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
+
+    <!-- Data Table Links    -->
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/af-2.3.4/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/cr-1.5.2/fh-3.1.6/r-2.2.3/sc-2.0.1/sp-1.0.1/sl-1.3.1/datatables.min.css" />
+
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script> -->
+    <script type="text/javascript"
+            src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.20/af-2.3.4/b-1.6.1/b-colvis-1.6.1/b-html5-1.6.1/b-print-1.6.1/cr-1.5.2/fh-3.1.6/r-2.2.3/sc-2.0.1/sp-1.0.1/sl-1.3.1/datatables.min.js"></script>
+
+    <!-- Data Table Links  body-content  -->
+    <style>
+        .pace-running > *:not(.pace) {
+        /* opacity:0.5; */
+        }
+    </style>
+        
+    <script>
+        Pace.options = {
+            ajax: true, // disabled
+            document: true, // disabled
+            eventLag: true, // disabled
+        };
+
+        $(document).ajaxStart(function() { Pace.restart(); });
+
+        // To check the login status of the user by providing security token
+        $(document).ready(function () {
+            CheckSession();
+            setInterval(function () { CheckSession() }, 180000);
+
+        })
+
+        function CheckSession() {
+            var filter_val = JSON.stringify(
+                {
+                    "Token": localStorage.getItem('securityToken'),
+                    "Status": ""
+                }
+            );
+            var result = callgetlist('CheckValidToken', filter_val);
+            console.log('CheckValidToken', result);
+            if (!result) {
+                alert("Session Expired! Login Again.");
+                window.location.href = 'index.html';
+            }
+
+        }
+    </script>
+    <link rel="stylesheet" href="components/registration/assets/font-awesome/css/font-awesome.min.css">
+    <link href="components/update_skill/css/update_skill.css" rel="stylesheet" />
+    <link href="css/dashboard.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="header_navbar">
+    </div>
+    <div class="body-content">
+        <div id="mySidebar" class="sidebar">
+            <h4 id="notificationsHeader">Notifications</h4>
+            <a href="#" class="closebtn" onclick="closeNotificationsNav()">&times;</a>
+            <a id="notes_notification_list"></a>
+   
+         </div>
+        <div id="rednerBody">
+
+            <!-- Quick Menu -->
+            <div class="d-quickmenu">
+                <div class="d-quickmenu-inner">
+                    <a href="#" class="d-qa cardHideDiv" data-scroll-card="quick_action_col" style="display: none;">
+                        Quick
+                        Actions <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                    <a href="#" class="d-ns cardHideDiv" data-scroll-card="notify_col" style="display: none;">
+                        Notifications
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                    <a href="#" class="d-mc cardHideDiv" data-scroll-card="mainCol" style="display: none;">
+                        Main <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Quick Menu End -->
+
+            <div class="row form-group dashboard-page" style="margin-top:30px;">
+
+                <div class="sidenav">
+                    <div class="notification-scroll small-scroll" data-simplebar>
+                        <div id="side_navbar"></div>
+                    </div>
+                </div>
+
+                <div class="main-content">
+
+                    <div class="flexdiv newsFeeds mainCol" data-card-map="d-mc" data-simplebar>
+                        <div class="newdivs">
+                        </div>
+                        <div class="MenuDivs">
+                        </div>
+                    </div>
+
+                    <div class="flexdiv flexCol small-scroll quick_action_col" data-card-map="d-qa" data-simplebar>
+                        <div class="ac-btn dataHideCard" id="qa_caret"><i class="fas fa-chevron-up"></i></div>
+                        <div id="quick_actions">
+                        </div>
+                    </div>
+
+                    <div class="flexdiv flexCol small-scroll notify_col" data-card-map="d-ns" data-simplebar>
+                        <div class="ac-btn dataHideCard" id="notify_caret"><i class="fas fa-chevron-up"></i></div>
+                        <div id="notification_cards"></div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div id="rfp_operation_modal">
+            </div>
+            <div id="nre_operation_modal">
+            </div>
+            <div id="assignproposalModal">
+            </div>
+            <div id="manageproposalModal">
+            </div>
+            <div id="manage_proposal_rfp">
+            </div>
+            <div id="openWorkOrderModel">
+            </div>
+            <div id="rfpUserMapModel">
+            </div>
+            <div id="apidbMapModelBox">
+            </div>
+            <div id="announcementModelBox"></div>
+            <div id="survey">
+            </div>
+        </div>
+        <div id="load_footer">
+        </div>
+    </div>
+    <div id="dashboar_modals">
+    </div>
+    <div id="proposal" class="proposal-page">
+    </div>
+    <div id="rfp_proposal">
+    </div>
+    <div id="nre_screen">
+    </div>
+    <div id="emailTemplateModal">
+
+    </div>
+    
+    <div id="notesModal">
+    </div>
+    <div id="project_creation">
+    </div>
+    <div id="create_project">
+    </div>
+    <div id="attendance_log_creation">
+    </div>
+    <div id="leave_entry_creation">
+    </div>
+    <div id="project_management">
+    </div>
+    <div id="tech_Team">
+    </div>
+    <div id="accounts_dept">
+    </div>
+    <div id="rrm_entrypointmodel">
+    </div>
+    <div id="rrm_profileentrypointmodel">
+    </div>
+    <div id="rrm_onboard_profileentrypointmodel">
+    </div>
+    <div id="project_creation_new">
+    </div>
+    <div id="useful_links">
+    </div>
+    <div id="huddle">
+    </div>
+    <div id="casestudy">
+    </div>
+
+
+<script type="text/javascript" >
+
+$(document).ready(function(){
+  $("#qa_caret").click(function(){
+    $(".newsFeeds ").addClass("fullwidth");
+  });
+});
+$(document).ready(function(){
+  $(".d-qa").click(function(){
+    $(".newsFeeds").removeClass("fullwidth");
+  });
+});
+
+$(document).ready(function(){
+  $("#notify_caret").click(function(){
+    $(".newsFeeds").addClass("fullcolumn");
+  });
+});
+$(document).ready(function(){
+  $(".d-ns").click(function(){
+    $(".newsFeeds").removeClass("fullcolumn");
+  });
+});
+</script>
+
+
+    <script type="text/javascript" src="js/library/jquery.validate.min.js"></script>
+    <!-- ============================================= /Chart js chart ========================== -->
+    <script type="text/javascript" src="js/callapi.js"></script>
+    <script type="text/javascript" src="components/quick_action/js/add_an_action.js"></script>
+    <!-- ============================================= Chart js chart ========================== -->
+    <script src="./js/library/Chart.bundle.min.js"></script>
+    <script src="./js/dashboard_script.js"></script>
+    <script src='./components/proposals/js/proposal.js'></script>
+    <!-- <script src='./components/rfp/js/workorder.js'></script> -->
+    <script src='./components/rfp/js/rfp.js'></script>
+    <script type="text/javascript" src="js/library/jquery.smartWizard.js"></script>
+    <script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+    <script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script>
+
+    <!-- @praveen : added to include rfpusermap scripts -->
+    <!--<script src='./components/rfpusermapping/js/usermap.js'></script>-->
+    <!-- @praveen : added to include apidbmap scripts -->
+    <script src='./components/apidbmapping/js/apidbmapping.js'></script>
+    <script src='./components/registration/assets/js/register/personaldetails.js'></script>
+
+    <!-- =============================== Add an action bar chart  ========-->
+    <script>
+        var midWidth = 1199
+        function hideColForSmall() {
+            $('.main-content').children().each(function () {
+                if ($(this).is(":visible")) {
+                    $(this).siblings().hide()
+                    $(this).siblings().each(function () {
+                        let thisAttr = $(this).attr('data-card-map')
+                        $(`.${thisAttr}`).show()
+                    })
+                }
+            })
+            saveActionColsLocal()
+        }
+
+        function evaluateMenuShows() {
+            let data = JSON.parse(localStorage.getItem('colMenuSettings'))
+            if (!data) {
+                return
+            }
+            data.forEach(elem => {
+                for (const key in elem) {
+                    if (elem[key] == true) {
+                        $(".main-content").find(`.${key}`).show()
+                        $(`[data-scroll-card="${key}"]`).hide()
+                    } else {
+                        $(".main-content").find(`.${key}`).hide()
+                        $(`[data-scroll-card="${key}"]`).show()
+                    }
+                }
+            });
+        }
+
+        function saveActionColsLocal() {
+            var arr = []
+            $(".d-quickmenu-inner").children().each(function () {
+                arr.push({
+                    [$(this).attr('data-scroll-card')]: $(this).css('display') == "none"
+                })
+            })
+            localStorage.setItem('colMenuSettings', JSON.stringify(arr))
+        }
+        $(document).ready(function () {
+            evaluateMenuShows()
+            if ($(document).width() < midWidth) {
+                hideColForSmall()
+            }
+
+            $(window).resize(function () {
+                if ($(document).width() < midWidth) {
+                    hideColForSmall()
+                }
+            })
+            $('.dataHideCard').click(function () {
+                $(this).parents('.flexdiv').hide()
+                $(`.${$(this).parents('.flexdiv').attr('data-card-map')}`).show()
+                saveActionColsLocal()
+            })
+            $('.cardHideDiv').click(function () {
+                // let thisCard =
+                let cardThis = $(`.${$(this).attr('data-scroll-card')}`)
+                $(this).hide()
+                cardThis.show()
+                if ($(document).width() < midWidth) {
+                    cardThis.siblings().hide()
+                    $(this).siblings().show()
+                }
+                saveActionColsLocal()
+            })
+
+        })
+        //Common html file call
+        $("#side_navbar").load("components/common/side_navbar.html");
+        $("#dashboar_modals").load("components/common/dashboar_modals.html");
+        $("#header_navbar").load("components/common/header_navbar.html");
+        $("#quick_actions").load("components/quick_action/quick_actions.html");
+        $("#notification_cards").load("components/common/notification_cards.html");
+        $("#load_footer").load("components/common/footer.html");
+
+
+        $("#rednerBody").on('click', '.expandCommonDiv', function () {
+            ResignDet(this);
+        })
+    </script>
+
+    <!-- skillset Scripts -->
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="components/registration/assets/js/register/skillset.js"></script>
+    <script src="./js/library/swal.min.js"></script>
+
+    <!--drag& drop deve grid-->
+    <!--<script src="https://unpkg.com/devextreme-aspnet-data@2.2.1/js/dx.aspnet.data.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+
+  
+    <script>window.jQuery || document.write(decodeURIComponent('%3Cscript src="js/jquery.min.js"%3E%3C/script%3E'))</script>
+    <script src="https://unpkg.com/devextreme-aspnet-data@2.2.1/js/dx.aspnet.data.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+    <script>
+                                      // clearAndShow_SkillInfo();
+
+    </script>
+
+</body>
+
+</html>

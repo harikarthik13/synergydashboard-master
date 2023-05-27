@@ -1,0 +1,274 @@
+
+<!-- Add an Action Modal-->
+<div class="modal fade" id="div-DefaultersEntry-Edit-Modal" role="dialog">
+	<div class="modal-dialog modealExpand">
+
+		<!-- Modal content-->
+		<div class="modal-content text-center-no">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+				<h2 class="modal-title text-left" >
+					<span id="defaulterModalTitle"> Add an Action </span>&nbsp; 
+					<span><label  class="label label-warning">Selected Date: <span id="defaultersSelectedDate"></span>&nbsp; </label></span>
+				</h2>
+
+			</div>
+			<div class="modal-body" data-simplebar>
+				<!-- <div class="row">
+                   <div class="col-md-12">
+                       <div class="action-wrap"> -->
+				<label for="Action" class="divDefaultersEdit">Select an activity <span style="color: red">*</span></label>
+				<select class="form-control divDefaultersEdit" id="defaultersEntryAction" name="Action" onchange="edit_DefaultersEntry_OnChange(this)">
+					<option value="">Select an activity</option>
+				</select>
+				<span class="error_message" id="selectDefaultersdActivityError"></span>
+				<!-- </div>
+                   </div>
+               </div> -->
+				<div id="sddgd-defaulters-actionitems"></div>
+
+				<!-- <div class="table-responsive" id="table_main">
+				<table class="table table-striped">
+						<thead>
+								<tr>
+									
+										<td>Name</td>
+										<td>Action</td>
+								</tr>
+						</thead>
+						<tbody id="action_table_body">
+								
+						</tbody>
+				</table>
+		</div> -->
+
+				<div class="row" id="defaulters-presales_task">
+					<div class="col-md-12">
+						<div style="margin-top:5px;">
+							<label for="text-area">Description <span style="color: red">*</span></label>
+							<textarea class="form-control" id="defaulters-text-area-action" name="text-area" rows="3"></textarea>
+							<span class="error_message" id="defaulters-descriptionError"></span>
+						</div>
+						<div style="margin-top:5px;">
+							<label for="defaulters-worked-hours-counter">Worked hours <span style="color: red">*</span></label><br>
+							<input id="defaulters-worked-hours-counter" name="defaulters-worked-hours-counter" value="0" min="0" max="23"
+								placeholder="hh" type="number" style="width:56px;">
+							:
+							<input id="defaulters-worked-mins-counter" name="defaulters-worked-mins-counter" value="0" min="0" max="59"
+								placeholder="mm" type="number" style="width:56px;">
+							<span class="error_message" id="defaulters-workingHrsError"></span>
+						</div>
+						<div>
+							<button class="btn btn-sm btn-primary float-right"
+								onclick="saveDefaultersEntry('presales')" id="" style="float:right;">
+								Save
+							</button>
+							<button class="btn btn-sm btn-secondary float-right"
+							data-dismiss="modal" id="" style="float:right;margin-right:16px;background-color:gray;color:white;">
+								Close
+							</button>
+						</div>
+
+					</div>
+				</div>
+
+				<div id="defaultersEntryDetails">
+				</div>
+				<!-- <div class="selectab">
+                        <ul>
+                            <li>Support to HR Team</li>
+                            <li>Support to Marketing Team</li>
+                            <li>Resource Management</li>
+                            <li>Interviews</li>
+                            <li>Meeting</li>
+                            <li>RFP Handling</li>
+                            <li>Projects</li>
+                            <li>manual Swipe</li>
+                        </ul>
+                    </div> -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Add an Activity Modal-->
+<div class="modal fade" id="div-DefaultersEntryActivity-Edit-Modal" role="dialog">
+	<div class="modal-dialog modealExpand">
+
+		<!-- Modal content-->
+		<div class="modal-content text-left" style="width:50%;">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+				<h2 class="modal-title text-left">
+					Edit activity
+					&nbsp;<span><label  class="label label-warning">Selected Date: <span id="defaultersSelectedDatePopup"></span>&nbsp; </label></span>
+				</h2>
+
+
+			</div>
+			<div class="modal-body" data-simplebar>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group" id="defaulters-phaseDiv">
+							<label>Select a Phase</label>
+							<select class="form-control" id="defaulters-selectPhase" name="defaulters-selectPhase" onchange="selectDefaultersPhase_OnChange(this)">
+								<option value="">Select a phase</option>
+							</select>
+						</div>
+						<div class="form-group" id="defaulters-taskDiv">
+							<label for="defaulters-selectTask" id="defaulters-selectTaskLabel">Select a Task <span style="color: red">*</span></label>
+							<div id="defaulters-taskSelectDiv">
+								<select class="form-control" id="defaulters-selectTask" name="defaulters-selectTask"
+									onchange="select_defaulters_task_OnChange()">
+									<option value="">Select a Task</option>
+								</select>
+								<span class="input-group-btn" id="defaulters-add-task-button">
+									<button class="btn btn-default" type="button" onclick="addDefaultersTask();">
+										<i class="glyphicon glyphicon-plus"></i>
+									</button>
+								</span>
+							</div>
+							<span class="error_message" id="defaulters-taskError-modal"></span>
+						</div>
+
+						<div class="form-group" id="defaulters-subTaskDiv">
+							<label for="defaulters-selectSubTask" id="defaulters-selectSubTaskLabel">Select a Sub-task</label>
+							<div style="display:table;">
+								<select class="form-control" id="defaulters-selectSubTask" name="defaulters-selectSubTask">
+									<option value="">Select a Sub-task</option>
+								</select>
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button" onclick="addDefaultersSubTask()">
+										<i class="glyphicon glyphicon-plus"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+
+						<div style="margin-top:10px;">
+							<label for="text-area">Description <span style="color: red">*</span></label>
+							<textarea class="form-control" id="defaulters-text-area-action-2" name="text-area" rows="3"></textarea>
+							<span class="error_message" id="defaulters-descriptionError-modal"></span>
+						</div>
+						<div class="row" style="margin-top:10px;">
+							<div class="col-md-6">
+								<label for="defaulters-worked-hours-counter">Worked hours <span style="color: red">*</span></label><br>
+								<input id="defaulters-worked-hours-counter-2" name="defaulters-worked-hours-counter" value="0" min="0" max="23"
+									placeholder="hh" type="number" style="width:56px;">
+								:
+								<input id="defaulters-worked-mins-counter-2" name="defaulters-worked-mins-counter" value="0" min="0" max="59"
+									placeholder="mm" type="number" style="width:56px;">
+									<span class="error_message" id="defaulters-workingHrsError-modal"></span>
+							</div>
+							<div class="col-md-6" id="defaulters-estimatedHoursDiv">
+								<label for="defaulters-estimated-hours-counter">Estimated hours</label><br>
+								<input disabled id="defaulters-estimated-hours-counter" name="defaulters-estimated-hours-counter"
+									value="01:00" placeholder="hh:mm" type="text" style="width:56px;">
+							</div>
+						</div>
+						<div class="row" style="margin-top:10px;" id="defaulters-availableHoursDiv">
+							<div class="col-md-6">
+								<label for="defaulters-available-hours-counter">Available hours</label><br>
+								<input disabled id="defaulters-available-hours-counter" name="defaulters-available-hours-counter"
+									value="01:00" placeholder="hh:mm" type="text" style="width:56px;">
+							</div>
+							<div class="col-md-6">
+								<label for="defaulters-completion-percentage">% of completion <span style="color: red">*</span></label><br>
+								<input id="defaulters-completion-percentage" name="defaulters-completion-percentage" value="60" placeholder="percentage"
+									type="text" style="width:56px;">
+									<span class="error_message" id="defaulters-completionError-modal"></span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<button class="btn btn-sm btn-primary float-right" onclick="saveDefaultersEntry()"
+									id="save_DefaultersActivity" style="float:right;">
+									Save
+								</button>
+								<button class="btn btn-sm btn-primary float-right" onclick="updateDefaultersEntry()"
+									id="update_DefaultersActivity" style="float:right;">
+									Update
+								</button>
+								<button class="btn btn-sm btn-secondary float-right"
+							data-dismiss="modal" id="" style="float:right;margin-right:16px;background-color:gray;color:white;">
+								Close
+							</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- ADD SUB-TASK MODAL STARTS HERE -->
+<div class="modal fade" id="addDefaultersSubTask_Modal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h2 class="modal-title">Add Sub-task</h2>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Sub-task Title <span style="color: red"> *</span></label>
+					<input type="text" class="form-control" name="defaulters-addSubTaskTitle" id="defaulters-addSubTaskTitle">
+					<span class="error_message" id="defaulters-subTaskTitleError"></span>
+				</div>
+				<div class="form-group">
+					<label>Sub-task Description <span style="color: red"> *</span></label>
+					<textarea class="form-control" name="defaulters-addSubTaskDesc" id="defaulters-addSubTaskDesc"></textarea>
+					<span class="error_message" id="defaulters-subTaskDescError"></span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<!-- <button type="button" class="btn btn-default woclosemodel">Cancel</button> -->
+				<button type="button" class="btn btn-primary" id="defaulters-addSubTaskModal_btn"
+					onclick="saveDefaultersSubTaskDetails()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ADD SUB-TASK MODAL ENDS HERE -->
+
+<!-- ADD TASK MODAL STARTS HERE -->
+<div class="modal fade" id="addDefaultersTask_Modal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h2 class="modal-title">Add Task</h2>
+			</div>
+			<div class="modal-body">
+				<!-- <div class="form-group" id="div_selectPhase">
+					<label>Phase</label>
+					<select class="form-control actionList" id="selectPhase" name="selectPhase" onchange="selectDefaultersPhase_OnChange(this)">
+						<option value="">Select a phase</option>
+					</select>
+				</div> -->
+				<div class="form-group">
+					<label>Task Title <span style="color: red"> *</span></label>
+					<input type="text" class="form-control" name="defaulters-addTaskTitle" id="defaulters-addTaskTitle">
+					<span class="error_message" id="defaulters-taskTitleError"></span>
+				</div>
+				<div class="form-group">
+					<label>Task Description <span style="color: red"> *</span></label>
+					<textarea class="form-control" name="defaulters-addTaskDesc" id="defaulters-addTaskDesc"></textarea>
+					<span class="error_message" id="defaulters-taskDescError"></span>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="defaulters-addTaskModal_btn"
+					onclick="saveDefaultersTaskDetails()">Save</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ADD TASK MODAL ENDS HERE -->
+
+<script src='components/defaultersentry/js/add_defaulters_entry.js'></script>

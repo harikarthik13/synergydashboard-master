@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registration page</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="components/registration/assets/css/font.css">
+  <link rel="stylesheet" href="components/registration/assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="components/registration/assets/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="components/registration/assets/css/form-elements.css">
+  <link rel="stylesheet" href="components/registration/assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="components/registration/assets/bootstrap/js/bootstrap.min.js"></script>
+  <link href="components/registration/assets/bootstrap/css//bootstrap.min.css" rel="stylesheet" />
+  <script src="js/library/modal-steps.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="shortcut icon" id="linkShortcutIcon">
+  <link rel="stylesheet" href="components/registration/assets/css/register.css">
+</head>
+
+<body>
+  <!-- Top content -->
+  <header class="text-center">
+    <a href="index.html"><img id="imgRegLogo"></a>
+  </header>
+
+  <div class="container1">
+    <form role="form" id="form" action="" method="post" class="f1">
+
+      <h3>Register To New Synergy Application</h3>
+      <!--                         <p>Fill in the form to get instant access</p> -->
+      <div class="f1-steps">
+        <div class="f1-progress">
+          <div class="f1-progress-line" data-now-value="6.66" data-number-of-steps="6" style="width: 6.66%;"></div>
+        </div>
+        <div class="f1-step oldSynergy active">
+          <div class="f1-step-icon"><i class="fa fa-sign-in-alt"></i></div>
+          <p>Old synergy login</p>
+        </div>
+        <div class="f1-step changePass">
+          <div class="f1-step-icon"><i class="fa fa-key"></i></div>
+          <p>Change Password</p>
+        </div>
+        <div class="f1-step personalDetails">
+          <div class="f1-step-icon"><i class="fa fa-user"></i></div>
+          <p>Personal Details</p>
+        </div>
+        <div class="f1-step previousEmployer">
+          <div class="f1-step-icon"><i class="fa fa-address-book"></i></div>
+          <p>Previous Employer Details</p>
+        </div>
+        <div class="f1-step address">
+          <div class="f1-step-icon"><i class="fas fa-envelope"></i></div>
+          <p>Address</p>
+        </div>
+        <div class="f1-step contactInfo">
+          <div class="f1-step-icon"><i class="fa fa-phone"></i></div>
+          <p>Contact Info</p>
+        </div>
+        <div class="f1-step skillset">
+          <div class="f1-step-icon"><i class="fa fa-award"></i></div>
+          <p>Skillset</p>
+        </div>
+
+      </div>
+
+      <fieldset id="login_fieldset">
+
+        <p class="text-red" id="login-caption"></p>
+
+        <div class="form-group">
+          <label for="old_user_id">Old Synergy User Id <span style="color: red">*</span></label>
+          <input tabindex="1" type="text" class="form-control" id="old_user_id" placeholder="User Id">
+        </div>
+        <span id="login-userid-error" style="font-weight: 700;color: red"></span>
+        <div class="form-group">
+          <label for="old_user_password">Old Synergy User Password <span style="color: red">*</span></label>
+          <input tabindex="2" type="password" class="form-control" id="old_user_password" placeholder="Password">
+        </div>
+        <span id="login-password-error" style="font-weight: 700;color: red"></span>
+        <span id="login-error" style="font-weight: 700;color: red"></span>
+
+        <div class="f1-buttons">
+          <button tabindex="3" type="button" class="btn btn-next checkuser">Next</button>
+        </div>
+
+      </fieldset>
+
+      <fieldset class="password_field" id="password_fieldset">
+        <p class="text-red" id="password-caption"></p>
+        <p class="text-red" id="password-caption"></p>
+
+        <div class="form-group">
+          <label for="new_password" class="">New Password <span style="color: red">*</span></label>
+          <input tabindex="1" type="password" id="new_user_password" class="form-control" placeholder="">
+          <span style="color:  #f15938;">Password must contain 8-15 characters, One Upper character, One lower Charcter,
+            Alphanumeric</span>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm_password" class="">Confirm Password <span style="color: red">*</span></label>
+          <input tabindex="2" type="password" id="new_user_confirm_password" class="form-control" placeholder="">
+        </div>
+        <span id="password-error" style="font-weight: 700;color: red"></span>
+
+        <div class="f1-buttons">
+          <!--  <button type="button" class="btn btn-previous">Previous</button> -->
+          <button tabindex="3" type="button" class="btn btn-next checkpass">Next</button>
+        </div>
+
+      </fieldset>
+
+      <fieldset id="personal-details" class="personal-details">
+
+        <p class="text-red" id="personaldetails-caption"></p>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <img src="https://via.placeholder.com/150" id="profile-img-tag" class="profile-img-tag" data-src="" height="200px" width="250px"
+                placeholder="Preview Image" alt="" /><br>
+              <label for="image">Browse file <span style="color: red">*</span></label>
+              <input type="file" name="file" value="Upload" id="profile-img" accept="image/png, image/jpeg, image/jpg">
+              <span id="image_upload_error" class="error_message image_upload_error"></span>
+            </div>
+          </div>
+          <div class="col-md-4">
+
+            <div class="form-group">
+              <label for="father_name">Father Name <span style="color: red">*</span></label>
+              <input tabindex="1" type="text" id="father-name" class="form-control" placeholder="">
+              <span id="father_name_error" class="error_message"></span>
+            </div>
+
+
+            <div class="form-group">
+              <label for="date_of_joining">Date of joining <span style="color: red">*</span></label>
+              <input tabindex="3" type="date" id="date-of-joining" class="form-control valid-date"
+                name="date_of_joining">
+              <span id="doj_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="date_of_birth">Date of Birth <span style="color: red">*</span></label>
+              <input tabindex="5" type="date" id="dob" class="form-control valid-date" name="date_of_birth">
+              <span id="dob_error" class="error_message"></span>
+            </div>
+
+
+            <div class="form-group">
+              <label for="blood_group_id">Blood Group <span style="color: red">*</span></label>
+              <select tabindex="7" name="" id="blood-group" class="form-control">
+                <!-- <option value="">Select your blood group</option>
+                                              <option value="A+">A+</option>
+                                              <option value="O+">O+</option>
+                                              <option value="B+">B+</option>
+                                              <option value="A-">A-</option>
+                                              <option value="O-">O-</option>
+                                              <option value="B-">B-</option>
+                                              <option value="AB+">AB+</option>
+                                              <option value="AB-">AB-</option> -->
+              </select>
+              <span id="blood_group_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="marital_status">Marital Status <span style="color: red">*</span></label>
+              <select tabindex="9" name="" class="form-control" id="marital_status">
+                <!--  <option value="">Select status</option>
+                                              <option value="single">Single</option>
+                                              <option value="married">Married</option> -->
+              </select>
+              <span id="marital_status_error" class="error_message"></span>
+            </div>
+
+
+
+          </div>
+          <div class="col-md-4">
+
+            <div class="form-group">
+              <label for="corporate_email_id">Corporate E-mail <span style="color: red">*</span></label>
+              <input tabindex="2" type="text" id="cop-email" class="form-control" placeholder="">
+              <span id="corporate_email_id_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="gitlab_name">GitLab UserName</label>
+              <input type="text" id="gitlab-name" class="form-control" placeholder="Eg: @g2techsoft">
+              <span id="gitlab_name_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="pan_no">PAN Number </label>
+              <input tabindex="4" type="text" id="Pan-no" maxlength="10" class="form-control"
+                placeholder="Eg : BKOPB1234M">
+              <span id="pan_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="pf_no">PF Number </label>
+              <input tabindex="6" type="text" id="pf-no" max-length="6" class="form-control"
+                placeholder="Eg : TN/CBE/12345/123">
+              <span id="pf_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="esi_no">ESI Number </label>
+              <input tabindex="8" type="text" id="esi-no" max-length="16" class="form-control" maxlength="21"
+                placeholder="Eg:31–00–123456–000–0001">
+              <span id="esi_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="passport_no">Passport Number </label>
+              <input tabindex="10" type="text" id="passport_no" maxlength="8" class="form-control"
+                placeholder="Eg : B1234567">
+              <span id="passport_error" class="error_message"></span>
+            </div>
+
+
+
+            <!--<div class="form-group">
+                                            <label for="bank_name">Bank Name</label>
+                                            <input type="text" class="form-control"  placeholder="">
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label for="bank_account_no">Bank Accountno</label>
+                                            <input type="text" class="form-control"  placeholder="">
+                                          </div> -->
+
+
+            <div class="form-group">
+              <label for=""><span style="color: red">*</span>Are Mandatory Fields</label>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="f1-buttons">
+          <!-- <button type="button" class="btn btn-previous person-previous">Previous</button> -->
+          <button tabindex="11" type="button" class="btn btn-next check-details">Next</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="previous_employer_field" id="employee_fieldset">
+
+        <p class="text-red" id="previousemployer-caption"></p>
+
+        <div class="cloneform0 pd-bt">
+          <div id="clonedInput0" class="clonedInput0 row">
+            <div class="form-group col-md-3">
+              <label for="previous_employer">Previous Employer Name <span style="color: red">*</span></label>
+              <input tabindex="1" id="name" type="text" class="form-control" placeholder="">
+              <span id="previous_employer_name_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-4 ">
+              <label for="from_date">From Date <span style="color: red">*</span></label>
+              <input tabindex="2" id="fdate" type="date" class="form-control" placeholder="">
+              <span id="fdate_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="to_date">To Date <span style="color: red">*</span></label>
+              <input tabindex="3" id="tdate" type="date" class="form-control" placeholder="">
+              <span id="tdate_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-1 ">
+              <label for="actions">Action</label><br>
+              <input tabindex="4" type="button" class="btn btn-add" id="pre_emp_action" value="+" onclick="insert()" />
+            </div>
+            <span class="status"></span>
+            <div id="display"></div>
+
+          </div>
+        </div>
+        <div class="f1-buttons">
+          <button type="button" class="btn btn-previous employer-previous">Previous</button>
+          <button tabindex="5" type="button" class="btn btn-next employer-details">Next</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="addressFieldset" id="address_fieldset">
+
+        <p class="text-red" id="address-caption"></p>
+        <div class="cloneform0 pd-bt">
+          <div id="clonedInput0" class="clonedInput0 row">
+            <div class="form-group col-md-2">
+              <label for="address">Address <span style="color: red">*</span></label>
+              <select tabindex="1" id="address" name="" class="form-control">
+                <option value="Permanent address">Permanent address</option>
+                <option value="Communication address">Communication address</option>
+                <span id="address_error" class="error_message"></span>
+              </select>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="landmark">Address Line <span style="color: red">*</span></label>
+              <input tabindex="2" id="landmark" type="text" class="form-control" placeholder="">
+              <span id="landmark_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="state">State <span style="color: red">*</span></label>
+              <!-- <input id="state" type="text" class="form-control"   placeholder=""> -->
+              <select tabindex="3" name="" id="state" class="form-control" onchange="getCity(this.value)">
+                <option value="">Select City</option>
+              </select>
+              <span id="state_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-2 ">
+              <label for="city">City <span style="color: red">*</span></label>
+              <!-- <input id="city" type="text" class="form-control"  placeholder=""> -->
+              <select tabindex="4" name="" id="city" class="form-control"></select>
+              <span id="city_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-2 ">
+              <label for="postal_code">Postal code <span style="color: red">*</span></label>
+              <input tabindex="5" id="postal_code" type="text" onkeypress="javascript:return isNumber(event)"
+                class="form-control" maxlength="6" placeholder="">
+              <span id="postal_code_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-1 ">
+              <label for="actions">Action</label><br>
+              <input tabindex="6" type="button" class="btn btn-add" id="add_address" value="+"
+                onclick="insert_Address()" />
+            </div>
+            <span class="address_status"></span>
+            <div id="display_Address"></div>
+
+          </div>
+        </div>
+        <div class="f1-buttons">
+          <button type="button" class="btn btn-previous address-previous">Previous</button>
+          <button tabindex="7" type="button" class="btn btn-next address-details">Next</button>
+        </div>
+
+      </fieldset>
+
+      <fieldset class="contact_info" id="contact_fieldset">
+
+        <p class="text-red" id="contactinfo-caption"></p>
+
+        <div class="cloneform0 pd-bt">
+          <div id="clonedInput0" class="clonedInput0 row">
+            <!-- <div class="form-group col-md-2">
+                                            <label for="contact_type">Contact type *</label>
+                                            <select id="contact_type" name="" class="form-control conInfo" >
+                                              <option value="Main">Main</option>
+                                              <option value="Primary">Primary</option>
+                                              <option value="Secondary">Secondary</option>
+                                            </select>
+                                    </div> -->
+            <div class="form-group col-md-3">
+              <label for="relationship">Relationship <span style="color: red">*</span></label>
+              <select tabindex="1" id="relationship" name="" class="form-control conInfo">
+                <!-- <option value="father">Father</option>
+                                              <option value="mother">Mother</option>
+                                              <option value="brother">Brother</option>
+                                              <option value="sister">Sister</option>
+                                              <option value="spouse">Spouse</option>
+                                              <option value="other">Other</option> -->
+              </select>
+              <span style="color: blue;"> Primary &amp; Secondary options are Mandatory</span>
+              <span id="relationship_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-3">
+              <label for="address">Name <span style="color: red">*</span></label>
+              <input tabindex="2" id="Contactname" type="text" class="form-control conInfo" placeholder="">
+              <span id="Contactname_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-3 ">
+              <label for="phno">Phone number</label>
+              <input tabindex="3" id="phno" type="text" class="form-control conInfo"
+                onkeypress="javascript:return isNumber(event)" maxlength="10" placeholder="">
+              <span id="phno_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="emailid">Email id</label>
+              <input tabindex="4" id="email" type="text" class="form-control conInfo" placeholder="">
+              <span id="email_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-1 ">
+              <label for="actions">Action</label><br>
+              <input tabindex="5" type="button" id="ContactInfoBtn" class="btn btn-add" value="+"
+                onclick="insert_ContactInfo()" />
+            </div>
+            <span class="contact_status"></span>
+            <div id="display_ContactInfo"></div>
+
+          </div>
+        </div>
+        <div class="f1-buttons">
+          <button type="button" class="btn btn-previous contact-previous">Previous</button>
+          <button tabindex="6" type="button" class="btn btn-next contact-info">Next</button>
+        </div>
+
+      </fieldset>
+
+      <fieldset class="skillsetField" id="skill_fieldset">
+
+        <p class="text-red" id="skill-caption"></p>
+
+        <p class="text-green" style="text-align:center;color: green;" id="skill-success"></p>
+
+        <div class="cloneform0 pd-bt">
+          <div id="clonedInput0" class="clonedInput0 row">
+
+            <div class="form-group col-md-2">
+              <label for="skill_grade">Grade <span style="color: red">*</span></label>
+              <select tabindex="1" id="skill_grade" name="" class="form-control">
+                <option value="Primary">Primary</option>
+                <option value="Secondary">Secondary</option>
+              </select>
+              <span id="skill_grade_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group col-md-3 ">
+              <label for="family">Family <span style="color: red">*</span></label>
+              <select tabindex="2" id="family" name="" onchange="get_skill(this.value)" class="form-control">
+                <option value="">Select family</option>
+
+              </select>
+              <span id="family_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group col-md-3">
+              <label for="skill">Skills <span style="color: red">*</span></label>
+              <select tabindex="3" id="skill" onchange="get_version(this.value)" name="" class="form-control">
+                <option value="">Select Skills</option>
+              </select>
+              <span id="skill_error" class="error_message"></span>
+            </div>
+            <div class="form-group col-md-3 ">
+              <label for="skillversion">Version <span style="color: red">*</span></label>
+              <select tabindex="4" id="skillversion" name="" class="form-control">
+                <option value="">Select Skill Version</option>
+              </select>
+              <span id="skillversion_error" class="error_message"></span>
+            </div>
+
+            <div class="form-group col-md-1  ">
+              <label for="actions">Action:</label><br>
+              <input tabindex="5" type="button" id="SkillsetsBtn" class="btn btn-add" value="+"
+                onclick="insert_SkillInfo()" />
+            </div>
+
+            <div class="form-group col-md-3 resume">
+              <div class="or-res-con">
+                <span class="success_message"></span>
+                <span class="or_error_message err_message"></span>
+                <label for="resume">Upload Resume (Original)<span style="color: red">*</span></label>
+                <input id="resume" class="skill-resume no-resume" type="file" accept=" .docx, .doc, .pdf , .odt " placeholder="">
+                <!-- <input id="or_resume" class="reset-resume" hidden type="button" value="x"> -->
+                <span id="resume_error" class="error_message"></span>
+                <br>
+                <div class="upload-btns">
+                  <input type="button" class="btn upload fa-input" value="&#xf093;" onclick="uploadResumeFiles('OR')"
+                    value="Upload" / style="background: green;color: #fff;"><input id="or_resume"
+                    class="fa-input reset-resume delete_file" hidden type="button" value="&#xf1f8;">
+                </div>            
+                <!-- <input type="button" value="Download Result" id="orResume" onclick="DownloadOR()" /> -->
+                <a href="#" id="orResume" class="hidden resume-files" onclick="DownloadOR('OR')">
+                  <i class="fas fa-download download-icon"> Original Resume</i>
+                </a>
+              </div>
+              <div class="uploadedOrres hidden">
+                  <span class="doc-icon"><i class="fa fa-file-text" hidden="true"> 
+                      <span class="doc-name" >
+                      <a class="resume-links" onclick="downloadResume('OR')" id="originalresume"> </a>
+                    </span>
+                    <span>
+                      <button class="doc-close-btn" onclick="removeResumeRegister('OR')">
+                        <i class="fa fa-window-close"></i>
+                      </button>
+                    </span></i></span>
+              </div>
+            </div>
+
+            <div class="form-group col-md-3 resume gr-resume">
+              <div class="gr-res-con">
+                <span class="success_message"></span>
+                <span class="gr_error_message err_message"></span>
+                <label for="resume" id="lblUploadResume"></label>
+                <input id="resumeg2" class="skill-resume no-resume" type="file" accept=" .docx, .doc, .pdf, .odt "
+                  placeholder="">
+                <!-- <input id="gr_resume" class="reset-resume" hidden type="button" value="x"> -->
+                <span id="resumeg2_error" class="error_message"></span>
+                <br>
+                <div class="upload-btns">
+                  <input type="button" class="fa-input btn upload" value="&#xf093;" onclick="uploadResumeFiles('GR')"
+                    value="Upload" / style="background: green;color: #fff;"><input id="gr_resume"
+                    class="fa-input reset-resume delete_file" hidden type="button" value="&#xf1f8;">
+                </div>
+  
+                <a href="#" id="grResume" hidden class="resume-files" onclick="DownloadOR('GR')">
+                  <i class="fas fa-download download-icon"> <label id="lblDownIcn"></label></i>
+                </a>
+              </div>
+              <div class="uploadedGrres hidden">
+                  <span class="doc-icon"><i class="fa fa-file-text" hidden="true"> 
+                      <span class="doc-name" >
+                      <a class="resume-links" onclick="downloadResume('GR')" id="g2resume"> </a>
+                    </span>
+                    <span>
+                      <button class="doc-close-btn" onclick="removeResumeRegister('GR')">
+                        <i class="fa fa-window-close"></i>
+                      </button>
+                    </span></i></span>
+              </div>
+            </div>
+
+            <div class="form-group col-md-4 resume">
+              <label for="download-icon">Please download the sample resume format here <span
+                  style="color: red;">*</span></label>
+              <br>
+              <a href="./files/sample.doc">
+                <i class="fas fa-download download-icon"> Download</i>
+              </a>
+            </div>
+            <div class="form-group col-md-1  ">
+              <!--  <input type="button" class="btn upload" value="Upload" onclick="uploadResumeFiles()" value="Upload" / style="background: green;color: #fff;"> -->
+            </div>
+            <span class="skillset_status"></span>
+            <div id="display_SkillInfo"></div>
+          </div>
+        </div>
+        <div class="f1-buttons">
+          <button type="button" class="btn btn-previous skillSet-previous">Previous</button>
+          <button tabindex="6" type="button" class="btn btn-submit skillSetNext" onclick="FinalSubmit()">Submit</button>
+        </div>
+      </fieldset>
+
+    </form>
+
+
+  </div>
+  <script>
+
+    // $("#orResume").hide();
+    // $("#grResume").hide();
+     $("#orResume").addClass("hidden");
+    $("#grResume").addClass("hidden");
+   
+
+
+
+    $(document).ready(function () {
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"100"}');
+        var imgLogoPath = result[0].Content;
+        $('#imgRegLogo').attr('src', companyFilesPath + imgLogoPath);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"101"}');
+        var imgLogoPath = result[0].Content;
+        $('#linkShortcutIcon').attr('src', imgLogoPath);
+
+        var result = callgetlist('GetCustimzedContentFor', '{"ContentCode":"103"}');
+        var lbUpldRes = "Upload Resume (" + result[0].Content + ")";
+        $('#lblUploadResume').html(lbUpldRes);
+        var lblDownIcn = result[0].Content;
+        $('#lblDownIcn').html(lblDownIcn);
+
+      /*$("input[type=text]").blur(function(){
+        $('#father-name').removeClass('login-errorinput-error');
+        $('#father_name_error').html("");
+      });*/
+
+      $("input[type = text]").keydown(function (e) {
+
+        $(this).removeClass('input-error');
+        $(this).next('span').html('');
+
+      });
+
+      $('select').on('change', function () {
+
+        $(this).removeClass('input-error');
+        $(this).next('span').html('');
+
+      });
+
+      $("input[type = date]").change(function () {
+
+        $(this).removeClass('input-error');
+        $(this).next('span').html('');
+
+      });
+
+
+    });
+
+
+
+    //number restriction
+    function isNumber(evt) {
+      var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+      if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+        return false;
+
+      return true;
+    }
+    //document.getElementById('date-of-joining').value = Date();
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) dd = '0' + dd;
+    if (mm < 10) mm = '0' + mm;
+
+    var current_date = yyyy + "/" + mm + "/" + dd;
+
+    var maxDate = yyyy + '-' + mm + '-' + dd;
+
+    $('input[type=date]').attr('max', maxDate);
+
+    var minDate = "1940-01-01";
+    $('input[type=date]').attr('min', minDate);
+
+
+
+  </script>
+
+  <!-- Javascript -->
+  <script src="components/registration/assets/js/jquery.backstretch.min.js"></script>
+  <script src="components/registration/assets/js/retina-1.1.0.min.js"></script>
+  <script src="components/registration/assets/js/moment.min.js"></script>
+  <!-- Registration page js files-->
+  <script src="js/callapi.js"></script>
+  <script src="js/profile_picture.js"></script>
+  <script src="components/registration/assets/js/register/oldsynergylogin.js"></script>
+  <script src="components/registration/assets/js/register/newsynergylogin.js"></script>
+  <script src="components/registration/assets/js/register/changepassword.js"></script>
+  <script src="components/registration/assets/js/register/personaldetails.js"></script>
+  <script src="components/registration/assets/js/register/previousemployerdetails.js"></script>
+  <script src="components/registration/assets/js/register/address.js"></script>
+  <script src="components/registration/assets/js/register/contactinfo.js"></script>
+  <script src="components/registration/assets/js/register/skillset.js"></script>
+  <script src="components/registration/assets/js/scripts.js"></script>
+  <!-- Registration page js files-->
+
+</body>
+
+</html>

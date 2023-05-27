@@ -1,0 +1,282 @@
+<!-- RFP Style -->
+<!-- <link href="css/library/smart_wizard_theme_arrows.css" rel="stylesheet" />
+<link href="css/library/jquery.minimalect.min.css" rel="stylesheet" />
+<link href="css/library/jquery.mCustomScrollbar.css" rel="stylesheet" />
+ -->
+ 
+<style>
+  /* .hide_column {
+    display: none;
+  } */
+</style>
+<!-- <script type="text/javascript" src="js/library/jquery.smartWizard.js"></script> -->
+<!-- 
+<script type="text/javascript" src="js/library/jquery.minimalect.min.js"></script>
+<script type="text/javascript" src="js/library/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/library/bootstrap-datepicker.js"></script> -->
+ 
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.3.0/js/dataTables.select.min.js"></script>
+ -->
+
+
+<!-- RFP scripts -->
+<!-- <div class="loader"></div> -->
+<!--POP-UP RFP MODAL STARTS HERE -->
+
+<style>
+  tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+
+  /* #MappedUserTable_filter
+{
+    display: none ;
+} */
+
+  div.dataTables_filter {
+    padding-right: 50px;
+  }
+</style>
+
+<div class="modal fade steps-model rfpusermapping" id="RFPUserMappingModel" role="dialog"
+  aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" id="close_user_model" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
+          <button class="expand modalExpanding"><i class="fas fa-expand" data-toggle="modal"></i></button>
+        <h2 class="modal-title" id="myModalLabel">RFP User Mapping</h2>
+      </div>
+      <div class="modal-body" data-simplebar>
+
+        <!-- <form action="/action_page.php"> -->
+        <!--  for multiple field search -->
+        <!--
+                  <div class="col-md-12 form-group">
+                    <input class="form-control" type="text" id="myInputTextName" placeholder="Search Name">
+        
+                    <input class="form-control" type="text" id="myInputTextDesignation" placeholder="Search Designation">
+                  
+                    <input class="form-control" type="text" id="myInputTextEmail" placeholder="Search Email">
+                                   
+                </div> -->
+        <!-- <div class="form-group">
+                  <label for="map_user_id">User:</label>
+                  <select class="form-control map_user_id" id="map_user_id">
+                      <option value=''>Select User</option>
+                    </select>
+                </div> -->
+
+        <table id="MappedUserTable" class="display" style="width:100%">
+
+        </table>
+
+
+        <!--  </form> -->
+      </div>
+
+      <div class="modal-footer">
+        <input type="hidden" id="map_user_id">
+        <input type="hidden" id="map_user_id_email"> <!-- hidden field to have email as id-->
+        <input type="hidden" id="map_obj">
+        <button type="button" class="btn btn-default" id="close_user_model1">Close</button>
+        <button type="button" class="btn btn-success" id="map_user" onclick="mapRPFUsers();">Map User</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  /* $(function() {
+  
+}); */
+  function openRFPUserMappingModel(userMapObjs) {
+    $('#RFPUserMappingModel').modal('show', function(){
+      $('#MappedUserTable').DataTable().destroy(); 
+    }); 
+       
+    $('#map_obj').val(JSON.stringify(userMapObjs));
+
+  }
+  
+      var filter_val = JSON.stringify({
+        "IsActive": true,
+      });
+      var result = callgetlist('GetEmployeeList', filter_val);
+      var dataSetarray = [];
+      var titlerray = [];
+
+      $.each(result, function (keys, values) {
+        //var radio_box = '<input type="radio" name="optradio" value="'+values.EmailID+'"></label>';
+        splitArr = [values.Name, values.Designation, values.EmailID, values.EmployeeId];
+        dataSetarray.push(splitArr);
+      });
+      var table = $('#MappedUserTable').DataTable({
+        data: dataSetarray,
+        columns: [
+          { title: "Name" },
+          { title: "Designation" },
+          { title: "Email Id" },
+          { title: "Employee No", "visible" : false, "searchable": false},
+        ],
+       /*  columnDefs: [
+                {
+                  targets : [3],
+                  "searchable" : false,
+                  "visible" : false,
+                }
+            ],  */
+        order : [[ 1, "asc" ]],
+        
+        select: {
+          style: 'single'
+        },
+        ordering: false,
+      });
+
+     
+  var table_dt = $('#MappedUserTable').DataTable();
+  $('#MappedUserTable tbody').on('click', 'tr', function () {
+/*     //console.log("========================");
+    //console.log(this);
+    //console.log("========================");
+    return false; */
+    var datas = (table_dt.row(this).data()); 
+    ////console.log(datas[3]);
+    $('#map_user_id').val(datas[3]);
+    $('#map_user_id_email').val(datas[2]);
+    if ($(this).hasClass('selected')) {
+      $(this).removeClass('selected');
+      $('#map_user_id').val('');
+      $('#map_user_id_email').val('');
+    }
+    else {
+      table_dt.$('tr.selected').removeClass('selected');
+      $(this).addClass('selected');
+    }
+  });
+
+  /** added by praveen */
+  function mapRPFUsers() {
+    //alert('Map function call to be added');
+    if ($('#map_user_id').val() === '' || $('#map_user_id').val() === null || $('#map_user_id').val() === 'undefined') {
+      alert('select the user');
+    } else {
+      let value = $('#map_obj').val(); //retrieve array
+      let map_user_id = $('#map_user_id').val();
+      let map_user_id_email = $('#map_user_id_email').val();
+
+      value = JSON.parse(value);
+      let RFPUserId = (value.RFPUserId);
+      let Department = (value.Department);
+      let Designation = (value.Designation);
+      let Name = (value.Name);
+      let PseudoName = (value.PseudoName);
+
+      let PostOldRFPUserMappingData = {
+        "RFPUserId": RFPUserId,
+        "PseudoName": PseudoName,
+        "Name": Name,
+        "Designation": Designation,
+        "Department": Department,
+        "EmployeeId": map_user_id,
+        "Isactive": true,
+      };
+
+      data_PostOldRFPUserMapping = {
+        "Method": "PostOldRFPUserMapping",
+        "Data": PostOldRFPUserMappingData
+      }
+
+      //console.log(" ======================================= 1");
+      //console.log(data_PostOldRFPUserMapping);
+      //console.log(" ======================================= 1");
+
+      let postCall_PostOldRFPUserMapping = PostDataCall(data_PostOldRFPUserMapping);
+
+      var PostSynergyRFPUserMappingData = {
+              "RFPUserId": RFPUserId,
+              "SynergyUserId": map_user_id,
+              "UserEmailId": map_user_id_email
+        };
+
+         data_PostSynergyRFPUserMapping = {
+          "Method": "PostSynergyRFPUserMapping",
+          "Data": PostSynergyRFPUserMappingData
+        }
+
+      //console.log(" ======================================= 2");
+      //console.log(data_PostSynergyRFPUserMapping);
+      //console.log(" ======================================= 2");
+
+      // return false;
+      var postCall_PostSynergyRFPUserMapping = PostDataCall(data_PostSynergyRFPUserMapping);
+      var postCall = postCall_PostSynergyRFPUserMapping;
+
+      logPostCall(postCall);
+
+      $('#map_obj').val('');
+      $('#map_user_id').val('');
+      $('#map_user_id_email').val('');
+      $('#RFPUserMappingModel').modal('hide');
+      /* var table = $('#MappedUserTable').DataTable(); */
+      table_dt.search( '' ).columns().search('').draw();
+      table_dt.$('tr.selected').removeClass('selected');
+      getUserMapList();
+      
+      //alert($('#map_user_id').val());
+    }
+  }
+
+  function logPostCall(postCall) {
+    if (postCall['IsSuccess'] == true) {
+      //console.log(postCall['Message']);
+      alert(postCall['Message']);
+    } else {
+      //console.log(postCall['Message']);
+      alert(postCall['Message']);
+    }
+  }
+
+  $("#close_user_model").click(function () {
+    closeClearModels();
+
+  });
+  $("#close_user_model1").click(function () {
+    closeClearModels();
+  });
+
+  /* $(".dataTables_filter input").keyup(function () {
+          this.value = this.value.replace(/[^0-9\.]/g,'');
+  }); */
+
+  function closeClearModels() {
+    $('#myInputTextName').val('');
+    $('#myInputTextEmail').val('');
+    $('#myInputTextDesignation').val('');
+    $('#map_obj').val('');
+    $('#map_user_id').val('');
+    $('#map_user_id_email').val('');
+    $('.dataTables_filter input').val('');
+    // /$('#MappedUserTable').dataTable().destroy();
+    //$('#MappedUserTable').DataTable().clear().destroy();
+   /*  if ($('.selected').hasClass('selected')) {
+      $('.selected').removeClass('selected');
+    } */
+    //$('#MappedUserTable').DataTable().destroy();    
+    /* var table = $('#MappedUserTable').DataTable(); */
+    table_dt.search( '' ).columns().search('').draw();
+    if ($('.selected').hasClass('selected')) {
+      $('.selected').removeClass('selected');
+    }
+    $('#RFPUserMappingModel').modal('hide');
+  }
+
+
+</script>
