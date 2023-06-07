@@ -1,0 +1,50 @@
+
+body {
+
+    font-family:cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+
+  .name {
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-top: 20px; /* Adjust the margin-top as desired */
+  }
+  
+  @keyframes showWelcome {
+    0% {
+      width: 0;
+      opacity: 0;
+    }
+    100% {
+      width: 100%;
+      opacity: 1;
+    }
+  }
+  
+  .letter {
+    display: inline-block;
+    color: transparent;
+    animation: showLetter 1s forwards;
+  }
+  
+  @keyframes showLetter {
+    0% {
+      color: rgb(0, 255, 42);
+      text-shadow: none;
+    }
+    100% {
+      color: #ff5500;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
